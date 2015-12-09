@@ -32,13 +32,12 @@ void loop() { // run over and over
   }
 }
 
-void processCommand(char* command) {
-  String c = String(command);
-  Serial.println(c);
+void processCommand(String command) {  
+  Serial.println(command);
   if (SD_isEnable) {
     SD_file_log = SD_card.open("events.txt", FILE_WRITE);
     if (SD_file_log) {
-      SD_file_log.println(c);
+      SD_file_log.println(command);
       SD_file_log.close();
     }
   }
