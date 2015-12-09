@@ -35,6 +35,7 @@ void loop() { // run over and over
 }
 
 void processCommand(String command) {
+  Serial.print(command);
   SD_log(command);
 }
 
