@@ -1,0 +1,3037 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/QAPage">
+<head>
+
+<title>Convert serial.read() into a useable string using Arduino? - Stack Overflow</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/stackoverflow/img/favicon.ico?v=4f32ecc8f43d">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+    <link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:domain" content="stackoverflow.com"/>
+    <meta property="og:type" content="website" />    
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon@2.png?v=73d79a89bded&a" />
+    <meta name="twitter:title" property="og:title" itemprop="title name" content="Convert serial.read() into a useable string using Arduino?" />
+    <meta name="twitter:description" property="og:description" itemprop="description" content="I&#39;m using two Arduinos to sent plain text strings to each other using newsoftserial and an RF transceiver.
+
+Each string is perhaps 20-30 characters in length. How do I convert Serial.read() into a ..." />
+    <meta property="og:url" content="http://stackoverflow.com/questions/5697047/convert-serial-read-into-a-useable-string-using-arduino"/>
+    <link rel="canonical" href="http://stackoverflow.com/questions/5697047/convert-serial-read-into-a-useable-string-using-arduino" />
+
+    
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=125f3b092db7"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/stackoverflow/all.css?v=07ef81d53548">
+
+            <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Convert serial.read() into a useable string using Arduino?&#39;" href="/feeds/question/5697047">
+            <meta name="twitter:app:country" content="US" />
+            <meta name="twitter:app:name:iphone" content="Stack Exchange iOS" />
+            <meta name="twitter:app:id:iphone" content="871299723" />
+            <meta name="twitter:app:url:iphone" content="se-zaphod://stackoverflow.com/questions/5697047/convert-serial-read-into-a-useable-string-using-arduino" />
+            <meta name="twitter:app:name:ipad" content="Stack Exchange iOS" />
+            <meta name="twitter:app:id:ipad" content="871299723" />
+            <meta name="twitter:app:url:ipad" content="se-zaphod://stackoverflow.com/questions/5697047/convert-serial-read-into-a-useable-string-using-arduino" />
+            <meta name="twitter:app:name:googleplay" content="Stack Exchange Android">
+            <meta name="twitter:app:url:googleplay" content="http://stackoverflow.com/questions/5697047/convert-serial-read-into-a-useable-string-using-arduino">
+            <meta name="twitter:app:id:googleplay" content="com.stackexchange.marvin">
+        <script>
+        
+            StackExchange.ready(function () {
+                    
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.initSnippetRenderer();
+                    });
+                    
+
+                StackExchange.using("postValidation", function () {
+                    StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+                });
+
+                
+                StackExchange.question.init({showAnswerHelp:true,totalCommentCount:1,shownCommentCount:1,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:5697047});
+
+                styleCode();
+
+                    StackExchange.realtime.subscribeToQuestion('1', '5697047');
+                                                                    StackExchange.using("gps", function () { StackExchange.gps.trackOutboundClicks('#content', '.post-text'); });
+
+            });
+        </script>
+
+
+    <script>
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1449684204,"networkMetaHostname":"meta.stackexchange.com","routeName":"Questions/Show","styleCode":true,"enableUserHovercards":true,"snippets":{"enabled":true,"domain":"stacksnippets.net"},"site":{"name":"Stack Overflow","description":"Q&A for professional and enthusiast programmers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdchgIAAAAAAJwGpIzRQSOFaO0pU6s44Xt8aTwc","recaptchaAudioLang":"en","enableNewTagCreationWarning":true,"insertSpaceAfterNameTabCompletion":false,"id":1,"nonAsciiTags":true,"enableSocialMediaInSharePopup":true},"user":{"fkey":"02922259da39f7cb762126b849c95560","rep":0,"isAnonymous":true,"isAnonymousNetworkWide":true,"ab":{"question_page_hero":{"v":"full_hero","g":2}}}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"3f1f7d685aff","js/moderator.en.js":"24ee4d052056","js/full-anon.en.js":"3b0896d0273a","js/full.en.js":"4dd1dd5d6456","js/wmd.en.js":"e0739e7900c3","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"ae05e7545ef0","js/help.en.js":"f58b9bbdda52","js/tageditor.en.js":"48ff9497244d","js/tageditornew.en.js":"5df1295d3c2b","js/inline-tag-editing.en.js":"c8fe23f81191","js/revisions.en.js":"6aca57a6c709","js/review.en.js":"28497f374af2","js/tagsuggestions.en.js":"7dfec0d2a2d7","js/post-validation.en.js":"aad8a09c03ad","js/explore-qlist.en.js":"415c9ef1f829","js/events.en.js":"1b83d354d73c","js/keyboard-shortcuts.en.js":"2be4ba042285","js/external-editor.en.js":"d4ced3475e8a","js/external-editor.en.js":"d4ced3475e8a","js/snippet-javascript.en.js":"433470c8fb5e","js/snippet-javascript-codemirror.en.js":"e9d2fe498089"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+    
+        <script>
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+    
+    
+</head>
+<body class="question-page new-topbar">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+
+
+
+
+
+<div class="topbar">
+    <div class="topbar-wrapper">
+
+        <div class="js-topbar-dialog-corral">
+
+
+<div class="topbar-dialog siteSwitcher-dialog dno">
+    <div class="header">
+        <h3><a href="//stackoverflow.com">current community</a></h3>
+    </div>
+    <div class="modal-content current-site-container">
+        <ul class="current-site">
+                <li>
+                        <div class="related-links">
+                    <a href="http://chat.stackoverflow.com" class="js-gps-track"     data-gps-track="site_switcher.click({ item_type:6 })"
+>chat</a>
+            </div>
+
+
+
+
+    <a href="//stackoverflow.com"
+       class="current-site-link site-link js-gps-track"
+       data-id="1"
+       data-gps-track="
+        site_switcher.click({ item_type:3 })">
+        <div class="site-icon favicon favicon-stackoverflow" title="Stack Overflow"></div>
+        Stack Overflow
+    </a>
+
+                </li>
+                <li class="related-site">
+                        <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                    
+
+
+
+    <a href="http://meta.stackoverflow.com"
+       class="site-link js-gps-track"
+       data-id="552"
+       data-gps-track="
+            site.switch({ target_site:552, item_type:3 }),
+        site_switcher.click({ item_type:4 })">
+        <div class="site-icon favicon favicon-stackoverflowmeta" title="Meta Stack Overflow"></div>
+        Meta Stack Overflow
+    </a>
+
+                </li>
+                            <li class="related-site">
+                        <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                    <a class="site-link js-gps-track"
+                       href="//careers.stackoverflow.com?utm_source=stackoverflow.com&amp;utm_medium=site-ui&amp;utm_campaign=multicollider"
+                            data-gps-track="site_switcher.click({ item_type:9 })"
+>
+                        <div class="site-icon favicon favicon-careers" title="Stack Overflow Careers"></div>
+                        Stack Overflow Careers
+                    </a>
+                </li>
+        </ul>
+    </div>
+    
+    <div class="header" id="your-communities-header">
+        <h3>
+your communities        </h3>
+            
+    </div>
+    <div class="modal-content" id="your-communities-section">
+            
+            <div class="call-to-login">
+<a href="https://stackoverflow.com/users/signup?ssrc=site_switcher&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f5697047%2fconvert-serial-read-into-a-useable-string-using-arduino" class="login-link js-gps-track"     data-gps-track="site_switcher.click({ item_type:10 })"
+>Sign up</a> or <a href="https://stackoverflow.com/users/login?ssrc=site_switcher&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f5697047%2fconvert-serial-read-into-a-useable-string-using-arduino" class="login-link js-gps-track"     data-gps-track="site_switcher.click({ item_type:11 })"
+>log in</a> to customize your list.
+            </div>
+    </div>
+    
+    <div class="header">
+        <h3><a href="//stackexchange.com/sites">more stack exchange communities</a></h3>
+        <a href="http://blog.stackoverflow.com" class="fr">company blog</a>
+    </div>
+    <div class="modal-content">
+            <div class="child-content"></div>
+    </div>
+</div>
+        </div>
+
+        <div class="network-items">
+
+            <a href="//stackexchange.com"
+               class="topbar-icon icon-site-switcher yes-hover js-site-switcher-button js-gps-track"
+               data-gps-track="site_switcher.show"
+               title="A list of all 150 Stack Exchange sites">
+                <span class="hidden-text">Stack Exchange</span>
+            </a>
+
+    <a href="#"
+       class="topbar-icon icon-inbox yes-hover js-inbox-button"
+       title="Recent inbox messages">
+        <span class="hidden-text">Inbox</span>
+        <span class="unread-count" style="display:none"></span>
+    </a>
+    <a href="#"
+       class="topbar-icon icon-achievements yes-hover js-achievements-button "
+       data-unread-class=""
+       title="Recent achievements: reputation, badges, and privileges earned">
+        <span class="hidden-text">Reputation and Badges</span>
+        <span class="unread-count" style="display:none">
+            
+        </span>
+    </a>
+        </div>
+
+        <div class="topbar-links">
+
+                <div class="links-container">
+                <span class="topbar-menu-links">
+                                    <a href="https://stackoverflow.com/users/signup?ssrc=head&returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f5697047%2fconvert-serial-read-into-a-useable-string-using-arduino" class="login-link">sign up</a>
+                                <a href="https://stackoverflow.com/users/login?ssrc=head&returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f5697047%2fconvert-serial-read-into-a-useable-string-using-arduino" class="login-link">log in</a>
+
+                        <a href="/tour">tour</a>
+                            <a href="#" class="icon-help js-help-button" title="Help Center and other resources">
+        help
+        <span class="triangle"></span>
+    </a>
+    <div class="topbar-dialog help-dialog js-help-dialog dno">
+        <div class="modal-content">
+            <ul>
+                                    <li>
+                        <a href="/tour" class="js-gps-track" data-gps-track="help_popup.click({ item_type:1 })">
+                            Tour
+                            <span class="item-summary">
+                                Start here for a quick overview of the site
+                            </span>
+                        </a>
+                    </li>
+                <li>
+                    <a href="/help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:4 })">
+                        Help Center
+                        <span class="item-summary">
+                            Detailed answers to any questions you might have
+                        </span>
+                    </a>
+                </li>
+                    <li>
+                        <a href="//meta.stackoverflow.com" class="js-gps-track" data-gps-track="help_popup.click({ item_type:2 })">
+                            Meta
+                            <span class="item-summary">
+                                Discuss the workings and policies of this site
+                            </span>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+
+                            <a href="//careers.stackoverflow.com?utm_source=stackoverflow.com&amp;utm_medium=site-ui&amp;utm_campaign=anon-topbar">stack overflow careers</a>
+                    </span>
+                </div>
+
+            <div class="search-container">
+                <form id="search" action="/search" method="get" autocomplete="off">
+                    <input name="q" type="text" placeholder="search" value="" tabindex="1" autocomplete="off" maxlength="240" />
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+    <script>
+        StackExchange.ready(function() { StackExchange.topbar.init(); });
+    </script>
+
+    <div class="container">
+        <div id="header">
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/" >
+                    Stack Overflow
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs">
+                    <ul>
+                        <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                        <li><a id="nav-tags" href="/tags">Tags</a></li>
+                        <li><a id="nav-users" href="/users">Users</a></li>
+                        <li><a id="nav-badges" href="/help/badges">Badges</a></li>
+                                                                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content" class="snippet-hidden">
+            
+
+<div itemscope itemtype="http://schema.org/Question">
+    <link itemprop="image" href="//cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+
+<div id="herobox">
+    <div id="hero-content">
+            <div id="close"><a title="click to minimize">_</a></div>
+        <div id="blurb">
+            Stack Overflow is a community of 4.7 million programmers, just like you, helping each other.
+            <br/>
+                <br/>Join them; it only takes a minute:<br/>
+            <br/>
+            <a href="/users/signup?ssrc=hero&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f5697047%2fconvert-serial-read-into-a-useable-string-using-arduino" id="tell-me-more" class="button">Sign up</a>
+        </div>
+        <div id="desc">
+            <b>Join the Stack Overflow community to:</b>
+            <ol id="hiw">
+                <li id="q">Ask programming questions
+                </li>
+                <li id="an">Answer and help your peers
+                </li>
+                <li id="b">Get recognized for your expertise
+                </li>
+            </ol>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    <script>
+        StackExchange.ready(function () {
+
+            var location = 0;
+            if ($("body").hasClass("questions-page")) {
+                location = 1;;
+            } else if ($("body").hasClass("question-page")) {
+                location = 1;;
+            } else if ($("body").hasClass("faq-page")) {
+                location = 5;;
+            } else if ($("body").hasClass("home-page")) {
+                location = 3;;
+            }
+
+            $('#tell-me-more').click(function () {
+                StackExchange.using("gps", function () {
+                    StackExchange.gps.track("hero.action", { hero_action_type: 'cta', location: location }, true);
+                });
+            });
+            $('#herobox #close').click(function () {
+                StackExchange.using("gps", function () {
+                    StackExchange.gps.track("hero.action", { hero_action_type: "minimize", location: location }, true);
+                });
+                $.cookie("hero", "mini", { path: "/", expires: 365 });
+                $.ajax({
+                    url: "/hero-mini",
+                    success: function (data) {
+                        $("#herobox").fadeOut("fast", function () {
+                            $("#herobox").replaceWith(data);
+                            $("#herobox-mini").fadeIn("fast");
+                        });
+                    }
+                });
+                return false;
+            });
+        });
+
+    </script>
+</div>
+			<div id="question-header">
+                <h1 itemprop="name"><a href="/questions/5697047/convert-serial-read-into-a-useable-string-using-arduino" class="question-hyperlink">Convert serial.read() into a useable string using Arduino?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="5697047"  id="question">
+
+    <script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,8277,"adzerk39338883",4).setZone(43); });
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk39338883">
+            </div>    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="5697047">
+        <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">52</span>
+        <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+
+        <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+        <div class="favoritecount"><b>42</b></div>
+
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="text">
+
+<p>I'm using two Arduinos to sent plain text strings to each other using newsoftserial and an <a href="http://en.wikipedia.org/wiki/Radio_frequency">RF</a> transceiver.</p>
+
+<p>Each string is perhaps 20-30 characters in length. How do I convert <code>Serial.read()</code> into a string so I can do <code>if x == "testing statements"</code>, etc.?</p>
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/arduino" class="post-tag" title="show questions tagged &#39;arduino&#39;" rel="tag">arduino</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/q/5697047" title="short permalink to this question" class="short-link" id="link-post-5697047">share</a><span class="lsep">|</span><a href="/posts/5697047/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        <a href="/posts/5697047/revisions" title="show all edits to this post">edited <span title="2011-09-07 21:19:43Z" class="relativetime">Sep 7 '11 at 21:19</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/63550/peter-mortensen"><div class="gravatar-wrapper-32"><img src="https://i.stack.imgur.com/RIZKi.png?s=32&amp;g=1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/63550/peter-mortensen">Peter Mortensen</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">9,134</span><span title="10 gold badges"><span class="badge1"></span><span class="badgecount">10</span></span><span title="63 silver badges"><span class="badge2"></span><span class="badgecount">63</span></span><span title="98 bronze badges"><span class="badge3"></span><span class="badgecount">98</span></span>
+        </div>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        <div class="user-info ">
+    <div class="user-action-time">
+        asked <span title="2011-04-17 22:57:22Z" class="relativetime">Apr 17 '11 at 22:57</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/695648/joe"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/becd8873a5ee7dda5ff15d12c13fd8b7?s=32&amp;d=identicon&amp;r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/695648/joe">Joe</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">353</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="6 silver badges"><span class="badge2"></span><span class="badgecount">6</span></span><span title="9 bronze badges"><span class="badge3"></span><span class="badgecount">9</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+                
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-5697047" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+
+
+    <tr id="comment-33114686" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Please do check my answer below, it&#39;s far more straightforward/simple than the answer you chose</span>
+                    &ndash;&nbsp;<a href="/users/1319139/ihab-hajj"
+                       title="818 reputation"
+                       class="comment-user">Ihab Hajj</a>
+                <span class="comment-date" dir="ltr"><span title="2014-02-19 05:27:04Z" class="relativetime-clean">Feb 19 '14 at 5:27</span></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-5697047" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>        </table>
+</div>
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								13 Answers
+                                <span style="display:none;" itemprop="answerCount">13</span>
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/5697047/convert-serial-read-into-a-useable-string-using-arduino?answertab=active#tab-top" data-nav-xhref="" title="Answers with the latest activity first" data-value="active">active</a>
+        <a href="/questions/5697047/convert-serial-read-into-a-useable-string-using-arduino?answertab=oldest#tab-top" data-nav-xhref="" title="Answers in the order they were provided" data-value="oldest">oldest</a>
+        <a class="youarehere" href="/questions/5697047/convert-serial-read-into-a-useable-string-using-arduino?answertab=votes#tab-top" data-nav-xhref="" title="Answers with the highest score first" data-value="votes">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="5697062"></a>
+<div id="answer-5697062" class="answer accepted-answer" data-answerid="5697062"  itemscope itemtype="http://schema.org/Answer" itemprop="acceptedAnswer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="5697062">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">47</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>From <em><a href="http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1262721812">Help with Serial.Read() getting string</a></em>:</p>
+
+<pre><code>char inData[20]; // Allocate some space for the string
+char inChar=-1; // Where to store the character read
+byte index = 0; // Index into array; where to store the character
+
+void setup() {
+    Serial.begin(9600);
+    Serial.write("Power On");
+}
+
+char Comp(char* This) {
+    while (Serial.available() &gt; 0) // Don't read unless
+                                   // there you know there is data
+    {
+        if(index &lt; 19) // One less than the size of the array
+        {
+            inChar = Serial.read(); // Read a character
+            inData[index] = inChar; // Store it
+            index++; // Increment where to write next
+            inData[index] = '\0'; // Null terminate the string
+        }
+    }
+
+    if (strcmp(inData,This)  == 0) {
+        for (int i=0;i&lt;19;i++) {
+            inData[i]=0;
+        }
+        index=0;
+        return(0);
+    }
+    else {
+        return(1);
+    }
+}
+
+void loop()
+{
+    if (Comp("m1 on")==0) {
+        Serial.write("Motor 1 -&gt; Online\n");
+    }
+    if (Comp("m1 off")==0) {
+        Serial.write("Motor 1 -&gt; Offline\n");
+    }
+}
+</code></pre>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/5697062" title="short permalink to this answer" class="short-link" id="link-post-5697062">share</a><span class="lsep">|</span><a href="/posts/5697062/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        <a href="/posts/5697062/revisions" title="show all edits to this post">edited <span title="2011-09-07 21:22:22Z" class="relativetime">Sep 7 '11 at 21:22</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/63550/peter-mortensen"><div class="gravatar-wrapper-32"><img src="https://i.stack.imgur.com/RIZKi.png?s=32&amp;g=1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/63550/peter-mortensen">Peter Mortensen</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">9,134</span><span title="10 gold badges"><span class="badge1"></span><span class="badgecount">10</span></span><span title="63 silver badges"><span class="badge2"></span><span class="badgecount">63</span></span><span title="98 bronze badges"><span class="badge3"></span><span class="badgecount">98</span></span>
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2011-04-17 23:01:48Z" class="relativetime">Apr 17 '11 at 23:01</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/112152/magma"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/67279becdc4b3576f23ef6c439a12581?s=32&amp;d=identicon&amp;r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/112152/magma">magma</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">5,707</span><span title="22 silver badges"><span class="badge2"></span><span class="badgecount">22</span></span><span title="29 bronze badges"><span class="badge3"></span><span class="badgecount">29</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-5697062" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+
+
+    <tr id="comment-38797783" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">if this did not work, try to add <code>inData.trim</code>() incase we are using the arduino console, there will be newline char. This <a href="http://stackoverflow.com/questions/24961402/how-to-compare-string-from-serial-read" title="how to compare string from serial read">stackoverflow.com/questions/24961402/&hellip;</a> works for me</span>
+                    &ndash;&nbsp;<a href="/users/610987/yakob-ubaidi"
+                       title="772 reputation"
+                       class="comment-user">Yakob Ubaidi</a>
+                <span class="comment-date" dir="ltr"><span title="2014-07-25 17:39:31Z" class="relativetime-clean">Jul 25 '14 at 17:39</span></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-44969914" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">This shouldn&#39;t work. The second &quot;if&quot; statement inside the loop will never trigger because you&#39;ve already read the serial data from the first &quot;if&quot; comparison.</span>
+                    &ndash;&nbsp;<a href="/users/1251309/levi-roberts"
+                       title="508 reputation"
+                       class="comment-user">Levi Roberts</a>
+                <span class="comment-date" dir="ltr"><span title="2015-02-03 21:52:33Z" class="relativetime-clean">Feb 3 at 21:52</span></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-5697062" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+<script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,8277,"adzerk321089350",4).setZone(44); });
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk321089350">
+            </div>
+  
+<a name="12439969"></a>
+<div id="answer-12439969" class="answer" data-answerid="12439969"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="12439969">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">80</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Unlimited string readed</p>
+
+<pre><code>  String content = "";
+  char character;
+
+  while(Serial.available()) {
+      character = Serial.read();
+      content.concat(character);
+  }
+
+  if (content != "") {
+    Serial.println(content);
+  }
+</code></pre>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/12439969" title="short permalink to this answer" class="short-link" id="link-post-12439969">share</a><span class="lsep">|</span><a href="/posts/12439969/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2012-09-15 18:27:55Z" class="relativetime">Sep 15 '12 at 18:27</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1415516/user1415516"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/93875daab77228c4eb73a9f1e26e7c32?s=32&amp;d=identicon&amp;r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1415516/user1415516">user1415516</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">814</span><span title="5 silver badges"><span class="badge2"></span><span class="badgecount">5</span></span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-12439969" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="1"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+
+
+    <tr id="comment-19347802" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Way more reliable on an Arduino Leonardo than any of the other reading methods. Might be an issue on RAM usage due to concat, but if the sketch can take it, it looks like the best way of doing this.</span>
+                    &ndash;&nbsp;<a href="/users/277267/daniel-f"
+                       title="1889 reputation"
+                       class="comment-user">Daniel F</a>
+                <span class="comment-date" dir="ltr"><span title="2012-12-23 15:25:49Z" class="relativetime-clean">Dec 23 '12 at 15:25</span></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-19469070" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received"
+                                      class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">+1 - This is the simplest method.</span>
+                    &ndash;&nbsp;<a href="/users/1421049/u%c4%b1nb%c9%90%c9%a5s"
+                       title="4883 reputation"
+                       class="comment-user">uınbɐɥs</a>
+                <span class="comment-date" dir="ltr"><span title="2012-12-29 09:38:04Z" class="relativetime-clean">Dec 29 '12 at 9:38</span></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-21853651" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received"
+                                      class="hot">19</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Very useful and simple. Though, I found I had to put a small delay between the read of each character over serial - otherwise it printed each character on a separate line rather than concatenating together.  <code>void setup() {   Serial.begin(9600); &#47;&#47; Initialize serial port }  void loop() {   String content = &quot;&quot;;   char character;    while(Serial.available()) {       character = Serial.read();       content.concat(character);       delay (10);   }    if (content != &quot;&quot;) {     Serial.println(content);   } } </code></span>
+                    &ndash;&nbsp;<a href="/users/423565/so-over-it"
+                       title="1552 reputation"
+                       class="comment-user">So Over It</a>
+                <span class="comment-date" dir="ltr"><span title="2013-03-16 07:56:42Z" class="relativetime-clean">Mar 16 '13 at 7:56</span></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-26780810" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received"
+                                      class="cool">3</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">If you want to move this code to a separate function called from <code>loop()</code>, it is VERY important that you <code>return(content);</code> rather than <code>Serial.println()</code>-ing it. Otherwise, you&#39;ll drop into an infinite loop, as it will catch whatever the function prints to Serial, and try to re-process it.</span>
+                    &ndash;&nbsp;<a href="/users/1265581/depwl9992"
+                       title="103 reputation"
+                       class="comment-user">depwl9992</a>
+                <span class="comment-date" dir="ltr"><span title="2013-08-15 19:54:32Z" class="relativetime-clean">Aug 15 '13 at 19:54</span></span>
+                    <span class="edited-yes" title="this comment was edited 1 time"></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-38797813" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">if in any case it still did not worked, try the <code>content.trim()</code> method</span>
+                    &ndash;&nbsp;<a href="/users/610987/yakob-ubaidi"
+                       title="772 reputation"
+                       class="comment-user">Yakob Ubaidi</a>
+                <span class="comment-date" dir="ltr"><span title="2014-07-25 17:40:13Z" class="relativetime-clean">Jul 25 '14 at 17:40</span></span>
+                    <span class="edited-yes" title="this comment was edited 1 time"></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-12439969" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link  dno"
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   ></a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link " title="expand to show all comments on this post" href=# onclick="">show <b>1</b> more comment</a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+
+  
+<a name="20966604"></a>
+<div id="answer-20966604" class="answer" data-answerid="20966604"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="20966604">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">30</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>You can use <code>Serial.readString()</code> and <code>Serial.readStringUntil()</code> to parse strings from Serial on the Arduino.</p>
+
+<p>You can also use <code>Serial.parseInt()</code> to read integer values from serial.</p>
+
+<pre><code>int x;
+String str;
+
+void loop() 
+{
+    if(Serial.available() &gt; 0)
+    {
+        str = Serial.readStringUntil('\n');
+        x = Serial.parseInt();
+    }
+}
+</code></pre>
+
+<p>The value to send over serial would be <code>my string\n5</code> and the result would be <code>str = "my string"</code> and <code>x = 5</code></p>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/20966604" title="short permalink to this answer" class="short-link" id="link-post-20966604">share</a><span class="lsep">|</span><a href="/posts/20966604/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="/posts/20966604/revisions" title="show all edits to this post">edited <span title="2014-08-13 20:59:38Z" class="relativetime">Aug 13 '14 at 20:59</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1743874/piccolo"><div class="gravatar-wrapper-32"><img src="https://i.stack.imgur.com/vQYev.png?s=32&amp;g=1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1743874/piccolo">Piccolo</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">683</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="11 silver badges"><span class="badge2"></span><span class="badgecount">11</span></span><span title="29 bronze badges"><span class="badge3"></span><span class="badgecount">29</span></span>
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2014-01-07 07:57:27Z" class="relativetime">Jan 7 '14 at 7:57</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1319139/ihab-hajj"><div class="gravatar-wrapper-32"><img src="https://i.stack.imgur.com/ffrf9.jpg?s=32&amp;g=1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1319139/ihab-hajj">Ihab Hajj</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">818</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="10 silver badges"><span class="badge2"></span><span class="badgecount">10</span></span><span title="22 bronze badges"><span class="badge3"></span><span class="badgecount">22</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-20966604" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-20966604" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+
+  
+<a name="17051931"></a>
+<div id="answer-17051931" class="answer" data-answerid="17051931"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="17051931">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">7</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>I was asking the same question myself and after some research I found something like that.</p>
+
+<p>It works like a charm for me. I use it to remote control my Arduino.</p>
+
+<pre><code>// Buffer to store incoming commands from serial port
+String inData;
+
+void setup() {
+    Serial.begin(9600);
+    Serial.println("Serial conection started, waiting for instructions...");
+}
+
+void loop() {
+    while (Serial.available() &gt; 0)
+    {
+        char recieved = Serial.read();
+        inData += recieved; 
+
+        // Process message when new line character is recieved
+        if (recieved == '\n')
+        {
+            Serial.print("Arduino Received: ");
+            Serial.print(inData);
+
+            // You can put some if and else here to process the message juste like that:
+
+            if(inData == "+++\n"){ // DON'T forget to add "\n" at the end of the string.
+              Serial.println("OK. Press h for help.");
+            }   
+
+
+            inData = ""; // Clear recieved buffer
+        }
+    }
+}
+</code></pre>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/17051931" title="short permalink to this answer" class="short-link" id="link-post-17051931">share</a><span class="lsep">|</span><a href="/posts/17051931/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2013-06-11 19:13:09Z" class="relativetime">Jun 11 '13 at 19:13</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/2205264/ladislas"><div class="gravatar-wrapper-32"><img src="https://i.stack.imgur.com/HwuNJ.jpg?s=32&amp;g=1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/2205264/ladislas">ladislas</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">1,690</span><span title="7 silver badges"><span class="badge2"></span><span class="badgecount">7</span></span><span title="11 bronze badges"><span class="badge3"></span><span class="badgecount">11</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-17051931" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+
+
+    <tr id="comment-36360710" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">its best than better ones :-)</span>
+                    &ndash;&nbsp;<a href="/users/2047363/jerith2"
+                       title="176 reputation"
+                       class="comment-user">jerith2</a>
+                <span class="comment-date" dir="ltr"><span title="2014-05-15 04:59:45Z" class="relativetime-clean">May 15 '14 at 4:59</span></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-17051931" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+
+  
+<a name="18273883"></a>
+<div id="answer-18273883" class="answer" data-answerid="18273883"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="18273883">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">2</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>This would be way easier:</p>
+
+<pre><code> char data [21];
+ int number_of_bytes_received;
+
+ if(Serial.available() &gt; 0)
+ {
+   number_of_bytes_received = Serial.readBytesUntil (13,data,20); // read bytes (max. 20) from buffer, untill &lt;CR&gt; (13). store bytes in data. count the bytes recieved.
+   data[number_of_bytes_received] = 0; // add a 0 terminator to the char array
+ } 
+
+ bool result = strcmp (data, "whatever");
+ // strcmp returns 0; if inputs match.
+ // http://en.cppreference.com/w/c/string/byte/strcmp
+
+
+ if (result == 0)
+ {
+   Serial.println("data matches whatever");
+ } 
+ else 
+ {
+   Serial.println("data does not match whatever");
+ }
+</code></pre>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/18273883" title="short permalink to this answer" class="short-link" id="link-post-18273883">share</a><span class="lsep">|</span><a href="/posts/18273883/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="/posts/18273883/revisions" title="show all edits to this post">edited <span title="2014-08-05 20:29:34Z" class="relativetime">Aug 5 '14 at 20:29</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/990598/kerem-atam"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/335babb98ecdf8faeb24bd2b4cf5e6d7?s=32&amp;d=identicon&amp;r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/990598/kerem-atam">Kerem atam</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">81</span><span title="8 bronze badges"><span class="badge3"></span><span class="badgecount">8</span></span>
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2013-08-16 12:56:51Z" class="relativetime">Aug 16 '13 at 12:56</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/2686424/mrv"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/e77f421f9bc551ff04b5ef1e8219d7d3?s=32&amp;d=identicon&amp;r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/2686424/mrv">mrv</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">86</span><span title="7 bronze badges"><span class="badge3"></span><span class="badgecount">7</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-18273883" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-18273883" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+
+  
+<a name="19066559"></a>
+<div id="answer-19066559" class="answer" data-answerid="19066559"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="19066559">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">1</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>The best and most intuitive way is to use serialEvent() callback Arduino defines along with loop() and setup().</p>
+
+<p>I've built a small library a while back that handles message reception, but never had time to opensource it.
+This library receives \n terminated lines that represent a command and arbitrary payload, space-separated.
+You can tweak it to use your own protocol easily.</p>
+
+<p>First of all, a library, SerialReciever.h:</p>
+
+<pre><code>#ifndef __SERIAL_RECEIVER_H__
+#define __SERIAL_RECEIVER_H__
+
+class IncomingCommand {
+  private:
+    static boolean hasPayload;
+  public:
+    static String command;
+    static String payload;
+    static boolean isReady;
+    static void reset() {
+      isReady = false;
+      hasPayload = false;
+      command = "";
+      payload = "";
+    }
+    static boolean append(char c) {
+      if (c == '\n') {
+        isReady = true;
+        return true;
+      }
+      if (c == ' ' &amp;&amp; !hasPayload) {
+        hasPayload = true;
+        return false;
+      }
+      if (hasPayload)
+        payload += c;
+      else
+        command += c;
+      return false;
+    }
+};
+
+boolean IncomingCommand::isReady = false;
+boolean IncomingCommand::hasPayload = false;
+String IncomingCommand::command = false;
+String IncomingCommand::payload = false;
+
+#endif // #ifndef __SERIAL_RECEIVER_H__
+</code></pre>
+
+<p>To use it, in your project do this:</p>
+
+<pre><code>#include &lt;SerialReceiver.h&gt;
+
+void setup() {
+  Serial.begin(115200);
+  IncomingCommand::reset();
+}
+
+void serialEvent() {
+  while (Serial.available()) {
+    char inChar = (char)Serial.read();
+    if (IncomingCommand::append(inChar))
+      return;
+  }
+}
+</code></pre>
+
+<p>To use the received commands:</p>
+
+<pre><code>void loop() {
+  if (!IncomingCommand::isReady) {
+    delay(10);
+    return;
+  }
+
+  executeCommand(IncomingCommand::command, IncomingCommand::payload); // I use registry pattern to handle commands, but you are free to do whatever suits your project better.
+
+  IncomingCommand::reset();
+}
+</code></pre>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/19066559" title="short permalink to this answer" class="short-link" id="link-post-19066559">share</a><span class="lsep">|</span><a href="/posts/19066559/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2013-09-28 11:44:06Z" class="relativetime">Sep 28 '13 at 11:44</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/2817072/blazer"><div class="gravatar-wrapper-32"><img src="https://i.stack.imgur.com/FI4dW.jpg?s=32&amp;g=1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/2817072/blazer">Blazer</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">19</span><span title="1 bronze badge"><span class="badge3"></span><span class="badgecount">1</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-19066559" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-19066559" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+
+  
+<a name="21143358"></a>
+<div id="answer-21143358" class="answer" data-answerid="21143358"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="21143358">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">1</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>If you want to read messages from the serial port and you need to deal with every single message separately I suggest separating messages into parts using a separator like this:</p>
+
+<pre><code>String getMessage()
+{
+  String msg=""; //the message starts empty
+  byte ch; // the character that you use to construct the Message 
+  byte d='#';// the separating symbol 
+
+  if(Serial.available())// checks if there is a new message;
+  {
+    while(Serial.available() &amp;&amp; Serial.peek()!=d)// while the message did not finish
+    {
+      ch=Serial.read();// get the character
+      msg+=(char)ch;//add the character to the message
+      delay(1);//wait for the next character
+    }
+  ch=Serial.read();// pop the '#' from the buffer
+  if(ch==d) // id finished
+  return msg;
+  else
+  return "NA";
+  }
+else
+return "NA"; // return "NA" if no message;
+}
+</code></pre>
+
+<p>This way you will get a single message every time you use the function.</p>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/21143358" title="short permalink to this answer" class="short-link" id="link-post-21143358">share</a><span class="lsep">|</span><a href="/posts/21143358/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2014-01-15 16:48:53Z" class="relativetime">Jan 15 '14 at 16:48</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1298050/alqurashi"><div class="gravatar-wrapper-32"><img src="https://i.stack.imgur.com/vvxHg.jpg?s=32&amp;g=1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1298050/alqurashi">AlQurashi</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">497</span><span title="3 silver badges"><span class="badge2"></span><span class="badgecount">3</span></span><span title="15 bronze badges"><span class="badge3"></span><span class="badgecount">15</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-21143358" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-21143358" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+
+  
+<a name="23391677"></a>
+<div id="answer-23391677" class="answer" data-answerid="23391677"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="23391677">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">1</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Here is a more robust implementation that handles abnormal input and race conditions.</p>
+
+<ul>
+<li>It detects unusually long input values and safely discards them. For example, if the source had an error and generated input without the expected terminator; or was malicious.</li>
+<li>It ensures the string value is always null terminated (even when buffer size is completely filled).</li>
+<li>It waits until the complete value is captured. For example, transmission delays could cause Serial.available() to return zero before the rest of the value finishes arriving.</li>
+<li>Does not skip values when multiple values arrive quicker than they can be processed (subject to the limitations of the serial input buffer).</li>
+<li>Can handle values that are a prefix of another value (e.g. "abc" and "abcd" can both be read in).</li>
+</ul>
+
+<p>It deliberately uses character arrays instead of the <code>String</code> type, to be more efficient and to avoid memory problems. It also avoids using the <code>readStringUntil()</code> function, to not timeout before the input arrives.</p>
+
+<p>The original question did not say how the variable length strings are defined, but I'll assume they are terminated by a single newline character - which turns this into a line reading problem.</p>
+
+
+
+<pre class="lang-c prettyprint-override"><code>int read_line(char* buffer, int bufsize)
+{
+  for (int index = 0; index &lt; bufsize; index++) {
+    // Wait until characters are available
+    while (Serial.available() == 0) {
+    }
+
+    char ch = Serial.read(); // read next character
+    Serial.print(ch); // echo it back: useful with the serial monitor (optional)
+
+    if (ch == '\n') {
+      buffer[index] = 0; // end of line reached: null terminate string
+      return index; // success: return length of string (zero if string is empty)
+    }
+
+    buffer[index] = ch; // Append character to buffer
+  }
+
+  // Reached end of buffer, but have not seen the end-of-line yet.
+  // Discard the rest of the line (safer than returning a partial line).
+
+  char ch;
+  do {
+    // Wait until characters are available
+    while (Serial.available() == 0) {
+    }
+    ch = Serial.read(); // read next character (and discard it)
+    Serial.print(ch); // echo it back
+  } while (ch != '\n');
+
+  buffer[0] = 0; // set buffer to empty string even though it should not be used
+  return -1; // error: return negative one to indicate the input was too long
+}
+</code></pre>
+
+<p>Here is an example of it being used to read commands from the serial monitor:</p>
+
+<pre class="lang-c prettyprint-override"><code>const int LED_PIN = 13;
+const int LINE_BUFFER_SIZE = 80; // max line length is one less than this
+
+void setup() {
+  pinMode(LED_PIN, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  Serial.print("&gt; ");
+
+  // Read command
+
+  char line[LINE_BUFFER_SIZE];
+  if (read_line(line, sizeof(line)) &lt; 0) {
+    Serial.println("Error: line too long");
+    return; // skip command processing and try again on next iteration of loop
+  }
+
+  // Process command
+
+  if (strcmp(line, "off") == 0) {
+      digitalWrite(LED_PIN, LOW);
+  } else if (strcmp(line, "on") == 0) {
+      digitalWrite(LED_PIN, HIGH);
+  } else if (strcmp(line, "") == 0) {
+    // Empty line: no command
+  } else {
+    Serial.print("Error: unknown command: \"");
+    Serial.print(line);
+    Serial.println("\" (available commands: \"off\", \"on\")");
+  }
+}
+</code></pre>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/23391677" title="short permalink to this answer" class="short-link" id="link-post-23391677">share</a><span class="lsep">|</span><a href="/posts/23391677/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2014-04-30 15:06:15Z" class="relativetime">Apr 30 '14 at 15:06</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/232064/hoylen"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/00691507a5fb77e8878241c08a066e40?s=32&amp;d=identicon&amp;r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/232064/hoylen">Hoylen</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">6,280</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="16 silver badges"><span class="badge2"></span><span class="badgecount">16</span></span><span title="10 bronze badges"><span class="badge3"></span><span class="badgecount">10</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-23391677" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-23391677" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+
+  
+<a name="26057182"></a>
+<div id="answer-26057182" class="answer" data-answerid="26057182"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="26057182">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">1</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<pre><code>String content = "";
+char character;
+
+if(Serial.available() &gt;0){
+//reset this variable!
+  content = "";
+ //make string from chars
+ while(Serial.available()&gt;0) {
+   character = Serial.read();
+   content.concat(character);
+ }
+ //send back   
+ Serial.print("#");
+ Serial.print(content);
+ Serial.print("#");
+ Serial.flush();
+}
+</code></pre>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/26057182" title="short permalink to this answer" class="short-link" id="link-post-26057182">share</a><span class="lsep">|</span><a href="/posts/26057182/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2014-09-26 10:13:40Z" class="relativetime">Sep 26 '14 at 10:13</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3202796/flamaniac"><div class="gravatar-wrapper-32"><img src="https://i.stack.imgur.com/2z7wc.jpg?s=32&amp;g=1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3202796/flamaniac">flamaniac</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">36</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">2</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-26057182" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+
+
+    <tr id="comment-40822851" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Warning: Sometimes your string will be send in two or more pieces. Put some &quot;end of message&quot; char to check that if you concate all chars from massage.</span>
+                    &ndash;&nbsp;<a href="/users/3202796/flamaniac"
+                       title="36 reputation"
+                       class="comment-user">flamaniac</a>
+                <span class="comment-date" dir="ltr"><span title="2014-09-26 10:45:53Z" class="relativetime-clean">Sep 26 '14 at 10:45</span></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-26057182" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+
+  
+<a name="27974511"></a>
+<div id="answer-27974511" class="answer" data-answerid="27974511"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="27974511">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">1</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Credit for this goes to magma. Great answer, but here it is using c++ style strings instead of c style strings. Some users may find that easier.</p>
+
+<pre><code>String string = "";
+char ch; // Where to store the character read
+
+void setup() {
+    Serial.begin(9600);
+    Serial.write("Power On");
+}
+
+boolean Comp(String par) {
+    while (Serial.available() &gt; 0) // Don't read unless
+                                   // there you know there is data
+    {
+        ch = Serial.read(); // Read a character
+        string += ch; // Add it
+    }
+
+    if (par == string) {
+        string = "";
+        return(true);
+    }
+    else {
+        //dont reset string
+        return(false);
+    }
+}
+
+void loop()
+{
+    if (Comp("m1 on")) {
+        Serial.write("Motor 1 -&gt; Online\n");
+    }
+    if (Comp("m1 off")) {
+        Serial.write("Motor 1 -&gt; Offline\n");
+    }
+}
+</code></pre>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/27974511" title="short permalink to this answer" class="short-link" id="link-post-27974511">share</a><span class="lsep">|</span><a href="/posts/27974511/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2015-01-15 22:53:26Z" class="relativetime">Jan 15 at 22:53</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3709685/j-v-wow-d"><div class="gravatar-wrapper-32"><img src="https://i.stack.imgur.com/1pwg7.jpg?s=32&amp;g=1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3709685/j-v-wow-d">j_v_wow_d</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">176</span><span title="8 bronze badges"><span class="badge3"></span><span class="badgecount">8</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-27974511" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-27974511" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+
+  
+<a name="23041482"></a>
+<div id="answer-23041482" class="answer" data-answerid="23041482"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="23041482">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">0</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>If you're using concatenate method then don't forget to trim the string if you're working with if else method.</p>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/23041482" title="short permalink to this answer" class="short-link" id="link-post-23041482">share</a><span class="lsep">|</span><a href="/posts/23041482/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        <a href="/posts/23041482/revisions" title="show all edits to this post">edited <span title="2014-04-13 10:38:09Z" class="relativetime">Apr 13 '14 at 10:38</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/875943/sandy"><div class="gravatar-wrapper-32"><img src="https://i.stack.imgur.com/UjIkv.jpg?s=32&amp;g=1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/875943/sandy">Sandy</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">1,660</span><span title="17 silver badges"><span class="badge2"></span><span class="badgecount">17</span></span><span title="39 bronze badges"><span class="badge3"></span><span class="badgecount">39</span></span>
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2014-04-13 10:17:00Z" class="relativetime">Apr 13 '14 at 10:17</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3528736/user3528736"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/1d945a8660787fc8796132285a43b04b?s=32&amp;d=identicon&amp;r=PG&amp;f=1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3528736/user3528736">user3528736</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">11</span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-23041482" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-23041482" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+
+  
+<a name="26234469"></a>
+<div id="answer-26234469" class="answer" data-answerid="26234469"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="26234469">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">0</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Use string append operator on the serial.read(). It works better than string.concat()</p>
+
+<pre><code>char r;
+string mystring = "";
+
+while(serial.available()) 
+   {
+    r = serial.read();
+    mystring = mystring + r; 
+   }
+</code></pre>
+
+<p>After you are done saving the stream in a string(mystring, in this case), use SubString functions to extract what you are looking for.</p>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/26234469" title="short permalink to this answer" class="short-link" id="link-post-26234469">share</a><span class="lsep">|</span><a href="/posts/26234469/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2014-10-07 11:00:02Z" class="relativetime">Oct 7 '14 at 11:00</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3694159/sarosh"><div class="gravatar-wrapper-32"><img src="https://graph.facebook.com/100000330674483/picture?type=large" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3694159/sarosh">Sarosh</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">13</span><span title="5 bronze badges"><span class="badge3"></span><span class="badgecount">5</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-26234469" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-26234469" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+
+  
+<a name="32933421"></a>
+<div id="answer-32933421" class="answer" data-answerid="32933421"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="32933421">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">0</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>I could get away with this:</p>
+
+<pre class="lang-c prettyprint-override"><code>void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  String message = "";
+  while (Serial.available())
+    message.concat((char) Serial.read());
+  if (message != "")
+    Serial.println(message);
+}
+</code></pre>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/32933421" title="short permalink to this answer" class="short-link" id="link-post-32933421">share</a><span class="lsep">|</span><a href="/posts/32933421/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2015-10-04 12:23:56Z" class="relativetime">Oct 4 at 12:23</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/906658/bengt"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/328de31775d6584cbf9ed230e27a7666?s=32&amp;d=identicon&amp;r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/906658/bengt">Bengt</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">3,949</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="22 silver badges"><span class="badge2"></span><span class="badgecount">22</span></span><span title="40 bronze badges"><span class="badge3"></span><span class="badgecount">40</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+            
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-32933421" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-32933421" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/5697047/answer/submit" method="post"  class="post-form">
+						    <input type="hidden" id="post-id" value="5697047" />
+                            <input type="hidden" id="qualityBanWarningShown" name="qualityBanWarningShown" value="false" />
+                            <input type="hidden" name="referrer" value="https://www.google.ru/"/>
+							<h2 class="space">Your Answer</h2>
+
+
+            <script>
+            StackExchange.ifUsing("editor", function () {
+                StackExchange.using("externalEditor", function () {
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.init();
+                    });
+                });
+            }, "code-snippets");
+        </script>
+    
+
+<script>
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+       
+        StackExchange.using("externalEditor", function() {
+                // Have to fire editor after snippets, if snippets enabled
+                if (StackExchange.options.snippets.enabled) {
+                    StackExchange.using("snippets", function() {
+                        createEditor();
+                    });
+                }
+                else {
+                    createEditor();
+                }
+            });
+
+            function createEditor() {
+                prepareEditor({
+                    heartbeatType: 'answer',
+                convertImagesToLinks: true,
+                reputationToPostImages: 10,
+                bindNavPrevention: true,
+                postfix: "",
+                    onDemand: true,
+                    discardSelector: ".discard-answer"
+                    ,immediatelyShowMarkdownHelp:true
+                    });
+                
+
+        }
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor js-post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="02922259da39f7cb762126b849c95560">
+        <input id="author" name="author" type="text">
+    </div>
+
+
+
+</div>
+							<div style="position: relative;">
+								
+								            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?ssrc=question_page&returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f5697047%2fconvert-serial-read-into-a-useable-string-using-arduino%23new-answer">log in</a></h3>
+                        <script>
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Email and Password</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="hidden" name="use-google" class="use-google" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown" />
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script>
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', 'http%3a%2f%2fstackoverflow.com%2fquestions%2f5697047%2fconvert-serial-read-into-a-useable-string-using-arduino%23new-answer', 'question_page');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown" />
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice" data-loc="1">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/arduino" class="post-tag" title="show questions tagged &#39;arduino&#39;" rel="tag">arduino</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+						    <div class="module question-stats">
+			        <table id="qinfo">
+			            <tr>
+			                <td>
+			                    <p class="label-key">asked</p>
+			                </td>
+			                <td style="padding-left: 10px">
+			                    <p class="label-key" title="2011-04-17 22:57:22Z"><b>4 years ago</b></p>
+			                </td>
+			            </tr>
+			            <tr>
+			                <td>
+			                    <p class="label-key">viewed</p>
+			                </td>
+
+			                <td style="padding-left: 10px">
+			                    <p class="label-key">
+			                        <b>186380 times</b>
+			                    </p>
+			                </td>
+			            </tr>
+			                <tr>
+			                    <td>
+			                        <p class="label-key">active</p>
+			                    </td>
+			                    <td style="padding-left: 10px">
+			                        <p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2015-10-04 12:23:56Z">2 months ago</a></b></p>
+			                    </td>
+			                </tr>
+			        </table>
+			    </div>
+						
+			<script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,8277,"adzerk1838220152",[17,2221]).setZone(45); });
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk1838220152">
+            </div>
+        <div id="hireme">
+            <script>
+(function(){function f(t,r,f,e){var s=(r.cl||[]).join(" "),o=i.getElementById(t);o&&(s&&(o.className+=" "+s),o.innerHTML=r.cn.replace("&pt=0","&pt="+(e||"0")),o.onmousedown=function(t){for(var i=t.target,s,e;i.tagName!=="A"&&i!==o;)i=i.parentNode;i!==o&&(s=n.enc,e=f,r.an&&(e+="?an="+r.an),[].forEach.call(i.attributes,function(n){var t=n.name.match(/^data-(.*)$/);t&&(e+="&"+s(t[1])+"="+s(n.value))}),e+="&utm="+s(u+r.utm),i.href=e)})}function e(){return[].map.call(n.qsa(".post-taglist .post-tag"),function(n){return n.innerText}).join(";")||null}if(!window.clc){var t=window,i=document,r=i.getElementsByTagName("head")[0],u="&utm_source="+location.hostname+"&utm_medium=ad&utm_campaign=",n={doc:i,head:r,enc:encodeURIComponent,dec:decodeURIComponent,se:t.StackExchange,ts:function(){return(new Date).getTime()},st:setTimeout,ct:clearTimeout,qsa:function(n){return document.querySelectorAll(n)}};n.as=function(n){var t=i.createElement("link");t.type="text/css";t.rel="stylesheet";t.href=n;r.appendChild(t)};n.ls=function(n,t,u){var f=i.createElement("script"),e=!1;f.async=!0;f.src=n;t&&(f.onload=f.onreadystatechange=function(){e||f.readyState&&f.readyState!=="loaded"&&f.readyState!=="complete"||(e=!0,t(f),f.onload=f.onreadystatechange=null,u&&f.parentNode.removeChild(f))});r.appendChild(f)};n.init=function(i){function a(){h.forEach(n.as);c.forEach(function(n){f(n,r[n],e,l)});typeof t.clc_after_init=="function"&&t.clc_after_init()}var r=i.cr,o=i.h,s=i.ct,u=i.an,h=i.st,c=Object.keys(r),l=n.cps?n.ts()-n.cps:0,e="//"+o+s;u&&(e+="?an="+u);a()};n.lo=function(i){var u=undefined,f=t.location.hash,s=n.dec,r=n.se,o;i=i||{};switch(f){case"#large":i.l=1;break;case"#abort":i.abort=1;break;default:f.length>0&&f.substr(1).split("&").forEach(function(n){var t=n.split("=",2);i[s(t[0])]=s(t[1])})}return o=i.ac||i.accountid||r&&r.options&&r.options.user&&r.options.user.accountId,o&&(i.ac=o),i.tags||(u=e(),u&&(i.tags=u)),i};n.o2q=function(t,i){var r=n.enc;return Object.keys(t).filter(function(n){return i.indexOf(n)!==-1}).map(function(n){return r(n)+"="+r(t[n])}).join("&")};n.load=function(i,r,u){n.ls(i+"?"+n.o2q(r,u),function(){typeof t.clc_loaded=="function"&&t.clc_loaded()});n.cps=n.ts()};n.el=function(t){var i=n.qsa(t);return i.length>0?i[0]:null};n.hc=function(n){return n&&n.innerHTML&&n.innerHTML.replace(/\s+/g,"").length>0};n.wfc=function(t,i,r,u){var h=n.el(t),c=n.st,f=n.ct,o=undefined,e=undefined,s,l;return h===null?function(){}:(s=function s(){n.hc(h)?(f(o),f(e),u(!0)):e=c(s,i)},l=function(){f(e);u(!1)},s(),r&&(o=c(l,r)),function(){e&&f(e);o&&f(o)})};t.clc=n}})();;(function(n){var l=n.adurl,r=window,i=r.clc,f=i.ts,a=i.st,v=i.lo,y=i.qsa,p=i.load,w=i.wfc,b=i.el,e=r.innerWidth,k=f(),o="#sidebar [id^='adzerk'].everyonelovesstackoverflow",t=v({d:"hireme"}),s=["stackoverflow.com","serverfault.com"],u,h;if((s[0]==="*"||s.indexOf(r.location.hostname)!==-1)&&(u=!1,h=function(n){if(!u){u=!0;var i=y("#"+t.d);i.length!==0&&(n||(t.azt=!0),t.lw=f()-k,t.l||b("#careersadsdoublehigh")===null||(t.l=1),typeof e=="number"&&(t.bw=e),p(l,t,["d","l","ip","ac","eng","prov","tags","theme","remote","seed","lw","azt","sysadmin","bw"]))}},!t.abort)){var c=w(o,20,null,h),d=function(){var n=clc.el(o);clc.hc(n)||(n.parentNode.removeChild(n),typeof c=="function"&&c())};a(d,2e3)}}).call(null, {"adurl":"//clc.stackoverflow.com/j/p.js"});            </script>
+        </div>
+			<div class="module" id="chat-feature">
+    
+
+    
+<h4><a href="http://chat.stackoverflow.com" id="h-chat-link">Visit Chat</a></h4>
+
+<div class="related" id="ad502-rooms"></div>
+<script>
+// <!--
+    StackExchange.ready(
+    function () {
+        var options = {
+            chatUrl: 'http://chat.stackoverflow.com',
+            reloadUrl: '/api/recent-chat',
+            preloadData: {"activeUsers":151,"activeRooms":63,"rooms":[{"name":"PHP","id":11,"lastPost":1449665813,"posts":2161968,"users":[{"name":"Sean","id":2274710,"emailhash":"8b4e4cbcc2999245d93b694347528a1b","lastPost":1449665813},{"name":"nikita2206","id":1461092,"emailhash":"!https://i.stack.imgur.com/grX09.jpg?s=128\u0026g=1","lastPost":1449665800},{"name":"DaveRandom","id":889949,"emailhash":"8609c7056e725f9e8c03c594b831353e","lastPost":1449665741},{"name":"Joe Watkins","id":1658631,"emailhash":"5bc924c90b254d2dba75ba29b3b9fd11","lastPost":1449665622},{"name":"Alma Do","id":2637490,"emailhash":"!https://i.stack.imgur.com/9XyjC.gif?s=128\u0026g=1","lastPost":1449665448},{"name":"Fabor","id":811241,"emailhash":"!https://i.stack.imgur.com/XWWc3.jpg?s=128\u0026g=1","lastPost":1449665443},{"name":"PeeHaa","id":508666,"emailhash":"!https://i.stack.imgur.com/0dpOE.png?s=128\u0026g=1","lastPost":1449665090}],"messages":[{"date":1449665813,"user":"Sean","userid":2274710}],"singleImage":false,"tags":["php"]},{"name":"JavaScript","id":17,"lastPost":1449665781,"posts":3057392,"users":[{"name":"Are Wojciechowski","id":2044286,"emailhash":"!https://i.stack.imgur.com/GWOkc.png?s=128\u0026g=1","lastPost":1449665781},{"name":"Zirak","id":617762,"emailhash":"348d335cd13298e475eeaefa1841dee6","lastPost":1449665763},{"name":"Awal Garg","id":3459110,"emailhash":"595ae5c7ef8e8c620bd4d3506be53172","lastPost":1449665714},{"name":"Benjamin Gruenbaum","id":1348195,"emailhash":"f6dca2295546af21e1cde8e68f2d49bd","lastPost":1449665368},{"name":"jAndy","id":1386886,"emailhash":"!https://i.stack.imgur.com/ItXE6.jpg?s=128\u0026g=1","lastPost":1449665095},{"name":"ivarni","id":957731,"emailhash":"!https://i.stack.imgur.com/tp9dK.jpg?s=128\u0026g=1","lastPost":1449664791},{"name":"Denys Séguret","id":263525,"emailhash":"ec289925069b35f18f1230b90dc654e5","lastPost":1449661928}],"messages":[{"date":1449665781,"user":"Are Wojciechowski","userid":2044286}],"singleImage":false,"tags":["ecmascript","es6","javascript","nodejs","promises"]}]} 
+        };
+
+        StackExchange.chatAd.init(options);
+    });
+// -->
+</script>
+
+</div>  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/24961402" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">1</div>
+	</a>
+	<a href="/questions/24961402/how-to-compare-string-from-serial-read" class="question-hyperlink">How to compare string from Serial.read()?</a>
+</div><div class="spacer">
+	<a href="/q/15867378" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">1</div>
+	</a>
+	<a href="/questions/15867378/connecting-two-arduinos-via-serial-and-using-one-to-control-the-other" class="question-hyperlink">Connecting two Arduinos via serial and using one to control the other</a>
+</div><div class="spacer">
+	<a href="/q/26246251" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">0</div>
+	</a>
+	<a href="/questions/26246251/receiving-multiple-chars-at-once-with-software-serial" class="question-hyperlink">Receiving multiple chars at once with Software Serial</a>
+</div><div class="spacer">
+	<a href="/q/16624399" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">2</div>
+	</a>
+	<a href="/questions/16624399/working-with-arrays-on-arduino-in-c" class="question-hyperlink">Working with arrays on Arduino in C++</a>
+</div><div class="spacer">
+	<a href="/q/24857279" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">1</div>
+	</a>
+	<a href="/questions/24857279/how-to-retrieve-a-string-value-from-serial-read" class="question-hyperlink">How to retrieve a String value from Serial.read();</a>
+</div><div class="spacer">
+	<a href="/q/32209957" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">-2</div>
+	</a>
+	<a href="/questions/32209957/received-string-data-from-android-apps-blutooh-bluetooth-terminal-to-arduino-u" class="question-hyperlink">Received String Data From Android Apps Blutooh (Bluetooth Terminal) to Arduino using Bluetooth HC-05</a>
+</div><div class="spacer">
+	<a href="/q/30280125" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">0</div>
+	</a>
+	<a href="/questions/30280125/sending-string-from-processing-to-arduino-not-working" class="question-hyperlink">Sending String from Processing to Arduino Not Working</a>
+</div>			</div>
+</div>
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+                    <div class="related js-gps-related-questions" data-tracker="rq=1">
+                        <div class="spacer">
+<a href="/q/12380483" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/12380483/arduino-parsing-get-string" class="question-hyperlink">Arduino - Parsing GET String</a>
+</div>
+<div class="spacer">
+<a href="/q/12627808" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/12627808/arduino-wifly-ad-hoc-network-setup" class="question-hyperlink">Arduino WiFly - ad hoc network setup</a>
+</div>
+<div class="spacer">
+<a href="/q/13186298" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">9
+    </div>
+</a><a href="/questions/13186298/arduino-i%c2%b2c-freezes-after-startup" class="question-hyperlink">Arduino I&#178;C freezes after startup</a>
+</div>
+<div class="spacer">
+<a href="/q/14199279" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">5
+    </div>
+</a><a href="/questions/14199279/reading-data-over-serial-arduino-and-xbee" class="question-hyperlink">Reading data over serial Arduino and XBee</a>
+</div>
+<div class="spacer">
+<a href="/q/15867378" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/15867378/connecting-two-arduinos-via-serial-and-using-one-to-control-the-other" class="question-hyperlink">Connecting two Arduinos via serial and using one to control the other</a>
+</div>
+<div class="spacer">
+<a href="/q/16283455" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/16283455/arduino-serial-read-within-isr" class="question-hyperlink">Arduino: serial.read within ISR</a>
+</div>
+<div class="spacer">
+<a href="/q/24407713" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/24407713/how-to-calculate-a-256-modulo-checksum-on-arduino" class="question-hyperlink">How to calculate a 256-modulo checksum on arduino</a>
+</div>
+<div class="spacer">
+<a href="/q/27122305" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/27122305/arduino-stepper-control-by-program" class="question-hyperlink">Arduino stepper control by program</a>
+</div>
+<div class="spacer">
+<a href="/q/28300833" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/28300833/arduino-dc-motor-in-sync-with-servo-motor" class="question-hyperlink">Arduino dc motor in sync with servo motor</a>
+</div>
+<div class="spacer">
+<a href="/q/29618597" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/29618597/arduino-combine-sketches" class="question-hyperlink">Arduino - combine sketches</a>
+</div>
+
+                    </div>
+				</div>
+            
+<div id="hot-network-questions" class="module">
+    <h4>
+        <a href="//stackexchange.com/questions?tab=hot" 
+           class="js-gps-track" 
+           data-gps-track="posts_hot_network.click({ item_type:1, location:11 })">
+            Hot Network Questions
+        </a>
+    </h4>
+    <ul>
+            <li >
+                <div class="favicon favicon-security" title="Information Security Stack Exchange"></div><a href="http://security.stackexchange.com/questions/107542/is-it-common-practice-for-companies-to-mitm-https-traffic" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:162 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is it common practice for companies to MITM HTTPS traffic?
+                </a>
+
+            </li>
+            <li >
+                <div class="favicon favicon-gamedev" title="Game Development Stack Exchange"></div><a href="http://gamedev.stackexchange.com/questions/112272/how-can-i-create-borders-in-an-open-world-game" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:53 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How can I create borders in an open world-game?
+                </a>
+
+            </li>
+            <li >
+                <div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a href="http://academia.stackexchange.com/questions/59688/etiquette-with-regard-to-email-consolidation" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Etiquette with regard to email consolidation
+                </a>
+
+            </li>
+            <li >
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="http://math.stackexchange.com/questions/1566029/the-pepperoni-pizza-problem" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    The &quot;pepperoni pizza problem&quot;
+                </a>
+
+            </li>
+            <li >
+                <div class="favicon favicon-rpg" title="Role-playing Games Stack Exchange"></div><a href="http://rpg.stackexchange.com/questions/71988/how-to-keep-the-consequences-of-a-players-actions-a-secret" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:122 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to keep the consequences of a player&#39;s actions a secret?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-history" title="History Stack Exchange"></div><a href="http://history.stackexchange.com/questions/26713/what-did-an-ancient-roman-certificate-of-land-ownership-look-like-or-what-did" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:324 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What did an ancient Roman certificate of land ownership look like; or, what did it consist of?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-workplace" title="The Workplace Stack Exchange"></div><a href="http://workplace.stackexchange.com/questions/59075/how-will-a-history-of-job-hopping-affect-my-career-or-job-search" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:423 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How will a history of job-hopping affect my career or job search?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-outdoors" title="The Great Outdoors Stack Exchange"></div><a href="http://outdoors.stackexchange.com/questions/10202/protection-from-rain-running-vs-walking" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:395 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Protection from rain - running vs. walking
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="http://codegolf.stackexchange.com/questions/66042/basic-latin-character-name-to-character" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Basic Latin character name to character
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-programmers" title="Programmers Stack Exchange"></div><a href="http://programmers.stackexchange.com/questions/304574/does-immutability-hurt-performance-in-javascript" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:131 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Does immutability hurt performance in JavaScript?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="http://codegolf.stackexchange.com/questions/66127/catalan-numbers" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Catalan Numbers
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-stats" title="Cross Validated"></div><a href="http://stats.stackexchange.com/questions/185507/what-happens-if-the-explanatory-and-response-variables-are-sorted-independently" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:65 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What happens if the explanatory and response variables are sorted independently before regression?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-english" title="English Language &amp; Usage Stack Exchange"></div><a href="http://english.stackexchange.com/questions/292834/how-to-use-the-infinitive-in-this-sentence" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to use the infinitive in this sentence?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-english" title="English Language &amp; Usage Stack Exchange"></div><a href="http://english.stackexchange.com/questions/292736/what-is-less-harsh-than-brainwashing" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What is less harsh than &quot;brainwashing&quot;?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-stackoverflow" title="Stack Overflow"></div><a href="http://stackoverflow.com/questions/34172634/where-is-operator-defined-in-class-object" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:1 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Where is == operator defined in Class &quot;object&quot;?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-security" title="Information Security Stack Exchange"></div><a href="http://security.stackexchange.com/questions/107673/can-any-password-hash-ever-be-secure" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:162 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Can any password hash ever be secure?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a href="http://scifi.stackexchange.com/questions/110010/how-are-the-lands-of-the-shire-governed" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How are the lands of the Shire governed?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-stackoverflow" title="Stack Overflow"></div><a href="http://stackoverflow.com/questions/34179968/is-there-any-case-where-you-would-prefer-a-ologn-to-a-o1-algorithm-complexic" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:1 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is there any case where you would prefer a O(logn) to a O(1) algorithm complexicity?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-sqa" title="Software Quality Assurance &amp; Testing Stack Exchange"></div><a href="http://sqa.stackexchange.com/questions/16024/how-to-test-website-in-ie-for-ubuntu-12-04-os" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:244 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to test website in IE for Ubuntu 12.04 os
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-security" title="Information Security Stack Exchange"></div><a href="http://security.stackexchange.com/questions/107546/old-os-memory-space-protection-was-it-really-that-bad" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:162 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Old OS memory space protection - was it really that bad?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-magento" title="Magento Stack Exchange"></div><a href="http://magento.stackexchange.com/questions/93168/magento-2-adding-static-blocks-to-specific-section-of-pages-with-custom-module" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:479 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Magento 2 : Adding static blocks to specific section of pages with custom module layout xml file
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-mechanics" title="Motor Vehicle Maintenance &amp; Repair Stack Exchange"></div><a href="http://mechanics.stackexchange.com/questions/23129/what-are-these-two-rubber-ended-attachments-used-for-in-a-compression-tester-kit" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:224 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What are these two rubber-ended attachments used for in a compression tester kit?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="http://math.stackexchange.com/questions/1566418/if-we-randomly-select-25-integers-between-1-and-100-how-many-consecutive-intege" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    If we randomly select 25 integers between 1 and 100, how many consecutive integers should we expect?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-apple" title="Ask Different"></div><a href="http://apple.stackexchange.com/questions/218868/packagemaker-problem" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:118 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    PackageMaker problem
+                </a>
+
+            </li>
+    </ul>
+
+        <a href="#" 
+           class="show-more js-show-more js-gps-track" 
+           data-gps-track="posts_hot_network.click({ item_type:3, location:11 })">
+            more hot questions
+        </a>
+</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text">
+        <a href="/feeds/question/5697047" title="feed of this question and its answers">
+            <span class="feed-icon"></span>question feed
+        </a>
+    </div>
+</div>	<script>
+StackExchange.ready(function(){$.get('/posts/5697047/ivc/4311');});
+</script>
+<noscript>
+    <div><img src="/posts/5697047/ivc/4311" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang"></div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/tour">tour</a>
+                    <a href="/help">help</a>
+                    <a href="http://blog.stackoverflow.com?blb=1">blog</a>
+                        <a href="http://chat.stackoverflow.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/work-here">work here</a>
+                    <a href="http://stackexchange.com/mediakit">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.stackoverflow.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="//stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="//serverfault.com" title="system and network administrators">Server Fault</a></li>
+                        <li><a href="//superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="//webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="//askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="//webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="//gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="//tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="//programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="//unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems">Unix &amp; Linux</a></li>
+                        <li><a href="//apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="//wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Development</a></li>
+                        <li><a href="//gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="//electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="//android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="//security.stackexchange.com" title="information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="//dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="//drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="//sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="//ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="//mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                        <li><a href="//salesforce.stackexchange.com" title="Salesforce administrators, implementation experts, developers and anybody in-between">Salesforce</a></li>
+                        <li><a href="//expressionengine.stackexchange.com" title="administrators, end users, developers and designers for ExpressionEngine&#174; CMS">ExpressionEngine&#174; Answers</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="//photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="//scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="//graphicdesign.stackexchange.com" title="Graphic Design professionals, students, and enthusiasts">Graphic Design</a></li>
+                        <li><a href="//movies.stackexchange.com" title="movie and tv enthusiasts">Movies &amp; TV</a></li>
+                        <li><a href="//cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="//diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                        <li><a href="//money.stackexchange.com" title="people who want to be financially literate">Personal Finance &amp; Money</a></li>
+                        <li><a href="//academia.stackexchange.com" title="academics and those enrolled in higher education">Academia</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (9)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="//english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="//skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="//judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="//travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="//christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="//gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="//bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="//rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="//math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="//stats.stackexchange.com" title="people interested in statistics, machine learning, data analysis, data mining, and data visualization">Cross Validated (stats)</a></li>
+                        <li><a href="//cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="//physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="//mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                        <li><a href="//chemistry.stackexchange.com" title="scientists, academics, teachers and students">Chemistry</a></li>
+                        <li><a href="//biology.stackexchange.com" title="biology researchers, academics, and students">Biology</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (5)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="//stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="//meta.stackexchange.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Exchange</a></li>
+                        <li><a href="//area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="//careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2015 Stack Exchange Inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc by-sa 3.0</a> 
+                with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="svnrev">
+                rev 2015.12.9.3064
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Stack Overflow works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+<script>var p = "http", d = "static"; if (document.location.protocol == "https:") { p += "s"; d = "engine"; } var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = p + "://" + d + ".adzerk.net/ados.js"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);</script>
+<script>
+    var ados = ados || {};
+    ados.run = ados.run || [];
+    ados.run.push(function () { ados_setKeywords('arduino');; ados_load(); });         
+</script>
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m);
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-5620270-1');
+                        ga('set', 'dimension2', '|arduino|');         ga('send', 'pageview');
+        var _qevents = _qevents || [],
+            _comscore = _comscore || [];
+        (function () {
+            var ssl='https:'==document.location.protocol,
+                s=document.getElementsByTagName('script')[0],
+                qc=document.createElement('script');
+            qc.async=true;
+            qc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+            s.parentNode.insertBefore(qc, s);
+            var sc=document.createElement('script');
+            sc.async=true;
+            sc.src=(ssl?'https://sb':'http://b') + '.scorecardresearch.com/beacon.js';
+            s.parentNode.insertBefore(sc, s);
+        })();
+        _comscore.push({ c1: "2", c2: "17440561" });
+        _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>
+            
+    </body>
+</html>
