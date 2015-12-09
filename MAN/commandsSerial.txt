@@ -1,5 +1,5 @@
 ===Serial from Radio_block to SdGsmRtc_block===
-SD:LOG	#2	V3.7	T23	H50
+SD:LOG\t#2\tV3.7\tT23\tH50\n
 SD:ALERT	#3	T23
 GSM:ALERT	#3	T23
 
@@ -10,3 +10,4 @@ H:i d-m-Y	TEST	something about sensors
 H:i d-m-Y	POWERUP
 
 \t separator
+\n end of line
