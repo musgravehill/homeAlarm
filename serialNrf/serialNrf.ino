@@ -9,10 +9,10 @@ void setup() {
 }
 
 void loop() {
-  Serial.print("{SD:LOG\t#2\tV3.7\tT23\tH50}");  
+  Serial.print("{LOG=#2;V3.7;T23;H50}");  
   delay(50);
-  Serial.print("{SD:ALERT\t#3\tT23}");
+  Serial.print("{ALERT=#3;T23}");
   delay(50);
-  Serial.print("{GSM:ALERT\t#3\tT23}");
+  Serial.print("{ALERT=#3;T23}");
   delay(2000);
 }

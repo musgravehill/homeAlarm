@@ -17,25 +17,30 @@ void setup() {
   SD_init();
 }
 
-void loop() { // run over and over 
+void loop() { // run over and over
   bool isEndOfCommand = false;
   char getByte;
   while (Serial.available() & !isEndOfCommand ) {
     char getByte = Serial.read();
-    command+= getByte;      
+    command += getByte;
+    if (getByte == '{') {
+      command = "";
+    }
     if (getByte == '}') {
       isEndOfCommand = true;
-      Serial.println(command);
       processCommand(command);
       command = "";
     }
   }
 }
 
-void processCommand(String command) {  
-  Serial.println(command);
+void processCommand(String command) {
+  SD_log(command);
+}
+
+void SD_log(String command) {
   if (SD_isEnable) {
-    SD_file_log = SD_card.open("events.txt", FILE_WRITE);
+    SD_file_log = SD_card.open("events.txt", FILE_WRITE); // 8.3 filename.ext rule
     if (SD_file_log) {
       SD_file_log.println(command);
       SD_file_log.close();

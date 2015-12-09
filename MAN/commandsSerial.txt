@@ -1,7 +1,7 @@
 ===Serial from Radio_block to SdGsmRtc_block===
-SD:LOG\t#2\tV3.7\tT23\tH50\n
-SD:ALERT	#3	T23
-GSM:ALERT	#3	T23
+{LOG=#2;V3.7;T23;H50}
+{ALERT=#3;T23}
+{ALERT=#3;T23}
 
 ===SdGsmRtc_block write to SD or GSM===
 H:i d-m-Y	LOG	#2	V3.7	T23	H50
