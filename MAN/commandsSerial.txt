@@ -6,11 +6,6 @@ GSM:ALERT	#3	T23
 ===SdGsmRtc_block write to SD or GSM===
 H:i d-m-Y	LOG	#2	V3.7	T23	H50
 H:i d-m-Y	ALERT	#3	T23
-
-===SdGsmRtc_block write to SD or GSM===
-H:i d-m-Y	ALERT	#3	T23
-
-===SdGsmRtc_block write to SD or GSM===
 H:i d-m-Y	TEST	something about sensors
 H:i d-m-Y	POWERUP
 
