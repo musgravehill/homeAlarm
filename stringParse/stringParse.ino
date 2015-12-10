@@ -2,7 +2,7 @@ void setup() {
   Serial.begin(9600);
   String command1 = "LOGS;#2;V3.7;T23;H50";
   String command2 = "ALRT;#5;H70"; // + '\0'; //\0 for strtok, terminated string
-  String command3 = "DNGR;#1;W1";
+  /String command3 = "DNGR;#1;W1";
 
   processCommand(command1);
   processCommand(command2);
