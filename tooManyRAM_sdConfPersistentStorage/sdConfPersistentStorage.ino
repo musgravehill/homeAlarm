@@ -35,8 +35,10 @@ uint32_t RTC_getUnixtime() {
 bool conf_isAllowSMS(String type) {
   //смс каждого типа ограничены промежутками. Например, вольты -1 раз в сутки.
   //в файле вольты.sms храним время предыдущей отправки
-  char filename[sizeof(type)];
-  type.toCharArray(filename, sizeof(type));
+  uint8_t sizeOfType = type.length();
+  Serial.println(sizeOfType, DEC);
+  char filename[sizeOfType];
+  type.toCharArray(filename, sizeOfType);
 
   uint32_t currUnixtime = RTC_getUnixtime();
   char prevUnixtime_chr[18]; //1449773796
@@ -74,7 +76,7 @@ bool conf_isAllowSMS(String type) {
     }
     prevUnixtime = atol(prevUnixtime_chr);
     SD_filePeriodSms.close();
-    Serial.print("curr: ");
+    Serial.print("prev: ");
     Serial.print(prevUnixtime, DEC);
     Serial.println(" ");
     res_isAllowByPeriod = (bool) (currUnixtime - prevUnixtime) > periodByTypeSms;
