@@ -35,7 +35,7 @@ uint32_t RTC_getUnixtime() {
 bool conf_isAllowSMS(String type) {
   //смс каждого типа ограничены промежутками. Например, вольты -1 раз в сутки.
   //в файле вольты.sms храним время предыдущей отправки
-  char* filename;
+  char filename[sizeof(type)];
   type.toCharArray(filename, sizeof(type));
 
   uint32_t currUnixtime = RTC_getUnixtime();
