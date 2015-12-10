@@ -1,16 +1,16 @@
 /*
   SD structure
-  log.txt     all logs here
-  phones.txt  phones for sms, call, etc
-  ddmmyy.***  GSM conf log
-  NAME            EXT     PERIOD_SECONDS
-  CH4             .ch4    
-  humidity        .h      
-  motionDetector  .mov    
-  powerUp         .pup    
-  sensorVoltage   .v      24*3600 [1 sms per 1 day]      
-  temperature     .t      
-  waterLeak       .wl     
+  -log.txt     all logs here
+  -phones.txt  phones for sms, call, etc
+
+  TITLE            FILENAME     PERIOD_SECONDS
+  CH4             ch4.sms
+  humidity        hmdt.sms
+  motionDetector  motdet.sms
+  powerUp         powup.sms
+  sensorVoltage   volt.sms      24*3600 [1 sms per 1 day]
+  temperature     t.sms
+  waterLeak       wleak.sms
 */
 
 #include <SPI.h>
@@ -19,23 +19,21 @@ SdFat SD_card;
 SdFile SD_confFileGSM;
 bool SD_isEnable = false;
 
-String RTC_getDDMMYY() {
-  //TODO, if size()==1 => "0"+ *
-  return "010502"; //01-05-2002
+uint32_t RTC_getUnixtime() {
+  uint32_t u = 1279393393;
+  return u;
 }
 
-bool conf_isAllowSMS() {
-  //
-  String currDDMMYY = RTC_getDDMMYY();
-  String filename_str = String(currDDMMYY + ".gsm");
-  char filename_chr[sizeof(filename_str)];
-  filename_str.toCharArray(filename_chr, sizeof(filename_chr));
-
+bool conf_isAllowSMS(char* type) {
+  //смс каждого типа ограничены промежутками. Например, вольты -1 раз в сутки.
+  //в файле вольты.sms храним время предыдущей отправки
+  char filename = type;
+  uint32_t currUnixtime = RTC_getUnixtime();
   if (!SD_isEnable) {
     return false;
   }
-  if (!SD_confFileGSM.open(filename_chr, O_READ)) {
-    if (!SD_confFileGSM.open(filename_chr, O_WRITE | O_CREAT )) {
+  if (!SD_confFileGSM.open(filename, O_READ)) {
+    if (!SD_confFileGSM.open(filename, O_WRITE | O_CREAT )) {
       return false;
     }
     else {
