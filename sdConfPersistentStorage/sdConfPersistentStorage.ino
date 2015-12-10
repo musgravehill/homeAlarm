@@ -39,7 +39,7 @@ bool conf_isAllowSMS(String type) {
   type.toCharArray(filename, sizeof(type));
 
   uint32_t currUnixtime = RTC_getUnixtime();
-  char* prevUnixtime_chr = {};
+  char prevUnixtime_chr[18]; //1449773796
   uint32_t prevUnixtime = 0;
   bool res_SDisDamaged = false;
   bool res_isAllowByPeriod = false;
@@ -114,9 +114,10 @@ void setup() {
 }
 
 void loop() {
-  String type = "wleak.sms";
+  String type = "motdet.sms";
   bool isAllow = conf_isAllowSMS(type);
-  Serial.println(" isAllow" + isAllow);
+  Serial.print(" isAllow ");
+  Serial.println(isAllow, DEC);
   delay(2000);
 
 }
