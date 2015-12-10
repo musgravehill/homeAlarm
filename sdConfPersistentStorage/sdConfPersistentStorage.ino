@@ -13,6 +13,14 @@
   waterLeak       wleak.sms
 */
 
+/*
+  WARNING: A given file must not be opened by more than one FatFile object
+     or file corruption may occur.
+
+     note Directory files must be opened read only.  Write and truncation is
+     not allowed for directory files.
+*/
+
 #include <SPI.h>
 #include <SdFat.h>
 SdFat SD_card;
@@ -32,8 +40,19 @@ bool conf_isAllowSMS(char* type) {
   if (!SD_isEnable) {
     return false;
   }
+
+----------читается
+да-----------------------нет
+берем дату из файла------создаем
+закрыли
+
+открыли|создали|обрезали до 0 (truncate)
+пишем текущую дату
+закрыли
+
+  
   if (!SD_confFileGSM.open(filename, O_READ)) {
-    if (!SD_confFileGSM.open(filename, O_WRITE | O_CREAT )) {
+    if (!SD_confFileGSM.open(filename, O_WRITE | O_CREAT | O_TRUNC )) {
       return false;
     }
     else {
