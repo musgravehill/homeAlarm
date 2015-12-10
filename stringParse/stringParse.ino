@@ -27,7 +27,7 @@ void processCommand(String command) {
 }
 
 void sendSMS(String message, String phone) {
-  Serial.rintln("AT+CMGS=\"" + phone + "\"");
+  Serial.println("AT+CMGS=\"" + phone + "\"");
   delay(1000);
   Serial.print(message);
   delay(300);
