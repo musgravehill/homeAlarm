@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<!-- saved from url=(0038)http://www.mysensors.org/build/battery -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" type="text/css" class="__meteor-css__" href="./sensorsGuide_files/e564595d3a4ebb04510f41263e92b86717a19108.css">
+
+
+<script id="addthis-wjs" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52c1fc802ef0b066"></script><script async="" src="./sensorsGuide_files/analytics.js"></script><script type="text/javascript">__meteor_runtime_config__ = {"meteorRelease":"METEOR@1.0.2.1","PUBLIC_SETTINGS":{"ga":{"account":"UA-48655524-1","trackInterests":true}},"ROOT_URL":"http://localhost:3000","ROOT_URL_PATH_PREFIX":"","DDP_DEFAULT_CONNECTION_URL":"http://ddp.mysensors.org","autoupdateVersion":"44dd4670ec2de00431e3c95262b0607ff2024245","autoupdateVersionRefreshable":"c083bce87dfaed5e8b1f7b45a44058ad31744c62","autoupdateVersionCordova":"none"};</script>
+
+  <script type="text/javascript" src="./sensorsGuide_files/4064978b7b6db602e9e71f383fa0a9d272b98cad.js"></script><link type="text/css" rel="stylesheet" href="./sensorsGuide_files/font-awesome.css">
+
+
+
+<meta name="fragment" content="!">
+<title>MySensors - </title><meta name="description" content=""><script type="text/javascript" async="" src="./sensorsGuide_files/embed.js"></script></head>
+<body style="padding-top: 88px;">
+
+
+
+
+	
+	
+	
+
+	<!-- if we're not showing a dropdown, we need some other place to show messages -->
+	<div id="lightboxOverlay" class="lightboxOverlay" style="display: none;"></div><div id="lightbox" class="lightbox" style="display: none;"><div class="lb-outerContainer"><div class="lb-container"><img class="lb-image" src=""><div class="lb-nav"><a class="lb-prev" href=""></a><a class="lb-next" href=""></a></div><div class="lb-loader"><a class="lb-cancel"></a></div></div></div><div class="lb-dataContainer"><div class="lb-data"><div class="lb-details"><span class="lb-caption"></span><span class="lb-number"></span></div><div class="lb-closeContainer"><a class="lb-close"></a></div></div></div></div><head>
+		<title>MySensors - Build your own Sensors</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="”shortcut" icon”="" type="”image/x-icon”" href="http://www.mysensors.org/build/%E2%80%9D/favicon.ico%E2%80%9D">
+	</head>
+	<body>
+	<nav id="navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
+	 <!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="http://www.mysensors.org/"><!--span class="solid">My</span><span class="sketch">Sensors</span-->
+			<img alt="MySensors" src="./sensorsGuide_files/MySensorsLogo.png"></a>
+		</div>
+
+		<div class="top-tavbar collapse navbar-collapse navbar-ex1-collapse">
+			<ul class="nav nav-justified">
+				<li class="normal-nav"><a href="http://www.mysensors.org/about/"><i class="fa fa-life-bouy fa-fw"></i><br>Getting&nbsp;Started</a></li>
+				<li class="normal-nav"><a href="http://www.mysensors.org/controller/"><i class="fa fa-gamepad fa-fw"></i><br>Controller</a></li>
+				<li class="normal-nav"><a href="http://www.mysensors.org/build/"><i class="fa fa-gears fa-fw"></i><br>Build</a></li>
+				<li class="normal-nav"><a href="http://www.mysensors.org/hardware/"><i class="fa fa-cubes fa-fw"></i><br>Hardware</a></li>
+				<li class="normal-nav"><a href="http://www.mysensors.org/download/"><i class="fa fa-download fa-fw"></i><br>API&nbsp;&amp;&nbsp;Download</a></li>
+				<li class="normal-nav"><a href="http://forum.mysensors.org/"><i class="fa fa-comment fa-fw"></i><br>Forum</a></li>
+				<li class="normal-nav"><a href="http://www.mysensors.org/store/"><i class="fa fa-shopping-cart fa-fw"></i><br>Store</a></li>
+			</ul>
+
+			<!--ul class="nav navbar-nav navbar-right">
+						{{#if currentUser}}
+
+						 <li class="{{cloudActive}}"><A href="{{pathFor 'cloud'}}"><i class="fa fa-cloud fa-fw"></i> {{signedInAs}}</A></li>
+
+						{{else}}
+							{{>topMenu url='/sign-in' icon='cloud' title='My Things' page=page}}
+						{{/if}}
+			</ul-->
+
+		</div>
+	</nav>
+	<div class="page">
+		<div class="row">
+			<div id="wrapper">
+				<div id="sidebar-wrapper" style="top: 68px;">
+					<ul id="buildnav" class="nav nav-pills nav-stacked">
+
+		<li class=""><a href="http://www.mysensors.org/build/connect_radio">Connecting the Radio</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/print">3D Printables</a></li>
+		<li class="active"><a href="./sensorsGuide_files/sensorsGuide.html">Battery Powering</a><ul class="fa-ul"><li class="popupMenu active"><i class="fa-li fa fa-caret-right"></i><a href="http://www.mysensors.org/build/battery#general-tips-for-battery-operation">General Tips for Battery Operation</a></li><li class="popupMenu"><i class="fa-li fa fa-caret-right"></i><a href="http://www.mysensors.org/build/battery#theoretical-battery-life">Theoretical Battery Life</a></li><li class="popupMenu"><i class="fa-li fa fa-caret-right"></i><a href="http://www.mysensors.org/build/battery#measuring-and-reporting-battery-level">Measuring and Reporting Battery Level</a></li><li class="popupMenu"><i class="fa-li fa fa-caret-right"></i><a href="http://www.mysensors.org/build/battery#need-to-know-more">Need to Know More?</a></li><li class="popupMenu"><i class="fa-li fa fa-caret-right"></i><a href="http://www.mysensors.org/build/battery#buying-guide">Buying Guide</a></li></ul></li>
+		<li class=""><a href="http://www.mysensors.org/build/debug">Troubleshooting</a></li>
+
+		<li><h4>Gateways</h4></li>
+		<li class=""><a href="http://www.mysensors.org/build/select_gateway">Selecting Gateway</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/serial_gateway">Serial Gateway</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/esp8266_gateway">ESP8266 Wifi Gateway</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/ethernet_gateway">Ethernet Gateway</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/mqtt_gateway">MQTT Gateway</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/advanced_gateway">Advanced build options</a></li>
+
+		<li><h4>Sensors &amp; Actuators</h4></li>
+		<li class=""><a href="http://www.mysensors.org/build/binary">Door/Window/Button</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/dimmer">Dimmer (LED)</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/distance">Distance</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/display">Display and Time</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/dust">Dust</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/gas">Gas</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/humidity">Humidity</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/ir">IR Sender/Receiver</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/irrigation">Irrigation Controller</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/light">Light</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/moisture">Moisture</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/motion">Motion</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/pressure">Pressure</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/parking">Parking</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/pulse_power">Pulse Powermeter</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/pulse_water">Pulse Watermeter</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/rain">Rain Gauge</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/relay">Relay</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/rfid">RFID</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/knock">Secret Knock</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/servo">Servo</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/scene_controller">Scene Controller</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/temp">Temperature</a></li>
+		<li class=""><a href="http://www.mysensors.org/build/uv">UV</a></li>
+
+	</ul>
+				</div>
+				<div id="page-content-wrapper">
+					<button type="button" id="menu-toggle" href="#" class="btn btn-primary btn-sm btn-pad"><span class="glyphicon glyphicon-chevron-right"></span> Toggle Menu</button>
+					<div class="col-md-12">
+		<h1>Battery Powered Sensors</h1>
+		<div class="well">
+
+		<a class="anchor" id="general-tips-for-battery-operation"></a><h2>General Tips for Battery Operation</h2>
+
+		 <a href="./sensorsGuide_files/ProMiniMod.png" data-lightbox="image-finding" title="Modification of the Pro Mini - clone"><img src="./sensorsGuide_files/ProMiniMod.png" style="width:20%;float:right;padding-left:20px"></a>
+		<p>The following tips will reduce the power consumption of your Arduino Sensor allowing it to run on batteries for a longer period of time.	</p>
+		<p>Note: When programming using FTDI adapter on modified 3v3 Pro Minis with removed regulators. Make sure to supply a stable 3v3 power source to the VCC pin yourself.</p>
+		<ol>
+			<li>Use the 3.3V version Arduino Pro Mini with the lower CPU clock speed (8MHz)</li>
+			<li>Sleep whenever possible by powering down the Arduino and radio. The sensor node can periodically wake up by either triggering a timer interrupt or by an attached sensor registering a reading on one of the Arduino interrupt enabled io-pins. Most of the MySensors example sketches implement sleep mode.<br>
+			When powered down, the CPU, DS18B20 temp sensor and radio consume (very roughly) 120 uA - which is similar to the self discharge rate of a battery.
+
+
+			</li>
+
+			<li>Disconnect the Arduino's power indicator LED by cutting the track between the LED and the resistor in series.  <i>Saves about 1.5 mA</i>
+			<a href="./sensorsGuide_files/ProMiniMod2.png" data-lightbox="image-finding" title="Modification of the Pro Mini - version 2"><img src="./sensorsGuide_files/ProMiniMod2.png" style="width:30%;float:right;padding-left:20px"></a>&gt;
+			<!-- a href="/battery/cut.png" data-lightbox="image-finding" title="Diconnect LEDs and Regulator - sparkfun"><img src="/battery/cut.png" style="width:40%;float:right;padding-left:20px"></a -->
+
+			</li>
+			<li>Disconnect the 3.3 VDC regulator because it is not needed. Cut the V<sub>out</sub> pin with a sharp fine wire cutter. See images to the right on how to locate regulator. <i>Saves about 220 uA.</i></li>
+
+			<li>Power the device with two AA batteries connected in series to the PCB.  You can power 5 VDC sensors using an ultra low power step up converter (see the Buying Guide below). Power regulators will reduce the battery life due constant power consumption.
+			</li>
+		</ol>
+
+		<a class="anchor" id="theoretical-battery-life"></a><h2>Theoretical Battery Life</h2>
+
+		<p>The battery life (for a hypothetical temperature sensor) can be calculated by determining the average current for the circuit, using the following general equation:</p>
+
+		<p>I<sub>avg</sub> = (t<sub>0</sub>*I<sub>0</sub> + t<sub>1</sub>*I<sub>1</sub> ... + t<sub>x</sub>*I<sub>x</sub>) / (t<sub>0</sub> + t<sub>1</sub> ... + t<sub>x</sub>)</p>
+
+		<p>Note these figures are <strong>for illustration purposes</strong> - your results will certainly vary. Current is measured at the battery with a battery Voltage of 3.0V.</p>
+
+		<p><strong>Idling</strong>:  I<sub>0</sub> = 28 mA, t<sub>0</sub> = 0.65 sec (using the delays I set up in the sketch)
+		<strong>Transmitting</strong>:  I<sub>1</sub> = 31 mA, t<sub>1</sub> = say 50 mSec (time is just a guess)<br>
+		<strong>Sleeping</strong>:  I<sub>2</sub> = 120 uA (very roughly), t<sub>2</sub> = 15 minutes (the temperature sampling rate)</p>
+
+		<p>Using the above figures the effective current = 0.142 mA.  The sleep current is difficult to measure accurately, so this figure may vary and will affect the lifetime calculation.</p>
+
+		<p>Assume the batteries are good for 2000 mAhr, that gives a lifetime of 14,101 hours, which equals to <strong>19.6 months</strong>. The lifetime is dominated by the sleep current and sensor sample rate. Assuming the figures and calculations are correct (let us know if they aren't), it's likely the batteries would die from old age rather than through actual usage.</p>
+
+		<a class="anchor" id="measuring-and-reporting-battery-level"></a><h2>Measuring and Reporting Battery Level</h2>
+		<a href="./sensorsGuide_files/volts.png" data-lightbox="image-finding" title="Modification of the Pro Mini - version 2"><img src="./sensorsGuide_files/volts.png" style="width:30%;float:right;padding-left:20px"></a>
+		<p>Use a 1MΩ (R1) and 470KΩ (R2) resistor in series, connected to the positive terminal on the battery and ground and then connected the tap point to the A0 input on the CPU. </p>
+
+		<p>The tap point could be bypassed with a 0.1 uF capacitor to keep the noise level low, at this otherwise high impedance point. </p>
+		<p>The ADC is set to use the internal reference value of 1.1V - so V<sub>max</sub> at ADC<sub>max</sub> = 1.1*(1<sup>6</sup>+470<sup>3</sup>)/470<sup>3</sup> = 3.44V</p>
+		<p>The battery power value must be converted to a percentage compatable with your Controller.</p>
+
+		<p>See the following example on how to measure battery level on A0 and report it to the Controller.</p>
+		<p><strong><a style="padding-left:20px" href="https://github.com/mysensors/Arduino/blob/master/libraries/MySensors/examples/BatteryPoweredSensor/BatteryPoweredSensor.ino"><i class="fa fa-github"></i> GitHub</a> | <a href="http://www.mysensors.org/git/Arduino/libraries/MySensors/examples/BatteryPoweredSensor/BatteryPoweredSensor.ino"> <i class="fa fa-download"></i> Download</a>  | BatteryPoweredSensor.ino</strong><br></p>
+
+
+		<a class="anchor" id="need-to-know-more"></a><h2>Need to Know More?</h2>
+		<p>Here are links to some articles for a more in-depth information:</p><a href="http://forum.micasaverde.com/index.php/topic,20078.0.html">A-lurker excellent post about this topic on the micasaverde forum</a><br>
+		<a href="http://maniacbug.wordpress.com/2011/10/19/sensor-node/">Maniacbugs Low-Power Wireless Sensor Node</a><br>
+		<a href="http://www.gammon.com.au/forum/?id=11497">Power saving techniques for microprocessors</a><br>
+		<a href="http://hwstartup.wordpress.com/2013/04/15/how-to-run-an-arduino-clone-on-aa-batteries-for-over-a-year-part-2/">Running Arduino for over a year on batteries</a><br>
+		​<a href="http://www.thalin.se/2013/04/arduino-pro-mini-low-power-modification.html">Pro mini modification for low power consuption</a><br>
+		​<a href="http://www.rocketscream.com/blog/2011/07/04/lightweight-low-power-arduino-library/">Low power library for Arduino</a>
+
+			<a class="anchor" id="buying-guide"></a><h2>Buying Guide</h2>
+			<div class="clearfix"></div>
+
+	<div class="storeCategory" id="r_s_battery"><div class="row" style="padding-left:0px; padding-right:0px">
+	
+	<div class="col-sm-6 col-lg-6 col-md-6 shopLeftItem">
+	<div class="shopBorder">
+		<div class="shopImageField">
+				<img src="./sensorsGuide_files/$_12.JPG" class="img-rounded shopImage">
+		</div>
+		<h5 class="shopHeader">Arduino Pro Mini Compatible 3.3V</h5>
+		<p>If you are planning to build a battery-powered sensors, the 3.3v pro mini is a good choice. You won't need a regulator for the radio when using this version. Make sure your attached sensors also can run on 3.3V or buy a <a href="http://www.mysensors.org/store#regulators">step-up regulator</a></p>
+		<div class="clearShop">
+		
+		
+			<div class="shopStock">
+				 <a href="http://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_ff3=2&amp;pub=5575069610&amp;toolid=10001&amp;campid=5337433187&amp;customid=&amp;icep_item=200914924969&amp;ipn=psmain&amp;icep_vectorid=229466&amp;kwid=902099&amp;mtid=824&amp;kw=lg"><img src="./sensorsGuide_files/ebay.png"></a>
+				 <div class="pull-right">
+					<a href="http://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_ff3=2&amp;pub=5575069610&amp;toolid=10001&amp;campid=5337433187&amp;customid=&amp;icep_item=200914924969&amp;ipn=psmain&amp;icep_vectorid=229466&amp;kwid=902099&amp;mtid=824&amp;kw=lg"><span style="color:green">In stock - $1.99</span></a>&nbsp;
+					<a class="btn btn-xs btn-primary" href="http://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_ff3=2&amp;pub=5575069610&amp;toolid=10001&amp;campid=5337433187&amp;customid=&amp;icep_item=200914924969&amp;ipn=psmain&amp;icep_vectorid=229466&amp;kwid=902099&amp;mtid=824&amp;kw=lg" role="button">&nbsp;&nbsp;<i class="fa fa-shopping-cart"></i> Buy &nbsp;&nbsp;</a>
+				</div>
+			</div>
+		
+		
+			<div class="shopStock">
+				<a href="http://s.click.aliexpress.com/e/ByJeubIeY"><img src="./sensorsGuide_files/ali.png"></a>
+				<div class="pull-right">
+					<a href="http://s.click.aliexpress.com/e/ByJeubIeY"><span style="color:green">In stock - $16.88</span></a>&nbsp;
+					<a class="btn btn-xs btn-primary" href="http://s.click.aliexpress.com/e/ByJeubIeY" role="button">&nbsp;&nbsp;<i class="fa fa-shopping-cart"></i> Buy &nbsp;&nbsp;</a>
+				</div>
+			</div>
+		
+		</div>
+		</div>
+		</div>
+	 
+	<div class="col-sm-6 col-lg-6 col-md-6 shopRightItem">
+	<div class="shopBorder">
+		<div class="shopImageField">
+				<img src="./sensorsGuide_files/$_12(1).JPG" class="img-rounded shopImage">
+		</div>
+		<h5 class="shopHeader">10pcs Arduino Pro Mini Compatible 3.3V</h5>
+		<p>10 is cheaper!</p>
+		<div class="clearShop">
+		
+		
+			<div class="shopStock">
+				 <a href="http://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_ff3=2&amp;pub=5575069610&amp;toolid=10001&amp;campid=5337433187&amp;customid=&amp;icep_item=131091305008&amp;ipn=psmain&amp;icep_vectorid=229466&amp;kwid=902099&amp;mtid=824&amp;kw=lg"><img src="./sensorsGuide_files/ebay.png"></a>
+				 <div class="pull-right">
+					<a href="http://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_ff3=2&amp;pub=5575069610&amp;toolid=10001&amp;campid=5337433187&amp;customid=&amp;icep_item=131091305008&amp;ipn=psmain&amp;icep_vectorid=229466&amp;kwid=902099&amp;mtid=824&amp;kw=lg"><span style="color:green">In stock - $20.65</span></a>&nbsp;
+					<a class="btn btn-xs btn-primary" href="http://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_ff3=2&amp;pub=5575069610&amp;toolid=10001&amp;campid=5337433187&amp;customid=&amp;icep_item=131091305008&amp;ipn=psmain&amp;icep_vectorid=229466&amp;kwid=902099&amp;mtid=824&amp;kw=lg" role="button">&nbsp;&nbsp;<i class="fa fa-shopping-cart"></i> Buy &nbsp;&nbsp;</a>
+				</div>
+			</div>
+		
+		
+			<div class="shopStock">
+				<a href="http://s.click.aliexpress.com/e/ByJeubIeY"><img src="./sensorsGuide_files/ali.png"></a>
+				<div class="pull-right">
+					<a href="http://s.click.aliexpress.com/e/ByJeubIeY"><span style="color:green">In stock - $16.88</span></a>&nbsp;
+					<a class="btn btn-xs btn-primary" href="http://s.click.aliexpress.com/e/ByJeubIeY" role="button">&nbsp;&nbsp;<i class="fa fa-shopping-cart"></i> Buy &nbsp;&nbsp;</a>
+				</div>
+			</div>
+		
+		</div>
+		</div>
+		</div>
+	 
+	<div class="col-sm-6 col-lg-6 col-md-6 shopLeftItem">
+	<div class="shopBorder">
+		<div class="shopImageField">
+				<img src="./sensorsGuide_files/$_1.JPG" class="img-rounded shopImage">
+		</div>
+		<h5 class="shopHeader">DC-DC Step Up Boost Module 5V</h5>
+		<p>Input 1-3V , Output 5V. Use this if you need to power 5V sensors from a 3.3V Arduino Pro Mini</p>
+		<div class="clearShop">
+		
+		
+			<div class="shopStock">
+				 <a href="http://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_ff3=2&amp;pub=5575069610&amp;toolid=10001&amp;campid=5337433187&amp;customid=&amp;icep_item=121142828799&amp;ipn=psmain&amp;icep_vectorid=229466&amp;kwid=902099&amp;mtid=824&amp;kw=lg"><img src="./sensorsGuide_files/ebay.png"></a>
+				 <div class="pull-right">
+					<a href="http://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_ff3=2&amp;pub=5575069610&amp;toolid=10001&amp;campid=5337433187&amp;customid=&amp;icep_item=121142828799&amp;ipn=psmain&amp;icep_vectorid=229466&amp;kwid=902099&amp;mtid=824&amp;kw=lg"><span style="color:green">In stock - $1.29</span></a>&nbsp;
+					<a class="btn btn-xs btn-primary" href="http://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_ff3=2&amp;pub=5575069610&amp;toolid=10001&amp;campid=5337433187&amp;customid=&amp;icep_item=121142828799&amp;ipn=psmain&amp;icep_vectorid=229466&amp;kwid=902099&amp;mtid=824&amp;kw=lg" role="button">&nbsp;&nbsp;<i class="fa fa-shopping-cart"></i> Buy &nbsp;&nbsp;</a>
+				</div>
+			</div>
+		
+		
+			<div class="shopStock">
+				<a href="http://s.click.aliexpress.com/e/mQ3Rv3rNz"><img src="./sensorsGuide_files/ali.png"></a>
+				<div class="pull-right">
+					<a href="http://s.click.aliexpress.com/e/mQ3Rv3rNz"><span style="color:green">In stock - $1.16</span></a>&nbsp;
+					<a class="btn btn-xs btn-primary" href="http://s.click.aliexpress.com/e/mQ3Rv3rNz" role="button">&nbsp;&nbsp;<i class="fa fa-shopping-cart"></i> Buy &nbsp;&nbsp;</a>
+				</div>
+			</div>
+		
+		</div>
+		</div>
+		</div>
+	 
+	<div class="col-sm-6 col-lg-6 col-md-6 shopRightItem">
+	<div class="shopBorder">
+		<div class="shopImageField">
+				<img src="./sensorsGuide_files/$(KGrHqR,!loE-3vNNoIRBPzsHcYQ4!--60_1.JPG" class="img-rounded shopImage">
+		</div>
+		<h5 class="shopHeader">3V AA Battery holder</h5>
+		<p>For powering 3.3V Arduino.</p>
+		<div class="clearShop">
+		
+		
+			<div class="shopStock">
+				 <a href="http://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_ff3=2&amp;pub=5575069610&amp;toolid=10001&amp;campid=5337433187&amp;customid=&amp;icep_item=320920506506&amp;ipn=psmain&amp;icep_vectorid=229466&amp;kwid=902099&amp;mtid=824&amp;kw=lg"><img src="./sensorsGuide_files/ebay.png"></a>
+				 <div class="pull-right">
+					<a href="http://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_ff3=2&amp;pub=5575069610&amp;toolid=10001&amp;campid=5337433187&amp;customid=&amp;icep_item=320920506506&amp;ipn=psmain&amp;icep_vectorid=229466&amp;kwid=902099&amp;mtid=824&amp;kw=lg"><span style="color:green">In stock - $3.99</span></a>&nbsp;
+					<a class="btn btn-xs btn-primary" href="http://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_ff3=2&amp;pub=5575069610&amp;toolid=10001&amp;campid=5337433187&amp;customid=&amp;icep_item=320920506506&amp;ipn=psmain&amp;icep_vectorid=229466&amp;kwid=902099&amp;mtid=824&amp;kw=lg" role="button">&nbsp;&nbsp;<i class="fa fa-shopping-cart"></i> Buy &nbsp;&nbsp;</a>
+				</div>
+			</div>
+		
+		
+			<div class="shopStock">
+				<a href="http://s.click.aliexpress.com/e/EuzFE6Mfm"><img src="./sensorsGuide_files/ali.png"></a>
+				<div class="pull-right">
+					<a href="http://s.click.aliexpress.com/e/EuzFE6Mfm"><span style="color:green">In stock - $1.43</span></a>&nbsp;
+					<a class="btn btn-xs btn-primary" href="http://s.click.aliexpress.com/e/EuzFE6Mfm" role="button">&nbsp;&nbsp;<i class="fa fa-shopping-cart"></i> Buy &nbsp;&nbsp;</a>
+				</div>
+			</div>
+		
+		</div>
+		</div>
+		</div>
+	 
+	 </div></div>
+		</div>
+	</div>
+					<div class="col-md-12" id="my-disqus">
+	<!-- Begin Disqus universal code -->
+	<div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./sensorsGuide_files/saved_resource.html" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 4394px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+
+	<noscript>Please enable JavaScript to enable
+		&lt;a href="http://disqus.com/?ref_noscript"&gt;comments&lt;/a&gt;.
+	</noscript>
+
+	
+	<!-- End Disqus universal code -->
+</div>
+					<div class="footer "><a href="http://sensnology.com/">Copyright 2015 Sensnology</a> &nbsp; | &nbsp; <a href="http://www.mysensors.org/privacy">Privacy Policy</a> &nbsp; | &nbsp; <a href="http://www.mysensors.org/tos">Terms of Service</a> &nbsp; | &nbsp; <a href="http://www.mysensors.org/about/mysensors">About</a></div>
+
+	<img style="text-decoration:none; border:0; padding:0; margin:0;" src="./sensorsGuide_files/1">
+				</div>
+			</div>
+		</div>
+	</div>
+	</body></body></html>

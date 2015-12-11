@@ -1,0 +1,2527 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)https://maniacbug.wordpress.com/2011/10/19/sensor-node/ -->
+<html lang="en"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>Low-Power Wireless Sensor Node | maniacbug</title>
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://maniacbug.wordpress.com/xmlrpc.php">
+<link rel="alternate" type="application/rss+xml" title="maniacbug » Feed" href="https://maniacbug.wordpress.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="maniacbug » Comments Feed" href="https://maniacbug.wordpress.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="maniacbug » Low-Power Wireless Sensor Node Comments Feed" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/feed/">
+<script type="text/javascript">
+/* <![CDATA[ */
+function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!='function'){window.onload=func;}else{window.onload=function(){oldonload();func();}}}
+/* ]]> */
+</script>
+<link rel="stylesheet" id="all-css-0" href="./Low-Power Wireless Sensor Node _ maniacbug_files/saved_resource" type="text/css" media="all">
+<script type="text/javascript">
+/* <![CDATA[ */
+var LoggedOutFollow = {"invalid_email":"Your subscription did not succeed, please try again with a valid email address."};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Low-Power Wireless Sensor Node _ maniacbug_files/saved_resource(1)"></script>
+<link rel="stylesheet" id="all-css-0" href="./Low-Power Wireless Sensor Node _ maniacbug_files/style.css" type="text/css" media="all">
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s2.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563g&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://maniacbug.wordpress.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="125Khz RFID Module RDM630" href="https://maniacbug.wordpress.com/2011/10/09/125khz-rfid-module-rdm630/">
+<link rel="next" title="Getting Started with nRF24L01+ on Arduino" href="https://maniacbug.wordpress.com/2011/11/02/getting-started-rf24/">
+<meta name="generator" content="WordPress.com">
+<link rel="canonical" href="./Low-Power Wireless Sensor Node _ maniacbug_files/Low-Power Wireless Sensor Node _ maniacbug.html">
+<link rel="shortlink" href="http://wp.me/p1nMLD-3D">
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=json&amp;url=https%3A%2F%2Fmaniacbug.wordpress.com%2F2011%2F10%2F19%2Fsensor-node%2F&amp;for=wpcom-auto-discovery"><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=xml&amp;url=https%3A%2F%2Fmaniacbug.wordpress.com%2F2011%2F10%2F19%2Fsensor-node%2F&amp;for=wpcom-auto-discovery">
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Low-Power Wireless Sensor Node">
+<meta property="og:url" content="https://maniacbug.wordpress.com/2011/10/19/sensor-node/">
+<meta property="og:description" content="My goal today is to create a sensor node which can be used in a wireless sensor network, to capture environmental information and send it back to the base. My main goals are for the nodes to: Be ch...">
+<meta property="article:published_time" content="2011-10-19T21:13:35+00:00">
+<meta property="article:modified_time" content="2012-02-22T15:31:23+00:00">
+<meta property="og:site_name" content="maniacbug">
+<meta property="og:image" content="http://farm7.static.flickr.com/6218/6225376286_f57938f8c2.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:site" content="@wordpressdotcom">
+<meta name="twitter:image" content="http://farm7.static.flickr.com/6097/6224308836_b9b3b421a3_z.jpg?w=240">
+<meta name="twitter:card" content="summary">
+<meta property="fb:app_id" content="249643311490">
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom">
+<link rel="shortcut icon" type="image/x-icon" href="https://s2.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48">
+<link rel="icon" type="image/x-icon" href="https://s2.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48">
+<link rel="apple-touch-icon-precomposed" href="https://s0.wp.com/i/webclip.png">
+<link rel="openid.server" href="https://maniacbug.wordpress.com/?openidserver=1">
+<link rel="openid.delegate" href="https://maniacbug.wordpress.com/">
+<link rel="search" type="application/opensearchdescription+xml" href="https://maniacbug.wordpress.com/osd.xml" title="maniacbug">
+<link rel="search" type="application/opensearchdescription+xml" href="https://wordpress.com/opensearch.xml" title="WordPress.com">
+<style type="text/css">
+.widget_twitter li {
+	word-wrap: break-word;
+}
+</style>
+<meta name="application-name" content="maniacbug"><meta name="msapplication-window" content="width=device-width;height=device-height"><meta name="msapplication-tooltip" content="Explorations in Embedded"><meta name="msapplication-task" content="name=Subscribe;action-uri=https://maniacbug.wordpress.com/feed/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="title" content="Low-Power Wireless Sensor Node | maniacbug on WordPress.com">
+<meta name="description" content="My goal today is to create a sensor node which can be used in a wireless sensor network, to capture environmental information and send it back to the base. My main goals are for the nodes to: Be cheap, and last for a year.How cheap and how low-power can we go? In the end, I…">
+		<script type="text/javascript" src="https://c.amazon-adsystem.com/aax2/amzn_ads.js"></script>
+		<script type="text/javascript">
+		try { amznads.getAds("3033"); } catch(e) { /* ignore */ }
+		</script>
+		<script type="text/javascript">
+		var a9_p = amznads.getKeys(),
+		_ipw_custom = {
+			wordAds: '0',
+			adSafe: '1',
+			domain: 'maniacbug.wordpress.com',
+			pageURL: 'https://maniacbug.wordpress.com/2011/10/19/sensor-node/'
+		};
+		if("undefined"!=typeof a9_p&&""!=a9_p&&null!==a9_p&&"[object Array]"===Object.prototype.toString.call(a9_p)){var a="",b=0,c=a9_p.length;a9_p.sort();for(var d=0;d<c;d++){a9_p[d-b]=a9_p[d-b].replace(/a1x6p/,"a160x600p");var e=a9_p[d-b].split("p");e[0]==a&&(a9_p.splice(d-b,1),b++);a=e[0]}_ipw_custom.amznPay=a9_p};document.close();
+		</script>		<!-- IPONWEB header script -->
+		<script type="text/javascript">
+			window.__ATA = {
+				scriptSrc: '//s.pubmine.com/showad.js',
+				slotPrefix: 'automattic-id-',
+				initAd: function(o) {
+					var o = o || {},
+						g = window,
+						d = g.document,
+						wr = d.write,
+						id = g.__ATA.id();
+					wr.call(d, '<div id="' + id + '" data-section="' + (o.sectionId || 0) + '"' + (o.type ? ('data-type="' + o.type + '"') : '') + ' ' + (o.forcedUrl ? ('data-forcedurl="' + o.forcedUrl + '"') : '') + ' style="width:' + (o.width || 0) + 'px; height:' + (o.height || 0) + 'px;">');
+					g.__ATA.displayAd(id);
+					wr.call(d, '</div>');
+				},
+				displayAd: function(id) {
+					window.__ATA.ids = window.__ATA.ids || {};
+					window.__ATA.ids[id] = 1;
+				},
+				customParams: _ipw_custom,
+				id: function() {
+					return window.__ATA.slotPrefix + (parseInt(Math.random() * 10000, 10) + 1 + (new Date()).getMilliseconds());
+				}
+			};
+			(function(d, ata) {
+				var pr = "https:" === d.location.protocol ? "https:" : "http:",
+					src = pr + ata.scriptSrc,
+					st = "text/javascript";
+				d.write('<scr' + 'ipt type="' + st + '" src="' + src + '"><\/scr' + 'ipt>');
+			})(window.document, window.__ATA);
+		</script><script type="text/javascript" src="https://s.pubmine.com/showad.js"></script>
+		<script type="text/javascript">
+		jQuery(window).ready(function () {
+			jQuery("a.wpa-about").text("About these ads");
+		});
+		</script><style type="text/css" id="syntaxhighlighteranchor"></style>
+<script type="text/javascript">
+	window.google_analytics_uacct = "UA-52447-2";
+</script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_setDomainName', 'wordpress.com']);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script><script type="text/javascript" async="" src="./Low-Power Wireless Sensor Node _ maniacbug_files/ga.js"></script>
+<script type="text/javascript" async="" src="./Low-Power Wireless Sensor Node _ maniacbug_files/saved_resource(2)"></script><script type="text/javascript" async="" src="./Low-Power Wireless Sensor Node _ maniacbug_files/saved_resource(3)"></script></head>
+
+<body class="single single-post postid-225 single-format-standard mp6 customizer-styles-applied no-sidebar color-red highlander-enabled highlander-dark">
+<div id="container" class="hfeed">
+	<div id="page" class="blog">
+		<div id="header">
+						<div id="site-title">
+				<span>
+					<a href="https://maniacbug.wordpress.com/" title="maniacbug" rel="home">maniacbug</a>
+				</span>
+			</div>
+
+			<div id="nav" role="navigation">
+			  				<div class="skip-link screen-reader-text"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#content" title="Skip to content">Skip to content</a></div>
+								<div class="menu"><ul><li><a href="https://maniacbug.wordpress.com/">Home</a></li><li class="page_item page-item-25"><a href="https://maniacbug.wordpress.com/find-me-on/">Find me on…</a></li></ul></div>
+			</div><!-- #nav -->
+
+			<div id="pic">
+				<a href="https://maniacbug.wordpress.com/" rel="home">
+										<img src="./Low-Power Wireless Sensor Node _ maniacbug_files/double-seven-led-v1-photo-4x1.jpg" width="990" height="257" alt="">
+								</a>
+			</div><!-- #pic -->
+		</div><!-- #header -->
+
+		<div id="content-box">
+
+<div id="content-container">
+	<div id="content" role="main">
+
+	
+<div id="nav-above" class="navigation">
+	<div class="nav-previous"><a href="https://maniacbug.wordpress.com/2011/10/09/125khz-rfid-module-rdm630/" rel="prev"><span class="meta-nav">←</span> 125Khz RFID Module&nbsp;RDM630</a></div>
+	<div class="nav-next"><a href="https://maniacbug.wordpress.com/2011/11/02/getting-started-rf24/" rel="next">Getting Started with nRF24L01+ on&nbsp;Arduino <span class="meta-nav">→</span></a></div>
+</div><!-- #nav-above -->
+
+<div id="post-225" class="post-225 post type-post status-publish format-standard hentry category-arduino category-rf-radio">
+	<div class="entry-meta">
+
+		October 19, 2011 · 2:13 pm	</div><!-- .entry-meta -->
+
+		<div class="jump"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comments"><span class="meta-nav">↓ </span>Jump to Comments</a></div>
+	<h1 class="entry-title"><a href="./Low-Power Wireless Sensor Node _ maniacbug_files/Low-Power Wireless Sensor Node _ maniacbug.html" rel="bookmark">Low-Power Wireless Sensor&nbsp;Node</a></h1>
+	<div class="entry entry-content">
+		<div>
+<h2 style="text-align:center;padding:3px;"><a title="RF Duinode V3 (2V4)" href="http://www.flickr.com/photos/maniacbug/6224308836/"><img style="border:solid 2px #000000;" alt="RF Duinode V3 (2V4)" src="./Low-Power Wireless Sensor Node _ maniacbug_files/6224308836_b9b3b421a3_z.jpg"></a></h2>
+<p>My goal today is to create a sensor node which can be used in a wireless sensor network, to capture environmental information and send it back to the base.  My main goals are for the nodes to: Be cheap, and last for a year.</p>
+<p>How cheap and how low-power can we go?  In the end, I got down under $12 for a very capable Arduino-compatible node with a 2.4GHz radio running ~2.6V that should last a year and a half on 2 AA’s, or 5 months on a coin cell.</p>
+<p><span id="more-225"></span><br>
+</p><h2>Adventures in Low Power</h2>
+<p>Previously, I ran a small test network of these nodes using 3.3V regulated power.  After doing that, I realized it’s possible to run on even less power and with an even cheaper BOM by ditching the regulator entirely.  Two AA cells will range from 2.4 to 2.9V.  An Atmega328P MCU and the nRF24L01+ radio will both operate just fine in that range.</p>
+<p>To enable this, I needed to create a new ‘board’ in the Arduino IDE.  This board has two changes from the stock Duemilanove:</p>
+<ul>
+<li>Set the correct fuses for the ‘Brown-Out Detector’ (BOD).  The Arduino IDE as-shipped sets the BOD to 2.7V, so the chip won’t even power up with 2x AA’s.</li>
+<li>Run the chip at 8MHz clock rate.  That is exactly the edge of the specified clock rate curve for 2.4V, the low end of my voltage range.</li>
+</ul>
+<p>Here’s what my entry to the <span class="skimlinks-unlinked">boards.txt</span> file looks like exactly:</p>
+<div style="background-color:#7d170d;padding:5px;"><code>lopower.name=Arduino Ultru Low-Power (&lt;2.4V, 8 MHz) w/ ATmega328<br>&nbsp;<br>lopower.upload.protocol=stk500<br>lopower.upload.maximum_size=30720<br>lopower.upload.speed=57600<br>&nbsp;<br>lopower.bootloader.low_fuses=0xFF<br>lopower.bootloader.high_fuses=0xDA<br>lopower.bootloader.extended_fuses=0x06<br>lopower.bootloader.path=atmega<br>lopower.bootloader.file=ATmegaBOOT_168_atmega328_pro_8MHz.hex<br>lopower.bootloader.unlock_bits=0x3F<br>lopower.bootloader.lock_bits=0x0F<br>&nbsp;<br>lopower.build.mcu=atmega328p<br>lopower.build.f_cpu=8000000L<br>lopower.build.core=arduino<br></code></div>
+<h2>Power Experimentation</h2>
+<p>Now it’s time to measure and estimate power.  Our usage pattern will be the MCU and radio powered down as low as they can go most of the time.  Then they wake once every minute or two, transmit, and then go back to sleep.</p>
+<p>These are the specific questions I needed to answer, so I ran experiments for each:</p>
+<ul>
+<li>How much power is consumed when sleeping?</li>
+<li>How much power is consumed when awake and transmitting?</li>
+<li>How long will it be sleeping each cycle? </li>
+<li>How long will it be awake each cycle?</li>
+<li>How much capacity is really available from the batteries?</li>
+</ul>
+<h3>Current Consumption</h3>
+<p>To measure current, we need a multimeter capable of doing so.  I use a <a href="http://www.amazon.com/gp/product/B000EX0AE4">Extech EX330 Autoranging Mini Multimeter</a>, but many cheaper meters have current-measuring features.  Look for an “mA” setting.  The methodology here is to insert the multimeter inline into the circuit at the point we want to know the current flow.  That is, the current flows THROUGH the meter on its way from the battery to the load.  To keep things simple, it’s a good idea to use the actual battery being tested as the current source, rather than some external bench power.</p>
+<p>There are two current measurements needed here, one while sleeping and the other while operating.  So I created simple test sketches that did each.  One just puts everything to sleep (MCU and radio), the other transmits constantly to a working receiver.  Simply measure the current from the meter during both tests.</p>
+<p>Actually for the ‘transmitting’ test, I am using the “endless sending” test.  This is consuming 13.57mA reliably.</p>
+<p>For ‘sleeping’, I am getting strange results.  With the radio removed, and the voltage measurement circuit removed, the meter still reports 395 uA.  But on mA mode, it reports 0.14mA.  Argh!  Also, adding the radio in doesn’t seem to matter much.  Adding back in the voltage measurement, I hover up at 410 uA.</p>
+<h3>Duration / Duty Cycle</h3>
+<p>How long between wake-ups is defined by the application.  For now, I am waking once a minute, but that is likely much more frequently than needed to effectively measure temperature.</p>
+<p>To measure how long it stays awake, I used the same “endless sending” test as for capacity.  I have the system endlessly send readings without actually ever sleeping.  Every 30 seconds, the receiver posts a reading to the database.  By counting the number of readings elapsed between each saved reading, I can see how long it takes to measure and send a reading.  In my tests, there were reliably 1128 readings every 30 seconds, for an awake duration of 27ms.</p>
+<h3>Capacity</h3>
+<p>The one true test for this is to take a fully-charged battery, and burn it to the ground.  Because consumption varies with current draw, it’s important to run the test at the correct amount of draw.  It seemed like the logical choice was to use the ‘constant transmitting’ sketch which I used above to measure draw, and leave it on as long as it takes.  Two AA batteries lasted over a week!  So 156 hours @ 13.57mA tells us these ‘2300mAh’ batteries actually gave about 2110mAh.</p>
+<p>Just for fun, I had the sender transmit its voltage level, so I could graph the progress.</p>
+<h2 style="text-align:center;padding:3px;"><a title="Capacity Test - 2AA @ 13mA" href="http://www.flickr.com/photos/maniacbug/6224740147/"><img style="border:solid 2px #000000;" alt="Capacity Test - 2AA @ 13mA" src="./Low-Power Wireless Sensor Node _ maniacbug_files/6224740147_cd59d6791a.jpg"></a></h2>
+<p>In the end, I decided to go with a 3V coin cell battery, CR2450, rated at 540mAh.  This is a big trade-off.  With the coin cell, the units are much smaller and easier to place.  They are also a few dollars cheaper.  But I’ll only get 5 months, and the batteries are not rechargeable.</p>
+<h2>Power Calculations</h2>
+<p>Armed with these results, we can estimate how long the node will really last.  I have a handy spreadsheet I use for these calculations.  The results for this test are pasted below, but the same calculations can work for anything sleep/wake setup.  we plug in the answers to the five questions above, and out comes the answer we want to know: How long will it operate?</p>
+<table>
+<tbody><tr>
+<td style="padding:0 10px;"> ‘<strong>Inputs </strong>‘</td>
+</tr>
+<tr>
+<td style="padding:0 10px;">Sleep Consumption</td>
+<td style="padding:0 10px;"> 0.14 </td>
+<td style="padding:0 10px;">mA </td>
+</tr>
+<tr>
+<td style="padding:0 10px;">Operating Consumption</td>
+<td style="padding:0 10px;"> 13.57 </td>
+<td style="padding:0 10px;">mA </td>
+</tr>
+<tr>
+<td style="padding:0 10px;">Sleep Duration</td>
+<td style="padding:0 10px;"> 60 </td>
+<td style="padding:0 10px;">s </td>
+</tr>
+<tr>
+<td style="padding:0 10px;">Operating Duration</td>
+<td style="padding:0 10px;"> 0.027 </td>
+<td style="padding:0 10px;">s </td>
+</tr>
+<tr>
+<td style="padding:0 10px;">Capacity</td>
+<td style="padding:0 10px;"> 2035.5 </td>
+<td style="padding:0 10px;">mAh </td>
+</tr>
+<tr>
+<td style="padding:0 10px;"> </td>
+<td style="padding:0 10px;">  </td>
+<td style="padding:0 10px;"></td></tr>
+<tr>
+<td style="padding:0 10px;"> ‘<strong>Per sleep cycle </strong>‘</td>
+</tr>
+<tr>
+<td style="padding:0 10px;">Capacity Used Sleeping</td>
+<td style="padding:0 10px;"> 8.4 </td>
+<td style="padding:0 10px;">=Sleep_Consumption * Sleep_Duration</td>
+</tr>
+<tr>
+<td style="padding:0 10px;">Capacity Used Operating</td>
+<td style="padding:0 10px;"> 0.36639 </td>
+<td style="padding:0 10px;">=Operating_Consumption * Operating_Duration</td>
+</tr>
+<tr>
+<td style="padding:0 10px;">Total Capacity Used mAs</td>
+<td style="padding:0 10px;"> 8.76639 </td>
+<td style="padding:0 10px;">=Operating_Consumption * Operating_Duration + Sleep_Consumption * Sleep_Duration</td>
+</tr>
+<tr>
+<td style="padding:0 10px;">Total Capacity Used</td>
+<td style="padding:0 10px;"> 0.00243510833333333 </td>
+<td style="padding:0 10px;">=Total_Capacity_Used_mAs/3600 </td>
+</tr>
+<tr>
+<td style="padding:0 10px;"> </td>
+<td style="padding:0 10px;">  </td>
+<td style="padding:0 10px;"></td></tr>
+<tr>
+<td style="padding:0 10px;"> ‘<strong>Results </strong>‘</td>
+</tr>
+<tr>
+<td style="padding:0 10px;">Time Available cycles</td>
+<td style="padding:0 10px;"> 835897.102456085 </td>
+<td style="padding:0 10px;">=Capacity / Total_Capacity_Used</td>
+</tr>
+<tr>
+<td style="padding:0 10px;">Time Available hours</td>
+<td style="padding:0 10px;"> 13931.6183742681 </td>
+<td style="padding:0 10px;">=Time_Available_cycles / (3600/Sleep_Duration)</td>
+</tr>
+<tr>
+<td style="padding:0 10px;">Time Available days</td>
+<td style="padding:0 10px;"> 580.484098927837 </td>
+<td style="padding:0 10px;">=Time_Available_hours / 24</td>
+</tr>
+<tr>
+<td style="padding:0 10px;">Time Available months</td>
+<td style="padding:0 10px;"> 19.3494699642612 </td>
+<td style="padding:0 10px;">=Time_Available_days / 30</td>
+</tr>
+</tbody></table>
+<p>This file is available on <span class="skimlinks-unlinked">Box.net</span>: <a href="http://www.box.net/shared/g6f998mhpxa1yxihm9ta">Power Calculations.ods</a> <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA</a></p>
+<h2>Sensors</h2>
+<p>What shall we measure, and how?</p>
+<h3>Temperature</h3>
+<p>The “hello world” of wireless sensor networks is temperature.  I figure it’s always interesting to know what the temperature is, so now I can find out what the temperature is in 25 unique points within the house <span class="wp-smiley wp-emoji wp-emoji-smile" title=":)">:)</span>  My weapon of choice is a Microchip MCP9700.  There are many options.  This one seemed simple and cheap.</p>
+<p>To drive it, I created a simple MCP9700 library.  It supports both the ’00 and ’01 variants, maintains a calibrated error value, and handles the average of multiple readings.  Soon to be available on github!</p>
+<h3>Battery Voltage</h3>
+<p>It’s useful to know the battery voltage, from which we can infer the remaining battery capacity.  So the nodes collect and transmit their battery voltage with every sample.</p>
+<p>These nodes use the internal 1.1V reference voltage, so the battery voltage has to be divided down before it can be sampled.  For this, I use a simple voltage divider circuit with 1M and 470k resistors.  The resistors are chosen to have very high impedance so they don’t draw a ton of current.  As a consequence, a capacitor is needed.  (Not sure why exactly, but it was suggested on the Arduino forum, and definitely solved the problem of poor readings.)</p>
+<p>Here is a very simple schematic of the voltage divider at work:</p>
+<h2 style="text-align:center;padding:3px;"><a title="Battery Voltage Measurement.sch" href="http://www.flickr.com/photos/maniacbug/6046166167/"><img style="border:solid 2px #000000;" alt="Battery Voltage Measurement.sch" src="./Low-Power Wireless Sensor Node _ maniacbug_files/6046166167_fb49f479d2.jpg"></a></h2>
+<h3>Others to Come</h3>
+<p>To future-proof this node just a little, I included an expansion port.  This exposes 4 unused pins (2 digital, 2 analog) and the SPI bus.  It will allow me to add additional sensors in the future without having to re-spin the board.  For details, see my post on the <a href="https://maniacbug.wordpress.com/2011/04/03/arduino-box-header-platform-2/">Arduino Box Header Platform</a>; this is “Port B”.</p>
+<h2>Software</h2>
+<p>These nodes are running my <a href="https://github.com/maniacbug/RF24Network">RF24Network</a> stack.  Built on my <a href="https://github.com/maniacbug/RF24">RF24</a> radio driver, the network layer provides node addressing and routing to build a tree topology out of the nRF24L01+ radios.</p>
+<p>The temperature reading &amp; sending code on the client is really simple.  It is also using my MCP9700 library for the temp sensor and my Sleep library for putting the node to sleep and waking at the right interval.</p>
+<div style="background-color:#7d170d;padding:5px;"><code>&nbsp;&nbsp;// If there's a reading ready, send it.<br>&nbsp;&nbsp;if ( temp_sensor &amp;&amp; temp_sensor-&gt;available() )<br>&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;// Take a reading<br>&nbsp;&nbsp;&nbsp;&nbsp;message.temp = temp_sensor-&gt;read();<br>&nbsp;&nbsp;&nbsp;&nbsp;if ( voltage_sensor )<br>&nbsp;&nbsp;&nbsp;&nbsp;  message.voltage = voltage_sensor-&gt;read();<br>&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;// Send it to the base<br>&nbsp;&nbsp;&nbsp;&nbsp;RF24NetworkHeader header(/*to node*/ base_node,/*message type*/ 'T');<br>&nbsp;&nbsp;&nbsp;&nbsp;network.write(header,&amp;message,sizeof(message));<br>&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;// Leaf nodes sleep<br>&nbsp;&nbsp;&nbsp;&nbsp;if ( is_leaf()  )<br>&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Power down the radio.  Note that the radio will get powered back up<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// on the next write() call.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;radio.powerDown();<br>&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Sleep the MCU.  The watchdog timer will awaken in a short while, and<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// continue execution here.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sleep.go();<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;}<br></code></div>
+<p>The receiving node and SQL storage infrastructure will be the topics of future blog posts.</p>
+<h2>Bill of Materials</h2>
+<p>Pricing for all of these parts is in quantity 25, which is about how many I want to have operating at once.  All part ##’s are from <a href="http://www.mouser.com/">Mouser</a>.</p>
+<table>
+<tbody><tr style="background-color:#EEEEEE;color:red;">
+<td style="padding:0 10px;"> <strong>  Qty </strong> </td>
+<td style="padding:0 10px;"> <strong>  Vendor# </strong> </td>
+<td style="padding:0 10px;"> <strong>  Description </strong> </td>
+<td style="padding:0 10px;"> <strong>  Price </strong> </td>
+</tr>
+<tr>
+<td style="padding:0 10px;"> 1 </td>
+<td style="padding:0 10px;"> 556-ATMEGA328P-PU  </td>
+<td style="padding:0 10px;"> Atmel Microcontrollers (MCU) 32KB In-system Flash 20MHz 1.8V-5.5V </td>
+<td style="padding:0 10px;"> $3.05</td>
+</tr>
+<tr>
+<td style="padding:0 10px;"> 1 </td>
+<td style="padding:0 10px;"> 614-CR2450N.IB  </td>
+<td style="padding:0 10px;"> Renata Coin Cell Battery 3V 24.5 x 5.0mm 540mAh  </td>
+<td style="padding:0 10px;"> $1.10</td>
+</tr>
+<tr>
+<td style="padding:0 10px;"> 1 </td>
+<td style="padding:0 10px;"> 122-00224-GR  </td>
+<td style="padding:0 10px;"> Eagle Plastic Devices Battery Holders, Snaps &amp; Contacts 24.5MM THRUHOLE BLK  </td>
+<td style="padding:0 10px;"> $0.65</td>
+</tr>
+<tr>
+<td style="padding:0 10px;"> 1 </td>
+<td style="padding:0 10px;"> 611-OS102011MS2QN1  </td>
+<td style="padding:0 10px;"> C&amp;K Components Slide Switches SPDT On-On  </td>
+<td style="padding:0 10px;"> $0.32</td>
+</tr>
+<tr>
+<td style="padding:0 10px;"> 1 </td>
+<td style="padding:0 10px;"> 571-1-390261-9  </td>
+<td style="padding:0 10px;"> TE Connectivity IC &amp; Component Sockets 28P ECONOMY TIN SKT  </td>
+<td style="padding:0 10px;"> $0.30</td>
+</tr>
+<tr>
+<td style="padding:0 10px;"> 1 </td>
+<td style="padding:0 10px;"> 774-ATS080B  </td>
+<td style="padding:0 10px;"> CTS Electronic Components Crystals 8.0MHz 18pF Fund. -20C +70C  </td>
+<td style="padding:0 10px;"> $0.29</td>
+</tr>
+<tr>
+<td style="padding:0 10px;"> 1 </td>
+<td style="padding:0 10px;"> 579-MCP9700A-E/TO  </td>
+<td style="padding:0 10px;"> Microchip Board Mount Temperature Sensors Lin Active Therm  </td>
+<td style="padding:0 10px;"> $0.26</td>
+</tr>
+<tr>
+<td style="padding:0 10px;"> 2 </td>
+<td style="padding:0 10px;"> 140-50N2-220J-RC  </td>
+<td style="padding:0 10px;"> Xicon Ceramic Disc Capacitors 50V 22pF NPO 5% Tol  </td>
+<td style="padding:0 10px;"> $0.08</td>
+</tr>
+<tr>
+<td style="padding:0 10px;"> 1 </td>
+<td style="padding:0 10px;"> 642-MJTP1230  </td>
+<td style="padding:0 10px;"> Apem Tactile &amp; Jog Switches 6mm TACTILE SW  </td>
+<td style="padding:0 10px;"> $0.06</td>
+</tr>
+<tr>
+<td style="padding:0 10px;"> 1 </td>
+<td style="padding:0 10px;"> 604-WP132XYD  </td>
+<td style="padding:0 10px;"> 	Kingbright Standard LED – Through Hole YELLOW DIFFUSED  </td>
+<td style="padding:0 10px;"> $0.06</td>
+</tr>
+<tr>
+<td style="padding:0 10px;"> 1 </td>
+<td style="padding:0 10px;"> 604-WP132XGD  </td>
+<td style="padding:0 10px;"> 	Kingbright Standard LED – Through Hole GREEN DIFFUSED  </td>
+<td style="padding:0 10px;"> $0.07</td>
+</tr>
+<tr>
+<td style="padding:0 10px;"> 1 </td>
+<td style="padding:0 10px;"> 604-WP7104HD  </td>
+<td style="padding:0 10px;"> Kingbright Standard LED – Through Hole RED DIFFUSED  </td>
+<td style="padding:0 10px;"> $0.06</td>
+</tr>
+<tr>
+<td style="padding:0 10px;"> 4 </td>
+<td style="padding:0 10px;"> 594-K104M15X7RF53L2 </td>
+<td style="padding:0 10px;">  Vishay Multilayer Ceramic Capacitors (MLCC) – Leaded 0.1uF 50volts 20% X7R 2.5mm LS  </td>
+<td style="padding:0 10px;"> $0.04</td>
+</tr>
+<tr>
+<td style="padding:0 10px;"> 1 </td>
+<td style="padding:0 10px;"> 660-MF1/4DCT52R1004F </td>
+<td style="padding:0 10px;">  KOA Speer Metal Film Resistors – Through Hole 1/4W 1M ohm 1%  </td>
+<td style="padding:0 10px;"> $0.05</td>
+</tr>
+<tr>
+<td style="padding:0 10px;"> 1 </td>
+<td style="padding:0 10px;"> 660-MF1/4DC4703F </td>
+<td style="padding:0 10px;">  KOA Speer Metal Film Resistors – Through Hole 470K 1% 100PPM </td>
+<td style="padding:0 10px;"> $0.05</td>
+</tr>
+<tr>
+<td style="padding:0 10px;"> 1 </td>
+<td style="padding:0 10px;"> 660-MF1/4DC1002F </td>
+<td style="padding:0 10px;"> KOA Speer Metal Film Resistors – Through Hole 10K 1% 100PPM </td>
+<td style="padding:0 10px;"> $0.06</td>
+</tr>
+<tr>
+<td style="padding:0 10px;"> 3 </td>
+<td style="padding:0 10px;"> 660-MF1/4DC3300F </td>
+<td style="padding:0 10px;"> KOA Speer Metal Film Resistors – Through Hole 330ohm 1% 100PPM </td>
+<td style="padding:0 10px;"> $0.06</td>
+</tr>
+</tbody></table>
+<p>The radio unit is from iTeadStudio, <a href="http://iteadstudio.com/store/index.php?main_page=product_info&amp;cPath=7&amp;products_id=53">2.4G Wireless nRF24L01+ Module</a> for $4.00.</p>
+<p>Cost breakdown:BOM $6.69, Radio $4, Board $1, Total $11.69</p>
+<h2>Schematic</h2>
+<p>Eagle file is on <span class="skimlinks-unlinked">box.net</span>: <a href="http://www.box.net/shared/0mrr1x78ds8ofembz2dp">RF Duinode V3.sch</a>  <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA</a></p>
+<h2 style="text-align:center;padding:3px;"><a title="RF Duinode V3.sch" href="http://www.flickr.com/photos/maniacbug/6224857389/"><img style="border:solid 2px #000000;" alt="RF Duinode V3.sch" src="./Low-Power Wireless Sensor Node _ maniacbug_files/6224857389_63634bd0e5.jpg"></a></h2>
+<h2>Circuit Board</h2>
+<p>Eagle file is on <span class="skimlinks-unlinked">box.net</span>: <a href="http://www.box.net/shared/4zu25ffnq0r4626ikdni">RF Duinode V3.brd</a>  <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA</a></p>
+<h2 style="text-align:center;padding:3px;"><a title="RF Duinode V3-laen" href="http://www.flickr.com/photos/maniacbug/6225376286/"><img style="border:solid 2px #000000;" alt="RF Duinode V3-laen" src="./Low-Power Wireless Sensor Node _ maniacbug_files/6225376286_f57938f8c2.jpg"></a></h2>
+</div>
+		<div class="wpcnt">
+			<div class="wpa wpmrec">
+				<a class="wpa-about" href="https://wordpress.com/about-these-ads/" rel="nofollow">About these ads</a>
+				<div class="u">
+					<script type="text/javascript">
+					(function(g){g.__ATA.initAd({sectionId:26942, width:300, height:250});})(window);
+					</script><div id="automattic-id-4303" data-section="26942" style="width:300px; height:250px;"></div>
+				</div>
+			</div>
+		</div><div id="jp-post-flair" class="sharedaddy sharedaddy-dark sd-like-enabled"><div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-loaded" id="like-post-wrapper-20445345-225-566a9ab255441" data-src="//widgets.wp.com/likes/#blog_id=20445345&amp;post_id=225&amp;origin=maniacbug.wordpress.com&amp;obj_id=20445345-225-566a9ab255441" data-name="like-post-frame-20445345-225-566a9ab255441"><h3 class="sd-title">Like this:</h3><div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px; display: none;"><span class="button"><span>Like</span></span> <span class="loading">Loading...</span></div><iframe class="post-likes-widget jetpack-likes-widget" name="like-post-frame-20445345-225-566a9ab255441" height="55px" width="100%" frameborder="0" src="./Low-Power Wireless Sensor Node _ maniacbug_files/saved_resource(7).html"></iframe><span class="sd-text-color"></span><a class="sd-link-color"></a></div>
+<div id="jp-relatedposts" class="jp-relatedposts" style="display: block;">
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+<div class="jp-relatedposts-items jp-relatedposts-items-minimal"><p class="jp-relatedposts-post jp-relatedposts-post0" data-post-id="325" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://maniacbug.wordpress.com/2012/03/30/rf24network/" title="RF24Network for Wireless Sensor Networking
+
+RF24Network is a network layer for Nordic nRF24L01+ radios running on Arduino-compatible hardware. It&#39;s goal is to have an alternative to Xbee radios for communication between Arduino units. It provides a host address space and message routing for up to 6,000 nodes. The layer forms the background of a capable…" rel="nofollow" data-origin="225" data-position="0">RF24Network for Wireless Sensor Networking</a></span><span class="jp-relatedposts-post-context">In "Arduino"</span></p><p class="jp-relatedposts-post jp-relatedposts-post1" data-post-id="168" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://maniacbug.wordpress.com/2011/03/19/2-4ghz-rf-radio-transceivers-and-library-8/" title="2.4GHz RF Radio Transceivers and Library
+
+I really want to communicate wirelessly between Arduinos for cheap. I love the idea of &quot;The Internet of Things&quot;, with everything I can look, see, touch all connected together. The problem is the cost. Zigbee modules seem to be the standard, but they are just too much to be a…" rel="nofollow" data-origin="225" data-position="1">2.4GHz RF Radio Transceivers and Library</a></span><span class="jp-relatedposts-post-context">In "Arduino"</span></p><p class="jp-relatedposts-post jp-relatedposts-post2" data-post-id="249" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://maniacbug.wordpress.com/2011/12/14/nrf24l01-running-on-maple-3/" title="nRF24L01+ Running on Maple
+
+Last weekend, I got a Maple Native board from Leaf Labs. This is a somewhat-Arduino-compatible board running a STM Cortex-M3 processor with 512k flash and 1M of external RAM. I figure it will ease the wait for the Arduino Due.So my first task is to port RF24, my Driver for…" rel="nofollow" data-origin="225" data-position="2">nRF24L01+ Running on Maple</a></span><span class="jp-relatedposts-post-context">In "Maple"</span></p></div></div></div>	</div><!-- .entry-content -->
+
+	<div class="entry-links">
+		<p class="comment-number"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comments">70 Comments</a></p>
+
+					<p class="entry-categories tagged">Filed under <a href="https://maniacbug.wordpress.com/category/arduino/" rel="category tag">Arduino</a>, <a href="https://maniacbug.wordpress.com/category/rf-radio/" rel="category tag">RF Radio</a></p>
+			<p class="entry-tags tagged"></p>
+			</div><!-- .entry-links -->
+
+</div><!-- #post-## -->
+
+<div id="nav-below" class="navigation">
+	<div class="nav-previous"><a href="https://maniacbug.wordpress.com/2011/10/09/125khz-rfid-module-rdm630/" rel="prev"><span class="meta-nav">←</span> 125Khz RFID Module&nbsp;RDM630</a></div>
+	<div class="nav-next"><a href="https://maniacbug.wordpress.com/2011/11/02/getting-started-rf24/" rel="next">Getting Started with nRF24L01+ on&nbsp;Arduino <span class="meta-nav">→</span></a></div>
+</div><!-- #nav-below -->
+
+
+<div id="comments">
+
+			<h3 id="comments-title" class="comment-head">
+			70 responses to “<em>Low-Power Wireless Sensor&nbsp;Node</em>”		</h3>
+
+		
+		<ol class="comment-list">
+			
+		<li class="comment even thread-even depth-1 highlander-comment" id="li-comment-75">
+			<div id="comment-75" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://1.gravatar.com/avatar/d939b183c83563f805e0708679ed8733?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">Jason</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-75">
+					November 24, 2011 at 5:08 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Excellent work – I’m going down the same route myself and this is most helpful! Many Thanks!</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=75#respond" onclick="return addComment.moveForm( &quot;comment-75&quot;, &quot;75&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to Jason">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor odd alt depth-2 highlander-comment" id="li-comment-76">
+			<div id="comment-76" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-76">
+					November 26, 2011 at 9:48 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Thanks!  And thanks for writing, glad to hear it’s helpful.  Please share a link if you post details about your project!</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=76#respond" onclick="return addComment.moveForm( &quot;comment-76&quot;, &quot;76&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to maniacbug">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li class="comment even thread-odd thread-alt depth-1 highlander-comment" id="li-comment-102">
+			<div id="comment-102" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://2.gravatar.com/avatar/edf5b92b6459176bdf1d185ee527beb3?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">Eric VDB</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-102">
+					December 16, 2011 at 12:16 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Hi, just came across your blog, and in particular this post, and all I can say is…….WOW.<br>
+Would you be interested in helping modifying a C# library so that it will be possible to create a sensor network with your nodes, and receive the data on Dot Net MicroFramework devices?<br>
+Is it also possible to allow Dynamic payload size?</p>
+<p>Keep up the fantastic work, this is a direct concurrent for the JeeNodes <span class="wp-smiley wp-emoji wp-emoji-wink" title=";)">;)</span></p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=102#respond" onclick="return addComment.moveForm( &quot;comment-102&quot;, &quot;102&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to Eric VDB">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor odd alt depth-2 highlander-comment" id="li-comment-105">
+			<div id="comment-105" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-105">
+					December 17, 2011 at 5:25 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Thanks!  Yes, the RF24 library allows you to use dynamic payload size.  I’ll be in touch about the C# library.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=105#respond" onclick="return addComment.moveForm( &quot;comment-105&quot;, &quot;105&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to maniacbug">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li class="comment even thread-even depth-1 highlander-comment" id="li-comment-103">
+			<div id="comment-103" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/ff0aa323429d8374f15bbde05a4d5578?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">Jay</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-103">
+					December 17, 2011 at 3:07 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>This is indeed awesome…. please keep on innovating… i will eventually get into the same line of stuff… ad i like what you did so far.</p>
+<p>great work and Thank you for sharing.</p>
+<p>Jay.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=103#respond" onclick="return addComment.moveForm( &quot;comment-103&quot;, &quot;103&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to Jay">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+
+		<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-244">
+			<div id="comment-244" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://1.gravatar.com/avatar/4f38683cc2c1eaceed47e82c527ac5f2?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="http://www.compuwatt.com/" rel="external nofollow" class="url">Ronald Otsig</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-244">
+					February 15, 2012 at 10:43 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Hi,</p>
+<p>What is the range of this system?<br>
+Do you know if this or something similar can work up to 100 meters?</p>
+<p>Thanks, Ron Otsig</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=244#respond" onclick="return addComment.moveForm( &quot;comment-244&quot;, &quot;244&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to Ronald Otsig">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor even depth-2 highlander-comment" id="li-comment-249">
+			<div id="comment-249" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-249">
+					February 18, 2012 at 2:57 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Never tried it at that distance.  I get about 50 feet indoors, around 2 corners, at 250kbps</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=249#respond" onclick="return addComment.moveForm( &quot;comment-249&quot;, &quot;249&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to maniacbug">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li class="comment odd alt thread-even depth-1 highlander-comment" id="li-comment-251">
+			<div id="comment-251" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/08339ce37836c176bd2710d213dd9901?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">Ameet</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-251">
+					February 20, 2012 at 5:35 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Thanks a lot for this beautiful information. I don’t understand one thing, how do you know the sleep duration is 60s. And you said you are waking once a second. If the sleep duration is 60s, shouldn’t it be once a 60s?</p>
+<p>Many Thanks,</p>
+<p>Ameet</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=251#respond" onclick="return addComment.moveForm( &quot;comment-251&quot;, &quot;251&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to Ameet">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor even depth-2 highlander-comment" id="li-comment-259">
+			<div id="comment-259" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-259">
+					February 22, 2012 at 7:32 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Thanks for pointing that out, I’ve updated the text to say “once a minute”.  I know the sleep duration is 60s because the code controls the sleep duration!  It can be whatever we want it to be.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=259#respond" onclick="return addComment.moveForm( &quot;comment-259&quot;, &quot;259&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to maniacbug">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment odd alt depth-3 highlander-comment" id="li-comment-262">
+			<div id="comment-262" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/08339ce37836c176bd2710d213dd9901?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">Ameet</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-262">
+					February 22, 2012 at 7:58 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Thanks a lot! I am clear now. </p>
+<p>Many Thanks,</p>
+<p>Ameet</p>
+</div>
+
+				<div class="reply">
+									</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li class="comment even thread-odd thread-alt depth-1 highlander-comment" id="li-comment-253">
+			<div id="comment-253" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/3d5e52c0065b090d63286413a038662a?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">StuartP</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-253">
+					February 21, 2012 at 7:07 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Any news on code being available for this ?</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=253#respond" onclick="return addComment.moveForm( &quot;comment-253&quot;, &quot;253&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to StuartP">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor odd alt depth-2 highlander-comment" id="li-comment-261">
+			<div id="comment-261" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-261">
+					February 22, 2012 at 7:37 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Not yet.  I have been working on something to share.  It will combine the RF24Network and NanodeUIP examples to post readings from a whole network up to Pachube.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=261#respond" onclick="return addComment.moveForm( &quot;comment-261&quot;, &quot;261&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to maniacbug">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment even depth-3 highlander-comment" id="li-comment-264">
+			<div id="comment-264" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/0965fafc3e23ed04f43517d74e51269a?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">Stuart</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-264">
+					February 22, 2012 at 10:19 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Great stuff, I was particularly interested in the idea of holding some calibration data. I’d be happy to see a pre-release code, drop me an e-mail.</p>
+</div>
+
+				<div class="reply">
+									</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li class="comment odd alt thread-even depth-1 highlander-comment" id="li-comment-287">
+			<div id="comment-287" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://1.gravatar.com/avatar/169aa159c6c066074fb030ad35cd9d5e?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="http://www.yellowfeather.co.uk/" rel="external nofollow" class="url">ChrisR</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-287">
+					February 29, 2012 at 1:07 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Do you think it would be possible to support a network of hundreds of sensor nodes with the nRF24L01+? I’m thinking that if the nodes are asleep most of the time and just wake at regular intervals up to ping the base, and wake up on interrupt from the sensor to send a reading, then it would be possible to use the same address for each node and overcome the limit of 6 receivers when in PRX mode. An id in the payload could be used to uniquely identify each node. Do you think this is workable? Do you have any other suggestions of how to support hundreds of nodes?</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=287#respond" onclick="return addComment.moveForm( &quot;comment-287&quot;, &quot;287&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to ChrisR">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor even depth-2 highlander-comment" id="li-comment-288">
+			<div id="comment-288" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-288">
+					February 29, 2012 at 4:36 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Definitely possible.  A few things to think through…</p>
+<p>Even if the nodes are mostly sleeping, you’ll still need a strategy to deal with inevitable collisions.  Typically, you would listen on the channel to see if it’s clear before talking.  If it’s not, you could adjust the sleep window so next time the node doesn’t wake up and collide AGAIN.</p>
+<p>Also have to think about range.  Would all hundreds of nodes be in range of the destination node?  Or would you build a tree of routers, and then just have dozens of nodes hit a single router?  Or build a much fancier mesh network?</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=288#respond" onclick="return addComment.moveForm( &quot;comment-288&quot;, &quot;288&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to maniacbug">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment odd alt depth-3 highlander-comment" id="li-comment-297">
+			<div id="comment-297" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://1.gravatar.com/avatar/169aa159c6c066074fb030ad35cd9d5e?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="http://www.yellowfeather.co.uk/" rel="external nofollow" class="url">ChrisR</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-297">
+					March 2, 2012 at 3:23 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>To minimise collisions, I was thinking that the nodes could wake up in RX mode, then the base node could ping each node in turn. Once a node has responded it goes back to sleep again. This will reduce the chances of collisions but not eliminate them, so a simple back-off strategy would still be required.</p>
+<p>Regarding the range, that is something that I will need to test. The nodes need to be as small and as low power as possible, but the base node can be larger and have power so could be fitted with an SMA connector and a decent antenna. But I guess adding repeaters would be fairly straight forward, in fact the repeaters could form a mesh network, with one or more providing internet connectivity.</p>
+<p>Thanks for your help, and the RF24 library. <span class="wp-smiley wp-emoji wp-emoji-smile" title=":-)">:-)</span></p>
+</div>
+
+				<div class="reply">
+									</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li class="comment even thread-odd thread-alt depth-1 highlander-comment" id="li-comment-318">
+			<div id="comment-318" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://1.gravatar.com/avatar/1dfa42fe82ea99619ad3545dba8c572b?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">GR0B</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-318">
+					March 13, 2012 at 9:18 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Hi maniacbug,<br>
+This project looks awesome and I am wanting to replicating it. How did you produce the PCBs? did you get someone to manufacture them for you and if so is it possible to order some?</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=318#respond" onclick="return addComment.moveForm( &quot;comment-318&quot;, &quot;318&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to GR0B">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor odd alt depth-2 highlander-comment" id="li-comment-322">
+			<div id="comment-322" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-322">
+					March 14, 2012 at 3:19 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Hi there.  I used iTeadStudio’s PCB service.  The files are available above and you’re welcome to send some off for them to fab, just follow the terms of the CC BY-NC-SA.  (Mainly, don’t sell them.)</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=322#respond" onclick="return addComment.moveForm( &quot;comment-322&quot;, &quot;322&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to maniacbug">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment even depth-3 highlander-comment" id="li-comment-342">
+			<div id="comment-342" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://1.gravatar.com/avatar/1dfa42fe82ea99619ad3545dba8c572b?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">GR0B</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-342">
+					March 17, 2012 at 9:20 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Thanks Maniacbug,<br>
+Ordering some now, some of the PCB quotes I was receiving were about ranging from $10-$60 per PCB + shipping so paying $0.99 per board + $4 shipping makes this project worth doing.</p>
+</div>
+
+				<div class="reply">
+									</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+
+		<li class="comment odd alt depth-3 highlander-comment" id="li-comment-379">
+			<div id="comment-379" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://1.gravatar.com/avatar/1ea04ffae588a5ffd081e7be5eedaee2?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">Yannick</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-379">
+					March 31, 2012 at 3:34 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Hi,</p>
+<p>I’d like to ordersome of your PCB’s off of iTeadStudio’s PCB Service, but I’m a bit flustered with all the different options, ie: single sided/double-sided, size, and all that… Do you have the “parameters” that you used to order them?</p>
+<p>Thanks!</p>
+<p>Yannick.</p>
+</div>
+
+				<div class="reply">
+									</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor even depth-3 highlander-comment" id="li-comment-380">
+			<div id="comment-380" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-380">
+					March 31, 2012 at 3:59 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Yup.  I just ordered some today.  This link should do what you need:  <a href="http://iteadstudio.com/store/index.php?main_page=product_info&amp;cPath=19_20&amp;products_id=173" rel="nofollow">http://iteadstudio.com/store/index.php?main_page=product_info&amp;cPath=19_20&amp;products_id=173</a></p>
+</div>
+
+				<div class="reply">
+									</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+
+		<li class="comment odd alt depth-3 highlander-comment" id="li-comment-381">
+			<div id="comment-381" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://1.gravatar.com/avatar/1ea04ffae588a5ffd081e7be5eedaee2?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">Yannick</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-381">
+					March 31, 2012 at 4:32 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Thanks!</p>
+<p>Just ordered my own batch using your link!</p>
+<p>Thanks again, looking forward to implementing, I currently have a bunch of wires going everywhere and was looking for a simple wireless alternative…</p>
+<p>Using DS18B20 Sensors instead though…</p>
+<p>Y,</p>
+</div>
+
+				<div class="reply">
+									</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li class="comment even thread-even depth-1 highlander-comment" id="li-comment-361">
+			<div id="comment-361" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://1.gravatar.com/avatar/1dfa42fe82ea99619ad3545dba8c572b?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">GR0B</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-361">
+					March 25, 2012 at 7:04 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Hi There,<br>
+I just noticed that the nRF24L01+ module you used uses a 8 pins but a lot of the nRF24L01+ modules use 10pins (2 pins each for VCC&amp;GND). Thought I might just put the comment out there as if people are planning to replicate you project they need to get the correct nRF24L01+ module or change the wiring a little.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=361#respond" onclick="return addComment.moveForm( &quot;comment-361&quot;, &quot;361&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to GR0B">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor odd alt depth-2 highlander-comment" id="li-comment-362">
+			<div id="comment-362" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-362">
+					March 25, 2012 at 7:38 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Interesting to know, thanks.� Can you provide links to some of those 10-pin modules?� I have only ever seen the 8-pin versions. </p>
+<p>________________________________ </p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=362#respond" onclick="return addComment.moveForm( &quot;comment-362&quot;, &quot;362&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to maniacbug">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment even depth-3 highlander-comment" id="li-comment-363">
+			<div id="comment-363" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://1.gravatar.com/avatar/1dfa42fe82ea99619ad3545dba8c572b?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">GR0B</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-363">
+					March 25, 2012 at 8:01 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>The GND pin has been moved to pins9&amp;10, Pin1 is connected to Pin2(VCC)<br>
+There is more info here <a href="http://www.electrodragon.com/?product=storage-container-set" rel="nofollow">http://www.electrodragon.com/?product=storage-container-set</a><br>
+But the ones I have/ordered look more like this one <a href="http://www.kuuco.com/images/propic/090022_S11.jpg" rel="nofollow">http://www.kuuco.com/images/propic/090022_S11.jpg</a><br>
+and found on ebay for around $2aud each</p>
+</div>
+
+				<div class="reply">
+									</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-371">
+			<div id="comment-371" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://2.gravatar.com/avatar/2fa480f8758a905ac313436c94a2da3e?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">Ram</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-371">
+					March 28, 2012 at 8:01 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>I am working on a home automation project and your rf24 library is the backbone. Thank you for the awesome work.</p>
+<p>I was wondering if you tried using the internal 8MHz oscillator  (i am using atmega328). This will be really useful to save more pins if I move to a smaller attiny…</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=371#respond" onclick="return addComment.moveForm( &quot;comment-371&quot;, &quot;371&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to Ram">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor even depth-2 highlander-comment" id="li-comment-372">
+			<div id="comment-372" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-372">
+					March 28, 2012 at 8:41 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Hi.  Glad it’s helpful  No, I’ve never touched the internal oscillator.  Probably there are people on the Arduino forums who have used it, tho.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=372#respond" onclick="return addComment.moveForm( &quot;comment-372&quot;, &quot;372&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to maniacbug">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li class="comment odd alt thread-even depth-1 highlander-comment" id="li-comment-390">
+			<div id="comment-390" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://2.gravatar.com/avatar/e51ea8784abba9f3ac04ec976cb125b2?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">Lorenzo Gasparini</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-390">
+					April 6, 2012 at 8:48 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Thank you so much for your work. It’s helping me a lot in preparing my school final exam. I followed this <a href="http://arduino.cc/en/Tutorial/ArduinoToBreadboard" rel="nofollow">http://arduino.cc/en/Tutorial/ArduinoToBreadboard</a> tutorial with an Arduino UNO R3, using an 8mhz external oscillator and working with 3.3V. It works like a charm. I’m using that board with an nRF24L01+ and a DS18B20 from Maxim IC, and I didn’t implement the voltage sensing yet. The board is being powered by two AA batteries and it works perfectly. I can transmit temperature to my other Arduino UNO wich stays listening and once received a packet sends it via Serial port.<br>
+I’m writing this to you because i found a bit strange the fact that your circuit has a current usage of 14mA while transmitting and 410uA while sleeping. My board consumes 5,4uA while sleeping and 4mA while transmitting. I had not the opportunity to check how much it stays active when transmitting, yet.<br>
+For letting the MCU sleep i used this excellent library <a href="https://github.com/rocketscream/Low-Power" rel="nofollow">https://github.com/rocketscream/Low-Power</a>.<br>
+If you want some other infos from me just send me an email!</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=390#respond" onclick="return addComment.moveForm( &quot;comment-390&quot;, &quot;390&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to Lorenzo Gasparini">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor even depth-2 highlander-comment" id="li-comment-393">
+			<div id="comment-393" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-393">
+					April 8, 2012 at 10:49 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>The 410uA strikes me as measurement error on my part, but I really haven’t dug into it further.  On the other hand, I can say for SURE that 4mA while transmitting is measurement error on your part.  The data sheet calls out 13mA on high-power modes.  It may just not be transmitting long enough for you to get a complete reading?</p>
+<p>Wow, that low power lib is pretty powerful, thanks for the tip.  That’s definitely worth digging through.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=393#respond" onclick="return addComment.moveForm( &quot;comment-393&quot;, &quot;393&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to maniacbug">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-420">
+			<div id="comment-420" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://1.gravatar.com/avatar/ded2657c9d0242d2a6fa68ec2abeee35?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">Joseph McGowan</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-420">
+					April 24, 2012 at 2:46 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Sir, </p>
+<p>Your setting of:<br>
+lopower.bootloader.low_fuses=OxFF<br>
+prevents the use of the internal oscillator,  at least in my findings.  I have defaulted to OxE2, and all is well</p>
+<p>Other than that, your only other modified setting from the default “ATmega328 on a breadboard (8 MHz internal clock)” config was:</p>
+<p>lopower.bootloader.extended_fuses=OxO6 ;verses the normal setting of OxO5.</p>
+<p>Which seems to work.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=420#respond" onclick="return addComment.moveForm( &quot;comment-420&quot;, &quot;420&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to Joseph McGowan">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor even depth-2 highlander-comment" id="li-comment-421">
+			<div id="comment-421" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-421">
+					April 24, 2012 at 7:46 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Yes, I did not want the internal oscillator.  The node has an external 8MHz osc.  And yes, the big change is to set the brownout detector to kick in at 1.8V instead of 2.7V.  Given that the unit runs at 2.4V, a 2.7V brownout is catastrophic!</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=421#respond" onclick="return addComment.moveForm( &quot;comment-421&quot;, &quot;421&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to maniacbug">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+
+		<li class="comment odd alt depth-2 highlander-comment" id="li-comment-1088">
+			<div id="comment-1088" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://1.gravatar.com/avatar/4796fb16533b6a9d2980ec09e0df2096?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">Larz</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-1088">
+					May 5, 2013 at 7:46 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Hi Joseph,</p>
+<p>Are you working with a 328 chip?</p>
+<p>I have been running a 328p on 2xAA batteries using the internal 8MHz oscillator.  I use LFUSE=0xE2, HFUSE=0xDA, and EFUSE=0xFE.  The low fuse byte set the oscillator.  A value of FF runs via an external source whereas E2 uses the internal.  I also set Brown Out Detection to 1.8v via the EFUSE (FE or 06).</p>
+<p>I  specified these fuse settings in the <span class="skimlinks-unlinked">boards.txt</span>, and compiled a new bootloader for this sort of board.</p>
+<p>I want to try to run things down to 1MHz internal, but have not had a lot of success so far.  This is mostly because I do not completely understand how to configure the bootloader baud rates at the lower speed.  As long as I load sketches via the ISP, 1MHz works a treat, but I have had no luck programming via serial.  If I ger some better results, I’d be happy to share them.</p>
+<p>Hope this was somewhat helpful.</p>
+<p>Cheers!</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=1088#respond" onclick="return addComment.moveForm( &quot;comment-1088&quot;, &quot;1088&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to Larz">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li class="comment even thread-even depth-1 highlander-comment" id="li-comment-423">
+			<div id="comment-423" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/0e28d79bf41094826776a9d86001db05?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">John Ellinas</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-423">
+					April 25, 2012 at 6:41 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Dear maniacbug,</p>
+<p>I have noticed that RFCE and RFCSN are connected to pins 14 and 13 (digital pins 8 and 7) of ATMEGA respectively, instead of pins 15 and 16 (digital pins 9 and 10) as they are normally connected. However, the sofware defines digital pins 9 and 10. Is there a mistake?</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=423#respond" onclick="return addComment.moveForm( &quot;comment-423&quot;, &quot;423&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to John Ellinas">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor odd alt depth-2 highlander-comment" id="li-comment-424">
+			<div id="comment-424" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-424">
+					April 25, 2012 at 10:26 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>The examples from the RF24 libraries are just that: examples.� In order to run them on actual hardware, the software must be configured for the hardware being used.� So yes, to run RF24 library examples on the nodes in this blog post, it’s necessary to change the software to use pins 8 &amp; 7.� The library uses 9 &amp; 10 because that’s how the ‘getting started’ boards are all set up, thereby making it easier on new people to have everything work together nicely out of the box.�  </p>
+<p>________________________________ </p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=424#respond" onclick="return addComment.moveForm( &quot;comment-424&quot;, &quot;424&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to maniacbug">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment even depth-3 highlander-comment" id="li-comment-427">
+			<div id="comment-427" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/0e28d79bf41094826776a9d86001db05?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">John Ellinas</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-427">
+					April 26, 2012 at 8:32 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Thank you very much for your answer! Congratulations for your work!</p>
+</div>
+
+				<div class="reply">
+									</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-507">
+			<div id="comment-507" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://2.gravatar.com/avatar/26cfe9cdf641727b7a82ac99050f6d71?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="http://www.facebook.com/DavidRayHoff" rel="external nofollow" class="url">David Hoff</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-507">
+					June 27, 2012 at 7:40 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Great work! I just tested out my first design using your library and it works! Then I realized my 3.3v regulator was going to really hurt my battery life as it draws 3.3mA all the time. I will be trying out the 2 batteries setup next. Thanks so much! I would never have figured all this out on my own, but it looks like it will end up being just what I wanted.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=507#respond" onclick="return addComment.moveForm( &quot;comment-507&quot;, &quot;507&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to David Hoff">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+
+		<li class="comment even thread-even depth-1 highlander-comment" id="li-comment-640">
+			<div id="comment-640" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/350935831a866474167e48ca3d23359f?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="http://gravatar.com/codypchristian" rel="external nofollow" class="url">codypchristian</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-640">
+					September 9, 2012 at 9:13 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>I can’t seem to find a article on your base node or your SQL stuff… Where is that please? I’m about to build 10 of these things.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=640#respond" onclick="return addComment.moveForm( &quot;comment-640&quot;, &quot;640&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to codypchristian">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor odd alt depth-2 highlander-comment" id="li-comment-798">
+			<div id="comment-798" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-798">
+					November 19, 2012 at 2:53 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>I’ve never gotten that to the point where I was comfortable publishing it.  Still needs a lot more cleanup!</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=798#respond" onclick="return addComment.moveForm( &quot;comment-798&quot;, &quot;798&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to maniacbug">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment even depth-3 highlander-comment" id="li-comment-1179">
+			<div id="comment-1179" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/350935831a866474167e48ca3d23359f?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">codypchristian</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-1179">
+					July 8, 2013 at 8:52 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Can you email it to me then please?</p>
+</div>
+
+				<div class="reply">
+									</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-727">
+			<div id="comment-727" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://1.gravatar.com/avatar/d4a21e11d77137f1b8ba91657a7782ab?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">Alberto Yarmuch</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-727">
+					November 8, 2012 at 7:02 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Hi,</p>
+<p>The idea is great <span class="wp-smiley wp-emoji wp-emoji-smile" title=":-)">:-)</span><br>
+But I have a question.<br>
+Where can I buy this board?</p>
+<p>Thanks<br>
+Alberto</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=727#respond" onclick="return addComment.moveForm( &quot;comment-727&quot;, &quot;727&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to Alberto Yarmuch">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor even depth-2 highlander-comment" id="li-comment-749">
+			<div id="comment-749" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-749">
+					November 19, 2012 at 11:33 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>It’s not for sale.  It’s a personal project I built.  You’re welcome to build one yourself!</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=749#respond" onclick="return addComment.moveForm( &quot;comment-749&quot;, &quot;749&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to maniacbug">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li class="comment odd alt thread-even depth-1 highlander-comment" id="li-comment-733">
+			<div id="comment-733" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://1.gravatar.com/avatar/1d3e6dd41dca425aa7f9b678a6954e41?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="http://machtudong.vn/" rel="external nofollow" class="url">mach tu dong</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-733">
+					November 12, 2012 at 9:11 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>A great tutorial, great links, great libraries.<br>
+I have to say thank you very much for this contributing.<br>
+We can make this low cost sensor and make the nrf24 a very useful wireless transmitting.<br>
+I’m going to make a board and do like this for my gardening project.<br>
+Hope to share the result soon.<br>
+Thanks a lot <span class="wp-smiley wp-emoji wp-emoji-smile" title=":)">:)</span></p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=733#respond" onclick="return addComment.moveForm( &quot;comment-733&quot;, &quot;733&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to mach tu dong">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor even depth-2 highlander-comment" id="li-comment-748">
+			<div id="comment-748" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-748">
+					November 19, 2012 at 11:33 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Good luck!  Once you’ve completed your project, it would be great if you could write something up and post a link here.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=748#respond" onclick="return addComment.moveForm( &quot;comment-748&quot;, &quot;748&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to maniacbug">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-737">
+			<div id="comment-737" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/fff291581127c1fe47562e2865915c42?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">Thomas T</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-737">
+					November 14, 2012 at 8:48 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Hi, I was wondering if you can program the node with the 5V FTDI breakout board or if you need the 3.3V version? Cheers.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=737#respond" onclick="return addComment.moveForm( &quot;comment-737&quot;, &quot;737&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to Thomas T">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor even depth-2 highlander-comment" id="li-comment-745">
+			<div id="comment-745" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-745">
+					November 19, 2012 at 11:30 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Right, good question.  I DO use the 5V FTDI breakout board, BUT I do not connect the +5V line.  Instead, during programming the module needs to be powered on with its own power.  This works great.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=745#respond" onclick="return addComment.moveForm( &quot;comment-745&quot;, &quot;745&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to maniacbug">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li class="comment odd alt thread-even depth-1 highlander-comment" id="li-comment-826">
+			<div id="comment-826" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/9b49d5b7d01b341b9fe1f3c3c5b3ad84?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">Sergey T</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-826">
+					November 30, 2012 at 3:54 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Hi, do you have any plans to make some experments with nRF24LE1 or nRF24LU1? The same network compatilble with L01 but with their own MCU onboard, compact size and maybe more power efficient solution for price about 10$. Only problem with it is that there are not so many examples  about this new chips and not so easy to upload compiled program to buildin mcu comparing to arduino. But with you experience it should be easy))</p>
+<p>Good luck with you projects!</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=826#respond" onclick="return addComment.moveForm( &quot;comment-826&quot;, &quot;826&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to Sergey T">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor even depth-2 highlander-comment" id="li-comment-1177">
+			<div id="comment-1177" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-1177">
+					July 8, 2013 at 6:38 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Hi Sergey, thanks for the suggestion.  I haven’t explored those.  As you said, there are not so many examples.  The beauty of Arduino is the rich community that you can tap into, and these modules seem to lack that.  They do look really interesting though.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=1177#respond" onclick="return addComment.moveForm( &quot;comment-1177&quot;, &quot;1177&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to maniacbug">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-858">
+			<div id="comment-858" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="./Low-Power Wireless Sensor Node _ maniacbug_files/picture" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="http://www.facebook.com/mats.o.karlsson" rel="external nofollow" class="url">Mats Karlsson</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-858">
+					December 21, 2012 at 12:22 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Hi,<br>
+Im about to do something quite like this project when I found it.</p>
+<p>I was thinking about adding a Maxim DS2401 (Silicon Serial Number) to create a unique ID for every node.</p>
+<p>Any thoughts about that ?</p>
+<p>Merry Christmas<br>
+Mats Karlsson</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=858#respond" onclick="return addComment.moveForm( &quot;comment-858&quot;, &quot;858&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to Mats Karlsson">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor even depth-2 highlander-comment" id="li-comment-1175">
+			<div id="comment-1175" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-1175">
+					July 8, 2013 at 6:36 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Oh yeah, that’s a great idea.  I avoid that just to keep the node cost minimal, and because I don’t mind entering the address into the EEPROM.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=1175#respond" onclick="return addComment.moveForm( &quot;comment-1175&quot;, &quot;1175&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to maniacbug">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li class="comment odd alt thread-even depth-1 highlander-comment" id="li-comment-879">
+			<div id="comment-879" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://1.gravatar.com/avatar/1bb05ad8a87998c7fb6f4e39bf5ae7ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">JohnW</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-879">
+					January 7, 2013 at 10:43 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>1st.. This all has been great information!! 2nd.. I am a total noob at this stuff, but I am learning. 3rd..  Has ANYONE tried a sensor node or use one of these RF modules with a attiny85 mcu?  If so I would like to know.<br>
+Regards,</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=879#respond" onclick="return addComment.moveForm( &quot;comment-879&quot;, &quot;879&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to JohnW">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+
+		<li class="comment even thread-odd thread-alt depth-1 highlander-comment" id="li-comment-932">
+			<div id="comment-932" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/fd31ec80478a31167be81b9e81add45c?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="http://gravatar.com/crankybit" rel="external nofollow" class="url">Eric</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-932">
+					January 25, 2013 at 10:25 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>The wonky power measurement was probably due to the ex330.  The specification table in the manual seems to indicate a minimum of 400µA.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=932#respond" onclick="return addComment.moveForm( &quot;comment-932&quot;, &quot;932&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to Eric">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+
+		<li class="comment odd alt thread-even depth-1 highlander-comment" id="li-comment-1029">
+			<div id="comment-1029" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/0aeec7c7fd436481b93bb75aab75b7eb?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">Ron M</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-1029">
+					March 14, 2013 at 12:37 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Great project and it gives me a lot of inspiration. But as far as I can tell, the PCB is no longer available on de iTeadStudio website. Am I missing something?</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=1029#respond" onclick="return addComment.moveForm( &quot;comment-1029&quot;, &quot;1029&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to Ron M">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor even depth-2 highlander-comment" id="li-comment-1164">
+			<div id="comment-1164" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-1164">
+					July 8, 2013 at 6:20 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Which PCB?  I searched for nrf24l01 today, and found $2.80 nodes in stock.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=1164#respond" onclick="return addComment.moveForm( &quot;comment-1164&quot;, &quot;1164&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to maniacbug">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment odd alt depth-3 highlander-comment" id="li-comment-1216">
+			<div id="comment-1216" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://1.gravatar.com/avatar/a3c0eae52c7f3c89440e6478fb2f27af?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">emma</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-1216">
+					July 12, 2013 at 4:16 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>What the commenter means, I believe, is that all iteadstudio links are now broken and redirect to their main page. So your direct link to order a copy of your PCB is broken.</p>
+</div>
+
+				<div class="reply">
+									</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor even depth-3 highlander-comment" id="li-comment-1219">
+			<div id="comment-1219" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-1219">
+					July 12, 2013 at 4:39 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Ah, I see.  Right, just search iteadstudio for “rf24L01” and the latest product come right up.</p>
+</div>
+
+				<div class="reply">
+									</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-1110">
+			<div id="comment-1110" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/f31d0747c0abf0b37c2be3cc76f6f0ad?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">Zenneth</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-1110">
+					May 20, 2013 at 1:26 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Hi, Just want to know if the low cost sensor node can communicate with a laptop with wifi directly?</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=1110#respond" onclick="return addComment.moveForm( &quot;comment-1110&quot;, &quot;1110&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to Zenneth">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor even depth-2 highlander-comment" id="li-comment-1156">
+			<div id="comment-1156" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-1156">
+					July 8, 2013 at 6:11 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Not directly.  You’d need something, like an Arduino, receiving the RF signals and putting the info out to the laptop via USB.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=1156#respond" onclick="return addComment.moveForm( &quot;comment-1156&quot;, &quot;1156&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to maniacbug">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li class="comment odd alt thread-even depth-1 highlander-comment" id="li-comment-1217">
+			<div id="comment-1217" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://1.gravatar.com/avatar/a3c0eae52c7f3c89440e6478fb2f27af?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">emma</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-1217">
+					July 12, 2013 at 4:21 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Thanks a lot for your informative post. I am currently considering building wireless sensor nodes myself, and I’m not completely sure whether to go with an Arduino board or your custom design.<br>
+The nodes will be running on battery power, typically with 2*AA or anything else that gives me a long life (9V batteries are a possibility as well). However I intend to use them for magnetic field detection (to hook them up to my gas &amp; water meters), and Hall effect sensors seem to require +5V power… so the regulator might be needed after all, unless I use 4*AA…</p>
+<p>Your custom design lacks a bootloader, correct? How would one program the µC, then? Aside from the BOM you have listed, the only thing I would need is a “programming cable” to use from my computer, am I mistaken? (I don’t have any Arduino equipment at home yet)</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=1217#respond" onclick="return addComment.moveForm( &quot;comment-1217&quot;, &quot;1217&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to emma">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor even depth-2 highlander-comment" id="li-comment-1220">
+			<div id="comment-1220" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-1220">
+					July 12, 2013 at 4:41 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>As with any custom-built Arduino-compatible unit, you’ve got to get a bootloader on somehow.  Easy way is to buy the 328 chips with a bootloader already on, like Adafruit sells.  Programming a bootloader is a pretty easy thing to do, though.  You can use another Arduino as an ISP.  There is an ‘ArduinoISP’ sketch that ships as an example in the IDE which will turn another Arduino into a programmer.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=1220#respond" onclick="return addComment.moveForm( &quot;comment-1220&quot;, &quot;1220&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to maniacbug">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment odd alt depth-3 highlander-comment" id="li-comment-1230">
+			<div id="comment-1230" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://1.gravatar.com/avatar/a3c0eae52c7f3c89440e6478fb2f27af?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">emma</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-1230">
+					July 26, 2013 at 4:52 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>I decided to buy a JeeNode v6, as it is designed for low power I figure it was a good idea. I bought it without the RFM12B, so I could fit my RF24 instead – it’s a bit messy in terms of connections, but it seems to work.<br>
+Once I’m done with this project, I could move to a JeeNode *Micro* which does *not* feature the Arduino bootloader. For now and as a beginner the Arduino bootloader is a great comfort.</p>
+<p>Thanks for all your informative posts!</p>
+</div>
+
+				<div class="reply">
+									</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li class="comment even thread-odd thread-alt depth-1 highlander-comment" id="li-comment-1229">
+			<div id="comment-1229" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/350935831a866474167e48ca3d23359f?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="http://gravatar.com/codypchristian" rel="external nofollow" class="url">CodyPChristian</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-1229">
+					July 23, 2013 at 9:31 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Hello Maniac, I’d like to chat with you sometime about this project and what you have done on the receving end. More so the hardware and this <a href="http://www.flickr.com/photos/maniacbug/7046477285/" rel="nofollow">http://www.flickr.com/photos/maniacbug/7046477285/</a>. Would you mind emailing me or replying here? Thanks</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=1229#respond" onclick="return addComment.moveForm( &quot;comment-1229&quot;, &quot;1229&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to CodyPChristian">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+
+		<li class="comment odd alt thread-even depth-1 highlander-comment" id="li-comment-1232">
+			<div id="comment-1232" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://2.gravatar.com/avatar/25acd9b45d5b2a769c2ded42e455b199?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">Mark Grass</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-1232">
+					July 27, 2013 at 11:01 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>First of all&gt;&gt;&gt;&gt;&gt;&gt;Thank you soooo much maniacbug for the library!!!!!!</p>
+<p>Finally!!!!  :smiley-mr-green:  I had three problems.<br>
+1. Bad connections on the 2×4 icd connector.  The module doesn’t lend itself to easy hook up or plugging it into a std breadboard, not to mention the fact that they all are marked as pin 1 is pin 2 (2 is 1), because they have the pins going out the bottom of the board not the top. They all seem to be that way.   So a colored ribbon cable does not match the std color code 1bro, 2rd, 3ord, 4yel, etc.   it’s 1rd, 2bro, 3yel, 4org, 5blu, 6grn, 7gry, 8vio.     </p>
+<p>2.  Reading the documentation I thought the CE and CSN pin could be any unused I/O pin.  For some reason the method  “RF24 radio(9,10);” can’t be changed.  I had used different pins than 9 and 10,and it didn’t work.   I understand that the SPI interface has to match that of the ucontroller hardware, but I thought the other two pins could be any unused digital I/O.<br>
+If some one can shed some light on this it would be appreciated.</p>
+<p>3. This applies to the module with PA+LNA: Once I fixed the other two problems, the pong (repeater) would send out one reply and then stop.  The fix was to add a cap to the module.   I started with a .1uf, but didn’t help.  Used a 220/15v cap and it worked. Did not check to see if a larger one was better or a smaller was the same.</p>
+<p>Using the RF24 lib example “pingpair”:  Tested with an Uno R3 and the Nano.<br>
+RANGE:  (line of sight:LOS)<br>
+    nRF24L01+    30′ in doors  through two walls<br>
+                        (doors open, LOS was through 2 walls)<br>
+    nRF24L01+PA+LNA    approx 200′ LOS<br>
+                        through 3 walls to outside and down the hill</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=1232#respond" onclick="return addComment.moveForm( &quot;comment-1232&quot;, &quot;1232&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to Mark Grass">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+
+		<li class="comment even thread-odd thread-alt depth-1 highlander-comment" id="li-comment-1233">
+			<div id="comment-1233" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://2.gravatar.com/avatar/25acd9b45d5b2a769c2ded42e455b199?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">Mark Grass</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-1233">
+					July 27, 2013 at 11:03 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>PS:  the cap was placed across gnd and 3v3.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=1233#respond" onclick="return addComment.moveForm( &quot;comment-1233&quot;, &quot;1233&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to Mark Grass">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+
+		<li class="comment odd alt thread-even depth-1 highlander-comment" id="li-comment-1234">
+			<div id="comment-1234" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://2.gravatar.com/avatar/25acd9b45d5b2a769c2ded42e455b199?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">Mark Grass</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-1234">
+					July 27, 2013 at 11:28 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>The bad connection:  I noticed that the “detail” print out didn’t match for both of the pingpair modules.   If you don’t get the following, you have a bad connection to the nRF24:</p>
+<p>RF24/examples/pingpair/<br>
+ROLE: Pong back<br>
+STATUS		        = 0x0e RX_DR=0 TX_DS=0 MAX_RT=0 RX_P_NO=7 TX_FULL=0<br>
+RX_ADDR_P0-1	= 0xf0f0f0f0d2 0xf0f0f0f0e1<br>
+RX_ADDR_P2-5	= 0xc3 0xc4 0xc5 0xc6<br>
+TX_ADDR               = 0xf0f0f0f0d2<br>
+RX_PW_P0-6         = 0x08 0x08 0x00 0x00 0x00 0x00<br>
+EN_AA                   = 0x3f<br>
+EN_RXADDR	       = 0x03<br>
+RF_CH                   	= 0x4c<br>
+RF_SETUP            = 0x07<br>
+CONFIG                = 0x7f<br>
+DYNPD/FEATURE = 0x00 0x00<br>
+Data Rate              = 1MBPS<br>
+Model                    = nRF24L01+<br>
+CRC Length         = 16 bits<br>
+PA Power             = PA_HIGH</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=1234#respond" onclick="return addComment.moveForm( &quot;comment-1234&quot;, &quot;1234&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to Mark Grass">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+
+		<li class="comment even thread-odd thread-alt depth-1 highlander-comment" id="li-comment-1235">
+			<div id="comment-1235" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://2.gravatar.com/avatar/25acd9b45d5b2a769c2ded42e455b199?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">Mark Grass</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-1235">
+					July 27, 2013 at 5:34 pm</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Well, I’m somewhat chagrined! The method “Radio(X,Y), does work for the nRF24L01 library.   May have been one of the other gremlins I was plagues with. Live and learn.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=1235#respond" onclick="return addComment.moveForm( &quot;comment-1235&quot;, &quot;1235&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to Mark Grass">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+
+		<li class="comment odd alt thread-even depth-1 highlander-comment" id="li-comment-1241">
+			<div id="comment-1241" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://2.gravatar.com/avatar/e945fd06c2f3984736835f6bda2f48f4?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="http://gravatar.com/frilog" rel="external nofollow" class="url">Alexandre</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-1241">
+					August 5, 2013 at 3:47 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Hi Maniac!</p>
+<p>Thanks for sharing your knowledge, I use RF24network in my project(sensor node) and works pefectly. But lastly,  I’ve written a little skecth to ‘updagre’ my system and have the ability to handle request so that sensor nodes can send back information when I want it(sorry for my english :-S, but see link below to have more informations about what I’m speaking):</p>
+<p><a href="http://pastebin.com/Wcv1uueb" rel="nofollow">http://pastebin.com/Wcv1uueb</a></p>
+<p>I’ve wired NRF24L01 IRQ  to Arduino pin 2, everything works(I don’t paste server code, not very useful) when I send request to these node. But when I’m trying to use radio.powerDown() and radio.powerUp(), IRQ pin don’t works anymore: interrupt routine isn’t called <span class="wp-smiley wp-emoji wp-emoji-sad" title=":-(">:-(</span> It seems power down mode disable NRF24L01 IRQ…Do you known any solution to solve these problem? because NRF2401 drawn me about 13ma! I’ve seen in datasheet that there standby mode(I and II) and some others mode…but I don’t see how to implement them to see if they can solve my problem…</p>
+<p>Greets,<br>
+Alex.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=1241#respond" onclick="return addComment.moveForm( &quot;comment-1241&quot;, &quot;1241&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to Alexandre">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+
+		<li class="comment even thread-odd thread-alt depth-1 highlander-comment" id="li-comment-1250">
+			<div id="comment-1250" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/0b81a2cca461924e8eadad76360d9653?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn">IlkerBEKMEZCI</cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-1250">
+					August 16, 2013 at 7:24 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Hello meniac,</p>
+<p>I have project about ad hoc networking on UAVs.<br>
+It will be a prototype project. Do you think that we can use it on UAVs.<br>
+If you give me your e-mail I can wirte smothing more specific.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=1250#respond" onclick="return addComment.moveForm( &quot;comment-1250&quot;, &quot;1250&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to IlkerBEKMEZCI">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+
+		<li class="comment odd alt thread-even depth-1 highlander-comment" id="li-comment-1259">
+			<div id="comment-1259" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/ccfb718a48bed1ae2d86ab7288d5dc41?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="http://gravatar.com/funky81" rel="external nofollow" class="url">Reski</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-1259">
+					August 25, 2013 at 2:55 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>Hi Maniacbug,</p>
+<p>I still confused about your mechanism to measure voltage.<br>
+Why you dont use like Larz (comment above) to measure it?<br>
+Is it because your using only 3.3v only?</p>
+<p>Just wanna be sure, suppose I’m using uno and I’m powering my arduino either from usb / battery, can I use internal reference voltage (like describe in <a href="https://code.google.com/p/tinkerit/wiki/SecretVoltmeter" rel="nofollow">https://code.google.com/p/tinkerit/wiki/SecretVoltmeter</a>) or I have to use voltage divider to measure voltage.</p>
+<p>anyway, cool project and already fork your code and RWDev code in <a href="https://github.com/funky81/RF24Network" rel="nofollow">https://github.com/funky81/RF24Network</a></p>
+<p>Looking forward to hear your answer</p>
+<p>Thanks</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=1259#respond" onclick="return addComment.moveForm( &quot;comment-1259&quot;, &quot;1259&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to Reski">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	<ul class="children">
+
+		<li class="comment byuser comment-author-maniacbug comment-author-is-site-member bypostauthor even depth-2 highlander-comment" id="li-comment-1330">
+			<div id="comment-1330" class="comment-container">
+				<div class="comment-author vcard">
+					<img alt="" src="https://0.gravatar.com/avatar/007a1c3bc57c42e31f0468dc8e8b84ff?s=48&amp;d=identicon&amp;r=G" class="avatar avatar-48" height="48" width="48">					<cite class="fn"><a href="https://maniacbug.wordpress.com/" rel="external nofollow" class="url">maniacbug</a></cite>				</div><!-- .comment-author .vcard -->
+
+				
+				<div class="comment-meta commentmetadata"><a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-1330">
+					October 5, 2013 at 7:11 am</a>				</div><!-- .comment-meta .commentmetadata -->
+
+				<div class="comment-body"><p>I do in fact use the internal reference voltage.  In order to use it, you have to get the voltage you’re measuring BELOW 1.1.</p>
+</div>
+
+				<div class="reply">
+					<a rel="nofollow" class="comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/?replytocom=1330#respond" onclick="return addComment.moveForm( &quot;comment-1330&quot;, &quot;1330&quot;, &quot;respond&quot;, &quot;225&quot; )" aria-label="Reply to maniacbug">Reply</a>				</div><!-- .reply -->
+			</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		</ol>
+
+		
+	
+					<div id="respond" class="comment-respond js">
+			<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#respond" style="display:none;">Cancel reply</a></small></h3>				<form action="https://maniacbug.wordpress.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+					<input type="hidden" id="highlander_comment_nonce" name="highlander_comment_nonce" value="7cba4767b1"><input type="hidden" name="_wp_http_referer" value="/2011/10/19/sensor-node/">
+<input type="hidden" name="hc_post_as" id="hc_post_as" value="guest">
+
+<div class="comment-form-field comment-textarea">
+	
+	<div id="comment-form-comment"><textarea tabindex="-1" style="position: absolute; top: -999px; left: 0px; right: auto; bottom: auto; border: 0px; padding: 0px; box-sizing: content-box; word-wrap: break-word; overflow: hidden; transition: none; height: 0px !important; min-height: 0px !important; font-family: Arial, Helvetica, Tahoma, Verdana, sans-serif; font-size: 14px; font-weight: 400; font-style: normal; letter-spacing: 0px; text-transform: none; text-decoration: none; word-spacing: 0px; text-indent: 0px; line-height: 23.8px; width: 968px;" class="autosizejs "></textarea><textarea id="comment" name="comment" title="Enter your comment here..." placeholder="Enter your comment here..." style="height: 43px; overflow: hidden; word-wrap: break-word; resize: none;"></textarea></div>
+</div>
+
+<div id="comment-form-identity" style="display: none;">
+
+	<div id="comment-form-nascar">
+		<p>Fill in your details below or click an icon to log in:</p>
+		<ul>
+			<li class="selected" style="display:none;">
+				<a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-form-guest" id="postas-guest" title="Guest">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-form-load-service:WordPress.com" id="postas-wordpress" title="WordPress.com">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-form-load-service:Twitter" id="postas-twitter" title="Twitter">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#comment-form-load-service:Facebook" id="postas-facebook" title="Facebook">
+					<span></span>
+				</a>
+			</li>
+			<li>
+			<iframe id="googleplus-sign-in" name="googleplus-sign-in" src="./Low-Power Wireless Sensor Node _ maniacbug_files/saved_resource.html" width="24" height="24" scrolling="no" allowtransparency="true" seamless="seamless" frameborder="0"></iframe>
+			</li>
+		</ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a href="https://gravatar.com/site/signup/" target="_blank">				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Gravatar" width="25" class="no-grav">
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Email <span class="required">(required)</span> <span class="nopublish">(Address never made public)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" type="email" value=""></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Name <span class="required">(required)</span></label>
+					<div class="comment-form-input"><input id="author" name="author" type="text" value=""></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Website</label>
+					<div class="comment-form-input"><input id="url" name="url" type="text" value=""></div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./Low-Power Wireless Sensor Node _ maniacbug_files/wplogo.png" alt="WordPress.com Logo" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="">
+				<input type="hidden" name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="">
+				<input type="hidden" name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="">
+				<p class="comment-form-posting-as pa-wordpress"><strong></strong> You are commenting using your <span class="skimlinks-unlinked">WordPress.com</span> account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;wordpress&#39; );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Twitter picture" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="">
+				<input type="hidden" name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="">
+				<input type="hidden" name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="">
+				<p class="comment-form-posting-as pa-twitter"><strong></strong> You are commenting using your Twitter account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;twitter&#39; );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Facebook photo" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="">
+				<input type="hidden" name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="">
+				<input type="hidden" name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="">
+				<p class="comment-form-posting-as pa-facebook"><strong></strong> You are commenting using your Facebook account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;facebook&#39; );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-googleplus" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Google+ photo" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value="">
+				<input type="hidden" name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value="">
+				<input type="hidden" name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value="">
+				<p class="comment-form-posting-as pa-googleplus"><strong></strong> You are commenting using your Google+ account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( &#39;googleplus&#39; );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="https://maniacbug.wordpress.com/2011/10/19/sensor-node/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a href="javascript:HighlanderComments.cancelExternalWindow();">Cancel</a></div>
+		<p>Connecting to %s</p>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script>
+
+<div id="comment-form-subscribe" style="display: none;">
+	<p class="comment-subscription-form"><input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;" tabindex="6"> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notify me of new comments via email.</label></p></div>
+
+
+
+
+<p class="form-submit" style="display: none;"><input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="225" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="4a61ae94ab"></p>
+<input type="hidden" name="genseq" value="1449826994">
+<p style="display: none;"></p>				<input type="hidden" id="ak_js" name="ak_js" value="1449823324777"></form>
+					</div><!-- #respond -->
+		<div style="clear: both"></div>
+</div><!-- #comments -->
+
+	</div><!-- #content -->
+</div><!-- #container -->
+
+
+		</div><!-- #content-box -->
+
+		<div id="footer" role="contentinfo">
+			<div id="colophon">
+
+				
+				<div id="site-info">
+					<a href="https://maniacbug.wordpress.com/" title="maniacbug" rel="home">maniacbug</a> · Explorations in Embedded				</div><!-- #site-info -->
+
+				<div id="site-generator">
+					<a href="https://wordpress.com/?ref=footer_website">Create a free website or blog at WordPress.com</a>.
+					·
+					<a href="https://wordpress.com/themes/pilcrow/" title="Learn more about this theme">The Pilcrow Theme</a>.				</div><!-- #site-generator -->
+
+			</div><!-- #colophon -->
+		</div><!-- #footer -->
+	</div><!-- #page .blog -->
+</div><!-- #container -->
+
+<!-- wpcom_wp_footer -->
+<script type="text/javascript" src="https://0.gravatar.com/js/gprofiles.js?ver=201550y"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Low-Power Wireless Sensor Node _ maniacbug_files/wpgroho.js"></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-d939b183c83563f805e0708679ed8733">
+	</div>
+	<div class="grofile-hash-map-007a1c3bc57c42e31f0468dc8e8b84ff">
+	</div>
+	<div class="grofile-hash-map-edf5b92b6459176bdf1d185ee527beb3">
+	</div>
+	<div class="grofile-hash-map-ff0aa323429d8374f15bbde05a4d5578">
+	</div>
+	<div class="grofile-hash-map-4f38683cc2c1eaceed47e82c527ac5f2">
+	</div>
+	<div class="grofile-hash-map-08339ce37836c176bd2710d213dd9901">
+	</div>
+	<div class="grofile-hash-map-3d5e52c0065b090d63286413a038662a">
+	</div>
+	<div class="grofile-hash-map-0965fafc3e23ed04f43517d74e51269a">
+	</div>
+	<div class="grofile-hash-map-169aa159c6c066074fb030ad35cd9d5e">
+	</div>
+	<div class="grofile-hash-map-1dfa42fe82ea99619ad3545dba8c572b">
+	</div>
+	<div class="grofile-hash-map-1ea04ffae588a5ffd081e7be5eedaee2">
+	</div>
+	<div class="grofile-hash-map-2fa480f8758a905ac313436c94a2da3e">
+	</div>
+	<div class="grofile-hash-map-e51ea8784abba9f3ac04ec976cb125b2">
+	</div>
+	<div class="grofile-hash-map-ded2657c9d0242d2a6fa68ec2abeee35">
+	</div>
+	<div class="grofile-hash-map-4796fb16533b6a9d2980ec09e0df2096">
+	</div>
+	<div class="grofile-hash-map-0e28d79bf41094826776a9d86001db05">
+	</div>
+	<div class="grofile-hash-map-26cfe9cdf641727b7a82ac99050f6d71">
+	</div>
+	<div class="grofile-hash-map-350935831a866474167e48ca3d23359f">
+	</div>
+	<div class="grofile-hash-map-d4a21e11d77137f1b8ba91657a7782ab">
+	</div>
+	<div class="grofile-hash-map-1d3e6dd41dca425aa7f9b678a6954e41">
+	</div>
+	<div class="grofile-hash-map-fff291581127c1fe47562e2865915c42">
+	</div>
+	<div class="grofile-hash-map-9b49d5b7d01b341b9fe1f3c3c5b3ad84">
+	</div>
+	<div class="grofile-hash-map-4db7924898dad38677d58a2353683b6c">
+	</div>
+	<div class="grofile-hash-map-1bb05ad8a87998c7fb6f4e39bf5ae7ff">
+	</div>
+	<div class="grofile-hash-map-fd31ec80478a31167be81b9e81add45c">
+	</div>
+	<div class="grofile-hash-map-0aeec7c7fd436481b93bb75aab75b7eb">
+	</div>
+	<div class="grofile-hash-map-a3c0eae52c7f3c89440e6478fb2f27af">
+	</div>
+	<div class="grofile-hash-map-f31d0747c0abf0b37c2be3cc76f6f0ad">
+	</div>
+	<div class="grofile-hash-map-25acd9b45d5b2a769c2ded42e455b199">
+	</div>
+	<div class="grofile-hash-map-e945fd06c2f3984736835f6bda2f48f4">
+	</div>
+	<div class="grofile-hash-map-0b81a2cca461924e8eadad76360d9653">
+	</div>
+	<div class="grofile-hash-map-ccfb718a48bed1ae2d86ab7288d5dc41">
+	</div>
+	</div>
+<script type="text/javascript">
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"https:\/\/maniacbug.wordpress.com\/public.api\/connect\/?action=request","logoutURL":"https:\/\/maniacbug.wordpress.com\/wp-login.php?action=logout&_wpnonce=15b99004c8","homeURL":"https:\/\/maniacbug.wordpress.com\/","postID":"225","gravDefault":"identicon","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"0","userIsLoggedIn":"","isJetpack":"0","text_direction":"ltr"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Low-Power Wireless Sensor Node _ maniacbug_files/saved_resource(4)"></script>
+
+	<div id="bit" class="loggedout-follow-normal" style="bottom: -284px;">
+		<a class="bsub" href="javascript:void(0)"><span id="bsub-text">Follow</span></a>
+		<div id="bitsubscribe">
+
+					<h3><label for="loggedout-follow-field">Follow “maniacbug”</label></h3>
+
+			<form action="https://subscribe.wordpress.com/" method="post" accept-charset="utf-8" id="loggedout-follow">
+			<p>Get every new post delivered to your Inbox.</p>
+
+			<p id="loggedout-follow-error" style="display: none;"></p>
+
+						<p class="bit-follow-count">Join 180 other followers</p>
+			<p><input type="email" name="email" placeholder="Enter your email address" id="loggedout-follow-field"></p>
+
+			<input type="hidden" name="action" value="subscribe">
+			<input type="hidden" name="blog_id" value="20445345">
+			<input type="hidden" name="source" value="https://maniacbug.wordpress.com/2011/10/19/sensor-node/">
+			<input type="hidden" name="sub-type" value="loggedout-follow">
+
+			<input type="hidden" id="_wpnonce" name="_wpnonce" value="f975f5599e"><input type="hidden" name="_wp_http_referer" value="/2011/10/19/sensor-node/">
+			<p id="bsub-subscribe-button"><input type="submit" value="Sign me up"></p>
+			</form>
+					<div id="bsub-credit"><a href="https://wordpress.com/?ref=lof">Build a website with WordPress.com</a></div>
+		</div><!-- #bitsubscribe -->
+	</div><!-- #bit -->
+		<iframe src="./Low-Power Wireless Sensor Node _ maniacbug_files/master.html" scrolling="no" id="likes-master" name="likes-master" style="display:none;"></iframe>
+		<div id="likes-other-gravatars"><div class="likes-text"><span>%d</span> bloggers like this:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+		<script type="text/javascript">
+		//<![CDATA[
+			var jetpackLikesWidgetQueue = [];
+			var jetpackLikesWidgetBatch = [];
+			var jetpackLikesMasterReady = false;
+
+			function JetpackLikespostMessage( message, target ) {
+				if ( "string" === typeof message ){
+					try{
+						message = JSON.parse( message );
+					}
+					catch(e) {
+						return;
+					}
+				}
+
+				pm( {
+					target: target,
+					type: 'likesMessage',
+					data: message,
+					origin: '*'
+				} );
+			}
+
+			function JetpackLikesBatchHandler() {
+				var requests = [];
+				jQuery( 'div.jetpack-likes-widget-unloaded' ).each( function( i ) {
+					if ( jetpackLikesWidgetBatch.indexOf( this.id ) > -1 )
+						return;
+					jetpackLikesWidgetBatch.push( this.id );
+					var regex = /like-(post|comment)-wrapper-(\d+)-(\d+)-(\w+)/;
+					var match = regex.exec( this.id );
+					if ( ! match || match.length != 5 )
+						return;
+
+					var info = {
+						blog_id: match[2],
+						width:   this.width
+					};
+
+					if ( 'post' == match[1] ) {
+						info.post_id = match[3];
+					} else if ( 'comment' == match[1] ) {
+						info.comment_id = match[3];
+					}
+
+					info.obj_id = match[4];
+
+					requests.push( info );
+				});
+
+				if ( requests.length > 0 ) {
+					JetpackLikespostMessage( { event: 'initialBatch', requests: requests }, window.frames['likes-master'] );
+				}
+			}
+
+			function JetpackLikesMessageListener( event ) {
+				if ( "undefined" == typeof event.event )
+					return;
+
+				if ( 'masterReady' == event.event ) {
+					jQuery( document ).ready( function() {
+						jetpackLikesMasterReady = true;
+
+						var stylesData = {
+								event: 'injectStyles'
+						};
+
+						if ( jQuery( 'iframe.admin-bar-likes-widget' ).length > 0 ) {
+							JetpackLikespostMessage( { event: 'adminBarEnabled' }, window.frames[ 'likes-master' ] );
+
+							stylesData.adminBarStyles = {
+								background: jQuery( '#wpadminbar .quicklinks li#wp-admin-bar-wpl-like > a' ).css( 'background' ),
+								isRtl: ( 'rtl' == jQuery( '#wpadminbar' ).css( 'direction' ) )
+							};
+						}
+
+						if ( !window.addEventListener )
+							jQuery( '#wp-admin-bar-admin-bar-likes-widget' ).hide();
+
+						stylesData.textStyles = {
+							color: jQuery( '.sd-text-color').css( 'color' ),
+							fontFamily: jQuery( '.sd-text-color' ).css( 'font-family' ),
+							fontSize: jQuery( '.sd-text-color' ).css( 'font-size' ),
+							direction: jQuery( '.sd-text-color' ).css( 'direction' ),
+							fontWeight: jQuery( '.sd-text-color' ).css( 'font-weight' ),
+							fontStyle: jQuery( '.sd-text-color' ).css( 'font-style' ),
+							textDecoration: jQuery( '.sd-text-color' ).css('text-decoration')
+						};
+
+						stylesData.linkStyles = {
+							color: jQuery( '.sd-link-color' ).css('color'),
+							fontFamily: jQuery( '.sd-link-color' ).css('font-family'),
+							fontSize: jQuery( '.sd-link-color' ).css('font-size'),
+							textDecoration: jQuery( '.sd-link-color' ).css('text-decoration'),
+							fontWeight: jQuery( '.sd-link-color' ).css( 'font-weight' ),
+							fontStyle: jQuery( '.sd-link-color' ).css( 'font-style' )
+						};
+
+						JetpackLikespostMessage( stylesData, window.frames[ 'likes-master' ] );
+
+						JetpackLikesBatchHandler();
+
+						jQuery( document ).on( 'inview', 'div.jetpack-likes-widget-unloaded', function() {
+							jetpackLikesWidgetQueue.push( this.id );
+						});
+					});
+				}
+
+				if ( 'showLikeWidget' == event.event ) {
+					jQuery( '#' + event.id + ' .post-likes-widget-placeholder'  ).fadeOut( 'fast', function() {
+						jQuery( '#' + event.id + ' .post-likes-widget' ).fadeIn( 'fast', function() {
+							JetpackLikespostMessage( { event: 'likeWidgetDisplayed', blog_id: event.blog_id, post_id: event.post_id, obj_id: event.obj_id }, window.frames['likes-master'] );
+						});
+					});
+				}
+
+				if ( 'clickReblogFlair' == event.event ) {
+					wpcom_reblog.toggle_reblog_box_flair( event.obj_id );
+				}
+
+				if ( 'showOtherGravatars' == event.event ) {
+					var $container = jQuery( '#likes-other-gravatars' );
+					var $list = $container.find( 'ul' );
+
+					$container.hide();
+					$list.html( '' );
+
+					$container.find( '.likes-text span' ).text( event.total );
+
+					jQuery.each( event.likers, function( i, liker ) {
+						$list.append( '<li class="' + liker.css_class + '"><a href="' + liker.profile_URL + '" class="wpl-liker" rel="nofollow" target="_parent"><img src="' + liker.avatar_URL + '" alt="' + liker.name + '" width="30" height="30" style="padding-right: 3px;" /></a></li>');
+					} );
+
+					var offset = jQuery( "[name='" + event.parent + "']" ).offset();
+
+					$container.css( 'left', offset.left + event.position.left - 10 + 'px' );
+					$container.css( 'top', offset.top + event.position.top - 33 + 'px' );
+
+					var rowLength = Math.floor( event.width / 37 );
+					var height = ( Math.ceil( event.likers.length / rowLength ) * 37 ) + 13;
+					if ( height > 204 ) {
+						height = 204;
+					}
+
+					$container.css( 'height', height + 'px' );
+					$container.css( 'width', rowLength * 37 - 7 + 'px' );
+
+					$list.css( 'width', rowLength * 37 + 'px' );
+
+					$container.fadeIn( 'slow' );
+
+					var scrollbarWidth = $list[0].offsetWidth - $list[0].clientWidth;
+					if ( scrollbarWidth > 0 ) {
+						$container.width( $container.width() + scrollbarWidth );
+						$list.width( $list.width() + scrollbarWidth );
+					}
+				}
+			}
+
+			pm.bind( 'likesMessage', function(e) { JetpackLikesMessageListener(e); } );
+
+			jQuery( document ).click( function( e ) {
+				var $container = jQuery( '#likes-other-gravatars' );
+
+				if ( $container.has( e.target ).length === 0 ) {
+					$container.fadeOut( 'slow' );
+				}
+			});
+
+			function JetpackLikesWidgetQueueHandler() {
+				var wrapperID;
+				if ( ! jetpackLikesMasterReady ) {
+					setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+					return;
+				}
+
+				if ( jetpackLikesWidgetQueue.length > 0 ) {
+					// We may have a widget that needs creating now
+					var found = false;
+					while( jetpackLikesWidgetQueue.length > 0 ) {
+						// Grab the first member of the queue that isn't already loading.
+						wrapperID = jetpackLikesWidgetQueue.splice( 0, 1 )[0];
+						if ( jQuery( '#' + wrapperID ).hasClass( 'jetpack-likes-widget-unloaded' ) ) {
+							found = true;
+							break;
+						}
+					}
+					if ( ! found ) {
+						setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+						return;
+					}
+				} else if ( jQuery( 'div.jetpack-likes-widget-unloaded' ).length > 0 ) {
+					// Grab any unloaded widgets for a batch request
+					JetpackLikesBatchHandler();
+
+					// Get the next unloaded widget
+					wrapperID = jQuery( 'div.jetpack-likes-widget-unloaded' ).first()[0].id;
+					if ( ! wrapperID ) {
+						// Everything is currently loaded
+						setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+						return;
+					}
+				}
+
+				if ( 'undefined' === typeof wrapperID ) {
+					setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+					return;
+				}
+
+				var $wrapper = jQuery( '#' + wrapperID );
+				$wrapper.find( 'iframe' ).remove();
+
+				if ( $wrapper.hasClass( 'slim-likes-widget' ) ) {
+					$wrapper.find( '.post-likes-widget-placeholder' ).after( "<iframe class='post-likes-widget jetpack-likes-widget' name='" + $wrapper.data( 'name' ) + "' height='22px' width='68px' frameBorder='0' scrolling='no' src='" + $wrapper.data( 'src' ) + "'></iframe>" );
+				} else {
+					$wrapper.find( '.post-likes-widget-placeholder' ).after( "<iframe class='post-likes-widget jetpack-likes-widget' name='" + $wrapper.data( 'name' ) + "' height='55px' width='100%' frameBorder='0' src='" + $wrapper.data( 'src' ) + "'></iframe>" );
+				}
+
+				$wrapper.removeClass( 'jetpack-likes-widget-unloaded' ).addClass( 'jetpack-likes-widget-loading' );
+
+				$wrapper.find( 'iframe' ).load( function( e ) {
+					var $iframe = jQuery( e.target );
+					$wrapper.removeClass( 'jetpack-likes-widget-loading' ).addClass( 'jetpack-likes-widget-loaded' );
+
+					JetpackLikespostMessage( { event: 'loadLikeWidget', name: $iframe.attr( 'name' ), width: $iframe.width() }, window.frames[ 'likes-master' ] );
+
+					if ( $wrapper.hasClass( 'slim-likes-widget' ) ) {
+						$wrapper.find( 'iframe' ).Jetpack( 'resizeable' );
+					}
+				});
+				setTimeout( JetpackLikesWidgetQueueHandler, 250 );
+			}
+			JetpackLikesWidgetQueueHandler();
+		//]]>
+		</script>
+<script type="text/javascript" src="./Low-Power Wireless Sensor Node _ maniacbug_files/form.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var JetpackEmojiSettings = {"base_url":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/emoji\/twemoji\/"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Low-Power Wireless Sensor Node _ maniacbug_files/saved_resource(5)"></script>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>	<script type="text/javascript">
+	var skimlinks_pub_id = "725X584219"
+	var skimlinks_sitename = "maniacbug.wordpress.com";
+	</script>
+	<script type="text/javascript" src="./Low-Power Wireless Sensor Node _ maniacbug_files/725X1342.skimlinks.js"></script><script src="./Low-Power Wireless Sensor Node _ maniacbug_files/w.js" type="text/javascript" async="" defer=""></script>
+<script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'20445345','blog_tz':'-8','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'20445345','v':'wpcom','tz':'-8','user_id':'0','post':'225','subd':'maniacbug'}]);
+_stq.push(['extra', {'crypt':'UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWFnNncxc1tjZG9XVXhReFBBJixXRU5XS20tYS5MYS03cC9rYkJ6LSttZEgsejRycEtZUDAtfi5LSjEmZHc/WTROPXBXVHhiZnRWUHRrbURNJWNiQUZCdDdhYiwydWdFK0lmcmcseEJrLU9KMW42LmlYJloyOWhbZ3VPQ0wyc18tLH4wLlQta3lWQzdaLE8xZVVpUkhWdUF+NGg2dG1xMEhJSHxJb0VKSFFYM2l6Vn5sSW9yN2U2d1cuQyZnWzZiMlJEMC85Zl04VT9BW1hCOG80Tjl0ZF9tajFsbFNMNVhnT0w9SnVvWXQ='}]);
+_stq.push([ 'clickTrackerInit', '20445345', '225' ]);
+	</script>
+<noscript>&lt;img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /&gt;</noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+
+<!--
+	generated in 0.680 seconds
+	160851 bytes batcached for 300 seconds
+-->
+<img src="./Low-Power Wireless Sensor Node _ maniacbug_files/g.gif" id="wpstats"></body></html>
