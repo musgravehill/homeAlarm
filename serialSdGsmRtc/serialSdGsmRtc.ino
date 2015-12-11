@@ -97,19 +97,26 @@ void processCommand(String command) {
   uint8_t ii = 29;
 
   String commandType = command.substring(0, 4);
-  String message = command + ";";
+  String commandParam0 = command.substring(8, 9);
+  String message = "";
   message += String(hh, DEC) + ":" + String(ii, DEC) + " ";
   message += String(dd, DEC) + "-" + String(mm, DEC) + "-" + String(yyyy, DEC);
+  message += ";" + command;
+  
 
   if (commandType == "DNGR") { //LOGS, ALRT
+    COMMAND_getVerbalParamName(commandParam0);
     GSM_sendSMS(message, "+79998885533");
   }
   SD_log(message);
 
-  Serial.print(F("\r\n processCommand: "));
+  Serial.print(F("processCommand: "));
   Serial.println(command);
+  Serial.print(F("commandParam0: "));
+  Serial.println(commandParam0);
   Serial.print(F("message: "));
   Serial.println(message);
+  Serial.print(F("\r\n"));
 }
 
 void SD_log(String data) {
@@ -139,6 +146,34 @@ void GSM_sendSMS(String message, String phone) {
   delay(300);
   Serial.print((char)26);
   delay(300);
+}
+
+String COMMAND_getVerbalParamName(String systemParamName) {
+  if (systemParamName == "V") {
+    return "_VOLTAGE_";
+  }
+  if (systemParamName == "T") {
+    return "_TEMPERATURE_";
+  }
+  if (systemParamName == "H") {
+    return "_HUMIDITY_";
+  }
+  if (systemParamName == "W") {
+    return "_WATER_LEAK_";
+  }
+  if (systemParamName == "P") {
+    return "_POWERUP_BASE_";
+  }
+  if (systemParamName == "G") {
+    return "_GAS_CH4_";
+  }
+  if (systemParamName == "M") {
+    return "_MOTION_DETECTION_";
+  }
+  if (systemParamName == "C") {
+    return "_GAS_CO_";
+  }
+  return "CNNT_RECOGNIZE_PARAM";
 }
 
 /*
