@@ -109,8 +109,9 @@ void processCommand(String command) {
     GSM_sendSMS(messageLog, "+79998885533");
   }
 
-  Serial.print(F("\r\n \r\n processCommand: "));
+  Serial.print(F("\r\n processCommand: "));
   Serial.println(command);
+  Serial.print(F("\r\n"));
   //Serial.print(F("commandParam0: "));
   //Serial.println(commandParam0);
   //Serial.print(F("message: "));
