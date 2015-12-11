@@ -11,8 +11,8 @@ void setup() {
 void loop() {
   Serial.print("{LOGS;#2;V3.7;T23;H50}");  
   delay(50);
-  Serial.print("{DNGR;#5;H70}");
+  Serial.print("{DNGR;#5;W1}");
   delay(50);
-  Serial.print("{DNGR;#1;W1}");
+  Serial.print("{DNGR;#1;H90}");
   delay(2000);
 }

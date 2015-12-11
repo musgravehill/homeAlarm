@@ -86,10 +86,10 @@ void loop() {
   }
 
   //----------------TEST-----------------
-  processCommand("LOGS;#2;V3.7;T23;H50");
-  processCommand("DNGR;#5;W1");
-  processCommand("DNGR;#1;H90");
-  delay(8000);
+  //processCommand("LOGS;#2;V3.7;T23;H50");
+  //processCommand("DNGR;#5;W1");
+  //processCommand("DNGR;#1;H90");
+  //delay(8000);
   //-------TEST END----------------------
 }
 
