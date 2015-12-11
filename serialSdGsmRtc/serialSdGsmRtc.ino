@@ -3,22 +3,21 @@
 
   command from baseNRF
     {LOGS;#2;V3.7;T23;H50}
-    {DNGR;#5;WL1}
+    {DNGR;#5;W1}
 
   command params
-    V   n, 0..5         voltage on sensor battery
-    T   n, -50..120     temperature
-    H   n, 0..100       humidity
-    W   n, 0, 1         water leak
-    P   1               power up base
-    G   n, 0..1023 ADC  gas ch4
-    M   n, 0, 1         motion detector
+    V   n, 0..5         voltage on sensor battery, V
+    T   n, -50..120     temperature, C
+    H   n, 0..100       humidity, %
+    W   n, 0, 1         water leak, bool
+    P   1               power up base, bool
+    G   n, 0..1023 ADC  gas CH4, ADC value
+    M   n, 0, 1         motion detector, bool
+    C   n, 0..1023      gas CO, ADC value
 
   LOGS => log on SD only
   DNGR => log on SD & send SMS
 */
-
-
 
 #include <SdFat.h>
 #include <SPI.h>
@@ -29,8 +28,8 @@
 
 const byte SD_CS =  10; //SS
 SdFat SD_card;
-File SD_file_log;
-SdFile SD_isEnable = false;
+SdFile SD_file_log;
+bool SD_isEnable = false;
 
 SoftwareSerial sftSrl_forCommand(7, 8); // RX, TX
 String command;
@@ -70,16 +69,24 @@ void loop() {
   }
 }
 
+//LOGS;#2;V3.7;T23;H50
+//DNGR;#5;W1
 void processCommand(String command) {
+  String commandType = command.substring(0, 4);
+  Serial.print("processCommand(");
   Serial.println(command);
-  SD_log(command);
+  String message = command + ";" + "hh::mm:ss dd-mm-yy";
+  if (commandType == "DNGR") { //LOGS, ALRT
+    sendSMS(message, "+79998885533");
+  }
+  SD_log(message);
 }
 
-void SD_log(String command) {
+void SD_log(String data) {
   if (SD_isEnable) {
-    SD_file_log = SD_card.open("log.txt", O_WRITE | O_CREAT | O_APPEND); // 8.3 filename.ext rule
-    if (SD_file_log) {
-      SD_file_log.println(command);
+    // 8.3 filename.ext rule
+    if (SD_file_log.open("log.txt", O_WRITE | O_CREAT | O_APPEND)) {
+      SD_file_log.println(data);
       SD_file_log.close();
     }
   }
@@ -93,6 +100,15 @@ void SD_init() {
     SD_isEnable = false;
     Serial.println("SD init ERROR");
   }
+}
+
+void GSM_sendSMS(String message, String phone) {
+  Serial.println("AT+CMGS=\"" + phone + "\"");
+  delay(1000);
+  Serial.print(message);
+  delay(300);
+  Serial.print((char)26);
+  delay(300);
 }
 
 

@@ -30,14 +30,7 @@ void processCommand(String command) {
   //Serial.println(commandType);
 }
 
-void sendSMS(String message, String phone) {
-  Serial.println("AT+CMGS=\"" + phone + "\"");
-  delay(1000);
-  Serial.print(message);
-  delay(300);
-  Serial.print((char)26);
-  delay(300);
-}
+
 
 void logSD(String message) {
   Serial.println("SD: " + message);
