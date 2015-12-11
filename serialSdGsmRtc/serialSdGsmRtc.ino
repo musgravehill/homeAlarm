@@ -102,20 +102,20 @@ void processCommand(String command) {
   messageLog += String(hh, DEC) + ":" + String(ii, DEC) + " ";
   messageLog += String(dd, DEC) + "-" + String(mm, DEC) + "-" + String(yyyy, DEC);
   messageLog += ";" + command;
+  SD_log(messageLog);
 
   if (commandType == "DNGR") { //LOGS, ALRT
     messageLog = COMMAND_getVerbalParamName(commandParam0) + messageLog;
-    GSM_sendSMS(message, "+79998885533");
+    GSM_sendSMS(messageLog, "+79998885533");
   }
-  SD_log(messageLog);
 
-  Serial.print(F("processCommand: "));
+  Serial.print(F("\r\n \r\n processCommand: "));
   Serial.println(command);
-  Serial.print(F("commandParam0: "));
-  Serial.println(commandParam0);
-  Serial.print(F("message: "));
-  Serial.println(message);
-  Serial.print(F("\r\n"));
+  //Serial.print(F("commandParam0: "));
+  //Serial.println(commandParam0);
+  //Serial.print(F("message: "));
+  //Serial.println(messageLog);
+  //Serial.print(F("\r\n"));
 }
 
 void SD_log(String data) {
