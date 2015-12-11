@@ -43,6 +43,7 @@ uint32_t periodAllowSMS_G = 12 * 3600; //gas CH4, ADC value
 uint32_t periodAllowSMS_M = 12 * 3600; //motion detector, bool
 uint32_t periodAllowSMS_C = 12 * 3600; //gas CO, ADC value
 
+//BUG: powerDown->powerUp->this vars will be skip to 0 => SMS_send is allow again
 uint32_t unixtimePrevSMS_V = 0; //n, 0..5         voltage on sensor battery, V
 uint32_t unixtimePrevSMS_T = 0; //n, -50..120     temperature, C
 uint32_t unixtimePrevSMS_H = 0; //n, 0..100       humidity, %
