@@ -16,7 +16,7 @@
     C   n, 0..1023      gas CO, ADC value
 
   LOGS => log on SD only
-  DNGR => log on SD & send SMS
+  DNGR => log on SD & send SMS [danger]
 */
 
 #include <SdFat.h>
@@ -71,6 +71,7 @@ void loop() {
   //----------------TEST-----------------
   processCommand("LOGS;#2;V3.7;T23;H50");
   processCommand("DNGR;#5;W1");
+  processCommand("DNGR;#1;H90");
   delay(8000);
   //-------TEST END----------------------
 }
