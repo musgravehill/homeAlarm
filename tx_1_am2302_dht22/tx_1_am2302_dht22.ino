@@ -16,7 +16,7 @@
 #include "DHT.h"
 
 #define IM_SENSOR_NUM 1  //1..5
-#define NRF_CE_PIN 8 //pin with no *PWM. Leave pwm-pin for other tasks
+#define NRF_CE_PIN 9 
 #define NRF_CSN_PIN 10 //if use SPI, d10=hardware SS SPI only
 
 const uint64_t pipes[6] = {   //'static' - no need
@@ -36,8 +36,7 @@ DHT dht;
 void setup() {
   delay(2000);
   Serial.begin(9600);
-  NRF_init();
-  dht.setup(2); // data pin 2
+  NRF_init();  
 }
 
 void loop() {
@@ -51,6 +50,7 @@ void loop() {
 }
 
 void sendDataToBase() {
+  dht.setup(2); // data pin 2
   uint16_t batteryVoltage = random(0, 1023); //ADC 10 bit
   uint16_t humidity = (int) dht.getHumidity();
   uint16_t temperature = (int) dht.getTemperature();
