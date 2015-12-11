@@ -67,18 +67,33 @@ void loop() {
       command += getByte;
     }
   }
+
+  //----------------TEST-----------------
+  processCommand("LOGS;#2;V3.7;T23;H50");
+  processCommand("DNGR;#5;W1");
+  delay(8000);
+  //-------TEST END----------------------
 }
 
 //LOGS;#2;V3.7;T23;H50
 //DNGR;#5;W1
 void processCommand(String command) {
-  DateTime now = RTC3231.now();
-  uint32_t nowUt = now.unixtime();
-  uint16_t yyyy =  now.year();
-  uint8_t mm = now.month();
-  uint8_t dd =  now.day();
-  uint8_t hh = now.hour();
-  uint8_t ii = now.minute();
+  /*
+    DateTime now = RTC3231.now();
+    uint32_t nowUt = now.unixtime();
+    uint16_t yyyy =  now.year();
+    uint8_t mm = now.month();
+    uint8_t dd =  now.day();
+    uint8_t hh = now.hour();
+    uint8_t ii = now.minute();
+  */
+
+  uint32_t nowUt = 1449823614;
+  uint16_t yyyy =  2015;
+  uint8_t mm = 12;
+  uint8_t dd = 28;
+  uint8_t hh = 14;
+  uint8_t ii = 29;
 
   String commandType = command.substring(0, 4);
   String message = command + ";";
