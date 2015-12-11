@@ -106,7 +106,7 @@ void processCommand(String command) {
   }
   SD_log(message);
 
-  Serial.print(F("processCommand: "));
+  Serial.print(F("\r\n processCommand: "));
   Serial.println(command);
   Serial.print(F("message: "));
   Serial.println(message);
