@@ -10,7 +10,6 @@
     T   n, -50..120     temperature, C
     H   n, 0..100       humidity, %
     W   n, 0, 1         water leak, bool
-    P   1               power up base, bool
     G   n, 0..1023 ADC  gas CH4, ADC value
     M   n, 0, 1         motion detector, bool
     C   n, 0..1023      gas CO, ADC value
@@ -34,6 +33,23 @@ bool SD_isEnable = false;
 
 SoftwareSerial sftSrl_forCommand(7, 8); // RX, TX
 String command;
+
+//seconds between SMS
+uint32_t periodAllowSMS_V = 24 * 3600; //voltage on sensor battery, V
+uint32_t periodAllowSMS_T = 12 * 3600; //temperature, C
+uint32_t periodAllowSMS_H = 12 * 3600; //humidity, %
+uint32_t periodAllowSMS_W = 12 * 3600; //water leak, bool
+uint32_t periodAllowSMS_G = 12 * 3600; //gas CH4, ADC value
+uint32_t periodAllowSMS_M = 12 * 3600; //motion detector, bool
+uint32_t periodAllowSMS_C = 12 * 3600; //gas CO, ADC value
+
+uint32_t unixtimePrevSMS_V = 0; //n, 0..5         voltage on sensor battery, V
+uint32_t unixtimePrevSMS_T = 0; //n, -50..120     temperature, C
+uint32_t unixtimePrevSMS_H = 0; //n, 0..100       humidity, %
+uint32_t unixtimePrevSMS_W = 0; //n, 0, 1         water leak, bool
+uint32_t unixtimePrevSMS_G = 0; //n, 0..1023 ADC  gas CH4, ADC value
+uint32_t unixtimePrevSMS_M = 0; //n, 0, 1         motion detector, bool
+uint32_t unixtimePrevSMS_C = 0; //n, 0..1023      gas CO, ADC value
 
 void setup() {
   delay(2000);
@@ -122,7 +138,7 @@ void processCommand(String command) {
 void SD_log(String data) {
   if (SD_isEnable) {
     // 8.3 filename.ext rule
-    if (SD_file_log.open("log.txt", O_WRITE | O_CREAT | O_APPEND)) {
+    if (SD_file_log.open("log.csv", O_WRITE | O_CREAT | O_APPEND)) {
       SD_file_log.println(data);
       SD_file_log.close();
     }
@@ -160,9 +176,6 @@ String COMMAND_getVerbalParamName(String systemParamName) {
   }
   if (systemParamName == "W") {
     return "_WATER_LEAK_";
-  }
-  if (systemParamName == "P") {
-    return "_POWERUP_BASE_";
   }
   if (systemParamName == "G") {
     return "_GAS_CH4_";
