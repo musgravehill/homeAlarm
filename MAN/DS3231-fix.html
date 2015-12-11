@@ -1,0 +1,1763 @@
+<!DOCTYPE html>
+<!-- saved from url=(0093)http://www.raspberrypi-spy.co.uk/2015/05/adding-a-ds3231-real-time-clock-to-the-raspberry-pi/ -->
+<html lang="en-GB"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta charset="UTF-8">
+<title>  Adding a DS3231 Real Time Clock To The Raspberry Pi</title>
+
+ 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="pingback" href="http://www.raspberrypi-spy.co.uk/xmlrpc.php">
+	
+<link rel="shortcut icon" href="http://www.raspberrypi-spy.co.uk/wp-content/uploads/2015/05/favicon.ico">	
+
+<link rel="apple-touch-icon-precomposed" href="http://www.raspberrypi-spy.co.uk/wp-content/uploads/2015/05/Raspberry-Pi-Spy-Logo-152x152-Outline.png">
+	
+<link rel="alternate" type="application/rss+xml" title="Raspberry Pi Spy » Feed" href="http://www.raspberrypi-spy.co.uk/feed/">
+<link rel="alternate" type="application/rss+xml" title="Raspberry Pi Spy » Comments Feed" href="http://www.raspberrypi-spy.co.uk/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Raspberry Pi Spy » Adding a DS3231 Real Time Clock To The Raspberry Pi Comments Feed" href="http://www.raspberrypi-spy.co.uk/2015/05/adding-a-ds3231-real-time-clock-to-the-raspberry-pi/feed/">
+		<script async="" src="./DS3231-fix_files/analytics.js"></script><script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.raspberrypi-spy.co.uk\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.4"}};
+			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56806,55356,56826),0,0),c.toDataURL().length>3e3):("simple"===a?d.fillText(String.fromCharCode(55357,56835),0,0):d.fillText(String.fromCharCode(55356,57135),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag"),unicode8:d("unicode8")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag&&c.supports.unicode8||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./DS3231-fix_files/wp-emoji-release.min.js" type="text/javascript"></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="easyazonpro-bootstrap-popovers-css" href="http://www.raspberrypi-spy.co.uk/wp-content/plugins/easyazon-pro-4.0.9/vendor/bootstrap.min.css?ver=3.3.2" type="text/css" media="all">
+<link rel="stylesheet" id="easyazonpro-popovers-css" href="http://www.raspberrypi-spy.co.uk/wp-content/plugins/easyazon-pro-4.0.9/components/popovers/resources/popovers.css?ver=4.0.9" type="text/css" media="all">
+<link rel="stylesheet" id="smartmag-fonts-css" href="./DS3231-fix_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="smartmag-core-css" href="./DS3231-fix_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="smartmag-responsive-css" href="./DS3231-fix_files/responsive.css" type="text/css" media="all">
+<link rel="stylesheet" id="pretty-photo-css" href="./DS3231-fix_files/prettyPhoto.css" type="text/css" media="all">
+<link rel="stylesheet" id="smartmag-font-awesome-css" href="./DS3231-fix_files/font-awesome.min.css" type="text/css" media="all">
+<style id="smartmag-font-awesome-inline-css" type="text/css">
+
+
+.main-head { 
+background-image: url('http://www.raspberrypi-spy.co.uk/wp-content/uploads/2015/05/rpispy_header.jpg'); 
+background-repeat: no-repeat;
+}
+
+/* Centre the footer/copyright content */
+.lower-foot .textwidget {
+  float: none;
+}
+
+/* Make social media icons a bit bigger on mobile */
+@media only screen and (max-width: 799px){
+.social-icons .icon {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 22px;
+}
+}
+
+/* Custom border for some images */
+.lightborder {border:1px solid #aaaaaa;}
+
+/* Correct floating of featured posts with different title lengths */
+.related-posts ul li:nth-child(3n+1) {
+clear:both;
+content: " ";
+display: block;
+}
+</style>
+<script type="text/javascript" src="./DS3231-fix_files/jquery.js"></script>
+<script type="text/javascript" src="./DS3231-fix_files/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="./DS3231-fix_files/jquery.prettyPhoto.js"></script>
+<link rel="https://api.w.org/" href="http://www.raspberrypi-spy.co.uk/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.raspberrypi-spy.co.uk/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.raspberrypi-spy.co.uk/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Using An I2C Enabled LCD Screen With The Raspberry Pi" href="http://www.raspberrypi-spy.co.uk/2015/05/using-an-i2c-enabled-lcd-screen-with-the-raspberry-pi/">
+<link rel="next" title="Raspberry Pi Used In New Point Break Movie" href="http://www.raspberrypi-spy.co.uk/2015/05/raspberry-pi-used-in-new-point-break-movie/">
+<meta name="generator" content="WordPress 4.4">
+<link rel="canonical" href="./DS3231-fix_files/DS3231-fix.html">
+<link rel="shortlink" href="http://www.raspberrypi-spy.co.uk/?p=4934">
+<link rel="alternate" type="application/json+oembed" href="http://www.raspberrypi-spy.co.uk/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.raspberrypi-spy.co.uk%2F2015%2F05%2Fadding-a-ds3231-real-time-clock-to-the-raspberry-pi%2F">
+<link rel="alternate" type="text/xml+oembed" href="http://www.raspberrypi-spy.co.uk/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.raspberrypi-spy.co.uk%2F2015%2F05%2Fadding-a-ds3231-real-time-clock-to-the-raspberry-pi%2F&amp;format=xml">
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-3716000-12', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+<script type="text/javascript">
+    window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience on our website","dismiss":"Got it!","learnMore":"More info","link":null,"theme":"dark-bottom"};
+</script>
+<script type="text/javascript" src="./DS3231-fix_files/cookieconsent.latest.min.js"></script>
+<!-- End Cookie Consent plugin -->
+ 
+<style type="text/css" id="syntaxhighlighteranchor"></style>
+	
+<!--[if lt IE 9]>
+<script src="http://www.raspberrypi-spy.co.uk/wp-content/themes/smart-mag/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+
+<style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style></head>
+
+
+<body class="single single-post postid-4934 single-format-standard page-builder right-sidebar boxed has-nav-dark">
+
+<div class="main-wrap">
+
+	
+	
+	<div class="top-bar">
+
+		<div class="wrap">
+			<section class="top-bar-content cf">
+			
+								<div class="trending-ticker">
+					<span class="heading">Trending</span>
+
+					<ul>
+												
+												
+							<li class="" style="display: none;"><a href="http://www.raspberrypi-spy.co.uk/2012/03/welcome/" title="Welcome">Welcome</a></li>
+						
+												
+							<li class="" style="display: none;"><a href="http://www.raspberrypi-spy.co.uk/2015/12/lumsing-grand-a1-plus-power-bank-test/" title="Lumsing Grand A1 Plus Power Bank Test">Lumsing Grand A1 Plus Power Bank Test</a></li>
+						
+												
+							<li class="" style="display: none;"><a href="http://www.raspberrypi-spy.co.uk/2015/12/3d-printed-adafruit-raspberry-pi-zero-case-part-2/" title="3D Printed Adafruit Raspberry Pi Zero Case – Part 2">3D Printed Adafruit Raspberry Pi Zero Case – Part 2</a></li>
+						
+												
+							<li class="" style="display: none;"><a href="http://www.raspberrypi-spy.co.uk/2015/12/3d-printed-adafruit-raspberryy-pi-zero-case/" title="3D Printed Adafruit Raspberryy Pi Zero Case">3D Printed Adafruit Raspberryy Pi Zero Case</a></li>
+						
+												
+							<li class="" style="display: none;"><a href="http://www.raspberrypi-spy.co.uk/2015/12/3d-printed-magpi-raspberry-pi-zero-case/" title="3D Printed MagPi Raspberry Pi Zero Case">3D Printed MagPi Raspberry Pi Zero Case</a></li>
+						
+												
+							<li class="" style="display: none;"><a href="http://www.raspberrypi-spy.co.uk/2015/11/raspberry-pi-family-photo-by-raspi-tv/" title="Raspberry Pi Family Photo by RasPi.TV">Raspberry Pi Family Photo by RasPi.TV</a></li>
+						
+												
+							<li class="" style="display: none;"><a href="http://www.raspberrypi-spy.co.uk/2015/11/introducing-the-raspberry-pi-zero/" title="Introducing the Raspberry Pi Zero">Introducing the Raspberry Pi Zero</a></li>
+						
+												
+							<li class="active" style="display: list-item;"><a href="http://www.raspberrypi-spy.co.uk/2015/11/the-official-raspberry-pi-projects-book/" title="The Official Raspberry Pi Projects Book">The Official Raspberry Pi Projects Book</a></li>
+						
+												
+							<li class="" style="display: none;"><a href="http://www.raspberrypi-spy.co.uk/2015/11/raspberry-pi-microsd-card-shoot-out/" title="Raspberry Pi microSD Card Shoot-out">Raspberry Pi microSD Card Shoot-out</a></li>
+						
+												
+											</ul>
+				</div>
+				
+									
+					
+		<div class="search">
+			<form role="search" action="http://www.raspberrypi-spy.co.uk/" method="get">
+				<input type="text" name="s" class="query live-search-query" value="" placeholder="Search..." autocomplete="off">
+				<button class="search-button" type="submit"><i class="fa fa-search"></i></button>
+			</form>
+		</div> <!-- .search -->					
+				
+							<div class="textwidget"><ul class="social-icons cf">
+	<li><a href="http://www.raspberrypi-spy.co.uk/?feed=rss2" class="icon fa fa-rss" data-original-title="RSS"><span class="visuallyhidden">RSS</span></a></li>
+	<li><a href="http://twitter.com/rpispy" class="icon fa fa-twitter" data-original-title="Twitter"><span class="visuallyhidden">Twitter</span></a></li>
+	<li><a href="https://plus.google.com/+RaspberryPi-SpyCoUK" class="icon fa fa-google-plus" data-original-title="Google+"><span class="visuallyhidden">Google+</span></a></li>
+	<li><a href="http://facebook.com/rpispy" class="icon fa fa-facebook" data-original-title="Facebook"><span class="visuallyhidden">Facebook</span></a></li>
+	<li><a href="http://www.pinterest.com/rpispy/" class="icon fa fa-pinterest" data-original-title="Pinterest"><span class="visuallyhidden">Pinterest</span></a></li>
+	<li><a href="https://www.youtube.com/user/rpispy" class="icon fa fa-youtube" data-original-title="YouTube"><span class="visuallyhidden">YouTube</span></a></li>
+</ul></div>
+						
+			</section>
+		</div>
+		
+	</div>
+	
+	<div id="main-head" class="main-head">
+		
+		<div class="wrap">
+			
+			
+			<header class="default">
+			
+				<div class="title">
+							<a href="http://www.raspberrypi-spy.co.uk/" title="Raspberry Pi Spy" rel="home" class"="">
+		
+														
+								
+				<img src="./DS3231-fix_files/Raspberry-Pi-Spy-Logo-140x140-Outline.png" class="logo-image" alt="Raspberry Pi Spy" data-at2x="http://www.raspberrypi-spy.co.uk/wp-content/uploads/2015/05/Raspberry-Pi-Spy-Logo-280x280-Outline.png">
+					 
+						
+		</a>				</div>
+				
+									
+					<div class="right">
+					
+				
+					
+			<div class="adwrap-widget">
+			
+				<script async="" src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Raspberry Pi Spy 728x90 -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-5084177467956694" data-ad-slot="6936497659"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>			
+			</div>
+		
+				
+							</div>
+					
+								
+			</header>
+				
+							
+				
+<div class="navigation-wrap cf">
+
+	<nav class="navigation cf nav-dark">
+	
+		<div class="">
+		
+			<div class="mobile" data-type="classic" data-search="1">
+				<a href="http://www.raspberrypi-spy.co.uk/2015/05/adding-a-ds3231-real-time-clock-to-the-raspberry-pi/#" class="selected">
+					<span class="text">Navigate</span><span class="current"></span> <i class="hamburger fa fa-bars"></i>
+				</a>
+			</div>
+			
+			<div class="menu-menu-1-container"><ul id="menu-menu-1" class="menu"><li id="menu-item-3147" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-3147"><a href="http://www.raspberrypi-spy.co.uk/">Home</a></li><li id="menu-item-4895" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-4895"><a href="http://www.raspberrypi-spy.co.uk/categories/">Categories</a>
+<ul class="sub-menu">
+	<li id="menu-item-4896" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-cat-4 menu-item-4896"><a href="http://www.raspberrypi-spy.co.uk/category/general/">General</a></li>	<li id="menu-item-4897" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor menu-cat-7 menu-item-4897"><a href="http://www.raspberrypi-spy.co.uk/category/hardware/">Hardware</a></li>	<li id="menu-item-4898" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-cat-145 menu-item-4898"><a href="http://www.raspberrypi-spy.co.uk/category/programming-2/">Programming</a></li>	<li id="menu-item-4899" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-cat-10 menu-item-4899"><a href="http://www.raspberrypi-spy.co.uk/category/python/">Python</a></li>	<li id="menu-item-4900" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-cat-8 menu-item-4900"><a href="http://www.raspberrypi-spy.co.uk/category/software/">Software</a></li>	<li id="menu-item-4901" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-cat-9 menu-item-4901"><a href="http://www.raspberrypi-spy.co.uk/category/tutorials-help/">Tutorials &amp; Help</a></li></ul>
+</li><li id="menu-item-3148" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3148"><a href="http://www.raspberrypi-spy.co.uk/berryclip-6-led-add-on-board/">BerryClip</a>
+<ul class="sub-menu">
+	<li id="menu-item-3149" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3149"><a href="http://www.raspberrypi-spy.co.uk/berryclip-6-led-add-on-board/berryclip-6-led-add-on-board-instructions/">BerryClip Instructions</a></li>	<li id="menu-item-3150" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3150"><a href="http://www.raspberrypi-spy.co.uk/berryclip-6-led-add-on-board/berryclip-plus-instructions/">BerryClip Plus Instructions</a></li>	<li id="menu-item-3161" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3161"><a href="http://www.raspberrypi-spy.co.uk/2014/04/berryclip-assembly-articles-videos-and-reviews/">Videos &amp; Reviews</a></li></ul>
+</li><li id="menu-item-4894" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-4894"><a href="http://www.raspberrypi-spy.co.uk/buy/">Buy</a>
+<ul class="sub-menu">
+	<li id="menu-item-3151" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3151"><a href="http://www.raspberrypi-spy.co.uk/buy/buy-a-pi-2/">Buy Pi</a></li>	<li id="menu-item-3152" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3152"><a href="http://www.raspberrypi-spy.co.uk/buy/buy-accessories/">Buy Accessories</a></li>	<li id="menu-item-3153" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3153"><a href="http://www.raspberrypi-spy.co.uk/buy/buy-books/">Buy Books</a></li></ul>
+</li><li id="menu-item-3154" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3154"><a href="http://www.raspberrypi-spy.co.uk/tools/">Tools</a>
+<ul class="sub-menu">
+	<li id="menu-item-3155" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3155"><a href="http://www.raspberrypi-spy.co.uk/tools/pi-lite-14x9-led-matrix-sprite-editor/">Pi-Lite 14×9 LED Matrix Sprite Editor</a></li>	<li id="menu-item-3853" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3853"><a href="http://www.raspberrypi-spy.co.uk/tools/pi-power-estimator-app/">Pi Power Estimator App</a></li>	<li id="menu-item-3807" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3807"><a href="http://www.raspberrypi-spy.co.uk/tools/rpiref-raspberry-pi-pin-out-reference-app/">RPiREF Pin-out Reference App</a></li>	<li id="menu-item-3156" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3156"><a href="http://www.raspberrypi-spy.co.uk/tools/simple-ohms-law-calculator/">Simple Ohm’s Law Calculator</a></li>	<li id="menu-item-3158" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3158"><a href="http://www.raspberrypi-spy.co.uk/resources/web-sites-links/">Web Sites &amp; Links</a></li></ul>
+</li><li id="menu-item-5015" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-cat-9 menu-item-5015"><a href="http://www.raspberrypi-spy.co.uk/category/tutorials-help/">Tutorials &amp; Help</a></li><li id="menu-item-3159" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3159"><a href="http://www.raspberrypi-spy.co.uk/contact-us/">Contact Us</a></li><li id="menu-item-4987" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4987"><a href="http://www.raspberrypi-spy.co.uk/site-map/">Site Map</a></li></ul></div>			
+				
+		</div>
+		
+	</nav>
+
+		
+</div>				
+							
+		</div>
+		
+				
+	</div>	
+	<div class="breadcrumbs-wrap">
+		
+		<div class="wrap">
+		<div class="breadcrumbs"><span class="location">You are at:</span><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="http://www.raspberrypi-spy.co.uk/"><span itemprop="title">Home</span></a></span><span class="delim">»</span><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="http://www.raspberrypi-spy.co.uk/category/tutorials-help/"><span itemprop="title">Tutorials &amp; Help</span></a></span><span class="delim">»</span><span class="current">Adding a DS3231 Real Time Clock To The Raspberry Pi</span></div>		</div>
+		
+	</div>
+
+
+<div class="main wrap cf">
+
+		
+	<div class="row">
+	
+		<div class="col-8 main-content">
+		
+				
+				
+<article id="post-4934" class="post-4934 post type-post status-publish format-standard has-post-thumbnail category-tutorials-help category-i2c tag-i2c tag-rtc tag-ds3231 tag-ds1307 title-above" itemscope="" itemtype="http://schema.org/Article">
+	
+	<header class="post-header cf">
+	
+		
+				<div class="heading cf">
+				
+			<h1 class="post-title item fn" itemprop="name headline">
+			Adding a DS3231 Real Time Clock To The Raspberry Pi			</h1>
+			
+			<a href="http://www.raspberrypi-spy.co.uk/2015/05/adding-a-ds3231-real-time-clock-to-the-raspberry-pi/#comments" class="comments"><i class="fa fa-comments-o"></i> 7</a>
+		
+		</div>
+
+		<div class="post-meta cf">
+			<span class="posted-by">By 
+				<span class="reviewer" itemprop="author"><a href="http://www.raspberrypi-spy.co.uk/author/matt/" title="Posts by Matt" rel="author">Matt</a></span>
+			</span>
+			 
+			<span class="posted-on">on				<span class="dtreviewed">
+					<time class="value-title" datetime="2015-05-25T20:44:48+00:00" title="2015-05-25" itemprop="datePublished">May 25, 2015</time>
+				</span>
+			</span>
+			
+			<span class="cats"><a href="http://www.raspberrypi-spy.co.uk/category/tutorials-help/" rel="category tag">Tutorials &amp; Help</a>, <a href="http://www.raspberrypi-spy.co.uk/category/hardware/i2c/" rel="category tag">I2C</a></span>
+				
+		</div>		
+			
+
+			<div class="featured">
+						
+							
+				<a href="http://www.raspberrypi-spy.co.uk/wp-content/uploads/2015/05/ds3231_03.jpg" title="Adding a DS3231 Real Time Clock To The Raspberry Pi" itemprop="image" rel="prettyPhoto">
+				
+								
+										
+						<img width="702" height="336" src="./DS3231-fix_files/ds3231_03-702x336.jpg" class="attachment-main-slider size-main-slider wp-post-image no-display appear" alt="DS3231 RTC Module" title="Adding a DS3231 Real Time Clock To The Raspberry Pi" srcset="http://www.raspberrypi-spy.co.uk/wp-content/uploads/2015/05/ds3231_03-1078x516.jpg 1078w, http://www.raspberrypi-spy.co.uk/wp-content/uploads/2015/05/ds3231_03-702x336.jpg 702w" sizes="(max-width: 702px) 100vw, 702px">					
+										
+												
+				</a>
+								
+								
+					</div>
+		
+			
+	</header><!-- .post-header -->
+
+	
+
+	<div class="post-container cf">
+	
+		<div class="post-content-right">
+			<div class="post-content description " itemprop="articleBody">
+	
+					
+				
+		<p>While your Pi is connected to a network it will be able to set it’s clock correctly using NTP. Without a network connection the system time and date will almost certainly be wrong. For some projects this is a problem especially if you are logging timestamps or performing other time sensitive operations.</p>
+<p><span id="more-4934"></span></p>
+<p>This can be solved&nbsp;using a Real Time Clock (RTC) module. This will use a small coin cell battery to keep the time for the Pi even if it is turned off. When the Pi reboots it can set it’s own internal clock using the time held in by the RTC.</p>
+<p>The easiest way of implementing an RTC is to buy a pre-made module.&nbsp;Luckily RTC modules are relatively cheap and easy to obtain. Some modules will attach directly the Pi’s GPIO header but these may get in the way of other devices so I prefer more generic modules that keep the GPIO clear for other purposes.</p>
+<h2>DS1307 or DS3231?</h2>
+<p><img class="alignright size-medium wp-image-4938 no-display appear" src="./DS3231-fix_files/ds1308_rtc_module_02-300x200.jpg" alt="DS1307 RTC Module" width="300" height="200" srcset="http://www.raspberrypi-spy.co.uk/wp-content/uploads/2015/04/ds1308_rtc_module_02-300x200.jpg 300w, http://www.raspberrypi-spy.co.uk/wp-content/uploads/2015/04/ds1308_rtc_module_02-1024x683.jpg 1024w" sizes="(max-width: 300px) 100vw, 300px">Modules based on the DS1307 and DS3231 chips are popular devices and you’ll see them for sale from various retailers. I purchased both types and quickly realised my DS1307 modules were useless. My advice would be to go for a DS3231 based module. They are more accurate and run happily from 3.3V. My two “Tiny RTC” DS1307 modules went straight in the bin.</p>
+<h2>Resistor Removal</h2>
+<p>Most generic I2C modules have pull-up resistors on the SDA and SCL pins but these aren’t required as the Pi has it’s own pull-ups. I didn’t want these on-board resistors to interfere with the operation of the I2C bus so I removed them.</p>
+<p>The module also has a basic charging circuit for use with a rechargeable LIR2032 coin cell. I wanted to use a normal non-rechargeable cell so I removed another resistor to disable this charging circuit. The resistors were removed from the module using a soldering iron and some tweezers or small pliers. The location of the resistors is shown in the photo below :</p>
+<p><img class="aligncenter size-full wp-image-4992 no-display appear" src="./DS3231-fix_files/ds3231_02.jpg" alt="DS3231 RTC Module" width="3000" height="2000" srcset="http://www.raspberrypi-spy.co.uk/wp-content/uploads/2015/05/ds3231_02-300x200.jpg 300w, http://www.raspberrypi-spy.co.uk/wp-content/uploads/2015/05/ds3231_02-1024x683.jpg 1024w" sizes="(max-width: 3000px) 100vw, 3000px"></p>
+<p>The pull-up resistors are the block marked in red on the left. The charging circuit is the block marked in red on the right.</p>
+<h2>I2C Setup</h2>
+<p>As with all I2C devices you must configure the I2C interface. This is quite easy to do and explained in my&nbsp;<a href="http://www.raspberrypi-spy.co.uk/2014/11/enabling-the-i2c-interface-on-the-raspberry-pi/">Enabling The I2C Interface On The Raspberry Pi</a>&nbsp;tutorial.</p>
+<h2>DS3231 Module Setup</h2>
+<p>In order to ensure you’ve got the latest updates you should run the following commands :</p>
+<pre>sudo apt-get update
+sudo apt-get -y upgrade</pre>
+<p>Now we need to modify a system file using :</p>
+<pre>sudo nano /etc/modules</pre>
+<p>If it isn’t already there add “rtc-ds1307” to the bottom so it looks something like :</p>
+<pre>snd-bcm2835
+i2c-bcm2835
+i2c-dev
+rtc-ds1307</pre>
+<p>You can save and quit using CTRL-X, Y and ENTER.</p>
+<p>Shutdown the Pi using “sudo halt” and remove the power when it has completed the process.</p>
+<h2>Hardware Setup</h2>
+<p>With the Raspberry Pi turned off you can now connect the module. It’s a fairly simple configuration but it needs to be correct so double check it. Refer to my <a href="http://www.raspberrypi-spy.co.uk/2012/06/simple-guide-to-the-rpi-gpio-header-and-pins/">GPIO Diagram</a> to ensure you get the correct pins on the Pi’s header.</p>
+<table>
+<tbody>
+<tr>
+<th>DS1307</th>
+<th>Pi GPIO</th>
+</tr>
+<tr>
+<td>GND</td>
+<td>P1-06</td>
+</tr>
+<tr>
+<td>Vcc</td>
+<td>P1-01 (3.3V)</td>
+</tr>
+<tr>
+<td>SDA</td>
+<td>P1-03 (I2C SDA)</td>
+</tr>
+<tr>
+<td>SCL</td>
+<td>P1-05 (I2C SCL)</td>
+</tr>
+</tbody>
+</table>
+<p>Don’t forget the 3V battery!</p>
+<p><img class="aligncenter size-large wp-image-4995 no-display appear" src="./DS3231-fix_files/ds3231_01-1024x683.jpg" alt="DS3231 RTC Module" width="702" height="468" srcset="http://www.raspberrypi-spy.co.uk/wp-content/uploads/2015/05/ds3231_01-300x200.jpg 300w, http://www.raspberrypi-spy.co.uk/wp-content/uploads/2015/05/ds3231_01-1024x683.jpg 1024w" sizes="(max-width: 702px) 100vw, 702px"></p>
+<h2>Interface Test</h2>
+<p>Power up the Pi and run the following command :</p>
+<pre>sudo i2cdetect -y 1</pre>
+<p><strong>Note :</strong> If you are using a Rev 1 you will need to use “sudo i2cdetect -y 0”.</p>
+<p>You should see something similar to this :</p>
+<p><img class="aligncenter size-full wp-image-4965 no-display" src="./DS3231-fix_files/ds3231_rtc_module_01.png" alt="DS3231 RTC Module Config" width="450" height="180" srcset="http://www.raspberrypi-spy.co.uk/wp-content/uploads/2015/05/ds3231_rtc_module_01-300x120.png 300w, http://www.raspberrypi-spy.co.uk/wp-content/uploads/2015/05/ds3231_rtc_module_01.png 450w" sizes="(max-width: 450px) 100vw, 450px"></p>
+<p>In this example “68” is the hex address of the RTC module on the I2C interface.</p>
+<h2>I2C Device Setup</h2>
+<p>To ensure the DS1307 device is setup and the time synchronised when the Pi boots we need to edit another system file :</p>
+<pre>sudo nano /etc/rc.local</pre>
+<p>Add the following two lines before the exit 0 line :</p>
+<pre>echo ds1307 0x68 &gt; /sys/class/i2c-adapter/i2c-1/new_device
+hwclock -s</pre>
+<p>so it looks something like :</p>
+<p><a href="http://www.raspberrypi-spy.co.uk/2015/05/adding-a-ds3231-real-time-clock-to-the-raspberry-pi/ds1308_rtc_module_06/" rel="attachment wp-att-4950"><img class="aligncenter size-full wp-image-4950 no-display" src="./DS3231-fix_files/ds1308_rtc_module_06.png" alt="DS1307 RTC Module Config" width="570" height="350" srcset="http://www.raspberrypi-spy.co.uk/wp-content/uploads/2015/04/ds1308_rtc_module_06-300x184.png 300w, http://www.raspberrypi-spy.co.uk/wp-content/uploads/2015/04/ds1308_rtc_module_06.png 570w" sizes="(max-width: 570px) 100vw, 570px"></a></p>
+<p><strong>Note :</strong> If you are using a Rev 1 you will need to use “/i2c-0/” instead of&nbsp;“/i2c-1/”.</p>
+<p>You can save and quit using CTRL-X, Y and ENTER.</p>
+<p>Now reboot the Pi using :</p>
+<pre>sudo reboot</pre>
+<p>Now when you repeat the i2cdetect command (see above) the 68 will turn into UU :</p>
+<p><img class="aligncenter size-full wp-image-4966 no-display" src="./DS3231-fix_files/ds3231_rtc_module_02.png" alt="DS3231 RTC Module Config" width="450" height="180" srcset="http://www.raspberrypi-spy.co.uk/wp-content/uploads/2015/05/ds3231_rtc_module_02-300x120.png 300w, http://www.raspberrypi-spy.co.uk/wp-content/uploads/2015/05/ds3231_rtc_module_02.png 450w" sizes="(max-width: 450px) 100vw, 450px"></p>
+<h2>Time Zones and Daylight Saving Time</h2>
+<p>By default the Pi tends to show time as GMT or UTC. For me sat in Bristol this results in the time being 1 hour behind my local time. To tell your Pi what region you are in you can use :</p>
+<pre>sudo raspi-config</pre>
+<p>and then select “Internationalisation Options” followed by “Change Timezone”. You can then select you location from the following screens.</p>
+<p>I set my location to “Europe/London” and this results in “date” showing the time in BST (British Summer Time) rather than UTC. The time is then correctly adjusted by +1 hour.</p>
+<h2>Reading The Date And Time</h2>
+<p>You can read the Pi’s system time using :</p>
+<pre>date</pre>
+<p>If you need to set the system time for any reason you can use the following command :</p>
+<pre>sudo date -s "29 AUG 1997 13:00:00"</pre>
+<p>Once correct you can write the system date and time to the RTC module using :</p>
+<pre>sudo hwclock -w</pre>
+<p>You should be able to read the date and time back from the RTC using :</p>
+<pre>sudo hwclock -r</pre>
+<p>By separating the commands with a semi-colon you can read back the system time and the RTC time at the same time. Hopefully they should match and look something like this :</p>
+<p><img class="aligncenter size-full wp-image-4967 no-display" src="./DS3231-fix_files/ds3231_rtc_module_03.png" alt="DS3231 RTC Module Config" width="400" height="60" srcset="http://www.raspberrypi-spy.co.uk/wp-content/uploads/2015/05/ds3231_rtc_module_03-300x45.png 300w, http://www.raspberrypi-spy.co.uk/wp-content/uploads/2015/05/ds3231_rtc_module_03.png 400w" sizes="(max-width: 400px) 100vw, 400px"></p>
+<p>The “hwclock -s” we added to “rc.local” sets the system time from the RTC module.</p>
+<h2>The Final Test</h2>
+<p>The final test is to determine if the RTC module is keeping time and that the Pi will use that time when it boots. The best way to do that is to :</p>
+<ul>
+<li>Power down the Pi</li>
+<li>Remove the power cable</li>
+<li>Remove the network connection</li>
+<li>Attach the Pi to a monitor and keyboard</li>
+<li>Leave it overnight</li>
+<li>Power it up and use “date” to see what time the Pi thinks it is</li>
+</ul>
+<p>Hopefully your Pi is now displaying the correct date and time and will maintain it when the Pi is powered down.</p>
+
+		
+				
+				
+			</div><!-- .post-content -->
+		</div>
+		
+	</div>
+	
+	
+	
+	
+	<div class="post-share">
+		<span class="text">Share.</span>
+		
+		<span class="share-links">
+
+			<a href="http://twitter.com/home?status=http%3A%2F%2Fwww.raspberrypi-spy.co.uk%2F2015%2F05%2Fadding-a-ds3231-real-time-clock-to-the-raspberry-pi%2F" class="fa fa-twitter" data-original-title="Tweet It">
+				<span class="visuallyhidden">Twitter</span></a>
+				
+			<a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.raspberrypi-spy.co.uk%2F2015%2F05%2Fadding-a-ds3231-real-time-clock-to-the-raspberry-pi%2F" class="fa fa-facebook" data-original-title="Share on Facebook">
+				<span class="visuallyhidden">Facebook</span></a>
+				
+			<a href="http://plus.google.com/share?url=http%3A%2F%2Fwww.raspberrypi-spy.co.uk%2F2015%2F05%2Fadding-a-ds3231-real-time-clock-to-the-raspberry-pi%2F" class="fa fa-google-plus" data-original-title="Share on Google+">
+				<span class="visuallyhidden">Google+</span></a>
+				
+			<a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.raspberrypi-spy.co.uk%2F2015%2F05%2Fadding-a-ds3231-real-time-clock-to-the-raspberry-pi%2F&amp;media=http%3A%2F%2Fwww.raspberrypi-spy.co.uk%2Fwp-content%2Fuploads%2F2015%2F05%2Fds3231_03.jpg" class="fa fa-pinterest" data-original-title="Share on Pinterest">
+				<span class="visuallyhidden">Pinterest</span></a>
+				
+			<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fwww.raspberrypi-spy.co.uk%2F2015%2F05%2Fadding-a-ds3231-real-time-clock-to-the-raspberry-pi%2F" class="fa fa-linkedin" data-original-title="Share on LinkedIn">
+				<span class="visuallyhidden">LinkedIn</span></a>
+				
+			<a href="http://www.tumblr.com/share/link?url=http%3A%2F%2Fwww.raspberrypi-spy.co.uk%2F2015%2F05%2Fadding-a-ds3231-real-time-clock-to-the-raspberry-pi%2F&amp;name=Adding+a+DS3231+Real+Time+Clock+To+The+Raspberry+Pi" class="fa fa-tumblr" data-original-title="Share on Tumblr">
+				<span class="visuallyhidden">Tumblr</span></a>
+				
+			<a href="mailto:?subject=Adding%20a%20DS3231%20Real%20Time%20Clock%20To%20The%20Raspberry%20Pi&amp;body=http%3A%2F%2Fwww.raspberrypi-spy.co.uk%2F2015%2F05%2Fadding-a-ds3231-real-time-clock-to-the-raspberry-pi%2F" class="fa fa-envelope-o" data-original-title="Share via Email">
+				<span class="visuallyhidden">Email</span></a>
+			
+		</span>
+	</div>
+	
+		
+</article>
+
+
+
+	<section class="navigate-posts">
+	
+		<div class="previous"><span class="main-color title"><i class="fa fa-chevron-left"></i> Previous Article</span><span class="link"><a href="http://www.raspberrypi-spy.co.uk/2015/05/using-an-i2c-enabled-lcd-screen-with-the-raspberry-pi/" rel="prev">Using An I2C Enabled LCD Screen With The Raspberry Pi</a></span>		</div>
+		
+		<div class="next"><span class="main-color title">Next Article <i class="fa fa-chevron-right"></i></span><span class="link"><a href="http://www.raspberrypi-spy.co.uk/2015/05/raspberry-pi-used-in-new-point-break-movie/" rel="next">Raspberry Pi Used In New Point Break Movie</a></span>		</div>
+		
+	</section>
+
+
+
+	
+	<section class="related-posts">
+		<h3 class="section-head">Related Posts</h3> 
+		<ul class="highlights-box three-col related-posts">
+		
+				
+			<li class="highlights column one-third">
+				
+				<article>
+						
+					<a href="http://www.raspberrypi-spy.co.uk/2015/10/raspberry-pi-temperature-logger-mkii/" title="Raspberry Pi Temperature Logger MkII" class="image-link">
+						<img width="214" height="140" src="./DS3231-fix_files/templogger2_02-214x140.jpg" class="image wp-post-image no-display" alt="Templogger Mk2" title="Raspberry Pi Temperature Logger MkII">	
+											</a>
+					
+								<div class="cf listing-meta meta above">
+					
+				<time datetime="2015-10-13T21:18:33+00:00" itemprop="datePublished" class="meta-item">October 13, 2015</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2015/10/raspberry-pi-temperature-logger-mkii/#respond"><i class="fa fa-comments-o"></i> 0</a></span>					
+			</div>
+							
+					<h2><a href="http://www.raspberrypi-spy.co.uk/2015/10/raspberry-pi-temperature-logger-mkii/" title="Raspberry Pi Temperature Logger MkII">Raspberry Pi Temperature Logger MkII</a></h2>
+					
+										
+				</article>
+			</li>
+			
+				
+			<li class="highlights column one-third">
+				
+				<article>
+						
+					<a href="http://www.raspberrypi-spy.co.uk/2015/10/how-to-autorun-a-python-script-on-boot-using-systemd/" title="How To Autorun A Python Script On Boot Using systemd" class="image-link">
+						<img width="214" height="140" src="./DS3231-fix_files/systemd_screenshot-214x140.png" class="image wp-post-image no-display" alt="systemd Screenshot" title="How To Autorun A Python Script On Boot Using systemd">	
+											</a>
+					
+								<div class="cf listing-meta meta above">
+					
+				<time datetime="2015-10-12T13:32:00+00:00" itemprop="datePublished" class="meta-item">October 12, 2015</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2015/10/how-to-autorun-a-python-script-on-boot-using-systemd/#comments"><i class="fa fa-comments-o"></i> 4</a></span>					
+			</div>
+							
+					<h2><a href="http://www.raspberrypi-spy.co.uk/2015/10/how-to-autorun-a-python-script-on-boot-using-systemd/" title="How To Autorun A Python Script On Boot Using systemd">How To Autorun A Python Script On Boot Using systemd</a></h2>
+					
+										
+				</article>
+			</li>
+			
+				
+			<li class="highlights column one-third">
+				
+				<article>
+						
+					<a href="http://www.raspberrypi-spy.co.uk/2015/09/raspbian-configuration-utility-and-new-boot-options/" title="Raspbian Configuration Utility and New Boot Options" class="image-link">
+						<img width="214" height="140" src="./DS3231-fix_files/raspi_config_boot_01-214x140.png" class="image wp-post-image no-display" alt="rasp-config boot options" title="Raspbian Configuration Utility and New Boot Options">	
+											</a>
+					
+								<div class="cf listing-meta meta above">
+					
+				<time datetime="2015-09-30T23:01:50+00:00" itemprop="datePublished" class="meta-item">September 30, 2015</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2015/09/raspbian-configuration-utility-and-new-boot-options/#respond"><i class="fa fa-comments-o"></i> 0</a></span>					
+			</div>
+							
+					<h2><a href="http://www.raspberrypi-spy.co.uk/2015/09/raspbian-configuration-utility-and-new-boot-options/" title="Raspbian Configuration Utility and New Boot Options">Raspbian Configuration Utility and New Boot Options</a></h2>
+					
+										
+				</article>
+			</li>
+			
+				
+			<li class="highlights column one-third">
+				
+				<article>
+						
+					<a href="http://www.raspberrypi-spy.co.uk/2015/09/how-to-use-a-hall-effect-sensor-with-the-raspberry-pi/" title="How To Use A Hall Effect Sensor With The Raspberry Pi" class="image-link">
+						<img width="214" height="140" src="./DS3231-fix_files/hall_effect_01-214x140.jpg" class="image wp-post-image no-display" alt="Hall Effect Sensor and Magnet" title="How To Use A Hall Effect Sensor With The Raspberry Pi">	
+											</a>
+					
+								<div class="cf listing-meta meta above">
+					
+				<time datetime="2015-09-28T22:57:44+00:00" itemprop="datePublished" class="meta-item">September 28, 2015</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2015/09/how-to-use-a-hall-effect-sensor-with-the-raspberry-pi/#comments"><i class="fa fa-comments-o"></i> 2</a></span>					
+			</div>
+							
+					<h2><a href="http://www.raspberrypi-spy.co.uk/2015/09/how-to-use-a-hall-effect-sensor-with-the-raspberry-pi/" title="How To Use A Hall Effect Sensor With The Raspberry Pi">How To Use A Hall Effect Sensor With The Raspberry Pi</a></h2>
+					
+										
+				</article>
+			</li>
+			
+				
+			<li class="highlights column one-third">
+				
+				<article>
+						
+					<a href="http://www.raspberrypi-spy.co.uk/2015/08/robotsentry-home-security-system-part-2/" title="RobotSentry – Home Security System – Part 2" class="image-link">
+						<img width="214" height="140" src="./DS3231-fix_files/2015_08_robotsentry_01-214x140.jpg" class="image wp-post-image no-display" alt="RobotSentry External Sensor Box" title="RobotSentry – Home Security System – Part 2">	
+											</a>
+					
+								<div class="cf listing-meta meta above">
+					
+				<time datetime="2015-08-15T19:32:58+00:00" itemprop="datePublished" class="meta-item">August 15, 2015</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2015/08/robotsentry-home-security-system-part-2/#comments"><i class="fa fa-comments-o"></i> 5</a></span>					
+			</div>
+							
+					<h2><a href="http://www.raspberrypi-spy.co.uk/2015/08/robotsentry-home-security-system-part-2/" title="RobotSentry – Home Security System – Part 2">RobotSentry – Home Security System – Part 2</a></h2>
+					
+										
+				</article>
+			</li>
+			
+				
+			<li class="highlights column one-third">
+				
+				<article>
+						
+					<a href="http://www.raspberrypi-spy.co.uk/2015/07/robotsentry-home-security-system-part-1/" title="RobotSentry – Home Security System – Part 1" class="image-link">
+						<img width="214" height="140" src="./DS3231-fix_files/rpispy_robot_sentry_02-214x140.jpg" class="image wp-post-image no-display" alt="Robot Sentry" title="RobotSentry – Home Security System – Part 1">	
+											</a>
+					
+								<div class="cf listing-meta meta above">
+					
+				<time datetime="2015-07-29T21:57:07+00:00" itemprop="datePublished" class="meta-item">July 29, 2015</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2015/07/robotsentry-home-security-system-part-1/#comments"><i class="fa fa-comments-o"></i> 4</a></span>					
+			</div>
+							
+					<h2><a href="http://www.raspberrypi-spy.co.uk/2015/07/robotsentry-home-security-system-part-1/" title="RobotSentry – Home Security System – Part 1">RobotSentry – Home Security System – Part 1</a></h2>
+					
+										
+				</article>
+			</li>
+			
+				
+			<li class="highlights column one-third">
+				
+				<article>
+						
+					<a href="http://www.raspberrypi-spy.co.uk/2015/06/basic-temperature-logging-to-the-internet-with-raspberry-pi/" title="Basic Temperature Logging To The Internet With Raspberry Pi" class="image-link">
+						<img width="214" height="140" src="./DS3231-fix_files/temperature_logger_01-214x140.jpg" class="image wp-post-image no-display" alt="Basic Temperature Logger" title="Basic Temperature Logging To The Internet With Raspberry Pi">	
+											</a>
+					
+								<div class="cf listing-meta meta above">
+					
+				<time datetime="2015-06-20T16:36:30+00:00" itemprop="datePublished" class="meta-item">June 20, 2015</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2015/06/basic-temperature-logging-to-the-internet-with-raspberry-pi/#comments"><i class="fa fa-comments-o"></i> 22</a></span>					
+			</div>
+							
+					<h2><a href="http://www.raspberrypi-spy.co.uk/2015/06/basic-temperature-logging-to-the-internet-with-raspberry-pi/" title="Basic Temperature Logging To The Internet With Raspberry Pi">Basic Temperature Logging To The Internet With Raspberry Pi</a></h2>
+					
+										
+				</article>
+			</li>
+			
+				
+			<li class="highlights column one-third">
+				
+				<article>
+						
+					<a href="http://www.raspberrypi-spy.co.uk/2015/06/how-to-disable-wifi-power-saving-on-the-raspberry-pi/" title="How To Disable WiFi Power Saving On The Raspberry Pi" class="image-link">
+						<img width="214" height="140" src="./DS3231-fix_files/raspberry_pi_wifi-214x140.jpg" class="image wp-post-image no-display" alt="Raspberry Pi WiFi" title="How To Disable WiFi Power Saving On The Raspberry Pi">	
+											</a>
+					
+								<div class="cf listing-meta meta above">
+					
+				<time datetime="2015-06-12T19:18:50+00:00" itemprop="datePublished" class="meta-item">June 12, 2015</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2015/06/how-to-disable-wifi-power-saving-on-the-raspberry-pi/#comments"><i class="fa fa-comments-o"></i> 3</a></span>					
+			</div>
+							
+					<h2><a href="http://www.raspberrypi-spy.co.uk/2015/06/how-to-disable-wifi-power-saving-on-the-raspberry-pi/" title="How To Disable WiFi Power Saving On The Raspberry Pi">How To Disable WiFi Power Saving On The Raspberry Pi</a></h2>
+					
+										
+				</article>
+			</li>
+			
+				
+			<li class="highlights column one-third">
+				
+				<article>
+						
+					<a href="http://www.raspberrypi-spy.co.uk/2015/05/using-an-i2c-enabled-lcd-screen-with-the-raspberry-pi/" title="Using An I2C Enabled LCD Screen With The Raspberry Pi" class="image-link">
+						<img width="214" height="140" src="./DS3231-fix_files/lcd_i2c_screen_01-214x140.jpg" class="image wp-post-image no-display" alt="I2C 16x2 LCD Screen" title="Using An I2C Enabled LCD Screen With The Raspberry Pi">	
+											</a>
+					
+								<div class="cf listing-meta meta above">
+					
+				<time datetime="2015-05-07T19:41:47+00:00" itemprop="datePublished" class="meta-item">May 7, 2015</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2015/05/using-an-i2c-enabled-lcd-screen-with-the-raspberry-pi/#respond"><i class="fa fa-comments-o"></i> 0</a></span>					
+			</div>
+							
+					<h2><a href="http://www.raspberrypi-spy.co.uk/2015/05/using-an-i2c-enabled-lcd-screen-with-the-raspberry-pi/" title="Using An I2C Enabled LCD Screen With The Raspberry Pi">Using An I2C Enabled LCD Screen With The Raspberry Pi</a></h2>
+					
+										
+				</article>
+			</li>
+			
+				</ul>
+	</section>
+
+	
+				<div class="comments">
+				
+	
+	<div id="comments">
+
+			<h3 class="section-head">
+			7 Comments		</h3>
+
+		<ol class="comments-list">
+					
+			<li class="comment even thread-even depth-1" id="li-comment-150338">
+				<article id="comment-150338" class="comment">
+				
+					<div class="comment-avatar">
+					<img alt="" src="http://0.gravatar.com/avatar/ff2fd0ef8a928991b2aea855ebff6aba?s=40&amp;r=g" srcset="http://0.gravatar.com/avatar/ff2fd0ef8a928991b2aea855ebff6aba?s=80&amp;r=g 2x" class="avatar avatar-40 photo no-display" height="40" width="40">					</div>
+					
+					<div class="comment-meta">					
+						<span class="comment-author">Faye</span> on 
+						<a href="http://www.raspberrypi-spy.co.uk/2015/05/adding-a-ds3231-real-time-clock-to-the-raspberry-pi/#comment-150338" class="comment-time" title="July 30, 2015 at 8:10 am">
+							<time pubdate="" datetime="2015-07-30T08:10:51+00:00">July 30, 2015 8:10 am</time>
+						</a>
+		
+											</div> <!-- .comment-meta -->
+		
+					<div class="comment-content">
+						<p>Hi,  you say the 1307 is pretty worthless but in your scripting you keep using it. Does the 3231 use the same libraries as the 1307 ?  Or should i  add ds3231 as a module?</p>
+						
+												
+			
+						<div class="reply">
+							<a rel="nofollow" class="comment-reply-link" href="http://www.raspberrypi-spy.co.uk/2015/05/adding-a-ds3231-real-time-clock-to-the-raspberry-pi/?replytocom=150338#respond" onclick="return addComment.moveForm( &quot;comment-150338&quot;, &quot;150338&quot;, &quot;respond&quot;, &quot;4934&quot; )" aria-label="Reply to Faye">Reply <i class="fa fa-angle-right"></i></a>							
+						</div><!-- .reply -->
+						
+					</div>
+				</article><!-- #comment-N -->
+	
+		<ul class="children">
+		
+			<li class="comment byuser comment-author-matt bypostauthor odd alt depth-2" id="li-comment-150360">
+				<article id="comment-150360" class="comment">
+				
+					<div class="comment-avatar">
+					<img alt="" src="http://1.gravatar.com/avatar/49044c5831a18ae589a1fcdd87644a6d?s=40&amp;r=g" srcset="http://1.gravatar.com/avatar/49044c5831a18ae589a1fcdd87644a6d?s=80&amp;r=g 2x" class="avatar avatar-40 photo no-display" height="40" width="40">					</div>
+					
+					<div class="comment-meta">					
+						<span class="comment-author">Matt</span> on 
+						<a href="http://www.raspberrypi-spy.co.uk/2015/05/adding-a-ds3231-real-time-clock-to-the-raspberry-pi/#comment-150360" class="comment-time" title="July 30, 2015 at 11:24 am">
+							<time pubdate="" datetime="2015-07-30T11:24:39+00:00">July 30, 2015 11:24 am</time>
+						</a>
+		
+											</div> <!-- .comment-meta -->
+		
+					<div class="comment-content">
+						<p>The 3231 can use the same libraries. You may be able to replace references to “1307” with “3231” but I didn’t get a chance to test that.</p>
+						
+												
+			
+						<div class="reply">
+							<a rel="nofollow" class="comment-reply-link" href="http://www.raspberrypi-spy.co.uk/2015/05/adding-a-ds3231-real-time-clock-to-the-raspberry-pi/?replytocom=150360#respond" onclick="return addComment.moveForm( &quot;comment-150360&quot;, &quot;150360&quot;, &quot;respond&quot;, &quot;4934&quot; )" aria-label="Reply to Matt">Reply <i class="fa fa-angle-right"></i></a>							
+						</div><!-- .reply -->
+						
+					</div>
+				</article><!-- #comment-N -->
+	
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		
+			<li class="comment even thread-odd thread-alt depth-1" id="li-comment-153286">
+				<article id="comment-153286" class="comment">
+				
+					<div class="comment-avatar">
+					<img alt="" src="http://2.gravatar.com/avatar/212bd004e96ca4cfeaeb36e39c541270?s=40&amp;r=g" srcset="http://2.gravatar.com/avatar/212bd004e96ca4cfeaeb36e39c541270?s=80&amp;r=g 2x" class="avatar avatar-40 photo no-display" height="40" width="40">					</div>
+					
+					<div class="comment-meta">					
+						<span class="comment-author"><a href="http://braselectron.com/" rel="external nofollow" class="url">John</a></span> on 
+						<a href="http://www.raspberrypi-spy.co.uk/2015/05/adding-a-ds3231-real-time-clock-to-the-raspberry-pi/#comment-153286" class="comment-time" title="August 16, 2015 at 4:17 am">
+							<time pubdate="" datetime="2015-08-16T04:17:02+00:00">August 16, 2015 4:17 am</time>
+						</a>
+		
+											</div> <!-- .comment-meta -->
+		
+					<div class="comment-content">
+						<p>Thanks for sharing.  Could you please answer these questions: 1) why did you disable LIR recharge feed for a CR battery ?  2) why not use ntp (more accurate) to setup system time/date and then set hwclk ?  3) do you really need to remove the pull-up resistor ?</p>
+						
+												
+			
+						<div class="reply">
+							<a rel="nofollow" class="comment-reply-link" href="http://www.raspberrypi-spy.co.uk/2015/05/adding-a-ds3231-real-time-clock-to-the-raspberry-pi/?replytocom=153286#respond" onclick="return addComment.moveForm( &quot;comment-153286&quot;, &quot;153286&quot;, &quot;respond&quot;, &quot;4934&quot; )" aria-label="Reply to John">Reply <i class="fa fa-angle-right"></i></a>							
+						</div><!-- .reply -->
+						
+					</div>
+				</article><!-- #comment-N -->
+	
+		<ul class="children">
+		
+			<li class="comment byuser comment-author-matt bypostauthor odd alt depth-2" id="li-comment-153394">
+				<article id="comment-153394" class="comment">
+				
+					<div class="comment-avatar">
+					<img alt="" src="http://1.gravatar.com/avatar/49044c5831a18ae589a1fcdd87644a6d?s=40&amp;r=g" srcset="http://1.gravatar.com/avatar/49044c5831a18ae589a1fcdd87644a6d?s=80&amp;r=g 2x" class="avatar avatar-40 photo no-display" height="40" width="40">					</div>
+					
+					<div class="comment-meta">					
+						<span class="comment-author">Matt</span> on 
+						<a href="http://www.raspberrypi-spy.co.uk/2015/05/adding-a-ds3231-real-time-clock-to-the-raspberry-pi/#comment-153394" class="comment-time" title="August 16, 2015 at 8:46 pm">
+							<time pubdate="" datetime="2015-08-16T20:46:50+00:00">August 16, 2015 8:46 pm</time>
+						</a>
+		
+											</div> <!-- .comment-meta -->
+		
+					<div class="comment-content">
+						<p>1) I couldn’t find a definitive source of information that would confirm it was safe to recharge a standard coin cell that wasn’t specifically rechargeable. So I was playing it safe.<br>
+2) You could use any technique to set the time. I just went for something basic for the sake of this tutorial. For my own experiments I tend to just connect the Pi to ethernet and let the time sync with ntp, then set the RTC module from that.<br>
+3) I’m sure it would work without removing the resistors but if you are using multiple I2C modules that all have their-own pull-ups it can cause intermittent problems.</p>
+						
+												
+			
+						<div class="reply">
+							<a rel="nofollow" class="comment-reply-link" href="http://www.raspberrypi-spy.co.uk/2015/05/adding-a-ds3231-real-time-clock-to-the-raspberry-pi/?replytocom=153394#respond" onclick="return addComment.moveForm( &quot;comment-153394&quot;, &quot;153394&quot;, &quot;respond&quot;, &quot;4934&quot; )" aria-label="Reply to Matt">Reply <i class="fa fa-angle-right"></i></a>							
+						</div><!-- .reply -->
+						
+					</div>
+				</article><!-- #comment-N -->
+	
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		
+			<li class="comment even thread-even depth-1" id="li-comment-155309">
+				<article id="comment-155309" class="comment">
+				
+					<div class="comment-avatar">
+					<img alt="" src="http://1.gravatar.com/avatar/af135e45b40ff82319edc1c766b93fce?s=40&amp;r=g" srcset="http://1.gravatar.com/avatar/af135e45b40ff82319edc1c766b93fce?s=80&amp;r=g 2x" class="avatar avatar-40 photo no-display" height="40" width="40">					</div>
+					
+					<div class="comment-meta">					
+						<span class="comment-author">prailele</span> on 
+						<a href="http://www.raspberrypi-spy.co.uk/2015/05/adding-a-ds3231-real-time-clock-to-the-raspberry-pi/#comment-155309" class="comment-time" title="August 29, 2015 at 10:10 pm">
+							<time pubdate="" datetime="2015-08-29T22:10:05+00:00">August 29, 2015 10:10 pm</time>
+						</a>
+		
+											</div> <!-- .comment-meta -->
+		
+					<div class="comment-content">
+						<p>Hi, which of the two red blocks (resistors removed) is the pull-up?<br>
+Thanks</p>
+						
+												
+			
+						<div class="reply">
+							<a rel="nofollow" class="comment-reply-link" href="http://www.raspberrypi-spy.co.uk/2015/05/adding-a-ds3231-real-time-clock-to-the-raspberry-pi/?replytocom=155309#respond" onclick="return addComment.moveForm( &quot;comment-155309&quot;, &quot;155309&quot;, &quot;respond&quot;, &quot;4934&quot; )" aria-label="Reply to prailele">Reply <i class="fa fa-angle-right"></i></a>							
+						</div><!-- .reply -->
+						
+					</div>
+				</article><!-- #comment-N -->
+	
+		<ul class="children">
+		
+			<li class="comment byuser comment-author-matt bypostauthor odd alt depth-2" id="li-comment-155322">
+				<article id="comment-155322" class="comment">
+				
+					<div class="comment-avatar">
+					<img alt="" src="http://1.gravatar.com/avatar/49044c5831a18ae589a1fcdd87644a6d?s=40&amp;r=g" srcset="http://1.gravatar.com/avatar/49044c5831a18ae589a1fcdd87644a6d?s=80&amp;r=g 2x" class="avatar avatar-40 photo no-display" height="40" width="40">					</div>
+					
+					<div class="comment-meta">					
+						<span class="comment-author">Matt</span> on 
+						<a href="http://www.raspberrypi-spy.co.uk/2015/05/adding-a-ds3231-real-time-clock-to-the-raspberry-pi/#comment-155322" class="comment-time" title="August 29, 2015 at 11:51 pm">
+							<time pubdate="" datetime="2015-08-29T23:51:52+00:00">August 29, 2015 11:51 pm</time>
+						</a>
+		
+											</div> <!-- .comment-meta -->
+		
+					<div class="comment-content">
+						<p>I’ve updated the post text. The pull-ups are on the left, the charging circuit on the right.</p>
+						
+												
+			
+						<div class="reply">
+							<a rel="nofollow" class="comment-reply-link" href="http://www.raspberrypi-spy.co.uk/2015/05/adding-a-ds3231-real-time-clock-to-the-raspberry-pi/?replytocom=155322#respond" onclick="return addComment.moveForm( &quot;comment-155322&quot;, &quot;155322&quot;, &quot;respond&quot;, &quot;4934&quot; )" aria-label="Reply to Matt">Reply <i class="fa fa-angle-right"></i></a>							
+						</div><!-- .reply -->
+						
+					</div>
+				</article><!-- #comment-N -->
+	
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		
+			<li class="comment even thread-odd thread-alt depth-1" id="li-comment-162545">
+				<article id="comment-162545" class="comment">
+				
+					<div class="comment-avatar">
+					<img alt="" src="http://0.gravatar.com/avatar/0ed850ee52eaf2a3cd599f8508afa13c?s=40&amp;r=g" srcset="http://0.gravatar.com/avatar/0ed850ee52eaf2a3cd599f8508afa13c?s=80&amp;r=g 2x" class="avatar avatar-40 photo no-display" height="40" width="40">					</div>
+					
+					<div class="comment-meta">					
+						<span class="comment-author">Doug</span> on 
+						<a href="http://www.raspberrypi-spy.co.uk/2015/05/adding-a-ds3231-real-time-clock-to-the-raspberry-pi/#comment-162545" class="comment-time" title="October 10, 2015 at 1:57 am">
+							<time pubdate="" datetime="2015-10-10T01:57:45+00:00">October 10, 2015 1:57 am</time>
+						</a>
+		
+											</div> <!-- .comment-meta -->
+		
+					<div class="comment-content">
+						<p>Thanks, this is great. My Pi now always knows what the time is.</p>
+						
+												
+			
+						<div class="reply">
+							<a rel="nofollow" class="comment-reply-link" href="http://www.raspberrypi-spy.co.uk/2015/05/adding-a-ds3231-real-time-clock-to-the-raspberry-pi/?replytocom=162545#respond" onclick="return addComment.moveForm( &quot;comment-162545&quot;, &quot;162545&quot;, &quot;respond&quot;, &quot;4934&quot; )" aria-label="Reply to Doug">Reply <i class="fa fa-angle-right"></i></a>							
+						</div><!-- .reply -->
+						
+					</div>
+				</article><!-- #comment-N -->
+	
+		</li><!-- #comment-## -->
+		</ol>
+
+		
+		
+	
+					<div id="respond" class="comment-respond">
+			<h3 id="reply-title" class="comment-reply-title"><span class="section-head">Leave A Reply</span> <small><a rel="nofollow" id="cancel-comment-reply-link" href="http://www.raspberrypi-spy.co.uk/2015/05/adding-a-ds3231-real-time-clock-to-the-raspberry-pi/#respond" style="display:none;">Cancel Reply</a></small></h3>				<form action="http://www.raspberrypi-spy.co.uk/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate="">
+					
+			<p>
+				<textarea name="comment" id="comment" cols="45" rows="8" aria-required="true" placeholder="Your Comment"></textarea>
+			</p>
+				<p>
+					<input name="author" id="author" type="text" size="30" aria-required="true" placeholder="Your Name" value="">
+				</p>
+
+				<p>
+					<input name="email" id="email" type="text" size="30" aria-required="true" placeholder="Your Email" value="">
+				</p>
+			
+
+				<p>
+					<input name="url" id="url" type="text" size="30" placeholder="Your Website" value="">
+				</p>
+			
+<p class="form-submit"><input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="4934" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="eb2cefe37d"></p><p style="display: none;"></p>				<input type="hidden" id="ak_js" name="ak_js" value="1449816646784"></form>
+					</div><!-- #respond -->
+		
+	</div><!-- #comments -->
+				</div>
+	
+				
+		</div>
+		
+		
+			
+		
+		
+		<aside class="col-4 sidebar">
+			<ul>
+			
+			
+		<li id="bunyad_ads_widget-5" class="widget bunyad-ad">		
+					
+			<div class="adwrap-widget">
+			
+				<script async="" src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- RaspberryPi Spy 300x250 -->
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5084177467956694" data-ad-slot="3339153257"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>			
+			</div>
+		
+		</li>
+		
+			
+			<li id="bunyad-tabbed-recent-widget-3" class="widget tabbed">	
+			<ul class="tabs-list">
+			
+								
+				<li class="active">
+					<a href="http://www.raspberrypi-spy.co.uk/2015/05/adding-a-ds3231-real-time-clock-to-the-raspberry-pi/#" data-tab="1">Recent</a>
+				</li>
+				
+								
+				<li class="">
+					<a href="http://www.raspberrypi-spy.co.uk/2015/05/adding-a-ds3231-real-time-clock-to-the-raspberry-pi/#" data-tab="2">Popular</a>
+				</li>
+				
+								
+				<li class="">
+					<a href="http://www.raspberrypi-spy.co.uk/2015/05/adding-a-ds3231-real-time-clock-to-the-raspberry-pi/#" data-tab="3">News</a>
+				</li>
+				
+								
+			</ul>
+			
+			<div class="tabs-data">
+									
+				<ul class="tab-posts active posts-list" id="recent-tab-1">
+				
+								
+						
+					<li>
+					
+						<a href="http://www.raspberrypi-spy.co.uk/2015/12/lumsing-grand-a1-plus-power-bank-test/"><img width="110" height="96" src="./DS3231-fix_files/lumsing_grand_a1_01-110x96.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image no-display appear" alt="Lumsing Grand A1 Plus Power Bank" title="Lumsing Grand A1 Plus Power Bank Test">	
+																									
+						</a>
+						
+						<div class="content">
+						
+										<div class="cf listing-meta meta above">
+					
+				<time datetime="2015-12-08T20:41:34+00:00" itemprop="datePublished" class="meta-item">December 8, 2015</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2015/12/lumsing-grand-a1-plus-power-bank-test/#respond"><i class="fa fa-comments-o"></i> 0</a></span>					
+			</div>
+								
+							<a href="http://www.raspberrypi-spy.co.uk/2015/12/lumsing-grand-a1-plus-power-bank-test/" title="Lumsing Grand A1 Plus Power Bank Test">
+								Lumsing Grand A1 Plus Power Bank Test</a>
+								
+															
+																																								
+						</div>
+					
+					</li>
+					
+						
+					<li>
+					
+						<a href="http://www.raspberrypi-spy.co.uk/2015/12/3d-printed-adafruit-raspberry-pi-zero-case-part-2/"><img width="110" height="96" src="./DS3231-fix_files/adafruit_zero_case_05-110x96.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image no-display appear" alt="3D Printed Adafruit Pi Zero Case" title="3D Printed Adafruit Raspberry Pi Zero Case – Part 2">	
+																									
+						</a>
+						
+						<div class="content">
+						
+										<div class="cf listing-meta meta above">
+					
+				<time datetime="2015-12-06T21:23:40+00:00" itemprop="datePublished" class="meta-item">December 6, 2015</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2015/12/3d-printed-adafruit-raspberry-pi-zero-case-part-2/#respond"><i class="fa fa-comments-o"></i> 0</a></span>					
+			</div>
+								
+							<a href="http://www.raspberrypi-spy.co.uk/2015/12/3d-printed-adafruit-raspberry-pi-zero-case-part-2/" title="3D Printed Adafruit Raspberry Pi Zero Case – Part 2">
+								3D Printed Adafruit Raspberry Pi Zero Case – Part 2</a>
+								
+															
+																																								
+						</div>
+					
+					</li>
+					
+						
+					<li>
+					
+						<a href="http://www.raspberrypi-spy.co.uk/2015/12/3d-printed-adafruit-raspberryy-pi-zero-case/"><img width="110" height="96" src="./DS3231-fix_files/adafruit_zero_case_01-110x96.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image no-display appear" alt="3D Printed Adafruit Pi Zero Case" title="3D Printed Adafruit Raspberryy Pi Zero Case">	
+																									
+						</a>
+						
+						<div class="content">
+						
+										<div class="cf listing-meta meta above">
+					
+				<time datetime="2015-12-03T21:49:45+00:00" itemprop="datePublished" class="meta-item">December 3, 2015</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2015/12/3d-printed-adafruit-raspberryy-pi-zero-case/#respond"><i class="fa fa-comments-o"></i> 0</a></span>					
+			</div>
+								
+							<a href="http://www.raspberrypi-spy.co.uk/2015/12/3d-printed-adafruit-raspberryy-pi-zero-case/" title="3D Printed Adafruit Raspberryy Pi Zero Case">
+								3D Printed Adafruit Raspberryy Pi Zero Case</a>
+								
+															
+																																								
+						</div>
+					
+					</li>
+					
+						
+					<li>
+					
+						<a href="http://www.raspberrypi-spy.co.uk/2015/12/3d-printed-magpi-raspberry-pi-zero-case/"><img width="110" height="96" src="./DS3231-fix_files/IMG_3417-110x96.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image no-display appear" alt="MagPi 3D Printed Case" title="3D Printed MagPi Raspberry Pi Zero Case">	
+																									
+						</a>
+						
+						<div class="content">
+						
+										<div class="cf listing-meta meta above">
+					
+				<time datetime="2015-12-02T13:51:29+00:00" itemprop="datePublished" class="meta-item">December 2, 2015</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2015/12/3d-printed-magpi-raspberry-pi-zero-case/#respond"><i class="fa fa-comments-o"></i> 0</a></span>					
+			</div>
+								
+							<a href="http://www.raspberrypi-spy.co.uk/2015/12/3d-printed-magpi-raspberry-pi-zero-case/" title="3D Printed MagPi Raspberry Pi Zero Case">
+								3D Printed MagPi Raspberry Pi Zero Case</a>
+								
+															
+																																								
+						</div>
+					
+					</li>
+					
+						
+					<li>
+					
+						<a href="http://www.raspberrypi-spy.co.uk/2015/11/raspberry-pi-family-photo-by-raspi-tv/"><img width="110" height="96" src="./DS3231-fix_files/raspberry_pi_model_b_plus_16-110x96.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image no-display appear" alt="Raspberry Pi Model B+" title="Raspberry Pi Family Photo by RasPi.TV">	
+																									
+						</a>
+						
+						<div class="content">
+						
+										<div class="cf listing-meta meta above">
+					
+				<time datetime="2015-11-30T14:28:12+00:00" itemprop="datePublished" class="meta-item">November 30, 2015</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2015/11/raspberry-pi-family-photo-by-raspi-tv/#respond"><i class="fa fa-comments-o"></i> 0</a></span>					
+			</div>
+								
+							<a href="http://www.raspberrypi-spy.co.uk/2015/11/raspberry-pi-family-photo-by-raspi-tv/" title="Raspberry Pi Family Photo by RasPi.TV">
+								Raspberry Pi Family Photo by RasPi.TV</a>
+								
+															
+																																								
+						</div>
+					
+					</li>
+					
+										
+									
+				</ul>
+									
+				<ul class="tab-posts  posts-list" id="recent-tab-2">
+				
+								
+						
+					<li>
+					
+						<a href="http://www.raspberrypi-spy.co.uk/2012/07/16x2-lcd-module-control-using-python/"><img width="110" height="96" src="./DS3231-fix_files/16x2_lcd_module_1-110x96.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image no-display" alt="16x2_lcd_module_1" title="16×2 LCD Module Control Using Python">	
+																									
+						</a>
+						
+						<div class="content">
+						
+										<div class="cf listing-meta meta above">
+					
+				<time datetime="2012-07-27T08:48:19+00:00" itemprop="datePublished" class="meta-item">July 27, 2012</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2012/07/16x2-lcd-module-control-using-python/#comments"><i class="fa fa-comments-o"></i> 81</a></span>					
+			</div>
+								
+							<a href="http://www.raspberrypi-spy.co.uk/2012/07/16x2-lcd-module-control-using-python/" title="16×2 LCD Module Control Using Python">
+								16×2 LCD Module Control Using Python</a>
+								
+															
+																																								
+						</div>
+					
+					</li>
+					
+						
+					<li>
+					
+						<a href="http://www.raspberrypi-spy.co.uk/2013/10/analogue-sensors-on-the-raspberry-pi-using-an-mcp3008/"><img width="110" height="96" src="./DS3231-fix_files/mcp3008_tmp36_02-110x96.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image no-display" alt="MCP3008 Example Circuit #2" title="Analogue Sensors On The Raspberry Pi Using An MCP3008">	
+																									
+						</a>
+						
+						<div class="content">
+						
+										<div class="cf listing-meta meta above">
+					
+				<time datetime="2013-10-20T11:26:28+00:00" itemprop="datePublished" class="meta-item">October 20, 2013</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2013/10/analogue-sensors-on-the-raspberry-pi-using-an-mcp3008/#comments"><i class="fa fa-comments-o"></i> 70</a></span>					
+			</div>
+								
+							<a href="http://www.raspberrypi-spy.co.uk/2013/10/analogue-sensors-on-the-raspberry-pi-using-an-mcp3008/" title="Analogue Sensors On The Raspberry Pi Using An MCP3008">
+								Analogue Sensors On The Raspberry Pi Using An MCP3008</a>
+								
+															
+																																								
+						</div>
+					
+					</li>
+					
+						
+					<li>
+					
+						<a href="http://www.raspberrypi-spy.co.uk/2014/09/top-5-reasons-the-raspberry-pi-sucks/"><img width="110" height="96" src="./DS3231-fix_files/raspberry_pi_sucks1-110x96.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image no-display" alt="Raspberry Pi Sucks" title="Top 5 Reasons The Raspberry Pi Sucks">	
+																									
+						</a>
+						
+						<div class="content">
+						
+										<div class="cf listing-meta meta above">
+					
+				<time datetime="2014-09-19T20:06:23+00:00" itemprop="datePublished" class="meta-item">September 19, 2014</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2014/09/top-5-reasons-the-raspberry-pi-sucks/#comments"><i class="fa fa-comments-o"></i> 53</a></span>					
+			</div>
+								
+							<a href="http://www.raspberrypi-spy.co.uk/2014/09/top-5-reasons-the-raspberry-pi-sucks/" title="Top 5 Reasons The Raspberry Pi Sucks">
+								Top 5 Reasons The Raspberry Pi Sucks</a>
+								
+															
+																																								
+						</div>
+					
+					</li>
+					
+						
+					<li>
+					
+						<a href="http://www.raspberrypi-spy.co.uk/2013/03/raspberry-pi-1-wire-digital-thermometer-sensor/"><img width="110" height="96" src="./DS3231-fix_files/DS18B20-Command-Line-Setup-110x96.png" class="attachment-post-thumbnail size-post-thumbnail wp-post-image no-display" alt="DS18B20 Command Line Setup" title="Raspberry Pi 1- Wire Digital Thermometer Sensor (DS18B20)">	
+																									
+						</a>
+						
+						<div class="content">
+						
+										<div class="cf listing-meta meta above">
+					
+				<time datetime="2013-03-15T20:02:20+00:00" itemprop="datePublished" class="meta-item">March 15, 2013</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2013/03/raspberry-pi-1-wire-digital-thermometer-sensor/#comments"><i class="fa fa-comments-o"></i> 42</a></span>					
+			</div>
+								
+							<a href="http://www.raspberrypi-spy.co.uk/2013/03/raspberry-pi-1-wire-digital-thermometer-sensor/" title="Raspberry Pi 1- Wire Digital Thermometer Sensor (DS18B20)">
+								Raspberry Pi 1- Wire Digital Thermometer Sensor (DS18B20)</a>
+								
+															
+																																								
+						</div>
+					
+					</li>
+					
+						
+					<li>
+					
+						<a href="http://www.raspberrypi-spy.co.uk/2012/12/ultrasonic-distance-measurement-using-python-part-1/"><img width="110" height="96" src="./DS3231-fix_files/Ultrasonic-Sensor-01-110x96.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image no-display" alt="Ultrasonic Sensor Circuit" title="Ultrasonic Distance Measurement Using Python – Part 1">	
+																									
+						</a>
+						
+						<div class="content">
+						
+										<div class="cf listing-meta meta above">
+					
+				<time datetime="2012-12-30T00:55:24+00:00" itemprop="datePublished" class="meta-item">December 30, 2012</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2012/12/ultrasonic-distance-measurement-using-python-part-1/#comments"><i class="fa fa-comments-o"></i> 42</a></span>					
+			</div>
+								
+							<a href="http://www.raspberrypi-spy.co.uk/2012/12/ultrasonic-distance-measurement-using-python-part-1/" title="Ultrasonic Distance Measurement Using Python – Part 1">
+								Ultrasonic Distance Measurement Using Python – Part 1</a>
+								
+															
+																																								
+						</div>
+					
+					</li>
+					
+										
+									
+				</ul>
+									
+				<ul class="tab-posts  posts-list" id="recent-tab-3">
+				
+								
+						
+					<li>
+					
+						<a href="http://www.raspberrypi-spy.co.uk/2015/11/raspberry-pi-family-photo-by-raspi-tv/"><img width="110" height="96" src="./DS3231-fix_files/raspberry_pi_model_b_plus_16-110x96.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image no-display" alt="Raspberry Pi Model B+" title="Raspberry Pi Family Photo by RasPi.TV">	
+																									
+						</a>
+						
+						<div class="content">
+						
+										<div class="cf listing-meta meta above">
+					
+				<time datetime="2015-11-30T14:28:12+00:00" itemprop="datePublished" class="meta-item">November 30, 2015</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2015/11/raspberry-pi-family-photo-by-raspi-tv/#respond"><i class="fa fa-comments-o"></i> 0</a></span>					
+			</div>
+								
+							<a href="http://www.raspberrypi-spy.co.uk/2015/11/raspberry-pi-family-photo-by-raspi-tv/" title="Raspberry Pi Family Photo by RasPi.TV">
+								Raspberry Pi Family Photo by RasPi.TV</a>
+								
+															
+																																								
+						</div>
+					
+					</li>
+					
+						
+					<li>
+					
+						<a href="http://www.raspberrypi-spy.co.uk/2015/11/the-official-raspberry-pi-projects-book/"><img width="110" height="96" src="./DS3231-fix_files/pi_projects_featured-110x96.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image no-display" alt="Pi Projects Book" title="The Official Raspberry Pi Projects Book">	
+																									
+						</a>
+						
+						<div class="content">
+						
+										<div class="cf listing-meta meta above">
+					
+				<time datetime="2015-11-23T16:49:09+00:00" itemprop="datePublished" class="meta-item">November 23, 2015</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2015/11/the-official-raspberry-pi-projects-book/#respond"><i class="fa fa-comments-o"></i> 0</a></span>					
+			</div>
+								
+							<a href="http://www.raspberrypi-spy.co.uk/2015/11/the-official-raspberry-pi-projects-book/" title="The Official Raspberry Pi Projects Book">
+								The Official Raspberry Pi Projects Book</a>
+								
+															
+																																								
+						</div>
+					
+					</li>
+					
+						
+					<li>
+					
+						<a href="http://www.raspberrypi-spy.co.uk/2015/09/official-raspberry-pi-touchscreen-display-is-here/"><img width="110" height="96" src="./DS3231-fix_files/raspberry_pi_display_cpc_1-110x96.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image no-display" alt="Raspberry Pi Display" title="Official Raspberry Pi Touchscreen Display is here">	
+																									
+						</a>
+						
+						<div class="content">
+						
+										<div class="cf listing-meta meta above">
+					
+				<time datetime="2015-09-08T11:25:17+00:00" itemprop="datePublished" class="meta-item">September 8, 2015</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2015/09/official-raspberry-pi-touchscreen-display-is-here/#comments"><i class="fa fa-comments-o"></i> 3</a></span>					
+			</div>
+								
+							<a href="http://www.raspberrypi-spy.co.uk/2015/09/official-raspberry-pi-touchscreen-display-is-here/" title="Official Raspberry Pi Touchscreen Display is here">
+								Official Raspberry Pi Touchscreen Display is here</a>
+								
+															
+																																								
+						</div>
+					
+					</li>
+					
+						
+					<li>
+					
+						<a href="http://www.raspberrypi-spy.co.uk/2015/07/raspberry-pi-vs-bbc-micro-bit/"><img width="110" height="96" src="./DS3231-fix_files/Raspberry-Pi-vs-BBC-Micro-Bit-110x96.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image no-display" alt="Raspberry Pi vs BBC Micro Bit" title="Raspberry Pi vs BBC Micro Bit">	
+																									
+						</a>
+						
+						<div class="content">
+						
+										<div class="cf listing-meta meta above">
+					
+				<time datetime="2015-07-21T19:26:28+00:00" itemprop="datePublished" class="meta-item">July 21, 2015</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2015/07/raspberry-pi-vs-bbc-micro-bit/#comments"><i class="fa fa-comments-o"></i> 3</a></span>					
+			</div>
+								
+							<a href="http://www.raspberrypi-spy.co.uk/2015/07/raspberry-pi-vs-bbc-micro-bit/" title="Raspberry Pi vs BBC Micro Bit">
+								Raspberry Pi vs BBC Micro Bit</a>
+								
+															
+																																								
+						</div>
+					
+					</li>
+					
+						
+					<li>
+					
+						<a href="http://www.raspberrypi-spy.co.uk/2015/07/raspio-gpio-quick-reference-ruler-for-raspberry-pi/"><img width="110" height="96" src="./DS3231-fix_files/raspio_ruler_01-110x96.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image no-display" alt="RasPiO GPIO Ruler" title="RasPiO GPIO Quick Reference Ruler for Raspberry Pi">	
+																									
+						</a>
+						
+						<div class="content">
+						
+										<div class="cf listing-meta meta above">
+					
+				<time datetime="2015-07-14T15:36:16+00:00" itemprop="datePublished" class="meta-item">July 14, 2015</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2015/07/raspio-gpio-quick-reference-ruler-for-raspberry-pi/#respond"><i class="fa fa-comments-o"></i> 0</a></span>					
+			</div>
+								
+							<a href="http://www.raspberrypi-spy.co.uk/2015/07/raspio-gpio-quick-reference-ruler-for-raspberry-pi/" title="RasPiO GPIO Quick Reference Ruler for Raspberry Pi">
+								RasPiO GPIO Quick Reference Ruler for Raspberry Pi</a>
+								
+															
+																																								
+						</div>
+					
+					</li>
+					
+										
+									
+				</ul>
+							
+			</div>
+			
+			</li>
+		
+		<li id="search-2" class="widget widget_search"><form role="search" method="get" class="search-form" action="http://www.raspberrypi-spy.co.uk/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search …" value="" name="s" title="Search for:">
+				</label>
+				<input type="submit" class="search-submit" value="Search">
+			</form></li>
+<li id="categories-2" class="widget widget_categories"><h3 class="widgettitle">Categories</h3>		<ul>
+	<li class="cat-item cat-item-268"><a href="http://www.raspberrypi-spy.co.uk/category/general/3d/" title="Posts that related to 3D printing.">3D Printing</a>
+</li>
+	<li class="cat-item cat-item-223"><a href="http://www.raspberrypi-spy.co.uk/category/hardware/add-ons/">Add-ons</a>
+</li>
+	<li class="cat-item cat-item-82"><a href="http://www.raspberrypi-spy.co.uk/category/hardware/berryclip-hardware/">BerryClip</a>
+</li>
+	<li class="cat-item cat-item-174"><a href="http://www.raspberrypi-spy.co.uk/category/general/books/">Books</a>
+</li>
+	<li class="cat-item cat-item-128"><a href="http://www.raspberrypi-spy.co.uk/category/hardware/camera-module/">Camera Module</a>
+</li>
+	<li class="cat-item cat-item-238"><a href="http://www.raspberrypi-spy.co.uk/category/general/cases/">Cases</a>
+</li>
+	<li class="cat-item cat-item-190"><a href="http://www.raspberrypi-spy.co.uk/category/general/events/">Events</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="http://www.raspberrypi-spy.co.uk/category/general/">General</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="http://www.raspberrypi-spy.co.uk/category/hardware/">Hardware</a>
+</li>
+	<li class="cat-item cat-item-254"><a href="http://www.raspberrypi-spy.co.uk/category/hardware/i2c/">I2C</a>
+</li>
+	<li class="cat-item cat-item-235"><a href="http://www.raspberrypi-spy.co.uk/category/general/infographics/">Infographics</a>
+</li>
+	<li class="cat-item cat-item-168"><a href="http://www.raspberrypi-spy.co.uk/category/software/minecraft/">Minecraft</a>
+</li>
+	<li class="cat-item cat-item-240"><a href="http://www.raspberrypi-spy.co.uk/category/hardware/model-a-hardware/">Model A+</a>
+</li>
+	<li class="cat-item cat-item-228"><a href="http://www.raspberrypi-spy.co.uk/category/hardware/model-b-hardware/">Model B+</a>
+</li>
+	<li class="cat-item cat-item-248"><a href="http://www.raspberrypi-spy.co.uk/category/general/news/" title="News articles that cover developments in the world of the Raspberry Pi.">News</a>
+</li>
+	<li class="cat-item cat-item-245"><a href="http://www.raspberrypi-spy.co.uk/category/hardware/pi-2-model-b/">Pi 2 Model B</a>
+</li>
+	<li class="cat-item cat-item-267"><a href="http://www.raspberrypi-spy.co.uk/category/hardware/zero/">Pi Zero</a>
+</li>
+	<li class="cat-item cat-item-153"><a href="http://www.raspberrypi-spy.co.uk/category/hardware/power-hardware/">Power</a>
+</li>
+	<li class="cat-item cat-item-145"><a href="http://www.raspberrypi-spy.co.uk/category/programming-2/">Programming</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="http://www.raspberrypi-spy.co.uk/category/python/">Python</a>
+</li>
+	<li class="cat-item cat-item-52"><a href="http://www.raspberrypi-spy.co.uk/category/raspbian/">Raspbian</a>
+</li>
+	<li class="cat-item cat-item-189"><a href="http://www.raspberrypi-spy.co.uk/category/hardware/robotics/">Robotics</a>
+</li>
+	<li class="cat-item cat-item-250"><a href="http://www.raspberrypi-spy.co.uk/category/hardware/sensors/">Sensors</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="http://www.raspberrypi-spy.co.uk/category/software/">Software</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="http://www.raspberrypi-spy.co.uk/category/tutorials-help/">Tutorials &amp; Help</a>
+</li>
+		</ul>
+</li>
+
+		<li id="bunyad_ads_widget-7" class="widget bunyad-ad">		
+					
+			<div class="adwrap-widget">
+			
+				<script async="" src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- RaspberryPi Spy 300x250 -->
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5084177467956694" data-ad-slot="3339153257"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>			
+			</div>
+		
+		</li>
+		
+		<li id="tag_cloud-3" class="widget widget_tag_cloud"><h3 class="widgettitle">Tags</h3><div class="tagcloud"><a href="http://www.raspberrypi-spy.co.uk/tag/3d-printing/" class="tag-link-208" title="4 topics" style="font-size: 9.45833333333pt;">3D Printing</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/44780/" class="tag-link-58" title="3 topics" style="font-size: 8pt;">44780</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/audio/" class="tag-link-39" title="3 topics" style="font-size: 8pt;">audio</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/avconv/" class="tag-link-133" title="3 topics" style="font-size: 8pt;">avconv</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/battery/" class="tag-link-110" title="9 topics" style="font-size: 13.8333333333pt;">battery</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/berryclip/" class="tag-link-79" title="10 topics" style="font-size: 14.4166666667pt;">berryclip</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/bluetooth/" class="tag-link-100" title="6 topics" style="font-size: 11.6458333333pt;">bluetooth</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/cambridge/" class="tag-link-164" title="4 topics" style="font-size: 9.45833333333pt;">cambridge</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/camera/" class="tag-link-119" title="22 topics" style="font-size: 19.0833333333pt;">camera</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/camjam/" class="tag-link-205" title="4 topics" style="font-size: 9.45833333333pt;">CamJam</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/cpu/" class="tag-link-29" title="3 topics" style="font-size: 8pt;">cpu</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/digimakers/" class="tag-link-191" title="6 topics" style="font-size: 11.6458333333pt;">DigiMakers</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/games/" class="tag-link-171" title="3 topics" style="font-size: 8pt;">games</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/gpio/" class="tag-link-14" title="19 topics" style="font-size: 18.2083333333pt;">GPIO</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/i2c/" class="tag-link-159" title="10 topics" style="font-size: 14.4166666667pt;">i2c</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/kickstarter/" class="tag-link-236" title="4 topics" style="font-size: 9.45833333333pt;">Kickstarter</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/lcd/" class="tag-link-55" title="7 topics" style="font-size: 12.375pt;">lcd</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/led/" class="tag-link-15" title="10 topics" style="font-size: 14.4166666667pt;">LED</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/li-on/" class="tag-link-156" title="3 topics" style="font-size: 8pt;">Li-on</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/linux/" class="tag-link-76" title="4 topics" style="font-size: 9.45833333333pt;">Linux</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/mcp3008/" class="tag-link-177" title="3 topics" style="font-size: 8pt;">MCP3008</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/mcp23017/" class="tag-link-160" title="3 topics" style="font-size: 8pt;">mcp23017</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/minecraft/" class="tag-link-261" title="8 topics" style="font-size: 13.1041666667pt;">Minecraft</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/model-a/" class="tag-link-106" title="3 topics" style="font-size: 8pt;">Model A</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/model-b/" class="tag-link-183" title="7 topics" style="font-size: 12.375pt;">Model B</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/mp4/" class="tag-link-129" title="3 topics" style="font-size: 8pt;">mp4</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/pcb/" class="tag-link-67" title="5 topics" style="font-size: 10.625pt;">pcb</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/photography/" class="tag-link-127" title="5 topics" style="font-size: 10.625pt;">photography</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/photos/" class="tag-link-12" title="4 topics" style="font-size: 9.45833333333pt;">photos</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/pi-lite/" class="tag-link-166" title="5 topics" style="font-size: 10.625pt;">Pi-Lite</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/portable/" class="tag-link-147" title="4 topics" style="font-size: 9.45833333333pt;">portable</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/power/" class="tag-link-108" title="10 topics" style="font-size: 14.4166666667pt;">power</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/python-2/" class="tag-link-13" title="35 topics" style="font-size: 22pt;">python</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/raspberry-pi-bootcamp/" class="tag-link-192" title="5 topics" style="font-size: 10.625pt;">Raspberry Pi Bootcamp</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/raspbian-2/" class="tag-link-53" title="7 topics" style="font-size: 12.375pt;">raspbian</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/ravpower/" class="tag-link-154" title="3 topics" style="font-size: 8pt;">ravpower</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/revision/" class="tag-link-68" title="3 topics" style="font-size: 8pt;">revision</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/sd-card/" class="tag-link-93" title="4 topics" style="font-size: 9.45833333333pt;">sd card</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/security/" class="tag-link-75" title="6 topics" style="font-size: 11.6458333333pt;">security</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/sensor/" class="tag-link-59" title="7 topics" style="font-size: 12.375pt;">sensor</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/soldering/" class="tag-link-90" title="3 topics" style="font-size: 8pt;">soldering</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/spi/" class="tag-link-176" title="3 topics" style="font-size: 8pt;">SPI</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/temperature/" class="tag-link-117" title="3 topics" style="font-size: 8pt;">temperature</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/ultrasonic/" class="tag-link-91" title="3 topics" style="font-size: 8pt;">ultrasonic</a>
+<a href="http://www.raspberrypi-spy.co.uk/tag/video/" class="tag-link-120" title="5 topics" style="font-size: 10.625pt;">video</a></div>
+</li>
+<li id="linkcat-3" class="widget widget_links"><h3 class="widgettitle">Raspberry PI Related</h3>
+	<ul class="xoxo blogroll">
+<li><a href="http://www.averagemanvsraspberrypi.com/" target="_blank">Averageman Vs Pi</a></li>
+<li><a href="http://www.mattsbits.co.uk/cat-14.html" rel="me" target="_blank">MattsBits – Pi Resources</a></li>
+<li><a href="http://www.raspberrypi.org/" rel="acquaintance" target="_blank">Official RaspBerry Pi Site</a></li>
+<li><a href="http://www.recantha.co.uk/blog/" title="Experiences with the Raspberry Pi micro computer" target="_blank">Raspberry Pi Pod</a></li>
+<li><a href="http://raspi.tv/" rel="friend" title="Raspberry Pi Tutorials, Videos &amp; Reviews" target="_blank">RasPi.tv</a></li>
+<li><a href="http://www.raspihub.com/" rel="acquaintance" title="The hottest Raspberry Pi news" target="_blank">Raspihub.com</a></li>
+<li><a href="http://www.rasptut.co.uk/" title="Articles and tutorials for the Raspberry Pi" target="_blank">RaspTut</a></li>
+<li><a href="http://rastrack.co.uk/" rel="acquaintance" title="Global map of Raspberry Pis. Add yours!" target="_blank">Rastrack.co.uk</a></li>
+<li><a href="http://www.rpischool.org.uk/" rel="friend" title="Raspberry Pi Blog focused on using the Pi in the classroom.">RPi School</a></li>
+
+	</ul>
+</li>
+
+<li id="linkcat-234" class="widget widget_links"><h3 class="widgettitle">Tech Resources</h3>
+	<ul class="xoxo blogroll">
+<li><a href="http://www.how2code.co.uk/" rel="me" title="Example Python scripts" target="_blank">How2Code</a></li>
+<li><a href="http://www.tech-spy.co.uk/" rel="me" title="Technology, gadgets and scripts." target="_blank">Technology Spy</a></li>
+
+	</ul>
+</li>
+
+<li id="archives-4" class="widget widget_archive"><h3 class="widgettitle">Archives</h3>		<label class="screen-reader-text" for="archives-dropdown-4">Archives</label>
+		<select id="archives-dropdown-4" name="archive-dropdown" onchange="document.location.href=this.options[this.selectedIndex].value;">
+			
+			<option value="">Select Month</option>
+				<option value="http://www.raspberrypi-spy.co.uk/2015/12/"> December 2015 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2015/11/"> November 2015 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2015/10/"> October 2015 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2015/09/"> September 2015 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2015/08/"> August 2015 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2015/07/"> July 2015 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2015/06/"> June 2015 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2015/05/"> May 2015 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2015/04/"> April 2015 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2015/03/"> March 2015 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2015/02/"> February 2015 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2015/01/"> January 2015 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2014/12/"> December 2014 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2014/11/"> November 2014 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2014/10/"> October 2014 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2014/09/"> September 2014 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2014/08/"> August 2014 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2014/07/"> July 2014 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2014/06/"> June 2014 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2014/05/"> May 2014 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2014/04/"> April 2014 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2014/03/"> March 2014 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2014/02/"> February 2014 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2014/01/"> January 2014 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2013/12/"> December 2013 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2013/11/"> November 2013 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2013/10/"> October 2013 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2013/09/"> September 2013 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2013/07/"> July 2013 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2013/06/"> June 2013 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2013/05/"> May 2013 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2013/04/"> April 2013 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2013/03/"> March 2013 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2013/02/"> February 2013 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2013/01/"> January 2013 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2012/12/"> December 2012 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2012/11/"> November 2012 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2012/10/"> October 2012 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2012/09/"> September 2012 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2012/08/"> August 2012 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2012/07/"> July 2012 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2012/06/"> June 2012 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2012/05/"> May 2012 </option>
+	<option value="http://www.raspberrypi-spy.co.uk/2012/03/"> March 2012 </option>
+
+		</select>
+		</li>
+	
+			</ul>
+		</aside>
+		
+		
+	</div> <!-- .row -->
+		
+	
+</div> <!-- .main -->
+
+
+		
+	<footer class="main-footer">
+	
+			<div class="wrap">
+		
+					<ul class="widgets row cf">
+				
+		<li class="widget col-4 bunyad-about">			<h3 class="widgettitle">About</h3>		
+			<div class="about-widget">
+			
+						
+			<p>Unofficial site devoted to the Raspberry Pi credit card sized computer offering tutorials, guides, resources,scripts and downloads. We hope to help everyone get the most out of their Pi by providing clear, simple articles on configuring, programming and operating it.</p>
+			
+			</div>
+		
+		</li>		
+					<li class="widget col-4 popular-posts">			<h3 class="widgettitle">Popular Posts</h3>			
+			<ul class="posts-list">
+							<li>
+				
+					<a href="http://www.raspberrypi-spy.co.uk/2012/07/16x2-lcd-module-control-using-python/"><img width="110" height="96" src="./DS3231-fix_files/16x2_lcd_module_1-110x96.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image no-display" alt="16x2_lcd_module_1" title="16×2 LCD Module Control Using Python">					
+																					
+					</a>
+					
+					<div class="content">
+					
+									<div class="cf listing-meta meta above">
+					
+				<time datetime="2012-07-27T08:48:19+00:00" itemprop="datePublished" class="meta-item">July 27, 2012</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2012/07/16x2-lcd-module-control-using-python/#comments"><i class="fa fa-comments-o"></i> 81</a></span>					
+			</div>
+							
+						<a href="http://www.raspberrypi-spy.co.uk/2012/07/16x2-lcd-module-control-using-python/" title="16×2 LCD Module Control Using Python">
+							16×2 LCD Module Control Using Python</a>
+							
+													
+																			
+					</div>
+				
+				</li>
+							<li>
+				
+					<a href="http://www.raspberrypi-spy.co.uk/2013/10/analogue-sensors-on-the-raspberry-pi-using-an-mcp3008/"><img width="110" height="96" src="./DS3231-fix_files/mcp3008_tmp36_02-110x96.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image no-display" alt="MCP3008 Example Circuit #2" title="Analogue Sensors On The Raspberry Pi Using An MCP3008">					
+																					
+					</a>
+					
+					<div class="content">
+					
+									<div class="cf listing-meta meta above">
+					
+				<time datetime="2013-10-20T11:26:28+00:00" itemprop="datePublished" class="meta-item">October 20, 2013</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2013/10/analogue-sensors-on-the-raspberry-pi-using-an-mcp3008/#comments"><i class="fa fa-comments-o"></i> 70</a></span>					
+			</div>
+							
+						<a href="http://www.raspberrypi-spy.co.uk/2013/10/analogue-sensors-on-the-raspberry-pi-using-an-mcp3008/" title="Analogue Sensors On The Raspberry Pi Using An MCP3008">
+							Analogue Sensors On The Raspberry Pi Using An MCP3008</a>
+							
+													
+																			
+					</div>
+				
+				</li>
+							<li>
+				
+					<a href="http://www.raspberrypi-spy.co.uk/2014/09/top-5-reasons-the-raspberry-pi-sucks/"><img width="110" height="96" src="./DS3231-fix_files/raspberry_pi_sucks1-110x96.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image no-display" alt="Raspberry Pi Sucks" title="Top 5 Reasons The Raspberry Pi Sucks">					
+																					
+					</a>
+					
+					<div class="content">
+					
+									<div class="cf listing-meta meta above">
+					
+				<time datetime="2014-09-19T20:06:23+00:00" itemprop="datePublished" class="meta-item">September 19, 2014</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2014/09/top-5-reasons-the-raspberry-pi-sucks/#comments"><i class="fa fa-comments-o"></i> 53</a></span>					
+			</div>
+							
+						<a href="http://www.raspberrypi-spy.co.uk/2014/09/top-5-reasons-the-raspberry-pi-sucks/" title="Top 5 Reasons The Raspberry Pi Sucks">
+							Top 5 Reasons The Raspberry Pi Sucks</a>
+							
+													
+																			
+					</div>
+				
+				</li>
+						</ul>
+			
+			</li>		
+		
+			<li class="widget col-4 latest-posts">			
+							<h3 class="widgettitle">Recent Posts</h3>						
+			<ul class="posts-list">
+			
+							<li>
+				
+					<a href="http://www.raspberrypi-spy.co.uk/2015/12/lumsing-grand-a1-plus-power-bank-test/"><img width="110" height="96" src="./DS3231-fix_files/lumsing_grand_a1_01-110x96.jpg" class="attachment-post-thumbnail wp-post-image no-display" alt="Lumsing Grand A1 Plus Power Bank" title="Lumsing Grand A1 Plus Power Bank Test">					
+																					
+					</a>
+					
+					<div class="content">
+					
+									<div class="cf listing-meta meta above">
+					
+				<time datetime="2015-12-08T20:41:34+00:00" itemprop="datePublished" class="meta-item">December 8, 2015</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2015/12/lumsing-grand-a1-plus-power-bank-test/#comments"><i class="fa fa-comments-o"></i> 0</a></span>					
+			</div>
+							
+						<a href="http://www.raspberrypi-spy.co.uk/2015/12/lumsing-grand-a1-plus-power-bank-test/" title="Lumsing Grand A1 Plus Power Bank Test">
+							Lumsing Grand A1 Plus Power Bank Test</a>
+							
+													
+																																				
+					</div>
+				
+				</li>
+							<li>
+				
+					<a href="http://www.raspberrypi-spy.co.uk/2015/12/3d-printed-adafruit-raspberry-pi-zero-case-part-2/"><img width="110" height="96" src="./DS3231-fix_files/adafruit_zero_case_05-110x96.jpg" class="attachment-post-thumbnail wp-post-image no-display" alt="3D Printed Adafruit Pi Zero Case" title="3D Printed Adafruit Raspberry Pi Zero Case – Part 2">					
+																					
+					</a>
+					
+					<div class="content">
+					
+									<div class="cf listing-meta meta above">
+					
+				<time datetime="2015-12-06T21:23:40+00:00" itemprop="datePublished" class="meta-item">December 6, 2015</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2015/12/3d-printed-adafruit-raspberry-pi-zero-case-part-2/#comments"><i class="fa fa-comments-o"></i> 0</a></span>					
+			</div>
+							
+						<a href="http://www.raspberrypi-spy.co.uk/2015/12/3d-printed-adafruit-raspberry-pi-zero-case-part-2/" title="3D Printed Adafruit Raspberry Pi Zero Case – Part 2">
+							3D Printed Adafruit Raspberry Pi Zero Case – Part 2</a>
+							
+													
+																																				
+					</div>
+				
+				</li>
+							<li>
+				
+					<a href="http://www.raspberrypi-spy.co.uk/2015/12/3d-printed-adafruit-raspberryy-pi-zero-case/"><img width="110" height="96" src="./DS3231-fix_files/adafruit_zero_case_01-110x96.jpg" class="attachment-post-thumbnail wp-post-image no-display" alt="3D Printed Adafruit Pi Zero Case" title="3D Printed Adafruit Raspberryy Pi Zero Case">					
+																					
+					</a>
+					
+					<div class="content">
+					
+									<div class="cf listing-meta meta above">
+					
+				<time datetime="2015-12-03T21:49:45+00:00" itemprop="datePublished" class="meta-item">December 3, 2015</time><span class="meta-item comments"><a href="http://www.raspberrypi-spy.co.uk/2015/12/3d-printed-adafruit-raspberryy-pi-zero-case/#comments"><i class="fa fa-comments-o"></i> 0</a></span>					
+			</div>
+							
+						<a href="http://www.raspberrypi-spy.co.uk/2015/12/3d-printed-adafruit-raspberryy-pi-zero-case/" title="3D Printed Adafruit Raspberryy Pi Zero Case">
+							3D Printed Adafruit Raspberryy Pi Zero Case</a>
+							
+													
+																																				
+					</div>
+				
+				</li>
+						</ul>
+			
+			</li>			</ul>
+				
+		</div>
+	
+		
+	
+			<div class="lower-foot">
+			<div class="wrap">
+		
+						
+			<div class="widgets">
+							<div class="textwidget"><div style="text-align:center;width:100%;">
+<p><a href="http://www.raspberrypi-spy.co.uk/feed/">Entries RSS</a>&nbsp;|&nbsp;<a href="http://www.raspberrypi-spy.co.uk/comments/feed/">Comments RSS</a></p>
+<p>This site is not associated with the official Raspberrypi.org site or the Raspberry Pi Foundation. Raspberry Pi is a trademark of the Raspberry Pi Foundation.</p>
+<p>Copyright © 2015 - All Rights Reserved - Matt Hawkins</p>
+</div></div>
+					</div>
+			
+					
+			</div>
+		</div>		
+		
+	</footer>
+	
+</div> <!-- .main-wrap -->
+
+<script type="text/javascript" src="./DS3231-fix_files/form.js"></script>
+<script type="text/javascript" src="./DS3231-fix_files/comment-reply.min.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var EasyAzonPro_Localize_Links = {"ajaxAction":"easyazonpro_localize","ajaxUrl":"http:\/\/www.raspberrypi-spy.co.uk\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://www.raspberrypi-spy.co.uk/wp-content/plugins/easyazon-pro-4.0.9/components/localization/links/resources/links.js?ver=4.0.9"></script>
+<script type="text/javascript" src="http://www.raspberrypi-spy.co.uk/wp-content/plugins/easyazon-pro-4.0.9/vendor/bootstrap.min.js?ver=3.3.2"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var EasyAzonPro_Components_Popovers = {"ajaxUrl":"http:\/\/www.raspberrypi-spy.co.uk\/wp-admin\/admin-ajax.php","ajaxAction":"easyazon_get_popover_markup","loading":"Loading product data.","placement":"top","template":"<div class=\"popover easyazon-popover\"><div class=\"arrow\"><\/div><h3 class=\"popover-title\"><\/h3><div class=\"popover-content easyazon-popover-content\"><\/div><\/div>","timeout":"750"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://www.raspberrypi-spy.co.uk/wp-content/plugins/easyazon-pro-4.0.9/components/popovers/resources/popovers.js?ver=4.0.9"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var Bunyad = {"ajaxurl":"http:\/\/www.raspberrypi-spy.co.uk\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./DS3231-fix_files/bunyad-theme.js"></script>
+<script type="text/javascript" src="./DS3231-fix_files/jquery.flexslider-min.js"></script>
+<script type="text/javascript" src="./DS3231-fix_files/jquery.sticky-sidebar.min.js"></script>
+<script type="text/javascript" src="./DS3231-fix_files/wp-embed.min.js"></script>
+
+
+</body></html>

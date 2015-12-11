@@ -77,7 +77,7 @@ void processCommand(String command) {
   Serial.println(command);
   String message = command + ";" + "hh::mm:ss dd-mm-yy";
   if (commandType == "DNGR") { //LOGS, ALRT
-    sendSMS(message, "+79998885533");
+    GSM_sendSMS(message, "+79998885533");
   }
   SD_log(message);
 }

@@ -1,0 +1,34 @@
+/*
+Theme Name: Smart Mag Child
+Theme URI: http://theme-sphere.com/
+Description: A child theme of SmartMag
+Author: ThemeSphere
+Author URI: http://theme-sphere.com
+Template: smart-mag
+Version: 2.6.1
+*/
+
+@import url("../smart-mag/style.css");
+
+/* Tweak quoted code */
+code, pre {
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+  margin-top: 0.5em;
+  margin-bottom: 0.8em;
+
+}
+
+/* Tweak table spacing */
+table {
+margin-top: 1.0em;
+margin-bottom: 1.0em;
+}
+
+td {vertical-align:middle;}
+
+/* Correctly scale EasyAzon images */
+.easyazon-block-information-image {
+width:100% !important;
+height:100% !important;
+}
