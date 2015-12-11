@@ -71,10 +71,7 @@ void loop() {
   bool isEndOfCommand = false;
   char getByte;
   while (sftSrl_forCommand.available() & !isEndOfCommand ) {
-    char getByte = sftSrl_forCommand.read();
-    if (getByte == '{') { //new command start, clean buffer
-      command = "";
-    }
+    char getByte = sftSrl_forCommand.read();    
     if (getByte == '}') { //end of command
       isEndOfCommand = true;
       processCommand(command);
@@ -82,6 +79,9 @@ void loop() {
     }
     else {
       command += getByte;
+    }
+    if (getByte == '{') { //new command start, clean buffer
+      command = "";
     }
   }
 
