@@ -98,17 +98,16 @@ void processCommand(String command) {
 
   String commandType = command.substring(0, 4);
   String commandParam0 = command.substring(8, 9);
-  String message = "";
-  message += String(hh, DEC) + ":" + String(ii, DEC) + " ";
-  message += String(dd, DEC) + "-" + String(mm, DEC) + "-" + String(yyyy, DEC);
-  message += ";" + command;
-  
+  String messageLog = "";
+  messageLog += String(hh, DEC) + ":" + String(ii, DEC) + " ";
+  messageLog += String(dd, DEC) + "-" + String(mm, DEC) + "-" + String(yyyy, DEC);
+  messageLog += ";" + command;
 
   if (commandType == "DNGR") { //LOGS, ALRT
-    COMMAND_getVerbalParamName(commandParam0);
+    messageLog = COMMAND_getVerbalParamName(commandParam0) + messageLog;
     GSM_sendSMS(message, "+79998885533");
   }
-  SD_log(message);
+  SD_log(messageLog);
 
   Serial.print(F("processCommand: "));
   Serial.println(command);
