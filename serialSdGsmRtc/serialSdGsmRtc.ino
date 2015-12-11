@@ -1,3 +1,25 @@
+/*
+  NRF[encoded value in uint16_t] --> baseNRF --> decoded "command params"  --> baseSdGsmRtc
+
+  command from baseNRF
+    {LOGS;#2;V3.7;T23;H50}
+    {DNGR;#5;WL1}
+
+  command params
+    V   n, 0..5         voltage on sensor battery
+    T   n, -50..120     temperature
+    H   n, 0..100       humidity
+    W   n, 0, 1         water leak
+    P   1               power up base
+    G   n, 0..1023 ADC  gas ch4
+    M   n, 0, 1         motion detector
+
+  LOGS => log on SD only
+  DNGR => log on SD & send SMS
+*/
+
+
+
 #include <SdFat.h>
 #include <SPI.h>
 #include <SoftwareSerial.h>
@@ -5,12 +27,12 @@
 
 #define DS3231_I2C_ADDRESS 0x68
 
-const byte SD_CS =  4; //SS
+const byte SD_CS =  10; //SS
 SdFat SD_card;
 File SD_file_log;
 SdFile SD_isEnable = false;
 
-SoftwareSerial serialCommand(7, 8); // RX, TX
+SoftwareSerial sftSrl_forCommand(7, 8); // RX, TX
 String command;
 
 void setup() {
@@ -20,7 +42,7 @@ void setup() {
   delay(100);
   Serial.begin(9600);
   delay(100);
-  serialCommand.begin(9600);
+  sftSrl_forCommand.begin(9600);
   delay(100);
   SD_init();
   delay(100);
@@ -29,15 +51,15 @@ void setup() {
   delay(100);
 }
 
-void loop() { // run over and over
+void loop() {
   bool isEndOfCommand = false;
   char getByte;
-  while (serialCommand.available() & !isEndOfCommand ) {
-    char getByte = serialCommand.read();
-    if (getByte == '{') {
-      command = ""; //new command start, clean buffer (?)
+  while (sftSrl_forCommand.available() & !isEndOfCommand ) {
+    char getByte = sftSrl_forCommand.read();
+    if (getByte == '{') { //new command start, clean buffer
+      command = "";
     }
-    if (getByte == '}') {
+    if (getByte == '}') { //end of command
       isEndOfCommand = true;
       processCommand(command);
       command = "";
