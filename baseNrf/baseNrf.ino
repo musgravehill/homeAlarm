@@ -140,9 +140,11 @@ void BASE_processDataFromSensor() {
   String commandToBaseSdGsmRtc_logs = "{LOGS;#" + String(currPipeNum, DEC) + ";";
   char paramCode[7] = {'V', 'T', 'H', 'W', 'G', 'M', 'C'};
   uint8_t i = 0;
+  uint16_t paramVal_decoded;
   for (i = 0; i < 7; i++) {
     if (messageFromSensor[i] != 0) { //param is available
-      commandToBaseSdGsmRtc_logs +=  paramCode[i] + String(messageFromSensor[i], DEC) + ";";
+      paramVal_decoded = BASE_decodeParam(i, messageFromSensor[i]);
+      commandToBaseSdGsmRtc_logs +=  paramCode[i] + String(paramVal_decoded, DEC) + ";";
     }
   }
   commandToBaseSdGsmRtc_logs += "}";
