@@ -65,12 +65,12 @@ void loop() {
 
 void sendDataToBase() {
   dht.setup(2); // data pin 2
-  uint16_t batteryVoltage = random(0, 1023); //ADC 10 bit
-  uint16_t humidity = (int) dht.getHumidity() ;
-  uint16_t temperature = (int) dht.getTemperature() ;
+  //uint16_t batteryVoltage = random(0, 1023); //ADC 10 bit
+  uint16_t humidity = (int) dht.getHumidity();
+  uint16_t temperature = (int) dht.getTemperature();
 
   uint16_t arrayToBase[7] = {
-    batteryVoltage + 1, //V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V
+    0,                  //V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V
     temperature + 100,  //T   0=null, -50..120 [+100]   temperature, C
     humidity + 100,     //H   0=null, 0..100   [+100]   humidity, %
     0,                  //W   0=null, 100, 999          water leak, bool
@@ -125,14 +125,21 @@ void NRF_init() {
   delay(50);
 }
 
-void NRF_sendData(uint16_t batteryVoltage, uint16_t temperature, uint16_t humidity) {
-  uint16_t arrayToBase[3] = {
-    batteryVoltage,
-    temperature,
-    humidity
-  };
-
+void NRF_sendData(uint16_t* arrayToBase) {
   uint8_t answerFromBase; //2^8 - 1   [0,255]
+
+  Serial.println("\r\n");
+  Serial.println("arr[");
+  Serial.println(sizeof(arrayToBase), DEC);
+  Serial.println("]: ");
+  Serial.println(arrayToBase[0], DEC);
+  Serial.println(arrayToBase[1], DEC);
+  Serial.println(arrayToBase[2], DEC);
+  Serial.println(arrayToBase[3], DEC);
+  Serial.println(arrayToBase[4], DEC);
+  Serial.println(arrayToBase[5], DEC);
+  Serial.println(arrayToBase[6], DEC);
+  Serial.println("\r\n");
 
   delay(50);
   NRF_radio.powerUp();
@@ -142,16 +149,6 @@ void NRF_sendData(uint16_t batteryVoltage, uint16_t temperature, uint16_t humidi
   //Do this before calling write().
   NRF_radio.stopListening();
   NRF_radio.write( &arrayToBase, sizeof(arrayToBase));
-
-  Serial.print(F("V= "));
-  Serial.print(arrayToBase[0]);
-  Serial.print(F("\r\n"));
-  Serial.print(F("t= "));
-  Serial.print(arrayToBase[1]);
-  Serial.print(F("\r\n"));
-  Serial.print(F("h= "));
-  Serial.print(arrayToBase[2]);
-  Serial.print(F("\r\n"));
 
   if ( NRF_radio.isAckPayloadAvailable() ) {
     NRF_radio.read(&answerFromBase, sizeof(answerFromBase)); //приемник принял и ответил
