@@ -2,8 +2,8 @@
   NRF[encoded value in uint16_t] --> baseNRF --> decoded "command params"  --> baseSdGsmRtc
 
   command from baseNRF
-    {LOGS;#2;V3.7;T23;H50}
-    {DNGR;#5;W1}
+    {LOGS;#1;V_;T21;H48;W_;G_;M_;C_;}
+    {DNGR;#1;T21;}
 
   command params
     V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V

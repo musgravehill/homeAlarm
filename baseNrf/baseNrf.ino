@@ -8,8 +8,8 @@
   NRF[encoded value in uint16_t] --> baseNRF --> decoded "command params"  --> baseSdGsmRtc
 
   command from baseNRF
-    {LOGS;#2;V3.7;T23;H50;}
-    {DNGR;#5;W1;}
+    {LOGS;#1;V_;T21;H48;W_;G_;M_;C_;}
+    {DNGR;#1;T21;}
 
   command params
     V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V
@@ -139,7 +139,7 @@ void BASE_processDataFromSensor() {
       paramVal_decoded = BASE_decodeParam(i, messageFromSensor[i]);
       commandToBaseSdGsmRtc_logs +=  String((char)paramCode[i]) + String(paramVal_decoded, DEC) + ";";
       if (BASE_isDangerParamValue(i, paramVal_decoded)) {
-        commandToBaseSdGsmRtc_dangers += "{DNGR;#" + + String(currPipeNum, DEC) + ";";
+        commandToBaseSdGsmRtc_dangers += "{DNGR;#" + String(currPipeNum, DEC) + ";";
         commandToBaseSdGsmRtc_dangers += String((char)paramCode[i]);
         commandToBaseSdGsmRtc_dangers += String(paramVal_decoded, DEC) + ";}";
       }
@@ -149,12 +149,8 @@ void BASE_processDataFromSensor() {
     }
   }
   commandToBaseSdGsmRtc_logs += "}";
-
-  Serial.println(commandToBaseSdGsmRtc_logs);
-  Serial.println(commandToBaseSdGsmRtc_dangers);
-  Serial.print("sizeDanger=");
-  Serial.println(sizeof(commandToBaseSdGsmRtc_dangers));
-
+  String commandToBaseSdGsmRtc_all = commandToBaseSdGsmRtc_logs + commandToBaseSdGsmRtc_dangers;
+  Serial.println(commandToBaseSdGsmRtc_all);
 }
 
 uint16_t BASE_decodeParam(uint8_t paramNum, uint16_t paramVal_encoded) {
@@ -195,7 +191,7 @@ bool BASE_isDangerParamValue(uint8_t paramNum, uint16_t paramVal_decoded) {
       isDanger = (bool)( (paramVal_decoded < 15) || (paramVal_decoded > 19) );
       break;
     case 2: //H   0=null, 0..100   [+100]   humidity, %
-      isDanger = (bool)( (paramVal_decoded < 5) || (paramVal_decoded > 70) );
+      isDanger = (bool)( (paramVal_decoded < 5) || (paramVal_decoded > 40) );
       break;
     case 3: //W   0=null, 100=ok 101=alert         water leak, bool
       isDanger = (bool)( paramVal_decoded == 101 );
