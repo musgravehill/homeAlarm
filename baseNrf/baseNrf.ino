@@ -8,8 +8,8 @@
   NRF[encoded value in uint16_t] --> baseNRF --> decoded "command params"  --> baseSdGsmRtc
 
   command from baseNRF
-    {LOGS;#2;V3.7;T23;H50}
-    {DNGR;#5;W1}
+    {LOGS;#2;V3.7;T23;H50;}
+    {DNGR;#5;W1;}
 
   command params
     V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V
@@ -94,14 +94,6 @@ void setup() {
 }
 
 void loop() {
-  /* test
-    Serial.print("{LOGS;#2;V3.7;T23;H50}");
-    delay(50);
-    Serial.print("{DNGR;#5;W1}");
-    delay(50);
-    Serial.print("{DNGR;#1;H90}");
-    delay(2000);
-  */
   NRF_listen();
 }
 
@@ -138,6 +130,7 @@ void BASE_processDataFromSensor() {
   */
 
   String commandToBaseSdGsmRtc_logs = "{LOGS;#" + String(currPipeNum, DEC) + ";";
+  String commandToBaseSdGsmRtc_dangers = "";
   const char paramCode[] = {'V', 'T', 'H', 'W', 'G', 'M', 'C'};
   uint8_t i = 0;
   uint16_t paramVal_decoded;
@@ -145,6 +138,11 @@ void BASE_processDataFromSensor() {
     if (messageFromSensor[i] != 0) { //param is available
       paramVal_decoded = BASE_decodeParam(i, messageFromSensor[i]);
       commandToBaseSdGsmRtc_logs +=  String((char)paramCode[i]) + String(paramVal_decoded, DEC) + ";";
+      if (BASE_isDangerParamValue(i, paramVal_decoded)) {
+        commandToBaseSdGsmRtc_dangers += "{DNGR;#" + + String(currPipeNum, DEC) + ";";
+        commandToBaseSdGsmRtc_dangers += String((char)paramCode[i]);
+        commandToBaseSdGsmRtc_dangers += String(paramVal_decoded, DEC) + ";}";
+      }
     }
     else {
       commandToBaseSdGsmRtc_logs += String((char)paramCode[i]) +  "_;";
@@ -153,6 +151,10 @@ void BASE_processDataFromSensor() {
   commandToBaseSdGsmRtc_logs += "}";
 
   Serial.println(commandToBaseSdGsmRtc_logs);
+  Serial.println(commandToBaseSdGsmRtc_dangers);
+  Serial.print("sizeDanger=");
+  Serial.println(sizeof(commandToBaseSdGsmRtc_dangers));
+
 }
 
 uint16_t BASE_decodeParam(uint8_t paramNum, uint16_t paramVal_encoded) {
@@ -171,14 +173,42 @@ uint16_t BASE_decodeParam(uint8_t paramNum, uint16_t paramVal_encoded) {
       paramVal_decoded = paramVal_encoded - 100;
       break;
     case 4: //G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
-      paramVal_decoded = paramVal_encoded + 1;
+      paramVal_decoded = paramVal_encoded - 1;
       break;
     case 5: //M   0=null, 100=ok 101=alert          motion detector, bool
       paramVal_decoded = paramVal_encoded - 100;
       break;
     case 6: //C   0=null, 0..1023 [+1]      gas CO, ADC value
-      paramVal_decoded = paramVal_encoded + 1;
+      paramVal_decoded = paramVal_encoded - 1;
       break;
   }
   return paramVal_decoded;
+}
+
+bool BASE_isDangerParamValue(uint8_t paramNum, uint16_t paramVal_decoded) {
+  bool isDanger = false;
+  switch (paramNum) {
+    case 0: //V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V
+      isDanger = (bool)( (paramVal_decoded < 555) || (paramVal_decoded > 777) );
+      break;
+    case 1: //T   0=null, -50..120 [+100]   temperature, C
+      isDanger = (bool)( (paramVal_decoded < 15) || (paramVal_decoded > 19) );
+      break;
+    case 2: //H   0=null, 0..100   [+100]   humidity, %
+      isDanger = (bool)( (paramVal_decoded < 5) || (paramVal_decoded > 70) );
+      break;
+    case 3: //W   0=null, 100=ok 101=alert         water leak, bool
+      isDanger = (bool)( paramVal_decoded == 101 );
+      break;
+    case 4: //G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
+      isDanger = (bool)( (paramVal_decoded < 555) || (paramVal_decoded > 777) );
+      break;
+    case 5: //M   0=null, 100=ok 101=alert          motion detector, bool
+      isDanger = (bool)( paramVal_decoded == 101 );
+      break;
+    case 6: //C   0=null, 0..1023 [+1]      gas CO, ADC value
+      isDanger = (bool)( (paramVal_decoded < 555) || (paramVal_decoded > 777) );
+      break;
+  }
+  return isDanger;
 }
