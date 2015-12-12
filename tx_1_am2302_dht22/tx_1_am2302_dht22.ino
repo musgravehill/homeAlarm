@@ -84,7 +84,7 @@ void sendDataToBase() {
   Serial.print(temperature);
   Serial.println(" ");
 
-  NRF_sendData(arrayToBase);
+  NRF_sendData(arrayToBase, sizeof(arrayToBase));
 }
 
 
@@ -125,12 +125,12 @@ void NRF_init() {
   delay(50);
 }
 
-void NRF_sendData(uint16_t* arrayToBase) {
+void NRF_sendData(uint16_t* arrayToBase, uint8_t sizeofArrayToBase) {
   uint8_t answerFromBase; //2^8 - 1   [0,255]
 
   Serial.println("\r\n");
   Serial.print("arr[");
-  Serial.print(sizeof(&arrayToBase), DEC);
+  Serial.print(sizeofArrayToBase, DEC);
   Serial.println("]: ");
   Serial.println(arrayToBase[0], DEC);
   Serial.println(arrayToBase[1], DEC);
@@ -148,7 +148,7 @@ void NRF_sendData(uint16_t* arrayToBase) {
   //Stop listening for incoming messages, and switch to transmit mode.
   //Do this before calling write().
   NRF_radio.stopListening();
-  NRF_radio.write( &arrayToBase, sizeof(arrayToBase));
+  NRF_radio.write( &arrayToBase, sizeofArrayToBase);
 
   if ( NRF_radio.isAckPayloadAvailable() ) {
     NRF_radio.read(&answerFromBase, sizeof(answerFromBase)); //приемник принял и ответил
