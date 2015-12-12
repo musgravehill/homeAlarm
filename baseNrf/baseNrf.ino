@@ -59,7 +59,7 @@ void setup() {
   delay(2000);
   Serial.begin(9600);
   delay(100);
-  Serial.println(F("Im Base with IRQ and AckPayload"));
+  Serial.println(F("Im Base with AckPayload"));
 
   radio.begin();
   delay(100);
@@ -106,36 +106,85 @@ void loop() {
 }
 
 void NRF_listen() {
-
   if (radio.available(&currPipeNum)) {
     radio.writeAckPayload(currPipeNum, &currPipeNum, sizeof(currPipeNum) );
     if (radio.getDynamicPayloadSize() > 1) { //размер полученного сообщения
       radio.read(&messageFromSensor, sizeof(messageFromSensor));
-
-      Serial.print(F("Sensor# "));
-      Serial.println(currPipeNum);
-      Serial.print(F("size:"));
-      Serial.println(sizeof(messageFromSensor), DEC);
-      Serial.println(messageFromSensor[0], DEC);
-      Serial.println(messageFromSensor[1], DEC);
-      Serial.println(messageFromSensor[2], DEC);
-      Serial.println(messageFromSensor[3], DEC);
-      Serial.println(messageFromSensor[4], DEC);
-      Serial.println(messageFromSensor[5], DEC);
-      Serial.println(messageFromSensor[6], DEC);
-      Serial.print(F("\r\n"));
-      Serial.print(F("\r\n"));
+      BASE_processDataFromSensor();
     }
     else {
       // Corrupt payload has been flushed
     }
-
     //radio.stopListening(); //не надо! СТОП только если хочешь write
     //radio.startListening();//не надо! СТАРТ один раз, когда объявил трубы
+  }
+  //bool tx, fail, rx;  //radio.whatHappened(tx, fail, rx); // What happened?  //if ( rx || radio.available()) {
+}
+
+void BASE_processDataFromSensor() {
+  /*Serial.print(F("Sensor# "));
+    Serial.println(currPipeNum);
+    Serial.print(F("size:"));
+    Serial.println(sizeof(messageFromSensor), DEC);
+    Serial.println(messageFromSensor[0], DEC);
+    Serial.println(messageFromSensor[1], DEC);
+    Serial.println(messageFromSensor[2], DEC);
+    Serial.println(messageFromSensor[3], DEC);
+    Serial.println(messageFromSensor[4], DEC);
+    Serial.println(messageFromSensor[5], DEC);
+    Serial.println(messageFromSensor[6], DEC);
+    Serial.print(F("\r\n"));
+    Serial.print(F("\r\n"));
+  */
+
+  String commandToBaseSdGsmRtc_logs = "{LOGS;#" + String(currPipeNum, DEC) + ";";
+  char paramCode[7] = {'V', 'T', 'H', 'W', 'G', 'M', 'C'};
+  uint8_t i = 0;
+  for (i = 0; i < 7; i++) {
+    if (messageFromSensor[i] != 0) { //param is available
+      commandToBaseSdGsmRtc_logs +=  paramCode[i] + String(messageFromSensor[i], DEC) + ";";
+    }
+  }
+  commandToBaseSdGsmRtc_logs += "}";
+
+  Serial.println(commandToBaseSdGsmRtc_logs);
+}
+
+void BASE_decodeParam(uint8_t paramNum, uint16_t paramVal_encoded) {
+  uint16_t paramVal_decoded = 0;
+  switch (paramNum) {
+    case 0: //V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V
+      paramVal_decoded = paramVal_encoded - 1;
+      break;
+    case 1: //T   0=null, -50..120 [+100]   temperature, C
+      paramVal_decoded = paramVal_encoded
+                         break;
+    case 2: //H   0=null, 0..100   [+100]   humidity, %
+      paramVal_decoded = paramVal_encoded
+                         break;
+    case 3: //W   0=null, 100, 999          water leak, bool
+      paramVal_decoded = paramVal_encoded
+                         break;
+    case 4: //G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
+      paramVal_decoded = paramVal_encoded
+                         break;
+    case 5: //M   0=null, 100, 999          motion detector, bool
+      paramVal_decoded = paramVal_encoded
+                         break;
+    case 6: //C   0=null, 0..1023 [+1]      gas CO, ADC value
+      paramVal_decoded = paramVal_encoded
+                         break;
 
   }
-  //bool tx, fail, rx;
-  //radio.whatHappened(tx, fail, rx); // What happened?
-  //if ( rx || radio.available()) {
+
+
+
+
+
+
+
+
+
+
 
 }
