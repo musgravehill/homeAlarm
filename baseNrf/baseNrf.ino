@@ -15,9 +15,9 @@
     V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V
     T   0=null, -50..120 [+100]   temperature, C
     H   0=null, 0..100   [+100]   humidity, %
-    W   0=null, 100, 999          water leak, bool
+    W   0=null, 0=null, (0,1 + 100) = 100=normal, 101=alert         water leak, bool
     G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
-    M   0=null, 100, 999          motion detector, bool
+    M   0=null, (0,1 + 100) = 100=normal, 101=alert motion detector, bool
     C   0=null, 0..1023 [+1]      gas CO, ADC value
 
   LOGS => log on SD only
@@ -44,13 +44,13 @@ const uint64_t NRF_pipes[6] = {
 
 uint8_t currPipeNum;
 uint16_t messageFromSensor[7] = {
-  0,  //V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V
-  0,  //T   0=null, -50..120 [+100]   temperature, C
-  0,  //H   0=null, 0..100   [+100]   humidity, %
-  0,  //W   0=null, 100, 999          water leak, bool
-  0,  //G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
-  0,  //M   0=null, 100, 999          motion detector, bool
-  0,  //C   0=null, 0..1023 [+1]      gas CO, ADC value
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0
 };
 
 RF24 radio(NRF_CE_PIN, NRF_CSN_PIN);
@@ -157,34 +157,23 @@ void BASE_decodeParam(uint8_t paramNum, uint16_t paramVal_encoded) {
       paramVal_decoded = paramVal_encoded - 1;
       break;
     case 1: //T   0=null, -50..120 [+100]   temperature, C
-      paramVal_decoded = paramVal_encoded
-                         break;
+      paramVal_decoded = paramVal_encoded - 100;
+      break;
     case 2: //H   0=null, 0..100   [+100]   humidity, %
-      paramVal_decoded = paramVal_encoded
-                         break;
-    case 3: //W   0=null, 100, 999          water leak, bool
-      paramVal_decoded = paramVal_encoded
-                         break;
+      paramVal_decoded = paramVal_encoded - 100;
+      break;
+    case 3: //W   0=null, 100=ok 101=alert         water leak, bool
+      paramVal_decoded = paramVal_encoded - 100;
+      break;
     case 4: //G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
-      paramVal_decoded = paramVal_encoded
-                         break;
-    case 5: //M   0=null, 100, 999          motion detector, bool
-      paramVal_decoded = paramVal_encoded
-                         break;
+      paramVal_decoded = paramVal_encoded + 1;
+      break;
+    case 5: //M   0=null, 100=ok 101=alert          motion detector, bool
+      paramVal_decoded = paramVal_encoded - 100;
+      break;
     case 6: //C   0=null, 0..1023 [+1]      gas CO, ADC value
-      paramVal_decoded = paramVal_encoded
-                         break;
-
+      paramVal_decoded = paramVal_encoded + 1;
+      break;
   }
-
-
-
-
-
-
-
-
-
-
-
+  return paramVal_decoded;
 }
