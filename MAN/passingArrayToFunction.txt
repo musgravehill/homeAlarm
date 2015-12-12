@@ -1,0 +1,5 @@
+When e.g. passing arrays as parameters, the compiler no longer has the size of the array. 
+Instead the array gets passed as a pointer, and in writeData the sizeof operation gets the size of the pointer 
+and not the array (or whatever) it points to.
+
+See tx_sensor.ino 
