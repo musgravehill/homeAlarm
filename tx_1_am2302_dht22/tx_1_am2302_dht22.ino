@@ -3,10 +3,24 @@
   nrf24l01+
   dht22
 */
-
 /* Defined constants in arduino don't take up any program memory space on the chip.
   The compiler will replace references to these constants with the defined value
-  at compile time.*/
+  at compile time.
+*/
+/*
+  command params
+    V   n, 0..5         voltage on sensor battery, V
+    T   n, -50..120     temperature, C
+    H   n, 0..100       humidity, %
+    W   n, 0, 1         water leak, bool
+    G   n, 0..1023 ADC  gas CH4, ADC value
+    M   n, 0, 1         motion detector, bool
+    C   n, 0..1023      gas CO, ADC value
+
+  LOGS => log on SD only
+  DNGR => log on SD & send SMS [danger]
+*/
+* /
 
 #include <SPI.h>
 #include <nRF24L01.h>
@@ -16,7 +30,7 @@
 #include "DHT.h"
 
 #define IM_SENSOR_NUM 1  //1..5
-#define NRF_CE_PIN 9 
+#define NRF_CE_PIN 9
 #define NRF_CSN_PIN 10 //if use SPI, d10=hardware SS SPI only
 
 const uint64_t pipes[6] = {   //'static' - no need
@@ -36,7 +50,7 @@ DHT dht;
 void setup() {
   delay(2000);
   Serial.begin(9600);
-  NRF_init();  
+  NRF_init();
 }
 
 void loop() {
@@ -52,15 +66,25 @@ void loop() {
 void sendDataToBase() {
   dht.setup(2); // data pin 2
   uint16_t batteryVoltage = random(0, 1023); //ADC 10 bit
-  uint16_t humidity = (int) dht.getHumidity();
-  uint16_t temperature = (int) dht.getTemperature();
+  uint16_t humidity = (int) dht.getHumidity() ;
+  uint16_t temperature = (int) dht.getTemperature() ;
+
+  uint16_t arrayToBase[7] = {
+    batteryVoltage + 1, //V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V
+    temperature + 100,  //T   0=null, -50..120 [+100]   temperature, C
+    humidity + 100,     //H   0=null, 0..100   [+100]   humidity, %
+    0,                  //W   0=null, 100, 999          water leak, bool
+    0,                  //G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
+    0,                  //M   0=null, 100, 999          motion detector, bool
+    0,                  //C   0=null, 0..1023 [+1]      gas CO, ADC value
+  };
 
   Serial.print(humidity);
   Serial.print("% \t t=");
   Serial.print(temperature);
   Serial.println(" ");
 
-  NRF_sendData(batteryVoltage, temperature, humidity );
+  NRF_sendData(arrayToBase);
 }
 
 
