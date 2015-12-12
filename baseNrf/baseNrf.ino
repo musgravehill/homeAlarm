@@ -43,10 +43,14 @@ const uint64_t NRF_pipes[6] = {
 };
 
 uint8_t currPipeNum;
-uint16_t messageFromSensor[3] = {
-  0, //v
-  0, //t
-  0  //h
+uint16_t messageFromSensor[7] = {
+  0,  //V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V
+  0,  //T   0=null, -50..120 [+100]   temperature, C
+  0,  //H   0=null, 0..100   [+100]   humidity, %
+  0,  //W   0=null, 100, 999          water leak, bool
+  0,  //G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
+  0,  //M   0=null, 100, 999          motion detector, bool
+  0,  //C   0=null, 0..1023 [+1]      gas CO, ADC value
 };
 
 RF24 radio(NRF_CE_PIN, NRF_CSN_PIN);
@@ -91,12 +95,12 @@ void setup() {
 
 void loop() {
   /* test
-  Serial.print("{LOGS;#2;V3.7;T23;H50}");
-  delay(50);
-  Serial.print("{DNGR;#5;W1}");
-  delay(50);
-  Serial.print("{DNGR;#1;H90}");
-  delay(2000);
+    Serial.print("{LOGS;#2;V3.7;T23;H50}");
+    delay(50);
+    Serial.print("{DNGR;#5;W1}");
+    delay(50);
+    Serial.print("{DNGR;#1;H90}");
+    delay(2000);
   */
   NRF_listen();
 }
@@ -109,16 +113,16 @@ void NRF_listen() {
       radio.read(&messageFromSensor, sizeof(messageFromSensor));
 
       Serial.print(F("Sensor# "));
-      Serial.print(currPipeNum);
-      Serial.print(F("\r\n"));
-      Serial.print(F("V= "));
-      Serial.print(messageFromSensor[0]);
-      Serial.print(F("\r\n"));
-      Serial.print(F("t= "));
-      Serial.print(messageFromSensor[1]);
-      Serial.print(F("\r\n"));
-      Serial.print(F("h= "));
-      Serial.print(messageFromSensor[2]);
+      Serial.println(currPipeNum);
+      Serial.print(F("size:"));
+      Serial.println(sizeof(messageFromSensor), DEC);
+      Serial.println(messageFromSensor[0], DEC);
+      Serial.println(messageFromSensor[1], DEC);
+      Serial.println(messageFromSensor[2], DEC);
+      Serial.println(messageFromSensor[3], DEC);
+      Serial.println(messageFromSensor[4], DEC);
+      Serial.println(messageFromSensor[5], DEC);
+      Serial.println(messageFromSensor[6], DEC);
       Serial.print(F("\r\n"));
       Serial.print(F("\r\n"));
     }

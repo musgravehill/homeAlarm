@@ -49,7 +49,7 @@ DHT dht;
 
 void setup() {
   delay(2000);
-  Serial.begin(9600);
+  //Serial.begin(9600);
   NRF_init();
 }
 
@@ -79,19 +79,19 @@ void sendDataToBase() {
     0,                  //C   0=null, 0..1023 [+1]      gas CO, ADC value
   };
 
-  Serial.print(humidity);
-  Serial.print("% \t t=");
-  Serial.print(temperature);
-  Serial.println(" ");
+  //Serial.print(humidity);
+  //Serial.print("% \t t=");
+  //Serial.print(temperature);
+  //Serial.println(" ");
 
   NRF_sendData(arrayToBase, sizeof(arrayToBase));
 }
 
 
 void NRF_init() {
-  Serial.print(F("Im Sensor# "));
-  Serial.print(IM_SENSOR_NUM);
-  Serial.print(F("\r\n"));
+  //Serial.print(F("Im Sensor# "));
+  //Serial.print(IM_SENSOR_NUM);
+  //Serial.print(F("\r\n"));
 
   delay(50);
   NRF_radio.begin();
@@ -128,18 +128,18 @@ void NRF_init() {
 void NRF_sendData(uint16_t* arrayToBase, uint8_t sizeofArrayToBase) {
   uint8_t answerFromBase; //2^8 - 1   [0,255]
 
-  Serial.println("\r\n");
-  Serial.print("arr[");
-  Serial.print(sizeofArrayToBase, DEC);
-  Serial.println("]: ");
-  Serial.println(arrayToBase[0], DEC);
-  Serial.println(arrayToBase[1], DEC);
-  Serial.println(arrayToBase[2], DEC);
-  Serial.println(arrayToBase[3], DEC);
-  Serial.println(arrayToBase[4], DEC);
-  Serial.println(arrayToBase[5], DEC);
-  Serial.println(arrayToBase[6], DEC);
-  Serial.println("\r\n");
+  //Serial.println("\r\n");
+  //Serial.print("arr[");
+  //Serial.print(sizeofArrayToBase, DEC);
+  //Serial.println("]: ");
+  //Serial.println(arrayToBase[0], DEC);
+  //Serial.println(arrayToBase[1], DEC);
+  //Serial.println(arrayToBase[2], DEC);
+  //Serial.println(arrayToBase[3], DEC);
+  //Serial.println(arrayToBase[4], DEC);
+  //Serial.println(arrayToBase[5], DEC);
+  //Serial.println(arrayToBase[6], DEC);
+  //Serial.println("\r\n");
 
   delay(50);
   NRF_radio.powerUp();
@@ -148,14 +148,15 @@ void NRF_sendData(uint16_t* arrayToBase, uint8_t sizeofArrayToBase) {
   //Stop listening for incoming messages, and switch to transmit mode.
   //Do this before calling write().
   NRF_radio.stopListening();
-  NRF_radio.write( &arrayToBase, sizeofArrayToBase);
+  NRF_radio.write( arrayToBase, sizeofArrayToBase); 
+  //& не надо, в ф-ю уже передал указатель, а не сам массив
 
   if ( NRF_radio.isAckPayloadAvailable() ) {
     NRF_radio.read(&answerFromBase, sizeof(answerFromBase)); //приемник принял и ответил
 
-    Serial.print(F("__Received answer from Base: "));
-    Serial.print(answerFromBase, DEC);
-    Serial.print(F("\r\n"));
+    //Serial.print(F("__Received answer from Base: "));
+    //Serial.print(answerFromBase, DEC);
+    //Serial.print(F("\r\n"));
   }
 
   delay(50);
