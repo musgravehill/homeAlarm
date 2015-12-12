@@ -20,7 +20,7 @@
   LOGS => log on SD only
   DNGR => log on SD & send SMS [danger]
 */
-* /
+
 
 #include <SPI.h>
 #include <nRF24L01.h>
@@ -129,8 +129,8 @@ void NRF_sendData(uint16_t* arrayToBase) {
   uint8_t answerFromBase; //2^8 - 1   [0,255]
 
   Serial.println("\r\n");
-  Serial.println("arr[");
-  Serial.println(sizeof(arrayToBase), DEC);
+  Serial.print("arr[");
+  Serial.print(sizeof(&arrayToBase), DEC);
   Serial.println("]: ");
   Serial.println(arrayToBase[0], DEC);
   Serial.println(arrayToBase[1], DEC);
