@@ -71,7 +71,7 @@ void loop() {
   bool isEndOfCommand = false;
   char getByte;
   while (sftSrl_forCommand.available() & !isEndOfCommand ) {
-    char getByte = sftSrl_forCommand.read();    
+    char getByte = sftSrl_forCommand.read();
     if (getByte == '}') { //end of command
       isEndOfCommand = true;
       processCommand(command);
@@ -84,17 +84,10 @@ void loop() {
       command = "";
     }
   }
-
-  //----------------TEST-----------------
-  //processCommand("LOGS;#2;V3.7;T23;H50");
-  //processCommand("DNGR;#5;W1");
-  //processCommand("DNGR;#1;H90");
-  //delay(8000);
-  //-------TEST END----------------------
 }
 
-//LOGS;#2;V3.7;T23;H50
-//DNGR;#5;W1
+//LOGS;#2;V3.7;T23;H50;
+//DNGR;#5;W1;
 void processCommand(String command) {
   /*
     DateTime now = RTC3231.now();
@@ -138,8 +131,23 @@ void processCommand(String command) {
 
 void SD_log(String data) {
   if (SD_isEnable) {
+    /*
+      DateTime now = RTC3231.now();
+      uint32_t nowUt = now.unixtime();
+      uint16_t yyyy =  now.year();
+      uint8_t mm = now.month();
+      uint8_t dd =  now.day();
+    */
+
+    uint16_t yy =  2015 - 2000;
+    uint8_t mm = 12;
+    uint8_t dd = 28;
+    String filename_s = String(dd, DEC) + "." + String(mm, DEC) + "." + String(yy, DEC) + ".csv";
+    char filename_chr[filename_s.length() + 1];
+    filename_s.toCharArray(filename_chr, sizeof(filename_chr));
+
     // 8.3 filename.ext rule
-    if (SD_file_log.open("log.csv", O_WRITE | O_CREAT | O_APPEND)) {
+    if (SD_file_log.open( filename_chr, O_WRITE | O_CREAT | O_APPEND)) {
       SD_file_log.println(data);
       SD_file_log.close();
     }
@@ -149,10 +157,8 @@ void SD_log(String data) {
 void SD_init() {
   if (SD_card.begin(SD_CS, SPI_HALF_SPEED)) {
     SD_isEnable = true;
-    //Serial.println("SD init OK");
   } else {
     SD_isEnable = false;
-    //Serial.println("SD init ERROR");
   }
 }
 
@@ -167,27 +173,27 @@ void GSM_sendSMS(String message, String phone) {
 
 String COMMAND_getVerbalParamName(String systemParamName) {
   if (systemParamName == "V") {
-    return "_VOLTAGE_";
+    return F("_VOLTAGE_");
   }
   if (systemParamName == "T") {
-    return "_TEMPERATURE_";
+    return F("_TEMPERATURE_");
   }
   if (systemParamName == "H") {
-    return "_HUMIDITY_";
+    return F("_HUMIDITY_");
   }
   if (systemParamName == "W") {
-    return "_WATER_LEAK_";
+    return F("_WATER_LEAK_");
   }
   if (systemParamName == "G") {
-    return "_GAS_CH4_";
+    return F("_GAS_CH4_");
   }
   if (systemParamName == "M") {
-    return "_MOTION_DETECTION_";
+    return F("_MOTION_DETECTION_");
   }
   if (systemParamName == "C") {
-    return "_GAS_CO_";
+    return F("_GAS_CO_");
   }
-  return "CNNT_RECOGNIZE_PARAM";
+  return F("CNNT_RECOGNIZE_PARAM");
 }
 
 /*
