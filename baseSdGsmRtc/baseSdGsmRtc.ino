@@ -6,13 +6,13 @@
     {DNGR;#5;W1}
 
   command params
-    V   n, 0..5         voltage on sensor battery, V
-    T   n, -50..120     temperature, C
-    H   n, 0..100       humidity, %
-    W   n, 0, 1         water leak, bool
-    G   n, 0..1023 ADC  gas CH4, ADC value
-    M   n, 0, 1         motion detector, bool
-    C   n, 0..1023      gas CO, ADC value
+    V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V
+    T   0=null, -50..120 [+100]   temperature, C
+    H   0=null, 0..100   [+100]   humidity, %
+    W   0=null, 0=null, (0,1 + 100) = 100=normal, 101=alert         water leak, bool
+    G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
+    M   0=null, (0,1 + 100) = 100=normal, 101=alert motion detector, bool
+    C   0=null, 0..1023 [+1]      gas CO, ADC value
 
   LOGS => log on SD only
   DNGR => log on SD & send SMS [danger]
