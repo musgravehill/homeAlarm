@@ -152,7 +152,7 @@ void BASE_processDataFromSensor() {
   Serial.println(commandToBaseSdGsmRtc_logs);
 }
 
-void BASE_decodeParam(uint8_t paramNum, uint16_t paramVal_encoded) {
+uint16_t BASE_decodeParam(uint8_t paramNum, uint16_t paramVal_encoded) {
   uint16_t paramVal_decoded = 0;
   switch (paramNum) {
     case 0: //V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V
