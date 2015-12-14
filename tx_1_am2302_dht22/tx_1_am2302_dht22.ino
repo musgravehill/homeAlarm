@@ -1,5 +1,5 @@
 /*
-  3.3V ardu_328
+  ardu_328
   nrf24l01+
   dht22
 */
@@ -57,7 +57,7 @@ void loop() {
   LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
   LP_counterSleep_8s++;
 
-  if (LP_counterSleep_8s > 0) {
+  if (LP_counterSleep_8s > 5) {
     LP_counterSleep_8s = 0;
     sendDataToBase();
   }
