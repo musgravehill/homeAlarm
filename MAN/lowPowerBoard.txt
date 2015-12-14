@@ -3,25 +3,9 @@
 add to the end of file boards.txt      
 
 
-
-##############################################################
-
-prominilowpower.name=Arduino Pro Mini LowPower
-
-prominilowpower.upload.tool=avrdude
-prominilowpower.upload.protocol=arduino
-
-prominilowpower.bootloader.tool=avrdude
-prominilowpower.bootloader.unlock_bits=0x3F
-prominilowpower.bootloader.lock_bits=0x0F
-
-prominilowpower.build.board=AVR_PRO
-prominilowpower.build.core=arduino
-prominilowpower.build.variant=eightanaloginputs
-
-## Arduino Pro Mini LowPower (2.4V++, 8 MHz) w/ ATmega328
+## Arduino Pro Mini LowPower (1.8V++, 8 MHz) w/ ATmega328
 ## --------------------------------------------------
-prominilowpower.menu.cpu.8MHzatmega328=ATmega328 (2.4V++, 8 MHz)
+prominilowpower.menu.cpu.8MHzatmega328=ATmega328 (1.8V++, 8 MHz)
 
 prominilowpower.menu.cpu.8MHzatmega328.upload.maximum_size=30720
 prominilowpower.menu.cpu.8MHzatmega328.upload.maximum_data_size=2048
@@ -34,3 +18,19 @@ prominilowpower.menu.cpu.8MHzatmega328.bootloader.file=atmega/ATmegaBOOT_168_atm
 
 prominilowpower.menu.cpu.8MHzatmega328.build.mcu=atmega328p
 prominilowpower.menu.cpu.8MHzatmega328.build.f_cpu=8000000L
+
+## Arduino Pro Mini LowPower (2.7V++, 16 MHz) w/ ATmega328
+## --------------------------------------------------
+prominilowpower.menu.cpu.16MHzatmega328=ATmega328 (2.7V++, 16 MHz)
+
+prominilowpower.menu.cpu.16MHzatmega328.upload.maximum_size=30720
+prominilowpower.menu.cpu.16MHzatmega328.upload.maximum_data_size=2048
+prominilowpower.menu.cpu.16MHzatmega328.upload.speed=57600
+
+prominilowpower.menu.cpu.16MHzatmega328.bootloader.low_fuses=0xFF
+prominilowpower.menu.cpu.16MHzatmega328.bootloader.high_fuses=0xDA
+prominilowpower.menu.cpu.16MHzatmega328.bootloader.extended_fuses=0x05
+prominilowpower.menu.cpu.16MHzatmega328.bootloader.file=atmega/ATmegaBOOT_168_atmega328.hex
+
+prominilowpower.menu.cpu.16MHzatmega328.build.mcu=atmega328p
+prominilowpower.menu.cpu.16MHzatmega328.build.f_cpu=16000000L
