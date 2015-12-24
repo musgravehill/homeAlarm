@@ -31,7 +31,7 @@ SdFat SD_card;
 SdFile SD_file_log;
 bool SD_isEnable = false;
 
-SoftwareSerial sftSrl_forCommand(7, 8); // RX, TX
+SoftwareSerial sftSrl_forGSM(7, 8); // RX, TX
 String command;
 
 //seconds between SMS
@@ -59,19 +59,21 @@ void setup() {
   delay(50);
   Serial.begin(9600);
   delay(50);
-  sftSrl_forCommand.begin(9600);
+  sftSrl_forGSM.begin(9600);
   delay(50);
   SD_init();
   delay(50);
   Wire.begin();
   delay(50);
+
+  sftSrl_forGSM.println("AT+CLIP=1"); //turn on caller ID notification
 }
 
 void loop() {
   bool isEndOfCommand = false;
   char getByte;
-  while (sftSrl_forCommand.available() & !isEndOfCommand ) {
-    char getByte = sftSrl_forCommand.read();
+  while (Serial.available() & !isEndOfCommand ) {
+    char getByte = Serial.read();
     if (getByte == '}') { //end of command
       isEndOfCommand = true;
       processCommand(command);
@@ -119,9 +121,9 @@ void processCommand(String command) {
     GSM_sendSMS(messageLog, "+79998885533");
   }
 
-  Serial.print(F("\r\n processCommand: "));
-  Serial.println(command);
-  Serial.print(F("\r\n"));
+  //Serial.print(F("\r\n processCommand: "));
+  //Serial.println(command);
+  //Serial.print(F("\r\n"));
   //Serial.print(F("commandParam0: "));
   //Serial.println(commandParam0);
   //Serial.print(F("message: "));
@@ -163,11 +165,19 @@ void SD_init() {
 }
 
 void GSM_sendSMS(String message, String phone) {
-  Serial.println("AT+CMGS=\"" + phone + "\"");
+  sftSrl_forGSM.println("AT+CMGF=1"); //Switching to text mode
+  delay(100);
+  sftSrl_forGSM.println("AT+CSCS=\"GSM\""); //english only
+  delay(100);
+  sftSrl_forGSM.println("AT+CMGS=\"" + phone + "\"");
   delay(1000);
-  Serial.print(message);
+  sftSrl_forGSM.print(message);
   delay(300);
-  Serial.print((char)26);
+  sftSrl_forGSM.print((char)26);
+  delay(300);
+
+  //clean ALL SMS (in, out, read, unread, sent, unsent)
+  sftSrl_forGSM.println("AT+CMGD=1,4");
   delay(300);
 }
 
@@ -195,17 +205,3 @@ String COMMAND_getVerbalParamName(String systemParamName) {
   }
   return F("CNNT_RECOGNIZE_PARAM");
 }
-
-/*
-   String str;
-
-  void loop()
-  {
-    if(Serial.available() > 0)
-    {
-        str = Serial.readStringUntil('\n');
-        x = Serial.parseInt();
-    }
-  }
-*/
-
