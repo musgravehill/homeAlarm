@@ -60,6 +60,16 @@ RF24 radio(NRF_CE_PIN, NRF_CSN_PIN);
 
 SoftwareSerial sftSrl_forCommand(7, 8); // RX, TX
 
+#include <Adafruit_GFX.h>
+#include <Adafruit_PCD8544.h>
+// Software SPI (slower updates, more flexible pin options):
+// pin 6 - Serial clock out (SCLK)
+// pin 5 - Serial data out (DIN)
+// pin 4 - Data/Command select (D/C)
+// pin 3 - LCD chip select (CS)
+// pin 2 - LCD reset (RST)
+Adafruit_PCD8544 myDisplay = Adafruit_PCD8544(6, 5, 4, 3, 2);
+
 void setup() {
   delay(2000);
 #ifdef DEBUG
@@ -98,6 +108,12 @@ void setup() {
   radio.openReadingPipe(4, NRF_pipes[4]);
   radio.openReadingPipe(5, NRF_pipes[5]);
   radio.startListening();
+
+  delay(100);
+  myDisplay.begin();
+  myDisplay.setContrast(60);
+  myDisplay.clearDisplay();
+  myDisplay.setRotation(2);
 }
 
 void loop() {
@@ -159,9 +175,16 @@ void BASE_processDataFromSensor() {
   commandToBaseSdGsmRtc_logs += "}";
   String commandToBaseSdGsmRtc_all = commandToBaseSdGsmRtc_logs + commandToBaseSdGsmRtc_dangers;
   sftSrl_forCommand.println(commandToBaseSdGsmRtc_all);
-#ifdef DEBUG 
+  
+  myDisplay.clearDisplay();
+  myDisplay.setTextSize(1);
+  myDisplay.setTextColor(BLACK);
+  myDisplay.setCursor(0, 0);
+  myDisplay.println(commandToBaseSdGsmRtc_all);
+  myDisplay.display();
+#ifdef DEBUG
   Serial.println(commandToBaseSdGsmRtc_all);
-#endif 
+#endif
 }
 
 uint16_t BASE_decodeParam(uint8_t paramNum, uint16_t paramVal_encoded) {
