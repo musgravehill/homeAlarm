@@ -24,10 +24,13 @@
   DNGR => log on SD & send SMS [danger]
 */
 
+#define DEBUG 1
+
 #include <SPI.h>
 #include <nRF24L01.h>
 #include <RF24.h>
 #include <stdint.h>
+#include <SoftwareSerial.h>
 
 #define NRF_CE_PIN 9
 #define NRF_CSN_PIN 10 //hardware SS SPI
@@ -55,11 +58,15 @@ uint16_t messageFromSensor[7] = {
 
 RF24 radio(NRF_CE_PIN, NRF_CSN_PIN);
 
+SoftwareSerial sftSrl_forCommand(7, 8); // RX, TX
+
 void setup() {
   delay(2000);
+#ifdef DEBUG
   Serial.begin(9600);
   delay(100);
   Serial.println(F("Im Base with AckPayload"));
+#endif
 
   radio.begin();
   delay(100);
@@ -114,20 +121,21 @@ void NRF_listen() {
 }
 
 void BASE_processDataFromSensor() {
-  /*Serial.print(F("Sensor# "));
-    Serial.println(currPipeNum);
-    Serial.print(F("size:"));
-    Serial.println(sizeof(messageFromSensor), DEC);
-    Serial.println(messageFromSensor[0], DEC);
-    Serial.println(messageFromSensor[1], DEC);
-    Serial.println(messageFromSensor[2], DEC);
-    Serial.println(messageFromSensor[3], DEC);
-    Serial.println(messageFromSensor[4], DEC);
-    Serial.println(messageFromSensor[5], DEC);
-    Serial.println(messageFromSensor[6], DEC);
-    Serial.print(F("\r\n"));
-    Serial.print(F("\r\n"));
-  */
+#ifdef DEBUG
+  Serial.print(F("Sensor# "));
+  Serial.println(currPipeNum);
+  Serial.print(F("size:"));
+  Serial.println(sizeof(messageFromSensor), DEC);
+  Serial.println(messageFromSensor[0], DEC);
+  Serial.println(messageFromSensor[1], DEC);
+  Serial.println(messageFromSensor[2], DEC);
+  Serial.println(messageFromSensor[3], DEC);
+  Serial.println(messageFromSensor[4], DEC);
+  Serial.println(messageFromSensor[5], DEC);
+  Serial.println(messageFromSensor[6], DEC);
+  Serial.print(F("\r\n"));
+  Serial.print(F("\r\n"));
+#endif
 
   String commandToBaseSdGsmRtc_logs = "{LOGS;#" + String(currPipeNum, DEC) + ";";
   String commandToBaseSdGsmRtc_dangers = "";
@@ -150,7 +158,10 @@ void BASE_processDataFromSensor() {
   }
   commandToBaseSdGsmRtc_logs += "}";
   String commandToBaseSdGsmRtc_all = commandToBaseSdGsmRtc_logs + commandToBaseSdGsmRtc_dangers;
+  sftSrl_forCommand.println(commandToBaseSdGsmRtc_all);
+#ifdef DEBUG 
   Serial.println(commandToBaseSdGsmRtc_all);
+#endif 
 }
 
 uint16_t BASE_decodeParam(uint8_t paramNum, uint16_t paramVal_encoded) {
