@@ -1,0 +1,2798 @@
+<!DOCTYPE html>
+<!-- saved from url=(0062)http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11 -->
+<html lang="en-GB" class=" " data-dir="ltr" style="direction: ltr;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>HC-SR501 motion sensor | MySensors Forum</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="content-type" content="text/html; charset=UTF-8">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta property="og:site_name" content="MySensors Forum">
+	<meta name="keywords" content="Arduino, MySensors, NRF24L01, RFM69, Wireless sensors, DIY, Do-it-yourself, Home automation, HA, Internet of things, IOT, Mesh network.">
+	<meta name="msapplication-badge" content="frequency=30; polling-uri=http://forum.mysensors.org/sitemap.xml">
+	<meta name="msapplication-square150x150logo" content="/uploads/files/site-logo.png">
+	<meta name="title" content="HC-SR501 motion sensor">
+	<meta name="description" content="Since I want to make my MySensors project all about security, I&amp;#x27;d like some input on the selection and operation of the default Ebay motion sensor - the HC-SR501. Some question that have been bugging me:   Is this sensor reliable? I noticed from the specs...">
+	<meta property="og:title" content="HC-SR501 motion sensor">
+	<meta property="og:description" content="Since I want to make my MySensors project all about security, I&amp;#x27;d like some input on the selection and operation of the default Ebay motion sensor - the HC-SR501. Some question that have been bugging me:   Is this sensor reliable? I noticed from the specs...">
+	<meta property="og:type" content="article">
+	<meta property="og:url" content="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor">
+	<meta property="og:image" content="https://s.gravatar.com/avatar/8a891920f72fca91b5c1c32b8f33d8d9?size=128&amp;default=wavatar&amp;rating=pg">
+	<meta property="og:image:url" content="https://s.gravatar.com/avatar/8a891920f72fca91b5c1c32b8f33d8d9?size=128&amp;default=wavatar&amp;rating=pg">
+	<meta property="article:published_time" content="2014-07-22T05:54:13.934Z">
+	<meta property="article:modified_time" content="2015-05-07T21:39:20.842Z">
+	<meta property="article:section" content="Hardware">
+	<link rel="stylesheet" type="text/css" href="./HC-SR501 motion sensor _ MySensors Forum_files/stylesheet.css">
+	
+	
+	<link rel="apple-touch-icon" href="http://forum.mysensors.org/apple-touch-icon">
+	<link rel="alternate" type="application/rss+xml" href="http://forum.mysensors.org/topic/225.rss">
+	<link rel="canonical" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor">
+	<link rel="up" href="http://forum.mysensors.org/category/4/hardware">
+	<link rel="next" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11?page=2">
+
+	<!--[if lt IE 9]>
+  		<script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/2.3.0/es5-shim.min.js"></script>
+  		<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script>
+  		<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+  		<script>__lt_ie_9__ = 1;</script>
+	<![endif]-->
+
+	<script async="" src="./HC-SR501 motion sensor _ MySensors Forum_files/analytics.js"></script><script>
+		var RELATIVE_PATH = "";
+		var config = JSON.parse('{"relative_path":"","socketioTransports":["polling","websocket"],"websocketAddress":"","version":"0.8.2","siteTitle":"MySensors Forum","browserTitle":"MySensors Forum","showSiteTitle":false,"postDelay":"10","minimumTitleLength":"3","maximumTitleLength":"255","minimumPostLength":"8","maximumPostLength":"32767","hasImageUploadPlugin":false,"maximumProfileImageSize":"256","minimumUsernameLength":"3","maximumUsernameLength":"16","minimumPasswordLength":"6","maximumSignatureLength":"255","maximumAboutMeLength":"500","useOutgoingLinksPage":false,"allowGuestSearching":true,"allowGuestUserSearching":false,"allowGuestHandles":false,"allowFileUploads":true,"allowProfileImageUploads":true,"allowTopicsThumbnail":false,"allowAccountDelete":true,"privateUserInfo":false,"privateTagListing":false,"usePagination":false,"disableSocialButtons":false,"disableChat":false,"maximumChatMessageLength":1000,"maxReconnectionAttempts":"5","reconnectionDelay":"200","minimumTagsPerTopic":0,"maximumTagsPerTopic":5,"minimumTagLength":"3","maximumTagLength":"15","topicsPerPage":"20","postsPerPage":"20","maximumFileSize":"2048","theme:id":"nodebb-theme-persona","theme:src":"","defaultLang":"en_GB","userLang":"en_GB","loggedIn":false,"cache-buster":"3087429a-73ba-403f-8ca7-ca152ab6dcd9","requireEmailConfirmation":false,"topicPostSort":"oldest_to_newest","categoryTopicSort":"newest_to_oldest","csrf_token":"Zy1f9qLp-izPj28yxJ5_86q0VYBz3BH4AmOQ","searchEnabled":true}');
+		var app = {
+			template: "topic",
+			user: JSON.parse('{"username":"Guest","userslug":"","picture":"https://s.gravatar.com/avatar/d415f0e30c471dfdd9bc4f827329ef48?size=128&default=wavatar&rating=pg","status":"offline","banned":false,"uid":0,"isAdmin":false,"email:confirmed":false}')
+		};
+	</script>
+	<script src="./HC-SR501 motion sensor _ MySensors Forum_files/nodebb.min.js"></script>
+<script>
+	require.config({
+		baseUrl: "/src/modules",
+		waitSeconds: 3,
+		urlArgs: "3087429a-73ba-403f-8ca7-ca152ab6dcd9",
+		paths: {
+			'forum': '../client',
+			'vendor': '../../vendor',
+			'mousetrap': '../../bower/mousetrap/mousetrap'
+		}
+	});
+</script>
+
+		
+		<style type="text/css">.copyright{padding-top:20px;padding-bottom:20px;font-size:14px;margin-right:auto;margin-left:auto;padding-left:15px;padding-right:15px;width:100%;text-align:center}.header .forum-logo{float:left;width:150px;margin-top:11px;margin-left:4px}#main-nav{margin-left:15px}</style>
+<link rel="stylesheet" href="./HC-SR501 motion sensor _ MySensors Forum_files/railscasts.css"><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="forum/topic" src="./HC-SR501 motion sensor _ MySensors Forum_files/topic.js"></script><style type="text/css">
+  .emoji {
+    width: 20px;
+    height: 20px;
+    transition: z-index,margin,margin-right,width,height;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.2s;
+    transition-delay: 0.2s;
+    z-index: 0;
+  }.emoji:hover {
+  width: 48px;
+  height: 48px;
+  margin: -14px;
+  z-index: 48;
+}
+.categories>li .content img.emoji:hover {
+  width: 48px;
+  height: 48px;
+  margin-right: -14px;
+}
+</style><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="forum/topic/threadTools" src="./HC-SR501 motion sensor _ MySensors Forum_files/threadTools.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="forum/topic/postTools" src="./HC-SR501 motion sensor _ MySensors Forum_files/postTools.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="forum/topic/events" src="./HC-SR501 motion sensor _ MySensors Forum_files/events.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="forum/topic/browsing" src="./HC-SR501 motion sensor _ MySensors Forum_files/browsing.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="forum/topic/posts" src="./HC-SR501 motion sensor _ MySensors Forum_files/posts.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="navigator" src="./HC-SR501 motion sensor _ MySensors Forum_files/navigator.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="sort" src="./HC-SR501 motion sensor _ MySensors Forum_files/sort.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="share" src="./HC-SR501 motion sensor _ MySensors Forum_files/share.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="forum/topic/fork" src="./HC-SR501 motion sensor _ MySensors Forum_files/fork.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="forum/topic/move" src="./HC-SR501 motion sensor _ MySensors Forum_files/move.js"></script><link type="image/x-icon" rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAADYElEQVQ4T33Ta0yTVxgH8P9LaV/e0tIrtJRKaWm5WmSWMTFGFGTgrQnEabYYHRHFqGPOZImJuiVuGIgQY9APXuJ9CEYXlc0NISjBXbJMjNq6XijlIlDTiqXlMkpb9rYJBjPDSc6H8yT/X845eR4C/18RdCm0/eBwMuRRnC1r4mU7RWTMi/q/H+rp+uT8CDF3kMlkbAmXwbe5ZuRE5KySGJv+M4ZkXixVxa3atDyTOP7U9ixifKrJOuRsMDqd43QulJ0lJBxOXDKXm+3mkcq8Rfyq505fH5sgA0msAMsxMVrcXJkPxxgPt7q7kcoWPfr0WttOH4ORBXbkELze3wi5XC7cJuVcXCIRFihIKvqPIR8iBczZDCWLeP7qNfHl3jw4ezmYhg/fneq0Nhq6X1MU1f2BOKahtW/YHH5CkUxecWyt5uzSXAkxABK2lz4UpifC5ZmEeGUs4EgFLKN44bXA+k9v0G0cecOTiXprDaa7YYBBUZtPaLWNXxStYAyuoGDsd4DJ58JqGYNaJEVPlwvFH6uh3JgAuEdQX/fQe7XVfNo14WoOA6pUTXmVJvFCSprKc9ZsmUlLzxElJUjBpRHX8DD8QT/YIhKxxEv/kmwd41ajacrvRX/TX+37w8CyrEy9RiGsHPh34vyrweldN87UlCiSUxAj4MHj9oLhn8Swcwyfle+/v65ombClvWsoK1EzZRi0dYYBtVpN9vT0MAQqFTOFx71fW1ud+6PNjW9KMuFweXD9dwMOlq5EW+uvN8v2HjqqTEiIt9vtD+ho4G0fhCCdThfPj2Z11tdUaxanJ8PlcIAvigXJpuiP8uNBy73Ogs2V6+Y30zuAVqsVCLlRbfsqtun064thNJkQJxCAH81BtFSCjl/udRVuqlhLAxNzDfgOQF+Bme2baq77/nApZe/D8rINCAaCeHLnJ+gqtqPl9s939Ft3f0KHZ94P0NWlOTn7yrdsPLlGIY2wtneAjFcgR18AljgueOBI3YFzVxpPvncW5op5ecXCKOb4ua/2fF62vjAfEVQUAr4ALt9oub1j9+EdgGd0QSA0id8eqm54/OTRng2rP4SAz8OAw4tL136oNpqtR0IDtCAgFi+SHaz6ukOTmZT6ZuQZ8j/KhcHaj/NNd+1mi7XEZDJZ5gP/AYRmOU9XOCNsAAAAAElFTkSuQmCC"><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="alerts" src="./HC-SR501 motion sensor _ MySensors Forum_files/alerts.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="search" src="./HC-SR501 motion sensor _ MySensors Forum_files/search.js"></script></head>
+
+<body>
+	<nav id="menu" class=" slideout-menu">
+		<section class="menu-profile">
+			<img src="https://s.gravatar.com/avatar/d415f0e30c471dfdd9bc4f827329ef48?size=128&amp;default=wavatar&amp;rating=pg">
+			<i component="user/status" class="fa fa-fw fa-circle status offline"></i>
+		</section>
+
+		<section class="menu-section" data-section="navigation">
+			<h3 class="menu-section-title">Navigation</h3>
+			<ul class="menu-section-list">
+										<li class="">
+						<a href="http://forum.mysensors.org/categories" title="Categories" id="categories">
+														<i class="fa fa-fw fa-th"></i>
+
+														<span class="visible-xs-inline">Categories</span>
+						</a>
+					</li>
+					
+										<li class="">
+						<a href="http://forum.mysensors.org/recent" title="Recent" id="">
+														<i class="fa fa-fw fa-clock-o"></i>
+
+														<span class="visible-xs-inline">Recent</span>
+						</a>
+					</li>
+										<li class="">
+						<a href="http://forum.mysensors.org/tags" title="Tags" id="">
+														<i class="fa fa-fw fa-tags"></i>
+
+														<span class="visible-xs-inline">Tags</span>
+						</a>
+					</li>
+										<li class="">
+						<a href="http://forum.mysensors.org/popular" title="Popular" id="">
+														<i class="fa fa-fw fa-fire"></i>
+
+														<span class="visible-xs-inline">Popular</span>
+						</a>
+					</li>
+					
+					
+				
+										<li>
+						<a href="http://forum.mysensors.org/register">
+							<i class="fa fa-pencil visible-xs-inline"></i>
+							<span>Register</span>
+						</a>
+					</li>
+					<li>
+						<a href="http://forum.mysensors.org/login">
+							<i class="fa fa-sign-in visible-xs-inline"></i>
+							<span>Login</span>
+						</a>
+					</li>
+				</ul>
+		</section>
+
+		
+	</nav>
+
+	<main id="panel" class=" slideout-panel">
+		<nav class="navbar navbar-default navbar-fixed-top header" role="navigation" id="header-menu" component="navbar">
+			<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" id="mobile-menu">
+					<span component="notifications/icon" class="notification-icon fa fa-fw fa-bell-o" data-content="0"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+				<a href="http://www.mysensors.org/">
+					<img alt="" class=" forum-logo" src="./HC-SR501 motion sensor _ MySensors Forum_files/site-logo.png">
+				</a>
+				
+
+				<div component="navbar/title" class="visible-xs">
+					<span style="display: inline;">HC-SR501 motion sensor</span>
+				</div>
+			</div>
+
+			<div id="nav-dropdown" class="hidden-xs">
+												<ul id="logged-out-menu" class="nav navbar-nav navbar-right">
+										<li>
+						<a href="http://forum.mysensors.org/register">
+							<i class="fa fa-pencil visible-xs-inline"></i>
+							<span>Register</span>
+						</a>
+					</li>
+					<li>
+						<a href="http://forum.mysensors.org/login">
+							<i class="fa fa-sign-in visible-xs-inline"></i>
+							<span>Login</span>
+						</a>
+					</li>
+				</ul>
+								<ul class="nav navbar-nav navbar-right">
+					<li data-original-title="" title="">
+						<form id="search-form" class="navbar-form navbar-right hidden-xs" role="search" method="GET" action="">
+							<div class="hide" id="search-fields">
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="Search" name="query" value="">
+									<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><i class="fa fa-gears fa-fw advanced-search-link"></i></a>
+								</div>
+								<button type="submit" class="btn btn-default hide">Search</button>
+							</div>
+							<button id="search-button" type="button" class="btn btn-link"><i class="fa fa-search fa-fw" title="Search"></i></button>
+						</form>
+					</li>
+					<li class="visible-xs">
+						<a href="http://forum.mysensors.org/search">
+							<i class="fa fa-search fa-fw"></i> Search
+						</a>
+					</li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right hidden-xs">
+					<li>
+						<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" id="reconnect" class="hide" title="" data-original-title="Connection to MySensors Forum has been lost, attempting to reconnect...">
+							<i class="fa fa-check"></i>
+						</a>
+					</li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right pagination-block visible-lg visible-md">
+					<li class="dropdown">
+						<i class="fa fa-angle-double-up pointer fa-fw pagetop"></i>
+						<i class="fa fa-angle-up pointer fa-fw pageup"></i>
+
+						<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="dropdown-toggle" data-toggle="dropdown">
+							<span id="pagination">11 out of 27</span>
+						</a>
+
+						<i class="fa fa-angle-down pointer fa-fw pagedown"></i>
+						<i class="fa fa-angle-double-down pointer fa-fw pagebottom"></i>
+
+						<div class="progress-container">
+							<div class="progress-bar" style="width: 40.7407%;"></div>
+						</div>
+
+						<ul class="dropdown-menu" role="menu">
+  							<input type="text" class="form-control" id="indexInput" placeholder="Enter index">
+  						</ul>
+					</li>
+				</ul>
+
+				<ul id="main-nav" class="nav navbar-nav">
+										<li class="">
+						<a href="http://forum.mysensors.org/categories" title="" id="categories" data-original-title="Categories">
+														<i class="fa fa-fw fa-th"></i>
+
+														<span class="visible-xs-inline">Categories</span>
+						</a>
+					</li>
+					
+										<li class="">
+						<a href="http://forum.mysensors.org/recent" title="" id="" data-original-title="Recent">
+														<i class="fa fa-fw fa-clock-o"></i>
+
+														<span class="visible-xs-inline">Recent</span>
+						</a>
+					</li>
+										<li class="">
+						<a href="http://forum.mysensors.org/tags" title="" id="" data-original-title="Tags">
+														<i class="fa fa-fw fa-tags"></i>
+
+														<span class="visible-xs-inline">Tags</span>
+						</a>
+					</li>
+										<li class="">
+						<a href="http://forum.mysensors.org/popular" title="" id="" data-original-title="Popular">
+														<i class="fa fa-fw fa-fire"></i>
+
+														<span class="visible-xs-inline">Popular</span>
+						</a>
+					</li>
+					
+					
+				</ul>
+			</div>
+			</div>
+		</nav>
+		<div class="container" id="content" component="header">
+	<noscript>
+		&lt;div class="alert alert-danger"&gt;
+			&lt;p&gt;
+				Your browser does not seem to support JavaScript. As a result, your viewing experience will be diminished, and you have been placed in &lt;strong&gt;read-only mode&lt;/strong&gt;.
+			&lt;/p&gt;
+			&lt;p&gt;
+				Please download a browser that supports JavaScript, or enable it if it's disabled (i.e. NoScript).
+			&lt;/p&gt;
+		&lt;/div&gt;
+	</noscript><div class="topic">
+<ol class="breadcrumb">
+	<li itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+		<a href="http://forum.mysensors.org/" itemprop="url">
+			<span itemprop="title">
+				Home
+				
+			</span>
+		</a>
+	</li>
+	<li itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+		<a href="http://forum.mysensors.org/category/4/hardware" itemprop="url">
+			<span itemprop="title">
+				Hardware
+				
+			</span>
+		</a>
+	</li>
+	<li itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb" class="active">
+		
+			<span itemprop="title">
+				HC-SR501 motion sensor
+												<a target="_blank" href="http://forum.mysensors.org/topic/225.rss"><i class="fa fa-rss-square"></i></a>
+			</span>
+		
+	</li>
+</ol>
+
+	<h1 component="post/header" itemprop="name">
+
+		<i class="fa fa-thumb-tack hidden"></i> <i class="fa fa-lock hidden"></i> <span class="topic-title" component="topic/title">HC-SR501 motion sensor</span>
+
+
+		<button component="topic/follow" class="btn hidden-xs hidden-sm ">
+			<span>Watch</span> <i class="fa fa-eye"></i>
+		</button>
+
+		<button component="topic/unfollow" class="btn hidden-xs hidden-sm hidden">
+			<span>Unwatch</span> <i class="fa fa-eye-slash"></i>
+		</button>
+
+		<span class="browsing-users hidden hidden-xs hidden-sm pull-right">
+			<span>browsing</span>
+			<div component="topic/browsing/list" class="thread_active_users active-users inline-block"></div>
+			<small class="hidden">
+				<i class="fa fa-users"></i> <span component="topic/browsing/count" class="user-count"></span>
+			</small>
+		</span>
+	</h1>
+
+	<div component="topic/deleted/message" class="alert alert-warning hidden">This topic has been deleted. Only users with topic management privileges can see it.</div>
+
+	<ul component="topic" class="posts" data-tid="225">
+			<li component="post" class="clearfix " data-pid="2069" data-uid="111" data-username="bjornhallberg" data-userslug="bjornhallberg" data-index="0" data-timestamp="1406008453940" data-votes="0" itemscope="" itemtype="http://schema.org/Comment">
+				<a component="post/anchor" name="0"></a>
+
+				<meta itemprop="datePublished" content="2014-07-22T05:54:13.940Z">
+				<meta itemprop="dateModified" content="2014-07-24T14:22:29.042Z">
+
+<div class="clearfix">
+	<div class="icon pull-left">
+		<a href="http://forum.mysensors.org/user/bjornhallberg">
+			<img src="https://s.gravatar.com/avatar/8a891920f72fca91b5c1c32b8f33d8d9?size=128&amp;default=wavatar&amp;rating=pg" align="left" itemprop="image">
+			
+		</a>
+	</div>
+
+	<small class="pull-left">
+		<i component="user/status" class="fa fa-circle status offline" title="Offline"></i>
+		<strong>
+			<a href="http://forum.mysensors.org/user/bjornhallberg" itemprop="author" data-username="bjornhallberg" data-uid="111">bjornhallberg</a>
+		</strong>
+
+<a href="http://forum.mysensors.org/groups/hangaround"><small class="label group-label inline-block" style="background-color: #4ca3de;"><i class="fa fa-trophy"></i> Hero Member</small></a>
+
+		<div class="visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
+			posted <a class="permalink" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/1"><span class="timeago" title="Tue Jul 22 2014 09:54:13 GMT+0400 (Московское время (зима))">about a year ago</span></a>
+			<i class="fa fa-pencil-square pointer edit-icon" title="" data-original-title="last edited by bjornhallberg about a year ago"></i>
+
+			<span class="post-tools">
+				<a component="post/reply" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Reply</a>
+				<a component="post/quote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Quote</a>
+			</span>
+			<span>
+				
+			</span>
+		</div>
+		<div class="votes">
+						<a component="post/upvote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="">
+				<i class="fa fa-chevron-up"></i>
+			</a>
+			<span component="post/vote-count" data-votes="0">0</span>
+			
+		</div>
+
+<div class="dropdown moderator-tools">
+	<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></a>
+	<ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+		
+
+		<li role="presentation">
+			<a component="post/favourite" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-favourited="false">
+
+				<span class="favourite-text">Favourite</span>
+				<span component="post/favourite-count" class="favouriteCount" data-favourites="0">0</span>&nbsp;
+
+				<i component="post/favourite/on" class="fa fa-heart hidden"></i>
+				<i component="post/favourite/off" class="fa fa-heart-o "></i>
+			</a>
+		</li>
+
+				<li role="presentation" class="divider"></li>
+		<li role="presentation" class="dropdown-header">Share this Post</li>
+		<li role="presentation">
+			<a role="menuitem" class="facebook-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-facebook"></i></span> Facebook</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="twitter-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-twitter"></i></span> Twitter</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="google-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-google-plus"></i></span> Google+</a>
+		</li>
+
+		<li role="presentation" class="divider"></li>
+
+				<li role="presentation">
+			<a component="post/flag" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#">
+				Flag this post for moderation
+			</a>
+		</li>
+	</ul>
+</div>
+
+	</small>
+</div>
+
+<br>
+<div class="content" component="post/content" itemprop="text">
+	<p>Since I want to make my MySensors project all about security, I'd like some input on the selection and operation of the default Ebay motion sensor - the HC-SR501. Some question that have been bugging me:</p>
+<ol>
+<li>
+<p>Is this sensor reliable? I noticed from the specs that the detection range / cone seems a bit narrow? Will it last outdoors if properly protected and sealed? What sort of lifespan does it have? Does it deteriorate over time?</p>
+</li>
+<li>
+<p>Are there other better modules available if you're willing to pay a little more? I've found none so far ...</p>
+</li>
+<li>
+<p>What about power consumption then? 65uA or &lt;50uA are figures being thrown around. I've seen mentions of 40 uA at 5V while idling and 150 uA when motion is detected. That shouldn't be too hard on batteries? What about when you run it on 3.3V and bypass the regulator, surely that would make some difference?</p>
+</li>
+</ol>
+
+</div>
+
+
+
+<small data-editor="bjornhallberg" component="post/editor" class="hidden">last edited by <strong>bjornhallberg</strong> <span class="timeago" title="Thu Jul 24 2014 18:22:29 GMT+0400 (Московское время (зима))">about a year ago</span></small>
+
+
+<hr>
+
+			</li>
+
+						<li class="post-bar" data-index="0">
+<span class="tags">
+
+</span>
+
+<div class="topic-main-buttons pull-right">
+	<span class="loading-indicator btn pull-left hidden" done="0">
+		<span class="hidden-xs">Loading More Posts</span> <i class="fa fa-refresh fa-spin"></i>
+	</span>
+
+	<div class="stats">
+		<span component="topic/post-count" class="human-readable-number" title="27">27</span><br>
+		<small>Posts</small>
+	</div>
+	<div class="stats">
+		<span class="human-readable-number" title="6628">6.6k</span><br>
+		<small>Views</small>
+	</div>
+
+
+
+
+<a component="topic/reply" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="btn btn-primary hidden">Reply</a>
+
+<a href="http://forum.mysensors.org/login" class="btn btn-primary">Log in to reply</a>
+
+
+
+
+
+</div>
+<div class="clearfix"></div>
+
+<hr>
+			</li>
+			<li component="post" class="clearfix " data-pid="2201" data-uid="50" data-username="BulldogLowell" data-userslug="bulldoglowell" data-index="1" data-timestamp="1406211169252" data-votes="0" itemscope="" itemtype="http://schema.org/Comment">
+				<a component="post/anchor" name="1"></a>
+
+				<meta itemprop="datePublished" content="2014-07-24T14:12:49.252Z">
+				<meta itemprop="dateModified" content="">
+
+<div class="clearfix">
+	<div class="icon pull-left">
+		<a href="http://forum.mysensors.org/user/bulldoglowell">
+			<img src="./HC-SR501 motion sensor _ MySensors Forum_files/50-profileimg.jpg" align="left" itemprop="image">
+			
+		</a>
+	</div>
+
+	<small class="pull-left">
+		<i component="user/status" class="fa fa-circle status offline" title="Offline"></i>
+		<strong>
+			<a href="http://forum.mysensors.org/user/bulldoglowell" itemprop="author" data-username="BulldogLowell" data-uid="50">BulldogLowell</a>
+		</strong>
+
+<a href="http://forum.mysensors.org/groups/contest-winner"><small class="label group-label inline-block" style="background-color: #b3b332;"><i class="fa fa-trophy"></i> Contest Winner</small></a>
+
+		<div class="visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
+			posted <a class="permalink" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/2"><span class="timeago" title="Thu Jul 24 2014 18:12:49 GMT+0400 (Московское время (зима))">about a year ago</span></a>
+			<i class="fa fa-pencil-square pointer edit-icon hidden"></i>
+
+			<span class="post-tools">
+				<a component="post/reply" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Reply</a>
+				<a component="post/quote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Quote</a>
+			</span>
+			<span>
+				
+			</span>
+		</div>
+		<div class="votes">
+						<a component="post/upvote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="">
+				<i class="fa fa-chevron-up"></i>
+			</a>
+			<span component="post/vote-count" data-votes="0">0</span>
+			
+		</div>
+
+<div class="dropdown moderator-tools">
+	<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></a>
+	<ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+		
+
+		<li role="presentation">
+			<a component="post/favourite" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-favourited="false">
+
+				<span class="favourite-text">Favourite</span>
+				<span component="post/favourite-count" class="favouriteCount" data-favourites="0">0</span>&nbsp;
+
+				<i component="post/favourite/on" class="fa fa-heart hidden"></i>
+				<i component="post/favourite/off" class="fa fa-heart-o "></i>
+			</a>
+		</li>
+
+				<li role="presentation" class="divider"></li>
+		<li role="presentation" class="dropdown-header">Share this Post</li>
+		<li role="presentation">
+			<a role="menuitem" class="facebook-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-facebook"></i></span> Facebook</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="twitter-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-twitter"></i></span> Twitter</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="google-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-google-plus"></i></span> Google+</a>
+		</li>
+
+		<li role="presentation" class="divider"></li>
+
+				<li role="presentation">
+			<a component="post/flag" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#">
+				Flag this post for moderation
+			</a>
+		</li>
+	</ul>
+</div>
+
+	</small>
+</div>
+
+<br>
+<div class="content" component="post/content" itemprop="text">
+	<p><a class="plugin-mentions-a" href="http://forum.mysensors.org/user/bjornhallberg">@bjornhallberg</a> said:</p>
+<blockquote>
+<p>I noticed from the specs that the detection range / cone seems a bit narrow?</p>
+</blockquote>
+<p>I am using them indoors to detect motion in/out of rome and hallways.  Seems reliable.  I mainly use them in wall outlets to detect legs moving by.</p>
+
+</div>
+
+
+
+<small data-editor="" component="post/editor" class="hidden">last edited by <strong></strong> <span class="timeago" title="Invalid Date"></span></small>
+
+
+<hr>
+
+			</li>
+
+			
+			<li component="post" class="clearfix " data-pid="2203" data-uid="60" data-username="marceltrapman" data-userslug="marceltrapman" data-index="2" data-timestamp="1406212079346" data-votes="0" itemscope="" itemtype="http://schema.org/Comment">
+				<a component="post/anchor" name="2"></a>
+
+				<meta itemprop="datePublished" content="2014-07-24T14:27:59.346Z">
+				<meta itemprop="dateModified" content="">
+
+<div class="clearfix">
+	<div class="icon pull-left">
+		<a href="http://forum.mysensors.org/user/marceltrapman">
+			<img src="./HC-SR501 motion sensor _ MySensors Forum_files/60-profileimg.png" align="left" itemprop="image">
+			
+		</a>
+	</div>
+
+	<small class="pull-left">
+		<i component="user/status" class="fa fa-circle status offline" title="Offline"></i>
+		<strong>
+			<a href="http://forum.mysensors.org/user/marceltrapman" itemprop="author" data-username="marceltrapman" data-uid="60">marceltrapman</a>
+		</strong>
+
+<a href="http://forum.mysensors.org/groups/controller-developer"><small class="label group-label inline-block" style="background-color: #d61ed6;"><i class="fa fa-puzzle-piece"></i> Plugin Developer</small></a>
+
+		<div class="visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
+			posted <a class="permalink" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/3"><span class="timeago" title="Thu Jul 24 2014 18:27:59 GMT+0400 (Московское время (зима))">about a year ago</span></a>
+			<i class="fa fa-pencil-square pointer edit-icon hidden"></i>
+
+			<span class="post-tools">
+				<a component="post/reply" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Reply</a>
+				<a component="post/quote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Quote</a>
+			</span>
+			<span>
+				
+			</span>
+		</div>
+		<div class="votes">
+						<a component="post/upvote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="">
+				<i class="fa fa-chevron-up"></i>
+			</a>
+			<span component="post/vote-count" data-votes="0">0</span>
+			
+		</div>
+
+<div class="dropdown moderator-tools">
+	<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></a>
+	<ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+		
+
+		<li role="presentation">
+			<a component="post/favourite" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-favourited="false">
+
+				<span class="favourite-text">Favourite</span>
+				<span component="post/favourite-count" class="favouriteCount" data-favourites="0">0</span>&nbsp;
+
+				<i component="post/favourite/on" class="fa fa-heart hidden"></i>
+				<i component="post/favourite/off" class="fa fa-heart-o "></i>
+			</a>
+		</li>
+
+				<li role="presentation" class="divider"></li>
+		<li role="presentation" class="dropdown-header">Share this Post</li>
+		<li role="presentation">
+			<a role="menuitem" class="facebook-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-facebook"></i></span> Facebook</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="twitter-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-twitter"></i></span> Twitter</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="google-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-google-plus"></i></span> Google+</a>
+		</li>
+
+		<li role="presentation" class="divider"></li>
+
+				<li role="presentation">
+			<a component="post/flag" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#">
+				Flag this post for moderation
+			</a>
+		</li>
+	</ul>
+</div>
+
+	</small>
+</div>
+
+<br>
+<div class="content" component="post/content" itemprop="text">
+	<p><a class="plugin-mentions-a" href="http://forum.mysensors.org/user/bulldoglowell">@BulldogLowell</a> said:</p>
+<blockquote>
+<p>I am using them indoors to detect motion in/out of rome...</p>
+</blockquote>
+<p>Wow, how many of these puppies do you use??? <img class="emoji emoji-extended not-responsive" src="./HC-SR501 motion sensor _ MySensors Forum_files/smiley.png" title=":-D" alt=":-D"></p>
+
+</div>
+<div component="post/signature" data-uid="60" class="post-signature"><p>Fulltime Sales trainer/coach<br>
+Parttime Moderator MySensors board</p>
+<p>I use Indigo as controller for Z-Wave and MySensors<br>
+I have a FABtotum to print cases</p>
+</div>
+
+
+<small data-editor="" component="post/editor" class="hidden">last edited by <strong></strong> <span class="timeago" title="Invalid Date"></span></small>
+
+
+<hr>
+
+			</li>
+
+			
+			<li component="post" class="clearfix " data-pid="2204" data-uid="50" data-username="BulldogLowell" data-userslug="bulldoglowell" data-index="3" data-timestamp="1406212688077" data-votes="0" itemscope="" itemtype="http://schema.org/Comment">
+				<a component="post/anchor" name="3"></a>
+
+				<meta itemprop="datePublished" content="2014-07-24T14:38:08.077Z">
+				<meta itemprop="dateModified" content="">
+
+<div class="clearfix">
+	<div class="icon pull-left">
+		<a href="http://forum.mysensors.org/user/bulldoglowell">
+			<img src="./HC-SR501 motion sensor _ MySensors Forum_files/50-profileimg.jpg" align="left" itemprop="image">
+			
+		</a>
+	</div>
+
+	<small class="pull-left">
+		<i component="user/status" class="fa fa-circle status offline" title="Offline"></i>
+		<strong>
+			<a href="http://forum.mysensors.org/user/bulldoglowell" itemprop="author" data-username="BulldogLowell" data-uid="50">BulldogLowell</a>
+		</strong>
+
+<a href="http://forum.mysensors.org/groups/contest-winner"><small class="label group-label inline-block" style="background-color: #b3b332;"><i class="fa fa-trophy"></i> Contest Winner</small></a>
+
+		<div class="visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
+			posted <a class="permalink" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/4"><span class="timeago" title="Thu Jul 24 2014 18:38:08 GMT+0400 (Московское время (зима))">about a year ago</span></a>
+			<i class="fa fa-pencil-square pointer edit-icon hidden"></i>
+
+			<span class="post-tools">
+				<a component="post/reply" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Reply</a>
+				<a component="post/quote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Quote</a>
+			</span>
+			<span>
+				
+			</span>
+		</div>
+		<div class="votes">
+						<a component="post/upvote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="">
+				<i class="fa fa-chevron-up"></i>
+			</a>
+			<span component="post/vote-count" data-votes="0">0</span>
+			
+		</div>
+
+<div class="dropdown moderator-tools">
+	<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></a>
+	<ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+		
+
+		<li role="presentation">
+			<a component="post/favourite" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-favourited="false">
+
+				<span class="favourite-text">Favourite</span>
+				<span component="post/favourite-count" class="favouriteCount" data-favourites="0">0</span>&nbsp;
+
+				<i component="post/favourite/on" class="fa fa-heart hidden"></i>
+				<i component="post/favourite/off" class="fa fa-heart-o "></i>
+			</a>
+		</li>
+
+				<li role="presentation" class="divider"></li>
+		<li role="presentation" class="dropdown-header">Share this Post</li>
+		<li role="presentation">
+			<a role="menuitem" class="facebook-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-facebook"></i></span> Facebook</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="twitter-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-twitter"></i></span> Twitter</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="google-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-google-plus"></i></span> Google+</a>
+		</li>
+
+		<li role="presentation" class="divider"></li>
+
+				<li role="presentation">
+			<a component="post/flag" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#">
+				Flag this post for moderation
+			</a>
+		</li>
+	</ul>
+</div>
+
+	</small>
+</div>
+
+<br>
+<div class="content" component="post/content" itemprop="text">
+	<p><a class="plugin-mentions-a" href="http://forum.mysensors.org/user/marceltrapman">@marceltrapman</a></p>
+<p>two kids rooms to turn off lights (that they seem incapable of doing)</p>
+<p>hallways X 2 and one in the garage I just put there</p>
+
+</div>
+
+
+
+<small data-editor="" component="post/editor" class="hidden">last edited by <strong></strong> <span class="timeago" title="Invalid Date"></span></small>
+
+
+<hr>
+
+			</li>
+
+			
+			<li component="post" class="clearfix " data-pid="2205" data-uid="60" data-username="marceltrapman" data-userslug="marceltrapman" data-index="4" data-timestamp="1406213480860" data-votes="0" itemscope="" itemtype="http://schema.org/Comment">
+				<a component="post/anchor" name="4"></a>
+
+				<meta itemprop="datePublished" content="2014-07-24T14:51:20.860Z">
+				<meta itemprop="dateModified" content="">
+
+<div class="clearfix">
+	<div class="icon pull-left">
+		<a href="http://forum.mysensors.org/user/marceltrapman">
+			<img src="./HC-SR501 motion sensor _ MySensors Forum_files/60-profileimg.png" align="left" itemprop="image">
+			
+		</a>
+	</div>
+
+	<small class="pull-left">
+		<i component="user/status" class="fa fa-circle status offline" title="Offline"></i>
+		<strong>
+			<a href="http://forum.mysensors.org/user/marceltrapman" itemprop="author" data-username="marceltrapman" data-uid="60">marceltrapman</a>
+		</strong>
+
+<a href="http://forum.mysensors.org/groups/controller-developer"><small class="label group-label inline-block" style="background-color: #d61ed6;"><i class="fa fa-puzzle-piece"></i> Plugin Developer</small></a>
+
+		<div class="visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
+			posted <a class="permalink" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/5"><span class="timeago" title="Thu Jul 24 2014 18:51:20 GMT+0400 (Московское время (зима))">about a year ago</span></a>
+			<i class="fa fa-pencil-square pointer edit-icon hidden"></i>
+
+			<span class="post-tools">
+				<a component="post/reply" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Reply</a>
+				<a component="post/quote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Quote</a>
+			</span>
+			<span>
+				
+			</span>
+		</div>
+		<div class="votes">
+						<a component="post/upvote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="">
+				<i class="fa fa-chevron-up"></i>
+			</a>
+			<span component="post/vote-count" data-votes="0">0</span>
+			
+		</div>
+
+<div class="dropdown moderator-tools">
+	<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></a>
+	<ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+		
+
+		<li role="presentation">
+			<a component="post/favourite" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-favourited="false">
+
+				<span class="favourite-text">Favourite</span>
+				<span component="post/favourite-count" class="favouriteCount" data-favourites="0">0</span>&nbsp;
+
+				<i component="post/favourite/on" class="fa fa-heart hidden"></i>
+				<i component="post/favourite/off" class="fa fa-heart-o "></i>
+			</a>
+		</li>
+
+				<li role="presentation" class="divider"></li>
+		<li role="presentation" class="dropdown-header">Share this Post</li>
+		<li role="presentation">
+			<a role="menuitem" class="facebook-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-facebook"></i></span> Facebook</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="twitter-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-twitter"></i></span> Twitter</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="google-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-google-plus"></i></span> Google+</a>
+		</li>
+
+		<li role="presentation" class="divider"></li>
+
+				<li role="presentation">
+			<a component="post/flag" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#">
+				Flag this post for moderation
+			</a>
+		</li>
+	</ul>
+</div>
+
+	</small>
+</div>
+
+<br>
+<div class="content" component="post/content" itemprop="text">
+	<p><a class="plugin-mentions-a" href="http://forum.mysensors.org/user/bulldoglowell">@BulldogLowell</a> said:</p>
+<blockquote>
+<p><a class="plugin-mentions-a" href="http://forum.mysensors.org/user/marceltrapman">@marceltrapman</a></p>
+<p>two kids rooms to turn off lights (that they seem incapable of doing)</p>
+<p>hallways X 2 and one in the garage I just put there</p>
+<i class="fa fa-angle-down pointer toggle"></i></blockquote>
+<p>Still many, I have only 2 one for the kitchen and one for the bathroom.</p>
+<p>But... I was referring to the fact that you wrote '<strong>rome</strong>' instead of '<strong>room</strong>' <img class="emoji emoji-extended not-responsive" src="./HC-SR501 motion sensor _ MySensors Forum_files/grinning.png" title=":)" alt=":)"></p>
+
+</div>
+<div component="post/signature" data-uid="60" class="post-signature"><p>Fulltime Sales trainer/coach<br>
+Parttime Moderator MySensors board</p>
+<p>I use Indigo as controller for Z-Wave and MySensors<br>
+I have a FABtotum to print cases</p>
+</div>
+
+
+<small data-editor="" component="post/editor" class="hidden">last edited by <strong></strong> <span class="timeago" title="Invalid Date"></span></small>
+
+
+<hr>
+
+			</li>
+
+			
+			<li component="post" class="clearfix " data-pid="2208" data-uid="50" data-username="BulldogLowell" data-userslug="bulldoglowell" data-index="5" data-timestamp="1406215030184" data-votes="0" itemscope="" itemtype="http://schema.org/Comment">
+				<a component="post/anchor" name="5"></a>
+
+				<meta itemprop="datePublished" content="2014-07-24T15:17:10.184Z">
+				<meta itemprop="dateModified" content="">
+
+<div class="clearfix">
+	<div class="icon pull-left">
+		<a href="http://forum.mysensors.org/user/bulldoglowell">
+			<img src="./HC-SR501 motion sensor _ MySensors Forum_files/50-profileimg.jpg" align="left" itemprop="image">
+			
+		</a>
+	</div>
+
+	<small class="pull-left">
+		<i component="user/status" class="fa fa-circle status offline" title="Offline"></i>
+		<strong>
+			<a href="http://forum.mysensors.org/user/bulldoglowell" itemprop="author" data-username="BulldogLowell" data-uid="50">BulldogLowell</a>
+		</strong>
+
+<a href="http://forum.mysensors.org/groups/contest-winner"><small class="label group-label inline-block" style="background-color: #b3b332;"><i class="fa fa-trophy"></i> Contest Winner</small></a>
+
+		<div class="visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
+			posted <a class="permalink" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/6"><span class="timeago" title="Thu Jul 24 2014 19:17:10 GMT+0400 (Московское время (зима))">about a year ago</span></a>
+			<i class="fa fa-pencil-square pointer edit-icon hidden"></i>
+
+			<span class="post-tools">
+				<a component="post/reply" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Reply</a>
+				<a component="post/quote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Quote</a>
+			</span>
+			<span>
+				
+			</span>
+		</div>
+		<div class="votes">
+						<a component="post/upvote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="">
+				<i class="fa fa-chevron-up"></i>
+			</a>
+			<span component="post/vote-count" data-votes="0">0</span>
+			
+		</div>
+
+<div class="dropdown moderator-tools">
+	<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></a>
+	<ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+		
+
+		<li role="presentation">
+			<a component="post/favourite" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-favourited="false">
+
+				<span class="favourite-text">Favourite</span>
+				<span component="post/favourite-count" class="favouriteCount" data-favourites="0">0</span>&nbsp;
+
+				<i component="post/favourite/on" class="fa fa-heart hidden"></i>
+				<i component="post/favourite/off" class="fa fa-heart-o "></i>
+			</a>
+		</li>
+
+				<li role="presentation" class="divider"></li>
+		<li role="presentation" class="dropdown-header">Share this Post</li>
+		<li role="presentation">
+			<a role="menuitem" class="facebook-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-facebook"></i></span> Facebook</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="twitter-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-twitter"></i></span> Twitter</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="google-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-google-plus"></i></span> Google+</a>
+		</li>
+
+		<li role="presentation" class="divider"></li>
+
+				<li role="presentation">
+			<a component="post/flag" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#">
+				Flag this post for moderation
+			</a>
+		</li>
+	</ul>
+</div>
+
+	</small>
+</div>
+
+<br>
+<div class="content" component="post/content" itemprop="text">
+	<p><a class="plugin-mentions-a" href="http://forum.mysensors.org/user/marceltrapman">@marceltrapman</a> said:</p>
+<blockquote>
+<p><a class="plugin-mentions-a" href="http://forum.mysensors.org/user/bulldoglowell">@BulldogLowell</a> said:</p>
+<blockquote>
+<p><a class="plugin-mentions-a" href="http://forum.mysensors.org/user/marceltrapman">@marceltrapman</a></p>
+<p>two kids rooms to turn off lights (that they seem incapable of doing)</p>
+<p>hallways X 2 and one in the garage I just put there</p>
+</blockquote>
+<p>Still many, I have only 2 one for the kitchen and one for the bathroom.</p>
+<p>But... I was referring to the fact that you wrote '<strong>rome</strong>' instead of '<strong>room</strong>' <img class="emoji emoji-extended not-responsive" src="./HC-SR501 motion sensor _ MySensors Forum_files/grinning.png" title=":)" alt=":)"></p>
+<i class="fa fa-angle-down pointer toggle"></i></blockquote>
+<p>hehe  I missed that.</p>
+<p>My kids live in Rome, so to speak, and live like senators!</p>
+
+</div>
+
+
+
+<small data-editor="" component="post/editor" class="hidden">last edited by <strong></strong> <span class="timeago" title="Invalid Date"></span></small>
+
+
+<hr>
+
+			</li>
+
+			
+			<li component="post" class="clearfix " data-pid="2215" data-uid="60" data-username="marceltrapman" data-userslug="marceltrapman" data-index="6" data-timestamp="1406226640826" data-votes="0" itemscope="" itemtype="http://schema.org/Comment">
+				<a component="post/anchor" name="6"></a>
+
+				<meta itemprop="datePublished" content="2014-07-24T18:30:40.826Z">
+				<meta itemprop="dateModified" content="">
+
+<div class="clearfix">
+	<div class="icon pull-left">
+		<a href="http://forum.mysensors.org/user/marceltrapman">
+			<img src="./HC-SR501 motion sensor _ MySensors Forum_files/60-profileimg.png" align="left" itemprop="image">
+			
+		</a>
+	</div>
+
+	<small class="pull-left">
+		<i component="user/status" class="fa fa-circle status offline" title="Offline"></i>
+		<strong>
+			<a href="http://forum.mysensors.org/user/marceltrapman" itemprop="author" data-username="marceltrapman" data-uid="60">marceltrapman</a>
+		</strong>
+
+<a href="http://forum.mysensors.org/groups/controller-developer"><small class="label group-label inline-block" style="background-color: #d61ed6;"><i class="fa fa-puzzle-piece"></i> Plugin Developer</small></a>
+
+		<div class="visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
+			posted <a class="permalink" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/7"><span class="timeago" title="Thu Jul 24 2014 22:30:40 GMT+0400 (Московское время (зима))">about a year ago</span></a>
+			<i class="fa fa-pencil-square pointer edit-icon hidden"></i>
+
+			<span class="post-tools">
+				<a component="post/reply" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Reply</a>
+				<a component="post/quote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Quote</a>
+			</span>
+			<span>
+				
+			</span>
+		</div>
+		<div class="votes">
+						<a component="post/upvote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="">
+				<i class="fa fa-chevron-up"></i>
+			</a>
+			<span component="post/vote-count" data-votes="0">0</span>
+			
+		</div>
+
+<div class="dropdown moderator-tools">
+	<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></a>
+	<ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+		
+
+		<li role="presentation">
+			<a component="post/favourite" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-favourited="false">
+
+				<span class="favourite-text">Favourite</span>
+				<span component="post/favourite-count" class="favouriteCount" data-favourites="0">0</span>&nbsp;
+
+				<i component="post/favourite/on" class="fa fa-heart hidden"></i>
+				<i component="post/favourite/off" class="fa fa-heart-o "></i>
+			</a>
+		</li>
+
+				<li role="presentation" class="divider"></li>
+		<li role="presentation" class="dropdown-header">Share this Post</li>
+		<li role="presentation">
+			<a role="menuitem" class="facebook-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-facebook"></i></span> Facebook</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="twitter-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-twitter"></i></span> Twitter</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="google-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-google-plus"></i></span> Google+</a>
+		</li>
+
+		<li role="presentation" class="divider"></li>
+
+				<li role="presentation">
+			<a component="post/flag" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#">
+				Flag this post for moderation
+			</a>
+		</li>
+	</ul>
+</div>
+
+	</small>
+</div>
+
+<br>
+<div class="content" component="post/content" itemprop="text">
+	<p><a class="plugin-mentions-a" href="http://forum.mysensors.org/user/bulldoglowell">@BulldogLowell</a> <img class="emoji emoji-extended not-responsive" src="./HC-SR501 motion sensor _ MySensors Forum_files/grinning.png" title=":)" alt=":)"></p>
+<p>So, the sensors solve the behaviour of the senators...</p>
+
+</div>
+<div component="post/signature" data-uid="60" class="post-signature"><p>Fulltime Sales trainer/coach<br>
+Parttime Moderator MySensors board</p>
+<p>I use Indigo as controller for Z-Wave and MySensors<br>
+I have a FABtotum to print cases</p>
+</div>
+
+
+<small data-editor="" component="post/editor" class="hidden">last edited by <strong></strong> <span class="timeago" title="Invalid Date"></span></small>
+
+
+<hr>
+
+			</li>
+
+			
+			<li component="post" class="clearfix " data-pid="2220" data-uid="133" data-username="Yveaux" data-userslug="yveaux" data-index="7" data-timestamp="1406230919584" data-votes="0" itemscope="" itemtype="http://schema.org/Comment">
+				<a component="post/anchor" name="7"></a>
+
+				<meta itemprop="datePublished" content="2014-07-24T19:41:59.584Z">
+				<meta itemprop="dateModified" content="">
+
+<div class="clearfix">
+	<div class="icon pull-left">
+		<a href="http://forum.mysensors.org/user/yveaux">
+			<img src="./HC-SR501 motion sensor _ MySensors Forum_files/133-profileimg.jpg" align="left" itemprop="image">
+			
+		</a>
+	</div>
+
+	<small class="pull-left">
+		<i component="user/status" class="fa fa-circle status offline" title="Offline"></i>
+		<strong>
+			<a href="http://forum.mysensors.org/user/yveaux" itemprop="author" data-username="Yveaux" data-uid="133">Yveaux</a>
+		</strong>
+
+<a href="http://forum.mysensors.org/groups/code-contributor"><small class="label group-label inline-block" style="background-color: #8f248e;"><i class="fa fa-keyboard-o"></i> Code Contributor</small></a>
+
+		<div class="visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
+			posted <a class="permalink" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/8"><span class="timeago" title="Thu Jul 24 2014 23:41:59 GMT+0400 (Московское время (зима))">about a year ago</span></a>
+			<i class="fa fa-pencil-square pointer edit-icon hidden"></i>
+
+			<span class="post-tools">
+				<a component="post/reply" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Reply</a>
+				<a component="post/quote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Quote</a>
+			</span>
+			<span>
+				
+			</span>
+		</div>
+		<div class="votes">
+						<a component="post/upvote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="">
+				<i class="fa fa-chevron-up"></i>
+			</a>
+			<span component="post/vote-count" data-votes="0">0</span>
+			
+		</div>
+
+<div class="dropdown moderator-tools">
+	<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></a>
+	<ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+		
+
+		<li role="presentation">
+			<a component="post/favourite" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-favourited="false">
+
+				<span class="favourite-text">Favourite</span>
+				<span component="post/favourite-count" class="favouriteCount" data-favourites="0">0</span>&nbsp;
+
+				<i component="post/favourite/on" class="fa fa-heart hidden"></i>
+				<i component="post/favourite/off" class="fa fa-heart-o "></i>
+			</a>
+		</li>
+
+				<li role="presentation" class="divider"></li>
+		<li role="presentation" class="dropdown-header">Share this Post</li>
+		<li role="presentation">
+			<a role="menuitem" class="facebook-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-facebook"></i></span> Facebook</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="twitter-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-twitter"></i></span> Twitter</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="google-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-google-plus"></i></span> Google+</a>
+		</li>
+
+		<li role="presentation" class="divider"></li>
+
+				<li role="presentation">
+			<a component="post/flag" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#">
+				Flag this post for moderation
+			</a>
+		</li>
+	</ul>
+</div>
+
+	</small>
+</div>
+
+<br>
+<div class="content" component="post/content" itemprop="text">
+	<p><a class="plugin-mentions-a" href="http://forum.mysensors.org/user/marceltrapman">@marceltrapman</a> said:</p>
+<blockquote>
+<p>So, the sensors solve the behaviour of the senators...</p>
+</blockquote>
+<p>This reminds me of an old thread before the crash. It discussed about the name of a sensor/actuator node and we came to the conclusion that <strong>sensuator</strong> could easily be mis-interpreted for a whole different type of device <img class="emoji emoji-extended not-responsive" src="./HC-SR501 motion sensor _ MySensors Forum_files/wink.png" title=";-)" alt=";-)"></p>
+<p>However <strong>senator</strong> seems like a nice contraction of <em>sensor</em> and <em>actuator</em>!   +<img class="emoji emoji-extended not-responsive" src="./HC-SR501 motion sensor _ MySensors Forum_files/100.png" title="100" alt=":100:"> <img class="emoji emoji-extended not-responsive" src="./HC-SR501 motion sensor _ MySensors Forum_files/exclamation.png" title="!!!" alt="!!!"></p>
+
+</div>
+<div component="post/signature" data-uid="133" class="post-signature"><p><a href="http://yveaux.blogspot.nl/" rel="nofollow">http://yveaux.blogspot.nl</a></p>
+</div>
+
+
+<small data-editor="" component="post/editor" class="hidden">last edited by <strong></strong> <span class="timeago" title="Invalid Date"></span></small>
+
+
+<hr>
+
+			</li>
+
+			
+			<li component="post" class="clearfix " data-pid="2221" data-uid="60" data-username="marceltrapman" data-userslug="marceltrapman" data-index="8" data-timestamp="1406231768109" data-votes="0" itemscope="" itemtype="http://schema.org/Comment">
+				<a component="post/anchor" name="8"></a>
+
+				<meta itemprop="datePublished" content="2014-07-24T19:56:08.109Z">
+				<meta itemprop="dateModified" content="">
+
+<div class="clearfix">
+	<div class="icon pull-left">
+		<a href="http://forum.mysensors.org/user/marceltrapman">
+			<img src="./HC-SR501 motion sensor _ MySensors Forum_files/60-profileimg.png" align="left" itemprop="image">
+			
+		</a>
+	</div>
+
+	<small class="pull-left">
+		<i component="user/status" class="fa fa-circle status offline" title="Offline"></i>
+		<strong>
+			<a href="http://forum.mysensors.org/user/marceltrapman" itemprop="author" data-username="marceltrapman" data-uid="60">marceltrapman</a>
+		</strong>
+
+<a href="http://forum.mysensors.org/groups/controller-developer"><small class="label group-label inline-block" style="background-color: #d61ed6;"><i class="fa fa-puzzle-piece"></i> Plugin Developer</small></a>
+
+		<div class="visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
+			posted <a class="permalink" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/9"><span class="timeago" title="Thu Jul 24 2014 23:56:08 GMT+0400 (Московское время (зима))">about a year ago</span></a>
+			<i class="fa fa-pencil-square pointer edit-icon hidden"></i>
+
+			<span class="post-tools">
+				<a component="post/reply" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Reply</a>
+				<a component="post/quote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Quote</a>
+			</span>
+			<span>
+				
+			</span>
+		</div>
+		<div class="votes">
+						<a component="post/upvote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="">
+				<i class="fa fa-chevron-up"></i>
+			</a>
+			<span component="post/vote-count" data-votes="0">0</span>
+			
+		</div>
+
+<div class="dropdown moderator-tools">
+	<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></a>
+	<ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+		
+
+		<li role="presentation">
+			<a component="post/favourite" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-favourited="false">
+
+				<span class="favourite-text">Favourite</span>
+				<span component="post/favourite-count" class="favouriteCount" data-favourites="0">0</span>&nbsp;
+
+				<i component="post/favourite/on" class="fa fa-heart hidden"></i>
+				<i component="post/favourite/off" class="fa fa-heart-o "></i>
+			</a>
+		</li>
+
+				<li role="presentation" class="divider"></li>
+		<li role="presentation" class="dropdown-header">Share this Post</li>
+		<li role="presentation">
+			<a role="menuitem" class="facebook-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-facebook"></i></span> Facebook</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="twitter-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-twitter"></i></span> Twitter</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="google-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-google-plus"></i></span> Google+</a>
+		</li>
+
+		<li role="presentation" class="divider"></li>
+
+				<li role="presentation">
+			<a component="post/flag" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#">
+				Flag this post for moderation
+			</a>
+		</li>
+	</ul>
+</div>
+
+	</small>
+</div>
+
+<br>
+<div class="content" component="post/content" itemprop="text">
+	<p><a class="plugin-mentions-a" href="http://forum.mysensors.org/user/yveaux">@Yveaux</a> said:</p>
+<blockquote>
+<p>However <strong>senator</strong> seems like a nice contraction of <em>sensor</em> and <em>actuator</em>!   +<img class="emoji emoji-extended not-responsive" src="./HC-SR501 motion sensor _ MySensors Forum_files/100.png" title="100" alt=":100:"> <img class="emoji emoji-extended not-responsive" src="./HC-SR501 motion sensor _ MySensors Forum_files/exclamation.png" title="!!!" alt="!!!"></p>
+</blockquote>
+<p>Good one!</p>
+
+</div>
+<div component="post/signature" data-uid="60" class="post-signature"><p>Fulltime Sales trainer/coach<br>
+Parttime Moderator MySensors board</p>
+<p>I use Indigo as controller for Z-Wave and MySensors<br>
+I have a FABtotum to print cases</p>
+</div>
+
+
+<small data-editor="" component="post/editor" class="hidden">last edited by <strong></strong> <span class="timeago" title="Invalid Date"></span></small>
+
+
+<hr>
+
+			</li>
+
+			
+			<li component="post" class="clearfix " data-pid="2651" data-uid="185" data-username="Bandra" data-userslug="bandra" data-index="9" data-timestamp="1407215340462" data-votes="0" itemscope="" itemtype="http://schema.org/Comment">
+				<a component="post/anchor" name="9"></a>
+
+				<meta itemprop="datePublished" content="2014-08-05T05:09:00.462Z">
+				<meta itemprop="dateModified" content="">
+
+<div class="clearfix">
+	<div class="icon pull-left">
+		<a href="http://forum.mysensors.org/user/bandra">
+			<img src="https://s.gravatar.com/avatar/faccee9a23ae79fcf59718ab688ab63c?size=128&amp;default=wavatar&amp;rating=pg" align="left" itemprop="image">
+			
+		</a>
+	</div>
+
+	<small class="pull-left">
+		<i component="user/status" class="fa fa-circle status offline" title="Offline"></i>
+		<strong>
+			<a href="http://forum.mysensors.org/user/bandra" itemprop="author" data-username="Bandra" data-uid="185">Bandra</a>
+		</strong>
+
+
+
+		<div class="visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
+			posted <a class="permalink" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/10"><span class="timeago" title="Tue Aug 05 2014 09:09:00 GMT+0400 (Московское время (зима))">about a year ago</span></a>
+			<i class="fa fa-pencil-square pointer edit-icon hidden"></i>
+
+			<span class="post-tools">
+				<a component="post/reply" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Reply</a>
+				<a component="post/quote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Quote</a>
+			</span>
+			<span>
+				
+			</span>
+		</div>
+		<div class="votes">
+						<a component="post/upvote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="">
+				<i class="fa fa-chevron-up"></i>
+			</a>
+			<span component="post/vote-count" data-votes="0">0</span>
+			
+		</div>
+
+<div class="dropdown moderator-tools">
+	<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></a>
+	<ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+		
+
+		<li role="presentation">
+			<a component="post/favourite" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-favourited="false">
+
+				<span class="favourite-text">Favourite</span>
+				<span component="post/favourite-count" class="favouriteCount" data-favourites="0">0</span>&nbsp;
+
+				<i component="post/favourite/on" class="fa fa-heart hidden"></i>
+				<i component="post/favourite/off" class="fa fa-heart-o "></i>
+			</a>
+		</li>
+
+				<li role="presentation" class="divider"></li>
+		<li role="presentation" class="dropdown-header">Share this Post</li>
+		<li role="presentation">
+			<a role="menuitem" class="facebook-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-facebook"></i></span> Facebook</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="twitter-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-twitter"></i></span> Twitter</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="google-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-google-plus"></i></span> Google+</a>
+		</li>
+
+		<li role="presentation" class="divider"></li>
+
+				<li role="presentation">
+			<a component="post/flag" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#">
+				Flag this post for moderation
+			</a>
+		</li>
+	</ul>
+</div>
+
+	</small>
+</div>
+
+<br>
+<div class="content" component="post/content" itemprop="text">
+	<p>Does anybody who has bypassed the onboard regulator on the HC-SR501 be able to post up a photo of where you soldered?</p>
+<p>I thought it was pretty simple and soldered my 3.3V lead to the leg on the 7133.  It seems to power up (at least, so says my voltmeter), but the trigger (output) pin just goes high immediately and never changes.  So on my sensors network it is just constantly triggering (even when there's no motion).</p>
+<p>I'm doing something wrong, but not sure what it is.  Any hints?</p>
+
+</div>
+
+
+
+<small data-editor="" component="post/editor" class="hidden">last edited by <strong></strong> <span class="timeago" title="Invalid Date"></span></small>
+
+
+<hr>
+
+			</li>
+
+			
+			<li component="post" class="clearfix " data-pid="2653" data-uid="133" data-username="Yveaux" data-userslug="yveaux" data-index="10" data-timestamp="1407217043127" data-votes="0" itemscope="" itemtype="http://schema.org/Comment">
+				<a component="post/anchor" name="10"></a>
+
+				<meta itemprop="datePublished" content="2014-08-05T05:37:23.127Z">
+				<meta itemprop="dateModified" content="">
+
+<div class="clearfix">
+	<div class="icon pull-left">
+		<a href="http://forum.mysensors.org/user/yveaux">
+			<img src="./HC-SR501 motion sensor _ MySensors Forum_files/133-profileimg.jpg" align="left" itemprop="image">
+			
+		</a>
+	</div>
+
+	<small class="pull-left">
+		<i component="user/status" class="fa fa-circle status offline" title="Offline"></i>
+		<strong>
+			<a href="http://forum.mysensors.org/user/yveaux" itemprop="author" data-username="Yveaux" data-uid="133">Yveaux</a>
+		</strong>
+
+<a href="http://forum.mysensors.org/groups/code-contributor"><small class="label group-label inline-block" style="background-color: #8f248e;"><i class="fa fa-keyboard-o"></i> Code Contributor</small></a>
+
+		<div class="visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
+			posted <a class="permalink" href="./HC-SR501 motion sensor _ MySensors Forum_files/HC-SR501 motion sensor _ MySensors Forum.html"><span class="timeago" title="Tue Aug 05 2014 09:37:23 GMT+0400 (Московское время (зима))">about a year ago</span></a>
+			<i class="fa fa-pencil-square pointer edit-icon hidden"></i>
+
+			<span class="post-tools">
+				<a component="post/reply" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Reply</a>
+				<a component="post/quote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Quote</a>
+			</span>
+			<span>
+				
+			</span>
+		</div>
+		<div class="votes">
+						<a component="post/upvote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="">
+				<i class="fa fa-chevron-up"></i>
+			</a>
+			<span component="post/vote-count" data-votes="0">0</span>
+			
+		</div>
+
+<div class="dropdown moderator-tools">
+	<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></a>
+	<ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+		
+
+		<li role="presentation">
+			<a component="post/favourite" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-favourited="false">
+
+				<span class="favourite-text">Favourite</span>
+				<span component="post/favourite-count" class="favouriteCount" data-favourites="0">0</span>&nbsp;
+
+				<i component="post/favourite/on" class="fa fa-heart hidden"></i>
+				<i component="post/favourite/off" class="fa fa-heart-o "></i>
+			</a>
+		</li>
+
+				<li role="presentation" class="divider"></li>
+		<li role="presentation" class="dropdown-header">Share this Post</li>
+		<li role="presentation">
+			<a role="menuitem" class="facebook-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-facebook"></i></span> Facebook</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="twitter-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-twitter"></i></span> Twitter</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="google-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-google-plus"></i></span> Google+</a>
+		</li>
+
+		<li role="presentation" class="divider"></li>
+
+				<li role="presentation">
+			<a component="post/flag" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#">
+				Flag this post for moderation
+			</a>
+		</li>
+	</ul>
+</div>
+
+	</small>
+</div>
+
+<br>
+<div class="content" component="post/content" itemprop="text">
+	<p><a class="plugin-mentions-a" href="http://forum.mysensors.org/user/bandra">@Bandra</a> see my investigations for this sensor here (also see the scope plus above) : <a href="http://forum.mysensors.org/topic/250/how-do-i-use-the-interrupt/19">http://forum.mysensors.org/topic/250/how-do-i-use-the-interrupt/19</a></p>
+<p>Removing the regulator does not influence the power consumption,  so just leave it connected.<br>
+The 3v3 should be connected to the inner pin of the retrigger jumpers, not the regular 5v supply pin.</p>
+
+</div>
+<div component="post/signature" data-uid="133" class="post-signature"><p><a href="http://yveaux.blogspot.nl/" rel="nofollow">http://yveaux.blogspot.nl</a></p>
+</div>
+
+
+<small data-editor="" component="post/editor" class="hidden">last edited by <strong></strong> <span class="timeago" title="Invalid Date"></span></small>
+
+
+<hr>
+
+			</li>
+
+			
+			<li component="post" class="clearfix " data-pid="2691" data-uid="112" data-username="lininger" data-userslug="lininger" data-index="11" data-timestamp="1407278682970" data-votes="1" itemscope="" itemtype="http://schema.org/Comment">
+				<a component="post/anchor" name="11"></a>
+
+				<meta itemprop="datePublished" content="2014-08-05T22:44:42.970Z">
+				<meta itemprop="dateModified" content="">
+
+<div class="clearfix">
+	<div class="icon pull-left">
+		<a href="http://forum.mysensors.org/user/lininger">
+			<img src="./HC-SR501 motion sensor _ MySensors Forum_files/112-profileimg.jpg" align="left" itemprop="image">
+			
+		</a>
+	</div>
+
+	<small class="pull-left">
+		<i component="user/status" class="fa fa-circle status offline" title="Offline"></i>
+		<strong>
+			<a href="http://forum.mysensors.org/user/lininger" itemprop="author" data-username="lininger" data-uid="112">lininger</a>
+		</strong>
+
+
+
+		<div class="visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
+			posted <a class="permalink" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/12"><span class="timeago" title="Wed Aug 06 2014 02:44:42 GMT+0400 (Московское время (зима))">about a year ago</span></a>
+			<i class="fa fa-pencil-square pointer edit-icon hidden"></i>
+
+			<span class="post-tools">
+				<a component="post/reply" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Reply</a>
+				<a component="post/quote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Quote</a>
+			</span>
+			<span>
+				
+			</span>
+		</div>
+		<div class="votes">
+						<a component="post/upvote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="">
+				<i class="fa fa-chevron-up"></i>
+			</a>
+			<span component="post/vote-count" data-votes="1">1</span>
+			
+		</div>
+
+<div class="dropdown moderator-tools">
+	<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></a>
+	<ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+		
+
+		<li role="presentation">
+			<a component="post/favourite" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-favourited="false">
+
+				<span class="favourite-text">Favourite</span>
+				<span component="post/favourite-count" class="favouriteCount" data-favourites="0">0</span>&nbsp;
+
+				<i component="post/favourite/on" class="fa fa-heart hidden"></i>
+				<i component="post/favourite/off" class="fa fa-heart-o "></i>
+			</a>
+		</li>
+
+				<li role="presentation" class="divider"></li>
+		<li role="presentation" class="dropdown-header">Share this Post</li>
+		<li role="presentation">
+			<a role="menuitem" class="facebook-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-facebook"></i></span> Facebook</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="twitter-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-twitter"></i></span> Twitter</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="google-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-google-plus"></i></span> Google+</a>
+		</li>
+
+		<li role="presentation" class="divider"></li>
+
+				<li role="presentation">
+			<a component="post/flag" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#">
+				Flag this post for moderation
+			</a>
+		</li>
+	</ul>
+</div>
+
+	</small>
+</div>
+
+<br>
+<div class="content" component="post/content" itemprop="text">
+	<p><a class="plugin-mentions-a" href="http://forum.mysensors.org/user/bandra">@Bandra</a> said:</p>
+<blockquote>
+<p>Does anybody who has bypassed the onboard regulator on the HC-SR501 be able to post up a photo of where you soldered?</p>
+</blockquote>
+<p>Here is how id modified the sensor.</p>
+<p><a href="./HC-SR501 motion sensor _ MySensors Forum_files/upload-7a89e1f7-0951-4ed2-8c85-abe440ac758d.jpg" target="_blank"><img src="./HC-SR501 motion sensor _ MySensors Forum_files/upload-7a89e1f7-0951-4ed2-8c85-abe440ac758d.jpg" alt="Motion 3v modify.jpg" class="img-responsive img-markdown"></a></p>
+<p>Does anyone know if the Mini version also has such a place as the SR501?</p>
+<p><a href="./HC-SR501 motion sensor _ MySensors Forum_files/upload-0bb1328b-b707-47e0-a34c-78cc495d2105.jpg" target="_blank"><img src="./HC-SR501 motion sensor _ MySensors Forum_files/upload-0bb1328b-b707-47e0-a34c-78cc495d2105.jpg" alt="Motion Mini.jpg" class="img-responsive img-markdown"></a></p>
+
+</div>
+
+
+
+<small data-editor="" component="post/editor" class="hidden">last edited by <strong></strong> <span class="timeago" title="Invalid Date"></span></small>
+
+
+<hr>
+
+			</li>
+
+			
+			<li component="post" class="clearfix " data-pid="2728" data-uid="185" data-username="Bandra" data-userslug="bandra" data-index="12" data-timestamp="1407383790288" data-votes="0" itemscope="" itemtype="http://schema.org/Comment">
+				<a component="post/anchor" name="12"></a>
+
+				<meta itemprop="datePublished" content="2014-08-07T03:56:30.288Z">
+				<meta itemprop="dateModified" content="">
+
+<div class="clearfix">
+	<div class="icon pull-left">
+		<a href="http://forum.mysensors.org/user/bandra">
+			<img src="https://s.gravatar.com/avatar/faccee9a23ae79fcf59718ab688ab63c?size=128&amp;default=wavatar&amp;rating=pg" align="left" itemprop="image">
+			
+		</a>
+	</div>
+
+	<small class="pull-left">
+		<i component="user/status" class="fa fa-circle status offline" title="Offline"></i>
+		<strong>
+			<a href="http://forum.mysensors.org/user/bandra" itemprop="author" data-username="Bandra" data-uid="185">Bandra</a>
+		</strong>
+
+
+
+		<div class="visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
+			posted <a class="permalink" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/13"><span class="timeago" title="Thu Aug 07 2014 07:56:30 GMT+0400 (Московское время (зима))">about a year ago</span></a>
+			<i class="fa fa-pencil-square pointer edit-icon hidden"></i>
+
+			<span class="post-tools">
+				<a component="post/reply" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Reply</a>
+				<a component="post/quote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Quote</a>
+			</span>
+			<span>
+				
+			</span>
+		</div>
+		<div class="votes">
+						<a component="post/upvote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="">
+				<i class="fa fa-chevron-up"></i>
+			</a>
+			<span component="post/vote-count" data-votes="0">0</span>
+			
+		</div>
+
+<div class="dropdown moderator-tools">
+	<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></a>
+	<ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+		
+
+		<li role="presentation">
+			<a component="post/favourite" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-favourited="false">
+
+				<span class="favourite-text">Favourite</span>
+				<span component="post/favourite-count" class="favouriteCount" data-favourites="0">0</span>&nbsp;
+
+				<i component="post/favourite/on" class="fa fa-heart hidden"></i>
+				<i component="post/favourite/off" class="fa fa-heart-o "></i>
+			</a>
+		</li>
+
+				<li role="presentation" class="divider"></li>
+		<li role="presentation" class="dropdown-header">Share this Post</li>
+		<li role="presentation">
+			<a role="menuitem" class="facebook-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-facebook"></i></span> Facebook</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="twitter-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-twitter"></i></span> Twitter</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="google-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-google-plus"></i></span> Google+</a>
+		</li>
+
+		<li role="presentation" class="divider"></li>
+
+				<li role="presentation">
+			<a component="post/flag" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#">
+				Flag this post for moderation
+			</a>
+		</li>
+	</ul>
+</div>
+
+	</small>
+</div>
+
+<br>
+<div class="content" component="post/content" itemprop="text">
+	<p>Thanks for the replies, <a class="plugin-mentions-a" href="http://forum.mysensors.org/user/lininger">@lininger</a>  and <a class="plugin-mentions-a" href="http://forum.mysensors.org/user/yveaux">@Yveaux</a>.  Do you bridge H and the centre solder pad?</p>
+<p>Here's my solder effort:</p>
+<p><a href="./HC-SR501 motion sensor _ MySensors Forum_files/upload-91e4fc48-511f-46de-8512-a86c74023af3.JPG" target="_blank"><img src="./HC-SR501 motion sensor _ MySensors Forum_files/upload-91e4fc48-511f-46de-8512-a86c74023af3.JPG" alt="photo(4).JPG" class="img-responsive img-markdown"></a></p>
+<p>I checked with my multimeter, and soldering a 3.3v wire onto the 7133 leg gets 3.3v to the H solder pad.  So I'm pretty sure that I've done the equivalent of yours.</p>
+<p>And yet, it doesn't seem to work.  After a few seconds my output pin just goes high and never drops low.  I've tried to tune the pots but it makes little difference.</p>
+<p>Just wanted to check that at least I got the power right.  Thanks guys!</p>
+
+</div>
+
+
+
+<small data-editor="" component="post/editor" class="hidden">last edited by <strong></strong> <span class="timeago" title="Invalid Date"></span></small>
+
+
+<hr>
+
+			</li>
+
+			
+			<li component="post" class="clearfix " data-pid="2730" data-uid="133" data-username="Yveaux" data-userslug="yveaux" data-index="13" data-timestamp="1407390186546" data-votes="0" itemscope="" itemtype="http://schema.org/Comment">
+				<a component="post/anchor" name="13"></a>
+
+				<meta itemprop="datePublished" content="2014-08-07T05:43:06.546Z">
+				<meta itemprop="dateModified" content="2014-08-07T05:43:19.575Z">
+
+<div class="clearfix">
+	<div class="icon pull-left">
+		<a href="http://forum.mysensors.org/user/yveaux">
+			<img src="./HC-SR501 motion sensor _ MySensors Forum_files/133-profileimg.jpg" align="left" itemprop="image">
+			
+		</a>
+	</div>
+
+	<small class="pull-left">
+		<i component="user/status" class="fa fa-circle status offline" title="Offline"></i>
+		<strong>
+			<a href="http://forum.mysensors.org/user/yveaux" itemprop="author" data-username="Yveaux" data-uid="133">Yveaux</a>
+		</strong>
+
+<a href="http://forum.mysensors.org/groups/code-contributor"><small class="label group-label inline-block" style="background-color: #8f248e;"><i class="fa fa-keyboard-o"></i> Code Contributor</small></a>
+
+		<div class="visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
+			posted <a class="permalink" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/14"><span class="timeago" title="Thu Aug 07 2014 09:43:06 GMT+0400 (Московское время (зима))">about a year ago</span></a>
+			<i class="fa fa-pencil-square pointer edit-icon" title="" data-original-title="last edited by Yveaux about a year ago"></i>
+
+			<span class="post-tools">
+				<a component="post/reply" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Reply</a>
+				<a component="post/quote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Quote</a>
+			</span>
+			<span>
+				
+			</span>
+		</div>
+		<div class="votes">
+						<a component="post/upvote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="">
+				<i class="fa fa-chevron-up"></i>
+			</a>
+			<span component="post/vote-count" data-votes="0">0</span>
+			
+		</div>
+
+<div class="dropdown moderator-tools">
+	<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></a>
+	<ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+		
+
+		<li role="presentation">
+			<a component="post/favourite" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-favourited="false">
+
+				<span class="favourite-text">Favourite</span>
+				<span component="post/favourite-count" class="favouriteCount" data-favourites="0">0</span>&nbsp;
+
+				<i component="post/favourite/on" class="fa fa-heart hidden"></i>
+				<i component="post/favourite/off" class="fa fa-heart-o "></i>
+			</a>
+		</li>
+
+				<li role="presentation" class="divider"></li>
+		<li role="presentation" class="dropdown-header">Share this Post</li>
+		<li role="presentation">
+			<a role="menuitem" class="facebook-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-facebook"></i></span> Facebook</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="twitter-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-twitter"></i></span> Twitter</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="google-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-google-plus"></i></span> Google+</a>
+		</li>
+
+		<li role="presentation" class="divider"></li>
+
+				<li role="presentation">
+			<a component="post/flag" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#">
+				Flag this post for moderation
+			</a>
+		</li>
+	</ul>
+</div>
+
+	</small>
+</div>
+
+<br>
+<div class="content" component="post/content" itemprop="text">
+	<p><a class="plugin-mentions-a" href="http://forum.mysensors.org/user/bandra">@Bandra</a> according to its specs it takes a minute or so to startup, but you probably waited longer, right?</p>
+
+</div>
+<div component="post/signature" data-uid="133" class="post-signature"><p><a href="http://yveaux.blogspot.nl/" rel="nofollow">http://yveaux.blogspot.nl</a></p>
+</div>
+
+
+<small data-editor="yveaux" component="post/editor" class="hidden">last edited by <strong>Yveaux</strong> <span class="timeago" title="Thu Aug 07 2014 09:43:19 GMT+0400 (Московское время (зима))">about a year ago</span></small>
+
+
+<hr>
+
+			</li>
+
+			
+			<li component="post" class="clearfix " data-pid="2731" data-uid="185" data-username="Bandra" data-userslug="bandra" data-index="14" data-timestamp="1407392627062" data-votes="0" itemscope="" itemtype="http://schema.org/Comment">
+				<a component="post/anchor" name="14"></a>
+
+				<meta itemprop="datePublished" content="2014-08-07T06:23:47.062Z">
+				<meta itemprop="dateModified" content="">
+
+<div class="clearfix">
+	<div class="icon pull-left">
+		<a href="http://forum.mysensors.org/user/bandra">
+			<img src="https://s.gravatar.com/avatar/faccee9a23ae79fcf59718ab688ab63c?size=128&amp;default=wavatar&amp;rating=pg" align="left" itemprop="image">
+			
+		</a>
+	</div>
+
+	<small class="pull-left">
+		<i component="user/status" class="fa fa-circle status offline" title="Offline"></i>
+		<strong>
+			<a href="http://forum.mysensors.org/user/bandra" itemprop="author" data-username="Bandra" data-uid="185">Bandra</a>
+		</strong>
+
+
+
+		<div class="visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
+			posted <a class="permalink" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/15"><span class="timeago" title="Thu Aug 07 2014 10:23:47 GMT+0400 (Московское время (зима))">about a year ago</span></a>
+			<i class="fa fa-pencil-square pointer edit-icon hidden"></i>
+
+			<span class="post-tools">
+				<a component="post/reply" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Reply</a>
+				<a component="post/quote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Quote</a>
+			</span>
+			<span>
+				
+			</span>
+		</div>
+		<div class="votes">
+						<a component="post/upvote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="">
+				<i class="fa fa-chevron-up"></i>
+			</a>
+			<span component="post/vote-count" data-votes="0">0</span>
+			
+		</div>
+
+<div class="dropdown moderator-tools">
+	<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></a>
+	<ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+		
+
+		<li role="presentation">
+			<a component="post/favourite" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-favourited="false">
+
+				<span class="favourite-text">Favourite</span>
+				<span component="post/favourite-count" class="favouriteCount" data-favourites="0">0</span>&nbsp;
+
+				<i component="post/favourite/on" class="fa fa-heart hidden"></i>
+				<i component="post/favourite/off" class="fa fa-heart-o "></i>
+			</a>
+		</li>
+
+				<li role="presentation" class="divider"></li>
+		<li role="presentation" class="dropdown-header">Share this Post</li>
+		<li role="presentation">
+			<a role="menuitem" class="facebook-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-facebook"></i></span> Facebook</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="twitter-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-twitter"></i></span> Twitter</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="google-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-google-plus"></i></span> Google+</a>
+		</li>
+
+		<li role="presentation" class="divider"></li>
+
+				<li role="presentation">
+			<a component="post/flag" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#">
+				Flag this post for moderation
+			</a>
+		</li>
+	</ul>
+</div>
+
+	</small>
+</div>
+
+<br>
+<div class="content" component="post/content" itemprop="text">
+	<p>Yeah, the sketch I found waits for it to warm up.  I'll increase the warmup period and try again.  Thanks for the suggestion!</p>
+
+</div>
+
+
+
+<small data-editor="" component="post/editor" class="hidden">last edited by <strong></strong> <span class="timeago" title="Invalid Date"></span></small>
+
+
+<hr>
+
+			</li>
+
+			
+			<li component="post" class="clearfix " data-pid="3039" data-uid="185" data-username="Bandra" data-userslug="bandra" data-index="15" data-timestamp="1408152420626" data-votes="0" itemscope="" itemtype="http://schema.org/Comment">
+				<a component="post/anchor" name="15"></a>
+
+				<meta itemprop="datePublished" content="2014-08-16T01:27:00.626Z">
+				<meta itemprop="dateModified" content="">
+
+<div class="clearfix">
+	<div class="icon pull-left">
+		<a href="http://forum.mysensors.org/user/bandra">
+			<img src="https://s.gravatar.com/avatar/faccee9a23ae79fcf59718ab688ab63c?size=128&amp;default=wavatar&amp;rating=pg" align="left" itemprop="image">
+			
+		</a>
+	</div>
+
+	<small class="pull-left">
+		<i component="user/status" class="fa fa-circle status offline" title="Offline"></i>
+		<strong>
+			<a href="http://forum.mysensors.org/user/bandra" itemprop="author" data-username="Bandra" data-uid="185">Bandra</a>
+		</strong>
+
+
+
+		<div class="visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
+			posted <a class="permalink" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/16"><span class="timeago" title="Sat Aug 16 2014 05:27:00 GMT+0400 (Московское время (зима))">about a year ago</span></a>
+			<i class="fa fa-pencil-square pointer edit-icon hidden"></i>
+
+			<span class="post-tools">
+				<a component="post/reply" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Reply</a>
+				<a component="post/quote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Quote</a>
+			</span>
+			<span>
+				
+			</span>
+		</div>
+		<div class="votes">
+						<a component="post/upvote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="">
+				<i class="fa fa-chevron-up"></i>
+			</a>
+			<span component="post/vote-count" data-votes="0">0</span>
+			
+		</div>
+
+<div class="dropdown moderator-tools">
+	<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></a>
+	<ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+		
+
+		<li role="presentation">
+			<a component="post/favourite" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-favourited="false">
+
+				<span class="favourite-text">Favourite</span>
+				<span component="post/favourite-count" class="favouriteCount" data-favourites="0">0</span>&nbsp;
+
+				<i component="post/favourite/on" class="fa fa-heart hidden"></i>
+				<i component="post/favourite/off" class="fa fa-heart-o "></i>
+			</a>
+		</li>
+
+				<li role="presentation" class="divider"></li>
+		<li role="presentation" class="dropdown-header">Share this Post</li>
+		<li role="presentation">
+			<a role="menuitem" class="facebook-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-facebook"></i></span> Facebook</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="twitter-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-twitter"></i></span> Twitter</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="google-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-google-plus"></i></span> Google+</a>
+		</li>
+
+		<li role="presentation" class="divider"></li>
+
+				<li role="presentation">
+			<a component="post/flag" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#">
+				Flag this post for moderation
+			</a>
+		</li>
+	</ul>
+</div>
+
+	</small>
+</div>
+
+<br>
+<div class="content" component="post/content" itemprop="text">
+	<p>Moved my solder point to the H pad. Also bridged the H pad with centre pad. All works now. Thanks everyone!</p>
+<p>Interesting observation. The motion sketch works very well. But when I try my multisensor sketch it always reads high and keeps triggering. Must be a problem with taking too long in the interrupt. I recall a small discussion about that. Time for some searching...</p>
+
+</div>
+
+
+
+<small data-editor="" component="post/editor" class="hidden">last edited by <strong></strong> <span class="timeago" title="Invalid Date"></span></small>
+
+
+<hr>
+
+			</li>
+
+			
+			<li component="post" class="clearfix " data-pid="3043" data-uid="133" data-username="Yveaux" data-userslug="yveaux" data-index="16" data-timestamp="1408168233108" data-votes="0" itemscope="" itemtype="http://schema.org/Comment">
+				<a component="post/anchor" name="16"></a>
+
+				<meta itemprop="datePublished" content="2014-08-16T05:50:33.108Z">
+				<meta itemprop="dateModified" content="">
+
+<div class="clearfix">
+	<div class="icon pull-left">
+		<a href="http://forum.mysensors.org/user/yveaux">
+			<img src="./HC-SR501 motion sensor _ MySensors Forum_files/133-profileimg.jpg" align="left" itemprop="image">
+			
+		</a>
+	</div>
+
+	<small class="pull-left">
+		<i component="user/status" class="fa fa-circle status offline" title="Offline"></i>
+		<strong>
+			<a href="http://forum.mysensors.org/user/yveaux" itemprop="author" data-username="Yveaux" data-uid="133">Yveaux</a>
+		</strong>
+
+<a href="http://forum.mysensors.org/groups/code-contributor"><small class="label group-label inline-block" style="background-color: #8f248e;"><i class="fa fa-keyboard-o"></i> Code Contributor</small></a>
+
+		<div class="visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
+			posted <a class="permalink" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/17"><span class="timeago" title="Sat Aug 16 2014 09:50:33 GMT+0400 (Московское время (зима))">about a year ago</span></a>
+			<i class="fa fa-pencil-square pointer edit-icon hidden"></i>
+
+			<span class="post-tools">
+				<a component="post/reply" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Reply</a>
+				<a component="post/quote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Quote</a>
+			</span>
+			<span>
+				
+			</span>
+		</div>
+		<div class="votes">
+						<a component="post/upvote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="">
+				<i class="fa fa-chevron-up"></i>
+			</a>
+			<span component="post/vote-count" data-votes="0">0</span>
+			
+		</div>
+
+<div class="dropdown moderator-tools">
+	<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></a>
+	<ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+		
+
+		<li role="presentation">
+			<a component="post/favourite" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-favourited="false">
+
+				<span class="favourite-text">Favourite</span>
+				<span component="post/favourite-count" class="favouriteCount" data-favourites="0">0</span>&nbsp;
+
+				<i component="post/favourite/on" class="fa fa-heart hidden"></i>
+				<i component="post/favourite/off" class="fa fa-heart-o "></i>
+			</a>
+		</li>
+
+				<li role="presentation" class="divider"></li>
+		<li role="presentation" class="dropdown-header">Share this Post</li>
+		<li role="presentation">
+			<a role="menuitem" class="facebook-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-facebook"></i></span> Facebook</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="twitter-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-twitter"></i></span> Twitter</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="google-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-google-plus"></i></span> Google+</a>
+		</li>
+
+		<li role="presentation" class="divider"></li>
+
+				<li role="presentation">
+			<a component="post/flag" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#">
+				Flag this post for moderation
+			</a>
+		</li>
+	</ul>
+</div>
+
+	</small>
+</div>
+
+<br>
+<div class="content" component="post/content" itemprop="text">
+	<p><a class="plugin-mentions-a" href="http://forum.mysensors.org/user/bandra">@Bandra</a> If you configured the interrupt LEVEL triggered (either low or high) you have to wait for the signal to change in the interrupt handler (or e.g. disable the interrupt in the interupt handler) or it will enter the interrupt handler immediately again on exit.</p>
+
+</div>
+<div component="post/signature" data-uid="133" class="post-signature"><p><a href="http://yveaux.blogspot.nl/" rel="nofollow">http://yveaux.blogspot.nl</a></p>
+</div>
+
+
+<small data-editor="" component="post/editor" class="hidden">last edited by <strong></strong> <span class="timeago" title="Invalid Date"></span></small>
+
+
+<hr>
+
+			</li>
+
+			
+			<li component="post" class="clearfix " data-pid="3178" data-uid="185" data-username="Bandra" data-userslug="bandra" data-index="17" data-timestamp="1408518079221" data-votes="0" itemscope="" itemtype="http://schema.org/Comment">
+				<a component="post/anchor" name="17"></a>
+
+				<meta itemprop="datePublished" content="2014-08-20T07:01:19.221Z">
+				<meta itemprop="dateModified" content="2014-08-20T07:02:08.378Z">
+
+<div class="clearfix">
+	<div class="icon pull-left">
+		<a href="http://forum.mysensors.org/user/bandra">
+			<img src="https://s.gravatar.com/avatar/faccee9a23ae79fcf59718ab688ab63c?size=128&amp;default=wavatar&amp;rating=pg" align="left" itemprop="image">
+			
+		</a>
+	</div>
+
+	<small class="pull-left">
+		<i component="user/status" class="fa fa-circle status offline" title="Offline"></i>
+		<strong>
+			<a href="http://forum.mysensors.org/user/bandra" itemprop="author" data-username="Bandra" data-uid="185">Bandra</a>
+		</strong>
+
+
+
+		<div class="visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
+			posted <a class="permalink" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/18"><span class="timeago" title="Wed Aug 20 2014 11:01:19 GMT+0400 (Московское время (зима))">about a year ago</span></a>
+			<i class="fa fa-pencil-square pointer edit-icon" title="" data-original-title="last edited by Bandra about a year ago"></i>
+
+			<span class="post-tools">
+				<a component="post/reply" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Reply</a>
+				<a component="post/quote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Quote</a>
+			</span>
+			<span>
+				
+			</span>
+		</div>
+		<div class="votes">
+						<a component="post/upvote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="">
+				<i class="fa fa-chevron-up"></i>
+			</a>
+			<span component="post/vote-count" data-votes="0">0</span>
+			
+		</div>
+
+<div class="dropdown moderator-tools">
+	<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></a>
+	<ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+		
+
+		<li role="presentation">
+			<a component="post/favourite" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-favourited="false">
+
+				<span class="favourite-text">Favourite</span>
+				<span component="post/favourite-count" class="favouriteCount" data-favourites="0">0</span>&nbsp;
+
+				<i component="post/favourite/on" class="fa fa-heart hidden"></i>
+				<i component="post/favourite/off" class="fa fa-heart-o "></i>
+			</a>
+		</li>
+
+				<li role="presentation" class="divider"></li>
+		<li role="presentation" class="dropdown-header">Share this Post</li>
+		<li role="presentation">
+			<a role="menuitem" class="facebook-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-facebook"></i></span> Facebook</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="twitter-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-twitter"></i></span> Twitter</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="google-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-google-plus"></i></span> Google+</a>
+		</li>
+
+		<li role="presentation" class="divider"></li>
+
+				<li role="presentation">
+			<a component="post/flag" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#">
+				Flag this post for moderation
+			</a>
+		</li>
+	</ul>
+</div>
+
+	</small>
+</div>
+
+<br>
+<div class="content" component="post/content" itemprop="text">
+	<p>Thanks <a class="plugin-mentions-a" href="http://forum.mysensors.org/user/yveaux">@Yveaux</a><br>
+I think I'm pretty safe there because I'm relying on the MySensors library to do the interrupt [ie, the sleep(int, int, long) method].  In that method, the library disables the interrupt itself [in MySensor::sleep it performs a "detachInterrupt(interrupt);" ]</p>
+<p>I got it going reasonably well by doing two things.  I moved the code that tests the D3 pin towards the beginning of the loop().  This helps avoid flapping (ie, if the pin fell low between the time the the interrupt was triggered to the end of the next loop() then it might cause flapping).  I also changed my sleep call from:</p>
+<pre class="markdown-highlight"><code class="hljs sql">sleep(INTERRUPT, <span class="hljs-operator"><span class="hljs-keyword">CHANGE</span>, <span class="hljs-number">30000</span>)
+</span></code></pre>
+<p>to</p>
+<pre class="markdown-highlight"><code class="hljs perl"><span class="hljs-keyword">sleep</span>(INTERRUPT, RISING, <span class="hljs-number">30000</span>)
+</code></pre>
+<p>This way, a flapping motion sensor doesn't affect me as much.  Those two changes worked a treat.  My multisensor sketch works well now!</p>
+<p>Thanks again for all your advice on this forum.</p>
+
+</div>
+
+
+
+<small data-editor="bandra" component="post/editor" class="hidden">last edited by <strong>Bandra</strong> <span class="timeago" title="Wed Aug 20 2014 11:02:08 GMT+0400 (Московское время (зима))">about a year ago</span></small>
+
+
+<hr>
+
+			</li>
+
+			
+			<li component="post" class="clearfix " data-pid="3789" data-uid="271" data-username="Homer" data-userslug="homer" data-index="18" data-timestamp="1409399336142" data-votes="0" itemscope="" itemtype="http://schema.org/Comment">
+				<a component="post/anchor" name="18"></a>
+
+				<meta itemprop="datePublished" content="2014-08-30T11:48:56.142Z">
+				<meta itemprop="dateModified" content="">
+
+<div class="clearfix">
+	<div class="icon pull-left">
+		<a href="http://forum.mysensors.org/user/homer">
+			<img src="./HC-SR501 motion sensor _ MySensors Forum_files/photo.jpg" align="left" itemprop="image">
+			
+		</a>
+	</div>
+
+	<small class="pull-left">
+		<i component="user/status" class="fa fa-circle status offline" title="Offline"></i>
+		<strong>
+			<a href="http://forum.mysensors.org/user/homer" itemprop="author" data-username="Homer" data-uid="271">Homer</a>
+		</strong>
+
+
+
+		<div class="visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
+			posted <a class="permalink" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/19"><span class="timeago" title="Sat Aug 30 2014 15:48:56 GMT+0400 (Московское время (зима))">about a year ago</span></a>
+			<i class="fa fa-pencil-square pointer edit-icon hidden"></i>
+
+			<span class="post-tools">
+				<a component="post/reply" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Reply</a>
+				<a component="post/quote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Quote</a>
+			</span>
+			<span>
+				
+			</span>
+		</div>
+		<div class="votes">
+						<a component="post/upvote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="">
+				<i class="fa fa-chevron-up"></i>
+			</a>
+			<span component="post/vote-count" data-votes="0">0</span>
+			
+		</div>
+
+<div class="dropdown moderator-tools">
+	<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></a>
+	<ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+		
+
+		<li role="presentation">
+			<a component="post/favourite" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-favourited="false">
+
+				<span class="favourite-text">Favourite</span>
+				<span component="post/favourite-count" class="favouriteCount" data-favourites="0">0</span>&nbsp;
+
+				<i component="post/favourite/on" class="fa fa-heart hidden"></i>
+				<i component="post/favourite/off" class="fa fa-heart-o "></i>
+			</a>
+		</li>
+
+				<li role="presentation" class="divider"></li>
+		<li role="presentation" class="dropdown-header">Share this Post</li>
+		<li role="presentation">
+			<a role="menuitem" class="facebook-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-facebook"></i></span> Facebook</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="twitter-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-twitter"></i></span> Twitter</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="google-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-google-plus"></i></span> Google+</a>
+		</li>
+
+		<li role="presentation" class="divider"></li>
+
+				<li role="presentation">
+			<a component="post/flag" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#">
+				Flag this post for moderation
+			</a>
+		</li>
+	</ul>
+</div>
+
+	</small>
+</div>
+
+<br>
+<div class="content" component="post/content" itemprop="text">
+	<p><a class="plugin-mentions-a" href="http://forum.mysensors.org/user/bulldoglowell">@BulldogLowell</a> said:</p>
+<blockquote>
+<p>I am using them indoors to detect motion in/out of rome and hallways.  Seems reliable.  I mainly use them in wall outlets to detect legs moving by.</p>
+</blockquote>
+<p>I'd really like to see this. Having the sensor plugged into a wall socket would be perfect! Would you mind sharing how you did this? ie what case etc, so it looks good?</p>
+<p>I have searched, but didn't find anything.</p>
+<p>thanks</p>
+
+</div>
+
+
+
+<small data-editor="" component="post/editor" class="hidden">last edited by <strong></strong> <span class="timeago" title="Invalid Date"></span></small>
+
+
+<hr>
+
+			</li>
+
+			
+			<li component="post" class="clearfix " data-pid="3846" data-uid="50" data-username="BulldogLowell" data-userslug="bulldoglowell" data-index="19" data-timestamp="1409462984976" data-votes="0" itemscope="" itemtype="http://schema.org/Comment">
+				<a component="post/anchor" name="19"></a>
+
+				<meta itemprop="datePublished" content="2014-08-31T05:29:44.976Z">
+				<meta itemprop="dateModified" content="">
+
+<div class="clearfix">
+	<div class="icon pull-left">
+		<a href="http://forum.mysensors.org/user/bulldoglowell">
+			<img src="./HC-SR501 motion sensor _ MySensors Forum_files/50-profileimg.jpg" align="left" itemprop="image">
+			
+		</a>
+	</div>
+
+	<small class="pull-left">
+		<i component="user/status" class="fa fa-circle status offline" title="Offline"></i>
+		<strong>
+			<a href="http://forum.mysensors.org/user/bulldoglowell" itemprop="author" data-username="BulldogLowell" data-uid="50">BulldogLowell</a>
+		</strong>
+
+<a href="http://forum.mysensors.org/groups/contest-winner"><small class="label group-label inline-block" style="background-color: #b3b332;"><i class="fa fa-trophy"></i> Contest Winner</small></a>
+
+		<div class="visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
+			posted <a class="permalink" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/20"><span class="timeago" title="Sun Aug 31 2014 09:29:44 GMT+0400 (Московское время (зима))">about a year ago</span></a>
+			<i class="fa fa-pencil-square pointer edit-icon hidden"></i>
+
+			<span class="post-tools">
+				<a component="post/reply" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Reply</a>
+				<a component="post/quote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Quote</a>
+			</span>
+			<span>
+				
+			</span>
+		</div>
+		<div class="votes">
+						<a component="post/upvote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="">
+				<i class="fa fa-chevron-up"></i>
+			</a>
+			<span component="post/vote-count" data-votes="0">0</span>
+			
+		</div>
+
+<div class="dropdown moderator-tools">
+	<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></a>
+	<ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+		
+
+		<li role="presentation">
+			<a component="post/favourite" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-favourited="false">
+
+				<span class="favourite-text">Favourite</span>
+				<span component="post/favourite-count" class="favouriteCount" data-favourites="0">0</span>&nbsp;
+
+				<i component="post/favourite/on" class="fa fa-heart hidden"></i>
+				<i component="post/favourite/off" class="fa fa-heart-o "></i>
+			</a>
+		</li>
+
+				<li role="presentation" class="divider"></li>
+		<li role="presentation" class="dropdown-header">Share this Post</li>
+		<li role="presentation">
+			<a role="menuitem" class="facebook-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-facebook"></i></span> Facebook</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="twitter-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-twitter"></i></span> Twitter</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="google-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-google-plus"></i></span> Google+</a>
+		</li>
+
+		<li role="presentation" class="divider"></li>
+
+				<li role="presentation">
+			<a component="post/flag" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#">
+				Flag this post for moderation
+			</a>
+		</li>
+	</ul>
+</div>
+
+	</small>
+</div>
+
+<br>
+<div class="content" component="post/content" itemprop="text">
+	<p><a class="plugin-mentions-a" href="http://forum.mysensors.org/user/homer">@Homer</a></p>
+<p>check out this <a href="http://forum.mysensors.org/topic/15/boxes-and-enclosures/11">thread</a></p>
+
+</div>
+
+
+
+<small data-editor="" component="post/editor" class="hidden">last edited by <strong></strong> <span class="timeago" title="Invalid Date"></span></small>
+
+
+<hr>
+
+			</li>
+
+			
+			<li component="post" class="clearfix " data-pid="3908" data-uid="271" data-username="Homer" data-userslug="homer" data-index="20" data-timestamp="1409516249369" data-votes="0" itemscope="" itemtype="http://schema.org/Comment">
+				<a component="post/anchor" name="20"></a>
+
+				<meta itemprop="datePublished" content="2014-08-31T20:17:29.369Z">
+				<meta itemprop="dateModified" content="">
+
+<div class="clearfix">
+	<div class="icon pull-left">
+		<a href="http://forum.mysensors.org/user/homer">
+			<img src="./HC-SR501 motion sensor _ MySensors Forum_files/photo.jpg" align="left" itemprop="image">
+			
+		</a>
+	</div>
+
+	<small class="pull-left">
+		<i component="user/status" class="fa fa-circle status offline" title="Offline"></i>
+		<strong>
+			<a href="http://forum.mysensors.org/user/homer" itemprop="author" data-username="Homer" data-uid="271">Homer</a>
+		</strong>
+
+
+
+		<div class="visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
+			posted <a class="permalink" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/21"><span class="timeago" title="Mon Sep 01 2014 00:17:29 GMT+0400 (Московское время (зима))">about a year ago</span></a>
+			<i class="fa fa-pencil-square pointer edit-icon hidden"></i>
+
+			<span class="post-tools">
+				<a component="post/reply" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Reply</a>
+				<a component="post/quote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="no-select hidden">Quote</a>
+			</span>
+			<span>
+				
+			</span>
+		</div>
+		<div class="votes">
+						<a component="post/upvote" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="">
+				<i class="fa fa-chevron-up"></i>
+			</a>
+			<span component="post/vote-count" data-votes="0">0</span>
+			
+		</div>
+
+<div class="dropdown moderator-tools">
+	<a href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></a>
+	<ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+		
+
+		<li role="presentation">
+			<a component="post/favourite" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" data-favourited="false">
+
+				<span class="favourite-text">Favourite</span>
+				<span component="post/favourite-count" class="favouriteCount" data-favourites="0">0</span>&nbsp;
+
+				<i component="post/favourite/on" class="fa fa-heart hidden"></i>
+				<i component="post/favourite/off" class="fa fa-heart-o "></i>
+			</a>
+		</li>
+
+				<li role="presentation" class="divider"></li>
+		<li role="presentation" class="dropdown-header">Share this Post</li>
+		<li role="presentation">
+			<a role="menuitem" class="facebook-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-facebook"></i></span> Facebook</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="twitter-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-twitter"></i></span> Twitter</a>
+		</li>
+		<li role="presentation">
+			<a role="menuitem" class="google-share" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#"><span class="menu-icon"><i class="fa fa-google-plus"></i></span> Google+</a>
+		</li>
+
+		<li role="presentation" class="divider"></li>
+
+				<li role="presentation">
+			<a component="post/flag" role="menuitem" tabindex="-1" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#">
+				Flag this post for moderation
+			</a>
+		</li>
+	</ul>
+</div>
+
+	</small>
+</div>
+
+<br>
+<div class="content" component="post/content" itemprop="text">
+	<p><a class="plugin-mentions-a" href="http://forum.mysensors.org/user/bulldoglowell">@BulldogLowell</a> said:</p>
+<blockquote>
+<p><a class="plugin-mentions-a" href="http://forum.mysensors.org/user/homer">@Homer</a></p>
+<p>check out this <a href="http://forum.mysensors.org/topic/15/boxes-and-enclosures/11">thread</a></p>
+<i class="fa fa-angle-down pointer toggle"></i></blockquote>
+<p>Awesome thanks heaps! Checking it out now <img class="emoji emoji-extended not-responsive" src="./HC-SR501 motion sensor _ MySensors Forum_files/grinning.png" title=":-)" alt=":-)"></p>
+
+</div>
+
+
+
+<small data-editor="" component="post/editor" class="hidden">last edited by <strong></strong> <span class="timeago" title="Invalid Date"></span></small>
+
+
+<hr>
+
+			</li>
+	</ul>
+
+	<div class="post-bar bottom-post-bar">
+<span class="tags">
+</span>
+
+<div class="topic-main-buttons pull-right">
+	<span class="loading-indicator btn pull-left hidden" done="0">
+		<span class="hidden-xs">Loading More Posts</span> <i class="fa fa-refresh fa-spin"></i>
+	</span>
+
+	<div class="stats">
+		<span component="topic/post-count" class="human-readable-number" title="27">27</span><br>
+		<small>Posts</small>
+	</div>
+	<div class="stats">
+		<span class="human-readable-number" title="6628">6.6k</span><br>
+		<small>Views</small>
+	</div>
+
+
+
+
+<a component="topic/reply" href="http://forum.mysensors.org/topic/225/hc-sr501-motion-sensor/11#" class="btn btn-primary hidden">Reply</a>
+
+<a href="http://forum.mysensors.org/login" class="btn btn-primary">Log in to reply</a>
+
+
+
+
+
+</div>
+<div class="clearfix"></div>
+
+<hr>
+	</div>
+
+	
+
+<div id="move_thread_modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="Move Topic" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3>Move Topic</h3>
+			</div>
+			<div class="modal-body">
+				<p id="categories-loading"><i class="fa fa-spin fa-refresh"></i> Loading Categories</p>
+				<p>
+					Disabled Categories are greyed out
+				</p>
+				<div id="move-confirm" class="hide">
+					<hr>
+					<div class="alert alert-info">This topic will be moved to the category <strong><span id="confirm-category-name"></span></strong></div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" id="move_thread_cancel">Close</button>
+				<button type="button" class="btn btn-primary" id="move_thread_commit" disabled="">Move</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="fork-thread-modal" class="hide" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="none">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4>Fork Topic</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label for="title">Title</label>
+					<input id="fork-title" type="text" class="form-control" placeholder="Enter new thread title"><br>
+					<label>Click the posts you want to fork</label> <br>
+					<span id="fork-pids"></span>
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" id="fork_thread_cancel">Close</button>
+				<button type="button" class="btn btn-primary" id="fork_thread_commit" disabled="">Fork</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="move-post-modal" class="hide" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="none">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4>Move Post</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label for="topicId">Topic ID</label>
+					<input id="topicId" type="text" class="form-control" placeholder="Enter topic ID"><br>
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" id="move_post_cancel">Close</button>
+				<button type="button" class="btn btn-primary" id="move_post_commit" disabled="">Move</button>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+<noscript>
+
+&lt;div class="text-center pagination-container"&gt;
+	&lt;ul class="pagination"&gt;
+		&lt;li class="previous pull-left disabled"&gt;
+			&lt;a href="?page=1" data-page="1"&gt;&lt;i class="fa fa-chevron-left"&gt;&lt;/i&gt; &lt;/a&gt;
+		&lt;/li&gt;
+
+						&lt;li class="page active" &gt;
+				&lt;a href="?page=1" data-page="1"&gt;1&lt;/a&gt;
+			&lt;/li&gt;
+						&lt;li class="page" &gt;
+				&lt;a href="?page=2" data-page="2"&gt;2&lt;/a&gt;
+			&lt;/li&gt;
+
+		&lt;li class="next pull-right"&gt;
+			&lt;a href="?page=2" data-page="2"&gt; &lt;i class="fa fa-chevron-right"&gt;&lt;/i&gt;&lt;/a&gt;
+		&lt;/li&gt;
+	&lt;/ul&gt;
+&lt;/div&gt;
+
+</noscript>
+		<div class="row"><div widget-area="footer" class="col-xs-12"><div class="well"><p><a href="http://forum.mysensors.org/topic/2598/looking-for-mysensors-contest-sponsors">We're looking for MySensors Contest Sponsors</a></p>
+</div><div class="row forum-stats">
+	<div class="col-md-3 col-xs-6">
+		<div class="stats-card ">
+			<h2><span class="stats" title="419">419</span><br><small>Online</small></h2>
+		</div>
+	</div>
+	<div class="col-md-3 col-xs-6">
+		<div class="stats-card ">
+			<h2><span class="stats" title="2239">2.2k</span><br><small>Users</small></h2>
+		</div>
+	</div>
+	<div class="col-md-3 col-xs-6">
+		<div class="stats-card ">
+			<h2><span class="stats" title="2603">2.6k</span><br><small>Topics</small></h2>
+		</div>
+	</div>
+	<div class="col-md-3 col-xs-6">
+		<div class="stats-card ">
+			<h2><span class="stats" title="26651">26.7k</span><br><small>Posts</small></h2>
+		</div>
+	</div>
+</div>
+
+<script>
+$(document).ready(function() {
+	utils.makeNumbersHumanReadable($('.forum-stats .stats'));
+});
+</script><div class="copyright"><a href="http://sensnology.com/">Copyright 2015 Sensnology</a> 
+&nbsp; | &nbsp;  <a href="http://forum.mysensors.org/topic/610/forum-user-guidelines">Forum Guidelines</a>
+&nbsp; | &nbsp;  <a href="http://www.mysensors.org/privacy">Privacy Policy</a> &nbsp; | &nbsp; <a href="http://www.mysensors.org/tos">Terms of Service</a> </div></div></div></div><!--END container -->
+	</main>
+
+	<div class="hide tpl-500">
+<div class="alert alert-danger">
+	<strong>Internal error.</strong>
+	<p>Oops! Looks like something went wrong!</p>
+	<p></p>
+	
+
+</div>
+
+	</div>
+	<div id="upload-picture-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="upload-picture" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h3 id="upload-picture">Upload picture</h3>
+				</div>
+				<div class="modal-body">
+					<form id="uploadForm" action="" method="post" enctype="multipart/form-data">
+						<div class="form-group">
+							<label for="userPhotoInput">Upload a picture</label>
+							<input type="file" id="userPhotoInput" name="files[]">
+							<p class="help-block">You may only upload PNG, JPG, or GIF files (<span id="file-size-block" class="hide"></span>)</p>
+						</div>
+						<input type="hidden" id="params" name="params">
+					</form>
+
+					<div id="upload-progress-box" class="progress progress-striped">
+						<div id="upload-progress-bar" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0">
+							<span class="sr-only"> Success</span>
+						</div>
+					</div>
+
+					<div id="alert-status" class="alert alert-info hide"></div>
+					<div id="alert-success" class="alert alert-success hide"></div>
+					<div id="alert-error" class="alert alert-danger hide"></div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+					<button id="pictureUploadSubmitBtn" class="btn btn-primary">Upload picture</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	<div class="topic-search hidden">
+		<div class="btn-group">
+			<button type="button" class="btn btn-default count"></button>
+			<button type="button" class="btn btn-default prev"><i class="fa fa-fw fa-angle-up"></i></button>
+			<button type="button" class="btn btn-default next"><i class="fa fa-fw fa-angle-down"></i></button>
+		</div>
+	</div>
+	<div class="alert-window alert-left-top"></div>
+	<div class="alert-window alert-left-bottom"></div>
+	<div class="alert-window alert-right-top"></div>
+	<div class="alert-window alert-right-bottom"></div>
+
+	<script>
+		require(['forum/footer']);
+	</script>
+
+
+<div id="taskbar" class="taskbar navbar-fixed-bottom">
+	<div class="navbar-inner"><ul class="nav navbar-nav pull-right"></ul></div>
+</div></body></html>
