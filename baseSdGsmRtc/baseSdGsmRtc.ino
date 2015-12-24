@@ -67,6 +67,11 @@ void setup() {
   delay(50);
 
   sftSrl_forGSM.println("AT+CLIP=1"); //turn on caller ID notification
+  delay(100);
+  sftSrl_forGSM.println("AT+CMGF=1"); //Switching to text mode
+  delay(100);
+  sftSrl_forGSM.println("AT+CSCS=\"GSM\""); //english only
+  delay(100);
 }
 
 void loop() {
@@ -165,10 +170,6 @@ void SD_init() {
 }
 
 void GSM_sendSMS(String message, String phone) {
-  sftSrl_forGSM.println("AT+CMGF=1"); //Switching to text mode
-  delay(100);
-  sftSrl_forGSM.println("AT+CSCS=\"GSM\""); //english only
-  delay(100);
   sftSrl_forGSM.println("AT+CMGS=\"" + phone + "\"");
   delay(1000);
   sftSrl_forGSM.print(message);
