@@ -189,19 +189,24 @@ void BASE_processDataFromSensor() {
 #ifdef DEBUG
   Serial.println(commandToBaseSdGsmRtc_all);
 #endif
+
+  millisPrevSignal_sensors[currPipeNum] =  millis(); //save time of sensor answer
 }
 
 void BASE_checkSensorsFault() {
   String commandToBaseSdGsmRtc_dangers = "";
   uint32_t millisCurrSignal = millis();
-  
-  uint32_t deltaSignal = millisCurrSignal - millisPrevSignal_sensors[currPipeNum];
-  if (deltaSignal >  7200000) { //2 hours
-    
-  }
-  millisPrevSignal_sensors[currPipeNum] =  millisCurrSignal;
 
-  
+  for (int i = 0; i <= 5; i++) {
+    uint32_t deltaSignal = millisCurrSignal - millisPrevSignal_sensors[sensorNum];
+    if (deltaSignal >  7200000) { //2 hours
+      //GREEN LED OFF
+    }
+    else {
+      //GREEN LED ON
+    }
+    millisPrevSignal_sensors[sensorNum] =  millisCurrSignal;
+  }
 }
 
 uint16_t BASE_decodeParam(uint8_t paramNum, uint16_t paramVal_encoded) {
