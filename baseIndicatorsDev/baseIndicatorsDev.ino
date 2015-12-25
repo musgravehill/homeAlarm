@@ -33,8 +33,8 @@ void loop() {
     }
     else {
       //sensor ok
-      myDisplay.fillRect(i*13, 40, 8, 8, 1);//x0, y0, w, h, color
-      myDisplay.fillRect(i*13+1, 41, 6, 6, 0);//x0, y0, w, h, color
+      myDisplay.fillRect(i*13, 41, 8, 8, 1);//x0, y0, w, h, color
+      myDisplay.fillRect(i*13+1, 42, 6, 6, 0);//x0, y0, w, h, color
     }
 
   }
