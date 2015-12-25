@@ -196,14 +196,16 @@ void BASE_processDataFromSensor() {
 void BASE_checkSensorsFault() {
   String commandToBaseSdGsmRtc_dangers = "";
   uint32_t millisCurrSignal = millis();
+  myDisplay.fillRect(0, 50, 64,64, 1);
 
   for (int i = 0; i <= 5; i++) {
     uint32_t deltaSignal = millisCurrSignal - millisPrevSignal_sensors[sensorNum];
     if (deltaSignal >  7200000) { //2 hours
-      //GREEN LED OFF
+      //sensor fault
+      display.fillRect(
     }
     else {
-      //GREEN LED ON
+      //sensor ok
     }
     millisPrevSignal_sensors[sensorNum] =  millisCurrSignal;
   }
