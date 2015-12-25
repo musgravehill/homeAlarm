@@ -56,6 +56,9 @@ uint16_t messageFromSensor[7] = {
   0
 };
 
+//время последнего сигнала от сенсоров, если давно было => сенсор сломался
+uint32_t millisPrevSignal_sensors[5] = {0};
+
 RF24 radio(NRF_CE_PIN, NRF_CSN_PIN);
 
 SoftwareSerial sftSrl_forCommand(7, 8); // RX, TX
@@ -174,8 +177,9 @@ void BASE_processDataFromSensor() {
   }
   commandToBaseSdGsmRtc_logs += "}";
   String commandToBaseSdGsmRtc_all = commandToBaseSdGsmRtc_logs + commandToBaseSdGsmRtc_dangers;
+
   sftSrl_forCommand.println(commandToBaseSdGsmRtc_all);
-  
+
   myDisplay.clearDisplay();
   myDisplay.setTextSize(1);
   myDisplay.setTextColor(BLACK);
@@ -185,6 +189,19 @@ void BASE_processDataFromSensor() {
 #ifdef DEBUG
   Serial.println(commandToBaseSdGsmRtc_all);
 #endif
+}
+
+void BASE_checkSensorsFault() {
+  String commandToBaseSdGsmRtc_dangers = "";
+  uint32_t millisCurrSignal = millis();
+  
+  uint32_t deltaSignal = millisCurrSignal - millisPrevSignal_sensors[currPipeNum];
+  if (deltaSignal >  7200000) { //2 hours
+    
+  }
+  millisPrevSignal_sensors[currPipeNum] =  millisCurrSignal;
+
+  
 }
 
 uint16_t BASE_decodeParam(uint8_t paramNum, uint16_t paramVal_encoded) {
