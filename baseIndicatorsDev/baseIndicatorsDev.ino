@@ -15,7 +15,7 @@ const int clockPin = A1;
 //Пин подключен к DS входу 74HC595
 const int dataPin = A2;
 
-uint16_t LED_twoBytes = B0000000000000000;
+uint16_t LED_twoBytes = B0;
 
 void setup() {
   delay(100);
@@ -30,7 +30,7 @@ void setup() {
 }
 
 void loop() {
-  digitalWrite(latchPin, LOW); //leds off
+  
 
   myDisplay.clearDisplay();
   myDisplay.setTextSize(1);
@@ -56,15 +56,12 @@ void loop() {
   }
   myDisplay.display();
   
-
+  digitalWrite(latchPin, LOW); //leds off
   byte LED_twoByte1 = highByte(LED_twoBytes);
   byte LED_twoByte2 = lowByte(LED_twoBytes);
-
-  shiftOut(dataPin, clockPin, MSBFIRST, LED_twoByte2);
   shiftOut(dataPin, clockPin, MSBFIRST, LED_twoByte1);
-
+  shiftOut(dataPin, clockPin, MSBFIRST, LED_twoByte2);
   digitalWrite(latchPin, HIGH); //leds ready
-
   delay(4000);
 
 }
