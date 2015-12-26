@@ -15,6 +15,8 @@ const int clockPin = A1;
 //Пин подключен к DS входу 74HC595
 const int dataPin = A2;
 
+uint16_t LED_twoBytes = B0000000000000000;
+
 void setup() {
   delay(100);
   myDisplay.begin();
@@ -28,6 +30,8 @@ void setup() {
 }
 
 void loop() {
+  digitalWrite(latchPin, LOW); //leds off
+
   myDisplay.clearDisplay();
   myDisplay.setTextSize(1);
   myDisplay.setTextColor(BLACK);
@@ -41,59 +45,27 @@ void loop() {
     if (random(0, 2) == 1) { //2 hours
       //sensor fault
       myDisplay.fillRect((i * 12 + 1), 41, 6, 6, 0); //x0, y0, w, h, color
+      bitWrite(LED_twoBytes, i, 0);
+      //LED_twoBytes|= 10;
     }
     else {
       //sensor ok
-
+      bitWrite(LED_twoBytes, i, 1);
     }
 
   }
   myDisplay.display();
-  delay(1000);
+  
 
-  // проходим циклом по всем 16 выходам двух регистров
-  for (int thisLed = 0; thisLed < 16; thisLed++) {
-    // записываем сигнал в регистр для очередного светодиода
-    registerWrite(thisLed, HIGH);
-    // если это не первый светодиод, то отключаем предыдущий
-    if (thisLed > 0) {
-      registerWrite(thisLed - 1, LOW);
-    }
-    // если это первый светодиод, то отключаем последний
-    else {
-      registerWrite(15, LOW);
-    }
-    delay(100);
-  }
+  byte LED_twoByte1 = highByte(LED_twoBytes);
+  byte LED_twoByte2 = lowByte(LED_twoBytes);
+
+  shiftOut(dataPin, clockPin, MSBFIRST, LED_twoByte2);
+  shiftOut(dataPin, clockPin, MSBFIRST, LED_twoByte1);
+
+  digitalWrite(latchPin, HIGH); //leds ready
+
+  delay(4000);
+
 }
-
-// этот метод отсылает бит на сдвиговый регистр
-void registerWrite(int whichPin, int whichState) {
-  // для хранения 16 битов используем unsigned int
-  unsigned int bitsToSend = 0;
-
-  // выключаем светодиоды на время передачи битов
-  digitalWrite(latchPin, LOW);
-
-  // устанавливаем HIGH в соответствующий бит
-  bitWrite(bitsToSend, whichPin, whichState);
-
-  // разбиваем наши 16 бит на два байта
-  // для записи в первый и второй регистр
-  byte registerOne = highByte(bitsToSend);
-  byte registerTwo = lowByte(bitsToSend);
-
-  // "проталкиваем" байты в регистры
-  shiftOut(dataPin, clockPin, MSBFIRST, registerTwo);
-  shiftOut(dataPin, clockPin, MSBFIRST, registerOne);
-
-  // "защелкиваем" регистр, чтобы биты появились на выходах регистра
-  digitalWrite(latchPin, HIGH);
-}
-
-
-
-
-
-
 
