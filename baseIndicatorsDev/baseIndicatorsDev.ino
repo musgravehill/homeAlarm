@@ -24,17 +24,16 @@ void loop() {
   myDisplay.println("{LOG:BOB:ANNA;H:5655;T:245;C:042;V:05}{DNGR:ANNA:LOVE}{0123456789abcdefghijklmnopqrstuvwxyz}");
   myDisplay.display();
 
-  myDisplay.fillRect(0, 39, 84, 9, 0);//x0, y0, w, h, color
-
+  myDisplay.fillRect(0, 40, 84, 8, 0);//x0, y0, w, h, color
   for (int i = 0; i < 5; i++) {
+    myDisplay.fillRect(i*12, 40, 8, 8, 1);//x0, y0, w, h, color
     if (random(0,2) == 1) { //2 hours
-      //sensor fault
-      myDisplay.fillRect(i*12, 39, 9, 9, 1);//x0, y0, w, h, color
+      //sensor fault    
+      myDisplay.fillRect((i*12+1), 41, 6, 6, 0);//x0, y0, w, h, color  
     }
     else {
       //sensor ok
-      myDisplay.fillRect(i*13, 41, 8, 8, 1);//x0, y0, w, h, color
-      myDisplay.fillRect(i*13+1, 42, 6, 6, 0);//x0, y0, w, h, color
+      
     }
 
   }
