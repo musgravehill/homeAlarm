@@ -70,6 +70,19 @@ void setup() {
 }
 
 void loop() {
+  uint8_t c;
+  for (c = 0; c < 8; c++) {
+    rg();
+  }
+  for (c = 0; c < 8; c++) {
+    rrrggg();
+  }
+  for (c = 0; c < 24; c++) {
+    randrg();
+  }
+}
+
+void randrg() {
   LED_twoBytes = random(0, 65535);
   digitalWrite(LED_latchPin, LOW); //leds off
   LED_twoByte1 = highByte(LED_twoBytes);
@@ -78,4 +91,48 @@ void loop() {
   shiftOut(LED_dataPin, LED_clockPin, MSBFIRST, LED_twoByte2);
   digitalWrite(LED_latchPin, HIGH); //leds ready
   delay(200);
+}
+
+
+void rg() {
+  for (uint8_t i = 0; i < 16; i++) {
+    LED_twoBytes = 0b0;
+    bitWrite(LED_twoBytes, i, 1);
+    digitalWrite(LED_latchPin, LOW); //leds off
+    LED_twoByte1 = highByte(LED_twoBytes);
+    LED_twoByte2 = lowByte(LED_twoBytes);
+    shiftOut(LED_dataPin, LED_clockPin, MSBFIRST, LED_twoByte1);
+    shiftOut(LED_dataPin, LED_clockPin, MSBFIRST, LED_twoByte2);
+    digitalWrite(LED_latchPin, HIGH); //leds ready
+    delay(50);
+  }
+}
+
+void rrrggg() {
+  for (uint8_t i = 0; i < 16; i++) {
+    if (i % 2 == 0) {
+      LED_twoBytes = 0b0;
+      bitWrite(LED_twoBytes, i, 1);
+      digitalWrite(LED_latchPin, LOW); //leds off
+      LED_twoByte1 = highByte(LED_twoBytes);
+      LED_twoByte2 = lowByte(LED_twoBytes);
+      shiftOut(LED_dataPin, LED_clockPin, MSBFIRST, LED_twoByte1);
+      shiftOut(LED_dataPin, LED_clockPin, MSBFIRST, LED_twoByte2);
+      digitalWrite(LED_latchPin, HIGH); //leds ready
+      delay(50);
+    }
+  }
+  for (uint8_t i = 16; i > 0; i--) {
+    if (i % 2 > 0) {
+      LED_twoBytes = 0b0;
+      bitWrite(LED_twoBytes, i, 1);
+      digitalWrite(LED_latchPin, LOW); //leds off
+      LED_twoByte1 = highByte(LED_twoBytes);
+      LED_twoByte2 = lowByte(LED_twoBytes);
+      shiftOut(LED_dataPin, LED_clockPin, MSBFIRST, LED_twoByte1);
+      shiftOut(LED_dataPin, LED_clockPin, MSBFIRST, LED_twoByte2);
+      digitalWrite(LED_latchPin, HIGH); //leds ready
+      delay(50);
+    }
+  }
 }
