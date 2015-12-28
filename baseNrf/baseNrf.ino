@@ -213,14 +213,7 @@ void BASE_checkSensorsFault() {
       //sensor ok
     }
   }
-  myDisplay.display();
-
-  for (uint8_t i = 0; i < 7; i++) {
-    if (BASE_isDangerParams[i] == 1) { //if !DNGR => null it. Sensors should update state
-      BASE_isDangerParams[i] = 0;
-    }
-  }
-  LED_paramsState();
+  myDisplay.display();  
 }
 
 uint16_t BASE_decodeParam(uint8_t paramNum, uint16_t paramVal_encoded) {
