@@ -5,7 +5,7 @@ const int LED_clockPin = A1;
 //Пин подключен к DS входу 74HC595
 const int LED_dataPin = A2;
 
-uint16_t LED_twoBytes = b01;
+uint16_t LED_twoBytes = 0b0;
 byte LED_twoByte1;
 byte LED_twoByte2;
 
@@ -77,7 +77,7 @@ void loop() {
   for (c = 0; c < 8; c++) {
     rrrggg();
   }
-  for (c = 0; c < 24; c++) {
+  for (c = 0; c < 80; c++) {
     randrg();
   }
 }
@@ -104,7 +104,7 @@ void rg() {
     shiftOut(LED_dataPin, LED_clockPin, MSBFIRST, LED_twoByte1);
     shiftOut(LED_dataPin, LED_clockPin, MSBFIRST, LED_twoByte2);
     digitalWrite(LED_latchPin, HIGH); //leds ready
-    delay(50);
+    delay(80);
   }
 }
 
@@ -119,7 +119,7 @@ void rrrggg() {
       shiftOut(LED_dataPin, LED_clockPin, MSBFIRST, LED_twoByte1);
       shiftOut(LED_dataPin, LED_clockPin, MSBFIRST, LED_twoByte2);
       digitalWrite(LED_latchPin, HIGH); //leds ready
-      delay(50);
+      delay(80);
     }
   }
   for (uint8_t i = 16; i > 0; i--) {
@@ -132,7 +132,7 @@ void rrrggg() {
       shiftOut(LED_dataPin, LED_clockPin, MSBFIRST, LED_twoByte1);
       shiftOut(LED_dataPin, LED_clockPin, MSBFIRST, LED_twoByte2);
       digitalWrite(LED_latchPin, HIGH); //leds ready
-      delay(50);
+      delay(80);
     }
   }
 }
