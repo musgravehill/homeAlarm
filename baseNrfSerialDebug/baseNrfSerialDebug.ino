@@ -24,13 +24,10 @@
   DNGR => log on SD & send SMS [danger]
 */
 
-//#define DEBUG 1
-
 #include <SPI.h>
 #include <nRF24L01.h>
 #include <RF24.h>
 #include <stdint.h>
-//#include <SoftwareSerial.h>
 
 #define NRF_CE_PIN 9
 #define NRF_CSN_PIN 10 //hardware SS SPI
@@ -56,30 +53,14 @@ uint16_t messageFromSensor[7] = {
   0
 };
 
-//время последнего сигнала от сенсоров, если давно было => сенсор сломался или выключен
-uint32_t millisPrevSignal_sensors[5] = {0};
-
 RF24 radio(NRF_CE_PIN, NRF_CSN_PIN);
-
-//SoftwareSerial sftSrl_forCommand(7, 8); // RX, TX
-
-#include <Adafruit_GFX.h>
-#include <Adafruit_PCD8544.h>
-// Software SPI (slower updates, more flexible pin options):
-// pin 6 - Serial clock out (SCLK)
-// pin 5 - Serial data out (DIN)
-// pin 4 - Data/Command select (D/C)
-// pin 3 - LCD chip select (CS)
-// pin 2 - LCD reset (RST)
-Adafruit_PCD8544 myDisplay = Adafruit_PCD8544(6, 5, 4, 3, 2);
 
 void setup() {
   delay(2000);
-  //#ifdef DEBUG
+ 
   Serial.begin(9600);
   delay(100);
-  //Serial.println(F("Im Base with AckPayload"));
-  //#endif
+  Serial.println(F("Im Base with AckPayload"));  
 
   radio.begin();
   delay(100);
@@ -110,13 +91,7 @@ void setup() {
   radio.openReadingPipe(3, NRF_pipes[3]);
   radio.openReadingPipe(4, NRF_pipes[4]);
   radio.openReadingPipe(5, NRF_pipes[5]);
-  radio.startListening();
-
-  delay(100);
-  myDisplay.begin();
-  myDisplay.setContrast(60);
-  myDisplay.clearDisplay();
-  myDisplay.setRotation(2);
+  radio.startListening();  
 }
 
 void loop() {
@@ -140,7 +115,7 @@ void NRF_listen() {
 }
 
 void BASE_processDataFromSensor() {
-#ifdef DEBUG
+
   Serial.print(F("Sensor# "));
   Serial.println(currPipeNum);
   Serial.print(F("size:"));
@@ -154,7 +129,7 @@ void BASE_processDataFromSensor() {
   Serial.println(messageFromSensor[6], DEC);
   Serial.print(F("\r\n"));
   Serial.print(F("\r\n"));
-#endif
+
 
   String commandToBaseSdGsmRtc_logs = "{LOGS;#" + String(currPipeNum, DEC) + ";";
   String commandToBaseSdGsmRtc_dangers = "";
@@ -176,39 +151,8 @@ void BASE_processDataFromSensor() {
     }
   }
   commandToBaseSdGsmRtc_logs += "}";
-  String commandToBaseSdGsmRtc_all = commandToBaseSdGsmRtc_logs + commandToBaseSdGsmRtc_dangers;
-
-  sftSrl_forCommand.println(commandToBaseSdGsmRtc_all);
-
-  myDisplay.clearDisplay();
-  myDisplay.setTextSize(1);
-  myDisplay.setTextColor(BLACK);
-  myDisplay.setCursor(0, 0);
-  myDisplay.println(commandToBaseSdGsmRtc_all);
-  myDisplay.display();
-#ifdef DEBUG
-  Serial.println(commandToBaseSdGsmRtc_all);
-#endif
-
-  millisPrevSignal_sensors[currPipeNum] =  millis(); //save time of sensor answer
-}
-
-void BASE_checkSensorsFault() {
-  String commandToBaseSdGsmRtc_dangers = "";
-  uint32_t millisCurrSignal = millis();
-  myDisplay.fillRect(0, 50, 64, 64, 1);
-
-  for (int i = 0; i <= 5; i++) {
-    uint32_t deltaSignal = millisCurrSignal - millisPrevSignal_sensors[sensorNum];
-    if (deltaSignal >  7200000) { //2 hours
-      //sensor fault
-      display.fillRect(
-    }
-    else {
-      //sensor ok
-    }
-    millisPrevSignal_sensors[sensorNum] =  millisCurrSignal;
-  }
+  String commandToBaseSdGsmRtc_all = commandToBaseSdGsmRtc_logs + commandToBaseSdGsmRtc_dangers;  
+  Serial.println(commandToBaseSdGsmRtc_all);  
 }
 
 uint16_t BASE_decodeParam(uint8_t paramNum, uint16_t paramVal_encoded) {
