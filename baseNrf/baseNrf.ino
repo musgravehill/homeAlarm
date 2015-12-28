@@ -180,6 +180,7 @@ void BASE_processDataFromSensor() {
     }
     else {
       commandToBaseSdGsmRtc_logs += String((char)paramCode[i]) +  "_;";
+      BASE_isDangerParams[i] = 0; //null
     }
   }
   commandToBaseSdGsmRtc_logs += "}";
@@ -213,7 +214,7 @@ void BASE_checkSensorsFault() {
       //sensor ok
     }
   }
-  myDisplay.display();  
+  myDisplay.display();
 }
 
 uint16_t BASE_decodeParam(uint8_t paramNum, uint16_t paramVal_encoded) {
