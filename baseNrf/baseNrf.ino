@@ -197,12 +197,9 @@ void BASE_processDataFromSensor() {
   millisPrevSignal_sensors[currPipeNum] =  millis(); //save time of sensor answer
 
   LED_paramsState();
-
-
 }
 
 void BASE_checkSensorsFault() {
-
   uint32_t millisCurrSignal = millis();
   myDisplay.fillRect(0, 40, 84, 8, 0);//clear white stripe for icons
   for (int sensorNum = 1; sensorNum <= 5; sensorNum++) { //SENSORS PIPES 1..5!
@@ -217,6 +214,13 @@ void BASE_checkSensorsFault() {
     }
   }
   myDisplay.display();
+
+  for (uint8_t i = 0; i < 7; i++) {
+    if (BASE_isDangerParams[i] == 1) { //if !DNGR => null it. Sensors should update state
+      BASE_isDangerParams[i] = 0;
+    }
+  }
+  LED_paramsState();
 }
 
 uint16_t BASE_decodeParam(uint8_t paramNum, uint16_t paramVal_encoded) {
