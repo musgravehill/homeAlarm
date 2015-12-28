@@ -24,13 +24,10 @@
   DNGR => log on SD & send SMS [danger]
 */
 
-//#define DEBUG 1
-
 #include <SPI.h>
 #include <nRF24L01.h>
 #include <RF24.h>
 #include <stdint.h>
-//#include <SoftwareSerial.h>
 
 #define NRF_CE_PIN 9
 #define NRF_CSN_PIN 10 //hardware SS SPI
@@ -75,11 +72,9 @@ Adafruit_PCD8544 myDisplay = Adafruit_PCD8544(6, 5, 4, 3, 2);
 
 void setup() {
   delay(2000);
-  //#ifdef DEBUG
+
   Serial.begin(9600);
   delay(100);
-  //Serial.println(F("Im Base with AckPayload"));
-  //#endif
 
   radio.begin();
   delay(100);
@@ -178,7 +173,7 @@ void BASE_processDataFromSensor() {
   commandToBaseSdGsmRtc_logs += "}";
   String commandToBaseSdGsmRtc_all = commandToBaseSdGsmRtc_logs + commandToBaseSdGsmRtc_dangers;
 
-  sftSrl_forCommand.println(commandToBaseSdGsmRtc_all);
+  Serial.println(commandToBaseSdGsmRtc_all);
 
   myDisplay.clearDisplay();
   myDisplay.setTextSize(1);
@@ -186,29 +181,25 @@ void BASE_processDataFromSensor() {
   myDisplay.setCursor(0, 0);
   myDisplay.println(commandToBaseSdGsmRtc_all);
   myDisplay.display();
-#ifdef DEBUG
-  Serial.println(commandToBaseSdGsmRtc_all);
-#endif
 
   millisPrevSignal_sensors[currPipeNum] =  millis(); //save time of sensor answer
 }
 
 void BASE_checkSensorsFault() {
-  String commandToBaseSdGsmRtc_dangers = "";
   uint32_t millisCurrSignal = millis();
-  myDisplay.fillRect(0, 50, 64, 64, 1);
-
-  for (int i = 0; i <= 5; i++) {
+  myDisplay.fillRect(0, 40, 84, 8, 0);//clear white stripe for icons
+  for (int sensorNum = 0; sensorNum <= 5; sensorNum++) {
+    myDisplay.fillRect(sensorNum * 12, 40, 8, 8, 1); //black icon == ok
     uint32_t deltaSignal = millisCurrSignal - millisPrevSignal_sensors[sensorNum];
-    if (deltaSignal >  7200000) { //2 hours
+    if (deltaSignal >  120000) { //120s
       //sensor fault
-      display.fillRect(
+      myDisplay.fillRect((sensorNum * 12 + 1), 41, 6, 6, 0); //white icon == fault
     }
     else {
       //sensor ok
     }
-    millisPrevSignal_sensors[sensorNum] =  millisCurrSignal;
   }
+  myDisplay.display();
 }
 
 uint16_t BASE_decodeParam(uint8_t paramNum, uint16_t paramVal_encoded) {
