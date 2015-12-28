@@ -73,6 +73,7 @@ Adafruit_PCD8544 myDisplay = Adafruit_PCD8544(6, 5, 4, 3, 2);
 const int LED_latchPin = A0; //ST_CP 74HC595
 const int LED_clockPin = A1; //SH_CP 74HC595
 const int LED_dataPin = A2; //DS 74HC595
+uint16_t LED_twoBytes = 0b0;
 
 void setup() {
   delay(2000);
@@ -120,7 +121,7 @@ void setup() {
   pinMode(LED_latchPin, OUTPUT);
   pinMode(LED_dataPin, OUTPUT);
   pinMode(LED_clockPin, OUTPUT);
-  uint16_t LED_twoBytes = 0b1111111111111111; //TEST LEDS
+  LED_twoBytes = 0b1111111111111111; //TEST LEDS
   digitalWrite(LED_latchPin, LOW); //leds off
   byte LED_twoByte1 = highByte(LED_twoBytes);
   byte LED_twoByte2 = lowByte(LED_twoBytes);
@@ -153,27 +154,16 @@ void NRF_listen() {
 }
 
 void BASE_processDataFromSensor() {
-#ifdef DEBUG
-  Serial.print(F("Sensor# "));
-  Serial.println(currPipeNum);
-  Serial.print(F("size:"));
-  Serial.println(sizeof(messageFromSensor), DEC);
-  Serial.println(messageFromSensor[0], DEC);
-  Serial.println(messageFromSensor[1], DEC);
-  Serial.println(messageFromSensor[2], DEC);
-  Serial.println(messageFromSensor[3], DEC);
-  Serial.println(messageFromSensor[4], DEC);
-  Serial.println(messageFromSensor[5], DEC);
-  Serial.println(messageFromSensor[6], DEC);
-  Serial.print(F("\r\n"));
-  Serial.print(F("\r\n"));
-#endif
 
   String commandToBaseSdGsmRtc_logs = "{LOGS;#" + String(currPipeNum, DEC) + ";";
   String commandToBaseSdGsmRtc_dangers = "";
   const char paramCode[] = {'V', 'T', 'H', 'W', 'G', 'M', 'C'};
   uint8_t i = 0;
   uint16_t paramVal_decoded;
+
+  LED_twoBytes = 0b0;
+  digitalWrite(LED_latchPin, LOW); //leds off
+
   for (i = 0; i < 7; i++) {
     if (messageFromSensor[i] != 0) { //param is available
       paramVal_decoded = BASE_decodeParam(i, messageFromSensor[i]);
@@ -182,10 +172,20 @@ void BASE_processDataFromSensor() {
         commandToBaseSdGsmRtc_dangers += "{DNGR;#" + String(currPipeNum, DEC) + ";";
         commandToBaseSdGsmRtc_dangers += String((char)paramCode[i]);
         commandToBaseSdGsmRtc_dangers += String(paramVal_decoded, DEC) + ";}";
+
+        bitWrite(LED_twoBytes, (i * 2), 0); //green off
+        bitWrite(LED_twoBytes, (i * 2 + 1), 1); //red on
+      }
+      else {
+        bitWrite(LED_twoBytes, (i * 2), 1); //green on
+        //bitWrite(LED_twoBytes, (i * 2 + 1), 0); //red off //если был DNGR, то пусть горит постоянно до перезагрузки
       }
     }
     else {
       commandToBaseSdGsmRtc_logs += String((char)paramCode[i]) +  "_;";
+
+      bitWrite(LED_twoBytes, (i * 2), 0); //green off
+      //bitWrite(LED_twoBytes, (i * 2 + 1), 0); //red off //если был DNGR, то пусть горит постоянно до перезагрузки
     }
   }
   commandToBaseSdGsmRtc_logs += "}";
@@ -201,13 +201,15 @@ void BASE_processDataFromSensor() {
   myDisplay.display();
 
   millisPrevSignal_sensors[currPipeNum] =  millis(); //save time of sensor answer
+
+  byte LED_twoByte1 = highByte(LED_twoBytes);
+  byte LED_twoByte2 = lowByte(LED_twoBytes);
+  shiftOut(LED_dataPin, LED_clockPin, MSBFIRST, LED_twoByte1);
+  shiftOut(LED_dataPin, LED_clockPin, MSBFIRST, LED_twoByte2);
+  digitalWrite(LED_latchPin, HIGH); //leds ready
 }
 
 void BASE_checkSensorsFault() {
-  //TEST LEDS
-  uint16_t LED_twoBytes = 0b0; //TEST LEDS
-  digitalWrite(LED_latchPin, LOW); //leds off
-  //END TEST LEDS
 
   uint32_t millisCurrSignal = millis();
   myDisplay.fillRect(0, 40, 84, 8, 0);//clear white stripe for icons
@@ -217,25 +219,12 @@ void BASE_checkSensorsFault() {
     if (deltaSignal >  10000) { //10s
       //sensor fault
       myDisplay.fillRect((sensorNum * 12 + 1), 41, 6, 6, 0); //white icon == fault
-
-      bitWrite(LED_twoBytes, (sensorNum * 2), 0); //TEST LEDS
-      bitWrite(LED_twoBytes, (sensorNum * 2 + 1), 1); //TEST LEDS
     }
     else {
       //sensor ok
-      bitWrite(LED_twoBytes, (sensorNum * 2), 1); //TEST LEDS
-      bitWrite(LED_twoBytes, (sensorNum * 2 + 1), 0); //TEST LEDS
     }
   }
   myDisplay.display();
-
-  //TEST LEDS
-  byte LED_twoByte1 = highByte(LED_twoBytes);
-  byte LED_twoByte2 = lowByte(LED_twoBytes);
-  shiftOut(LED_dataPin, LED_clockPin, MSBFIRST, LED_twoByte1);
-  shiftOut(LED_dataPin, LED_clockPin, MSBFIRST, LED_twoByte2);
-  digitalWrite(LED_latchPin, HIGH); //leds ready
-  //END TEST LEDS
 }
 
 uint16_t BASE_decodeParam(uint8_t paramNum, uint16_t paramVal_encoded) {
@@ -292,4 +281,7 @@ bool BASE_isDangerParamValue(uint8_t paramNum, uint16_t paramVal_decoded) {
       break;
   }
   return isDanger;
+}
+
+void LED_paramsState() {
 }
