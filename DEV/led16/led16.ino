@@ -5,7 +5,7 @@ const int LED_clockPin = A1;
 //Пин подключен к DS входу 74HC595
 const int LED_dataPin = A2;
 
-uint16_t LED_twoBytes = B0;
+uint16_t LED_twoBytes = b01;
 byte LED_twoByte1;
 byte LED_twoByte2;
 

@@ -133,6 +133,7 @@ void setup() {
 
 void loop() {
   NRF_listen();
+  BASE_checkSensorsFault();
 }
 
 void NRF_listen() {
