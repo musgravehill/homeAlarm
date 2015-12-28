@@ -116,7 +116,7 @@ void setup() {
   myDisplay.begin();
   myDisplay.setContrast(60);
   myDisplay.clearDisplay();
-  myDisplay.setRotation(2);
+  myDisplay.setRotation(0);
 
   pinMode(LED_latchPin, OUTPUT);
   pinMode(LED_dataPin, OUTPUT);
@@ -262,7 +262,7 @@ bool BASE_isDangerParamValue(uint8_t paramNum, uint16_t paramVal_decoded) {
       isDanger = (bool)( (paramVal_decoded < 555) || (paramVal_decoded > 777) );
       break;
     case 1: //T   0=null, -50..120 [+100]   temperature, C
-      isDanger = (bool)( (paramVal_decoded < 15) || (paramVal_decoded > 19) );
+      isDanger = (bool)( (paramVal_decoded < 15) || (paramVal_decoded > 28) );
       break;
     case 2: //H   0=null, 0..100   [+100]   humidity, %
       isDanger = (bool)( (paramVal_decoded < 5) || (paramVal_decoded > 40) );
