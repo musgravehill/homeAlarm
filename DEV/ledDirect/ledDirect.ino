@@ -49,5 +49,5 @@ void loop() {
   shiftOut(LED_dataPin, LED_clockPin, MSBFIRST, LED_twoByte2);
   digitalWrite(LED_latchPin, HIGH); //leds ready
   Serial.println(val, DEC);
-  delay(500);
+  delay(50);
 }
