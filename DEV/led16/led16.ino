@@ -71,7 +71,7 @@ void setup() {
 
 void loop() {
   uint8_t c;
-  for (c = 0; c < 8; c++) {
+  /*for (c = 0; c < 8; c++) {
     rg();
   }
   for (c = 0; c < 8; c++) {
@@ -79,7 +79,8 @@ void loop() {
   }
   for (c = 0; c < 80; c++) {
     randrg();
-  }
+  }*/
+  randrg();
 }
 
 void randrg() {
