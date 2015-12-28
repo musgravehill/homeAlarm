@@ -16,6 +16,8 @@ void setup() {
   
   LED_twoBytes = 0b0;
   bitWrite(LED_twoBytes, 0, 1);
+  bitWrite(LED_twoBytes, 9, 1);
+  bitWrite(LED_twoBytes, 15, 1);
   digitalWrite(LED_latchPin, LOW); //leds off
   LED_twoByte1 = highByte(LED_twoBytes);
   LED_twoByte2 = lowByte(LED_twoBytes);

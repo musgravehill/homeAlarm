@@ -211,20 +211,20 @@ void BASE_checkSensorsFault() {
 
   uint32_t millisCurrSignal = millis();
   myDisplay.fillRect(0, 40, 84, 8, 0);//clear white stripe for icons
-  for (int sensorNum = 0; sensorNum <= 5; sensorNum++) {
+  for (int sensorNum = 1; sensorNum <= 5; sensorNum++) { //SENSORS PIPES 1..5!
     myDisplay.fillRect(sensorNum * 12, 40, 8, 8, 1); //black icon == ok
     uint32_t deltaSignal = millisCurrSignal - millisPrevSignal_sensors[sensorNum];
     if (deltaSignal >  10000) { //10s
       //sensor fault
       myDisplay.fillRect((sensorNum * 12 + 1), 41, 6, 6, 0); //white icon == fault
 
-      bitWrite(LED_twoBytes, sensorNum, 0);//TEST LEDS
-      bitWrite(LED_twoBytes, (sensorNum + 1), 1); //TEST LEDS
+      bitWrite(LED_twoBytes, (sensorNum * 2), 0); //TEST LEDS
+      bitWrite(LED_twoBytes, (sensorNum * 2 + 1), 1); //TEST LEDS
     }
     else {
       //sensor ok
-      bitWrite(LED_twoBytes, sensorNum, 1);//TEST LEDS
-      bitWrite(LED_twoBytes, (sensorNum + 1), 0); //TEST LEDS
+      bitWrite(LED_twoBytes, (sensorNum * 2), 1); //TEST LEDS
+      bitWrite(LED_twoBytes, (sensorNum * 2 + 1), 0); //TEST LEDS
     }
   }
   myDisplay.display();
