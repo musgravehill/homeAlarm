@@ -53,6 +53,9 @@ uint16_t messageFromSensor[7] = {
   0
 };
 
+//0=null  1=ok 2=danger
+uint8_t BASE_isDangerParams[7] = {0};
+
 //время последнего сигнала от сенсоров, если давно было => сенсор сломался или выключен
 uint32_t millisPrevSignal_sensors[5] = {0};
 
@@ -129,7 +132,6 @@ void setup() {
   shiftOut(LED_dataPin, LED_clockPin, MSBFIRST, LED_twoByte2);
   digitalWrite(LED_latchPin, HIGH); //leds ready
   delay(100);
-
 }
 
 void loop() {
@@ -154,17 +156,12 @@ void NRF_listen() {
 }
 
 void BASE_processDataFromSensor() {
-
   String commandToBaseSdGsmRtc_logs = "{LOGS;#" + String(currPipeNum, DEC) + ";";
   String commandToBaseSdGsmRtc_dangers = "";
   const char paramCode[] = {'V', 'T', 'H', 'W', 'G', 'M', 'C'};
-  uint8_t i = 0;
   uint16_t paramVal_decoded;
 
-  LED_twoBytes = 0b0;
-  digitalWrite(LED_latchPin, LOW); //leds off
-
-  for (i = 0; i < 7; i++) {
+  for (uint8_t i = 0; i < 7; i++) {
     if (messageFromSensor[i] != 0) { //param is available
       paramVal_decoded = BASE_decodeParam(i, messageFromSensor[i]);
       commandToBaseSdGsmRtc_logs +=  String((char)paramCode[i]) + String(paramVal_decoded, DEC) + ";";
@@ -173,19 +170,16 @@ void BASE_processDataFromSensor() {
         commandToBaseSdGsmRtc_dangers += String((char)paramCode[i]);
         commandToBaseSdGsmRtc_dangers += String(paramVal_decoded, DEC) + ";}";
 
-        bitWrite(LED_twoBytes, (i * 2), 0); //green off
-        bitWrite(LED_twoBytes, (i * 2 + 1), 1); //red on
+        BASE_isDangerParams[i] = 2; //0..6 params  0=null 1=ok 2=danger
       }
       else {
-        bitWrite(LED_twoBytes, (i * 2), 1); //green on
-        //bitWrite(LED_twoBytes, (i * 2 + 1), 0); //red off //если был DNGR, то пусть горит постоянно до перезагрузки
+        if (BASE_isDangerParams[i] != 2) { //save DNGR forever, until you reboot
+          BASE_isDangerParams[i] = 1; //ok
+        }
       }
     }
     else {
       commandToBaseSdGsmRtc_logs += String((char)paramCode[i]) +  "_;";
-
-      bitWrite(LED_twoBytes, (i * 2), 0); //green off
-      //bitWrite(LED_twoBytes, (i * 2 + 1), 0); //red off //если был DNGR, то пусть горит постоянно до перезагрузки
     }
   }
   commandToBaseSdGsmRtc_logs += "}";
@@ -202,11 +196,9 @@ void BASE_processDataFromSensor() {
 
   millisPrevSignal_sensors[currPipeNum] =  millis(); //save time of sensor answer
 
-  byte LED_twoByte1 = highByte(LED_twoBytes);
-  byte LED_twoByte2 = lowByte(LED_twoBytes);
-  shiftOut(LED_dataPin, LED_clockPin, MSBFIRST, LED_twoByte1);
-  shiftOut(LED_dataPin, LED_clockPin, MSBFIRST, LED_twoByte2);
-  digitalWrite(LED_latchPin, HIGH); //leds ready
+  LED_paramsState();
+
+
 }
 
 void BASE_checkSensorsFault() {
@@ -284,4 +276,25 @@ bool BASE_isDangerParamValue(uint8_t paramNum, uint16_t paramVal_decoded) {
 }
 
 void LED_paramsState() {
+  //0=null  1=ok 2=danger
+  LED_twoBytes = 0b0; //ALL LEDS OFF
+  for (uint8_t i = 0; i < 7; i++) {
+    switch (BASE_isDangerParams[i]) {
+      case 0:   //0=null
+        break;
+      case 1:   //1=ok
+        bitWrite(LED_twoBytes, (i * 2), 1); //green on
+        break;
+      case 2:   //2=danger
+        bitWrite(LED_twoBytes, (i * 2 + 1), 1); //red on
+        break;
+    }
+  }
+
+  digitalWrite(LED_latchPin, LOW); //leds off
+  byte LED_twoByte1 = highByte(LED_twoBytes);
+  byte LED_twoByte2 = lowByte(LED_twoBytes);
+  shiftOut(LED_dataPin, LED_clockPin, MSBFIRST, LED_twoByte1);
+  shiftOut(LED_dataPin, LED_clockPin, MSBFIRST, LED_twoByte2);
+  digitalWrite(LED_latchPin, HIGH); //leds ready
 }
