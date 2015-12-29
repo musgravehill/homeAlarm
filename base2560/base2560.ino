@@ -110,6 +110,11 @@ uint32_t unixtimePrevSMS_G = 0; //n, 0..1023 ADC  gas CH4, ADC value
 uint32_t unixtimePrevSMS_M = 0; //n, 0, 1         motion detector, bool
 uint32_t unixtimePrevSMS_C = 0; //n, 0..1023      gas CO, ADC value
 
+bool BASE_sensorIsOk[6] = {false}; //0 1..5
+uint16_t BASE_sensorParams[6][7] = {0}; //encoded uint params; 0==null
+
+unsigned long STATEMACHINE_prevMillis_5s;
+unsigned long STATEMACHINE_prevMillis_10s;
 
 #define DEBUG 1;
 
@@ -142,22 +147,24 @@ void setup() {
 
 void loop() {
   NRF_listen();
-  BASE_checkSensorsFault();
+  STATEMACHINE_loop();
 }
 
 void BASE_processDataFromSensor() {
   String string_logs = "{LOGS;#" + String(NRF_currPipeNum, DEC) + ";";
   String string_dangers = "";
   const char paramCode[] = {'V', 'T', 'H', 'W', 'G', 'M', 'C'};
-  uint16_t paramVal_decoded;
+  int16_t paramVal_decoded; //int -+;  not uint
 
-  for (uint8_t i = 0; i < 7; i++) {
-    if (NRF_messageFromSensor[i] != 0) { //param is available
-      paramVal_decoded = PARAMS_decodeParam(i, NRF_messageFromSensor[i]);
-      string_logs +=  String((char)paramCode[i]) + String(paramVal_decoded, DEC) + ";";
-      if (PARAMS_isDangerParamValue(i, paramVal_decoded)) {
+  for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
+    BASE_sensorParams[NRF_currPipeNum][paramNum] = NRF_messageFromSensor[paramNum];//save encoded params for TFT
+    if (NRF_messageFromSensor[paramNum] != 0) { //param is available
+      paramVal_decoded = PARAMS_decodeParam(paramNum, NRF_messageFromSensor[paramNum]); //decode to real range
+      string_logs +=  String((char)paramCode[paramNum]) + String(paramVal_decoded, DEC) + ";";
+      
+      if (PARAMS_isDangerParamValue(paramNum, paramVal_decoded)) {
         string_dangers += "{DNGR;#" + String(NRF_currPipeNum, DEC) + ";";
-        string_dangers += String((char)paramCode[i]);
+        string_dangers += String((char)paramCode[paramNum]);
         string_dangers += String(paramVal_decoded, DEC) + ";}";
       }
       else {
@@ -165,7 +172,7 @@ void BASE_processDataFromSensor() {
       }
     }
     else {
-      string_logs += String((char)paramCode[i]) +  "_;";
+      string_logs += String((char)paramCode[paramNum]) +  "_;";
     }
   }
   string_logs += "}";
@@ -185,10 +192,13 @@ void BASE_checkSensorsFault() {
     uint32_t deltaSignal = millisCurrSignal - millisPrevSignal_sensors[sensorNum];
     if (deltaSignal >  10000) { //10s
       //sensor fault
+      BASE_sensorIsOk[sensorNum] = false;
     }
     else {
       //sensor ok
+      BASE_sensorIsOk[sensorNum] = true;
     }
   }
 }
+
 
