@@ -76,9 +76,6 @@ uint16_t NRF_messageFromSensor[7] = {
   0
 };
 
-//0=null  1=ok 2=danger
-uint8_t BASE_isDangerParams[7] = {0};
-
 //время последнего сигнала от сенсоров, если давно было => сенсор сломался или выключен
 uint32_t millisPrevSignal_sensors[5] = {0};
 
@@ -162,55 +159,36 @@ void BASE_processDataFromSensor() {
         string_dangers += "{DNGR;#" + String(NRF_currPipeNum, DEC) + ";";
         string_dangers += String((char)paramCode[i]);
         string_dangers += String(paramVal_decoded, DEC) + ";}";
-
-        BASE_isDangerParams[i] = 2; //0..6 params  0=null 1=ok 2=danger
       }
       else {
-        if (BASE_isDangerParams[i] != 2) { //save DNGR forever, until you reboot
-          BASE_isDangerParams[i] = 1; //ok
-        }
+
       }
     }
     else {
       string_logs += String((char)paramCode[i]) +  "_;";
-      BASE_isDangerParams[i] = 0; //null
     }
   }
   string_logs += "}";
+
   String commandToBaseSdGsmRtc_all = string_logs + string_dangers;
 
+  millisPrevSignal_sensors[NRF_currPipeNum] =  millis(); //save time of sensor answer
 
 #ifdef DEBUG
   debugSerial.println(commandToBaseSdGsmRtc_all);
 #endif
-
-  //myDisplay.clearDisplay();
-  //myDisplay.setTextSize(1);
-  //myDisplay.setTextColor(BLACK);
-  //myDisplay.setCursor(0, 0);
-  //myDisplay.println(commandToBaseSdGsmRtc_all);
-  //myDisplay.display();
-
-  millisPrevSignal_sensors[NRF_currPipeNum] =  millis(); //save time of sensor answer
-
-  // LED_paramsState();
 }
 
 void BASE_checkSensorsFault() {
   uint32_t millisCurrSignal = millis();
-  //myDisplay.fillRect(0, 40, 84, 8, 0);//clear white stripe for icons
   for (int sensorNum = 1; sensorNum <= 5; sensorNum++) { //SENSORS PIPES 1..5!
-    //myDisplay.fillRect(sensorNum * 12, 40, 8, 8, 1); //black icon == ok
     uint32_t deltaSignal = millisCurrSignal - millisPrevSignal_sensors[sensorNum];
     if (deltaSignal >  10000) { //10s
       //sensor fault
-      //myDisplay.fillRect((sensorNum * 12 + 1), 41, 6, 6, 0); //white icon == fault
     }
     else {
       //sensor ok
     }
   }
-  //myDisplay.display();
 }
-
 
