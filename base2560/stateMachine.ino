@@ -13,6 +13,18 @@ void STATEMACHINE_loop() {
 void STATEMACHINE_5s() {
   BASE_checkSensorsFault();
   TFT_renderSensors();
+
+
+#ifdef DEBUG
+  DateTime now = RTC3231.now();
+  uint32_t nowUt = now.unixtime();
+  debugSerial.println(nowUt, DEC);
+  uint16_t yyyy =  now.year();
+  uint8_t mm = now.month();
+  uint8_t dd =  now.day();
+  String filename_s = String(dd, DEC) + "." + String(mm, DEC) + "." + String(yyyy, DEC) + ".csv";
+  debugSerial.println(filename_s);
+#endif
 }
 
 void STATEMACHINE_10s() {
