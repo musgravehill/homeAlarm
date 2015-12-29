@@ -53,12 +53,14 @@
 
 #include <SdFat.h>
 #include <SdFatUtil.h>
-#if SD_SPI_CONFIGURATION >= 3  // Must be set in SdFat/SdFatConfig.h
+//#if SD_SPI_CONFIGURATION >= 3  // Must be set in SdFat/SdFatConfig.h
 SdFatSoftSpi<12, 11, 13> SD_card;
+SdFile SD_file;
 const uint8_t SD_CS = 10;
-#else
-#error SD_SPI_CONFIGURATION must be set to 3 in SdFat/SdFatConfig.h
-#endif
+//#else
+//#error SD_SPI_CONFIGURATION must be set to 3 in SdFat/SdFatConfig.h
+//#endif
+bool SD_isEnable = false;
 
 
 //NRF: 49 CE, 50 MISO, 51 MOSI, 52 SCK, 53 SS
@@ -152,6 +154,11 @@ void setup() {
   delay(50);
 
   GSM_init();
+  delay(50);
+
+  pinMode(SD_CS, OUTPUT);
+  digitalWrite(SD_CS, HIGH); //disable SD
+  SD_init();
   delay(50);
 }
 
