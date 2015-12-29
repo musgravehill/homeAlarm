@@ -151,6 +151,7 @@ void loop() {
 }
 
 void BASE_processDataFromSensor() {
+  millisPrevSignal_sensors[NRF_currPipeNum] =  millis(); //save time of sensor answer
   String string_logs = "{LOGS;#" + String(NRF_currPipeNum, DEC) + ";";
   String string_dangers = "";
   const char paramCode[] = {'V', 'T', 'H', 'W', 'G', 'M', 'C'};
@@ -161,7 +162,7 @@ void BASE_processDataFromSensor() {
     if (NRF_messageFromSensor[paramNum] != 0) { //param is available
       paramVal_decoded = PARAMS_decodeParam(paramNum, NRF_messageFromSensor[paramNum]); //decode to real range
       string_logs +=  String((char)paramCode[paramNum]) + String(paramVal_decoded, DEC) + ";";
-      
+
       if (PARAMS_isDangerParamValue(paramNum, paramVal_decoded)) {
         string_dangers += "{DNGR;#" + String(NRF_currPipeNum, DEC) + ";";
         string_dangers += String((char)paramCode[paramNum]);
@@ -179,7 +180,7 @@ void BASE_processDataFromSensor() {
 
   String commandToBaseSdGsmRtc_all = string_logs + string_dangers;
 
-  millisPrevSignal_sensors[NRF_currPipeNum] =  millis(); //save time of sensor answer
+
 
 #ifdef DEBUG
   debugSerial.println(commandToBaseSdGsmRtc_all);

@@ -1,5 +1,5 @@
-//TFT SPI ILI9341
-//LCD nokia 5110 PCD8544
+// *  TFT SPI ILI9341
+//    LCD nokia 5110 PCD8544
 
 
 void TFT_init() {

@@ -14,3 +14,7 @@ void STATEMACHINE_5s() {
   BASE_checkSensorsFault();
   TFT_renderSensors();
 }
+
+void STATEMACHINE_10s() {
+  //may be GSM_SMS
+}
