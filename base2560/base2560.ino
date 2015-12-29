@@ -51,6 +51,16 @@
 #include "Adafruit_GFX.h"
 #include "Adafruit_ILI9341.h"
 
+#include <SdFat.h>
+#include <SdFatUtil.h>
+#if SD_SPI_CONFIGURATION >= 3  // Must be set in SdFat/SdFatConfig.h
+SdFatSoftSpi<12, 11, 13> SD_card;
+const uint8_t SD_CS = 10;
+#else
+#error SD_SPI_CONFIGURATION must be set to 3 in SdFat/SdFatConfig.h
+#endif
+
+
 //NRF: 49 CE, 50 MISO, 51 MOSI, 52 SCK, 53 SS
 #define NRF_CE_PIN 49 //custom nrf-s pin for listen\transmit\sleep signal
 #define NRF_CSN_PIN 53 //hardware SS SPI
