@@ -39,7 +39,7 @@
   LOGS => log on SD only
   DNGR => log on SD & send SMS [danger]
 */
-// [20,21 RTC] [43,44,45,46,47,48 TFT] [49,50,51,52,53 NRF]
+// [10,11,12,13 SD][20,21 RTC] [43,44,45,46,47,48 TFT] [49,50,51,52,53 NRF]
 
 #include <SPI.h>
 #include <nRF24L01.h>
@@ -53,15 +53,11 @@
 
 #include <SdFat.h>
 #include <SdFatUtil.h>
-//#if SD_SPI_CONFIGURATION >= 3  // Must be set in SdFat/SdFatConfig.h
-SdFatSoftSpi<12, 11, 13> SD_card;
+//SD_SPI_CONFIGURATION >= 3  // Must be set in SdFat/SdFatConfig.h
+SdFatSoftSpi<12, 11, 13> SD_card; //12 MISO, 11 MOSI, 13 SCK
 SdFile SD_file;
 const uint8_t SD_CS = 10;
-//#else
-//#error SD_SPI_CONFIGURATION must be set to 3 in SdFat/SdFatConfig.h
-//#endif
 bool SD_isEnable = false;
-
 
 //NRF: 49 CE, 50 MISO, 51 MOSI, 52 SCK, 53 SS
 #define NRF_CE_PIN 49 //custom nrf-s pin for listen\transmit\sleep signal
@@ -176,31 +172,31 @@ void BASE_processDataFromSensor() {
 
   for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
     BASE_sensorParams[NRF_currPipeNum][paramNum] = NRF_messageFromSensor[paramNum];//save encoded params for TFT
-    if (NRF_messageFromSensor[paramNum] != 0) { //param is available
+
+    //param is available
+    if (NRF_messageFromSensor[paramNum] != 0) {
       paramVal_decoded = PARAMS_decodeParam(paramNum, NRF_messageFromSensor[paramNum]); //decode to real range
       string_logs +=  String((char)paramCode[paramNum]) + String(paramVal_decoded, DEC) + ";";
 
+      //param is danger
       if (PARAMS_isDangerParamValue(paramNum, paramVal_decoded)) {
         string_dangers += "{DNGR;#" + String(NRF_currPipeNum, DEC) + ";";
         string_dangers += String((char)paramCode[paramNum]);
         string_dangers += String(paramVal_decoded, DEC) + ";}";
-      }
-      else {
-
+        SD_log(string_dangers);
       }
     }
+    //param NOT available
     else {
       string_logs += String((char)paramCode[paramNum]) +  "_;";
     }
   }
   string_logs += "}";
-
-  String commandToBaseSdGsmRtc_all = string_logs + string_dangers;
-
-
+  SD_log(string_logs);
 
 #ifdef DEBUG
-  debugSerial.println(commandToBaseSdGsmRtc_all);
+  debugSerial.println(string_logs);
+  debugSerial.println(string_dangers);
 #endif
 }
 
