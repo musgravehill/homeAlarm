@@ -14,7 +14,8 @@ void TFT_init() {
 
 void TFT_renderSensors() {
   //bool BASE_sensorIsOk[6] = {false}; //0 1..5
-  //uint16_t BASE_sensorParams[6][7] = {0}; //encoded uint params; 0==null
+  //uint16_t BASE_sensorParams[6][7] = {0}; //encoded uint params; 0==null; [sensorNum][paramNum] 1..5  0..6
+  //bool BASE_sensorParamsIsDanger[sensorNum][paramNum] = false; [6][7]  1..5  0..6
   //DECODE params before display it
 }
 

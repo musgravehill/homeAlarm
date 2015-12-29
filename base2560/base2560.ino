@@ -119,7 +119,8 @@ uint32_t unixtimePrevSMS_M = 0; //n, 0, 1         motion detector, bool
 uint32_t unixtimePrevSMS_C = 0; //n, 0..1023      gas CO, ADC value
 
 bool BASE_sensorIsOk[6] = {false}; //0 1..5
-uint16_t BASE_sensorParams[6][7] = {0}; //encoded uint params; 0==null
+uint16_t BASE_sensorParams[6][7] = {0}; //encoded uint params; 0==null;  [sensorNum][paramNum]
+bool BASE_sensorParamsIsDanger[6][7] = {true}; //[sensorNum][paramNum]
 
 unsigned long STATEMACHINE_prevMillis_5s;
 unsigned long STATEMACHINE_prevMillis_10s;
@@ -184,6 +185,10 @@ void BASE_processDataFromSensor() {
         string_dangers += String((char)paramCode[paramNum]);
         string_dangers += String(paramVal_decoded, DEC) + ";}";
         SD_log(string_dangers);
+        BASE_sensorParamsIsDanger[NRF_currPipeNum][paramNum] = true;
+      }
+      else {
+        BASE_sensorParamsIsDanger[NRF_currPipeNum][paramNum] = false;
       }
     }
     //param NOT available
