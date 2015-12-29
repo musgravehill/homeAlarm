@@ -157,7 +157,7 @@ void setup() {
   SD_init();
   delay(50);
 
-  RTC_setTime();
+  //RTC_setTime();
 }
 
 void loop() {
