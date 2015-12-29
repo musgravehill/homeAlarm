@@ -2,7 +2,7 @@
   base with NRF, GSM, SD, RTC, TFT
   MEGA_2560 3.6V 16MHz => no level-shifters
   3.6V for ALL devicies
-  Get data from sensors 1..5 by NRF  
+  Get data from sensors 1..5 by NRF
 */
 /*
   Последовательная шина: 0 (RX) и 1 (TX)
@@ -81,8 +81,8 @@ uint32_t millisPrevSignal_sensors[5] = {0};
 
 RF24 radio(NRF_CE_PIN, NRF_CSN_PIN);
 
-//SoftwareSerial sftSrl_forCommand(7, 8); // RX, TX
 
+/*
 #include <Adafruit_GFX.h>
 #include <Adafruit_PCD8544.h>
 // Software SPI (slower updates, more flexible pin options):
@@ -97,6 +97,7 @@ const int LED_latchPin = A0; //ST_CP 74HC595
 const int LED_clockPin = A1; //SH_CP 74HC595
 const int LED_dataPin = A2; //DS 74HC595
 uint16_t LED_twoBytes = 0b0;
+*/
 
 //RTC I2C: 20 SDA, 21 SCL
 RTClib RTC3231;
@@ -142,11 +143,11 @@ void setup() {
   NRF_init();
   delay(50);
 
-  TFT_init();
-  delay(50);
+  //TFT_init();
+  //delay(50);
 
-  LED_init();
-  delay(50);
+  //LED_init();
+  //delay(50);
 
   GSM_init();
   delay(50);
@@ -193,33 +194,33 @@ void BASE_processDataFromSensor() {
   debugSerial.println(commandToBaseSdGsmRtc_all);
 #endif
 
-  myDisplay.clearDisplay();
-  myDisplay.setTextSize(1);
-  myDisplay.setTextColor(BLACK);
-  myDisplay.setCursor(0, 0);
-  myDisplay.println(commandToBaseSdGsmRtc_all);
-  myDisplay.display();
+  //myDisplay.clearDisplay();
+  //myDisplay.setTextSize(1);
+  //myDisplay.setTextColor(BLACK);
+  //myDisplay.setCursor(0, 0);
+  //myDisplay.println(commandToBaseSdGsmRtc_all);
+  //myDisplay.display();
 
   millisPrevSignal_sensors[NRF_currPipeNum] =  millis(); //save time of sensor answer
 
-  LED_paramsState();
+ // LED_paramsState();
 }
 
 void BASE_checkSensorsFault() {
   uint32_t millisCurrSignal = millis();
-  myDisplay.fillRect(0, 40, 84, 8, 0);//clear white stripe for icons
+  //myDisplay.fillRect(0, 40, 84, 8, 0);//clear white stripe for icons
   for (int sensorNum = 1; sensorNum <= 5; sensorNum++) { //SENSORS PIPES 1..5!
-    myDisplay.fillRect(sensorNum * 12, 40, 8, 8, 1); //black icon == ok
+    //myDisplay.fillRect(sensorNum * 12, 40, 8, 8, 1); //black icon == ok
     uint32_t deltaSignal = millisCurrSignal - millisPrevSignal_sensors[sensorNum];
     if (deltaSignal >  10000) { //10s
       //sensor fault
-      myDisplay.fillRect((sensorNum * 12 + 1), 41, 6, 6, 0); //white icon == fault
+      //myDisplay.fillRect((sensorNum * 12 + 1), 41, 6, 6, 0); //white icon == fault
     }
     else {
       //sensor ok
     }
   }
-  myDisplay.display();
+  //myDisplay.display();
 }
 
 
