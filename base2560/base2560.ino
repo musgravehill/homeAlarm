@@ -84,30 +84,12 @@ uint32_t millisPrevSignal_sensors[5] = {0};
 
 RF24 radio(NRF_CE_PIN, NRF_CSN_PIN);
 
-
-/*
-  #include <Adafruit_GFX.h>
-  #include <Adafruit_PCD8544.h>
-  // Software SPI (slower updates, more flexible pin options):
-  // pin 6 - Serial clock out (SCLK)
-  // pin 5 - Serial data out (DIN)
-  // pin 4 - Data/Command select (D/C)
-  // pin 3 - LCD chip select (CS)
-  // pin 2 - LCD reset (RST)
-  Adafruit_PCD8544 myDisplay = Adafruit_PCD8544(6, 5, 4, 3, 2);
-
-  const int LED_latchPin = A0; //ST_CP 74HC595
-  const int LED_clockPin = A1; //SH_CP 74HC595
-  const int LED_dataPin = A2; //DS 74HC595
-  uint16_t LED_twoBytes = 0b0;
-*/
-
 #define TFT_CS 43
 #define TFT_DC 44
 #define TFT_MOSI 45
 #define TFT_CLK 46
 #define TFT_RST 47
-#define TFT_MISO 48 
+#define TFT_MISO 48
 Adafruit_ILI9341 myDisplay = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_MOSI, TFT_CLK, TFT_RST, TFT_MISO);
 
 //RTC I2C: 20 SDA, 21 SCL
@@ -154,11 +136,8 @@ void setup() {
   NRF_init();
   delay(50);
 
-  //TFT_init();
-  //delay(50);
-
-  //LED_init();
-  //delay(50);
+  TFT_init();
+  delay(50);
 
   GSM_init();
   delay(50);
