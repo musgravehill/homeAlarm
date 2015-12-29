@@ -1,9 +1,8 @@
 /*
-  base with NRF
+  base with NRF, GSM, SD, RTC, TFT
   MEGA_2560 3.6V 16MHz => no level-shifters
   3.6V for ALL devicies
-  Get data from sensors 1..5 by NRF.
-  Process data => make commands [logs, dngr] => send by Serial to baseSdGsmRtc
+  Get data from sensors 1..5 by NRF  
 */
 /*
   Последовательная шина: 0 (RX) и 1 (TX)
@@ -49,8 +48,9 @@
 #include <Wire.h>
 #include "DS3231.h"
 
-#define NRF_CE_PIN 9
-#define NRF_CSN_PIN 10 //hardware SS SPI
+//NRF: 49 CE, 50 MISO, 51 MOSI, 52 SCK, 53 SS
+#define NRF_CE_PIN 49 //custom nrf-s pin for listen\transmit\sleep signal
+#define NRF_CSN_PIN 53 //hardware SS SPI
 
 //'static' - no need
 const uint64_t NRF_pipes[6] = {
@@ -98,6 +98,7 @@ const int LED_clockPin = A1; //SH_CP 74HC595
 const int LED_dataPin = A2; //DS 74HC595
 uint16_t LED_twoBytes = 0b0;
 
+//RTC I2C: 20 SDA, 21 SCL
 RTClib RTC3231;
 
 //seconds between SMS
