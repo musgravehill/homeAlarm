@@ -8,16 +8,13 @@ void SD_init() {
 
 void SD_log(String data) {
   if (SD_isEnable) {
-    /*
-      DateTime now = RTC3231.now();
-      uint32_t nowUt = now.unixtime();
-      uint16_t yyyy =  now.year();
-      uint8_t mm = now.month();
-      uint8_t dd =  now.day();
-    */
-    uint16_t yy =  2015 - 2000;
-    uint8_t mm = 12;
-    uint8_t dd = 28;
+
+    DateTime now = RTC3231.now();
+    uint32_t nowUt = now.unixtime();
+    uint16_t yy =  now.year() - 2000;
+    uint8_t mm = now.month();
+    uint8_t dd =  now.day();
+
     String filename_s = String(dd, DEC) + "." + String(mm, DEC) + "." + String(yy, DEC) + ".csv";
     char filename_chr[filename_s.length() + 1];
     filename_s.toCharArray(filename_chr, sizeof(filename_chr));

@@ -44,7 +44,6 @@
 #include <SPI.h>
 #include <nRF24L01.h>
 #include <RF24.h>
-//#include <SdFat.h>
 #include <stdint.h>
 #include <Wire.h>
 #include "DS3231.h"
@@ -157,6 +156,8 @@ void setup() {
   digitalWrite(SD_CS, HIGH); //disable SD
   SD_init();
   delay(50);
+
+  RTC_setTime();
 }
 
 void loop() {
@@ -201,7 +202,7 @@ void BASE_processDataFromSensor() {
 
 #ifdef DEBUG
   debugSerial.println(string_logs);
-  debugSerial.println(string_dangers);
+  debugSerial.println(string_dangers);  
 #endif
 }
 
@@ -213,6 +214,8 @@ void BASE_checkSensorsFault() {
       //sensor fault
       BASE_sensorIsOk[sensorNum] = false;
     }
+
+
     else {
       //sensor ok
       BASE_sensorIsOk[sensorNum] = true;
