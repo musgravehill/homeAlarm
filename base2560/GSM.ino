@@ -41,6 +41,7 @@ void GSM_initPhoneNums() {
              || chr == '+' )
         {
           GSM_phoneNums[i] += chr;
+          //GSM_phoneNums[i] += String(chr);
         }
         if (chr == '\n') {
           GSM_phoneNums_count++;
