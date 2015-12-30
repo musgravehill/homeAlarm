@@ -4,7 +4,7 @@
 
 void TFT_init() {
   myDisplay.begin();
-  myDisplay.setRotation(1);
+  myDisplay.setRotation(3);
   myDisplay.fillScreen(ILI9341_BLACK);
   myDisplay.setCursor(0, 0);
   myDisplay.setTextColor(ILI9341_GREEN);
@@ -24,7 +24,7 @@ void TFT_renderSensors() {
   uint8_t H =  now.hour();
   float temperature = SYS_DS3231.getTemperature();
   String infoLine = String(dd, DEC) + "." + String(mm, DEC) + "." + String(yy, DEC) + " " + String(H, DEC) + ":" + String(i, DEC);
-  infoLine += " " + String(((int) temperature), DEC) + " C";
+  infoLine += " " + String(((int) temperature), DEC) + "°C";
   myDisplay.setCursor(0, 220);
   myDisplay.setTextColor(ILI9341_WHITE);
   myDisplay.setTextSize(2);

@@ -182,7 +182,7 @@ void loop() {
 
 void BASE_processDataFromSensor() {
   millisPrevSignal_sensors[NRF_currPipeNum] =  millis(); //save time of sensor answer
-  String string_logs = "{LOGS;#" + String(NRF_currPipeNum, DEC) + ";";
+  String string_logs = "LOGS;#" + String(NRF_currPipeNum, DEC) + ";";
   String string_dangers = "";
   const char paramCode[] = {'V', 'T', 'H', 'W', 'G', 'M', 'C'};
   int16_t paramVal_decoded; //int -+;  not uint
@@ -193,13 +193,13 @@ void BASE_processDataFromSensor() {
     //param is available
     if (NRF_messageFromSensor[paramNum] != 0) {
       paramVal_decoded = PARAMS_decodeParam(paramNum, NRF_messageFromSensor[paramNum]); //decode to real range
-      string_logs +=  String((char)paramCode[paramNum]) + String(paramVal_decoded, DEC) + ";";
+      string_logs +=  String((char)paramCode[paramNum]) + ";" + String(paramVal_decoded, DEC) + ";";
 
       //param is danger
       if (PARAMS_isDangerParamValue(paramNum, paramVal_decoded)) {
-        string_dangers += "{DNGR;#" + String(NRF_currPipeNum, DEC) + ";";
-        string_dangers += String((char)paramCode[paramNum]);
-        string_dangers += String(paramVal_decoded, DEC) + ";}";
+        string_dangers += "DNGR;#" + String(NRF_currPipeNum, DEC) + ";";
+        string_dangers += String((char)paramCode[paramNum]) + ";";
+        string_dangers += String(paramVal_decoded, DEC) + ";";
         SD_log(string_dangers);
         BASE_sensorParamsIsDanger[NRF_currPipeNum][paramNum] = true;
       }
@@ -209,10 +209,9 @@ void BASE_processDataFromSensor() {
     }
     //param NOT available
     else {
-      string_logs += String((char)paramCode[paramNum]) +  "_;";
+      string_logs += String((char)paramCode[paramNum]) +  ";";
     }
   }
-  string_logs += "}";
   SD_log(string_logs);
 
 #ifdef DEBUG
