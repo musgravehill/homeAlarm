@@ -27,8 +27,9 @@ void GSM_initPhoneNums() {
   if (SD_isEnable) {
     if (SD_file.open("phones.txt", O_READ)) { //8.3 filename.ext rule
       uint8_t i = 0;
-      byte chr;
-      while ((chr = SD_file.read()) >= 0) {
+      char chr;
+      while (SD_file.available()) {
+        chr = SD_file.read();
         if ( chr == '0'
              || chr == '1'
              || chr == '2'
@@ -38,7 +39,7 @@ void GSM_initPhoneNums() {
              || chr == '6'
              || chr == '7'
              || chr == '8'
-             || chr == '9'             
+             || chr == '9'
              || chr == '+' )
         {
           GSM_phoneNums[i] += chr;
@@ -49,8 +50,8 @@ void GSM_initPhoneNums() {
           i++;
         }
       }
-      SD_file.close();      
-    }
+      SD_file.close();
+    }    
   }
 }
 

@@ -168,7 +168,8 @@ void setup() {
   for (uint8_t i = 0; i <= GSM_phoneNums_count; i++) {
     debugSerial.print(i, DEC);
     debugSerial.print("___");
-    debugSerial.println(GSM_phoneNums[i]);
+    debugSerial.print(GSM_phoneNums[i]);
+    debugSerial.println("___");
   }
 #endif
 }

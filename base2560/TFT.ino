@@ -22,11 +22,15 @@ void TFT_renderSensors() {
   uint8_t dd =  now.day();
   uint8_t i =  now.minute();
   uint8_t H =  now.hour();
-  String currDt = String(dd, DEC) + "." + String(mm, DEC) + "." + String(yy, DEC) + " " + String(H, DEC) + ":" + String(i, DEC);
+  float temperature = SYS_RTC3231.getTemperature();
+  String infoLine = String(dd, DEC) + "." + String(mm, DEC) + "." + String(yy, DEC) + " " + String(H, DEC) + ":" + String(i, DEC);
+  infoLine += " " + String(((int) temperature), DEC) + " C";
   myDisplay.setCursor(0, 220);
   myDisplay.setTextColor(ILI9341_WHITE);
   myDisplay.setTextSize(2);
-  myDisplay.println(currDt);
+  myDisplay.println(infoLine);
+
+
 
 
   //bool BASE_sensorIsOk[6] = {false}; //0 1..5
