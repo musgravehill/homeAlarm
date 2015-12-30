@@ -20,3 +20,38 @@ void GSM_cleanAllSMS() {
   gsmSerial.println("AT+CMGD=1,4"); //clean ALL SMS (in, out, read, unread, sent, unsent)
   delay(50);
 }
+
+void GSM_initPhoneNums() {
+  GSM_phoneNums_count = 0;
+  if (SD_isEnable) {
+    if (SD_file.open("phones.txt", O_READ)) { //8.3 filename.ext rule
+      uint8_t i = 0;
+      byte chr;
+      while ((chr = SD_file.read()) >= 0) {
+        if ( chr == '0'
+             || chr == '1'
+             || chr == '2'
+             || chr == '3'
+             || chr == '4'
+             || chr == '5'
+             || chr == '6'
+             || chr == '7'
+             || chr == '8'
+             || chr == '9'             
+             || chr == '+' )
+        {
+          GSM_phoneNums[i] += chr;
+        }
+        if (chr == '\n') {
+          GSM_phoneNums_count++;
+          i++;
+        }
+      }
+      SD_file.close();
+      GSM_phoneNums_count--; //cause last /r/n increase size +1
+    }
+  }
+}
+
+
+

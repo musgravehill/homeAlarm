@@ -39,7 +39,7 @@
   LOGS => log on SD only
   DNGR => log on SD & send SMS [danger]
 */
-// [10,11,12,13 SD][20,21 RTC] [43,44,45,46,47,48 TFT] [49,50,51,52,53 NRF]
+// [10,11,12,13 SD_softSPI] [20,21 RTC_i2c] [43,44,45,46,47,48 TFT_softSPI] [49,50,51,52,53 NRF_hwSPI]
 
 #include <SPI.h>
 #include <nRF24L01.h>
@@ -125,6 +125,9 @@ unsigned long STATEMACHINE_prevMillis_5s;
 unsigned long STATEMACHINE_prevMillis_61s;
 unsigned long STATEMACHINE_prevMillis_103s;
 
+String GSM_phoneNums[] = {};
+uint8_t GSM_phoneNums_count = 0;
+
 #define DEBUG 1;
 
 #define debugSerial Serial
@@ -159,6 +162,15 @@ void setup() {
   delay(50);
 
   //RTC_setTime();
+
+  GSM_initPhoneNums();
+#ifdef DEBUG
+  for (uint8_t i = 0; i <= GSM_phoneNums_count; i++) {
+    debugSerial.print(i, DEC);
+    debugSerial.print("___");
+    debugSerial.println(GSM_phoneNums[i]);
+  }
+#endif
 }
 
 void loop() {
@@ -203,7 +215,7 @@ void BASE_processDataFromSensor() {
 
 #ifdef DEBUG
   debugSerial.println(string_logs);
-  debugSerial.println(string_dangers);  
+  debugSerial.println(string_dangers);
 #endif
 }
 
