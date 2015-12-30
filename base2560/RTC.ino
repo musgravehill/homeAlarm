@@ -1,6 +1,4 @@
-void RTC_setTime() {
-  DS3231 SYS_DS3231;
-  
+void RTC_setTime() {  
   SYS_DS3231.setYear(15);
   SYS_DS3231.setMonth(12);
   SYS_DS3231.setDate(30);

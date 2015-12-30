@@ -7,6 +7,12 @@ void GSM_init() {
   delay(100);
 }
 
+void GSM_sendSMS2All(String message) {
+  for (uint8_t i = 0; i <= GSM_phoneNums_count; i++) {
+    GSM_sendSMS(message, GSM_phoneNums[i]);
+  }
+}
+
 void GSM_sendSMS(String message, String phone) {
   gsmSerial.println("AT+CMGS=\"" + phone + "\"");
   delay(1000);
@@ -51,7 +57,7 @@ void GSM_initPhoneNums() {
         }
       }
       SD_file.close();
-    }    
+    }
   }
 }
 

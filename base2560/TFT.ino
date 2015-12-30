@@ -22,7 +22,7 @@ void TFT_renderSensors() {
   uint8_t dd =  now.day();
   uint8_t i =  now.minute();
   uint8_t H =  now.hour();
-  float temperature = SYS_RTC3231.getTemperature();
+  float temperature = SYS_DS3231.getTemperature();
   String infoLine = String(dd, DEC) + "." + String(mm, DEC) + "." + String(yy, DEC) + " " + String(H, DEC) + ":" + String(i, DEC);
   infoLine += " " + String(((int) temperature), DEC) + " C";
   myDisplay.setCursor(0, 220);

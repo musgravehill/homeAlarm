@@ -98,6 +98,7 @@ Adafruit_ILI9341 myDisplay = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_MOSI, TFT_CLK,
 
 //RTC I2C: 20 SDA, 21 SCL
 RTClib RTC3231;
+DS3231 SYS_DS3231;
 
 //seconds between SMS
 uint32_t periodAllowSMS_V = 24 * 3600; //voltage on sensor battery, V
