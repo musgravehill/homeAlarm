@@ -4,17 +4,26 @@ void STATEMACHINE_loop() {
     STATEMACHINE_5s();
     STATEMACHINE_prevMillis_5s = STATEMACHINE_currMillis;
   }
-  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_10s) > 10000) {
-    STATEMACHINE_10s();
-    STATEMACHINE_prevMillis_10s = STATEMACHINE_currMillis;
+  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_61s) > 61000) {
+    STATEMACHINE_61s();
+    STATEMACHINE_prevMillis_61s = STATEMACHINE_currMillis;
+  }
+  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_103s) > 103000) {
+    STATEMACHINE_103s();
+    STATEMACHINE_prevMillis_103s = STATEMACHINE_currMillis;
   }
 }
 
 void STATEMACHINE_5s() {
-  BASE_checkSensorsFault();
   TFT_renderSensors();
 }
 
-void STATEMACHINE_10s() {
-  //may be GSM_SMS
+void STATEMACHINE_61s() {
+  BASE_checkSensorsFault();
+  //TODO function check DNGRs, periodSmsLimits and send SMS
 }
+
+void STATEMACHINE_103s() {
+  GSM_cleanAllSMS();
+}
+

@@ -14,8 +14,9 @@ void GSM_sendSMS(String message, String phone) {
   delay(300);
   gsmSerial.print((char)26);
   delay(300);
+}
 
-  //clean ALL SMS (in, out, read, unread, sent, unsent)
-  gsmSerial.println("AT+CMGD=1,4");
-  delay(300);
+void GSM_cleanAllSMS() {
+  gsmSerial.println("AT+CMGD=1,4"); //clean ALL SMS (in, out, read, unread, sent, unsent)
+  delay(50);
 }

@@ -122,7 +122,8 @@ uint16_t BASE_sensorParams[6][7] = {0}; //encoded uint params; 0==null;  [sensor
 bool BASE_sensorParamsIsDanger[6][7] = {true}; //[sensorNum][paramNum]
 
 unsigned long STATEMACHINE_prevMillis_5s;
-unsigned long STATEMACHINE_prevMillis_10s;
+unsigned long STATEMACHINE_prevMillis_61s;
+unsigned long STATEMACHINE_prevMillis_103s;
 
 #define DEBUG 1;
 
