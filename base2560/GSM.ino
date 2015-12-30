@@ -22,6 +22,7 @@ void GSM_cleanAllSMS() {
 }
 
 void GSM_initPhoneNums() {
+  //+xxxxxxxxxx,+xxxxxxxxxx,+xxxxxxxxxx
   GSM_phoneNums_count = 0;
   if (SD_isEnable) {
     if (SD_file.open("phones.txt", O_READ)) { //8.3 filename.ext rule
@@ -43,13 +44,12 @@ void GSM_initPhoneNums() {
           GSM_phoneNums[i] += chr;
           //GSM_phoneNums[i] += String(chr);
         }
-        if (chr == '\n') {
+        if (chr == ',') {
           GSM_phoneNums_count++;
           i++;
         }
       }
-      SD_file.close();
-      GSM_phoneNums_count--; //cause last /r/n increase size +1
+      SD_file.close();      
     }
   }
 }

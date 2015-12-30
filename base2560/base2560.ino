@@ -161,7 +161,7 @@ void setup() {
   SD_init();
   delay(50);
 
-  //RTC_setTime();
+  RTC_setTime();
 
   GSM_initPhoneNums();
 #ifdef DEBUG
