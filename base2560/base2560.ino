@@ -123,7 +123,7 @@ uint32_t unixtimePrevSMS_C = 0; //n, 0..1023      gas CO, ADC value
 bool BASE_sensorIsOk[6] = {false}; //0 1..5
 uint16_t BASE_sensorParams[6][7] = {0}; //encoded uint params; 0==null;  [sensorNum][paramNum]
 bool BASE_sensorParamsIsDanger[6][7] = {true}; //[sensorNum][paramNum]
-bool BASE_buzzerIsOn = false;
+bool BASE_buzzerIsNeed = false;
 
 unsigned long STATEMACHINE_prevMillis_5s;
 unsigned long STATEMACHINE_prevMillis_61s;
@@ -169,7 +169,7 @@ void setup() {
 
   GSM_initPhoneNums();
 
-  BASE_buzzerIsOn = true;
+  BASE_buzzerIsNeed = true;
   
 #ifdef DEBUG
   for (uint8_t i = 0; i <= GSM_phoneNums_count; i++) {
