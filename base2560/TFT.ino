@@ -26,6 +26,7 @@ void TFT_renderInfoLine() {
     float temperature = SYS_DS3231.getTemperature();
     String infoLine = String(dd, DEC) + "." + String(mm, DEC) + "." + String(yy, DEC) + " " + String(H, DEC) + ":" + String(i, DEC);
     infoLine += " " + String(((int) temperature), DEC) + "C";
+    infoLine += " " + String(((int) (millis() / 86400000L)), DEC) + "d";
     myDisplay.setCursor(1, 225);
     myDisplay.setTextColor(ILI9341_WHITE);
     myDisplay.setTextSize(2);
