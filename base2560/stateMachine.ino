@@ -1,5 +1,5 @@
 void STATEMACHINE_loop() {
-  unsigned long STATEMACHINE_currMillis = millis(); 
+  unsigned long STATEMACHINE_currMillis = millis();
   if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_5s) > 5000) {
     STATEMACHINE_5s();
     STATEMACHINE_prevMillis_5s = STATEMACHINE_currMillis;
@@ -18,6 +18,14 @@ void STATEMACHINE_5s() {
   TFT_checkBtnPower();
   TFT_renderInfoLine();
   TFT_renderSensors();
+
+  if (BASE_buzzerIsOn) {
+    SYS_DS3231.enableOscillator(true, 3);
+    BASE_buzzerIsOn = false;
+  } else {
+    SYS_DS3231.enableOscillator(false, 3);
+  }
+
 }
 
 void STATEMACHINE_61s() {
