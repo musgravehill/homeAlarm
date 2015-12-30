@@ -18,12 +18,11 @@ void STATEMACHINE_5s() {
   TFT_checkBtnPower();
   TFT_renderInfoLine();
   TFT_renderSensors();
-
   if (BASE_buzzerIsOn) {
-    SYS_DS3231.enableOscillator(true, false, 3);
+    SYS_DS3231.enableOscillator(true, false, 2);
     BASE_buzzerIsOn = false;
   } else {
-    SYS_DS3231.enableOscillator(false, false, 3);
+    SYS_DS3231.enableOscillator(false, false, 2);
   }
 
 }
