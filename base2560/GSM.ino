@@ -1,5 +1,11 @@
 void GSM_init() {
-  gsmSerial.println("AT+CLIP=1"); //turn on caller ID notification
+  gsmSerial.println("ATE0"); //эхо выключено
+  delay(100);
+  gsmSerial.println("ATV0"); //возврат кода ответа только 0=OK 4=ERROR
+  delay(100);
+  gsmSerial.println("AT+CMEE=0"); //если ошибка, то короткий ответ=="ERROR or 4"
+  delay(100);
+  gsmSerial.println("AT+CLIP=1"); //определитель номера
   delay(100);
   gsmSerial.println("AT+CMGF=1"); //Switching to text mode
   delay(100);
@@ -14,12 +20,13 @@ void GSM_sendSMS2All(String message) {
 }
 
 void GSM_sendSMS(String message, String phone) {
+  //TODO delete delay, use state machine
   gsmSerial.println("AT+CMGS=\"" + phone + "\"");
   delay(1000);
   gsmSerial.print(message);
-  delay(300);
+  delay(100);
   gsmSerial.print((char)26);
-  delay(300);
+  delay(1000);
 }
 
 void GSM_cleanAllSMS() {

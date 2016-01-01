@@ -145,7 +145,7 @@ void setup() {
   delay(50);
 #endif
 
-  gsmSerial.begin(9600); //GSM
+  gsmSerial.begin(9600, SERIAL_8N1); //default for Arduino & SIM800L
   delay(50);
 
   Wire.begin();
