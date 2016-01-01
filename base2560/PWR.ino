@@ -10,7 +10,9 @@ The ADC is set to use the internal reference value of 1.1V - so Vmax at ADCmax =
 The battery power value must be converted to a percentage compatable with your Controller.
 
 See the following example on how to measure battery level on A0 and report it to the Controller.
-file:///G:/!HOBBY/!ARDU/PROJECTS/homeAlarm/MAN/sensorsGuide_files/volts.png
+http://www.mysensors.org/battery/volts.png
+
+MAX 1.1V for ADC A0..A*
 
 
 #if defined(__AVR_ATmega2560__)
