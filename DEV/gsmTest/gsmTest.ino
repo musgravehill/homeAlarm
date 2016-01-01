@@ -17,12 +17,20 @@ void loop() {
 }
 
 /*
+Задача: отправка СМС.
+Проверка состояния модуля, если разговор или что-то иное =Ю задание на отправку СМС 
+не выполнено, Повторить задание.
+
+
+*/
+
+/*
   По умолчанию модуль настроен 9600 8N1, 9600 – скорость,
   8 – бит в посылки, N – нет контроля чётности, 1- стоп бит.
 
   AT+CMIC=0,15 – команда для установки чувствительности микрофона. 
 
-ATE0 - режим эха
+ATE1 - режим эха
     0 - выключен
     1 - включен. Стоит по умолчанию.
 
@@ -109,11 +117,7 @@ AT+CMEE=0 - уровень информации об ошибке. Может б
   AT+CSCB=0                       Приём специальных сообщений
                                   0 – разрешен (по умолчанию)
                                   1 – запрещен
-
-  ATE0                            ЭХО  1 – вкл (по умолчанию) / 0 – выкл
-  ATV1                            Формат ответа модуля
-                                  0 – только ответ
-                                  1 – полный ответ с ЭХО (по умолчанию)
+  
 
   AT+CCLK="13/09/25,13:25:33+05"   Установка часов
                                     «yy/mm/dd,hh:mm:ss+zz»
@@ -146,9 +150,53 @@ AT+CMEE=0 - уровень информации об ошибке. Может б
 
 
 
-
-
-
-
+-------------------
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+AT+CMIC=0,15
+OK
+ATE0
+OK
+0
+0
+0
+0
+0
+2
++CLIP: "+79159772008",145,"",0,"",0
+UNDER-VOLTAGE WARNNING
+2
++CLIP: "+79159772008",145,"",0,"",0
+UNDER-VOLTAGE WARNNING
+2
++CLIP: "+79159772008",145,"",0,"",0
+UNDER-VOLTAGE WARNNING
+0
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+UNDER-VOLTAGE WARNNING
+3
+UNDER-VOLTAGE WARNNING
 
 */
