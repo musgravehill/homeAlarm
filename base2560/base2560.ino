@@ -200,7 +200,7 @@ void BASE_processDataFromSensor() {
     BASE_sensorParams[NRF_currPipeNum][paramNum] = NRF_messageFromSensor[paramNum];//save encoded params for TFT
 
     //param is available
-    if (NRF_messageFromSensor[paramNum] != 0) {
+    if (NRF_messageFromSensor[paramNum] != 0) {      
       paramVal_decoded = PARAMS_decodeParam(paramNum, NRF_messageFromSensor[paramNum]); //decode to real range
       string_logs +=  String((char)paramCode[paramNum]) + ";" + String(paramVal_decoded, DEC) + ";";
 

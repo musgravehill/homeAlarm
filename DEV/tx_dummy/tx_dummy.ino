@@ -27,7 +27,7 @@
 #include <stdint.h>
 #include "LowPower.h" //LP
 
-#define IM_SENSOR_NUM 5  //1..5
+#define IM_SENSOR_NUM 4  //1..5
 #define NRF_CE_PIN 9
 #define NRF_CSN_PIN 10 //if use SPI, d10=hardware SS SPI only
 
@@ -112,18 +112,18 @@ void NRF_init() {
 void NRF_sendData(uint16_t* arrayToBase, uint8_t sizeofArrayToBase) {
   uint8_t answerFromBase; //2^8 - 1   [0,255]
 
-  //Serial.println("\r\n");
-  //Serial.print("arr[");
-  //Serial.print(sizeofArrayToBase, DEC);
-  //Serial.println("]: ");
-  //Serial.println(arrayToBase[0], DEC);
-  //Serial.println(arrayToBase[1], DEC);
-  //Serial.println(arrayToBase[2], DEC);
-  //Serial.println(arrayToBase[3], DEC);
-  //Serial.println(arrayToBase[4], DEC);
-  //Serial.println(arrayToBase[5], DEC);
-  //Serial.println(arrayToBase[6], DEC);
-  //Serial.println("\r\n");
+  Serial.println("\r\n");
+  Serial.print("arr[");
+  Serial.print(sizeofArrayToBase, DEC);
+  Serial.println("]: ");
+  Serial.println(arrayToBase[0], DEC);
+  Serial.println(arrayToBase[1], DEC);
+  Serial.println(arrayToBase[2], DEC);
+  Serial.println(arrayToBase[3], DEC);
+  Serial.println(arrayToBase[4], DEC);
+  Serial.println(arrayToBase[5], DEC);
+  Serial.println(arrayToBase[6], DEC);
+  Serial.println("\r\n");
 
   delay(50);
   NRF_radio.powerUp();
