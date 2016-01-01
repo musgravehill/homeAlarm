@@ -2,8 +2,7 @@
 //    LCD nokia 5110 PCD8544
 
 
-void TFT_init() {
-  pinMode(TFT_btnPowerPin, INPUT);
+void TFT_init() {  
   myDisplay.begin();
   myDisplay.setRotation(3);
   myDisplay.fillScreen(ILI9341_BLACK);
@@ -42,12 +41,4 @@ void TFT_renderSensors() {
   //bool BASE_sensorParamsIsDanger[sensorNum][paramNum] = false; [6][7]  1..5  0..6
   //DECODE params before display it
 }
-
-void TFT_checkBtnPower() {
-  uint8_t TFT_btnState = digitalRead(TFT_btnPowerPin);
-  TFT_isOn = (bool) (TFT_btnState == 1);
-}
-
-
-
 

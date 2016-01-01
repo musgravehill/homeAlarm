@@ -15,14 +15,12 @@ void STATEMACHINE_loop() {
 }
 
 void STATEMACHINE_5s() {
-  if (BASE_buzzerIsNeed) {
-    
+  if (BASE_buzzerIsNeed) {    
     BASE_buzzerIsNeed = false;
   } else {
     
-  }
+  }  
   
-  TFT_checkBtnPower();
   TFT_renderInfoLine();
   TFT_renderSensors();
 }

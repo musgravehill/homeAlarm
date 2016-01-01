@@ -39,7 +39,7 @@
   LOGS => log on SD only
   DNGR => log on SD & send SMS [danger]
 */
-// [10,11,12,13 SD_softSPI] [20,21 RTC_i2c] [42 TFT_on_btn] [43,44,45,46,47,48 TFT_softSPI] [49,50,51,52,53 NRF_hwSPI]
+// [10,11,12,13 SD_softSPI] [20,21 RTC_i2c] [43,44,45,46,47,48 TFT_softSPI] [49,50,51,52,53 NRF_hwSPI]
 
 #include <SPI.h>
 #include <nRF24L01.h>
@@ -95,8 +95,7 @@ RF24 radio(NRF_CE_PIN, NRF_CSN_PIN);
 #define TFT_RST 47
 #define TFT_MISO 48
 Adafruit_ILI9341 myDisplay = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_MOSI, TFT_CLK, TFT_RST, TFT_MISO);
-bool TFT_isOn = false; //is need to render display and LED on
-uint8_t TFT_btnPowerPin = 42;
+bool TFT_isOn = true; //is need to render display and LED on
 
 //RTC I2C: 20 SDA, 21 SCL
 RTClib RTC3231;
@@ -124,6 +123,7 @@ bool BASE_sensorIsOk[6] = {false}; //0 1..5
 uint16_t BASE_sensorParams[6][7] = {0}; //encoded uint params; 0==null;  [sensorNum][paramNum]
 bool BASE_sensorParamsIsDanger[6][7] = {true}; //[sensorNum][paramNum]
 bool BASE_buzzerIsNeed = false;
+uint8_t BASE_voltagePin = A0;  
 
 unsigned long STATEMACHINE_prevMillis_5s;
 unsigned long STATEMACHINE_prevMillis_61s;
@@ -177,6 +177,9 @@ void setup() {
     debugSerial.print("___");
     debugSerial.print(GSM_phoneNums[i]);
     debugSerial.println("___");
+
+    uint16_t v = analogRead(BASE_voltagePin);
+    debugSerial.println(v, DEC);
   }
 #endif
 }
@@ -215,7 +218,7 @@ void BASE_processDataFromSensor() {
     }
     //param NOT available
     else {
-      string_logs += String((char)paramCode[paramNum]) +  ";";
+      string_logs += String((char)paramCode[paramNum]) +  ";;";
     }
   }
   SD_log(string_logs);
