@@ -1,8 +1,12 @@
 void STATEMACHINE_loop() {
   unsigned long STATEMACHINE_currMillis = millis();
-  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_2s) > 2000) {
-    STATEMACHINE_2s();
-    STATEMACHINE_prevMillis_2s = STATEMACHINE_currMillis;
+  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_1s) > 1000) {
+    STATEMACHINE_1s();
+    STATEMACHINE_prevMillis_1s = STATEMACHINE_currMillis;
+  }
+  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_5s) > 5000) {
+    STATEMACHINE_5s();
+    STATEMACHINE_prevMillis_5s = STATEMACHINE_currMillis;
   }
   if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_61s) > 61000) {
     STATEMACHINE_61s();
@@ -14,7 +18,15 @@ void STATEMACHINE_loop() {
   }
 }
 
-void STATEMACHINE_2s() {
+void STATEMACHINE_1s() {
+  TFT_initLED();
+
+#ifdef DEBUG
+  debugSerial.println(MENU_state, DEC);
+#endif
+}
+
+void STATEMACHINE_5s() {
   if (BASE_buzzerIsNeed) {
     BASE_buzzerIsNeed = false;
   } else {
@@ -22,10 +34,6 @@ void STATEMACHINE_2s() {
   }
 
   TFT_renderState();
-
-#ifdef DEBUG
-  debugSerial.println(MENU_state, DEC);
-#endif
 }
 
 void STATEMACHINE_61s() {

@@ -22,49 +22,55 @@ void TFT_initLED() {
   }
 }
 
-void TFT_renderState() {
-  switch ( MENU_state) {
-    case 1:
+void TFT_renderState() {  
+  switch (MENU_state) {
+    case 4:
       TFT_renderSensors();
       break;
-    case 2:
+    case 8:
       TFT_renderGSM();
       break;
-  }
-  TFT_initLED();
+  }  
   TFT_renderInfoLine();
 }
 
 void TFT_renderInfoLine() {
-  if (MENU_state > 0) {
-    myDisplay.fillRect(0, 223, 320, 17, ILI9341_NAVY); //x y w h color
-    DateTime now = RTC3231.now();
-    uint32_t nowUt = now.unixtime();
-    uint16_t yy =  now.year() - 2000;
-    uint8_t mm = now.month();
-    uint8_t dd =  now.day();
-    uint8_t i =  now.minute();
-    uint8_t H =  now.hour();
-    //float temperature = SYS_DS3231.getTemperature();
-    String infoLine = String(dd, DEC) + "." + String(mm, DEC) + "." + String(yy, DEC) + " " + String(H, DEC) + ":" + String(i, DEC);
-    //infoLine += " " + String(((int) temperature), DEC) + "C";
-    infoLine += " " + String(((int) (millis() / 86400000L)), DEC) + "d";
-    myDisplay.setCursor(1, 225);
-    myDisplay.setTextColor(ILI9341_WHITE);
-    myDisplay.setTextSize(2);
-    myDisplay.println(infoLine);
-  }
+  myDisplay.fillRect(0, 223, 320, 17, ILI9341_NAVY); //x y w h color
+  DateTime now = RTC3231.now();
+  uint32_t nowUt = now.unixtime();
+  uint16_t yy =  now.year() - 2000;
+  uint8_t mm = now.month();
+  uint8_t dd =  now.day();
+  uint8_t i =  now.minute();
+  uint8_t H =  now.hour();
+  //float temperature = SYS_DS3231.getTemperature();
+  String infoLine = String(dd, DEC) + "." + String(mm, DEC) + "." + String(yy, DEC) + " " + String(H, DEC) + ":" + String(i, DEC);
+  //infoLine += " " + String(((int) temperature), DEC) + "C";
+  infoLine += " " + String(((int) (millis() / 86400000L)), DEC) + "d";
+  myDisplay.setCursor(1, 225);
+  myDisplay.setTextColor(ILI9341_WHITE);
+  myDisplay.setTextSize(2);
+  myDisplay.println(infoLine);
 }
 
 void TFT_renderSensors() {
-  if (MENU_state > 0) {
-  }
   //bool BASE_sensorIsOk[6] = {false}; //0 1..5
   //uint16_t BASE_sensorParams[6][7] = {0}; //encoded uint params; 0==null; [sensorNum][paramNum] 1..5  0..6
   //bool BASE_sensorParamsIsDanger[sensorNum][paramNum] = false; [6][7]  1..5  0..6
   //DECODE params before display it
+
+  myDisplay.fillRect(0, 0, 320, 222, ILI9341_WHITE); //x y w h color
+  myDisplay.setCursor(1, 30);
+  myDisplay.setTextColor(ILI9341_PINK);
+  myDisplay.setTextSize(2);
+  myDisplay.println("sensors");
 }
 
 void TFT_renderGSM() {
+  myDisplay.fillRect(0, 0, 320, 222, ILI9341_WHITE); //x y w h color
+  myDisplay.setCursor(1, 30);
+  myDisplay.setTextColor(ILI9341_PINK);
+  myDisplay.setTextSize(2);
+  myDisplay.println("gsm________");
 }
 

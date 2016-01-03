@@ -129,7 +129,8 @@ bool BASE_buzzerIsNeed = false;
 uint8_t BASE_voltagePin = A0;
 int8_t MENU_state = 0;
 
-unsigned long STATEMACHINE_prevMillis_2s;
+unsigned long STATEMACHINE_prevMillis_1s;
+unsigned long STATEMACHINE_prevMillis_5s;
 unsigned long STATEMACHINE_prevMillis_61s;
 unsigned long STATEMACHINE_prevMillis_103s;
 
@@ -191,11 +192,7 @@ void setup() {
 void loop() {
   NRF_listen();
 
-  int8_t newMenuState = myEncoder.read();
-  if (newMenuState != MENU_state) {
-    TFT_initLED();
-  }
-  MENU_state = newMenuState;
+  MENU_state = myEncoder.read();
   if (MENU_state < 0) {
     MENU_state = 0;
     myEncoder.write(0);
