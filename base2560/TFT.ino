@@ -14,7 +14,7 @@ void TFT_init() {
 }
 
 void TFT_initLED() {
-  if (TFT_isOn) {
+  if (MENU_state > 0) {
     digitalWrite(TFT_pinLedPower, 1);
   }
   else {
@@ -22,8 +22,21 @@ void TFT_initLED() {
   }
 }
 
+void TFT_renderState() {
+  switch ( MENU_state) {
+    case 1:
+      TFT_renderSensors();
+      break;
+    case 2:
+      TFT_renderGSM();
+      break;
+  }
+  TFT_initLED();
+  TFT_renderInfoLine();
+}
+
 void TFT_renderInfoLine() {
-  if (TFT_isOn) {
+  if (MENU_state > 0) {
     myDisplay.fillRect(0, 223, 320, 17, ILI9341_NAVY); //x y w h color
     DateTime now = RTC3231.now();
     uint32_t nowUt = now.unixtime();
@@ -44,11 +57,14 @@ void TFT_renderInfoLine() {
 }
 
 void TFT_renderSensors() {
-  if (TFT_isOn) {
+  if (MENU_state > 0) {
   }
   //bool BASE_sensorIsOk[6] = {false}; //0 1..5
   //uint16_t BASE_sensorParams[6][7] = {0}; //encoded uint params; 0==null; [sensorNum][paramNum] 1..5  0..6
   //bool BASE_sensorParamsIsDanger[sensorNum][paramNum] = false; [6][7]  1..5  0..6
   //DECODE params before display it
+}
+
+void TFT_renderGSM() {
 }
 

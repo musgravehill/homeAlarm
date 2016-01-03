@@ -39,7 +39,7 @@
   LOGS => log on SD only
   DNGR => log on SD & send SMS [danger]
 */
-// [10,11,12,13 SD_softSPI] [20,21 RTC_i2c] [42 TFT_LET mosfet] [43,44,45,46,47,48 TFT_softSPI] [49,50,51,52,53 NRF_hwSPI]
+// [10,11,12,13 SD_softSPI] [20,21 RTC_i2c] [40,41 ENCODER] [42 TFT_LET mosfet] [43,44,45,46,47,48 TFT_softSPI] [49,50,51,52,53 NRF_hwSPI]
 
 #include <SPI.h>
 #include <nRF24L01.h>
@@ -49,6 +49,10 @@
 #include "DS3231.h"
 #include "Adafruit_GFX.h"
 #include "Adafruit_ILI9341.h"
+
+#define ENCODER_DO_NOT_USE_INTERRUPTS
+#include <Encoder.h>
+Encoder myEncoder(40, 41);
 
 #include <SdFat.h>
 #include <SdFatUtil.h>
@@ -95,7 +99,6 @@ RF24 radio(NRF_CE_PIN, NRF_CSN_PIN);
 #define TFT_RST 47
 #define TFT_MISO 48
 Adafruit_ILI9341 myDisplay = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_MOSI, TFT_CLK, TFT_RST, TFT_MISO);
-bool TFT_isOn = true; //is need to render display and LED on
 uint8_t TFT_pinLedPower = 42;
 
 //RTC I2C: 20 SDA, 21 SCL
@@ -124,7 +127,8 @@ bool BASE_sensorIsOk[6] = {false}; //0 1..5
 int16_t BASE_sensorEncodedParams[6][7] = {0}; //encoded params; 0==null;  [sensorNum][paramNum]
 bool BASE_sensorParamsIsDanger[6][7] = {true}; //[sensorNum][paramNum]
 bool BASE_buzzerIsNeed = false;
-uint8_t BASE_voltagePin = A0;  
+uint8_t BASE_voltagePin = A0;
+uint8_t MENU_state = 0;
 
 unsigned long STATEMACHINE_prevMillis_5s;
 unsigned long STATEMACHINE_prevMillis_61s;
@@ -171,7 +175,7 @@ void setup() {
   GSM_initPhoneNums();
 
   BASE_buzzerIsNeed = true;
-  
+
 #ifdef DEBUG
   for (uint8_t i = 0; i <= GSM_phoneNums_count; i++) {
     debugSerial.print(i, DEC);
@@ -187,6 +191,21 @@ void setup() {
 
 void loop() {
   NRF_listen();
+
+  uint8_t newMenuState = myEncoder.read();
+  if (newMenuState != MENU_state) {
+    digitalWrite(TFT_pinLedPower, 1);
+  }
+  MENU_state = newMenuState;
+  if (MENU_state < 0) {
+    MENU_state = 0;
+  }
+  if (MENU_state > 3) {
+    MENU_state = 3;
+  }
+
+
+
   STATEMACHINE_loop();
 }
 
@@ -201,7 +220,7 @@ void BASE_processDataFromSensor() {
     BASE_sensorEncodedParams[NRF_currPipeNum][paramNum] = NRF_messageFromSensor[paramNum];//save encoded params for TFT
 
     //param is available
-    if (NRF_messageFromSensor[paramNum] != 0) {      
+    if (NRF_messageFromSensor[paramNum] != 0) {
       paramVal_decoded = PARAMS_decodeParam(paramNum, NRF_messageFromSensor[paramNum]); //decode to real range
       string_logs +=  String((char)paramCode[paramNum]) + ";" + String(paramVal_decoded, DEC) + ";";
 

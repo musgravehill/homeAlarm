@@ -19,11 +19,14 @@ void STATEMACHINE_5s() {
     BASE_buzzerIsNeed = false;
   } else {
     
-  }  
+  }    
+
+  TFT_renderState();
   
-  TFT_initLED();
-  TFT_renderInfoLine();
-  TFT_renderSensors();
+
+  #ifdef DEBUG
+  debugSerial.println(MENU_state, DEC);
+#endif
 }
 
 void STATEMACHINE_61s() {
