@@ -27,7 +27,7 @@
 #include <stdint.h>
 #include "LowPower.h" //LP
 
-#define IM_SENSOR_NUM 3  //1..5
+#define IM_SENSOR_NUM 2  //1..5
 #define NRF_CE_PIN 9
 #define NRF_CSN_PIN 10 //if use SPI, d10=hardware SS SPI only
 
@@ -62,7 +62,7 @@ void loop() {
 
 void sendDataToBase() {
   int16_t arrayToBase[7] = {
-    0,                  //V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V
+    1020,                  //V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V
     126,  //T   0=null, -50..120 [+100]   temperature, C
     148,     //H   0=null, 0..100   [+100]   humidity, %
     100,                  //W   0=null, 100, 101          water leak, bool
@@ -80,7 +80,7 @@ void NRF_init() {
   delay(50);
   NRF_radio.begin();
   delay(100);
-  //NRF_radio.powerUp();
+  NRF_radio.powerUp();
   delay(50);
   NRF_radio.setChannel(0x6D);
   NRF_radio.setRetries(15, 15);
@@ -97,20 +97,20 @@ void NRF_init() {
   NRF_radio.enableDynamicPayloads();//for ALL pipes
   //NRF_radio.setPayloadSize(32); //32 bytes? Can corrupt "writeAckPayload"?
 
-  NRF_radio.setAutoAck(true);//allow RX send answer(acknoledgement) to TX (for ALL pipes?)
-  NRF_radio.enableAckPayload(); //only for 0,1 pipes?
-  //NRF_radio.enableDynamicAck(); //for ALL pipes? Чтобы можно было вкл\выкл получение ACK?
+  NRF_radio.setAutoAck(false);//disallow RX send answer(acknoledgement) to TX (for ALL pipes?)
+  //NRF_radio.enableAckPayload(); //only for 0,1 pipes?
+  ////NRF_radio.enableDynamicAck(); //for ALL pipes? Чтобы можно было вкл\выкл получение ACK?
 
   NRF_radio.stopListening();// ?
   NRF_radio.openWritingPipe(pipes[IM_SENSOR_NUM]); //pipe0 is SYSTEM_pipe, no reading
 
   delay(50);
-  //NRF_radio.powerDown();
+  NRF_radio.powerDown();
   delay(50);
 }
 
 void NRF_sendData(int16_t* arrayToBase, uint8_t sizeofArrayToBase) {
-  uint8_t answerFromBase; //2^8 - 1   [0,255]
+ 
 
   Serial.println("\r\n");
   Serial.print("arr[");
@@ -126,7 +126,7 @@ void NRF_sendData(int16_t* arrayToBase, uint8_t sizeofArrayToBase) {
   Serial.println("\r\n");
 
   delay(50);
-  //NRF_radio.powerUp();
+  NRF_radio.powerUp();
   delay(50);
 
   //Stop listening for incoming messages, and switch to transmit mode.
@@ -135,15 +135,18 @@ void NRF_sendData(int16_t* arrayToBase, uint8_t sizeofArrayToBase) {
   NRF_radio.write( arrayToBase, sizeofArrayToBase); 
   //& не надо, в ф-ю уже передал указатель, а не сам массив
 
-  if ( NRF_radio.isAckPayloadAvailable() ) {
+  /*
+    uint8_t answerFromBase; //2^8 - 1   [0,255] 
+    if ( NRF_radio.isAckPayloadAvailable() ) {
     NRF_radio.read(&answerFromBase, sizeof(answerFromBase)); //приемник принял и ответил
 
     Serial.print(F("__Received answer from Base: "));
     Serial.print(answerFromBase, DEC);
     Serial.print(F("\r\n"));
   }
+  */
 
-  delay(50);
-  //NRF_radio.powerDown();
+  delay(100);
+  NRF_radio.powerDown();
   delay(50);
 }

@@ -1,6 +1,6 @@
 void NRF_listen() {
   if (radio.available(&NRF_currPipeNum)) {
-    radio.writeAckPayload(NRF_currPipeNum, &NRF_currPipeNum, sizeof(NRF_currPipeNum) );
+    //radio.writeAckPayload(NRF_currPipeNum, &NRF_currPipeNum, sizeof(NRF_currPipeNum) );
     if (radio.getDynamicPayloadSize() > 1) { //размер полученного сообщения
       radio.read(&NRF_messageFromSensor, sizeof(NRF_messageFromSensor));
       BASE_processDataFromSensor();
@@ -32,9 +32,9 @@ void NRF_init() {
   radio.enableDynamicPayloads();//for ALL NRF_pipes
   //radio.setPayloadSize(32); //32 bytes? Can corrupt "writeAckPayload"?
 
-  radio.setAutoAck(true);//allow RX send answer(acknoledgement) to TX (for ALL NRF_pipes?)
-  radio.enableAckPayload(); //only for 0,1 NRF_pipes?
-  //radio.enableDynamicAck(); //for ALL NRF_pipes? Чтобы можно было вкл\выкл получение ACK?
+  radio.setAutoAck(false);//disallow RX send answer(acknoledgement) to TX (for ALL NRF_pipes?)
+  //radio.enableAckPayload(); //only for 0,1 NRF_pipes?
+  ////radio.enableDynamicAck(); //for ALL NRF_pipes? Чтобы можно было вкл\выкл получение ACK?
 
   //radio.openReadingPipe(0, pipe0); 0 is SYSTEM, no reading
   radio.openReadingPipe(1, NRF_pipes[1]);
