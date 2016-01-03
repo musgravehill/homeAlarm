@@ -39,7 +39,7 @@
   LOGS => log on SD only
   DNGR => log on SD & send SMS [danger]
 */
-// [10,11,12,13 SD_softSPI] [20,21 RTC_i2c] [40,41 ENCODER] [42 TFT_LET mosfet] [43,44,45,46,47,48 TFT_softSPI] [49,50,51,52,53 NRF_hwSPI]
+// [2,3 ENCODER] [10,11,12,13 SD_softSPI] [20,21 RTC_i2c] [42 TFT_LET mosfet] [43,44,45,46,47,48 TFT_softSPI] [49,50,51,52,53 NRF_hwSPI]
 
 #include <SPI.h>
 #include <nRF24L01.h>
@@ -50,9 +50,8 @@
 #include "Adafruit_GFX.h"
 #include "Adafruit_ILI9341.h"
 
-#define ENCODER_DO_NOT_USE_INTERRUPTS
 #include <Encoder.h>
-Encoder myEncoder(40, 41);
+Encoder myEncoder(2, 3);
 
 #include <SdFat.h>
 #include <SdFatUtil.h>
@@ -128,9 +127,9 @@ int16_t BASE_sensorEncodedParams[6][7] = {0}; //encoded params; 0==null;  [senso
 bool BASE_sensorParamsIsDanger[6][7] = {true}; //[sensorNum][paramNum]
 bool BASE_buzzerIsNeed = false;
 uint8_t BASE_voltagePin = A0;
-uint8_t MENU_state = 0;
+int8_t MENU_state = 0;
 
-unsigned long STATEMACHINE_prevMillis_5s;
+unsigned long STATEMACHINE_prevMillis_2s;
 unsigned long STATEMACHINE_prevMillis_61s;
 unsigned long STATEMACHINE_prevMillis_103s;
 
@@ -192,19 +191,19 @@ void setup() {
 void loop() {
   NRF_listen();
 
-  uint8_t newMenuState = myEncoder.read();
+  int8_t newMenuState = myEncoder.read();
   if (newMenuState != MENU_state) {
-    digitalWrite(TFT_pinLedPower, 1);
+    TFT_initLED();
   }
   MENU_state = newMenuState;
   if (MENU_state < 0) {
     MENU_state = 0;
+    myEncoder.write(0);
   }
-  if (MENU_state > 3) {
-    MENU_state = 3;
+  if (MENU_state > 12) {
+    MENU_state = 12;
+    myEncoder.write(12);
   }
-
-
 
   STATEMACHINE_loop();
 }
