@@ -21,6 +21,7 @@ void STATEMACHINE_5s() {
     
   }  
   
+  TFT_initLED();
   TFT_renderInfoLine();
   TFT_renderSensors();
 }

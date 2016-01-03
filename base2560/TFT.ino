@@ -2,7 +2,8 @@
 //    LCD nokia 5110 PCD8544
 
 
-void TFT_init() {  
+void TFT_init() {
+  pinMode(TFT_pinLedPower, OUTPUT);
   myDisplay.begin();
   myDisplay.setRotation(3);
   myDisplay.fillScreen(ILI9341_BLACK);
@@ -10,6 +11,15 @@ void TFT_init() {
   myDisplay.setTextColor(ILI9341_GREEN);
   myDisplay.setTextSize(2);
   myDisplay.println("Boris homeAlarm v1.0");
+}
+
+void TFT_initLED() {
+  if (TFT_isOn) {
+    digitalWrite(TFT_pinLedPower, 1);
+  }
+  else {
+    digitalWrite(TFT_pinLedPower, 0);
+  }
 }
 
 void TFT_renderInfoLine() {
@@ -22,7 +32,7 @@ void TFT_renderInfoLine() {
     uint8_t dd =  now.day();
     uint8_t i =  now.minute();
     uint8_t H =  now.hour();
-   //float temperature = SYS_DS3231.getTemperature();
+    //float temperature = SYS_DS3231.getTemperature();
     String infoLine = String(dd, DEC) + "." + String(mm, DEC) + "." + String(yy, DEC) + " " + String(H, DEC) + ":" + String(i, DEC);
     //infoLine += " " + String(((int) temperature), DEC) + "C";
     infoLine += " " + String(((int) (millis() / 86400000L)), DEC) + "d";

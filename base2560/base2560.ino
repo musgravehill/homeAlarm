@@ -39,7 +39,7 @@
   LOGS => log on SD only
   DNGR => log on SD & send SMS [danger]
 */
-// [10,11,12,13 SD_softSPI] [20,21 RTC_i2c] [43,44,45,46,47,48 TFT_softSPI] [49,50,51,52,53 NRF_hwSPI]
+// [10,11,12,13 SD_softSPI] [20,21 RTC_i2c] [42 TFT_LET mosfet] [43,44,45,46,47,48 TFT_softSPI] [49,50,51,52,53 NRF_hwSPI]
 
 #include <SPI.h>
 #include <nRF24L01.h>
@@ -96,6 +96,7 @@ RF24 radio(NRF_CE_PIN, NRF_CSN_PIN);
 #define TFT_MISO 48
 Adafruit_ILI9341 myDisplay = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_MOSI, TFT_CLK, TFT_RST, TFT_MISO);
 bool TFT_isOn = true; //is need to render display and LED on
+uint8_t TFT_pinLedPower = 42;
 
 //RTC I2C: 20 SDA, 21 SCL
 RTClib RTC3231;
