@@ -23,7 +23,7 @@ String PARAMS_getVerbalParamName(String systemParamName) {
   return F("CNNT_RECOGNIZE_PARAM");
 }
 
-int16_t PARAMS_decodeParam(uint8_t paramNum, uint16_t paramVal_encoded) {
+int16_t PARAMS_decodeParam(uint8_t paramNum, int16_t paramVal_encoded) {
   int16_t paramVal_decoded = 0;
   switch (paramNum) {
     case 0: //V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V

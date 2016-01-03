@@ -73,7 +73,7 @@ const uint64_t NRF_pipes[6] = {
 };
 
 uint8_t NRF_currPipeNum;
-uint16_t NRF_messageFromSensor[7] = {
+int16_t NRF_messageFromSensor[7] = {
   0,
   0,
   0,
@@ -120,7 +120,7 @@ uint32_t unixtimePrevSMS_M = 0; //n, 0, 1         motion detector, bool
 uint32_t unixtimePrevSMS_C = 0; //n, 0..1023      gas CO, ADC value
 
 bool BASE_sensorIsOk[6] = {false}; //0 1..5
-uint16_t BASE_sensorParams[6][7] = {0}; //encoded uint params; 0==null;  [sensorNum][paramNum]
+int16_t BASE_sensorEncodedParams[6][7] = {0}; //encoded params; 0==null;  [sensorNum][paramNum]
 bool BASE_sensorParamsIsDanger[6][7] = {true}; //[sensorNum][paramNum]
 bool BASE_buzzerIsNeed = false;
 uint8_t BASE_voltagePin = A0;  
@@ -197,7 +197,7 @@ void BASE_processDataFromSensor() {
   int16_t paramVal_decoded; //int -+;  not uint
 
   for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
-    BASE_sensorParams[NRF_currPipeNum][paramNum] = NRF_messageFromSensor[paramNum];//save encoded params for TFT
+    BASE_sensorEncodedParams[NRF_currPipeNum][paramNum] = NRF_messageFromSensor[paramNum];//save encoded params for TFT
 
     //param is available
     if (NRF_messageFromSensor[paramNum] != 0) {      

@@ -16,9 +16,7 @@ void NRF_listen() {
 
 void NRF_init() {
   radio.begin();
-  delay(100);
-  radio.powerUp();
-  delay(100);
+  delay(100);  
   radio.setChannel(0x6D);
   radio.setRetries(15, 15);
   radio.setDataRate(RF24_1MBPS);

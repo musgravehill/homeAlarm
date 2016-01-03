@@ -27,7 +27,7 @@
 #include <stdint.h>
 #include "LowPower.h" //LP
 
-#define IM_SENSOR_NUM 4  //1..5
+#define IM_SENSOR_NUM 3  //1..5
 #define NRF_CE_PIN 9
 #define NRF_CSN_PIN 10 //if use SPI, d10=hardware SS SPI only
 
@@ -37,7 +37,7 @@ const uint64_t pipes[6] = {   //'static' - no need
   0xDEADBEEF02LL,
   0xDEADBEEF03LL,
   0xDEADBEEF04LL,
-  0xDEADBEEF05LL
+  0xDEADBEEF05LL,
 };
 
 RF24 NRF_radio(NRF_CE_PIN, NRF_CSN_PIN);
@@ -61,7 +61,7 @@ void loop() {
 }
 
 void sendDataToBase() {
-  uint16_t arrayToBase[7] = {
+  int16_t arrayToBase[7] = {
     0,                  //V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V
     126,  //T   0=null, -50..120 [+100]   temperature, C
     148,     //H   0=null, 0..100   [+100]   humidity, %
@@ -80,7 +80,7 @@ void NRF_init() {
   delay(50);
   NRF_radio.begin();
   delay(100);
-  NRF_radio.powerUp();
+  //NRF_radio.powerUp();
   delay(50);
   NRF_radio.setChannel(0x6D);
   NRF_radio.setRetries(15, 15);
@@ -105,11 +105,11 @@ void NRF_init() {
   NRF_radio.openWritingPipe(pipes[IM_SENSOR_NUM]); //pipe0 is SYSTEM_pipe, no reading
 
   delay(50);
-  NRF_radio.powerDown();
+  //NRF_radio.powerDown();
   delay(50);
 }
 
-void NRF_sendData(uint16_t* arrayToBase, uint8_t sizeofArrayToBase) {
+void NRF_sendData(int16_t* arrayToBase, uint8_t sizeofArrayToBase) {
   uint8_t answerFromBase; //2^8 - 1   [0,255]
 
   Serial.println("\r\n");
@@ -126,7 +126,7 @@ void NRF_sendData(uint16_t* arrayToBase, uint8_t sizeofArrayToBase) {
   Serial.println("\r\n");
 
   delay(50);
-  NRF_radio.powerUp();
+  //NRF_radio.powerUp();
   delay(50);
 
   //Stop listening for incoming messages, and switch to transmit mode.
@@ -144,6 +144,6 @@ void NRF_sendData(uint16_t* arrayToBase, uint8_t sizeofArrayToBase) {
   }
 
   delay(50);
-  NRF_radio.powerDown();
+  //NRF_radio.powerDown();
   delay(50);
 }
