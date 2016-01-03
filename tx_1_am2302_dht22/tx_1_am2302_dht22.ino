@@ -69,7 +69,7 @@ void sendDataToBase() {
   uint16_t humidity = (int) dht.getHumidity();
   uint16_t temperature = (int) dht.getTemperature();
 
-  uint16_t arrayToBase[7] = {
+  int16_t arrayToBase[7] = {
     0,                  //V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V
     temperature + 100,  //T   0=null, -50..120 [+100]   temperature, C
     humidity + 100,     //H   0=null, 0..100   [+100]   humidity, %
@@ -113,9 +113,9 @@ void NRF_init() {
   NRF_radio.enableDynamicPayloads();//for ALL pipes
   //NRF_radio.setPayloadSize(32); //32 bytes? Can corrupt "writeAckPayload"?
 
-  NRF_radio.setAutoAck(true);//allow RX send answer(acknoledgement) to TX (for ALL pipes?)
-  NRF_radio.enableAckPayload(); //only for 0,1 pipes?
-  //NRF_radio.enableDynamicAck(); //for ALL pipes? Чтобы можно было вкл\выкл получение ACK?
+  NRF_radio.setAutoAck(false);////allow RX send answer(acknoledgement) to TX (for ALL pipes?)
+  //NRF_radio.enableAckPayload(); //only for 0,1 pipes?
+  ////NRF_radio.enableDynamicAck(); //for ALL pipes? Чтобы можно было вкл\выкл получение ACK?
 
   NRF_radio.stopListening();// ?
   NRF_radio.openWritingPipe(pipes[IM_SENSOR_NUM]); //pipe0 is SYSTEM_pipe, no reading
@@ -125,8 +125,8 @@ void NRF_init() {
   delay(50);
 }
 
-void NRF_sendData(uint16_t* arrayToBase, uint8_t sizeofArrayToBase) {
-  uint8_t answerFromBase; //2^8 - 1   [0,255]
+void NRF_sendData(int16_t* arrayToBase, uint8_t sizeofArrayToBase) {
+  
 
   //Serial.println("\r\n");
   //Serial.print("arr[");
@@ -151,6 +151,8 @@ void NRF_sendData(uint16_t* arrayToBase, uint8_t sizeofArrayToBase) {
   NRF_radio.write( arrayToBase, sizeofArrayToBase); 
   //& не надо, в ф-ю уже передал указатель, а не сам массив
 
+/*
+  uint8_t answerFromBase; //2^8 - 1   [0,255]
   if ( NRF_radio.isAckPayloadAvailable() ) {
     NRF_radio.read(&answerFromBase, sizeof(answerFromBase)); //приемник принял и ответил
 
@@ -158,6 +160,7 @@ void NRF_sendData(uint16_t* arrayToBase, uint8_t sizeofArrayToBase) {
     //Serial.print(answerFromBase, DEC);
     //Serial.print(F("\r\n"));
   }
+*/
 
   delay(50);
   NRF_radio.powerDown();
