@@ -27,7 +27,7 @@
 #include <stdint.h>
 #include "LowPower.h" //LP
 
-#define IM_SENSOR_NUM 2  //1..5
+#define IM_SENSOR_NUM 5  //1..5
 #define NRF_CE_PIN 9
 #define NRF_CSN_PIN 10 //if use SPI, d10=hardware SS SPI only
 
