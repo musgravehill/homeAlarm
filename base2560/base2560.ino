@@ -87,7 +87,7 @@ int16_t NRF_messageFromSensor[7] = {
 };
 
 //время последнего сигнала от сенсоров, если давно было => сенсор сломался или выключен
-uint64_t millisPrevSignal_sensors[6] = {0}; // pipe 0..5 
+uint64_t millisPrevSignal_sensors[6] = {0}; // pipe 0..5
 
 RF24 radio(NRF_CE_PIN, NRF_CSN_PIN);
 
@@ -192,19 +192,18 @@ void setup() {
 void loop() {
   NRF_listen();
 
-  /*
-    MENU_state = myEncoder.read();
-    if (MENU_state < 0) {
-      MENU_state = 0;
-      myEncoder.write(0);
-    }
-    if (MENU_state > 12) {
-      MENU_state = 12;
-      myEncoder.write(12);
-    }
+  MENU_state = myEncoder.read();
+  if (MENU_state < 0) {
+    MENU_state = 0;
+    myEncoder.write(0);
+  }
+  if (MENU_state > 12) {
+    MENU_state = 12;
+    myEncoder.write(12);
+  }
 
-    STATEMACHINE_loop();
-  */
+  STATEMACHINE_loop();
+
 }
 
 void BASE_processDataFromSensor() {
@@ -243,7 +242,7 @@ void BASE_processDataFromSensor() {
 
 #ifdef DEBUG
   debugSerial.println(string_logs);
-  debugSerial.println(string_dangers);  
+  debugSerial.println(string_dangers);
 #endif
 }
 
