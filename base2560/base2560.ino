@@ -87,7 +87,7 @@ int16_t NRF_messageFromSensor[7] = {
 };
 
 //время последнего сигнала от сенсоров, если давно было => сенсор сломался или выключен
-uint32_t millisPrevSignal_sensors[5] = {0};
+uint64_t millisPrevSignal_sensors[6] = {0}; // pipe 0..5 
 
 RF24 radio(NRF_CE_PIN, NRF_CSN_PIN);
 
@@ -192,17 +192,19 @@ void setup() {
 void loop() {
   NRF_listen();
 
-  MENU_state = myEncoder.read();
-  if (MENU_state < 0) {
-    MENU_state = 0;
-    myEncoder.write(0);
-  }
-  if (MENU_state > 12) {
-    MENU_state = 12;
-    myEncoder.write(12);
-  }
+  /*
+    MENU_state = myEncoder.read();
+    if (MENU_state < 0) {
+      MENU_state = 0;
+      myEncoder.write(0);
+    }
+    if (MENU_state > 12) {
+      MENU_state = 12;
+      myEncoder.write(12);
+    }
 
-  STATEMACHINE_loop();
+    STATEMACHINE_loop();
+  */
 }
 
 void BASE_processDataFromSensor() {
@@ -210,13 +212,12 @@ void BASE_processDataFromSensor() {
   String string_logs = "LOGS;#" + String(NRF_currPipeNum, DEC) + ";";
   String string_dangers = "";
   const char paramCode[] = {'V', 'T', 'H', 'W', 'G', 'M', 'C'};
-  int16_t paramVal_decoded; //int -+;  not uint
+  int16_t paramVal_decoded;
 
   for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
     BASE_sensorEncodedParams[NRF_currPipeNum][paramNum] = NRF_messageFromSensor[paramNum];//save encoded params for TFT
 
-    //param is available
-    if (NRF_messageFromSensor[paramNum] != 0) {
+    if (NRF_messageFromSensor[paramNum] > 0) { //param is available
       paramVal_decoded = PARAMS_decodeParam(paramNum, NRF_messageFromSensor[paramNum]); //decode to real range
       string_logs +=  String((char)paramCode[paramNum]) + ";" + String(paramVal_decoded, DEC) + ";";
 
@@ -236,12 +237,13 @@ void BASE_processDataFromSensor() {
     else {
       string_logs += String((char)paramCode[paramNum]) +  ";;";
     }
+
   }
   SD_log(string_logs);
 
 #ifdef DEBUG
   debugSerial.println(string_logs);
-  debugSerial.println(string_dangers);
+  debugSerial.println(string_dangers);  
 #endif
 }
 

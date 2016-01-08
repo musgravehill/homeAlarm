@@ -29,8 +29,8 @@
 #include <RF24.h>
 #include <stdint.h>
 
-#define NRF_CE_PIN 9
-#define NRF_CSN_PIN 10 //hardware SS SPI
+#define NRF_CE_PIN 49
+#define NRF_CSN_PIN 53 //hardware SS SPI
 
 //'static' - no need
 const uint64_t NRF_pipes[6] = {
@@ -83,8 +83,8 @@ void setup() {
   radio.enableDynamicPayloads();//for ALL NRF_pipes
   //radio.setPayloadSize(32); //32 bytes? Can corrupt "writeAckPayload"?
 
-  radio.setAutoAck(false);//allow RX send answer(acknoledgement) to TX (for ALL NRF_pipes?)
-  //radio.enableAckPayload(); //only for 0,1 NRF_pipes?
+  radio.setAutoAck(true);//allow RX send answer(acknoledgement) to TX (for ALL NRF_pipes?)
+  radio.enableAckPayload(); //only for 0,1 NRF_pipes?
   //radio.enableDynamicAck(); //for ALL NRF_pipes? Чтобы можно было вкл\выкл получение ACK?
 
   //radio.openReadingPipe(0, pipe0); 0 is SYSTEM, no reading
@@ -104,7 +104,7 @@ void loop() {
 
 void NRF_listen() {
   if (radio.available(&currPipeNum)) {
-    //radio.writeAckPayload(currPipeNum, &currPipeNum, sizeof(currPipeNum) );
+    radio.writeAckPayload(currPipeNum, &currPipeNum, sizeof(currPipeNum) );
     if (radio.getDynamicPayloadSize() > 1) { //размер полученного сообщения
       radio.read(&messageFromSensor, sizeof(messageFromSensor));
       BASE_processDataFromSensor();

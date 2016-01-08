@@ -1,6 +1,6 @@
 /*
   ardu_328
-  nrf24l01+  
+  nrf24l01+
 */
 /* Defined constants in arduino don't take up any program memory space on the chip.
   The compiler will replace references to these constants with the defined value
@@ -69,7 +69,7 @@ void sendDataToBase() {
     0,                  //G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
     101,                  //M   0=null, 100, 101         motion detector, bool
     0,                  //C   0=null, 0..1023 [+1]      gas CO, ADC value
-  };  
+  };
 
   NRF_sendData(arrayToBase, sizeof(arrayToBase));
 }
@@ -97,8 +97,8 @@ void NRF_init() {
   NRF_radio.enableDynamicPayloads();//for ALL pipes
   //NRF_radio.setPayloadSize(32); //32 bytes? Can corrupt "writeAckPayload"?
 
-  NRF_radio.setAutoAck(false);//disallow RX send answer(acknoledgement) to TX (for ALL pipes?)
-  //NRF_radio.enableAckPayload(); //only for 0,1 pipes?
+  NRF_radio.setAutoAck(true);//disallow RX send answer(acknoledgement) to TX (for ALL pipes?)
+  NRF_radio.enableAckPayload(); //only for 0,1 pipes?
   ////NRF_radio.enableDynamicAck(); //for ALL pipes? Чтобы можно было вкл\выкл получение ACK?
 
   NRF_radio.stopListening();// ?
@@ -110,7 +110,7 @@ void NRF_init() {
 }
 
 void NRF_sendData(int16_t* arrayToBase, uint8_t sizeofArrayToBase) {
- 
+
 
   Serial.println("\r\n");
   Serial.print("arr[");
@@ -132,19 +132,19 @@ void NRF_sendData(int16_t* arrayToBase, uint8_t sizeofArrayToBase) {
   //Stop listening for incoming messages, and switch to transmit mode.
   //Do this before calling write().
   NRF_radio.stopListening();
-  NRF_radio.write( arrayToBase, sizeofArrayToBase); 
+  NRF_radio.write( arrayToBase, sizeofArrayToBase);
   //& не надо, в ф-ю уже передал указатель, а не сам массив
 
-  /*
-    uint8_t answerFromBase; //2^8 - 1   [0,255] 
-    if ( NRF_radio.isAckPayloadAvailable() ) {
+
+  uint8_t answerFromBase; //2^8 - 1   [0,255]
+  if ( NRF_radio.isAckPayloadAvailable() ) {
     NRF_radio.read(&answerFromBase, sizeof(answerFromBase)); //приемник принял и ответил
 
     Serial.print(F("__Received answer from Base: "));
     Serial.print(answerFromBase, DEC);
     Serial.print(F("\r\n"));
   }
-  */
+
 
   delay(100);
   NRF_radio.powerDown();
