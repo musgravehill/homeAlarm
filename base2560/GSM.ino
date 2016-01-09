@@ -11,6 +11,9 @@ void GSM_init() {
   delay(100);
   gsmSerial.println("AT+CSCS=\"GSM\""); //english only
   delay(100);
+  gsmSerial.println("ATS0=1"); //auto-respond to incoming call
+  delay(100);
+  gsmSerial.println("AT+CMIC=0,15");
 }
 
 void GSM_sendSMS2All(String message) {

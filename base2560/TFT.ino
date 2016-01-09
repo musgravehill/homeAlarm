@@ -5,7 +5,7 @@
 void TFT_init() {
   pinMode(TFT_pinLedPower, OUTPUT);
   myDisplay.begin();
-  myDisplay.setRotation(3);
+  myDisplay.setRotation(1);
   myDisplay.fillScreen(ILI9341_BLACK);
   myDisplay.setCursor(50, 4);
   myDisplay.setTextColor(ILI9341_GREEN);
@@ -18,7 +18,7 @@ void TFT_initLED() {
     digitalWrite(TFT_pinLedPower, 1);
   }
   else {
-    digitalWrite(TFT_pinLedPower, 0);
+    digitalWrite(TFT_pinLedPower, 1);
   }
 }
 

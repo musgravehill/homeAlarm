@@ -170,7 +170,7 @@ void setup() {
   SD_init();
   delay(50);
 
-  //RTC_setTime();
+  RTC_setTime();
 
   GSM_initPhoneNums();
 
@@ -183,8 +183,8 @@ void setup() {
     debugSerial.print(GSM_phoneNums[i]);
     debugSerial.println("___");
 
-    uint16_t v = analogRead(BASE_voltagePin);
-    debugSerial.println(v, DEC);
+    //uint16_t v = analogRead(BASE_voltagePin);
+    //debugSerial.println(v, DEC);
   }
 #endif
 }
@@ -203,6 +203,12 @@ void loop() {
   }
 
   STATEMACHINE_loop();
+
+#ifdef DEBUG
+  if (gsmSerial.available()) {
+    debugSerial.write(gsmSerial.read());
+  }
+#endif
 
 }
 

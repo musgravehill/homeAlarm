@@ -22,7 +22,7 @@ void STATEMACHINE_1s() {
   TFT_initLED();
 
 #ifdef DEBUG
-  debugSerial.println(MENU_state, DEC);
+  //debugSerial.println(MENU_state, DEC);
 #endif
 }
 
