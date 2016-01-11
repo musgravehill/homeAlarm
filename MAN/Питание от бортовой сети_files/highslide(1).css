@@ -1,0 +1,112 @@
+.highslide {
+/*	cursor: url(graphics/zoomin.cur), pointer;*/
+    outline: none;
+}
+.highslide img {
+	#border: 2px solid gray;
+	cursor:  url(graphics/zoomin.cur), pointer;
+    outline: none;
+}
+
+.highslide img {
+	/*#border: 2px solid gray;*/  /*Uncomment to add border around image */
+	border:none;
+}
+.highslide:hover img {
+	#border: 2px solid white;
+}
+
+.highslide-image {
+    #border: 2px solid white;
+}
+.highslide-image-blur {
+}
+a.highslide-full-expand {
+	background: url(graphics/fullexpand.gif) no-repeat;
+	display: block;
+	margin: 0 10px 10px 0;
+	width: 34px;
+	height: 34px;
+}
+.highslide-caption {
+    display: none;
+    height: 35px;
+    border: 2px solid white;
+    border-top: none;
+    font-family: Verdana, Helvetica;
+    font-size: 10pt;
+    padding: 5px;
+    background-color: white;
+	text-align:center;
+	font-weight:bold;
+}
+.highslide-loading {
+ display: block;
+	color: white;
+	font-size: 9px;
+	font-weight: bold;
+	text-transform: uppercase;
+    text-decoration: none;
+	padding: 3px;
+	border-top: 1px solid white;
+	border-bottom: 1px solid white;
+    background-color: black;
+  
+   /* padding-left: 22px;*/
+    background-image:  url(graphics/loader.gif);
+    background-repeat: no-repeat;
+    background-position: 3px 1px;
+    
+}
+a.highslide-credits,
+a.highslide-credits i {
+    padding: 2px;
+    color: silver;
+    text-decoration: none;
+	font-size: 10px;
+}
+a.highslide-credits:hover,
+a.highslide-credits:hover i {
+    color: white;
+    background-color: gray;
+}
+/*Close Controls.  Enable through wordpress options */
+.highslide-close {
+	float: right;
+    display: inline;
+/*    position: relative;*/
+	margin: 0 5px 5px 0;
+	font-size: 7pt;
+    font-weight: bold;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+/*Next and Previous Links. Enable through wordpress options*/
+.highslide-next {
+	float: left;
+    display: inline;
+/*    position: relative;*/
+	margin: 0 5px;
+	font-size: 7pt;
+    font-weight: bold;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.highslide-previous {
+	float: left;
+    display: inline;
+/*    position: relative;*/
+	margin: 0 5px;
+	font-size: 7pt;
+    font-weight: bold;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+.highslide-display-block {
+    display: block;
+}
+.highslide-display-none {
+    display: none;
+}
