@@ -33,9 +33,10 @@ void GSM_sendDangers() {
 
   for (uint8_t sensorPipeNum = 1; sensorPipeNum < 6; sensorPipeNum++) {
     for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
-      if (BASE_sensorParamsIsDanger[sensorPipeNumm][paramNum]) {
+      if (BASE_sensorParamsIsDanger[sensorPipeNumm][paramNum] && GSM_paramIsAllowSms(paramNum)) {
         SMS_dangers +=  String((char)paramCode[paramNum]) + "=";
         SMS_dangers +=  String(BASE_sensorDecodedParams[sensorPipeNumm][paramNum], DEC) + ";";
+        //TODO TODO TODO
       }
     }
   }
