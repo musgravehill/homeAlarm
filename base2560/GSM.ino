@@ -16,6 +16,12 @@ void GSM_init() {
   gsmSerial.println("AT+CMIC=0,15");
 }
 
+void GSM_sendDangers() {
+  //BASE_sensorParamsIsDanger[NRF_currPipeNum][paramNum]
+  //BASE_sensorParamsIsAvailable[NRF_currPipeNum][paramNum]
+  //BASE_sensorDecodedParams[NRF_currPipeNum][paramNum]
+}
+
 void GSM_sendSMS2All(String message) {
   for (uint8_t i = 0; i <= GSM_phoneNums_count; i++) {
     GSM_sendSMS(message, GSM_phoneNums[i]);

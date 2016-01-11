@@ -27,18 +27,18 @@ void STATEMACHINE_1s() {
 }
 
 void STATEMACHINE_5s() {
+  TFT_renderState();
+
   if (BASE_buzzerIsNeed) {
     BASE_buzzerIsNeed = false;
   } else {
 
   }
 
-  TFT_renderState();
 }
 
 void STATEMACHINE_61s() {
-  BASE_checkSensorsFault();
-  //TODO function check DNGRs, periodSmsLimits and send SMS
+  BASE_checkSensorsFault();  
 }
 
 void STATEMACHINE_103s() {

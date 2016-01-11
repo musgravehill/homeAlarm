@@ -39,7 +39,7 @@
   LOGS => log on SD only
   DNGR => log on SD & send SMS [danger]
 */
-// [2,3 ENCODER] [10,11,12,13 SD_softSPI] [20,21 RTC_i2c] [42 TFT_LET mosfet] [43,44,45,46,47,48 TFT_softSPI] [49,50,51,52,53 NRF_hwSPI]
+// [2,3 ENCODER] [10,11,12,13 SD_softSPI] [20,21 RTC_i2c] [42 TFT_LED] [43,44,45,46,47,48 TFT_softSPI] [49,50,51,52,53 NRF_hwSPI]
 
 #include <SPI.h>
 #include <nRF24L01.h>
@@ -104,27 +104,24 @@ uint8_t TFT_pinLedPower = 42;
 RTClib RTC3231;
 DS3231 SYS_DS3231;
 
-//seconds between SMS
-uint32_t periodAllowSMS_V = 24 * 3600; //voltage on sensor battery, V
-uint32_t periodAllowSMS_T = 12 * 3600; //temperature, C
-uint32_t periodAllowSMS_H = 12 * 3600; //humidity, %
-uint32_t periodAllowSMS_W = 12 * 3600; //water leak, bool
-uint32_t periodAllowSMS_G = 12 * 3600; //gas CH4, ADC value
-uint32_t periodAllowSMS_M = 12 * 3600; //motion detector, bool
-uint32_t periodAllowSMS_C = 12 * 3600; //gas CO, ADC value
+//seconds between SMS //unsigned long 2^32-1
+uint32_t periodAllowSMS[7] = {
+  24 * 3600, //voltage on sensor battery, V
+  12 * 3600, //temperature, C
+  12 * 3600, //humidity, %
+  12 * 3600, //water leak, bool
+  12 * 3600, //gas CH4, ADC value
+  12 * 3600, //motion detector, bool
+  12 * 3600 //gas CO, ADC value
+};
 
 //BUG: powerDown->powerUp->this vars will be skip to 0 => SMS_send is allow again
-uint32_t unixtimePrevSMS_V = 0; //n, 0..5         voltage on sensor battery, V
-uint32_t unixtimePrevSMS_T = 0; //n, -50..120     temperature, C
-uint32_t unixtimePrevSMS_H = 0; //n, 0..100       humidity, %
-uint32_t unixtimePrevSMS_W = 0; //n, 0, 1         water leak, bool
-uint32_t unixtimePrevSMS_G = 0; //n, 0..1023 ADC  gas CH4, ADC value
-uint32_t unixtimePrevSMS_M = 0; //n, 0, 1         motion detector, bool
-uint32_t unixtimePrevSMS_C = 0; //n, 0..1023      gas CO, ADC value
+uint32_t unixtimePrevSMS[7] = {0};
 
 bool BASE_sensorIsOk[6] = {false}; //0 1..5
-int16_t BASE_sensorEncodedParams[6][7] = {0}; //encoded params; 0==null;  [sensorNum][paramNum]
-bool BASE_sensorParamsIsDanger[6][7] = {true}; //[sensorNum][paramNum]
+int16_t BASE_sensorDecodedParams[6][7] = {0}; //encoded params; 0==null;  [sensorNum][paramNum]
+bool BASE_sensorParamsIsDanger[6][7] = {true}; //[sensorPipeNum][paramNum]
+bool BASE_sensorParamsIsAvailable[6][7] = {true}; //[sensorPipeNum][paramNum]
 bool BASE_buzzerIsNeed = false;
 uint8_t BASE_voltagePin = A0;
 int8_t MENU_state = 0;
@@ -191,17 +188,7 @@ void setup() {
 
 void loop() {
   NRF_listen();
-
-  MENU_state = myEncoder.read();
-  if (MENU_state < 0) {
-    MENU_state = 0;
-    myEncoder.write(0);
-  }
-  if (MENU_state > 12) {
-    MENU_state = 12;
-    myEncoder.write(12);
-  }
-
+  ENCODER_read();
   STATEMACHINE_loop();
 
 #ifdef DEBUG
@@ -220,11 +207,11 @@ void BASE_processDataFromSensor() {
   int16_t paramVal_decoded;
 
   for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
-    BASE_sensorEncodedParams[NRF_currPipeNum][paramNum] = NRF_messageFromSensor[paramNum];//save encoded params for TFT
-
     if (NRF_messageFromSensor[paramNum] > 0) { //param is available
       paramVal_decoded = PARAMS_decodeParam(paramNum, NRF_messageFromSensor[paramNum]); //decode to real range
       string_logs +=  String((char)paramCode[paramNum]) + ";" + String(paramVal_decoded, DEC) + ";";
+      BASE_sensorParamsIsAvailable[NRF_currPipeNum][paramNum] = true;
+      BASE_sensorDecodedParams[NRF_currPipeNum][paramNum] = paramVal_decoded;
 
       //param is danger
       if (PARAMS_isDangerParamValue(paramNum, paramVal_decoded)) {
@@ -241,6 +228,7 @@ void BASE_processDataFromSensor() {
     //param NOT available
     else {
       string_logs += String((char)paramCode[paramNum]) +  ";;";
+      BASE_sensorParamsIsAvailable[NRF_currPipeNum][paramNum] = false;
     }
 
   }
@@ -255,16 +243,12 @@ void BASE_processDataFromSensor() {
 void BASE_checkSensorsFault() {
   uint32_t millisCurrSignal = millis();
   for (int sensorNum = 1; sensorNum <= 5; sensorNum++) { //SENSORS PIPES 1..5!
-    uint32_t deltaSignal = millisCurrSignal - millisPrevSignal_sensors[sensorNum];
+    uint32_t deltaSignal = millisCurrSignal - millisPrevSignal_sensors[sensorPipeNum];
     if (deltaSignal >  10000) { //10s
-      //sensor fault
-      BASE_sensorIsOk[sensorNum] = false;
+      BASE_sensorIsOk[sensorPipeNum] = false; //sensor fault
     }
-
-
     else {
-      //sensor ok
-      BASE_sensorIsOk[sensorNum] = true;
+      BASE_sensorIsOk[sensorPipeNum] = true; //sensor ok
     }
   }
 }

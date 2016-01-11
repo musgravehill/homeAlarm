@@ -18,20 +18,23 @@ void TFT_initLED() {
     digitalWrite(TFT_pinLedPower, 1);
   }
   else {
-    digitalWrite(TFT_pinLedPower, 1);
+    digitalWrite(TFT_pinLedPower, 0);
   }
 }
 
-void TFT_renderState() {  
+void TFT_renderState() {
   switch (MENU_state) {
     case 4:
-      TFT_renderSensors();
+      TFT_renderInfoLine();
       break;
     case 8:
+      TFT_renderSensors();
+      break;
+    case 12:
       TFT_renderGSM();
       break;
-  }  
-  TFT_renderInfoLine();
+  }
+
 }
 
 void TFT_renderInfoLine() {
@@ -55,8 +58,8 @@ void TFT_renderInfoLine() {
 
 void TFT_renderSensors() {
   //bool BASE_sensorIsOk[6] = {false}; //0 1..5
-  //uint16_t BASE_sensorParams[6][7] = {0}; //encoded uint params; 0==null; [sensorNum][paramNum] 1..5  0..6
-  //bool BASE_sensorParamsIsDanger[sensorNum][paramNum] = false; [6][7]  1..5  0..6
+  //uint16_t BASE_sensorParams[6][7] = {0}; //encoded uint params; 0==null; [sensorPipeNum][paramNum] 1..5  0..6
+  //bool BASE_sensorParamsIsDanger[sensorPipeNum][paramNum] = false; [6][7]  1..5  0..6
   //DECODE params before display it
 
   myDisplay.fillRect(0, 0, 320, 222, ILI9341_WHITE); //x y w h color
