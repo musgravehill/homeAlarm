@@ -105,19 +105,20 @@ RTClib RTC3231;
 DS3231 SYS_DS3231;
 
 //seconds between SMS //unsigned long 2^32-1
-uint32_t periodAllowSMS[7] = {
+uint32_t periodParamAllowSMS[7] = {
   24 * 3600, //voltage on sensor battery, V
-  12 * 3600, //temperature, C
-  12 * 3600, //humidity, %
-  12 * 3600, //water leak, bool
-  12 * 3600, //gas CH4, ADC value
-  12 * 3600, //motion detector, bool
-  12 * 3600 //gas CO, ADC value
+  1 * 3600, //temperature, C
+  1 * 3600, //humidity, %
+  1 * 3600, //water leak, bool
+  1 * 3600, //gas CH4, ADC value
+  1 * 3600, //motion detector, bool
+  1 * 3600 //gas CO, ADC value
 };
 
 //BUG: powerDown->powerUp->this vars will be skip to 0 => SMS_send is allow again
-uint32_t unixtimePrevSMS[7] = {0};
+uint32_t unixtimeParamPrevSMS[7] = {0};
 
+uint16_t BASE_sensorSilenceFaultTime = 10000; //10s
 bool BASE_sensorIsOk[6] = {false}; //0 1..5
 int16_t BASE_sensorDecodedParams[6][7] = {0}; //encoded params; 0==null;  [sensorNum][paramNum]
 bool BASE_sensorParamsIsDanger[6][7] = {true}; //[sensorPipeNum][paramNum]
@@ -233,6 +234,7 @@ void BASE_processDataFromSensor() {
 
   }
   SD_log(string_logs);
+  GSM_sendDangers();
 
 #ifdef DEBUG
   debugSerial.println(string_logs);
@@ -242,9 +244,9 @@ void BASE_processDataFromSensor() {
 
 void BASE_checkSensorsFault() {
   uint32_t millisCurrSignal = millis();
-  for (int sensorNum = 1; sensorNum <= 5; sensorNum++) { //SENSORS PIPES 1..5!
+  for (int sensorPipeNum = 1; sensorPipeNum < 6; sensorPipeNum++) { //SENSORS PIPES 1..5!
     uint32_t deltaSignal = millisCurrSignal - millisPrevSignal_sensors[sensorPipeNum];
-    if (deltaSignal >  10000) { //10s
+    if (deltaSignal >  BASE_sensorSilenceFaultTime) {
       BASE_sensorIsOk[sensorPipeNum] = false; //sensor fault
     }
     else {

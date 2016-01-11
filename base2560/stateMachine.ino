@@ -38,7 +38,8 @@ void STATEMACHINE_5s() {
 }
 
 void STATEMACHINE_61s() {
-  BASE_checkSensorsFault();  
+  BASE_checkSensorsFault();
+  
 }
 
 void STATEMACHINE_103s() {

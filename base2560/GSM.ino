@@ -16,7 +16,34 @@ void GSM_init() {
   gsmSerial.println("AT+CMIC=0,15");
 }
 
+void GSM_paramIsAllowSms(uint8_t paramNum) {
+  uint32_t currMillis = millis();
+  if ( (currMillis - unixtimeParamPrevSMS) >  periodParamAllowSMS[paramNum]) {
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
 void GSM_sendDangers() {
+  String SMS_dangers = "";
+  bool isNeedSendSMS = false;
+  const char paramCode[] = {'V', 'T', 'H', 'W', 'G', 'M', 'C'};
+
+  for (uint8_t sensorPipeNum = 1; sensorPipeNum < 6; sensorPipeNum++) {
+    for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
+      if (BASE_sensorParamsIsDanger[sensorPipeNumm][paramNum]) {
+        SMS_dangers +=  String((char)paramCode[paramNum]) + "=";
+        SMS_dangers +=  String(BASE_sensorDecodedParams[sensorPipeNumm][paramNum], DEC) + ";";
+      }
+    }
+  }
+
+  if (isNeedSendSMS) {
+    GSM_sendSMS2All(SMS_dangers);
+  }
+
   //BASE_sensorParamsIsDanger[NRF_currPipeNum][paramNum]
   //BASE_sensorParamsIsAvailable[NRF_currPipeNum][paramNum]
   //BASE_sensorDecodedParams[NRF_currPipeNum][paramNum]
