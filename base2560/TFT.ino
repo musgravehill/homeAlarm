@@ -70,19 +70,19 @@ void TFT_renderSensors() {
 
   myDisplay.fillScreen(ILI9341_BLACK);
   //table cells
-  drawFastHLine(0, 40, 320, ILI9341_DARKGREY); //x,y,w,color
-  drawFastHLine(0, 80, 320, ILI9341_DARKGREY); //x,y,w,color
-  drawFastHLine(0, 120, 320, ILI9341_DARKGREY); //x,y,w,color
-  drawFastHLine(0, 160, 320, ILI9341_DARKGREY); //x,y,w,color
-  drawFastHLine(0, 200, 320, ILI9341_DARKGREY); //x,y,w,color
+  myDisplay.drawFastHLine(0, 40, 320, ILI9341_DARKGREY); //x,y,w,color
+  myDisplay.drawFastHLine(0, 80, 320, ILI9341_DARKGREY); //x,y,w,color
+  myDisplay.drawFastHLine(0, 120, 320, ILI9341_DARKGREY); //x,y,w,color
+  myDisplay.drawFastHLine(0, 160, 320, ILI9341_DARKGREY); //x,y,w,color
+  myDisplay.drawFastHLine(0, 200, 320, ILI9341_DARKGREY); //x,y,w,color
 
-  drawFastVLine(40, 0, 240, ILI9341_DARKGREY); //x,y,h,color
-  drawFastVLine(80, 0, 240, ILI9341_DARKGREY); //x,y,h,color
-  drawFastVLine(120, 0, 240, ILI9341_DARKGREY); //x,y,h,color
-  drawFastVLine(160, 0, 240, ILI9341_DARKGREY); //x,y,h,color
-  drawFastVLine(200, 0, 240, ILI9341_DARKGREY); //x,y,h,color
-  drawFastVLine(240, 0, 240, ILI9341_DARKGREY); //x,y,h,color
-  drawFastVLine(280, 0, 240, ILI9341_DARKGREY); //x,y,h,color
+  myDisplay.drawFastVLine(40, 0, 240, ILI9341_DARKGREY); //x,y,h,color
+  myDisplay.drawFastVLine(80, 0, 240, ILI9341_DARKGREY); //x,y,h,color
+  myDisplay.drawFastVLine(120, 0, 240, ILI9341_DARKGREY); //x,y,h,color
+  myDisplay.drawFastVLine(160, 0, 240, ILI9341_DARKGREY); //x,y,h,color
+  myDisplay.drawFastVLine(200, 0, 240, ILI9341_DARKGREY); //x,y,h,color
+  myDisplay.drawFastVLine(240, 0, 240, ILI9341_DARKGREY); //x,y,h,color
+  myDisplay.drawFastVLine(280, 0, 240, ILI9341_DARKGREY); //x,y,h,color
 
   myDisplay.setTextColor(ILI9341_WHITE);
   myDisplay.setTextSize(2);
@@ -111,9 +111,7 @@ void TFT_renderSensors() {
   myDisplay.setCursor(280, 0);
   myDisplay.print("CO");
 
-  //sensors
-
-
+  //data
   for (uint8_t sensorPipeNum = 1; sensorPipeNum < 6; sensorPipeNum++) { //SENSORS PIPES 1..5!
     //sensor num
     if (BASE_sensorIsOn[sensorPipeNum]) {
