@@ -131,11 +131,25 @@ void GSM_answerCall() {
     if (charFromGSM == '+') {
       stringFromGSM = "+";
     }
+    if (
+      charFromGSM == '0'
+      || charFromGSM == '1'
+      || charFromGSM == '2'
+      || charFromGSM == '3'
+      || charFromGSM == '4'
+      || charFromGSM == '5'
+      || charFromGSM == '6'
+      || charFromGSM == '7'
+      || charFromGSM == '8'
+      || charFromGSM == '9'
+    ) {
+      stringFromGSM += String((char)charFromGSM);
+    }
 
     if (charFromGSM == '"') {
       for (uint8_t i = 0; i <= GSM_phoneNums_count; i++) {
 #ifdef DEBUG
-        s = "_" + stringFromGSM + "_==_" + GSM_phoneNums[i] + "_";
+        s = "_" + String(stringFromGSM); // + "_==_" + String(GSM_phoneNums[i]) + "_";
         debugSerial.println(s);
 #endif
         if (stringFromGSM == GSM_phoneNums[i]) {
@@ -144,8 +158,6 @@ void GSM_answerCall() {
       }
       stringFromGSM = "";
     }
-
-    stringFromGSM += (char)charFromGSM;
 
     if (stringFromGSM.length() > 64) {
       stringFromGSM = "";
