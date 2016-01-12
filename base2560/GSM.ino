@@ -28,7 +28,6 @@ bool GSM_paramIsAllowSms(uint8_t paramNum) {
 void GSM_sendDangers() {
   String SMS_dangers = "";
   bool isAllowSendSMS = false;
-  const char paramCode[] = {'V', 'T', 'H', 'W', 'G', 'M', 'C'};
   /*
     Все опасные параметры от всех датчиков пишем в строку.
     Если можно отправить СМС хотя бы для 1 параметра, то щлем всю строку.
@@ -36,7 +35,8 @@ void GSM_sendDangers() {
   for (uint8_t sensorPipeNum = 1; sensorPipeNum < 6; sensorPipeNum++) {
     for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
       if (BASE_sensorParamsIsDanger[sensorPipeNum][paramNum]) {
-        SMS_dangers +=  String((char)paramCode[paramNum]) + "=";
+        SMS_dangers +=  "#" + String(sensorPipeNum, DEC) + ":";
+        SMS_dangers +=  PARAMS_getVerbalParamName(paramNum) + "=";
         SMS_dangers +=  String(BASE_sensorDecodedParams[sensorPipeNum][paramNum], DEC) + ";";
       }
       if (GSM_paramIsAllowSms(paramNum)) {
@@ -56,8 +56,15 @@ void GSM_sendDangers() {
 }
 
 void GSM_sendSMS2All(String message) {
+#ifdef DEBUG
+  debugSerial.println("SMS DNGR SEND:");
+  debugSerial.println(message);
+#endif
   for (uint8_t i = 0; i <= GSM_phoneNums_count; i++) {
     GSM_sendSMS(message, GSM_phoneNums[i]);
+#ifdef DEBUG
+    debugSerial.println(GSM_phoneNums[i]);
+#endif
   }
 }
 

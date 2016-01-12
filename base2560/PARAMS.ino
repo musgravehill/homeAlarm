@@ -1,26 +1,26 @@
-String PARAMS_getVerbalParamName(String systemParamName) {
-  if (systemParamName == "V") {
-    return F("_VOLTAGE_");
+String PARAMS_getVerbalParamName(uint8_t paramNum) {
+  if (paramNum == 0) {
+    return F("V");
   }
-  if (systemParamName == "T") {
-    return F("_TEMPERATURE_");
+  if (paramNum == 1) {
+    return F("T");
   }
-  if (systemParamName == "H") {
-    return F("_HUMIDITY_");
+  if (paramNum == 2) {
+    return F("H");
   }
-  if (systemParamName == "W") {
-    return F("_WATER_LEAK_");
+  if (paramNum == 3) {
+    return F("WaterLeak");
   }
-  if (systemParamName == "G") {
-    return F("_GAS_CH4_");
+  if (paramNum == 4) {
+    return F("CH4");
   }
-  if (systemParamName == "M") {
-    return F("_MOTION_DETECTION_");
+  if (paramNum == 5) {
+    return F("Motion");
   }
-  if (systemParamName == "C") {
-    return F("_GAS_CO_");
+  if (paramNum == 6) {
+    return F("CO");
   }
-  return F("CNNT_RECOGNIZE_PARAM");
+  return F("?PARAM");
 }
 
 int16_t PARAMS_decodeParam(uint8_t paramNum, int16_t paramVal_encoded) {
