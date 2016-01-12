@@ -129,15 +129,19 @@ void GSM_answerCall() {
     if (charFromGSM == '+') {
       stringFromGSM = "";
     }
-    stringFromGSM += String((char)charFromGSM);
+    stringFromGSM += (char)charFromGSM;
+
     for (uint8_t i = 0; i <= GSM_phoneNums_count; i++) {
       if (stringFromGSM == GSM_phoneNums[i]) {
         gsmSerial.println("ATA");// respond to call
         stringFromGSM = "";
       }
     }
-    if (stringFromGSM.length() > 64) {
-      stringFromGSM = "";
+    if (stringFromGSM.length() > 255) {
+      //stringFromGSM = "";
     }
+#ifdef DEBUG
+    debugSerial.println(stringFromGSM);
+#endif
   }
 }

@@ -27,7 +27,7 @@
 #include <stdint.h>
 #include "LowPower.h" //LP
 
-#define IM_SENSOR_NUM 1  //1..5
+#define IM_SENSOR_NUM 5  //1..5
 #define NRF_CE_PIN 9
 #define NRF_CSN_PIN 10 //if use SPI, d10=hardware SS SPI only
 
@@ -63,9 +63,9 @@ void loop() {
 void sendDataToBase() {
   int16_t arrayToBase[7] = {
     0,                  //V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V
-    0,  //T   0=null, -50..120 [+100]   temperature, C
-    0,     //H   0=null, 0..100   [+100]   humidity, %
-    100,                  //W   0=null, 100, 101          water leak, bool
+    118,  //T   0=null, -50..120 [+100]   temperature, C
+    130,     //H   0=null, 0..100   [+100]   humidity, %
+    0,                  //W   0=null, 100, 101          water leak, bool
     0,                  //G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
     0,                  //M   0=null, 100, 101         motion detector, bool
     0,                  //C   0=null, 0..1023 [+1]      gas CO, ADC value
