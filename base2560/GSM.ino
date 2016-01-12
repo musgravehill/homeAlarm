@@ -13,7 +13,7 @@ void GSM_init() {
   delay(100);
   gsmSerial.println("ATS0=1"); //auto-respond to incoming call
   delay(100);
-  gsmSerial.println("AT+CMIC=0,15");
+  gsmSerial.println("AT+CMIC=0,15"); //mic amp
 }
 
 bool GSM_paramIsAllowSms(uint8_t paramNum) {

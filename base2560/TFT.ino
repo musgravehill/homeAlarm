@@ -66,8 +66,6 @@ void TFT_renderInfoLine() {
 }
 
 void TFT_renderSensors() {
-
-
   myDisplay.fillScreen(ILI9341_BLACK);
   //table cells
   myDisplay.drawFastHLine(0, 40, 320, ILI9341_DARKGREY); //x,y,w,color
@@ -138,10 +136,49 @@ void TFT_renderSensors() {
 }
 
 void TFT_renderGSM() {
-  myDisplay.fillRect(0, 0, 320, 222, ILI9341_WHITE); //x y w h color
-  myDisplay.setCursor(1, 30);
-  myDisplay.setTextColor(ILI9341_PINK);
-  myDisplay.setTextSize(2);
-  myDisplay.println("gsm________");
+  myDisplay.fillScreen(ILI9341_WHITE);
+  myDisplay.setTextColor(ILI9341_BLACK);
+  myDisplay.setTextSize(1);
+
+  //may be: set ATE1, ATV1, AT+CMEE=2
+
+  myDisplay.setCursor(0, 0);
+  gsmSerial.println("AT+COPS?");
+  while (gsmSerial.available()) {
+    myDisplay.write(gsmSerial.read());
+  }
+
+  myDisplay.setCursor(0, 10);
+  gsmSerial.println("AT+CPAS");
+  while (gsmSerial.available()) {
+    myDisplay.write(gsmSerial.read());
+  }
+
+  myDisplay.setCursor(0, 20);
+  gsmSerial.println("AT+CSQ");
+  while (gsmSerial.available()) {
+    myDisplay.write(gsmSerial.read());
+  }
+
+
+  /*
+    AT+COPS?  +COPS: 0,0,"MTS-RUS"    Информация об операторе
+
+    AT+CPAS  +CPAS:                   Информация о состояние модуля
+                                    0 – готов к работе
+                                    2 – неизвестно
+                                    3 – входящий звонок
+                                    4 – голосовое соединение
+
+    AT+CSQ  +CSQ: 17,0          Уровень сигнала:
+                              0 -115 дБл и меньше
+                              1 -112 дБл
+                              2-30 -110..-54 дБл
+                              31 -52 дБл и сильнее
+                              99 – нет сигнала.
+                              ---
+                              0 - коэффициент ошибок связи (т.н. RXQUAL).
+                              Может быть от 0 до 7, чем число меньше тем качество связи лучше.
+  */
 }
 
