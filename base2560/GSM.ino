@@ -11,8 +11,8 @@ void GSM_init() {
   delay(100);
   gsmSerial.println("AT+CSCS=\"GSM\""); //english only
   delay(100);
-  gsmSerial.println("ATS0=1"); //auto-respond to incoming call
-  delay(100);
+  //gsmSerial.println("ATS0=1"); //auto-respond to incoming call
+  //delay(100);
   gsmSerial.println("AT+CMIC=0,15"); //mic amp
 }
 
@@ -113,7 +113,7 @@ void GSM_initPhoneNums() {
   }
 }
 
-void GSM_answerCall {
+void GSM_answerCall() {
   String stringFromGSM = "";     //+CLIP: "+7915977xxxx",145,"",0,"",0
   while (gsmSerial.available()) {
     char charFromGSM = gsmSerial.read();
