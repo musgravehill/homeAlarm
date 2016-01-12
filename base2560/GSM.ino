@@ -17,6 +17,9 @@ void GSM_init() {
 }
 
 bool GSM_paramIsAllowSms(uint8_t paramNum) {
+  if (GSM_paramPrevSMSMillis[paramNum] == 0) {
+    return true;
+  }
   if ( (millis() - GSM_paramPrevSMSMillis[paramNum]) >  GSM_periodParamAllowSMSMillis[paramNum]) {
     return true;
   }
@@ -38,16 +41,10 @@ void GSM_sendDangers() {
         SMS_dangers +=  "#" + String(sensorPipeNum, DEC) + ":";
         SMS_dangers +=  PARAMS_getVerbalParamName(paramNum) + "=";
         SMS_dangers +=  String(BASE_sensorDecodedParams[sensorPipeNum][paramNum], DEC) + ";";
-
-#ifdef DEBUG
-        debugSerial.print("SMS DNGR++: ");
-        debugSerial.println(SMS_dangers);
-#endif
-
-      }
-      if (GSM_paramIsAllowSms(paramNum)) {
-        isAllowSendSMS = true;
-        GSM_paramPrevSMSMillis[paramNum] = millis();
+        if (GSM_paramIsAllowSms(paramNum)) {
+          isAllowSendSMS = true;
+          GSM_paramPrevSMSMillis[paramNum] = millis();
+        }
       }
     }
   }
@@ -55,6 +52,12 @@ void GSM_sendDangers() {
   if (isAllowSendSMS) {
     GSM_sendSMS2All(SMS_dangers);
   }
+
+#ifdef DEBUG
+  debugSerial.print("SMS DNGR++: ");
+  debugSerial.println(SMS_dangers);
+#endif
+
 }
 
 void GSM_sendSMS2All(String message) {
