@@ -124,14 +124,17 @@ void TFT_renderSensors() {
 
     //params
     for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
+      if (BASE_sensorParamsIsAvailable[sensorPipeNum][paramNum]) {
+        if (BASE_sensorParamsIsDanger[sensorPipeNum][paramNum]) {
+          myDisplay.setTextColor(ILI9341_RED);
+        } else {
+          myDisplay.setTextColor(ILI9341_OLIVE);
+        }
+        myDisplay.setCursor( (sensorPipeNum * 40), (40 * paramNum + 40) );
+        myDisplay.print(BASE_sensorDecodedParams[sensorPipeNum][paramNum], DEC);
+      }
     }
   }
-
-  //BASE_sensorParamsIsDanger[NRF_currPipeNum][paramNum]
-  //BASE_sensorParamsIsAvailable[NRF_currPipeNum][paramNum]
-  //BASE_sensorDecodedParams[NRF_currPipeNum][paramNum]
-  //BASE_sensorIsOn[NRF_currPipeNum]
-
 }
 
 void TFT_renderGSM() {
