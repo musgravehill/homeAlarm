@@ -124,24 +124,35 @@ void GSM_initPhoneNums() {
 
 void GSM_answerCall() {
   String stringFromGSM = "";     //+CLIP: "+7915977xxxx",145,"",0,"",0
+  String s = "";
+  bool isAllowRespond = false;
   while (gsmSerial.available()) {
     char charFromGSM = gsmSerial.read();
     if (charFromGSM == '+') {
+      stringFromGSM = "+";
+    }
+
+    if (charFromGSM == '"') {
+      for (uint8_t i = 0; i <= GSM_phoneNums_count; i++) {
+#ifdef DEBUG
+        s = "_" + stringFromGSM + "_==_" + GSM_phoneNums[i] + "_";
+        debugSerial.println(s);
+#endif
+        if (stringFromGSM == GSM_phoneNums[i]) {
+          isAllowRespond = true;
+        }
+      }
       stringFromGSM = "";
     }
+
     stringFromGSM += (char)charFromGSM;
 
-    for (uint8_t i = 0; i <= GSM_phoneNums_count; i++) {
-      if (stringFromGSM == GSM_phoneNums[i]) {
-        gsmSerial.println("ATA");// respond to call
-        stringFromGSM = "";
-      }
+    if (stringFromGSM.length() > 64) {
+      stringFromGSM = "";
     }
-    if (stringFromGSM.length() > 255) {
-      //stringFromGSM = "";
-    }
-#ifdef DEBUG
-    debugSerial.println(stringFromGSM);
-#endif
+  }
+
+  if (isAllowRespond) {
+    gsmSerial.println("ATA");// respond to call
   }
 }

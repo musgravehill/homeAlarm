@@ -192,8 +192,7 @@ void setup() {
 void loop() {
   NRF_listen();
   ENCODER_read();
-  STATEMACHINE_loop();
-  GSM_answerCall();
+  STATEMACHINE_loop();  
 }
 
 void BASE_processDataFromSensor() {
