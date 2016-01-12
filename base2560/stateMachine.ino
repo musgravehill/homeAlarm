@@ -20,26 +20,23 @@ void STATEMACHINE_loop() {
 
 void STATEMACHINE_1s() {
   TFT_initLED();
-
 #ifdef DEBUG
+  //debugSerial.print("MENU_state=");
   //debugSerial.println(MENU_state, DEC);
 #endif
 }
 
 void STATEMACHINE_5s() {
-  TFT_renderState();
+  TFT_renderMenuState();
 
   if (BASE_buzzerIsNeed) {
     BASE_buzzerIsNeed = false;
-  } else {
-
   }
 
 }
 
 void STATEMACHINE_61s() {
   BASE_checkSensorsFault();
-  
 }
 
 void STATEMACHINE_103s() {

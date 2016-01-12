@@ -22,8 +22,11 @@ void TFT_initLED() {
   }
 }
 
-void TFT_renderState() {
+void TFT_renderMenuState() {
   switch (MENU_state) {
+    case 0:
+      //no TFT render, TFT_LED will be off
+      break;
     case 4:
       TFT_renderInfoLine();
       break;
@@ -49,11 +52,16 @@ void TFT_renderInfoLine() {
   //float temperature = SYS_DS3231.getTemperature();
   String infoLine = String(dd, DEC) + "." + String(mm, DEC) + "." + String(yy, DEC) + " " + String(H, DEC) + ":" + String(i, DEC);
   //infoLine += " " + String(((int) temperature), DEC) + "C";
-  infoLine += " " + String(((int) (millis() / 86400000L)), DEC) + "d";
+  infoLine += " " + String(((int) (millis() / 86400000L)), DEC) + "d"; //uptime days
   myDisplay.setCursor(1, 225);
   myDisplay.setTextColor(ILI9341_WHITE);
   myDisplay.setTextSize(2);
   myDisplay.println(infoLine);
+  //TODO
+  //diz
+  //voltage base acc
+  //gsm signal bar
+  //temperature base
 }
 
 void TFT_renderSensors() {
@@ -62,7 +70,8 @@ void TFT_renderSensors() {
   //BASE_sensorDecodedParams[NRF_currPipeNum][paramNum]
   //BASE_sensorIsOk[NRF_currPipeNum]
 
-  myDisplay.fillRect(0, 0, 320, 222, ILI9341_WHITE); //x y w h color
+  myDisplay.fillRect(0, 0, 320, 240, ILI9341_BLACK); //x y w h color
+  
   myDisplay.setCursor(1, 30);
   myDisplay.setTextColor(ILI9341_PINK);
   myDisplay.setTextSize(2);

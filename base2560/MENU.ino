@@ -7,5 +7,5 @@ void ENCODER_read() {
   if (MENU_state > 12) {
     MENU_state = 12;
     myEncoder.write(12);
-  }
+  } 
 }

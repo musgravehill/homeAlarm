@@ -131,8 +131,8 @@ uint32_t GSM_periodParamAllowSMSMillis[7] = {   //millis between SMS //unsigned 
 uint32_t GSM_paramPrevSMSMillis[7] = {0};  //BUG: powerDown->powerUp->this vars will be skip to 0 => SMS_send is allow again
 
 //peripheral
-bool BASE_buzzerIsNeed = false;
-uint8_t BASE_voltagePin = A0;
+bool BASE_buzzerIsNeed = true;
+uint8_t BASE_voltagePin = A0; //TODO ADC AREF set to inner 1.1V and make -R-R- voltage divider
 
 //menu
 int8_t MENU_state = 0;
