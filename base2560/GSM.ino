@@ -17,7 +17,7 @@ void GSM_init() {
 }
 
 bool GSM_paramIsAllowSms(uint8_t paramNum) {
-  if ( (millis() - millisParamPrevSMS[paramNum]) >  periodParamAllowSMS[paramNum]) {
+  if ( (millis() - GSM_paramPrevSMSMillis[paramNum]) >  GSM_periodParamAllowSMSMillis[paramNum]) {
     return true;
   }
   else {
@@ -41,18 +41,14 @@ void GSM_sendDangers() {
       }
       if (GSM_paramIsAllowSms(paramNum)) {
         isAllowSendSMS = true;
-        millisParamPrevSMS[paramNum] = millis();
+        GSM_paramPrevSMSMillis[paramNum] = millis();
       }
     }
   }
 
   if (isAllowSendSMS) {
     GSM_sendSMS2All(SMS_dangers);
-  }
-
-  //BASE_sensorParamsIsDanger[NRF_currPipeNum][paramNum]
-  //BASE_sensorParamsIsAvailable[NRF_currPipeNum][paramNum]
-  //BASE_sensorDecodedParams[NRF_currPipeNum][paramNum]
+  } 
 }
 
 void GSM_sendSMS2All(String message) {
@@ -80,7 +76,7 @@ void GSM_sendSMS(String message, String phone) {
 
 void GSM_cleanAllSMS() {
   gsmSerial.println("AT+CMGD=1,4"); //clean ALL SMS (in, out, read, unread, sent, unsent)
-  delay(50);
+  delay(300);
 }
 
 void GSM_initPhoneNums() {

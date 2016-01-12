@@ -39,7 +39,7 @@
   LOGS => log on SD only
   DNGR => log on SD & send SMS [danger]
 */
-// [2,3 ENCODER] [10,11,12,13 SD_softSPI] [20,21 RTC_i2c] [42 TFT_LED] [43,44,45,46,47,48 TFT_softSPI] [49,50,51,52,53 NRF_hwSPI]
+// [A0 voltage 1.1V] [2,3 ENCODER] [10,11,12,13 SD_softSPI] [20,21 RTC_i2c] [42 TFT_LED] [43,44,45,46,47,48 TFT_softSPI] [49,50,51,52,53 NRF_hwSPI]
 
 #include <SPI.h>
 #include <nRF24L01.h>
@@ -104,36 +104,38 @@ uint8_t TFT_pinLedPower = 42;
 RTClib RTC3231;
 DS3231 SYS_DS3231;
 
-//seconds between SMS //unsigned long 2^32-1
-uint32_t periodParamAllowSMS[7] = {
-  24 * 3600, //voltage on sensor battery, V
-  1 * 3600, //temperature, C
-  1 * 3600, //humidity, %
-  1 * 3600, //water leak, bool
-  1 * 3600, //gas CH4, ADC value
-  1 * 3600, //motion detector, bool
-  1 * 3600 //gas CO, ADC value
-};
-
-//BUG: powerDown->powerUp->this vars will be skip to 0 => SMS_send is allow again
-uint32_t millisParamPrevSMS[7] = {0};
-
-uint16_t BASE_sensorSilenceFaultTime = 10000; //10s
+uint16_t BASE_sensorSilenceFaultTime = 10000; //сенсор молчит более 10s => он сломался
 bool BASE_sensorIsOk[6] = {false}; //0 1..5
 int16_t BASE_sensorDecodedParams[6][7] = {0}; //encoded params; 0==null;  [sensorNum][paramNum]
 bool BASE_sensorParamsIsDanger[6][7] = {true}; //[sensorPipeNum][paramNum]
 bool BASE_sensorParamsIsAvailable[6][7] = {true}; //[sensorPipeNum][paramNum]
-bool BASE_buzzerIsNeed = false;
-uint8_t BASE_voltagePin = A0;
-int8_t MENU_state = 0;
 
+//STATEMACHINE
 unsigned long STATEMACHINE_prevMillis_1s;
 unsigned long STATEMACHINE_prevMillis_5s;
 unsigned long STATEMACHINE_prevMillis_61s;
 unsigned long STATEMACHINE_prevMillis_103s;
 
+//GSM
 String GSM_phoneNums[] = {};
 uint8_t GSM_phoneNums_count = 0;
+uint32_t GSM_periodParamAllowSMSMillis[7] = {   //millis between SMS //unsigned long 2^32-1
+  24 * 3600000, //voltage on sensor battery, V
+  1 * 3600000, //temperature, C
+  1 * 3600000, //humidity, %
+  1 * 3600000, //water leak, bool
+  1 * 3600000, //gas CH4, ADC value
+  1 * 3600000, //motion detector, bool
+  1 * 3600000 //gas CO, ADC value
+};
+uint32_t GSM_paramPrevSMSMillis[7] = {0};  //BUG: powerDown->powerUp->this vars will be skip to 0 => SMS_send is allow again
+
+//peripheral
+bool BASE_buzzerIsNeed = false;
+uint8_t BASE_voltagePin = A0;
+
+//menu
+int8_t MENU_state = 0;
 
 #define DEBUG 1;
 

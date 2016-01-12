@@ -57,10 +57,10 @@ void TFT_renderInfoLine() {
 }
 
 void TFT_renderSensors() {
-  //bool BASE_sensorIsOk[6] = {false}; //0 1..5
-  //uint16_t BASE_sensorParams[6][7] = {0}; //encoded uint params; 0==null; [sensorPipeNum][paramNum] 1..5  0..6
-  //bool BASE_sensorParamsIsDanger[sensorPipeNum][paramNum] = false; [6][7]  1..5  0..6
-  //DECODE params before display it
+  //BASE_sensorParamsIsDanger[NRF_currPipeNum][paramNum]
+  //BASE_sensorParamsIsAvailable[NRF_currPipeNum][paramNum]
+  //BASE_sensorDecodedParams[NRF_currPipeNum][paramNum]
+  //BASE_sensorIsOk[NRF_currPipeNum]
 
   myDisplay.fillRect(0, 0, 320, 222, ILI9341_WHITE); //x y w h color
   myDisplay.setCursor(1, 30);
