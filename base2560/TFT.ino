@@ -89,28 +89,28 @@ void TFT_renderSensors() {
   myDisplay.setTextColor(ILI9341_WHITE);
   myDisplay.setTextSize(2);
 
-  myDisplay.setCursor(0, 0);
+  myDisplay.setCursor(4, 4);
   myDisplay.print("#");
 
-  myDisplay.setCursor(40, 0);
+  myDisplay.setCursor(44, 4);
   myDisplay.print("V");
 
-  myDisplay.setCursor(80, 0);
+  myDisplay.setCursor(84, 4);
   myDisplay.print("T");
 
-  myDisplay.setCursor(120, 0);
+  myDisplay.setCursor(124, 4);
   myDisplay.print("H");
 
-  myDisplay.setCursor(160, 0);
+  myDisplay.setCursor(164, 4);
   myDisplay.print("WL");
 
-  myDisplay.setCursor(200, 0);
+  myDisplay.setCursor(204, 4);
   myDisplay.print("CH4");
 
-  myDisplay.setCursor(240, 0);
+  myDisplay.setCursor(244, 4);
   myDisplay.print("MD");
 
-  myDisplay.setCursor(280, 0);
+  myDisplay.setCursor(284, 4);
   myDisplay.print("CO");
 
   //data
@@ -121,7 +121,7 @@ void TFT_renderSensors() {
     } else {
       myDisplay.setTextColor(ILI9341_DARKGREY);
     }
-    myDisplay.setCursor( (sensorPipeNum * 40), 0);
+    myDisplay.setCursor( 4, (4 + sensorPipeNum * 40));
     myDisplay.print(sensorPipeNum, DEC);
 
     //params
@@ -132,7 +132,13 @@ void TFT_renderSensors() {
         } else {
           myDisplay.setTextColor(ILI9341_OLIVE);
         }
-        myDisplay.setCursor( (sensorPipeNum * 40), (40 * paramNum + 40) );
+        myDisplay.setCursor( (2 + 40 + 40 * paramNum), (2 + 40 * sensorPipeNum) );
+        if (BASE_sensorDecodedParams[sensorPipeNum][paramNum] > 99) {
+          myDisplay.setTextSize(1);
+        }
+        else {
+          myDisplay.setTextSize(2);
+        }
         myDisplay.print(BASE_sensorDecodedParams[sensorPipeNum][paramNum], DEC);
       }
     }
