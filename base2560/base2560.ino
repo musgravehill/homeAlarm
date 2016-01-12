@@ -193,13 +193,7 @@ void loop() {
   NRF_listen();
   ENCODER_read();
   STATEMACHINE_loop();
-
-#ifdef DEBUG
-  if (gsmSerial.available()) {
-    debugSerial.write(gsmSerial.read());
-  }
-#endif
-
+  GSM_answerCall();
 }
 
 void BASE_processDataFromSensor() {

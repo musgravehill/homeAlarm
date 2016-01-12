@@ -48,7 +48,7 @@ void GSM_sendDangers() {
 
   if (isAllowSendSMS) {
     GSM_sendSMS2All(SMS_dangers);
-  } 
+  }
 }
 
 void GSM_sendSMS2All(String message) {
@@ -113,5 +113,22 @@ void GSM_initPhoneNums() {
   }
 }
 
-
-
+void GSM_answerCall {
+  String stringFromGSM = "";     //+CLIP: "+7915977xxxx",145,"",0,"",0
+  while (gsmSerial.available()) {
+    char charFromGSM = gsmSerial.read();
+    if (charFromGSM == '+') {
+      stringFromGSM = "";
+    }
+    stringFromGSM += String((char)charFromGSM);
+    for (uint8_t i = 0; i <= GSM_phoneNums_count; i++) {
+      if (stringFromGSM == GSM_phoneNums[i]) {
+        gsmSerial.println("ATA");// respond to call
+        stringFromGSM = "";
+      }
+    }
+    if (stringFromGSM.length() > 64) {
+      stringFromGSM = "";
+    }
+  }
+}
