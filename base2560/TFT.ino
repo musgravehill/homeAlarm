@@ -37,6 +37,10 @@ void TFT_renderMenuState() {
       TFT_renderGSM();
       break;
   }
+#ifdef DEBUG
+  debugSerial.print("MENU_state=");
+  debugSerial.println(MENU_state, DEC);
+#endif
 
 }
 
@@ -142,25 +146,28 @@ void TFT_renderGSM() {
 
   //may be: set ATE1, ATV1, AT+CMEE=2
 
-  myDisplay.setCursor(0, 0);
+  myDisplay.setCursor(10, 2);
   gsmSerial.println("AT+COPS?");
+  delay(100);
   while (gsmSerial.available()) {
     myDisplay.write(gsmSerial.read());
   }
 
-  myDisplay.setCursor(0, 10);
+  myDisplay.setCursor(10, 12);
   gsmSerial.println("AT+CPAS");
+  delay(100);
   while (gsmSerial.available()) {
     myDisplay.write(gsmSerial.read());
   }
 
-  myDisplay.setCursor(0, 20);
+  myDisplay.setCursor(10, 22);
   gsmSerial.println("AT+CSQ");
+  delay(100);
   while (gsmSerial.available()) {
     myDisplay.write(gsmSerial.read());
   }
 
-  myDisplay.setCursor(0, 180);
+  myDisplay.setCursor(10, 180);
   myDisplay.setTextColor(ILI9341_RED);
   myDisplay.println("GSM test mode, corrupt CALL and SMS. Change menu to other screen.");
 

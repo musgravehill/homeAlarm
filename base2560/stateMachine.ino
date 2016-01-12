@@ -4,9 +4,9 @@ void STATEMACHINE_loop() {
     STATEMACHINE_1s();
     STATEMACHINE_prevMillis_1s = STATEMACHINE_currMillis;
   }
-  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_7s) > 7000) {
-    STATEMACHINE_7s();
-    STATEMACHINE_prevMillis_7s = STATEMACHINE_currMillis;
+  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_17s) > 17000) {
+    STATEMACHINE_17s();
+    STATEMACHINE_prevMillis_17s = STATEMACHINE_currMillis;
   }
   if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_61s) > 61000) {
     STATEMACHINE_61s();
@@ -20,13 +20,9 @@ void STATEMACHINE_loop() {
 
 void STATEMACHINE_1s() {
   TFT_initLED();
-#ifdef DEBUG
-  //debugSerial.print("MENU_state=");
-  //debugSerial.println(MENU_state, DEC);
-#endif
 }
 
-void STATEMACHINE_7s() {
+void STATEMACHINE_17s() {
   TFT_renderMenuState();
 
   if (BASE_buzzerIsNeed) {

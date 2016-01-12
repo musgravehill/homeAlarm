@@ -38,6 +38,12 @@ void GSM_sendDangers() {
         SMS_dangers +=  "#" + String(sensorPipeNum, DEC) + ":";
         SMS_dangers +=  PARAMS_getVerbalParamName(paramNum) + "=";
         SMS_dangers +=  String(BASE_sensorDecodedParams[sensorPipeNum][paramNum], DEC) + ";";
+
+#ifdef DEBUG
+        debugSerial.print("SMS DNGR++: ");
+        debugSerial.println(SMS_dangers);
+#endif
+
       }
       if (GSM_paramIsAllowSms(paramNum)) {
         isAllowSendSMS = true;

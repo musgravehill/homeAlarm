@@ -112,7 +112,7 @@ bool BASE_sensorParamsIsAvailable[6][7] = {true}; //[sensorPipeNum][paramNum]
 
 //STATEMACHINE
 unsigned long STATEMACHINE_prevMillis_1s;
-unsigned long STATEMACHINE_prevMillis_7s;
+unsigned long STATEMACHINE_prevMillis_17s;
 unsigned long STATEMACHINE_prevMillis_61s;
 unsigned long STATEMACHINE_prevMillis_103s;
 
