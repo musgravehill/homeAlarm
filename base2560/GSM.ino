@@ -16,9 +16,8 @@ void GSM_init() {
   gsmSerial.println("AT+CMIC=0,15");
 }
 
-void GSM_paramIsAllowSms(uint8_t paramNum) {
-  uint32_t currMillis = millis();
-  if ( (currMillis - unixtimeParamPrevSMS) >  periodParamAllowSMS[paramNum]) {
+bool GSM_paramIsAllowSms(uint8_t paramNum) {
+  if ( (millis() - millisParamPrevSMS[paramNum]) >  periodParamAllowSMS[paramNum]) {
     return true;
   }
   else {
@@ -28,20 +27,26 @@ void GSM_paramIsAllowSms(uint8_t paramNum) {
 
 void GSM_sendDangers() {
   String SMS_dangers = "";
-  bool isNeedSendSMS = false;
+  bool isAllowSendSMS = false;
   const char paramCode[] = {'V', 'T', 'H', 'W', 'G', 'M', 'C'};
-
+  /*
+    Все опасные параметры от всех датчиков пишем в строку.
+    Если можно отправить СМС хотя бы для 1 параметра, то щлем всю строку.
+  */
   for (uint8_t sensorPipeNum = 1; sensorPipeNum < 6; sensorPipeNum++) {
     for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
-      if (BASE_sensorParamsIsDanger[sensorPipeNumm][paramNum] && GSM_paramIsAllowSms(paramNum)) {
+      if (BASE_sensorParamsIsDanger[sensorPipeNum][paramNum]) {
         SMS_dangers +=  String((char)paramCode[paramNum]) + "=";
-        SMS_dangers +=  String(BASE_sensorDecodedParams[sensorPipeNumm][paramNum], DEC) + ";";
-        //TODO TODO TODO
+        SMS_dangers +=  String(BASE_sensorDecodedParams[sensorPipeNum][paramNum], DEC) + ";";
+      }
+      if (GSM_paramIsAllowSms(paramNum)) {
+        isAllowSendSMS = true;
+        millisParamPrevSMS[paramNum] = millis();
       }
     }
   }
 
-  if (isNeedSendSMS) {
+  if (isAllowSendSMS) {
     GSM_sendSMS2All(SMS_dangers);
   }
 

@@ -116,7 +116,7 @@ uint32_t periodParamAllowSMS[7] = {
 };
 
 //BUG: powerDown->powerUp->this vars will be skip to 0 => SMS_send is allow again
-uint32_t unixtimeParamPrevSMS[7] = {0};
+uint32_t millisParamPrevSMS[7] = {0};
 
 uint16_t BASE_sensorSilenceFaultTime = 10000; //10s
 bool BASE_sensorIsOk[6] = {false}; //0 1..5
