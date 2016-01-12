@@ -4,9 +4,9 @@ void STATEMACHINE_loop() {
     STATEMACHINE_1s();
     STATEMACHINE_prevMillis_1s = STATEMACHINE_currMillis;
   }
-  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_5s) > 5000) {
-    STATEMACHINE_5s();
-    STATEMACHINE_prevMillis_5s = STATEMACHINE_currMillis;
+  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_7s) > 7000) {
+    STATEMACHINE_7s();
+    STATEMACHINE_prevMillis_7s = STATEMACHINE_currMillis;
   }
   if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_61s) > 61000) {
     STATEMACHINE_61s();
@@ -26,7 +26,7 @@ void STATEMACHINE_1s() {
 #endif
 }
 
-void STATEMACHINE_5s() {
+void STATEMACHINE_7s() {
   TFT_renderMenuState();
 
   if (BASE_buzzerIsNeed) {
