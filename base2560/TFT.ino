@@ -41,7 +41,8 @@ void TFT_renderMenuState() {
 }
 
 void TFT_renderInfoLine() {
-  myDisplay.fillRect(0, 223, 320, 17, ILI9341_NAVY); //x y w h color
+  //myDisplay.fillRect(0, 223, 320, 17, ILI9341_NAVY); //x y w h color
+  myDisplay.fillScreen(ILI9341_BLACK);
   DateTime now = RTC3231.now();
   uint32_t nowUt = now.unixtime();
   uint16_t yy =  now.year() - 2000;
@@ -65,17 +66,74 @@ void TFT_renderInfoLine() {
 }
 
 void TFT_renderSensors() {
+
+
+  myDisplay.fillScreen(ILI9341_BLACK);
+  //table cells
+  drawFastHLine(0, 40, 320, ILI9341_DARKGREY); //x,y,w,color
+  drawFastHLine(0, 80, 320, ILI9341_DARKGREY); //x,y,w,color
+  drawFastHLine(0, 120, 320, ILI9341_DARKGREY); //x,y,w,color
+  drawFastHLine(0, 160, 320, ILI9341_DARKGREY); //x,y,w,color
+  drawFastHLine(0, 200, 320, ILI9341_DARKGREY); //x,y,w,color
+
+  drawFastVLine(40, 0, 240, ILI9341_DARKGREY); //x,y,h,color
+  drawFastVLine(80, 0, 240, ILI9341_DARKGREY); //x,y,h,color
+  drawFastVLine(120, 0, 240, ILI9341_DARKGREY); //x,y,h,color
+  drawFastVLine(160, 0, 240, ILI9341_DARKGREY); //x,y,h,color
+  drawFastVLine(200, 0, 240, ILI9341_DARKGREY); //x,y,h,color
+  drawFastVLine(240, 0, 240, ILI9341_DARKGREY); //x,y,h,color
+  drawFastVLine(280, 0, 240, ILI9341_DARKGREY); //x,y,h,color
+
+  myDisplay.setTextColor(ILI9341_WHITE);
+  myDisplay.setTextSize(2);
+
+  myDisplay.setCursor(0, 0);
+  myDisplay.print("#");
+
+  myDisplay.setCursor(40, 0);
+  myDisplay.print("V");
+
+  myDisplay.setCursor(80, 0);
+  myDisplay.print("T");
+
+  myDisplay.setCursor(120, 0);
+  myDisplay.print("H");
+
+  myDisplay.setCursor(160, 0);
+  myDisplay.print("WL");
+
+  myDisplay.setCursor(200, 0);
+  myDisplay.print("CH4");
+
+  myDisplay.setCursor(240, 0);
+  myDisplay.print("MD");
+
+  myDisplay.setCursor(280, 0);
+  myDisplay.print("CO");
+
+  //sensors
+
+
+  for (uint8_t sensorPipeNum = 1; sensorPipeNum < 6; sensorPipeNum++) { //SENSORS PIPES 1..5!
+    //sensor num
+    if (BASE_sensorIsOn[sensorPipeNum]) {
+      myDisplay.setTextColor(ILI9341_BLUE);
+    } else {
+      myDisplay.setTextColor(ILI9341_DARKGREY);
+    }
+    myDisplay.setCursor( (sensorPipeNum * 40), 0);
+    myDisplay.print(sensorPipeNum, DEC);
+
+    //params
+    for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
+    }
+  }
+
   //BASE_sensorParamsIsDanger[NRF_currPipeNum][paramNum]
   //BASE_sensorParamsIsAvailable[NRF_currPipeNum][paramNum]
   //BASE_sensorDecodedParams[NRF_currPipeNum][paramNum]
-  //BASE_sensorIsOk[NRF_currPipeNum]
+  //BASE_sensorIsOn[NRF_currPipeNum]
 
-  myDisplay.fillRect(0, 0, 320, 240, ILI9341_BLACK); //x y w h color
-  
-  myDisplay.setCursor(1, 30);
-  myDisplay.setTextColor(ILI9341_PINK);
-  myDisplay.setTextSize(2);
-  myDisplay.println("sensors");
 }
 
 void TFT_renderGSM() {
