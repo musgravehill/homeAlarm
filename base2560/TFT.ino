@@ -160,6 +160,10 @@ void TFT_renderGSM() {
     myDisplay.write(gsmSerial.read());
   }
 
+  myDisplay.setCursor(0, 180);
+  myDisplay.setTextColor(ILI9341_RED);
+  myDisplay.println("GSM test mode, corrupt CALL and SMS. Change menu to other screen.");
+
 
   /*
     AT+COPS?  +COPS: 0,0,"MTS-RUS"    Информация об операторе
