@@ -142,13 +142,11 @@ void GSM_listenSerial() {
       strGsm = "";
     }
   }
-  GSM_postProcessSerial();
+  GSM_checkIncomingCall();
 }
 
-void GSM_postProcessSerial() {
+void GSM_checkIncomingCall() {
   String s_tmp = "";
-
-  //incoming call
   if (GSM_answerCLIP.length() > 20) {  //+CLIP: "+7915977xxxx",145,"",0,"",0\r\n
     s_tmp = GSM_answerCLIP.substring(0, 20); //+CLIP: "+7915977xxxx   //sub [from, until)
     for (uint8_t i = 0; i <= GSM_phoneNums_count; i++) {
@@ -164,8 +162,6 @@ void GSM_postProcessSerial() {
 #ifdef DEBUG
   debugSerial.println("CLIP:" + s_tmp);
 #endif
-
-  //CQS signal quality
 }
 
 void GSM_processSerialString(String s) {

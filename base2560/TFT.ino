@@ -45,8 +45,13 @@ void TFT_renderMenuState() {
 }
 
 void TFT_renderInfoLine() {
+  String infoLine = "";
+  gsmSerial.println("AT+CSQ");
+  delay(80);
   //myDisplay.fillRect(0, 223, 320, 17, ILI9341_NAVY); //x y w h color
   myDisplay.fillScreen(ILI9341_BLACK);
+  myDisplay.setTextSize(2);
+  //RTC
   DateTime now = RTC3231.now();
   uint32_t nowUt = now.unixtime();
   uint16_t yy =  now.year() - 2000;
@@ -54,19 +59,85 @@ void TFT_renderInfoLine() {
   uint8_t dd =  now.day();
   uint8_t i =  now.minute();
   uint8_t H =  now.hour();
-  //float temperature = SYS_DS3231.getTemperature();
-  String infoLine = String(dd, DEC) + "." + String(mm, DEC) + "." + String(yy, DEC) + " " + String(H, DEC) + ":" + String(i, DEC);
-  //infoLine += " " + String(((int) temperature), DEC) + "C";
-  infoLine += " " + String(((int) (millis() / 86400000L)), DEC) + "d"; //uptime days
+  float temperature = SYS_DS3231.getTemperature();
+
+  myDisplay.setCursor(2, 2);
+  myDisplay.setTextColor(ILI9341_WHITE);
+  infoLine = ((dd < 10) ? "0" : "") + String(dd, DEC) + "." ;
+  infoLine += ((mm < 10) ? "0" : "") + String(mm, DEC) + "." ;
+  infoLine += ((yy < 10) ? "0" : "") + String(yy, DEC) + " " ;
+  infoLine += ((H < 10) ? "0" : "") + String(H, DEC) + ":" ;
+  infoLine += ((i < 10) ? "0" : "") + String(i, DEC);
+  myDisplay.print(infoLine);
+  myDisplay.setTextColor(ILI9341_PURPLE);
+  infoLine = "  " + String(((int) temperature), DEC) + "C";
+  myDisplay.print(infoLine);
+
+  //uptime days
+  myDisplay.setCursor(2, 12);
+  myDisplay.setTextColor(ILI9341_BLUE);
+  infoLine = "uptime " + String(((int) (millis() / 86400000L)), DEC) + " days";
+  myDisplay.print(infoLine);
+
+  //gsm
+  if (GSM_answerCSQ.length() > 7) { //+CSQ: 23,0
+    String s_tmp = GSM_answerCSQ.substring(6); //23,0
+    uint8_t pos_tmp = s_tmp.indexOf(',');
+    uint8_t gsm_RSSI_raw = s_tmp.substring(0, pos_tmp).toInt();
+    uint8_t gsm_BER_raw = s_tmp.substring((pos_tmp + 1)).toInt();
+    //int8_t gsmRSSI = (gsm_raw_RSSI == 99) ? 0 :  -115 + gsm_raw_RSSI * 2;
+
+#ifdef DEBUG
+    debugSerial.println("CSQ:" + GSM_answerCSQ);
+    debugSerial.println("CSQvals:" + s_tmp);
+    debugSerial.println("CSQ,:" + pos_tmp);
+    debugSerial.println("CSQrssi:" + gsm_RSSI_raw);
+    debugSerial.println("CSQber:" + gsm_BER_raw);
+#endif
+
+    if (gsm_RSSI_raw == 99) {
+      myDisplay.setTextColor(ILI9341_RED);
+      myDisplay.setCursor(2, 22);
+      myDisplay.print("GSM NO SIGNAL");
+    }
+    else {
+      myDisplay.fillRect(2, 22, 64, 10, ILI9341_LIGHTGREY); //x y w h color
+      uint8_t gsmBarW = 64 * gsm_RSSI_raw / 31;
+      if (gsm_RSSI_raw < 18) {
+        myDisplay.fillRect(3, 23, gsm_RSSI_raw, 8, ILI9341_RED); //x y w h color
+      }
+      else if (gsm_RSSI_raw < 27) {
+        myDisplay.fillRect(3, 23, gsm_RSSI_raw, 8, ILI9341_YELLOW); //x y w h color
+      }
+      else {
+        myDisplay.fillRect(3, 23, gsm_RSSI_raw, 8, ILI9341_GREEN); //x y w h color
+      }
+    }
+
+    if (gsm_BER_raw == 99) {
+      myDisplay.setTextColor(ILI9341_RED);
+      myDisplay.setCursor(160, 22);
+      myDisplay.print("GSM ERROR UNKNOWN");
+    }
+    else {
+      myDisplay.setTextColor(ILI9341_GREEN);
+      myDisplay.setCursor(160, 22);
+      myDisplay.print(gsm_BER_raw, DEC);
+    }
+
+  }
+
+
+
+
   myDisplay.setCursor(1, 225);
   myDisplay.setTextColor(ILI9341_WHITE);
   myDisplay.setTextSize(2);
   myDisplay.println(infoLine);
   //TODO
-  //diz
-  //voltage base acc
+  //voltage base, acc
   //gsm signal bar
-  //temperature base
+
 }
 
 void TFT_renderSensors() {
@@ -146,24 +217,29 @@ void TFT_renderSensors() {
 }
 
 void TFT_renderGSM() {
+  //may be: set ATE1, ATV1, AT+CMEE=2
+  gsmSerial.println("AT+COPS?");
+  delay(80);
+  gsmSerial.println("AT+CPAS");
+  delay(80);
+  gsmSerial.println("AT+CSQ");
+  delay(80);
+
   myDisplay.fillScreen(ILI9341_WHITE);
   myDisplay.setTextColor(ILI9341_BLACK);
   myDisplay.setTextSize(1);
 
-  //may be: set ATE1, ATV1, AT+CMEE=2
-
   myDisplay.setCursor(10, 2);
-  gsmSerial.println("AT+COPS?");
   myDisplay.println(GSM_answerCOPS);
 
   myDisplay.setCursor(10, 12);
-  gsmSerial.println("AT+CPAS");
   myDisplay.println(GSM_answerCPAS);
 
-  myDisplay.setCursor(10, 22);
-  gsmSerial.println("AT+CSQ");
+  myDisplay.setCursor(10, 22);  ;
   myDisplay.println(GSM_answerCSQ);
 
+  myDisplay.setCursor(10, 32);
+  myDisplay.println(GSM_answerCLIP);
 
   /*
     AT+COPS?  +COPS: 0,0,"MTS-RUS"    Информация об операторе
