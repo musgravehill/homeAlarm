@@ -85,7 +85,7 @@ void TFT_renderInfoLine() {
     uint8_t pos_tmp = s_tmp.indexOf(',');
     uint8_t gsm_RSSI_raw = s_tmp.substring(0, pos_tmp).toInt();
     uint8_t gsm_BER_raw = s_tmp.substring((pos_tmp + 1)).toInt();
-    //int8_t gsmRSSI = (gsm_raw_RSSI == 99) ? 0 :  -115 + gsm_raw_RSSI * 2;
+    int8_t gsmRSSI = (gsm_raw_RSSI == 99) ? 0 :  -115 + gsm_raw_RSSI * 2;
 
 #ifdef DEBUG
     debugSerial.println("CSQ:" + GSM_answerCSQ);
@@ -105,13 +105,19 @@ void TFT_renderInfoLine() {
       uint8_t gsmBarW = 64 * gsm_RSSI_raw / 31;
       if (gsm_RSSI_raw < 18) {
         myDisplay.fillRect(3, 23, gsm_RSSI_raw, 8, ILI9341_RED); //x y w h color
+        myDisplay.setTextColor(ILI9341_RED);
       }
       else if (gsm_RSSI_raw < 27) {
         myDisplay.fillRect(3, 23, gsm_RSSI_raw, 8, ILI9341_YELLOW); //x y w h color
+        myDisplay.setTextColor(ILI9341_YELLOW);
       }
       else {
         myDisplay.fillRect(3, 23, gsm_RSSI_raw, 8, ILI9341_GREEN); //x y w h color
+        myDisplay.setTextColor(ILI9341_GREEN);
       }
+      myDisplay.setCursor(68, 22);
+      myDisplay.print(gsmRSSI);
+      myDisplay.print(" dBm");
     }
 
     if (gsm_BER_raw == 99) {
@@ -124,20 +130,11 @@ void TFT_renderInfoLine() {
       myDisplay.setCursor(160, 22);
       myDisplay.print(gsm_BER_raw, DEC);
     }
-
   }
 
-
-
-
-  myDisplay.setCursor(1, 225);
-  myDisplay.setTextColor(ILI9341_WHITE);
-  myDisplay.setTextSize(2);
-  myDisplay.println(infoLine);
   //TODO
   //voltage base, acc
   //gsm signal bar
-
 }
 
 void TFT_renderSensors() {
