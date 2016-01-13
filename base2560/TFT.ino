@@ -74,7 +74,7 @@ void TFT_renderInfoLine() {
   myDisplay.print(infoLine);
 
   //uptime days
-  myDisplay.setCursor(2, 12);
+  myDisplay.setCursor(2, 16);
   myDisplay.setTextColor(ILI9341_BLUE);
   infoLine = "uptime " + String(((int) (millis() / 86400000L)), DEC) + " days";
   myDisplay.print(infoLine);
@@ -90,44 +90,44 @@ void TFT_renderInfoLine() {
 #ifdef DEBUG
     debugSerial.println("CSQ:" + GSM_answerCSQ);
     debugSerial.println("CSQvals:" + s_tmp);
-    debugSerial.println("CSQ,:" + pos_tmp);
-    debugSerial.println("CSQrssi:" + gsm_RSSI_raw);
-    debugSerial.println("CSQber:" + gsm_BER_raw);
+    debugSerial.println("CSQ,:" + String(pos_tmp, DEC));
+    debugSerial.println("CSQrssi:" +  String(gsm_RSSI_raw, DEC));
+    debugSerial.println("CSQber:" + String(gsm_BER_raw, DEC));
 #endif
 
     if (gsm_RSSI_raw == 99) {
       myDisplay.setTextColor(ILI9341_RED);
-      myDisplay.setCursor(2, 22);
+      myDisplay.setCursor(2, 30);
       myDisplay.print("GSM NO SIGNAL");
     }
     else {
-      myDisplay.fillRect(2, 22, 64, 10, ILI9341_LIGHTGREY); //x y w h color
+      myDisplay.fillRect(2, 30, 64, 10, ILI9341_LIGHTGREY); //x y w h color
       uint8_t gsmBarW = 64 * gsm_RSSI_raw / 31;
       if (gsm_RSSI_raw < 18) {
-        myDisplay.fillRect(3, 23, gsm_RSSI_raw, 8, ILI9341_RED); //x y w h color
+        myDisplay.fillRect(3, 31, gsm_RSSI_raw, 8, ILI9341_RED); //x y w h color
         myDisplay.setTextColor(ILI9341_RED);
       }
       else if (gsm_RSSI_raw < 27) {
-        myDisplay.fillRect(3, 23, gsm_RSSI_raw, 8, ILI9341_YELLOW); //x y w h color
+        myDisplay.fillRect(3, 31, gsm_RSSI_raw, 8, ILI9341_YELLOW); //x y w h color
         myDisplay.setTextColor(ILI9341_YELLOW);
       }
       else {
-        myDisplay.fillRect(3, 23, gsm_RSSI_raw, 8, ILI9341_GREEN); //x y w h color
+        myDisplay.fillRect(3, 31, gsm_RSSI_raw, 8, ILI9341_GREEN); //x y w h color
         myDisplay.setTextColor(ILI9341_GREEN);
       }
-      myDisplay.setCursor(68, 22);
+      myDisplay.setCursor(68, 30);
       myDisplay.print(gsmRSSI);
       myDisplay.print(" dBm");
     }
 
     if (gsm_BER_raw == 99) {
       myDisplay.setTextColor(ILI9341_RED);
-      myDisplay.setCursor(160, 22);
+      myDisplay.setCursor(160, 30);
       myDisplay.print("GSM ERROR UNKNOWN");
     }
     else {
       myDisplay.setTextColor(ILI9341_GREEN);
-      myDisplay.setCursor(160, 22);
+      myDisplay.setCursor(160, 30);
       myDisplay.print(gsm_BER_raw, DEC);
     }
   }
