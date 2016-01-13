@@ -146,11 +146,11 @@ void setup() {
   delay(2000); //for calming current & voltage fluctuations
 
 #ifdef DEBUG
-  debugSerial.begin(9600); //DBG
+  debugSerial.begin(57600); //DBG
   delay(50);
 #endif
 
-  gsmSerial.begin(9600, SERIAL_8N1); //default for Arduino & SIM800L
+  gsmSerial.begin(57600, SERIAL_8N1); //default for Arduino & SIM800L
   delay(50);
 
   Wire.begin();
