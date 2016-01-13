@@ -20,7 +20,7 @@ void STATEMACHINE_loop() {
 
 void STATEMACHINE_1s() {
   TFT_initLED();
-  GSM_answerCall();
+  GSM_listenSerial();
 }
 
 void STATEMACHINE_17s() {

@@ -124,49 +124,55 @@ void GSM_initPhoneNums() {
   }
 }
 
-void GSM_answerCall() {
-  String stringFromGSM = "";     //+CLIP: "+7915977xxxx",145,"",0,"",0
-  String s = "";
-  bool isAllowRespond = false;
+void GSM_listenSerial() {
+  String strGsm = "";
   while (gsmSerial.available()) {
     char charFromGSM = gsmSerial.read();
-    if (charFromGSM == '+') {
-      stringFromGSM = "+";
+    if (charFromGSM == '\r') { //end of text
+      GSM_processSerialString(strGsm);
+      strGsm = "";
     }
-    if (
-      charFromGSM == '0'
-      || charFromGSM == '1'
-      || charFromGSM == '2'
-      || charFromGSM == '3'
-      || charFromGSM == '4'
-      || charFromGSM == '5'
-      || charFromGSM == '6'
-      || charFromGSM == '7'
-      || charFromGSM == '8'
-      || charFromGSM == '9'
-    ) {
-      stringFromGSM += String((char)charFromGSM);
+    else if (charFromGSM == '\n') {
+      strGsm = "";
     }
-
-    if (charFromGSM == '"') {
-      for (uint8_t i = 0; i <= GSM_phoneNums_count; i++) {
-#ifdef DEBUG
-        s = "_" + String(stringFromGSM); // + "_==_" + String(GSM_phoneNums[i]) + "_";
-        debugSerial.println(s);
-#endif
-        if (stringFromGSM == GSM_phoneNums[i]) {
-          isAllowRespond = true;
-        }
-      }
-      stringFromGSM = "";
+    else {
+      strGsm += String((char)charFromGSM);
     }
-
     if (stringFromGSM.length() > 64) {
-      stringFromGSM = "";
+      strGsm = "";
     }
   }
+  GSM_postProcessSerial();
+}
 
-  if (isAllowRespond) {
-    gsmSerial.println("ATA");// respond to call
+void GSM_postProcessSerial() {
+  if (GSM_isNeedAnswerIncomingCall) {
+    GSM_isNeedAnswerIncomingCall = false;
+    gsmSerial.println("ATA");// respond to incoming call
+#ifdef DEBUG
+    debugSerial.println("ATA");
+#endif
   }
 }
+
+void GSM_processSerialString(String s) {
+  GSM_isNeedAnswerIncomingCall = false;
+
+  //incoming call?  //+CLIP: "+7915977xxxx",145,"",0,"",0\r\n
+  if (s.length() > 19) {
+    String s_tmp = s.substring(0, 19); //+CLIP: "+7915977xxxx
+#ifdef DEBUG
+    debugSerial.println(s_tmp);
+#endif
+    for (uint8_t i = 0; i <= GSM_phoneNums_count; i++) {
+      if (s == String("+CLIP: \"" + GSM_phoneNums[i]) ) {
+        GSM_isNeedAnswerIncomingCall = true;
+      }
+    }
+  }
+
+#ifdef DEBUG  
+  debugSerial.println(s);
+#endif
+}
+

@@ -129,6 +129,7 @@ uint32_t GSM_periodParamAllowSMSMillis[7] = {   //millis between SMS //unsigned 
   1 * 3600000 //gas CO, ADC value
 };
 uint32_t GSM_paramPrevSMSMillis[7] = {0};  //BUG: powerDown->powerUp->this vars will be skip to 0 => SMS_send is allow again
+bool GSM_isNeedAnswerIncomingCall = false;
 
 //peripheral
 bool BASE_buzzerIsNeed = true;
@@ -192,7 +193,7 @@ void setup() {
 void loop() {
   NRF_listen();
   ENCODER_read();
-  STATEMACHINE_loop();  
+  STATEMACHINE_loop();
 }
 
 void BASE_processDataFromSensor() {
