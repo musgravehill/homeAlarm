@@ -154,28 +154,15 @@ void TFT_renderGSM() {
 
   myDisplay.setCursor(10, 2);
   gsmSerial.println("AT+COPS?");
-  delay(100);
-  while (gsmSerial.available()) {
-    myDisplay.write(gsmSerial.read());
-  }
+  myDisplay.println(GSM_answerCOPS);
 
   myDisplay.setCursor(10, 12);
   gsmSerial.println("AT+CPAS");
-  delay(100);
-  while (gsmSerial.available()) {
-    myDisplay.write(gsmSerial.read());
-  }
+  myDisplay.println(GSM_answerCPAS);
 
   myDisplay.setCursor(10, 22);
   gsmSerial.println("AT+CSQ");
-  delay(100);
-  while (gsmSerial.available()) {
-    myDisplay.write(gsmSerial.read());
-  }
-
-  myDisplay.setCursor(10, 180);
-  myDisplay.setTextColor(ILI9341_RED);
-  myDisplay.println("GSM test mode, corrupt CALL and SMS. Change menu to other screen.");
+  myDisplay.println(GSM_answerCSQ);
 
 
   /*
