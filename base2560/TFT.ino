@@ -128,7 +128,8 @@ void TFT_renderInfoLine() {
     else {
       myDisplay.setTextColor(ILI9341_GREEN);
       myDisplay.setCursor(160, 42);
-      myDisplay.print(gsm_BER_raw, DEC);
+      myDisplay.print("error ");
+      myDisplay.print(gsm_BER_raw, DEC);      
     }
   }
 

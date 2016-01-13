@@ -87,7 +87,7 @@ void GSM_sendSMS(String message, String phone) {
 
 void GSM_cleanAllSMS() {
   gsmSerial.println("AT+CMGD=1,4"); //clean ALL SMS (in, out, read, unread, sent, unsent)
-  delay(300);
+  delay(1000);
 }
 
 void GSM_initPhoneNums() {
@@ -97,6 +97,7 @@ void GSM_initPhoneNums() {
     if (SD_file.open("phones.txt", O_READ)) { //8.3 filename.ext rule
       uint8_t i = 0;
       char chr;
+      GSM_phoneNums[i] = "";
       while (SD_file.available()) {
         chr = SD_file.read();
         if ( chr == '0'
@@ -112,11 +113,12 @@ void GSM_initPhoneNums() {
              || chr == '+' )
         {
           //GSM_phoneNums[i] += chr;
-          GSM_phoneNums[i] += String(chr);
+          GSM_phoneNums[i] += String((char)chr);
         }
         if (chr == ',') {
           GSM_phoneNums_count++;
-          i++;
+          i++;     
+          GSM_phoneNums[i] = "";     
         }
       }
       SD_file.close();
@@ -127,44 +129,42 @@ void GSM_initPhoneNums() {
 
 void GSM_listenSerial() {
   String strGsm = "";
-  while (gsmSerial.available()) {
+  uint8_t strGsmLength = 0;
+  while (gsmSerial.available() && (strGsmLength <= 64) ) {
     char charFromGSM = gsmSerial.read();
+    strGsmLength++;
     if (charFromGSM == '\r') { //end of text
       GSM_processSerialString(strGsm);
       strGsm = "";
+      strGsmLength = 0;
     }
     else if (charFromGSM == '\n') {
       strGsm = "";
+      strGsmLength = 0;
     }
     else {
-      strGsm += String((char)charFromGSM);
-    }
-    if (strGsm.length() > 64) { //overflow
-      strGsm = "";
+      strGsm += (char)charFromGSM;
     }
   }
-  GSM_checkIncomingCall();
 }
 
 void GSM_checkIncomingCall() {
   String s_tmp = "";
+  String phone = "";
+
+  phone = "+7915977xxxx";
   if (GSM_answerCLIP.length() > 20) {  //+CLIP: "+7915977xxxx",145,"",0,"",0\r\n
     s_tmp = GSM_answerCLIP.substring(8, 20); //+CLIP: "+7915977xxxx   //sub [from, until)
-    for (uint8_t i = 0; i < GSM_phoneNums_count; i++) {
-#ifdef DEBUG
-      debugSerial.println("_" + String(s_tmp) + "_" + String(GSM_phoneNums[i]) + "_");
-#endif
-      if ( String(s_tmp) == String(GSM_phoneNums[i]) ) {
-        gsmSerial.println("ATA");// respond to incoming call
-#ifdef DEBUG
-        debugSerial.println("->GSM:ATA");
-#endif
-      }
+    if ( s_tmp  == phone ) {
+      gsmSerial.println("ATA");// respond to incoming call
+      //#ifdef DEBUG
+      //debugSerial.println("->GSM:ATA");
+      //#endif
     }
   }
   GSM_answerCLIP = ""; //DONT SEND "ATA" AGAIN!
 #ifdef DEBUG
-  debugSerial.println("CLIP:" + s_tmp);
+  debugSerial.println("CLIP_NUM:" + s_tmp);
 #endif
 }
 
@@ -183,14 +183,12 @@ void GSM_processSerialString(String s) {
     else if (s_head == "+COPS") {
       GSM_answerCOPS = s;
     }
-
-#ifdef DEBUG
-    debugSerial.println("gsm_head:" + s_head);
-#endif
+    //#ifdef DEBUG
+    //debugSerial.println("gsm_head:" + s_head);
+    //#endif
   }
-
-#ifdef DEBUG
-  debugSerial.println("GSM:" + s);
-#endif
+  //#ifdef DEBUG
+  // debugSerial.println("GSM:" + s);
+  //#endif
 }
 

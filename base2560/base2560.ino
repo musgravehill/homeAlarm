@@ -87,7 +87,7 @@ int16_t NRF_messageFromSensor[7] = {
 };
 
 //время последнего сигнала от сенсоров, если давно было => сенсор сломался или выключен
-uint64_t millisPrevSignal_sensors[6] = {0}; // pipe 0..5
+uint64_t millisPrevSignal_sensors[6] = {1}; // pipe 0..5
 
 RF24 radio(NRF_CE_PIN, NRF_CSN_PIN);
 
@@ -111,10 +111,10 @@ bool BASE_sensorParamsIsDanger[6][7] = {true}; //[sensorPipeNum][paramNum]
 bool BASE_sensorParamsIsAvailable[6][7] = {true}; //[sensorPipeNum][paramNum]
 
 //STATEMACHINE
-unsigned long STATEMACHINE_prevMillis_1s;
-unsigned long STATEMACHINE_prevMillis_17s;
-unsigned long STATEMACHINE_prevMillis_61s;
-unsigned long STATEMACHINE_prevMillis_103s;
+uint32_t STATEMACHINE_prevMillis_1s = 1;
+uint32_t STATEMACHINE_prevMillis_17s = 1;
+uint32_t STATEMACHINE_prevMillis_61s = 1;
+uint32_t STATEMACHINE_prevMillis_103s = 1;
 
 //GSM
 String GSM_phoneNums[] = {};
@@ -128,7 +128,7 @@ uint32_t GSM_periodParamAllowSMSMillis[7] = {   //millis between SMS //unsigned 
   1 * 3600000, //motion detector, bool
   1 * 3600000 //gas CO, ADC value
 };
-uint32_t GSM_paramPrevSMSMillis[7] = {0};  //BUG: powerDown->powerUp->this vars will be skip to 0 => SMS_send is allow again
+uint32_t GSM_paramPrevSMSMillis[7] = {1};  //BUG: powerDown->powerUp->this vars will be skip to 0 => SMS_send is allow again
 String GSM_answerCLIP = "";
 String GSM_answerCSQ = "";
 String GSM_answerCPAS = "";
@@ -188,14 +188,12 @@ void setup() {
     debugSerial.print("___");
     debugSerial.print(GSM_phoneNums[i]);
     debugSerial.println("___");
-
-    //uint16_t v = analogRead(BASE_voltagePin);
-    //debugSerial.println(v, DEC);
   }
 #endif
+
 }
 
-void loop() {
+void loop() {  
   NRF_listen();
   ENCODER_read();
   STATEMACHINE_loop();
