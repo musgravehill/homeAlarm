@@ -244,7 +244,7 @@ void BASE_processDataFromSensor() {
 void BASE_checkSensorsFault() {
   uint32_t millisCurrSignal = millis();
   for (uint8_t sensorPipeNum = 1; sensorPipeNum < 6; sensorPipeNum++) { //SENSORS PIPES 1..5!
-    uint32_t deltaSignal = millisCurrSignal - millisPrevSignal_sensors[sensorPipeNum];
+    int32_t deltaSignal = millisCurrSignal - millisPrevSignal_sensors[sensorPipeNum];
     if (deltaSignal >  BASE_sensorSilenceFaultTime) {
       BASE_sensorIsOn[sensorPipeNum] = false; //sensor fault
     }

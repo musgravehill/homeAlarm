@@ -157,14 +157,15 @@ void GSM_checkIncomingCall() {
         gsmSerial.println("ATA");// respond to incoming call
       }
 #ifdef DEBUG
-      debugSerial.println("_" + s_tmp + "=?=" + GSM_phoneNums[i] + "_" + );
+      debugSerial.println("_" + s_tmp + "=?=" + GSM_phoneNums[i] + "_");
 #endif
     }
+#ifdef DEBUG
+    debugSerial.println("CLIP_NUM:" + s_tmp);
+#endif
   }
   GSM_answerCLIP = ""; //DONT SEND "ATA" AGAIN!
-#ifdef DEBUG
-  debugSerial.println("CLIP_NUM:" + s_tmp);
-#endif
+
 }
 
 void GSM_processSerialString(String s) {

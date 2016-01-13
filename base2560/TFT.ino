@@ -97,7 +97,7 @@ void TFT_renderInfoLine() {
 
     if (gsm_RSSI_raw == 99) {
       myDisplay.setTextColor(ILI9341_RED);
-      myDisplay.setCursor(2,42);
+      myDisplay.setCursor(2, 42);
       myDisplay.print("GSM NO SIGNAL");
     }
     else {
@@ -129,8 +129,14 @@ void TFT_renderInfoLine() {
       myDisplay.setTextColor(ILI9341_GREEN);
       myDisplay.setCursor(160, 42);
       myDisplay.print("error ");
-      myDisplay.print(gsm_BER_raw, DEC);      
+      myDisplay.print(gsm_BER_raw, DEC);
     }
+  }
+
+  for (uint8_t i = 0; i < GSM_phoneNums_count; i++) {
+    myDisplay.setTextColor(ILI9341_ORANGE);
+    myDisplay.setCursor(160, 62);
+    myDisplay.print(GSM_phoneNums[i]+" ");
   }
 
   //TODO
