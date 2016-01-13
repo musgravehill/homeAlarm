@@ -85,7 +85,7 @@ void TFT_renderInfoLine() {
     uint8_t pos_tmp = s_tmp.indexOf(',');
     uint8_t gsm_RSSI_raw = s_tmp.substring(0, pos_tmp).toInt();
     uint8_t gsm_BER_raw = s_tmp.substring((pos_tmp + 1)).toInt();
-    int8_t gsmRSSI = (gsm_raw_RSSI == 99) ? 0 :  -115 + gsm_raw_RSSI * 2;
+    int8_t gsmRSSI = (gsm_RSSI_raw == 99) ? 0 :  -115 + gsm_RSSI_raw * 2;
 
 #ifdef DEBUG
     debugSerial.println("CSQ:" + GSM_answerCSQ);
