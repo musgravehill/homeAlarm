@@ -148,9 +148,9 @@ void GSM_listenSerial() {
 void GSM_checkIncomingCall() {
   String s_tmp = "";
   if (GSM_answerCLIP.length() > 20) {  //+CLIP: "+7915977xxxx",145,"",0,"",0\r\n
-    s_tmp = GSM_answerCLIP.substring(0, 20); //+CLIP: "+7915977xxxx   //sub [from, until)
-    for (uint8_t i = 0; i <= GSM_phoneNums_count; i++) {
-      if (s_tmp == String("+CLIP: \"" + GSM_phoneNums[i]) ) {
+    s_tmp = GSM_answerCLIP.substring(8, 20); //+CLIP: "+7915977xxxx   //sub [from, until)
+    for (uint8_t i = 0; i < GSM_phoneNums_count; i++) {
+      if ( s_tmp == GSM_phoneNums[i] ) {
         gsmSerial.println("ATA");// respond to incoming call
 #ifdef DEBUG
         debugSerial.println("->GSM:ATA");
