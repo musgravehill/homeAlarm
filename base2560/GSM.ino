@@ -67,7 +67,7 @@ void GSM_sendSMS2All(String message) {
   debugSerial.println("SMS DNGR SEND:");
   debugSerial.println(message);
 #endif
-  for (uint8_t i = 0; i <= GSM_phoneNums_count; i++) {
+  for (uint8_t i = 0; i < GSM_phoneNums_count; i++) {
     GSM_sendSMS(message, GSM_phoneNums[i]);
 #ifdef DEBUG
     debugSerial.println(GSM_phoneNums[i]);
@@ -111,8 +111,8 @@ void GSM_initPhoneNums() {
              || chr == '9'
              || chr == '+' )
         {
-          GSM_phoneNums[i] += chr;
-          //GSM_phoneNums[i] += String(chr);
+          //GSM_phoneNums[i] += chr;
+          GSM_phoneNums[i] += String(chr);
         }
         if (chr == ',') {
           GSM_phoneNums_count++;
@@ -120,6 +120,7 @@ void GSM_initPhoneNums() {
         }
       }
       SD_file.close();
+      GSM_phoneNums_count++;
     }
   }
 }
@@ -150,7 +151,10 @@ void GSM_checkIncomingCall() {
   if (GSM_answerCLIP.length() > 20) {  //+CLIP: "+7915977xxxx",145,"",0,"",0\r\n
     s_tmp = GSM_answerCLIP.substring(8, 20); //+CLIP: "+7915977xxxx   //sub [from, until)
     for (uint8_t i = 0; i < GSM_phoneNums_count; i++) {
-      if ( s_tmp == GSM_phoneNums[i] ) {
+#ifdef DEBUG
+      debugSerial.println("_" + s_tmp + "_" + String(i, DEC) + "_");
+#endif
+      if ( s_tmp == String(GSM_phoneNums[i]) ) {
         gsmSerial.println("ATA");// respond to incoming call
 #ifdef DEBUG
         debugSerial.println("->GSM:ATA");

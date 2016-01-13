@@ -104,15 +104,15 @@ void TFT_renderInfoLine() {
       myDisplay.fillRect(2, 42, 64, 10, ILI9341_LIGHTGREY); //x y w h color
       uint8_t gsmBarW = 64 * gsm_RSSI_raw / 31;
       if (gsm_RSSI_raw < 18) {
-        myDisplay.fillRect(3, 41, gsm_RSSI_raw, 8, ILI9341_RED); //x y w h color
+        myDisplay.fillRect(3, 43, gsm_RSSI_raw, 8, ILI9341_RED); //x y w h color
         myDisplay.setTextColor(ILI9341_RED);
       }
       else if (gsm_RSSI_raw < 27) {
-        myDisplay.fillRect(3, 41, gsm_RSSI_raw, 8, ILI9341_YELLOW); //x y w h color
+        myDisplay.fillRect(3, 43, gsm_RSSI_raw, 8, ILI9341_YELLOW); //x y w h color
         myDisplay.setTextColor(ILI9341_YELLOW);
       }
       else {
-        myDisplay.fillRect(3, 41, gsm_RSSI_raw, 8, ILI9341_GREEN); //x y w h color
+        myDisplay.fillRect(3, 43, gsm_RSSI_raw, 8, ILI9341_GREEN); //x y w h color
         myDisplay.setTextColor(ILI9341_GREEN);
       }
       myDisplay.setCursor(68, 42);

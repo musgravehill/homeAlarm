@@ -181,7 +181,9 @@ void setup() {
   BASE_buzzerIsNeed = true;
 
 #ifdef DEBUG
-  for (uint8_t i = 0; i <= GSM_phoneNums_count; i++) {
+  debugSerial.print("GSM_phoneNums_count=");
+  debugSerial.println(GSM_phoneNums_count, DEC);
+  for (uint8_t i = 0; i < GSM_phoneNums_count; i++) {
     debugSerial.print(i, DEC);
     debugSerial.print("___");
     debugSerial.print(GSM_phoneNums[i]);
@@ -201,7 +203,7 @@ void loop() {
 
 void BASE_processDataFromSensor() {
   millisPrevSignal_sensors[NRF_currPipeNum] =  millis(); //save time of sensor answer
-  String string_logs = "LOGS;#" + String(NRF_currPipeNum, DEC) + ";";
+  String string_logs = "LOGS; #" + String(NRF_currPipeNum, DEC) + ";";
   String string_dangers = "";
   const char paramCode[] = {'V', 'T', 'H', 'W', 'G', 'M', 'C'};
   int16_t paramVal_decoded;
@@ -209,15 +211,15 @@ void BASE_processDataFromSensor() {
   for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
     if (NRF_messageFromSensor[paramNum] > 0) { //param is available
       paramVal_decoded = PARAMS_decodeParam(paramNum, NRF_messageFromSensor[paramNum]); //decode to real range
-      string_logs +=  String((char)paramCode[paramNum]) + ";" + String(paramVal_decoded, DEC) + ";";
+      string_logs +=  String((char)paramCode[paramNum]) + "; " + String(paramVal_decoded, DEC) + "; ";
       BASE_sensorParamsIsAvailable[NRF_currPipeNum][paramNum] = true;
       BASE_sensorDecodedParams[NRF_currPipeNum][paramNum] = paramVal_decoded;
 
       //param is danger
       if (PARAMS_isDangerParamValue(paramNum, paramVal_decoded)) {
-        string_dangers += "DNGR;#" + String(NRF_currPipeNum, DEC) + ";";
-        string_dangers += String((char)paramCode[paramNum]) + ";";
-        string_dangers += String(paramVal_decoded, DEC) + ";";
+        string_dangers += "DNGR; #" + String(NRF_currPipeNum, DEC) + ";";
+        string_dangers += String((char)paramCode[paramNum]) + "; ";
+        string_dangers += String(paramVal_decoded, DEC) + "; ";
         SD_log(string_dangers);
         BASE_sensorParamsIsDanger[NRF_currPipeNum][paramNum] = true;
       }
@@ -227,7 +229,7 @@ void BASE_processDataFromSensor() {
     }
     //param NOT available
     else {
-      string_logs += String((char)paramCode[paramNum]) +  ";;";
+      string_logs += String((char)paramCode[paramNum]) +  ";; ";
       BASE_sensorParamsIsAvailable[NRF_currPipeNum][paramNum] = false;
     }
 
