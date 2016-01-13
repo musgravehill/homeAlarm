@@ -47,7 +47,7 @@ void TFT_renderMenuState() {
 void TFT_renderInfoLine() {
   String infoLine = "";
   gsmSerial.println("AT+CSQ");
-  delay(80);
+  delay(100);
   //myDisplay.fillRect(0, 223, 320, 17, ILI9341_NAVY); //x y w h color
   myDisplay.fillScreen(ILI9341_BLACK);
   myDisplay.setTextSize(2);
@@ -216,11 +216,11 @@ void TFT_renderSensors() {
 void TFT_renderGSM() {
   //may be: set ATE1, ATV1, AT+CMEE=2
   gsmSerial.println("AT+COPS?");
-  delay(80);
+  delay(100);
   gsmSerial.println("AT+CPAS");
-  delay(80);
+  delay(100);
   gsmSerial.println("AT+CSQ");
-  delay(80);
+  delay(100);
 
   myDisplay.fillScreen(ILI9341_WHITE);
   myDisplay.setTextColor(ILI9341_BLACK);
