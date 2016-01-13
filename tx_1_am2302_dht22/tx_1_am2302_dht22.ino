@@ -113,8 +113,8 @@ void NRF_init() {
   NRF_radio.enableDynamicPayloads();//for ALL pipes
   //NRF_radio.setPayloadSize(32); //32 bytes? Can corrupt "writeAckPayload"?
 
-  NRF_radio.setAutoAck(false);////allow RX send answer(acknoledgement) to TX (for ALL pipes?)
-  //NRF_radio.enableAckPayload(); //only for 0,1 pipes?
+  NRF_radio.setAutoAck(true);////allow RX send answer(acknoledgement) to TX (for ALL pipes?)
+  //NRF_radio.enableAckPayload(); //custom ack //only for 0,1 pipes?
   ////NRF_radio.enableDynamicAck(); //for ALL pipes? Чтобы можно было вкл\выкл получение ACK?
 
   NRF_radio.stopListening();// ?

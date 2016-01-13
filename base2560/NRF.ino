@@ -6,7 +6,7 @@ void NRF_listen() {
       BASE_processDataFromSensor();
     }
     //else {
-      // Corrupt payload has been flushed
+    // Corrupt payload has been flushed
     //}
     //radio.stopListening(); //не надо! СТОП только если хочешь write
     //radio.startListening();//не надо! СТАРТ один раз, когда объявил трубы
@@ -16,7 +16,7 @@ void NRF_listen() {
 
 void NRF_init() {
   radio.begin();
-  delay(100);  
+  delay(100);
   radio.setChannel(0x6D);
   radio.setRetries(15, 15);
   radio.setDataRate(RF24_1MBPS);
@@ -33,7 +33,7 @@ void NRF_init() {
   //radio.setPayloadSize(32); //32 bytes? Can corrupt "writeAckPayload"?
 
   radio.setAutoAck(true);//disallow RX send answer(acknoledgement) to TX (for ALL NRF_pipes?)
-  radio.enableAckPayload(); //only for 0,1 NRF_pipes?
+  //radio.enableAckPayload(); //custom ack //only for 0,1 NRF_pipes?
   ////radio.enableDynamicAck(); //for ALL NRF_pipes? Чтобы можно было вкл\выкл получение ACK?
 
   //radio.openReadingPipe(0, pipe0); 0 is SYSTEM, no reading
