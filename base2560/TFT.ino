@@ -122,12 +122,12 @@ void TFT_renderInfoLine() {
 
     if (gsm_BER_raw == 99) {
       myDisplay.setTextColor(ILI9341_RED);
-      myDisplay.setCursor(160, 32);
+      myDisplay.setCursor(160, 42);
       myDisplay.print("GSM ERROR UNKNOWN");
     }
     else {
       myDisplay.setTextColor(ILI9341_GREEN);
-      myDisplay.setCursor(160, 32);
+      myDisplay.setCursor(160, 42);
       myDisplay.print(gsm_BER_raw, DEC);
     }
   }

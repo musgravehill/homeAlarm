@@ -152,9 +152,9 @@ void GSM_checkIncomingCall() {
     s_tmp = GSM_answerCLIP.substring(8, 20); //+CLIP: "+7915977xxxx   //sub [from, until)
     for (uint8_t i = 0; i < GSM_phoneNums_count; i++) {
 #ifdef DEBUG
-      debugSerial.println("_" + s_tmp + "_" + String(i, DEC) + "_");
+      debugSerial.println("_" + String(s_tmp) + "_" + String(GSM_phoneNums[i]) + "_");
 #endif
-      if ( s_tmp == String(GSM_phoneNums[i]) ) {
+      if ( String(s_tmp) == String(GSM_phoneNums[i]) ) {
         gsmSerial.println("ATA");// respond to incoming call
 #ifdef DEBUG
         debugSerial.println("->GSM:ATA");
