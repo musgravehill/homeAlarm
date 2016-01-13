@@ -117,8 +117,8 @@ void GSM_initPhoneNums() {
         }
         if (chr == ',') {
           GSM_phoneNums_count++;
-          i++;     
-          GSM_phoneNums[i] = "";     
+          i++;
+          GSM_phoneNums[i] = "";
         }
       }
       SD_file.close();
@@ -150,16 +150,15 @@ void GSM_listenSerial() {
 
 void GSM_checkIncomingCall() {
   String s_tmp = "";
-  String phone = "";
-
-  phone = "+7915977xxxx";
   if (GSM_answerCLIP.length() > 20) {  //+CLIP: "+7915977xxxx",145,"",0,"",0\r\n
     s_tmp = GSM_answerCLIP.substring(8, 20); //+CLIP: "+7915977xxxx   //sub [from, until)
-    if ( s_tmp  == phone ) {
-      gsmSerial.println("ATA");// respond to incoming call
-      //#ifdef DEBUG
-      //debugSerial.println("->GSM:ATA");
-      //#endif
+    for (uint8_t i = 0; i < GSM_phoneNums_count; i++) {
+      if ( s_tmp  == GSM_phoneNums[i] ) {
+        gsmSerial.println("ATA");// respond to incoming call
+      }
+#ifdef DEBUG
+      debugSerial.println("_" + s_tmp + "=?=" + GSM_phoneNums[i] + "_" + );
+#endif
     }
   }
   GSM_answerCLIP = ""; //DONT SEND "ATA" AGAIN!
