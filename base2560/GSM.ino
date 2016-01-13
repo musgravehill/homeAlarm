@@ -138,7 +138,7 @@ void GSM_listenSerial() {
     else {
       strGsm += String((char)charFromGSM);
     }
-    if (stringFromGSM.length() > 64) {
+    if (strGsm.length() > 64) { //overflow
       strGsm = "";
     }
   }
@@ -159,8 +159,8 @@ void GSM_processSerialString(String s) {
   GSM_isNeedAnswerIncomingCall = false;
 
   //incoming call?  //+CLIP: "+7915977xxxx",145,"",0,"",0\r\n
-  if (s.length() > 19) {
-    String s_tmp = s.substring(0, 19); //+CLIP: "+7915977xxxx
+  if (s.length() > 20) {
+    String s_tmp = s.substring(0, 20); //+CLIP: "+7915977xxxx   //sub [from, until)
 #ifdef DEBUG
     debugSerial.println(s_tmp);
 #endif
@@ -171,7 +171,7 @@ void GSM_processSerialString(String s) {
     }
   }
 
-#ifdef DEBUG  
+#ifdef DEBUG
   debugSerial.println(s);
 #endif
 }
