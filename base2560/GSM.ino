@@ -1,4 +1,6 @@
 void GSM_init() {
+  gsmSerial.println("AT"); //synchronize baud rate. GSM by default in auto-baud mode, it will not output any until sync
+  delay(100);
   gsmSerial.println("ATE0"); //эхо выключено
   delay(100);
   gsmSerial.println("ATV0"); //возврат кода ответа только 0=OK 4=ERROR
