@@ -64,7 +64,7 @@ void GSM_sendDangers() {
 
 void GSM_sendSMS2All(String message) {
 #ifdef DEBUG
-  debugSerial.println("SMS DNGR SEND:");
+  debugSerial.print("SMS DNGR SEND:");
   debugSerial.println(message);
 #endif
   for (uint8_t i = 0; i < GSM_phoneNums_count; i++) {
@@ -82,7 +82,7 @@ void GSM_sendSMS(String message, String phone) {
   gsmSerial.print(message);
   delay(100);
   gsmSerial.print((char)26);
-  delay(1000);
+  delay(5000);
 }
 
 void GSM_cleanAllSMS() {

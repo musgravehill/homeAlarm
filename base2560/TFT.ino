@@ -133,10 +133,11 @@ void TFT_renderInfoLine() {
     }
   }
 
+  //phones
+  myDisplay.setTextColor(ILI9341_MAGENTA);
+  myDisplay.setCursor(2, 62);
   for (uint8_t i = 0; i < GSM_phoneNums_count; i++) {
-    myDisplay.setTextColor(ILI9341_ORANGE);
-    myDisplay.setCursor(160, 62);
-    myDisplay.print(GSM_phoneNums[i]+" ");
+    myDisplay.print(GSM_phoneNums[i] + " ");
   }
 
   //TODO
