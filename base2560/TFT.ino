@@ -53,7 +53,7 @@ void TFT_renderInfoLine() {
   myDisplay.setTextSize(2);
   //RTC
   DateTime now = RTC3231.now();
-  uint32_t nowUt = now.unixtime();
+  //uint32_t nowUt = now.unixtime();
   uint16_t yy =  now.year() - 2000;
   uint8_t mm = now.month();
   uint8_t dd =  now.day();

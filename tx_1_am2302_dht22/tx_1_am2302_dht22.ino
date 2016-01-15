@@ -32,6 +32,7 @@
 #define IM_SENSOR_NUM 1  //1..5
 #define NRF_CE_PIN 9
 #define NRF_CSN_PIN 10 //if use SPI, d10=hardware SS SPI only
+#define ACC_CONTROL_PIN_1V A0 //hardcoded in PCB voltage divider
 
 const uint64_t pipes[6] = {   //'static' - no need
   0xDEADBEEF00LL,  //pipe0 is SYSTEM_pipe, avoid openReadingPipe(0, );
@@ -51,6 +52,13 @@ void setup() {
   delay(2000);
   //Serial.begin(9600);
   NRF_init();
+
+  //use the 1.1 V internal reference => other A* can NOT receive VCC, only 1.1V max
+#if defined(__AVR_ATmega2560__)
+  analogReference(INTERNAL1V1);
+#else
+  analogReference(INTERNAL);
+#endif
 }
 
 void loop() {
@@ -65,12 +73,16 @@ void loop() {
 
 void sendDataToBase() {
   dht.setup(2); // data pin 2
-  //uint16_t batteryVoltage = random(0, 1023); //ADC 10 bit
+  // 1M, 470K divider across battery and using internal ADC ref of 1.1V
+  // Sense point is bypassed with 0.1 uF cap to reduce noise at that point
+  // ((1e6+470e3)/470e3)*1.1 = Vmax = 3.44 Volts
+  // 3.44/1023 = Volts per bit = 0.003363075
+  uint16_t batteryVoltage = 100 * 0.003363075 * analogRead(ACC_CONTROL_PIN_1V); // 100 * 3.24V = 324
   uint16_t humidity = (int) dht.getHumidity();
   uint16_t temperature = (int) dht.getTemperature();
 
   int16_t arrayToBase[7] = {
-    0,                  //V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V
+    batteryVoltage,     //100*V,** 0=null, voltage on sensor battery, 100*V
     temperature + 100,  //T   0=null, -50..120 [+100]   temperature, C
     humidity + 100,     //H   0=null, 0..100   [+100]   humidity, %
     0,                  //W   0=null, 100, 101          water leak, bool
@@ -126,7 +138,7 @@ void NRF_init() {
 }
 
 void NRF_sendData(int16_t* arrayToBase, uint8_t sizeofArrayToBase) {
-  
+
 
   //Serial.println("\r\n");
   //Serial.print("arr[");
@@ -148,19 +160,19 @@ void NRF_sendData(int16_t* arrayToBase, uint8_t sizeofArrayToBase) {
   //Stop listening for incoming messages, and switch to transmit mode.
   //Do this before calling write().
   NRF_radio.stopListening();
-  NRF_radio.write( arrayToBase, sizeofArrayToBase); 
+  NRF_radio.write( arrayToBase, sizeofArrayToBase);
   //& не надо, в ф-ю уже передал указатель, а не сам массив
 
-/*
-  uint8_t answerFromBase; //2^8 - 1   [0,255]
-  if ( NRF_radio.isAckPayloadAvailable() ) {
-    NRF_radio.read(&answerFromBase, sizeof(answerFromBase)); //приемник принял и ответил
+  /*
+    uint8_t answerFromBase; //2^8 - 1   [0,255]
+    if ( NRF_radio.isAckPayloadAvailable() ) {
+      NRF_radio.read(&answerFromBase, sizeof(answerFromBase)); //приемник принял и ответил
 
-    //Serial.print(F("__Received answer from Base: "));
-    //Serial.print(answerFromBase, DEC);
-    //Serial.print(F("\r\n"));
-  }
-*/
+      //Serial.print(F("__Received answer from Base: "));
+      //Serial.print(answerFromBase, DEC);
+      //Serial.print(F("\r\n"));
+    }
+  */
 
   delay(50);
   NRF_radio.powerDown();

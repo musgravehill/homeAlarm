@@ -28,7 +28,7 @@
     {DNGR;#1;T21;}
 
   command params
-    V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V
+    V   0=null, 100*V,**  voltage on sensor battery, 100*V
     T   0=null, -50..120 [+100]   temperature, C
     H   0=null, 0..100   [+100]   humidity, %
     W   0=null, 0=null, (0,1 + 100) = 100=normal, 101=alert         water leak, bool

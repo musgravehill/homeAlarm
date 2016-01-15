@@ -8,3 +8,5 @@ void RTC_setTime() {
   SYS_DS3231.setSecond(0);
   SYS_DS3231.enableOscillator(true, true, 0);
 }
+
+//TODO  SET DATETIME FROM SD: if isset dt.txt => read it & set RTC & delete file.

@@ -40,9 +40,9 @@ void GSM_sendDangers() {
   for (uint8_t sensorPipeNum = 1; sensorPipeNum < 6; sensorPipeNum++) {
     for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
       if (BASE_sensorParamsIsDanger[sensorPipeNum][paramNum]) {
-        SMS_dangers +=  "#" + String(sensorPipeNum, DEC) + ":";
+        SMS_dangers +=  "#" + String(sensorPipeNum, DEC) + " ";
         SMS_dangers +=  PARAMS_getVerbalParamName(paramNum) + "=";
-        SMS_dangers +=  String(BASE_sensorDecodedParams[sensorPipeNum][paramNum], DEC) + ";";
+        SMS_dangers +=  String(BASE_sensorDecodedParams[sensorPipeNum][paramNum], DEC) + " ";
         if (GSM_paramIsAllowSms(paramNum)) {
           isAllowSendSMS = true;
           GSM_paramPrevSMSMillis[paramNum] = millis();
@@ -56,7 +56,7 @@ void GSM_sendDangers() {
   }
 
 #ifdef DEBUG
-  debugSerial.print("SMS DNGR++: ");
+  debugSerial.print("SMS INIT: ");
   debugSerial.println(SMS_dangers);
 #endif
 
@@ -64,7 +64,7 @@ void GSM_sendDangers() {
 
 void GSM_sendSMS2All(String message) {
 #ifdef DEBUG
-  debugSerial.print("SMS DNGR SEND:");
+  debugSerial.print("SMS SEND:");
   debugSerial.println(message);
 #endif
   for (uint8_t i = 0; i < GSM_phoneNums_count; i++) {

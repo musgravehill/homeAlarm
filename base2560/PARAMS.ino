@@ -26,8 +26,8 @@ String PARAMS_getVerbalParamName(uint8_t paramNum) {
 int16_t PARAMS_decodeParam(uint8_t paramNum, int16_t paramVal_encoded) {
   int16_t paramVal_decoded = 0;
   switch (paramNum) {
-    case 0: //V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V
-      paramVal_decoded = paramVal_encoded - 1;
+    case 0: //0=null, 100*V,**  voltage on sensor battery, 100*V
+      paramVal_decoded = paramVal_encoded; //100*V , cannot use float
       break;
     case 1: //T   0=null, -50..120 [+100]   temperature, C
       paramVal_decoded = paramVal_encoded - 100;
@@ -54,8 +54,8 @@ int16_t PARAMS_decodeParam(uint8_t paramNum, int16_t paramVal_encoded) {
 bool PARAMS_isDangerParamValue(uint8_t paramNum, int16_t paramVal_decoded) {
   bool isDanger = false;
   switch (paramNum) {
-    case 0: //V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V
-      isDanger = (bool)( (paramVal_decoded < 3.0) || (paramVal_decoded > 3.63) );
+    case 0: //0=null, 100*V,**  voltage on sensor battery, 100*V
+      isDanger = (bool) (paramVal_decoded < 310) ; //100*V
       break;
     case 1: //T   0=null, -50..120 [+100]   temperature, C
       isDanger = (bool)( (paramVal_decoded < 15) || (paramVal_decoded > 28) );
