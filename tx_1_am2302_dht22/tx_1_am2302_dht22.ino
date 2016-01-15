@@ -9,13 +9,13 @@
 */
 /*
   command params
-    V   n, 0..5         voltage on sensor battery, V
-    T   n, -50..120     temperature, C
-    H   n, 0..100       humidity, %
-    W   n, 0, 1         water leak, bool
-    G   n, 0..1023 ADC  gas CH4, ADC value
-    M   n, 0, 1         motion detector, bool
-    C   n, 0..1023      gas CO, ADC value
+    //100*V.xx 0=null, voltage on sensor battery, 100*V
+    //T   0=null, -50..120 [+100]   temperature, C
+    //H   0=null, 0..100   [+100]   humidity, %
+    //W   0=null, 100, 101          water leak, bool
+    //G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
+    //M   0=null, 100, 101          motion detector, bool
+    //C   0=null, 0..1023 [+1]      gas CO, ADC value
 
   LOGS => log on SD only
   DNGR => log on SD & send SMS [danger]
@@ -54,6 +54,13 @@ void setup() {
   NRF_init();
 
   //use the 1.1 V internal reference => other A* can NOT receive VCC, only 1.1V max
+  /*
+    DEFAULT: опорное напряжение по умолчанию, равное 5 В (на 5В-платах Ардуино) или 3.3 В (на 3.3В-платах Ардуино)
+    INTERNAL: внутренне опорное напряжение, равное 1.1 В в микроконтроллерах ATmega168 и ATmega328, или 2.56 В в микроконтроллере ATmega8 (не доступно в Arduino Mega)
+    INTERNAL1V1: внутреннее опорное напряжение 1.1 В (только для Arduino Mega)
+    INTERNAL2V56: внутреннее опорное напряжение 2.56 В (только для Arduino Mega)
+    EXTERNAL: в качестве опорного напряжения будет использоваться напряжение, приложенное к выводу AREF (от 0 до 5В)
+  */
 #if defined(__AVR_ATmega2560__)
   analogReference(INTERNAL1V1);
 #else
@@ -82,7 +89,7 @@ void sendDataToBase() {
   uint16_t temperature = (int) dht.getTemperature();
 
   int16_t arrayToBase[7] = {
-    batteryVoltage,     //100*V,** 0=null, voltage on sensor battery, 100*V
+    batteryVoltage,     //100*V.xx 0=null, voltage on sensor battery, 100*V
     temperature + 100,  //T   0=null, -50..120 [+100]   temperature, C
     humidity + 100,     //H   0=null, 0..100   [+100]   humidity, %
     0,                  //W   0=null, 100, 101          water leak, bool

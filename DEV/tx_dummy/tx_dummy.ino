@@ -1,6 +1,7 @@
 /*
   ardu_328
   nrf24l01+
+  dht22
 */
 /* Defined constants in arduino don't take up any program memory space on the chip.
   The compiler will replace references to these constants with the defined value
@@ -8,13 +9,13 @@
 */
 /*
   command params
-    V   n, 0..5         voltage on sensor battery, V
-    T   n, -50..120     temperature, C
-    H   n, 0..100       humidity, %
-    W   n, 0, 1         water leak, bool
-    G   n, 0..1023 ADC  gas CH4, ADC value
-    M   n, 0, 1         motion detector, bool
-    C   n, 0..1023      gas CO, ADC value
+    //100*V,xx 0=null, voltage on sensor battery, 100*V
+    //T   0=null, -50..120 [+100]   temperature, C
+    //H   0=null, 0..100   [+100]   humidity, %
+    //W   0=null, 100, 101          water leak, bool
+    //G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
+    //M   0=null, 100, 101          motion detector, bool
+    //C   0=null, 0..1023 [+1]      gas CO, ADC value
 
   LOGS => log on SD only
   DNGR => log on SD & send SMS [danger]
@@ -62,7 +63,7 @@ void loop() {
 
 void sendDataToBase() {
   int16_t arrayToBase[7] = {
-    0,                  //V   0=null, 0..1023 [+1] ADC  voltage on sensor battery, V
+    320,                  //100*V.xx  0=null, voltage on sensor battery
     0,  //T   0=null, -50..120 [+100]   temperature, C
     0,     //H   0=null, 0..100   [+100]   humidity, %
     101,                  //W   0=null, 100, 101          water leak, bool

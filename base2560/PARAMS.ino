@@ -26,7 +26,7 @@ String PARAMS_getVerbalParamName(uint8_t paramNum) {
 int16_t PARAMS_decodeParam(uint8_t paramNum, int16_t paramVal_encoded) {
   int16_t paramVal_decoded = 0;
   switch (paramNum) {
-    case 0: //0=null, 100*V,**  voltage on sensor battery, 100*V
+    case 0: //0=null, 100*V.**  voltage on sensor battery, 100*V
       paramVal_decoded = paramVal_encoded; //100*V , cannot use float
       break;
     case 1: //T   0=null, -50..120 [+100]   temperature, C
