@@ -142,7 +142,7 @@ void TFT_renderInfoLine() {
 
   //TODO
   //voltage base, acc
-  //gsm signal bar
+  
 }
 
 void TFT_renderSensors() {
