@@ -207,7 +207,7 @@ void TFT_renderSensors() {
         if (BASE_sensorParamsIsDanger[sensorPipeNum][paramNum]) {
           myDisplay.setTextColor(ILI9341_RED);
         } else {
-          myDisplay.setTextColor(ILI9341_OLIVE);
+          myDisplay.setTextColor(ILI9341_GREEN);
         }
         myDisplay.setCursor( (2 + 40 + 40 * paramNum), (2 + 40 * sensorPipeNum) );
         if (BASE_sensorDecodedParams[sensorPipeNum][paramNum] > 99) {
