@@ -15,7 +15,10 @@ void SD_log(String data) {
     uint8_t mm = now.month();
     uint8_t dd =  now.day();
 
-    String filename_s = String(dd, DEC) + "." + String(mm, DEC) + "." + String(yy, DEC) + ".csv";
+    String filename_s = ((dd < 10) ? "0" : "") + String(dd, DEC) + ".";
+    filename_s +=  ((mm < 10) ? "0" : "") + String(mm, DEC) + ".";
+    filename_s += ((yy < 10) ? "0" : "") + String(yy, DEC);
+    filename_s += ".csv";
     char filename_chr[filename_s.length() + 1];
     filename_s.toCharArray(filename_chr, sizeof(filename_chr));
 
@@ -34,12 +37,22 @@ void SD_logIncomingCall(String phone) {
     uint16_t yy =  now.year() - 2000;
     uint8_t mm = now.month();
     uint8_t dd =  now.day();
+    uint8_t hh =  now.hour();
+    uint8_t ii =  now.minute();
+
     String filename_s = "incall.csv";
     char filename_chr[filename_s.length() + 1];
     filename_s.toCharArray(filename_chr, sizeof(filename_chr));
     // 8.3 filename.ext rule
     if (SD_file.open( filename_chr, O_WRITE | O_CREAT | O_APPEND)) {
-      SD_file.println(phone + ";" +  String(dd, DEC) + "-" + String(mm, DEC) + "-" + String(yy, DEC) + ";");
+      String data = phone + ";";
+      data += ((dd < 10) ? "0" : "") + String(dd, DEC) + ".";
+      data += ((mm < 10) ? "0" : "") + String(mm, DEC) + ".";
+      data += ((yy < 10) ? "0" : "") + String(yy, DEC) + " ";
+      data += ((hh < 10) ? "0" : "") + String(hh, DEC) + ":";
+      data += ((ii < 10) ? "0" : "") + String(ii, DEC) + ";";
+
+      SD_file.println(data);
       SD_file.close();
     }
   }
