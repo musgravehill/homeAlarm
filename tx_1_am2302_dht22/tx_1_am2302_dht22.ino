@@ -61,14 +61,14 @@ void setup() {
     INTERNAL2V56: внутреннее опорное напряжение 2.56 В (только для Arduino Mega)
     EXTERNAL: в качестве опорного напряжения будет использоваться напряжение, приложенное к выводу AREF (от 0 до 5В)
   */
- // analogReference(INTERNAL); I NEED 470k RESISITOR SMD => GET IT FROM ALI
+  // analogReference(INTERNAL); I NEED 470k RESISITOR SMD => GET IT FROM ALI
 }
 
 void loop() {
   LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
   LP_counterSleep_8s++;
 
-  if (LP_counterSleep_8s > 1) {
+  if (LP_counterSleep_8s > 20) {
     LP_counterSleep_8s = 0;
     sendDataToBase();
   }
@@ -98,8 +98,10 @@ void sendDataToBase() {
   //Serial.print("% \t t=");
   //Serial.print(temperature);
   //Serial.println(" ");
+  if ((temperature != 0) || (humidity != 0)) {
+    NRF_sendData(arrayToBase, sizeof(arrayToBase));
+  }
 
-  NRF_sendData(arrayToBase, sizeof(arrayToBase));
 }
 
 

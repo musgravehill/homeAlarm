@@ -238,6 +238,7 @@ void BASE_processDataFromSensor() {
     //param NOT available
     else {
       string_logs += String((char)paramCode[paramNum]) +  ";;";
+      string_dangers += String((char)paramCode[paramNum]) + ";;";
       BASE_sensorParamsIsAvailable[NRF_currPipeNum][paramNum] = false;
     }
   }
