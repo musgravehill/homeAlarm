@@ -28,6 +28,7 @@ void SD_log(String data) {
       SD_file.close();
     }
   }
+  delay(500);
 }
 
 void SD_logIncomingCall(String phone) {
@@ -56,5 +57,6 @@ void SD_logIncomingCall(String phone) {
       SD_file.close();
     }
   }
+  delay(500);
 }
 

@@ -224,7 +224,7 @@ void BASE_processDataFromSensor() {
 
       //param is danger
       if (PARAMS_isDangerParamValue(paramNum, paramVal_decoded)) {
-        string_dangers += "DNGR;#" + String(NRF_currPipeNum, DEC) + ";";
+        string_dangers = "DNGR;#" + String(NRF_currPipeNum, DEC) + ";";
         string_dangers += String((char)paramCode[paramNum]) + ";";
         string_dangers += String(paramVal_decoded, DEC) + ";" + hhii + ";";
         SD_log(string_dangers);
@@ -241,7 +241,7 @@ void BASE_processDataFromSensor() {
     }
   }
 
-  string_logs += ";" + hhii + ";";
+  string_logs += hhii + ";";
   SD_log(string_logs);
   GSM_sendDangers();
 
