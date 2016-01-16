@@ -205,9 +205,10 @@ void loop() {
 void BASE_processDataFromSensor() {
   millisPrevSignal_sensors[NRF_currPipeNum] =  millis(); //save time of sensor answer
   String string_logs = "LOGS;#" + String(NRF_currPipeNum, DEC) + ";";
-  String string_dangers = "";
+  String string_dangers = "DNGR;#" + String(NRF_currPipeNum, DEC) + ";";
   const char paramCode[] = {'V', 'T', 'H', 'W', 'G', 'M', 'C'};
   int16_t paramVal_decoded;
+  bool issetDangers = false;
 
   DateTime now = RTC3231.now();
   uint8_t hh =  now.hour();
@@ -224,13 +225,13 @@ void BASE_processDataFromSensor() {
 
       //param is danger
       if (PARAMS_isDangerParamValue(paramNum, paramVal_decoded)) {
-        string_dangers = "DNGR;#" + String(NRF_currPipeNum, DEC) + ";";
+        issetDangers = true;
         string_dangers += String((char)paramCode[paramNum]) + ";";
-        string_dangers += String(paramVal_decoded, DEC) + ";" + hhii + ";";
-        SD_log(string_dangers);
+        string_dangers += String(paramVal_decoded, DEC) + ";";
         BASE_sensorParamsIsDanger[NRF_currPipeNum][paramNum] = true;
       }
       else {
+        string_dangers += String((char)paramCode[paramNum]) + ";;";
         BASE_sensorParamsIsDanger[NRF_currPipeNum][paramNum] = false;
       }
     }
@@ -243,6 +244,10 @@ void BASE_processDataFromSensor() {
 
   string_logs += hhii + ";";
   SD_log(string_logs);
+  if (issetDangers) {
+    string_dangers += hhii + ";";
+    SD_log(string_dangers);
+  }
   GSM_sendDangers();
 
 #ifdef DEBUG
