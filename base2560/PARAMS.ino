@@ -52,7 +52,7 @@ int16_t PARAMS_decodeParam(uint8_t paramNum, int16_t paramVal_encoded) {
 }
 
 bool PARAMS_isDangerParamValue(uint8_t paramNum, int16_t paramVal_decoded) {
-  bool isDanger = false;
+  bool isDanger = false;  
   switch (paramNum) {
     case 0: //0=null, 100*V,**  voltage on sensor battery, 100*V
       isDanger = (bool) (paramVal_decoded < 310) ; //100*V
