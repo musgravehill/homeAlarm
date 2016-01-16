@@ -107,7 +107,7 @@ uint8_t TFT_pinLedPower = 42;
 RTClib RTC3231;
 DS3231 SYS_DS3231;
 
-uint16_t BASE_sensorSilenceFaultMillis = 300000; //сенсор молчит более millis => он сломался
+uint32_t BASE_sensorSilenceFaultMillis = 300000; //сенсор молчит более millis => он сломался
 bool BASE_sensorIsOn[6] = {false}; //0 1..5
 int16_t BASE_sensorDecodedParams[6][7] = {0}; //encoded params; 0==null;  [sensorNum][paramNum]
 bool BASE_sensorParamsIsDanger[6][7] = {true}; //[sensorPipeNum][paramNum]
@@ -269,6 +269,14 @@ void BASE_checkSensorsFault() {
 #endif
     if (deltaSignal > BASE_sensorSilenceFaultMillis) {
       BASE_sensorIsOn[sensorPipeNum] = false; //sensor fault
+#ifdef DEBUG
+      debugSerial.print("fault:");
+      debugSerial.print(sensorPipeNum, DEC);
+      debugSerial.print("_");
+      debugSerial.print(deltaSignal, DEC);
+      debugSerial.print(">");
+      debugSerial.println(BASE_sensorSilenceFaultMillis, DEC);
+#endif
     }
     else {
       BASE_sensorIsOn[sensorPipeNum] = true; //sensor ok
