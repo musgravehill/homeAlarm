@@ -1,3 +1,6 @@
+//TODO
+// 0. CALL => save phone to SD
+
 /*
   base with NRF, GSM, SD, RTC, TFT
   MEGA_2560 3.6V 16MHz => no level-shifters
