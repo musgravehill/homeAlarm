@@ -142,7 +142,7 @@ void TFT_renderInfoLine() {
 
   //TODO
   //voltage base, acc
-  
+
 }
 
 void TFT_renderSensors() {
@@ -192,12 +192,13 @@ void TFT_renderSensors() {
   //data
   for (uint8_t sensorPipeNum = 1; sensorPipeNum < 6; sensorPipeNum++) { //SENSORS PIPES 1..5!
     //sensor num
+    myDisplay.setCursor( 4, (4 + sensorPipeNum * 40));
     if (BASE_sensorIsOn[sensorPipeNum]) {
-      myDisplay.setTextColor(ILI9341_BLUE);
+      myDisplay.setTextColor(ILI9341_GREENYELLOW);
+      myDisplay.print(" ");
     } else {
       myDisplay.setTextColor(ILI9341_DARKGREY);
     }
-    myDisplay.setCursor( 4, (4 + sensorPipeNum * 40));
     myDisplay.print(sensorPipeNum, DEC);
 
     //params
