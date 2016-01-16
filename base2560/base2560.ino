@@ -104,7 +104,7 @@ uint8_t TFT_pinLedPower = 42;
 RTClib RTC3231;
 DS3231 SYS_DS3231;
 
-uint16_t BASE_sensorSilenceFaultTime = 10000; //сенсор молчит более 10s => он сломался
+uint16_t BASE_sensorSilenceFaultMillis = 300000; //сенсор молчит более 10s => он сломался
 bool BASE_sensorIsOn[6] = {false}; //0 1..5
 int16_t BASE_sensorDecodedParams[6][7] = {0}; //encoded params; 0==null;  [sensorNum][paramNum]
 bool BASE_sensorParamsIsDanger[6][7] = {true}; //[sensorPipeNum][paramNum]
@@ -245,7 +245,7 @@ void BASE_checkSensorsFault() {
   uint32_t millisCurrSignal = millis();
   for (uint8_t sensorPipeNum = 1; sensorPipeNum < 6; sensorPipeNum++) { //SENSORS PIPES 1..5!
     int32_t deltaSignal = millisCurrSignal - millisPrevSignal_sensors[sensorPipeNum];
-    if (deltaSignal >  BASE_sensorSilenceFaultTime) {
+    if (deltaSignal >  BASE_sensorSilenceFaultMillis) {
       BASE_sensorIsOn[sensorPipeNum] = false; //sensor fault
     }
     else {

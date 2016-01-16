@@ -61,11 +61,7 @@ void setup() {
     INTERNAL2V56: внутреннее опорное напряжение 2.56 В (только для Arduino Mega)
     EXTERNAL: в качестве опорного напряжения будет использоваться напряжение, приложенное к выводу AREF (от 0 до 5В)
   */
-#if defined(__AVR_ATmega2560__)
-  analogReference(INTERNAL1V1);
-#else
-  analogReference(INTERNAL);
-#endif
+ // analogReference(INTERNAL); I NEED 470k RESISITOR SMD => GET IT FROM ALI
 }
 
 void loop() {
@@ -89,7 +85,7 @@ void sendDataToBase() {
   uint16_t temperature = (int) dht.getTemperature();
 
   int16_t arrayToBase[7] = {
-    batteryVoltage,     //100*V.xx 0=null, voltage on sensor battery, 100*V
+    0,     //100*V.xx 0=null, voltage on sensor battery, 100*V
     temperature + 100,  //T   0=null, -50..120 [+100]   temperature, C
     humidity + 100,     //H   0=null, 0..100   [+100]   humidity, %
     0,                  //W   0=null, 100, 101          water leak, bool
