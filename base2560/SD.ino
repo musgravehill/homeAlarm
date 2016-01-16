@@ -26,3 +26,22 @@ void SD_log(String data) {
     }
   }
 }
+
+void SD_logIncomingCall(String phone) {
+  if (SD_isEnable) {
+    DateTime now = RTC3231.now();
+    //uint32_t nowUt = now.unixtime();
+    uint16_t yy =  now.year() - 2000;
+    uint8_t mm = now.month();
+    uint8_t dd =  now.day();
+    String filename_s = "incall.csv";
+    char filename_chr[filename_s.length() + 1];
+    filename_s.toCharArray(filename_chr, sizeof(filename_chr));
+    // 8.3 filename.ext rule
+    if (SD_file.open( filename_chr, O_WRITE | O_CREAT | O_APPEND)) {
+      SD_file.println(phone + ";" +  String(dd, DEC) + "-" + String(mm, DEC) + "-" + String(yy, DEC) + ";");
+      SD_file.close();
+    }
+  }
+}
+

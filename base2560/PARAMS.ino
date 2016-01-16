@@ -61,7 +61,7 @@ bool PARAMS_isDangerParamValue(uint8_t paramNum, int16_t paramVal_decoded) {
       isDanger = (bool)( (paramVal_decoded < 15) || (paramVal_decoded > 28) );
       break;
     case 2: //H   0=null, 0..100   [+100]   humidity, %
-      isDanger = (bool)( (paramVal_decoded < 5) || (paramVal_decoded > 40) );
+      isDanger = (bool)( (paramVal_decoded < 5) || (paramVal_decoded > 60) );
       break;
     case 3: //W   0=null, 100=ok 101=alert         water leak, bool
       isDanger = (bool)( paramVal_decoded == 1 );
