@@ -44,7 +44,6 @@ const uint64_t pipes[6] = {   //'static' - no need
 RF24 NRF_radio(NRF_CE_PIN, NRF_CSN_PIN);
 
 uint16_t LP_counterSleep_8s = 0;
-DHT dht;
 
 void setup() {
   delay(2000);
