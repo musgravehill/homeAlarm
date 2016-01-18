@@ -68,7 +68,7 @@ void loop() {
   LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
   LP_counterSleep_8s++;
 
-  if (LP_counterSleep_8s > 20) {
+  if (LP_counterSleep_8s >= 8) {
     LP_counterSleep_8s = 0;
     sendDataToBase();
   }
