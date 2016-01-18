@@ -19,7 +19,7 @@ void GSM_init() {
 }
 
 bool GSM_paramIsAllowSms(uint8_t paramNum) {
-  if (GSM_paramPrevSMSMillis[paramNum] == 0) {
+  if (GSM_paramPrevSMSMillis[paramNum] == 1) {
     return true;
   }
   if ( (millis() - GSM_paramPrevSMSMillis[paramNum]) >  GSM_periodParamAllowSMSMillis[paramNum]) {
