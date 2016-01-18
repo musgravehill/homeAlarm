@@ -1,5 +1,5 @@
 //TODO
-// 0. CALL => save phone to SD
+// 0. 
 
 /*
   base with NRF, GSM, SD, RTC, TFT

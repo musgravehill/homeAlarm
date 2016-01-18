@@ -58,25 +58,26 @@ void setup() {
     INTERNAL2V56: внутреннее опорное напряжение 2.56 В (только для Arduino Mega)
     EXTERNAL: в качестве опорного напряжения будет использоваться напряжение, приложенное к выводу AREF (от 0 до 5В)
   */
-   analogReference(INTERNAL); 
+  analogReference(INTERNAL);
 }
 
 void loop() {
   LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
   LP_counterSleep_8s++;
 
-  if (LP_counterSleep_8s >= 8) {
+  if (LP_counterSleep_8s >= 1) {
     LP_counterSleep_8s = 0;
     sendDataToBase();
   }
 }
 
-void sendDataToBase() {  
+void sendDataToBase() {
   // 1M, 470K divider across battery and using internal ADC ref of 1.1V
   // Sense point is bypassed with 0.1 uF cap to reduce noise at that point
   // ((1e6+470e3)/470e3)*1.1 = Vmax = 3.44 Volts
   // 3.44/1023 = Volts per bit = 0.003363075
-  uint16_t batteryVoltage = 100 * 0.003363075 * analogRead(ACC_CONTROL_PIN_1V); // 100 * 3.24V = 324
+  delay(1000); //voltage fluctuation on ADC  
+  uint16_t batteryVoltage =  100 * 0.00330 * analogRead(ACC_CONTROL_PIN_1V); // 100 * 3.24V = 324
 
   int16_t arrayToBase[7] = {
     batteryVoltage,     //100*V.xx 0=null, voltage on sensor battery, 100*V
@@ -92,7 +93,7 @@ void sendDataToBase() {
 }
 
 
-void NRF_init() { 
+void NRF_init() {
   delay(50);
   NRF_radio.begin();
   delay(100);
