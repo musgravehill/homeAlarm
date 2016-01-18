@@ -69,7 +69,7 @@ void TFT_renderInfoLine() {
   infoLine += ((H < 10) ? "0" : "") + String(H, DEC) + ":" ;
   infoLine += ((i < 10) ? "0" : "") + String(i, DEC);
   myDisplay.print(infoLine);
-  myDisplay.setTextColor(ILI9341_PURPLE);
+  myDisplay.setTextColor(ILI9341_GREEN);
   infoLine = "  " + String(((int) temperature), DEC) + "C";
   myDisplay.print(infoLine);
 
@@ -165,34 +165,34 @@ void TFT_renderSensors() {
   myDisplay.setTextColor(ILI9341_WHITE);
   myDisplay.setTextSize(2);
 
-  myDisplay.setCursor(4, 8);
+  myDisplay.setCursor(4, 16);
   myDisplay.print("#");
 
-  myDisplay.setCursor(44, 8);
+  myDisplay.setCursor(44, 16);
   myDisplay.print("V");
 
-  myDisplay.setCursor(84, 8);
+  myDisplay.setCursor(84, 16);
   myDisplay.print("T");
 
-  myDisplay.setCursor(124, 8);
+  myDisplay.setCursor(124, 16);
   myDisplay.print("H");
 
-  myDisplay.setCursor(164, 8);
+  myDisplay.setCursor(164, 16);
   myDisplay.print("WL");
 
-  myDisplay.setCursor(204, 8);
+  myDisplay.setCursor(204, 16);
   myDisplay.print("CH4");
 
-  myDisplay.setCursor(244, 8);
+  myDisplay.setCursor(244, 16);
   myDisplay.print("MD");
 
-  myDisplay.setCursor(284, 8);
+  myDisplay.setCursor(284, 16);
   myDisplay.print("CO");
 
   //data
   for (uint8_t sensorPipeNum = 1; sensorPipeNum < 6; sensorPipeNum++) { //SENSORS PIPES 1..5!
     //sensor num
-    myDisplay.setCursor( 4, (8 + sensorPipeNum * 40));
+    myDisplay.setCursor( 4, (16 + sensorPipeNum * 40));
     if (BASE_sensorIsOn[sensorPipeNum]) {
       myDisplay.setTextColor(ILI9341_GREENYELLOW);
       myDisplay.print(" ");
@@ -209,8 +209,8 @@ void TFT_renderSensors() {
         } else {
           myDisplay.setTextColor(ILI9341_GREEN);
         }
-        myDisplay.setCursor( (2 + 40 + 40 * paramNum), (8 + 40 * sensorPipeNum) );
-        if (BASE_sensorDecodedParams[sensorPipeNum][paramNum] > 99) {
+        myDisplay.setCursor( (6 + 40 + 40 * paramNum), (16 + 40 * sensorPipeNum) );
+        if (abs(BASE_sensorDecodedParams[sensorPipeNum][paramNum] > 99)) {
           myDisplay.setTextSize(1);
         }
         else {

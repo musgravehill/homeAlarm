@@ -65,7 +65,7 @@ void loop() {
   LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
   LP_counterSleep_8s++;
 
-  if (LP_counterSleep_8s >= 1) {
+  if (LP_counterSleep_8s >= 8) {
     LP_counterSleep_8s = 0;
     sendDataToBase();
   }
@@ -76,8 +76,8 @@ void sendDataToBase() {
   // Sense point is bypassed with 0.1 uF cap to reduce noise at that point
   // ((1e6+470e3)/470e3)*1.1 = Vmax = 3.44 Volts
   // 3.44/1023 = Volts per bit = 0.003363075
-  delay(1000); //voltage fluctuation on ADC  
-  uint16_t batteryVoltage =  100 * 0.00330 * analogRead(ACC_CONTROL_PIN_1V); // 100 * 3.24V = 324
+  delay(50); //voltage fluctuation on ADC  
+  uint16_t batteryVoltage =  0.3305 * analogRead(ACC_CONTROL_PIN_1V); // 100 * 3.24V = 324
 
   int16_t arrayToBase[7] = {
     batteryVoltage,     //100*V.xx 0=null, voltage on sensor battery, 100*V
