@@ -58,7 +58,7 @@ void setup() {
     INTERNAL2V56: внутреннее опорное напряжение 2.56 В (только для Arduino Mega)
     EXTERNAL: в качестве опорного напряжения будет использоваться напряжение, приложенное к выводу AREF (от 0 до 5В)
   */
-  // analogReference(INTERNAL); I NEED 470k RESISITOR SMD => GET IT FROM ALI
+   analogReference(INTERNAL); 
 }
 
 void loop() {
@@ -80,7 +80,7 @@ void sendDataToBase() {
 
 
   int16_t arrayToBase[7] = {
-    0,     //100*V.xx 0=null, voltage on sensor battery, 100*V
+    batteryVoltage,     //100*V.xx 0=null, voltage on sensor battery, 100*V
     0,  //T   0=null, -50..120 [+100]   temperature, C
     0,     //H   0=null, 0..100   [+100]   humidity, %
     100,                  //W   0=null, 100, 101          water leak, bool
