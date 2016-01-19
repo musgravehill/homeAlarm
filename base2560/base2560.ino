@@ -1,5 +1,5 @@
 //TODO
-// 0. 
+// 0.
 
 /*
   base with NRF, GSM, SD, RTC, TFT
@@ -177,6 +177,10 @@ void setup() {
   SD_init();
   delay(50);
 
+  
+  RTC_init();
+  RTC_setTimeFromSD();
+  delay(50);
   //RTC_setTime();
 
   GSM_initPhoneNums();
