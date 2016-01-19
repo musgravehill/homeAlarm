@@ -43,7 +43,9 @@ void RTC_setTimeFromSD() {
         }
       }
       SD_file.close();
+      SD_file.remove();
     }
+
   }
 }
 
