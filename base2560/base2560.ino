@@ -59,9 +59,9 @@ Encoder myEncoder(2, 3);
 #include <SdFat.h>
 #include <SdFatUtil.h>
 //SD_SPI_CONFIGURATION >= 3  // Must be set in SdFat/SdFatConfig.h
-SdFatSoftSpi<12, 11, 13> SD_card; //12 MISO, 11 MOSI, 13 SCK
+SdFatSoftSpi<10, 12, 11> SD_card; //MISO, MOSI, SCK
 SdFile SD_file;
-const uint8_t SD_CS = 10;
+const uint8_t SD_CS = 13;
 bool SD_isEnable = false;
 
 //NRF: 49 CE, 50 MISO, 51 MOSI, 52 SCK, 53 SS
@@ -94,14 +94,14 @@ uint64_t millisPrevSignal_sensors[6] = {1}; // pipe 0..5
 
 RF24 radio(NRF_CE_PIN, NRF_CSN_PIN);
 
-#define TFT_CS 43
+#define TFT_CS 48
 #define TFT_DC 44
-#define TFT_MOSI 45
-#define TFT_CLK 46
-#define TFT_RST 47
-#define TFT_MISO 48
+#define TFT_MOSI 42
+#define TFT_CLK 40
+#define TFT_RST 46
+#define TFT_MISO 36
 Adafruit_ILI9341 myDisplay = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_MOSI, TFT_CLK, TFT_RST, TFT_MISO);
-uint8_t TFT_pinLedPower = 42;
+uint8_t TFT_pinLedPower = 38;
 
 //RTC I2C: 20 SDA, 21 SCL
 RTClib RTC3231;
@@ -142,7 +142,7 @@ bool BASE_buzzerIsNeed = true;
 uint8_t BASE_voltagePin = A0; //TODO ADC AREF set to inner 1.1V and make -R-R- voltage divider
 
 //menu
-int8_t MENU_state = 0;
+int8_t MENU_state = 8;
 
 #define DEBUG 1;
 
@@ -181,7 +181,7 @@ void setup() {
   RTC_init();
   RTC_setTimeFromSD();
   delay(50);
-  //RTC_setTime();
+  RTC_setTime();
 
   GSM_initPhoneNums();
 
