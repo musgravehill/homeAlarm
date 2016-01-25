@@ -1,14 +1,14 @@
 void RTC_init() {
   SYS_DS3231.enableOscillator(true, true, 0);
-  SYS_DS3231.setClockMode(false); // Set 12/24h mode. True is 12-h, false is 24-hour.
+  SYS_DS3231.setClockMode(true); //ERROR? true=24 false=12? // Set 12/24h mode. True is 12-h, false is 24-hour.
   delay(20);
 }
 void RTC_setTime() {
   SYS_DS3231.setYear(16);
   SYS_DS3231.setMonth(1);
   SYS_DS3231.setDate(25);
-  SYS_DS3231.setHour(21);
-  SYS_DS3231.setMinute(31);
+  SYS_DS3231.setHour(22);
+  SYS_DS3231.setMinute(17);
   SYS_DS3231.setSecond(0);
   SYS_DS3231.setDoW(2); //Sets the Day of the Week (1-7);
 }
