@@ -201,7 +201,7 @@ void setup() {
   }
 #endif
 
-  wdt_enable (WDTO_8S);
+  wdt_enable (WDTO_8S); //if WDT not reset on 8s => atmega restarts
 
 }
 
