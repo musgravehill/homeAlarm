@@ -42,7 +42,7 @@
   LOGS => log on SD only
   DNGR => log on SD & send SMS [danger]
 */
-// [A0 voltage 1.1V] [2,3 ENCODER] [10,11,12,13 SD_softSPI] [20,21 RTC_i2c] [42 TFT_LED] [43,44,45,46,47,48 TFT_softSPI] [49,50,51,52,53 NRF_hwSPI]
+// [A0, A1] [2,3 ENCODER] [10,11,12,13 SD_softSPI] [20,21 RTC_i2c] [38 TFT_LED] [36,40,42,44,46,48 TFT_softSPI] [49,50,51,52,53 NRF_hwSPI]
 
 #include <SPI.h>
 #include <nRF24L01.h>
@@ -142,7 +142,7 @@ bool BASE_buzzerIsNeed = true;
 uint8_t BASE_voltagePin = A0; //TODO ADC AREF set to inner 1.1V and make -R-R- voltage divider
 
 //menu
-int8_t MENU_state = 8;
+int8_t MENU_state = 0;
 
 #define DEBUG 1;
 
