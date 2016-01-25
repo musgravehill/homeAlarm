@@ -18,7 +18,7 @@ void STATEMACHINE_loop() {
   }
 }
 
-void STATEMACHINE_1s() {
+void STATEMACHINE_1s() {  
   TFT_initLED();
   GSM_listenSerial();
   GSM_checkIncomingCall();

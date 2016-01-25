@@ -77,17 +77,19 @@ void GSM_sendSMS2All(String message) {
 
 void GSM_sendSMS(String message, String phone) {
   //TODO delete delay, use state machine
+  wdt_reset();
   gsmSerial.println("AT+CMGS=\"" + phone + "\"");
   delay(1000);
   gsmSerial.print(message);
   delay(100);
   gsmSerial.print((char)26);
+  wdt_reset();
   delay(5000);
 }
 
 void GSM_cleanAllSMS() {
   gsmSerial.println("AT+CMGD=1,4"); //clean ALL SMS (in, out, read, unread, sent, unsent)
-  delay(1000);
+  delay(1000);  
 }
 
 void GSM_initPhoneNums() {

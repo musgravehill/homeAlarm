@@ -149,7 +149,10 @@ int8_t MENU_state = 0;
 #define debugSerial Serial
 #define gsmSerial Serial1
 
+#include <avr/wdt.h>
+
 void setup() {
+  wdt_disable();
   delay(2000); //for calming current & voltage fluctuations
 
 #ifdef DEBUG
@@ -177,11 +180,11 @@ void setup() {
   SD_init();
   delay(50);
 
-  
+
   RTC_init();
   RTC_setTimeFromSD();
   delay(50);
-  RTC_setTime();
+  //RTC_setTime();
 
   GSM_initPhoneNums();
 
@@ -198,9 +201,12 @@ void setup() {
   }
 #endif
 
+  wdt_enable (WDTO_8S);
+
 }
 
 void loop() {
+  wdt_reset();
   NRF_listen();
   ENCODER_read();
   STATEMACHINE_loop();
@@ -266,10 +272,10 @@ void BASE_checkSensorsFault() {
   for (uint8_t sensorPipeNum = 1; sensorPipeNum < 6; sensorPipeNum++) { //SENSORS PIPES 1..5!
     int32_t deltaSignal = millisCurrSignal - millisPrevSignal_sensors[sensorPipeNum];
 #ifdef DEBUG
-    debugSerial.print("deltas:");
-    debugSerial.print(sensorPipeNum, DEC);
-    debugSerial.print("_");
-    debugSerial.println(deltaSignal, DEC);
+    //debugSerial.print("deltas:");
+    //debugSerial.print(sensorPipeNum, DEC);
+    //debugSerial.print("_");
+    //debugSerial.println(deltaSignal, DEC);
 #endif
     if (deltaSignal > BASE_sensorSilenceFaultMillis) {
       BASE_sensorIsOn[sensorPipeNum] = false; //sensor fault
