@@ -61,14 +61,15 @@ void setup() {
     INTERNAL2V56: внутреннее опорное напряжение 2.56 В (только для Arduino Mega)
     EXTERNAL: в качестве опорного напряжения будет использоваться напряжение, приложенное к выводу AREF (от 0 до 5В)
   */
-   analogReference(INTERNAL);
+   analogReference(INTERNAL);  
 }
 
 void loop() {
+  //Serial.flush(); //the system is going to sleep while it's still sending the serial data.
   LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
   LP_counterSleep_8s++;
 
-  if (LP_counterSleep_8s >= 8) {
+  if (LP_counterSleep_8s >= 5) {
     LP_counterSleep_8s = 0;
     sendDataToBase();
   }

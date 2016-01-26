@@ -46,20 +46,22 @@ RF24 NRF_radio(NRF_CE_PIN, NRF_CSN_PIN);
 uint16_t LP_counterSleep_8s = 0;
 
 void setup() {
-  delay(2000);
+  delay(500);
   Serial.begin(9600);
-  NRF_init();
-  Serial.println(MCUSR); //flags
-  Serial.println(WDTCSR);
+  delay(500);
+  //NRF_init();  
+  Serial.println("Setup...");
 }
 
-void loop() {
-  LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
+void loop() {  
+  LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF); 
+  //delay(1000); 
   LP_counterSleep_8s++;
 
   if (LP_counterSleep_8s >= 0) {
     LP_counterSleep_8s = 0;
-    sendDataToBase();
+    //sendDataToBase();
+    Serial.println("Send data...");
   }
 }
 
