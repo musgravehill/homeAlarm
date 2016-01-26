@@ -1,1 +1,1 @@
-avrdude -p m328p -c usbasp -b19200 -e -U flash:w:watchDogTest.ino.eightanaloginputs.hex -U lfuse:w:0xff:m -U hfuse:w:0xdf:m -U efuse:w:0x06:m
+avrdude -p m328p -c usbasp -b19200 -e -U flash:w:optiboot_atmega328_pro_8MHz.hex -U lfuse:w:0xFF:m -U hfuse:w:0xDE:m -U efuse:w:0x06:m
