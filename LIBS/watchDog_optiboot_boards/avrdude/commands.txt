@@ -1,1 +1,12 @@
-avrdude -p m328p -c usbasp -b19200 -e -U flash:w:optiboot_atmega328_pro_8MHz.hex -U lfuse:w:0xFF:m -U hfuse:w:0xDE:m -U efuse:w:0x06:m
+
+//no boot, no boot vector, 1.8++V  Ext.oscill. 8mhz++  16K CK/ 14 CK + 65ms
+avrdude -p m328p -c usbasp -b9600 -e -U lfuse:w:0xff:m -U hfuse:w:0xdf:m -U efuse:w:0x06:m
+
+//no boot, no boot vector, 1.8++V  Ext.oscill. 8mhz++  1K CK/ 14 CK + 0ms
+avrdude -p m328p -c usbasp -b9600 -e -U lfuse:w:0xee:m -U hfuse:w:0xdf:m -U efuse:w:0x06:m
+
+//no boot, no boot vector, 1.8++V  Full swing  16K CK/ 14 CK + 4.1ms
+avrdude -p m328p -c usbasp -b9600 -e -U lfuse:w:0xe7:m -U hfuse:w:0xdf:m -U efuse:w:0x06:m
+
+avrdude -p m328p -c usbasp -b9600 -e -U flash:w:watchDogTest.ino.hex
+

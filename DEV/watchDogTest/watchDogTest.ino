@@ -1,25 +1,25 @@
 #include <avr/wdt.h>
 
 void setup() {
-  MCUSR = 0;
-  wdt_reset();
+  MCUSR = 0;  //VERY VERY IMPORTANT!!!! ELSE WDT DOESNTOT RESET, DOESNOT DISABLED!!!
   wdt_disable();
-  wdt_enable (WDTO_8S);
   Serial.begin(9600);
-  Serial.println("Setup..");
+  delay(100);
+  Serial.println("Setup WDT 8s init");
+  wdt_enable (WDTO_8S);
+  delay(100);
   wdt_reset();
-  Serial.println(MCUSR); //flags
-  Serial.println(WDTCSR);
-  Serial.flush();
-  wdt_reset();
-  Serial.println("Watchdog enabled.");
+  pinMode(2, OUTPUT);
 }
 
 int timer = 0;
 
 void loop() {
-  delay(1000);
+  delay(500);
+  digitalWrite(2, LOW);  
+  delay(500);
+  digitalWrite(2, HIGH);
   timer++;
-  Serial.println(timer);
-   wdt_reset();
+  Serial.flush();
+  Serial.println(timer, DEC);  
 }
