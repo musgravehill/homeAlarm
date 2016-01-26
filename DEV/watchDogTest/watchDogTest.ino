@@ -1,13 +1,17 @@
 #include <avr/wdt.h>
 
 void setup() {
+  MCUSR = 0;
   wdt_reset();
   wdt_disable();
+  wdt_enable (WDTO_8S);
   Serial.begin(9600);
   Serial.println("Setup..");
-  Serial.println("Wait 5 sec..");
-  delay(5000);
-  wdt_enable (WDTO_8S);
+  wdt_reset();
+  Serial.println(MCUSR); //flags
+  Serial.println(WDTCSR);
+  Serial.flush();
+  wdt_reset();
   Serial.println("Watchdog enabled.");
 }
 
@@ -17,5 +21,5 @@ void loop() {
   delay(1000);
   timer++;
   Serial.println(timer);
-  //  wdt_reset();
+   wdt_reset();
 }

@@ -49,13 +49,15 @@ void setup() {
   delay(2000);
   Serial.begin(9600);
   NRF_init();
+  Serial.println(MCUSR); //flags
+  Serial.println(WDTCSR);
 }
 
 void loop() {
   LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
   LP_counterSleep_8s++;
 
-  if (LP_counterSleep_8s > 0) {
+  if (LP_counterSleep_8s >= 0) {
     LP_counterSleep_8s = 0;
     sendDataToBase();
   }
