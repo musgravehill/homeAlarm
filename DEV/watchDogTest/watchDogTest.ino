@@ -1,24 +1,21 @@
 #include <avr/wdt.h>
 
 void setup() {
-  wdt_disable(); // ����������� ������ �� ������� �� ������� ���������� ��� bootloop
+  wdt_reset();
+  wdt_disable();
   Serial.begin(9600);
   Serial.println("Setup..");
-  
   Serial.println("Wait 5 sec..");
-  delay(5000); // ��������, ����� ���� ����� ����������� ���������� � ������ bootloop
-  wdt_enable (WDTO_8S); // ��� ������ �� ������������� ������������� �������� ����� 8 ���.
+  delay(5000);
+  wdt_enable (WDTO_8S);
   Serial.println("Watchdog enabled.");
 }
 
 int timer = 0;
 
-void loop(){
-  // ������ ������� ������ ����������� � �������� �������� ����� � Serial
-  if(!(millis()%1000)){
-    timer++;
-    Serial.println(timer);
-    digitalWrite(13, digitalRead(13)==1?0:1); delay(1);
-  }
-//  wdt_reset();
+void loop() {
+  delay(1000);
+  timer++;
+  Serial.println(timer);
+  //  wdt_reset();
 }
