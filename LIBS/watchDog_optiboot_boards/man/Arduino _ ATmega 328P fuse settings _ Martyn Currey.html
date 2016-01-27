@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" lang="en-US">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Arduino / ATmega 328P fuse settings | Martyn Currey</title>
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" type="text/css" media="all" href="http://www.martyncurrey.com/wp-content/themes/twentyeleven/style.css" />
+<link rel="pingback" href="http://www.martyncurrey.com/xmlrpc.php" />
+<!--[if lt IE 9]>
+<script src="http://www.martyncurrey.com/wp-content/themes/twentyeleven/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+
+	<style type="text/css">
+		#fancybox-close{right:-15px;top:-15px}
+		div#fancybox-content{border-color:#FFFFFF}
+		div#fancybox-title{background-color:#FFFFFF}
+		div#fancybox-outer{background-color:#FFFFFF}
+		div#fancybox-title-inside{color:#333333}
+	</style>
+
+	<link rel="alternate" type="application/rss+xml" title="Martyn Currey &raquo; Feed" href="http://www.martyncurrey.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Martyn Currey &raquo; Comments Feed" href="http://www.martyncurrey.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Martyn Currey &raquo; Arduino / ATmega 328P fuse settings Comments Feed" href="http://www.martyncurrey.com/arduino-atmega-328p-fuse-settings/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.martyncurrey.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.2.4"}};
+			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56812,55356,56807),0,0),c.toDataURL().length>3e3):(d.fillText(String.fromCharCode(55357,56835),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='cptch_stylesheet-css'  href='http://www.martyncurrey.com/wp-content/plugins/captcha/css/style.css?ver=4.2.4' type='text/css' media='all' />
+<link rel='stylesheet' id='icons-css'  href='http://www.martyncurrey.com/wp-content/plugins/download-manager/css/front.css?ver=4.2.4' type='text/css' media='all' />
+<link rel='stylesheet' id='wpdm-bootstrap-css'  href='http://www.martyncurrey.com/wp-content/plugins/download-manager/bootstrap/css/bootstrap.css?ver=4.2.4' type='text/css' media='all' />
+<link rel='stylesheet' id='font-awesome-css'  href='http://www.martyncurrey.com/wp-content/plugins/download-manager/font-awesome/css/font-awesome.min.css?ver=4.2.4' type='text/css' media='all' />
+<link rel='stylesheet' id='flowplayer-css-css'  href='http://www.martyncurrey.com/wp-content/plugins/easy-video-player/lib/skin/all-skins.css?ver=4.2.4' type='text/css' media='all' />
+<link rel='stylesheet' id='fancybox-css'  href='http://www.martyncurrey.com/wp-content/plugins/fancybox-for-wordpress/fancybox/fancybox.css?ver=4.2.4' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-syntax-css-css'  href='http://www.martyncurrey.com/wp-content/plugins/wp-syntax/css/wp-syntax.css?ver=1.0' type='text/css' media='all' />
+<script type='text/javascript' src='http://www.martyncurrey.com/wp-includes/js/jquery/jquery.js?ver=1.11.2'></script>
+<script type='text/javascript' src='http://www.martyncurrey.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+<script type='text/javascript' src='http://www.martyncurrey.com/wp-content/plugins/download-manager/bootstrap/js/bootstrap.min.js?ver=4.2.4'></script>
+<script type='text/javascript' src='http://www.martyncurrey.com/wp-content/plugins/download-manager/js/front.js?ver=4.2.4'></script>
+<script type='text/javascript' src='http://www.martyncurrey.com/wp-content/plugins/download-manager/js/chosen.jquery.min.js?ver=4.2.4'></script>
+<script type='text/javascript' src='http://www.martyncurrey.com/wp-content/plugins/easy-video-player/lib/flowplayer.min.js?ver=4.2.4'></script>
+<script type='text/javascript' src='http://www.martyncurrey.com/wp-content/plugins/fancybox-for-wordpress/fancybox/jquery.fancybox.js?ver=1.3.4'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.martyncurrey.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.martyncurrey.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Arduino Nano as an ISP Programmer' href='http://www.martyncurrey.com/arduino-nano-as-an-isp-programmer/' />
+<link rel='next' title='HC-05 and HC-06 zs-040 Bluetooth modules. First Look' href='http://www.martyncurrey.com/hc-05-and-hc-06-zs-040-bluetooth-modules-first-look/' />
+<meta name="generator" content="WordPress 4.2.4" />
+<link rel='canonical' href='http://www.martyncurrey.com/arduino-atmega-328p-fuse-settings/' />
+<link rel='shortlink' href='http://www.martyncurrey.com/?p=823' />
+<!-- This content is generated with the Easy Video Player plugin v1.0.8 - http://noorsplugin.com/wordpress-video-plugin/ --><script>flowplayer.conf.embed = false;flowplayer.conf.keyboard = false;</script><!-- Easy Video Player plugin -->
+<!-- Fancybox for WordPress -->
+<script type="text/javascript">
+jQuery(function(){
+
+jQuery.fn.getTitle = function() { // Copy the title of every IMG tag and add it to its parent A so that fancybox can show titles
+	var arr = jQuery("a.fancybox");
+	jQuery.each(arr, function() {
+		var title = jQuery(this).children("img").attr("title");
+		jQuery(this).attr('title',title);
+	})
+}
+
+// Supported file extensions
+var thumbnails = jQuery("a:has(img)").not(".nolightbox").filter( function() { return /\.(jpe?g|png|gif|bmp)$/i.test(jQuery(this).attr('href')) });
+
+thumbnails.addClass("fancybox").getTitle();
+jQuery("a.fancybox").fancybox({
+	'cyclic': true,
+	'autoScale': true,
+	'padding': 10,
+	'opacity': true,
+	'speedIn': 500,
+	'speedOut': 500,
+	'changeSpeed': 300,
+	'overlayShow': true,
+	'overlayOpacity': "0.3",
+	'overlayColor': "#666666",
+	'titleShow': true,
+	'titlePosition': 'inside',
+	'enableEscapeButton': true,
+	'showCloseButton': true,
+	'showNavArrows': true,
+	'hideOnOverlayClick': true,
+	'hideOnContentClick': false,
+	'width': 560,
+	'height': 340,
+	'transitionIn': "fade",
+	'transitionOut': "fade",
+	'centerOnScroll': true
+});
+
+
+})
+</script>
+<!-- END Fancybox for WordPress -->
+</head>
+
+<body class="single single-post postid-823 single-format-standard single-author singular two-column right-sidebar">
+<div id="page" class="hfeed">
+	<header id="branding" role="banner">
+			<hgroup>
+				<h1 id="site-title"><span><a href="http://www.martyncurrey.com/" title="Martyn Currey" rel="home">Martyn Currey</a></span></h1>
+				<h2 id="site-description">Mostly Arduino stuff</h2>
+			</hgroup>
+
+			
+ 
+						<nav id="access" role="navigation">
+				<h3 class="assistive-text">Main menu</h3>
+								<div class="skip-link"><a class="assistive-text" href="#content" title="Skip to primary content">Skip to primary content</a></div>
+				<div class="skip-link"><a class="assistive-text" href="#secondary" title="Skip to secondary content">Skip to secondary content</a></div>
+								<div class="menu"><ul><li ><a href="http://www.martyncurrey.com/">Home</a></li><li class="page_item page-item-2572"><a href="http://www.martyncurrey.com/arduino-bluetooth-control/">Arduino Bluetooth Control</a></li><li class="page_item page-item-950"><a href="http://www.martyncurrey.com/dropcontroller-v2/">dropController V2</a></li><li class="page_item page-item-559"><a href="http://www.martyncurrey.com/water-drop-photographs/">Water Drop Photographs</a></li></ul></div>
+			</nav><!-- #access -->
+	</header><!-- #branding -->
+
+
+	<div id="main">
+
+		<div id="primary">
+			<div id="content" role="main">
+
+				
+					<nav id="nav-single">
+						<h3 class="assistive-text">Post navigation</h3>
+						<span class="nav-previous"><a href="http://www.martyncurrey.com/arduino-nano-as-an-isp-programmer/" rel="prev"><span class="meta-nav">&larr;</span> Previous</a></span>
+						<span class="nav-next"><a href="http://www.martyncurrey.com/hc-05-and-hc-06-zs-040-bluetooth-modules-first-look/" rel="next">Next <span class="meta-nav">&rarr;</span></a></span>
+					</nav><!-- #nav-single -->
+
+					
+<article id="post-823" class="post-823 post type-post status-publish format-standard hentry category-arduino category-atmega tag-arduino-2 tag-atmega-2 tag-fuse tag-fuses">
+	<header class="entry-header">
+		<h1 class="entry-title">Arduino / ATmega 328P fuse settings</h1>
+
+				<div class="entry-meta">
+			<span class="sep">Posted on </span><a href="http://www.martyncurrey.com/arduino-atmega-328p-fuse-settings/" title="11:09 am" rel="bookmark"><time class="entry-date" datetime="2014-08-16T11:09:43+00:00">August 16, 2014</time></a><span class="by-author"> <span class="sep"> by </span> <span class="author vcard"><a class="url fn n" href="http://www.martyncurrey.com/author/admin/" title="View all posts by Martyn" rel="author">Martyn</a></span></span>		</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<p>Part of programming stand-alone ATmega chips is setting the fuse bytes, these are special settings that can be used to change how the ATmega chips operate.</p>
+<p>Some of the things you can do by changing the value of the fuses include;</p>
+<ul>
+<li>select different clock sources and change how fast the chip runs,</li>
+<li>set the minimum voltage required before the chip works.</li>
+<li>set whether or not a boot loader is used,</li>
+<li>set how much memory is allocated to the boot loader,</li>
+<li>disable reset.</li>
+<li>disable serial programming</li>
+<li>stop eeprom data being erased when uploading a new sketch.</li>
+</ul>
+<p>There are many articles online but I could not find a single source that brought all the information together and fully explain what the fuses actually do.</p>
+<p>It is important to remember that some of the fuse bits can be used to lock certain aspects of the chip and can potentially brick it (make it unusable). However, with a bit of care it is fairly straight forward to understand and use the fuse settings.</p>
+<p>Disclaimer, I am relatively new to programming fuses and these are notes I wrote to help me remember things. The information is based on the data sheet for the ATmega chip, internet searches, and questions I asked on forums (especially the Arduino forum).</p>
+<p><span id="more-823"></span></p>
+<p>There are 3 bytes in total:</p>
+<ul>
+<li>low byte fuse,</li>
+<li>high byte fuse,</li>
+<li>extended fuse</li>
+</ul>
+<p>There is also a forth byte that is used to program the lock bits. Lock bits are not covered by this article.</p>
+<p>Each byte is 8 bits and each bit is a separate setting or flag. When we talk about setting/not setting, programmed/not programmed fuses we are actually using binary. 1 means not set/not programmed and a 0 (zero) means set/programmed.</p>
+<p>When programming the fuses you can use binary notation or more commonly hexadecimal notation. For 8 bits (1 byte) we can use B11111111 or 0xFF. Both are the same value.</p>
+<p>Note: For all fuses, a value of 1 means not set and a value of 0(zero) means set.</p>
+<p>&nbsp;</p>
+<h2>ATmega 328P 28 PDIP diagram</h2>
+<p><img class="alignnone wp-image-542 size-full" src="http://www.martyncurrey.com/wp-content/uploads/2014/05/ATmega328Pins.jpg" alt="ATmega 328P pin layout" width="471" height="331" /></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>Low Byte Fuses</h2>
+<p>The low byte fuse deals with the clock source, how fast the chip will run, and how long it waits at startup.</p>
+<p><img class="alignnone wp-image-828" src="http://www.martyncurrey.com/wp-content/uploads/2014/08/LowByteFuse.jpg" alt="LowByteFuse" width="485" height="165" /></p>
+<p>The ATmega chips can be run at different speeds or frequencies and the frequency is determined by the clock source that is used. The clock source is set by using the CKSEL fuse bits.</p>
+<h3> CKSEL (Clock Sources / Clock Selection)</h3>
+<p>The clock signal can come from an internal oscillator, an external crystal/resonator, or an external signal. Arduinos normally use an external 16MHz crystal.</p>
+<p><img class="alignnone wp-image-829" src="http://www.martyncurrey.com/wp-content/uploads/2014/08/crystal.jpg" alt="crystal" width="280" height="209" /><br />
+Here is a 16 MHz crystal used on a bread board Arduino connected to XTAL1 and XTAL2. The ATmega chip has to be told to use the external crystal and this is done by setting the CKSEL bits. A common mistake is to have the crystal correctly connected in the circuit but forget to tell the chip to use it.</p>
+<p>The different options for CKSEL are:<br />
+<img class="alignnone wp-image-831 size-full" src="http://www.martyncurrey.com/wp-content/uploads/2014/08/CKSEL.jpg" alt="CKSEL" width="561" height="164" /></p>
+<p>Arduinos normally use a low power crystal oscillator.<br />
+The ATmega has 2 built in oscillators, a 128MHz RC oscillator and a calibrated RC oscillator.<br />
+The external clock option allows the chip to use an external square wave clock signal. This is used when you have a circuit with its own clock that you want to sync the ATmega with or if you want to use a separate clock chip. The external clock signal needs to be connected to the CLOCK-IN pin</p>
+<h3> Crystal Oscillator Options</h3>
+<p><img class="alignnone wp-image-834 size-full" src="http://www.martyncurrey.com/wp-content/uploads/2014/08/crystalOptions.jpg" alt="crystalOptions" width="635" height="123" /><br />
+CKSEL3=1 CKSEL2=1 CKSEL1=1 CKSEL0=1 selects a crystal any where from 8MHz to 16MHz and is the normal setting for Arduinos.<br />
+If you want to use a slower crystal, for example 6MHz, then you would use CKSEL3=1 CKSEL2=1 CKSEL1=0 CKSEL0=1 (the 3.0 to 8.0 range).</p>
+<p>To use the internal RC oscillator at 8MHz, the settings are CKSEL3=0 CKSEL2=0 CKSEL1=1 CKSEL0=0</p>
+<h3>SUT1/SUT0 (Start Up Time)</h3>
+<p>Crystals and oscillators require sufficient voltage to operate correctly. When you start the ATmega chip it can take a brief period of time for the voltage to get to its maximum value. While the voltage is rising the clock source may not be working at the correct speed or frequency. To allow the clock to stabilise a startup delay can be set.</p>
+<p>CKSEL0 is used together with SUT1 and SUT0 to set the start up delay time.</p>
+<p><img class="alignnone wp-image-835" src="http://www.martyncurrey.com/wp-content/uploads/2014/08/SUT.jpg" alt="SUT" width="558" height="168" /><br />
+BOD is Brown Out Detection and discussed later.</p>
+<p>The Arduino uses the maximum startup delay of 14CK + 65ms (CKSEL0=1, SUT1=1, SUT0=1) which are also the default settings for new ATmega 328/328P chips.</p>
+<h3>CHDIV8 (Clock Divide)</h3>
+<p>ATmega 328/328P chips have a built in RC oscillator which has a 8.0MHz frequency. New chips are shipped with this set as the clock source and the CKDIV8 fuse active, resulting in a 1.0MHz system clock. The startup time is set to maximum and time-out period enabled. (CKSEL = &#8220;0010&#8221;, SUT = &#8220;10&#8221;, CKDIV8 = &#8220;0&#8221;). This setting is used so that all users can make their desired clock source setting using any available programming interface.</p>
+<p>CKDIV8 should be used if the selected clock source has a higher frequency than the maximum frequency of the ATmega chip.</p>
+<p>The ATmega chips can be used at very low voltages, however, the lower the voltage the slower they need to work at. The CHDIV8 can be used to set a slow clock speed to match a low voltage.</p>
+<h3> CKOUT (Clock Out)</h3>
+<p>The clock signal can be routed to PB0. This is useful if you need the clock signal to drive other circuits. This works for all clock sources and the default setting for new chips is CKOUT=1 (not set).</p>
+<p>&nbsp;</p>
+<h2>High Byte Fuses</h2>
+<p><img class="alignnone wp-image-840 size-full" src="http://www.martyncurrey.com/wp-content/uploads/2014/08/HighByteFuse.jpg" alt="HighByteFuse" width="555" height="184" /></p>
+<h3> RSTDISBL (External reset disable)</h3>
+<p>PC6 is a reset pin, hold it low (to ground) and the chip will reset. This is how the switch on the Arduino works. When you press the reset button it connects PC6 to ground and resets the chip.</p>
+<p>PC6 can also be used as a regular IO pin but this means disabling the reset function which in turns means the chip can no longer be inline programmed (in line programming requires a reset). This is one of the options it is better not to change.</p>
+<p>I imagine RSTDISBL is implemented for security reasons to stop the chip being reprogrammed or the firmware being downloaded.</p>
+<p>When RSTDISBL is programmed the start up time (SUT1 SUT0) is increased to 14CK + 4.1ms to ensure the programming mode can be entered.</p>
+<p>By default, the setting is RSTDISBL=1 (not set).</p>
+<h3>DWEN (debugWIRE enable)</h3>
+<p>ATmega chips have built in debugging tools which are by default turned off. The DWEN fuse is used to turn them on.</p>
+<p>DWEN uses the same pin as reset (PC6) and when DWEN is enabled (and the lock bits are not set) the reset pin becomes a communication pin and normal reset no longer works. For example, if you enable DWEN on an Arduino the reset button no longer works.</p>
+<p>To use the on-chip debugging you need a compatible programmer such as the AVR Dragon. Since I have never used AVR studio and do not have a suitable programmer I have never used and do not know how to use debugging. If you would like to know more then there is a good article at http://www.hilltop-cottage.info/blogs/adam/debugging-arduino-using-debugwire-atmel-studio-and-an-avr-dragon/ to get you started.</p>
+<p>This is one of the fuses you should take care with. If you enable DWEN and also enable the lock bits you can no longer program the chip in the normal way.</p>
+<p>If you are just starting then leave DWEN to not set. After all, reset is very useful.</p>
+<h3>SPIEN (Enable Serial programming and Data Downloading)</h3>
+<p>ATmega chips can be programmed using serial programming. Serial programming is used for on board programming using a serial protocol via an ISP (inline serial programmer) or UART (universal asynchronous receiver/transmitter).</p>
+<p>The normal method of programming the ATmega chips is via the SPI interface using the SCK (clock), MOSI (input) and MISO (output) pins. If you disable serial programming then you can no longer use the SPI to program the chip. You can also disable serial programming using the lock bits.</p>
+<p>For normal use and development leave SPIEN enabled, however, if you have a device that is final and no further programming is required then you can use this option to stop people accessing the chip through serial communication.</p>
+<p>The default setting is SPIEN enabled, SPIEN=0.</p>
+<p><span style="color: #ff0000;"><strong>The RSTDISBL, SPIEN and DWEN fuses have the potential to brick the ATmega chip, or at least make the chip very very difficult to use again. For general use, and especially if you are just starting out with programming stand-alone chips, you should not change these fuse settings. You should also double check that you are not changing them when you re-write the other fuse settings.</strong></span></p>
+<h3>WDTON (Watchdog Timer Always On)</h3>
+<p>The watchdog is basically a timer that will cause the chip to reset if it does not receive an OK signal at specific times.</p>
+<p>This can be useful when you have unstable code or have a system that must not be allowed to permanently lock up.</p>
+<p>When the watchdog timer is enabled, should a sketch crash or freeze then the timer will time out and reset the chip causing a restart similar to pressing the reset button an a running Arduino.</p>
+<p>The Watchdog Timer can be activated in software so the fuse settings doesn&#8217;t really need to be used. By default, the watchdog timer is off, WDTON=1.</p>
+<p>There is a nice mini guide on the Watchdog timer by za_nic on the Arduino forum at ttp://forum.arduino.cc/index.php/topic,63651.0.html<br />
+Paul Martinsen has a guide on how to use the watchdog timer to detect lockups at http://www.megunolink.com/how-to-detect-lockups-using-the-arduino-watchdog/</p>
+<h3>EESAVE (Preserve EEPROM memory)</h3>
+<p>When the ATmega chip is programmed the memory is erased just before the new code is uploaded. Under normal circumstances the eeprom memory is erased as well as the program memory. The EESAVE fuse can be used to tell the chip not to erase the eeprom. This is useful when you want to upgrade code but keep user settings that are stored in eeprom.</p>
+<p>The default value is EESAVE=1, not set and eeprom memory is erased during the chip erase cycle when programming.</p>
+<p>I have got into the habit of setting this fuse; eeprom has a limited life cycle so the less you write to it the better. Erasing the eeprom has no effect on uploading new code and the majority of my projects don&#8217;t use the eeprom memory so not erasing it is not a problem. The dropController stores settings and drop times in eeprom and so I set EESAVE to preserve the data when I upload new versions of the code.</p>
+<h3>BOOTSZ1 &amp; BOOTSZ0 (Boot loader Size)</h3>
+<p>The ATmega chips have the ability to use a boot loader, this is a small program that runs when the chip is first started or when it is reset. Boot loaders are normally used to initialize the device and check for external communication. The Arduino uses a boot loader to talk to a connected computer to see if there is a new program to be uploaded. This is the reason the Arduino resets when you upload new code, the reset runs the boot loader, the boot loader checks to see if you have new code.</p>
+<p>The boot loader is stored in program memory, the same memory used for the user application and since the boot loader can be different sizes you can tell the ATmega chip how much space to reserve. The regular (older) Arduino boot loader is 2 kilobytes (KB) but the newer Optiboot (used on the UNO) is only 0.5KB (512 bytes). If using Optiboot and setting the boot loader size accordingly you gain an extra 1.5KB for your own program. 1.5KB can be a lot of space, running out of program space is why I started programming stand alone ATmega chips in the first place. The code for the dropController became too large for the regular Arduino so I removed the boot loader.</p>
+<p><img class="alignnone wp-image-845" src="http://www.martyncurrey.com/wp-content/uploads/2014/08/ProgMem.jpg" alt="ProgMem" width="180" height="185" /><br />
+The boot loader is stored at the top of the program memory</p>
+<p>If you have a boot loader then BOOTSZ has to be used in conjunction with BOOTRST. BOOTRST tells the ATmega chip the memory address where the boot loader starts. If BOOTRST is not set then the user application can use the whole of the memory regardless of the BOOTSZ settings.</p>
+<h3>Boot Size Configuration for the 328/328P</h3>
+<p><img class="alignnone wp-image-847" src="http://www.martyncurrey.com/wp-content/uploads/2014/08/BootSize.jpg" alt="BootSize" width="556" height="113" /></p>
+<p>Note that the above sizes are in words (a word is 2 bytes) and 256 words is 512 bytes.</p>
+<p>The default for new chips is BOOTSZ1=0 BOOTSZ0=1 which means they have 2KB reserved for a boot loader.</p>
+<h3>BOOTRST Select reset vector</h3>
+<p>ATmega chips can use a boot loader, this is a small program that runs when the chip is reset. If you have a boot loader then you need to inform the MCU and this is done by using the BOOTRST fuse setting. When the BOOTRST Fuse is set, on reset the device will jump to the Boot Loader address. If not set, the chip will jump to the program start address at 0x0000.</p>
+<p>The default value is BOOTRST = 1 (not set).</p>
+<p>If BOOTRST is not set (no boot loader) then the BOOTSZ fuses are not used regardless of the value.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>Extended Fuse Bits</h2>
+<p><strong> </strong>The extended fuses are only used to set the brown-out detection level (BOD).</p>
+<p>The ATmega chips can become unstable or unreliable when used with insufficient voltage. For example, the 328/328P can run safely at 16MHz if it has at least 4V. Anything below 4V means the chip is likely to misbehave. This would be a problem if the device were being used with sensors to take measurements or relied on accurate timings.</p>
+<p>To ensure the chip has sufficient input voltage a minimum voltage level can be set. If the voltage falls below this level then the chip will reset itself. This is called the brown-out detector level. Basically, if the supplied voltage is below the BOD the chip keeps reset low.</p>
+<p><img class="alignnone size-full wp-image-850" src="http://www.martyncurrey.com/wp-content/uploads/2014/08/Extended.jpg" alt="Extended" width="468" height="179" /></p>
+<p><a href="http://www.martyncurrey.com/wp-content/uploads/2014/08/BOD.jpg"><img class="alignnone size-full wp-image-851" src="http://www.martyncurrey.com/wp-content/uploads/2014/08/BOD.jpg" alt="BOD" width="372" height="178" /></a><br />
+The default values for new chips are; BODLEVEL2=1 (not set), BODLEVEL1=1 (not set), BODLEVEL0=1 (not set).</p>
+<p>&nbsp;</p>
+<h2>Default Fuse Settings</h2>
+<h3>New ATmega 328P Chip.</h3>
+<p>New 328/328P chips generally have the following fuse settings:</p>
+<p>Low fuse = 0x62 (B01100010)<br />
+High fuse = 0xDB (B11011011)<br />
+Extended fuse = 0xFF (B11111111)</p>
+<p><img class="alignnone size-full wp-image-870" src="http://www.martyncurrey.com/wp-content/uploads/2014/08/defaultFuse01.jpg" alt="defaultFuse01" width="608" height="568" /></p>
+<p>&nbsp;</p>
+<h3>Arduino Duemilanove or Nano w/ ATmega328 Default Fuse Settings</h3>
+<p>Low fuse = 0xFF (B11111111)<br />
+High fuse = 0xDA (B11011110)<br />
+Extended fuse = 0x05 (B00000101)<br />
+<img class="alignnone size-full wp-image-871" src="http://www.martyncurrey.com/wp-content/uploads/2014/08/defaultFuse02.jpg" alt="defaultFuse02" width="605" height="594" /></p>
+<h3> Optiboot Boot Loader</h3>
+<p>If you load the Optiboot boot loader then the high byte fuse should be set as 0xDE (B11011110). The only difference is the space allocated to the boot loader.</p>
+<p><a href="http://www.martyncurrey.com/wp-content/uploads/2014/08/optibootFuseCorrected.jpg"><img src="http://www.martyncurrey.com/wp-content/uploads/2014/08/optibootFuseCorrected.jpg" alt="optibootFuse(Corrected)" width="605" height="195" class="alignnone size-full wp-image-1556" /></a></p>
+<p>For a comprehensive list of the default fuse settings for the various Arduinos have a look at Coding with Cody&#8217;s <a href="http://www.codingwithcody.com/2011/04/arduino-default-fuse-settings/" target="_blank"><span class="archive_title">Arduino Default Fuse Settings</span></a> page.</p>
+<p>&nbsp;</p>
+<h2>Lock Bits</h2>
+<p>Lock bits can be used to restrict read/write access to the program memory. The boot section and the application section have their own lock bits and access for each area can be controlled separately.</p>
+<p><span style="color: #ff0000;">You can brick the ATmega chip if you enable the lock bits and you should not change them.</span></p>
+<p>I will try to cover lock bits in more detail in a later post.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>Actually Programming The Fuses</h2>
+<p>To program stand-alone ATmega chips I used an Arduino Nano as programmer, see  <a title="Arduino Nano As An ISP Programmer" href="http://www.martyncurrey.com/?p=633" target="_blank">Arduino Nano as an ISP Programmer</a> and found the easiest way to set the fuses was to burn a boot loader (the fuses are set as part of the process). The boot loader can then be written over later when you upload a sketch. By editing the boards.txt file in the Arduino installation folder you can use any values you desire for the fuses.</p>
+<p>Here is the entry I added to boards.txt for use with bread board Arduinos. This has the low byte fuse at 0xFF, the hight byte fuse at 0xDF, the extended fuse at 0x05, and uses the Optiboot boot loader. The values for the lock bits were copied from the Arduino Uno entry.</p>
+<pre><code>
+atmegasa16.name=ATmega328P Stand Alone (Arduino as ISP)
+atmegasa16.upload.protocol=stk500
+atmegasa16.upload.maximum_size=32768
+atmegasa16.upload.speed=115200
+atmegasa16.upload.using=arduino:arduinoisp
+atmegasa16.bootloader.low_fuses=0xff
+atmegasa16.bootloader.high_fuses=0xdf
+atmegasa16.bootloader.extended_fuses=0x05
+atmegasa16.bootloader.path=optiboot
+atmegasa16.bootloader.file=optiboot_atmega328.hex
+atmegasa16.bootloader.unlock_bits=0x3F
+atmegasa16.bootloader.lock_bits=0x0F
+atmegasa16.build.mcu=atmega328p
+atmegasa16.build.f_cpu=16000000L
+atmegasa16.build.core=arduino
+atmegasa16.build.variant=arduino:standard
+</code></pre>
+<p>&nbsp;</p>
+<h2> Useful links</h2>
+<p>Nick Gammon&#8217;s site has a lot of really good information about building your own Arduino and uploading boot loaders:<br />
+<a href="http://www.gammon.com.au/forum/?id=11637" target="_blank">How to make an Arduino-compatible minimal board</a> (similar to mine).<br />
+<a href="http://www.gammon.com.au/forum/?id=11643" target="_blank">Solving problems with uploading programs to your Arduino</a><br />
+<a href="http://www.gammon.com.au/forum/?id=11635" target="_blank">ATmega bootloader programmer</a>.</p>
+<p>My own <a title="Arduino on a breadbaord" href="http://www.martyncurrey.com/?p=609" target="_blank">Arduino on a breadboard</a> explains how to set up a stand-alone ATmega chip and <a title="Arduino as an ISP programmer" href="http://www.martyncurrey.com/?p=633" target="_blank">Using an Arduino Nano to program a ATmega328P chip</a>  explains how to use an Arduino as an ISP programmer.</p>
+<p>The ATmega 328P data sheet can be down loaded from the Amtel website at <a title="ATmega 328P data sheet" href="http://www.atmel.com/Images/doc8161.pdf" target="_blank">http://www.atmel.com/Images/doc8161.pdf</a></p>
+<p><a title="Fuse calculator" href="http://eleccelerator.com/fusecalc/fusecalc.php?chip=atmega328p" target="_blank">http://eleccelerator.com</a> and <a title="Fuse calculator" href="http://www.engbedded.com/fusecalc/" target="_blank">http://www.engbedded.com</a> both have a fuse calculator where you select what options you want and the page gives you the fuse settings to use. I prefer not to use the calculators as I think it may be easy to make mistakes but this is my personal opinion only.</p>
+<p>NIck Gammon also has a useful sketch that detects ATmega chip types. The sketch can be found at <a title="ATmega chip detector" href="http://www.gammon.com.au/forum/?id=11633" target="_blank">http://www.gammon.com.au/forum/?id=11633</a>. The sketch displays the fuse settings, the lock bits and gives information about the boot loader if one is present. I found this sketch very useful when I first started programming chips directly.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+			</div><!-- .entry-content -->
+
+	<footer class="entry-meta">
+		This entry was posted in <a href="http://www.martyncurrey.com/category/arduino/" rel="category tag">Arduino</a>, <a href="http://www.martyncurrey.com/category/atmega/" rel="category tag">ATmega</a> and tagged <a href="http://www.martyncurrey.com/tag/arduino-2/" rel="tag">arduino</a>, <a href="http://www.martyncurrey.com/tag/atmega-2/" rel="tag">ATmega</a>, <a href="http://www.martyncurrey.com/tag/fuse/" rel="tag">fuse</a>, <a href="http://www.martyncurrey.com/tag/fuses/" rel="tag">fuses</a> by <a href="http://www.martyncurrey.com/author/admin/">Martyn</a>. Bookmark the <a href="http://www.martyncurrey.com/arduino-atmega-328p-fuse-settings/" title="Permalink to Arduino / ATmega 328P fuse settings" rel="bookmark">permalink</a>.		
+			</footer><!-- .entry-meta -->
+</article><!-- #post-823 -->
+
+						<div id="comments">
+	
+	
+			<h2 id="comments-title">
+			8 thoughts on &ldquo;<span>Arduino / ATmega 328P fuse settings</span>&rdquo;		</h2>
+
+		
+		<ol class="commentlist">
+				<li class="comment even thread-even depth-1" id="li-comment-3414">
+		<article id="comment-3414" class="comment">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt='' src='http://2.gravatar.com/avatar/b0012db0d29c5fb1616f9343c81e051e?s=68&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/b0012db0d29c5fb1616f9343c81e051e?s=136&amp;d=mm&amp;r=g 2x' class='avatar avatar-68 photo' height='68' width='68' /><span class="fn">Kenzen</span> on <a href="http://www.martyncurrey.com/arduino-atmega-328p-fuse-settings/#comment-3414"><time datetime="2015-01-20T23:03:01+00:00">January 20, 2015 at 11:03 pm</time></a> <span class="says">said:</span>
+									</div><!-- .comment-author .vcard -->
+
+				
+			</footer>
+
+			<div class="comment-content"><p>Hello,</p>
+<p>I am trying to change the atmega328p&#8217;s clock source as an external clock signal coming from the function/signal generator.</p>
+<p>I will use the avrdude to change the fuse bits and I have an AvrmkII ISP, </p>
+<p>My question is do i need to plug the atmega328p out of the Arduino board and connect on a bredboard in order to feed an external clock source ? or connecting the function generator to XTAL1 ( pin9) on Arduino board works as well ? </p>
+<p>I&#8217;d appreciate for any help. Thank you very much</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/arduino-atmega-328p-fuse-settings/?replytocom=3414#respond' onclick='return addComment.moveForm( "comment-3414", "3414", "respond", "823" )' aria-label='Reply to Kenzen'>Reply <span>&darr;</span></a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+	<li class="comment byuser comment-author-admin bypostauthor odd alt thread-odd thread-alt depth-1" id="li-comment-3415">
+		<article id="comment-3415" class="comment">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt='' src='http://2.gravatar.com/avatar/2030c0326204231434ecea74cb826581?s=68&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/2030c0326204231434ecea74cb826581?s=136&amp;d=mm&amp;r=g 2x' class='avatar avatar-68 photo' height='68' width='68' /><span class="fn"><a href='http://www.martyncurrey.com' rel='external nofollow' class='url'>Martyn</a></span> on <a href="http://www.martyncurrey.com/arduino-atmega-328p-fuse-settings/#comment-3415"><time datetime="2015-01-21T07:57:16+00:00">January 21, 2015 at 7:57 am</time></a> <span class="says">said:</span>
+									</div><!-- .comment-author .vcard -->
+
+				
+			</footer>
+
+			<div class="comment-content"><p>Better to put the 328P on a breadboard. The external clock signal goes to PB6/XTAL1 (pin 9) which on an Arduino has the crystal connected.</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/arduino-atmega-328p-fuse-settings/?replytocom=3415#respond' onclick='return addComment.moveForm( "comment-3415", "3415", "respond", "823" )' aria-label='Reply to Martyn'>Reply <span>&darr;</span></a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1" id="li-comment-3455">
+		<article id="comment-3455" class="comment">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt='' src='http://1.gravatar.com/avatar/1b64ba9e0edd869917eb51bc18ad7213?s=68&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/1b64ba9e0edd869917eb51bc18ad7213?s=136&amp;d=mm&amp;r=g 2x' class='avatar avatar-68 photo' height='68' width='68' /><span class="fn"><a href='http://www.philipsmith.com' rel='external nofollow' class='url'>Phil Smith</a></span> on <a href="http://www.martyncurrey.com/arduino-atmega-328p-fuse-settings/#comment-3455"><time datetime="2015-02-13T19:49:45+00:00">February 13, 2015 at 7:49 pm</time></a> <span class="says">said:</span>
+									</div><!-- .comment-author .vcard -->
+
+				
+			</footer>
+
+			<div class="comment-content"><p>Very helpful. Thank you for posting it all. It has enabled me to progress my project, and write a boards.txt entry to put the optiboot loader onto my arduino nano.</p>
+<p>Just one tiny error I spotted: in the Optiboot boot loader table, showing the fuse settings, you correctly have both of the BOOTSZ bits set to 1, but you say BOOTSZ1 is &#8220;set&#8221;,  but BOOTSZ2 is &#8220;not set&#8221;.</p>
+<p>Phil</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/arduino-atmega-328p-fuse-settings/?replytocom=3455#respond' onclick='return addComment.moveForm( "comment-3455", "3455", "respond", "823" )' aria-label='Reply to Phil Smith'>Reply <span>&darr;</span></a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-admin bypostauthor odd alt depth-2" id="li-comment-3456">
+		<article id="comment-3456" class="comment">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt='' src='http://2.gravatar.com/avatar/2030c0326204231434ecea74cb826581?s=39&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/2030c0326204231434ecea74cb826581?s=78&amp;d=mm&amp;r=g 2x' class='avatar avatar-39 photo' height='39' width='39' /><span class="fn"><a href='http://www.martyncurrey.com' rel='external nofollow' class='url'>Martyn</a></span> on <a href="http://www.martyncurrey.com/arduino-atmega-328p-fuse-settings/#comment-3456"><time datetime="2015-02-14T03:49:09+00:00">February 14, 2015 at 3:49 am</time></a> <span class="says">said:</span>
+									</div><!-- .comment-author .vcard -->
+
+				
+			</footer>
+
+			<div class="comment-content"><p>Thanks for pointing out the typo. I have corrected the Opitboot chart.</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/arduino-atmega-328p-fuse-settings/?replytocom=3456#respond' onclick='return addComment.moveForm( "comment-3456", "3456", "respond", "823" )' aria-label='Reply to Martyn'>Reply <span>&darr;</span></a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-4000">
+		<article id="comment-4000" class="comment">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt='' src='http://1.gravatar.com/avatar/16e71564b0d5a24f82bd096d34b18543?s=68&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/16e71564b0d5a24f82bd096d34b18543?s=136&amp;d=mm&amp;r=g 2x' class='avatar avatar-68 photo' height='68' width='68' /><span class="fn">Dipankar</span> on <a href="http://www.martyncurrey.com/arduino-atmega-328p-fuse-settings/#comment-4000"><time datetime="2015-08-13T16:01:50+00:00">August 13, 2015 at 4:01 pm</time></a> <span class="says">said:</span>
+									</div><!-- .comment-author .vcard -->
+
+				
+			</footer>
+
+			<div class="comment-content"><p>A really very very helpful informative suggestion. Thank you for your effort. Keep it up. Be always well n happy,,,,</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/arduino-atmega-328p-fuse-settings/?replytocom=4000#respond' onclick='return addComment.moveForm( "comment-4000", "4000", "respond", "823" )' aria-label='Reply to Dipankar'>Reply <span>&darr;</span></a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-4203">
+		<article id="comment-4203" class="comment">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt='' src='http://0.gravatar.com/avatar/cd0b1cbb343d8fbc849849cd0cce217d?s=68&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/cd0b1cbb343d8fbc849849cd0cce217d?s=136&amp;d=mm&amp;r=g 2x' class='avatar avatar-68 photo' height='68' width='68' /><span class="fn">zaf</span> on <a href="http://www.martyncurrey.com/arduino-atmega-328p-fuse-settings/#comment-4203"><time datetime="2015-10-03T16:00:58+00:00">October 3, 2015 at 4:00 pm</time></a> <span class="says">said:</span>
+									</div><!-- .comment-author .vcard -->
+
+				
+			</footer>
+
+			<div class="comment-content"><p>Hello,<br />
+Just wanted to point out the BOOTRST section:<br />
+&#8220;The default value is BOOTRST = 1 (not set).&#8221;<br />
+Should that not be a 0 instead of a 1? One means that the bootrst is set, isn&#8217;t it?<br />
+Great tutorial!</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/arduino-atmega-328p-fuse-settings/?replytocom=4203#respond' onclick='return addComment.moveForm( "comment-4203", "4203", "respond", "823" )' aria-label='Reply to zaf'>Reply <span>&darr;</span></a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-4691">
+		<article id="comment-4691" class="comment">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt='' src='http://0.gravatar.com/avatar/96f7026397be072367c04287cd812f83?s=68&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/96f7026397be072367c04287cd812f83?s=136&amp;d=mm&amp;r=g 2x' class='avatar avatar-68 photo' height='68' width='68' /><span class="fn">guniti srinibash</span> on <a href="http://www.martyncurrey.com/arduino-atmega-328p-fuse-settings/#comment-4691"><time datetime="2016-01-19T12:18:40+00:00">January 19, 2016 at 12:18 pm</time></a> <span class="says">said:</span>
+									</div><!-- .comment-author .vcard -->
+
+				
+			</footer>
+
+			<div class="comment-content"><p>SPIEN (Enable Serial programming and Data Downloading).<br />
+if SPIEN=1, then it is not possible to upload program via SPI.<br />
+Is any problem if we are using arduino ethernet shield?</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/arduino-atmega-328p-fuse-settings/?replytocom=4691#respond' onclick='return addComment.moveForm( "comment-4691", "4691", "respond", "823" )' aria-label='Reply to guniti srinibash'>Reply <span>&darr;</span></a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-admin bypostauthor odd alt depth-2" id="li-comment-4695">
+		<article id="comment-4695" class="comment">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<img alt='' src='http://2.gravatar.com/avatar/2030c0326204231434ecea74cb826581?s=39&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/2030c0326204231434ecea74cb826581?s=78&amp;d=mm&amp;r=g 2x' class='avatar avatar-39 photo' height='39' width='39' /><span class="fn"><a href='http://www.martyncurrey.com' rel='external nofollow' class='url'>Martyn</a></span> on <a href="http://www.martyncurrey.com/arduino-atmega-328p-fuse-settings/#comment-4695"><time datetime="2016-01-20T05:15:27+00:00">January 20, 2016 at 5:15 am</time></a> <span class="says">said:</span>
+									</div><!-- .comment-author .vcard -->
+
+				
+			</footer>
+
+			<div class="comment-content"><p>Sorry, I don&#8217;t know. Although I have an Ethernet shield I have never used it.</p>
+<p>If you disable SPIEN then you can no longer program the Arduino/ATmega chip in the usual way, either by ISP or by USB.</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/arduino-atmega-328p-fuse-settings/?replytocom=4695#respond' onclick='return addComment.moveForm( "comment-4695", "4695", "respond", "823" )' aria-label='Reply to Martyn'>Reply <span>&darr;</span></a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		</ol>
+
+		
+		
+	
+							<div id="respond" class="comment-respond">
+				<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/arduino-atmega-328p-fuse-settings/#respond" style="display:none;">Cancel reply</a></small></h3>
+									<form action="http://www.martyncurrey.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+																			<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p>							<p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" aria-required='true' required='required' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" aria-describedby="email-notes" aria-required='true' required='required' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="text" value="" size="30" /></p>
+<p class="cptch_block"><br />		<input type="hidden" name="cptch_result" value="5zE=" />
+		<input type="hidden" name="cptch_time" value="1453807802" />
+		<input type="hidden" value="Version: 4.1.3" />
+		<input id="cptch_input" class="cptch_input" type="text" autocomplete="off" name="cptch_number" value="" maxlength="2" size="2" aria-required="true" required="required" style="margin-bottom:0;display:inline;font-size: 12px;width: 40px;" /> &minus; t&#119;o = 4</p>												<p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" aria-describedby="form-allowed-tags" aria-required="true" required="required"></textarea></p>						<p class="form-allowed-tags" id="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:  <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;s&gt; &lt;strike&gt; &lt;strong&gt; </code></p>
+						<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='823' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="177ae0907c" /></p><input type="hidden" id="sk2_my_js_check1" name="sk2_my_js_check1" value="zskuq9a3re" />
+<input type="hidden" id="sk2_my_js_check2" name="sk2_my_js_check2" value="73fd7a43cf2373c97986758b8830a837" />
+<script type="text/javascript">
+<!--
+	document.write('<input type="hidden" id="sk2_my_js_payload" name="sk2_my_js_payload" value="');
+	document.write(Math.round ( Math.abs(Math.round ( Math.abs((Math.min(Math.max((((1 - 4) + 5) + 23), 13), 6) * 39) / 21)))));
+	document.write('" />');
+-->
+</script>
+<p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="186"/></p>					</form>
+							</div><!-- #respond -->
+			
+</div><!-- #comments -->
+
+				
+			</div><!-- #content -->
+		</div><!-- #primary -->
+
+
+	</div><!-- #main -->
+
+	<footer id="colophon" role="contentinfo">
+
+			
+
+			<div id="site-generator">
+								<a href="http://wordpress.org/" title="Semantic Personal Publishing Platform">Proudly powered by WordPress</a>
+			</div>
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<script type='text/javascript' src='http://www.martyncurrey.com/wp-content/plugins/akismet/_inc/form.js?ver=3.1.3'></script>
+<script type='text/javascript' src='http://www.martyncurrey.com/wp-includes/js/comment-reply.min.js?ver=4.2.4'></script>
+<script type='text/javascript' src='http://www.martyncurrey.com/wp-includes/js/jquery/jquery.form.min.js?ver=3.37.0'></script>
+
+</body>
+</html>
