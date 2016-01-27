@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<head>
+	<title>Arduino watchdog </title>
+	<meta http-equiv="Content-Language" content="English" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+</head>
+<body>
+<div id="wrap">
+	<div id="header">
+		<div id="headerlinks">
+		<a href="../welcome.html" title="Home">Home</a>
+		<a href="../author.html" title="Author">Author</a>
+		</div>
+		<h1>Jean Rabault website - UiO</h1>
+	</div>
+
+	<div id="sidebar">
+		<h2>Sections:</h2>
+		<div class="box">
+		<ul>
+		<li><a href="../Microelectronics/MicroelectronicsMain.html">Microelectronics</a></li>
+                <li><a href="../Informatics/InformaticsMain.html">Informatics</a></li>
+		</ul>
+		</div>
+
+	</div>
+
+	<div id="content">
+		<br />
+		<br />
+
+<h1>Using the Arduino watchdog<span class="post-span"> </span></h1>
+<br />
+<br />
+<h2>Principle of a watchdog<span class="post-span"> </span></h2>
+<br />
+<p>
+<a href="https://en.wikipedia.org/wiki/Watchdog_timer">Watchdog timers</a> are used to avoid malfunction in electronic devices, for example hangs. For this, a physical timer keeps increasing in parallel of the program and drives an interrupt that can reset the microcontroller (in the case of the Arduino) if it hits a given value. In normal operation the timer is regularly set to zero in the program flow, but if the code hangs, the timer reset cannot occur and the watchdog will fire and trigger actions (such as rebooting) that can solve the problem.
+<br />
+<h2>Using the watchdog for preventing failures<span class="post-span"> </span></h2>
+<br />
+<p>
+As any 'low level' microcontroller feature, using the watchdog of an Arduino requests setting bit registers for selecting the behaviour of the chip. The corresponding registers and their meanings are described in the datasheet of the microcontroller embedded in each Arduino board, which can be quite painful to read. Fortunately, the Arduino IDE comes with a few functions and macros for easing the process, that can be imported through the <I>#include &ltavr/wdt.h&gt</I> command. This way, the watchdog can be enabled by calling the <I>wdt_enable()</I> function. The argument of the <I>wdt_enable()</I> function indicates the time before reboot of the board in the case when the watchdog does not get reset, and some convenient aliases are defined:
+<pre>
+<code> 
+time before watchdog firing    argument of wdt_enable()
+-------------------------------------------------------
+15mS                           WDTO_15MS
+30mS                           WDTO_30MS
+60mS                           WDTO_60MS
+120mS                          WDTO_120MS
+250mS                          WDTO_250MS
+500mS                          WDTO_500MS
+1S                             WDTO_1S            
+2S                             WDTO_2S
+4S                             WDTO_4S
+8S                             WDTO_8S
+</code> 
+</pre>
+<p>
+For example, the following code will reboot the Arduino board after the setup loop and a 15 milliseconds frozen time (you will see the led 13 blinking as the board goes through each setup):
+<pre>
+<code> 
+#include &ltavr/wdt.h&gt
+
+#define led 13 // pin 13 is connected to a led on Arduino Uno
+
+void setup()
+{
+  pinMode(led, OUTPUT);      // set pin mode
+  digitalWrite(led, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(100);                // wait for a tenth of a second
+  digitalWrite(led, LOW);    // turn the LED off by making the voltage LOW
+  delay(100);                // wait for a tenth of a second
+}
+
+void loop(){
+  wdt_enable(WDTO_15MS);     // enable the watchdog
+                             // will fire after 15 ms without reset
+
+  while(1)
+  {
+//     wdt_reset();          // uncomment to avoid reboot
+  }
+}
+</code> 
+</pre>
+<p>
+For avoiding the board to reboot in normal operation, the <I>wdt_reset();</I> command should be called regularly in the program for reseting the watchdog.
+<br />
+<h2>Using the watchdog for energy savings<span class="post-span"> </span></h2>
+<br />
+<p>
+There are other ways in which the Arduino watchdog can be useful. In particular, the microcontrollers used in the Arduino boards can be set to low power sleep modes. As for the watchdog, the gestion of the low power modes is done via bit registers, but macros / functions / libraries are available to ease the programmer work (I let you browse the web if you need more details on this). <br />
+The point of importance is that in the lowest power mode, that can be configured by the <I>set_sleep_mode(SLEEP_MODE_PWR_DOWN);</I> command and activated by the <I>sleep_mode();</I> function of the #include &ltavr/sleep.h&gt library, the microcontroller is sleeping so deep that only an interrupt will be able to wake up the processor. Such an interrupt can come for example from the watchdog. Using an interrupt based on rising, falling, high or low level on one of the interrupt enabled pins would be another option, see <a href="http://playground.arduino.cc/Learning/ArduinoSleepCode">here</a>. <br />
+Therefore, making sure that an Arduino board would sleep consuming the least amount of current while still waking up periodically imposes to use the watchdog to wake up periodically the board. This can be done for example through the following program, where a few additional measures have been taken to save power, such as shutting off the ADC. Shutting off the brown-out voltage detection is also a possibility to further reduce power consumption during sleep, but is dangerous for the board functionning.
+<pre>
+<code>
+#include &ltavr/wdt.h&gt            // library for default watchdog functions
+#include &ltavr/interrupt.h&gt      // library for interrupts handling
+#include &ltavr/sleep.h&gt          // library for sleep
+#include &ltavr/power.h&gt          // library for power control
+
+// how many times remain to sleep before wake up
+int nbr_remaining; 
+
+// pin on which a led is attached on the board
+#define led 13
+
+// interrupt raised by the watchdog firing
+// when the watchdog fires during sleep, this function will be executed
+// remember that interrupts are disabled in ISR functions
+ISR(WDT_vect)
+{
+        // not hanging, just waiting
+        // reset the watchdog
+        wdt_reset();
+}
+
+// function to configure the watchdog: let it sleep 8 seconds before firing
+// when firing, configure it for resuming program execution
+void configure_wdt(void)
+{
+ 
+  cli();                           // disable interrupts for changing the registers
+
+  MCUSR = 0;                       // reset status register flags
+
+                                   // Put timer in interrupt-only mode:                                       
+  WDTCSR |= 0b00011000;            // Set WDCE (5th from left) and WDE (4th from left) to enter config mode,
+                                   // using bitwise OR assignment (leaves other bits unchanged).
+  WDTCSR =  0b01000000 | 0b100001; // set WDIE: interrupt enabled
+                                   // clr WDE: reset disabled
+                                   // and set delay interval (right side of bar) to 8 seconds
+
+  sei();                           // re-enable interrupts
+
+  // reminder of the definitions for the time before firing
+  // delay interval patterns:
+  //  16 ms:     0b000000
+  //  500 ms:    0b000101
+  //  1 second:  0b000110
+  //  2 seconds: 0b000111
+  //  4 seconds: 0b100000
+  //  8 seconds: 0b100001
+ 
+}
+
+// Put the Arduino to deep sleep. Only an interrupt can wake it up.
+void sleep(int ncycles)
+{  
+  nbr_remaining = ncycles; // defines how many cycles should sleep
+
+  // Set sleep to full power down.  Only external interrupts or
+  // the watchdog timer can wake the CPU!
+  set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+ 
+  // Turn off the ADC while asleep.
+  power_adc_disable();
+ 
+  while (nbr_remaining > 0){ // while some cycles left, sleep!
+
+  // Enable sleep and enter sleep mode.
+  sleep_mode();
+
+  // CPU is now asleep and program execution completely halts!
+  // Once awake, execution will resume at this point if the
+  // watchdog is configured for resume rather than restart
+ 
+  // When awake, disable sleep mode
+  sleep_disable();
+  
+  // we have slept one time more
+  nbr_remaining = nbr_remaining - 1;
+ 
+  }
+ 
+  // put everything on again
+  power_all_enable();
+ 
+}
+
+void setup(){
+  
+  // use led 13 and put it in low mode
+  pinMode(led, OUTPUT);
+  digitalWrite(led, LOW);
+  
+  delay(1000);
+  
+  // configure the watchdog
+  configure_wdt();
+
+  // blink twice
+  digitalWrite(led, HIGH);   
+  delay(500);               
+  digitalWrite(led, LOW);   
+  delay(500); 
+  digitalWrite(led, HIGH);   
+  delay(500);               
+  digitalWrite(led, LOW);   
+  delay(500); 
+
+}
+
+void loop(){
+
+  // sleep for a given number of cycles (here, 5 * 8 seconds) in lowest power mode
+  sleep(5);
+
+  // usefull stuff should be done here before next long sleep
+  // blink three times
+  digitalWrite(led, HIGH);   
+  delay(500);               
+  digitalWrite(led, LOW);   
+  delay(500); 
+  digitalWrite(led, HIGH);   
+  delay(500);               
+  digitalWrite(led, LOW);   
+  delay(500); 
+  digitalWrite(led, HIGH);   
+  delay(500);               
+  digitalWrite(led, LOW);   
+  delay(500); 
+
+}</code>
+</pre>
+<p>
+You can notice the call to the <I>ISR(WDT_vec)</I> function. This is an interrupt function, that will be called when the watchdog fires. WDT_vec indicates that this is the interrupt that will be called by the watchdog. Other sources can call interrupts and will have different _vec parameters. There are a few things to know about ISR functions. First, interrupts are disabled in ISR functions, so interrupt based functions will not work properly (for example, <I>Serial.write</I>). Moreover, usual variables cannot be modified in ISR functions. If you need to modify a variable in an interrupt, you should declare it as volatile the first time you use it (see next section). In general, ISR functions should be as short as possible, to allow the normal program flow to resume as fast as possible (do not forget that interrupts are disabled during ISR, so receiving on serial or pin driven interrupts will not work when executing ISR core).
+<br />
+One starts to see here the limits of general purpose libraries for detailed control of the microcontroller behavior. As more specific behavior is needed, it becomes necessary to start digging in the datasheet and bit registers to get full control over the microcontroller. 
+<br />
+<h2>Using the watchdog for both preventing failures and energy savings<span class="post-span"> </span></h2>
+<br />
+<p>
+We have learnt to use the watchdog to avoid code hangs and to put the Arduino in its lowest power mode. We can also use both functionnalities in the same program, by using a little bit more code in the <I>ISR()</I> function. This is exactly what the next example does.
+<pre>
+<code>
+#include &ltavr/wdt.h&gt            // library for default watchdog functions
+#include &ltavr/interrupt.h&gt      // library for interrupts handling
+#include &ltavr/sleep.h&gt          // library for sleep
+#include &ltavr/power.h&gt          // library for power control
+
+// how many times remain to sleep before wake up
+// volatile to be modified in interrupt function
+volatile int nbr_remaining; 
+
+// pin on which a led is attached on the board
+#define led 13
+
+// interrupt raised by the watchdog firing
+// when the watchdog fires, this function will be executed
+// remember that interrupts are disabled in ISR functions
+// now we must check if the board is sleeping or if this is a genuine
+// interrupt (hanging)
+ISR(WDT_vect)
+{
+    // Check if we are in sleep mode or it is a genuine WDR.
+    if(nbr_remaining > 0)
+    {
+        // not hang out, just waiting
+        // decrease the number of remaining avail loops
+        nbr_remaining = nbr_remaining - 1;
+        wdt_reset();
+    }
+    else
+    {
+        // must be rebooted
+        // configure
+        MCUSR = 0;                          // reset flags
+       
+                                            // Put timer in reset-only mode:
+        WDTCSR |= 0b00011000;               // Enter config mode.
+        WDTCSR =  0b00001000 | 0b000000;    // clr WDIE (interrupt enable...7th from left)
+                                            // set WDE (reset enable...4th from left), and set delay interval
+                                            // reset system in 16 ms...
+                                            // unless wdt_disable() in loop() is reached first
+                                       
+        // reboot
+        while(1);
+    }
+}
+
+// function to configure the watchdog: let it sleep 8 seconds before firing
+// when firing, configure it for resuming program execution by default
+// hangs will correspond to watchdog fired when nbr_remaining <= 0 and will
+// be determined in the ISR function
+void configure_wdt(void)
+{
+ 
+  cli();                           // disable interrupts for changing the registers
+
+  MCUSR = 0;                       // reset status register flags
+
+                                   // Put timer in interrupt-only mode:                                       
+  WDTCSR |= 0b00011000;            // Set WDCE (5th from left) and WDE (4th from left) to enter config mode,
+                                   // using bitwise OR assignment (leaves other bits unchanged).
+  WDTCSR =  0b01000000 | 0b100001; // set WDIE: interrupt enabled
+                                   // clr WDE: reset disabled
+                                   // and set delay interval (right side of bar) to 8 seconds
+
+  sei();                           // re-enable interrupts 
+}
+
+// Put the Arduino to deep sleep. Only an interrupt can wake it up.
+void sleep(int ncycles)
+{  
+  nbr_remaining = ncycles; // defines how many cycles should sleep
+
+  // Set sleep to full power down.  Only external interrupts or
+  // the watchdog timer can wake the CPU!
+  set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+ 
+  // Turn off the ADC while asleep.
+  power_adc_disable();
+ 
+  while (nbr_remaining > 0){ // while some cycles left, sleep!
+
+  // Enable sleep and enter sleep mode.
+  sleep_mode();
+
+  // CPU is now asleep and program execution completely halts!
+  // Once awake, execution will resume at this point if the
+  // watchdog is configured for resume rather than restart
+ 
+  // When awake, disable sleep mode
+  sleep_disable();
+  
+  // we have slept one time more
+  nbr_remaining = nbr_remaining - 1;
+ 
+  }
+ 
+  // put everything on again
+  power_all_enable();
+ 
+}
+
+void setup(){
+  
+  // use led 13 and put it in low mode
+  pinMode(led, OUTPUT);
+  digitalWrite(led, LOW);
+  
+  delay(1000);
+  
+  // configure the watchdog
+  configure_wdt();
+
+  // blink twice
+  digitalWrite(led, HIGH);   
+  delay(500);               
+  digitalWrite(led, LOW);   
+  delay(500); 
+  digitalWrite(led, HIGH);   
+  delay(500);               
+  digitalWrite(led, LOW);   
+  delay(500); 
+
+}
+
+void loop(){
+
+  // sleep for a given number of cycles (here, 5 * 8 seconds) in lowest power mode
+  sleep(5);
+
+  // usefull stuff
+  // blink three times
+  digitalWrite(led, HIGH);   
+  delay(500);               
+  digitalWrite(led, LOW);   
+  delay(500); 
+  digitalWrite(led, HIGH);   
+  delay(500);               
+  digitalWrite(led, LOW);   
+  delay(500);
+  digitalWrite(led, HIGH);   
+  delay(500);               
+  digitalWrite(led, LOW);   
+  delay(500); 
+
+  // now a real hang is happening: this will rebood the board
+  // after 8 seconds
+  // (at the end of the sleep, nrb_remaining = 0)
+  while (1);
+
+}
+</pre>
+</code>
+<br />
+<br />
+<h2>Conclusion<span class="post-span"> </span></h2>
+<p>
+You can now use the Arduino watchdog for both failure prevention and energy savings. Since the detailed gestion of the watchdog is done explicitly in the program, it is easy for you to adapt the code to your needs. For example, if you need to push some content to the internet and that some operations request some time, you can call the following code before each time consuming operation
+<pre>
+<code>
+wdt_reset();
+nbr_remaining = 5;   
+</pre>
+</code>
+<p>
+to let the following operation several watchdog times (here, 5 * 8 = 40s) to perform before rebooting (I found it useful when working with the CC3000 WiFi shield).
+<br />
+<h1>Disclaimer<span class="post-span"> </span></h1>
+<p>
+Disclaimer: the content of this page is the result of a mix and classification work of the content I read on a number of other webpages, including <a href="http://playground.arduino.cc/Learning/ArduinoSleepCode">this one</a>, <a href="http://donalmorrissey.blogspot.no/2010/04/sleeping-arduino-part-5-wake-up-via.html">this one</a>, and <a href="http://megunolink.com/how-to-detect-lockups-using-the-arduino-watchdog/">this one</a>. I hope I do not forget to cite additional sources of inspiration. If I clearly used some verbatim pieces of your code to build the functions on this page and forget to cite you, contact me and I may add a link to your work. 
+<br />
+
+</div>
+<div id="footer">
+<font size="1">
+Content released under <a href="../License.html" title="License"><font color="3366CC">MIT License</font></a>
+<br />
+(c) 2015 Jean Rabault, contact: jeanra@math.uio.no
+</font>
+</div>
+</body>
+</html>
