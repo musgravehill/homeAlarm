@@ -1,3 +1,5 @@
 Диод на базе от переполюсовки
 Предохранители на БП
 TVS на базе
+
+send SMS delay -> state machine, for watchdog reset!

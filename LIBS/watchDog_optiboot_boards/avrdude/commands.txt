@@ -11,7 +11,7 @@ avrdude -p m328p -c usbasp -b9600 -e -U lfuse:w:0xee:m -U hfuse:w:0xdf:m -U efus
 avrdude -p m328p -c usbasp -b9600 -e -U lfuse:w:0xe7:m -U hfuse:w:0xdf:m -U efuse:w:0x06:m
 
 //upload hex
-avrdude -p m328p -c usbasp -b9600 -e -U flash:w:tx_1_am2302_dht22.ino.hex
+avrdude -p m328p -c usbasp -b9600 -e -U flash:w:tx_2.ino.hex
 
 //read fuses
 avrdude -p m328p -c usbasp -b9600 -U lfuse:r:fuse_L.txt:h -U hfuse:r:fuse_H.txt:h -U efuse:r:fuse_E.txt:h

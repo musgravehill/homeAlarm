@@ -8,5 +8,5 @@ void ENCODER_read() {
     MENU_state = 12;
     myEncoder.write(12);
   } 
-  MENU_state = 4; //DBG
+  MENU_state = 8; //DBG
 }

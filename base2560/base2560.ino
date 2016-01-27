@@ -52,6 +52,7 @@
 #include "DS3231.h"
 #include "Adafruit_GFX.h"
 #include "Adafruit_ILI9341.h"
+#include <avr/wdt.h>
 
 #include <Encoder.h>
 Encoder myEncoder(2, 3);
@@ -149,10 +150,12 @@ int8_t MENU_state = 0;
 #define debugSerial Serial
 #define gsmSerial Serial1
 
-#include <avr/wdt.h>
+
 
 void setup() {
+  MCUSR = 0;  //VERY VERY IMPORTANT!!!! ELSE WDT DOESNOT RESET, DOESNOT DISABLED!!!
   wdt_disable();
+  
   delay(2000); //for calming current & voltage fluctuations
 
 #ifdef DEBUG

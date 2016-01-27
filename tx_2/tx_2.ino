@@ -26,6 +26,7 @@
 #include <RF24.h>
 #include <stdint.h>
 #include "LowPower.h" //LP
+#include <avr/wdt.h>
 
 #define IM_SENSOR_NUM 2  //1..5
 #define NRF_CE_PIN 9
@@ -43,9 +44,11 @@ const uint64_t pipes[6] = {   //'static' - no need
 
 RF24 NRF_radio(NRF_CE_PIN, NRF_CSN_PIN);
 
-uint16_t LP_counterSleep_8s = 0;
 
 void setup() {
+  MCUSR = 0;  //VERY VERY IMPORTANT!!!! ELSE WDT DOESNOT RESET, DOESNOT DISABLED!!!
+  wdt_disable();
+
   delay(2000);
   //Serial.begin(9600);
   NRF_init();
@@ -58,17 +61,21 @@ void setup() {
     INTERNAL2V56: внутреннее опорное напряжение 2.56 В (только для Arduino Mega)
     EXTERNAL: в качестве опорного напряжения будет использоваться напряжение, приложенное к выводу AREF (от 0 до 5В)
   */
-   analogReference(INTERNAL); 
+  analogReference(INTERNAL);
 }
 
 void loop() {
-  //Serial.flush(); //the system is going to sleep while it's still sending the serial data
-  LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
-  LP_counterSleep_8s++;
+  wdt_enable (WDTO_8S);
+  //try to have time < 8s, else autoreset by watchdog
+  sendDataToBase();
+  wdt_reset();
+  wdt_disable();
 
-  if (LP_counterSleep_8s >= 8) {
-    LP_counterSleep_8s = 0;
-    sendDataToBase();
+  //Serial.flush(); //the system is going to sleep while it's still sending the serial data.
+  uint8_t countSleep = 0;
+  while (countSleep < 8) {
+    LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
+    countSleep++;
   }
 }
 
