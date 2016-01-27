@@ -1,0 +1,14 @@
+SETUP:
+// Nothing
+LOOP:
+wdt_enable(WDTO_8S); //Time for wait before autoreset
+//do some stuff here ….
+wdt_reset();
+//do some other stuff here ….
+wdt_reset();
+//more stuff
+wdt_disable();
+for (unsigned int i = 0; i < seconds; i++) { LowPower.powerDown(SLEEP_1S, ADC_OFF, BOD_OFF); } 
+
+
+- See more at: http://www.rocketscream.com/blog/2011/07/04/lightweight-low-power-arduino-library/#sthash.zrPTV9e9.dpuf
