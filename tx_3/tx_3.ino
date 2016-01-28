@@ -26,6 +26,7 @@
 #include <RF24.h>
 #include <stdint.h>
 #include "LowPower.h" //LP
+#include <avr/wdt.h>
 
 #define IM_SENSOR_NUM 3  //1..5
 #define NRF_CE_PIN 9
@@ -43,9 +44,11 @@ const uint64_t pipes[6] = {   //'static' - no need
 
 RF24 NRF_radio(NRF_CE_PIN, NRF_CSN_PIN);
 
-uint16_t LP_counterSleep_8s = 0;
 
 void setup() {
+  MCUSR = 0;  //VERY VERY IMPORTANT!!!! ELSE WDT DOESNOT RESET, DOESNOT DISABLED!!!
+  wdt_disable();
+
   delay(2000);
   //Serial.begin(9600);
   NRF_init();
@@ -62,12 +65,23 @@ void setup() {
 }
 
 void loop() {
-  LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
-  LP_counterSleep_8s++;
+  wdt_enable (WDTO_8S);
+  //try to have time < 8s, else autoreset by watchdog
+  sendDataToBase();
+  wdt_reset();
+  wdt_disable();
 
-  if (LP_counterSleep_8s >= 8) {
-    LP_counterSleep_8s = 0;
-    sendDataToBase();
+  //Serial.flush(); //the system is going to sleep while it's still sending the serial data.
+  uint8_t countSleep = 0;
+  while (countSleep < 8) {
+    LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
+    countSleep++;
+  }
+
+  //reset base after 1 day uptime
+  if ((int) millis() > 86400000L) {
+    wdt_enable(WDTO_1S);
+    delay(1500);
   }
 }
 
@@ -76,16 +90,18 @@ void sendDataToBase() {
   // Sense point is bypassed with 0.1 uF cap to reduce noise at that point
   // ((1e6+470e3)/470e3)*1.1 = Vmax = 3.44 Volts
   // 3.44/1023 = Volts per bit = 0.003363075
-  delay(50); //voltage fluctuation on ADC  
-  uint16_t batteryVoltage =  0.3305 * analogRead(ACC_CONTROL_PIN_1V); // 100 * 3.24V = 324
+  delay(50); //voltage fluctuation on ADC
+  analogRead(ACC_CONTROL_PIN_1V);//skip first measure. is it need?
+  uint16_t batteryVoltage = 0.3305 * analogRead(ACC_CONTROL_PIN_1V); // 100 * 3.24V = 324
+
 
   int16_t arrayToBase[7] = {
     batteryVoltage,     //100*V.xx 0=null, voltage on sensor battery, 100*V
     0,  //T   0=null, -50..120 [+100]   temperature, C
     0,     //H   0=null, 0..100   [+100]   humidity, %
-    0,                  //W   0=null, 100, 101          water leak, bool
+    101,                  //W   0=null, 100, 101          water leak, bool
     0,                  //G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
-    100,                  //M   0=null, 100, 101          motion detector, bool
+    101,                  //M   0=null, 100, 101          motion detector, bool
     0,                  //C   0=null, 0..1023 [+1]      gas CO, ADC value
   };
 

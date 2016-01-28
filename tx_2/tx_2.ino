@@ -77,6 +77,12 @@ void loop() {
     LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
     countSleep++;
   }
+
+  //reset base after 1 day uptime
+  if ((int) millis() > 86400000L) {
+    wdt_enable(WDTO_1S);
+    delay(1500);
+  }
 }
 
 void sendDataToBase() {
