@@ -138,6 +138,12 @@ String GSM_answerCSQ = "";
 String GSM_answerCPAS = "";
 String GSM_answerCOPS = "";
 
+const uint8_t GSM_queueLoop_size = 12;
+String GSM_queueLoop_phones[GSM_queueLoop_size] = {"-"}; //0..11
+String GSM_queueLoop_messages[GSM_queueLoop_size] = {""};
+uint8_t GSM_queueLoop_pos = 0;
+uint8_t GSM_queueLoop_stateMachine_pos = 0;
+
 //peripheral
 bool BASE_buzzerIsNeed = true;
 uint8_t BASE_voltagePin = A0; //TODO ADC AREF set to inner 1.1V and make -R-R- voltage divider
@@ -155,7 +161,7 @@ int8_t MENU_state = 0;
 void setup() {
   MCUSR = 0;  //VERY VERY IMPORTANT!!!! ELSE WDT DOESNOT RESET, DOESNOT DISABLED!!!
   wdt_disable();
-  
+
   delay(2000); //for calming current & voltage fluctuations
 
 #ifdef DEBUG
@@ -204,15 +210,18 @@ void setup() {
   }
 #endif
 
-  wdt_enable (WDTO_8S); //if WDT not reset on 8s => atmega restarts
+  wdt_enable(WDTO_8S); //if WDT not reset on 8s => atmega restarts
 
 }
 
 void loop() {
   wdt_reset();
   NRF_listen();
+  wdt_reset();
   ENCODER_read();
+  wdt_reset();
   STATEMACHINE_loop();
+  wdt_reset();
 }
 
 void BASE_processDataFromSensor() {

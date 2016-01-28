@@ -18,25 +18,41 @@ void STATEMACHINE_loop() {
   }
 }
 
-void STATEMACHINE_1s() {  
+void STATEMACHINE_1s() {
+  wdt_reset();
   TFT_initLED();
+  wdt_reset();
   GSM_listenSerial();
+  wdt_reset();
   GSM_checkIncomingCall();
+  wdt_reset();
 }
 
 void STATEMACHINE_17s() {
+  wdt_reset();
   TFT_renderMenuState();
-
-  if (BASE_buzzerIsNeed) {
-    BASE_buzzerIsNeed = false;
-  }
+  wdt_reset();
 }
 
 void STATEMACHINE_61s() {
+  wdt_reset();
   BASE_checkSensorsFault();
+  wdt_reset();
+  GSM_queueLoop_stateMachine_processing();
+  wdt_reset();
 }
 
 void STATEMACHINE_103s() {
+  wdt_reset();
   GSM_cleanAllSMS();
+  wdt_reset();
+
+  //reset base after 1 day uptime
+  if ((int) millis() > 86400000L) {
+    wdt_disable();
+    wdt_enable(WDTO_1S);
+    delay(1500);
+  }
+
 }
 

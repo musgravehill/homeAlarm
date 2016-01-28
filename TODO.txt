@@ -3,3 +3,4 @@
 TVS на базе
 
 send SMS delay -> state machine, for watchdog reset!
+reboot once a day: base & sensors

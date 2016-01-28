@@ -34,8 +34,8 @@ void GSM_sendDangers() {
   String SMS_dangers = "";
   bool isAllowSendSMS = false;
   /*
-    Все опасные параметры от всех датчиков пишем в строку.
-    Если можно отправить СМС хотя бы для 1 параметра, то щлем всю строку.
+    no Все опасные параметры от всех датчиков пишем в строку.
+    no Если можно отправить СМС хотя бы для 1 параметра, то щлем всю строку.
   */
   for (uint8_t sensorPipeNum = 1; sensorPipeNum < 6; sensorPipeNum++) {
     for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
@@ -52,7 +52,7 @@ void GSM_sendDangers() {
   }
 
   if (isAllowSendSMS) {
-    GSM_sendSMS2All(SMS_dangers);
+    GSM_addToQueue_SMS_all(SMS_dangers);
   }
 
 #ifdef DEBUG
@@ -62,34 +62,38 @@ void GSM_sendDangers() {
 
 }
 
-void GSM_sendSMS2All(String message) {
-#ifdef DEBUG
-  debugSerial.print("SMS SEND:");
-  debugSerial.println(message);
-#endif
+void GSM_addToQueue_SMS_all(String message) {
   for (uint8_t i = 0; i < GSM_phoneNums_count; i++) {
-    GSM_sendSMS(message, GSM_phoneNums[i]);
-#ifdef DEBUG
-    debugSerial.println(GSM_phoneNums[i]);
-#endif
+    GSM_queueLoop_phones[GSM_queueLoop_pos] = GSM_phoneNums[i]; //0..7
+    GSM_queueLoop_messages[GSM_queueLoop_pos] = message.substring(0, 63);
+    GSM_queueLoop_pos++; //create next pos
+    if (GSM_queueLoop_pos > (GSM_queueLoop_size - 1)) {
+      GSM_queueLoop_pos = 0; //loop, goto 0 position in queue
+    }
   }
 }
 
-void GSM_sendSMS(String message, String phone) {
-  //TODO delete delay, use state machine
-  wdt_reset();
+void GSM_queueLoop_stateMachine_processing() {
+  GSM_sendSMS(GSM_queueLoop_phones[GSM_queueLoop_stateMachine_pos], GSM_queueLoop_messages[GSM_queueLoop_stateMachine_pos]);
+  GSM_queueLoop_stateMachine_pos++; //create next pos
+  if (GSM_queueLoop_stateMachine_pos > (GSM_queueLoop_size - 1)) {
+    GSM_queueLoop_stateMachine_pos = 0; //loop, goto 0 position in queue
+  }
+}
+
+void GSM_sendSMS(String phone, String message) {
   gsmSerial.println("AT+CMGS=\"" + phone + "\"");
   delay(1000);
   gsmSerial.print(message);
-  delay(100);
+  delay(50);
   gsmSerial.print((char)26);
-  wdt_reset();
-  delay(5000);
+  delay(50);
+  //delay in state machine 61s
 }
 
 void GSM_cleanAllSMS() {
   gsmSerial.println("AT+CMGD=1,4"); //clean ALL SMS (in, out, read, unread, sent, unsent)
-  delay(1000);  
+  delay(1000);
 }
 
 void GSM_initPhoneNums() {
