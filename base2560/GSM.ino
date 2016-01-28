@@ -31,35 +31,19 @@ bool GSM_paramIsAllowSms(uint8_t paramNum) {
 }
 
 void GSM_sendDangers() {
-  String SMS_dangers = "";
-  bool isAllowSendSMS = false;
-  /*
-    no Все опасные параметры от всех датчиков пишем в строку.
-    no Если можно отправить СМС хотя бы для 1 параметра, то щлем всю строку.
-  */
+  String SMS_danger = "";
+
   for (uint8_t sensorPipeNum = 1; sensorPipeNum < 6; sensorPipeNum++) {
     for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
-      if (BASE_sensorParamsIsDanger[sensorPipeNum][paramNum]) {
-        SMS_dangers +=  "#" + String(sensorPipeNum, DEC) + " ";
-        SMS_dangers +=  PARAMS_getVerbalParamName(paramNum) + "=";
-        SMS_dangers +=  String(BASE_sensorDecodedParams[sensorPipeNum][paramNum], DEC) + " ";
-        if (GSM_paramIsAllowSms(paramNum)) {
-          isAllowSendSMS = true;
-          GSM_paramPrevSMSMillis[paramNum] = millis();
-        }
+      if (BASE_sensorParamsIsDanger[sensorPipeNum][paramNum] && GSM_paramIsAllowSms(paramNum)) {
+        SMS_danger =  "#" + String(sensorPipeNum, DEC) + " ";
+        SMS_danger +=  PARAMS_getVerbalParamName(paramNum) + "=";
+        SMS_danger +=  String(BASE_sensorDecodedParams[sensorPipeNum][paramNum], DEC) + " ";
+        GSM_addToQueue_SMS_all(SMS_danger);
+        GSM_paramPrevSMSMillis[paramNum] = millis();
       }
     }
   }
-
-  if (isAllowSendSMS) {
-    GSM_addToQueue_SMS_all(SMS_dangers);
-  }
-
-#ifdef DEBUG
-  debugSerial.print("SMS INIT: ");
-  debugSerial.println(SMS_dangers);
-#endif
-
 }
 
 void GSM_addToQueue_SMS_all(String message) {
