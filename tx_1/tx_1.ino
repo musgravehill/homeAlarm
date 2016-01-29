@@ -2,6 +2,7 @@
   ardu_328
   nrf24l01+
   dht22
+  PIR
 */
 /* Defined constants in arduino don't take up any program memory space on the chip.
   The compiler will replace references to these constants with the defined value
@@ -33,7 +34,9 @@
 #define IM_SENSOR_NUM 1  //1..5
 #define NRF_CE_PIN 9
 #define NRF_CSN_PIN 10 //if use SPI, d10=hardware SS SPI only
-#define ACC_CONTROL_PIN_1V A0 //hardcoded in PCB voltage divider
+#define BATT_CONTROL_PIN_1V1 A0 //hardcoded in PCB voltage divider
+#define DHT22_DATA_PIN 2
+#define PIR_DATA_PIN 3
 
 const uint64_t pipes[6] = {   //'static' - no need
   0xDEADBEEF00LL,  //pipe0 is SYSTEM_pipe, avoid openReadingPipe(0, );
@@ -48,13 +51,16 @@ RF24 NRF_radio(NRF_CE_PIN, NRF_CSN_PIN);
 
 DHT dht;
 
+uint8_t PIR_motionDetected = 0;
+
 void setup() {
   MCUSR = 0;  //VERY VERY IMPORTANT!!!! ELSE WDT DOESNOT RESET, DOESNOT DISABLED!!!
   wdt_disable();
 
-  delay(2000);
-  //Serial.begin(9600);
+  pinMode(PIR_DATA_PIN, INPUT);
+  delay(61000); //for PIR calibrating 60s, reduction of power fluctuation on powerUp, etc
   NRF_init();
+  dht.setup(DHT22_DATA_PIN);
 
   //use the 1.1 V internal reference => other A* can NOT receive VCC, only 1.1V max
   /*
@@ -77,38 +83,41 @@ void loop() {
   //Serial.flush(); //the system is going to sleep while it's still sending the serial data.
   uint8_t countSleep = 0;
   while (countSleep < 8) {
-    LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
+    LowPower.powerDown(SLEEP_4S, ADC_OFF, BOD_OFF);
+    PIR_motionDetected = PIR_motionDetected | digitalRead(PIR_DATA_PIN); //Bitwise OR
     countSleep++;
   }
 
   //reset base after 1 day uptime
   if ((int) millis() > 86400000L) {
-    wdt_enable(WDTO_1S);
-    delay(1500);
+    wdt_enable(WDTO_2S);
+    delay(2500);
   }
 }
 
 void sendDataToBase() {
-  dht.setup(2); // data pin 2
+  dht.setup(DHT22_DATA_PIN);
+  delay(100);
+  uint16_t humidity = (int) dht.getHumidity();
+  delay(20);
+  uint16_t temperature = (int) dht.getTemperature();
+  delay(20);
+  uint16_t batteryVoltage = 0.3334 * analogRead(BATT_CONTROL_PIN_1V1); // 100 * 3.24V = 324
+  PIR_motionDetected = PIR_motionDetected | digitalRead(PIR_DATA_PIN); //Bitwise OR
+
   // 1M, 470K divider across battery and using internal ADC ref of 1.1V
   // Sense point is bypassed with 0.1 uF cap to reduce noise at that point
   // ((1e6+470e3)/470e3)*1.1 = Vmax = 3.44 Volts
   // 3.44/1023 = Volts per bit = 0.003363075
-  delay(20);
-  uint16_t humidity = (int) dht.getHumidity();
-  uint16_t temperature = (int) dht.getTemperature();
-  delay(20);
-  uint16_t batteryVoltage = 0.3334 * analogRead(ACC_CONTROL_PIN_1V); // 100 * 3.24V = 324
-
 
   int16_t arrayToBase[7] = {
-    batteryVoltage,     //100*V.xx 0=null, voltage on sensor battery, 100*V
-    temperature + 100,  //T   0=null, -50..120 [+100]   temperature, C
-    humidity + 100,     //H   0=null, 0..100   [+100]   humidity, %
-    0,                  //W   0=null, 100, 101          water leak, bool
-    0,                  //G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
-    0,                  //M   0=null, 100, 101          motion detector, bool
-    0,                  //C   0=null, 0..1023 [+1]      gas CO, ADC value
+    batteryVoltage,               //100*V.xx 0=null, voltage on sensor battery, 100*V
+    temperature + 100,            //T   0=null, -50..120 [+100]   temperature, C
+    humidity + 100,               //H   0=null, 0..100   [+100]   humidity, %
+    0,                            //W   0=null, 100, 101          water leak, bool
+    0,                            //G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
+    PIR_motionDetected + 100 ,  //M   0=null, 100, 101          motion detector, bool
+    0,                            //C   0=null, 0..1023 [+1]      gas CO, ADC value
   };
 
   //Serial.print(humidity);
