@@ -15,6 +15,10 @@
     //G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
     //M   0=null, 100, 101          motion detector, bool
     //C   0=null, 0..1023 [+1]      gas CO, ADC value
+    //A   0=null, 100=off, 101=on   ALARM mode:
+                                      ON  SMS:ALL  BEEPER:OFF
+                                      OFF SMS:V,T,H,WL,CH4,CO  BEEPER:V,T,H,WL,CH4,CO
+
 
   LOGS => log on SD only
   DNGR => log on SD & send SMS [danger]
@@ -31,7 +35,7 @@
 #define IM_SENSOR_NUM 2  //1..5
 #define NRF_CE_PIN 9
 #define NRF_CSN_PIN 10 //if use SPI, d10=hardware SS SPI only
-#define ACC_CONTROL_PIN_1V A0 //hardcoded in PCB voltage divider
+#define BATT_CONTROL_PIN_1V1 A0 //hardcoded in PCB voltage divider
 
 const uint64_t pipes[6] = {   //'static' - no need
   0xDEADBEEF00LL,  //pipe0 is SYSTEM_pipe, avoid openReadingPipe(0, );
@@ -48,10 +52,12 @@ RF24 NRF_radio(NRF_CE_PIN, NRF_CSN_PIN);
 void setup() {
   MCUSR = 0;  //VERY VERY IMPORTANT!!!! ELSE WDT DOESNOT RESET, DOESNOT DISABLED!!!
   wdt_disable();
+  delay(50);
+  analogReference(INTERNAL);
 
-  delay(2000);
-  //Serial.begin(9600);
+  delay(3000); //reduction of power fluctuation on powerUp
   NRF_init();
+  delay(57000); //for PIR calibrating 60s
 
   //use the 1.1 V internal reference => other A* can NOT receive VCC, only 1.1V max
   /*
@@ -61,7 +67,7 @@ void setup() {
     INTERNAL2V56: внутреннее опорное напряжение 2.56 В (только для Arduino Mega)
     EXTERNAL: в качестве опорного напряжения будет использоваться напряжение, приложенное к выводу AREF (от 0 до 5В)
   */
-  analogReference(INTERNAL);
+
 }
 
 void loop() {
@@ -73,36 +79,38 @@ void loop() {
 
   //Serial.flush(); //the system is going to sleep while it's still sending the serial data.
   uint8_t countSleep = 0;
-  while (countSleep < 8) {
+  while (countSleep < 15) {
     LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
     countSleep++;
   }
 
   //reset base after 1 day uptime
   if ((int) millis() > 86400000L) {
-    wdt_enable(WDTO_1S);
-    delay(1500);
+    wdt_enable(WDTO_2S);
+    delay(2500);
   }
 }
 
 void sendDataToBase() {
+
+
+  uint16_t batteryVoltage = 0.3348 * analogRead(BATT_CONTROL_PIN_1V1); // 100 * 3.24V = 324
+  delay(20);
+
   // 1M, 470K divider across battery and using internal ADC ref of 1.1V
   // Sense point is bypassed with 0.1 uF cap to reduce noise at that point
   // ((1e6+470e3)/470e3)*1.1 = Vmax = 3.44 Volts
   // 3.44/1023 = Volts per bit = 0.003363075
-  delay(50); //voltage fluctuation on ADC
-  analogRead(ACC_CONTROL_PIN_1V);//skip first measure. is it need?
-  uint16_t batteryVoltage = 0.3348 * analogRead(ACC_CONTROL_PIN_1V); // 100 * 3.24V = 324
 
-
-  int16_t arrayToBase[7] = {
-    batteryVoltage,     //100*V.xx 0=null, voltage on sensor battery, 100*V
-    0,  //T   0=null, -50..120 [+100]   temperature, C
-    0,     //H   0=null, 0..100   [+100]   humidity, %
-    100,                  //W   0=null, 100, 101          water leak, bool
-    0,                  //G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
-    0,                  //M   0=null, 100, 101          motion detector, bool
-    0,                  //C   0=null, 0..1023 [+1]      gas CO, ADC value
+  int16_t arrayToBase[8] = {
+    batteryVoltage,               //100*V.xx 0=null, voltage on sensor battery, 100*V
+    0,                            //T   0=null, -50..120 [+100]   temperature, C
+    0,                            //H   0=null, 0..100   [+100]   humidity, %
+    0,                            //W   0=null, 100, 101          water leak, bool
+    0,                            //G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
+    0,                            //M   0=null, 100, 101          motion detector, bool
+    0,                            //C   0=null, 0..1023 [+1]      gas CO, ADC value
+    0                             //no alarm control
   };
 
   NRF_sendData(arrayToBase, sizeof(arrayToBase));
@@ -131,7 +139,7 @@ void NRF_init() {
   //NRF_radio.setPayloadSize(32); //32 bytes? Can corrupt "writeAckPayload"?
 
   NRF_radio.setAutoAck(true);////allow RX send answer(acknoledgement) to TX (for ALL pipes?)
-  //NRF_radio.enableAckPayload(); //custom ack //only for 0,1 pipes?
+  NRF_radio.enableAckPayload(); //custom ack //only for 0,1 pipes?
   ////NRF_radio.enableDynamicAck(); //for ALL pipes? Чтобы можно было вкл\выкл получение ACK?
 
   NRF_radio.stopListening();// ?
@@ -143,6 +151,19 @@ void NRF_init() {
 }
 
 void NRF_sendData(int16_t* arrayToBase, uint8_t sizeofArrayToBase) {
+  //Serial.println("\r\n");
+  //Serial.print("arr[");
+  //Serial.print(sizeofArrayToBase, DEC);
+  //Serial.println("]: ");
+  //Serial.println(arrayToBase[0], DEC);
+  //Serial.println(arrayToBase[1], DEC);
+  //Serial.println(arrayToBase[2], DEC);
+  //Serial.println(arrayToBase[3], DEC);
+  //Serial.println(arrayToBase[4], DEC);
+  //Serial.println(arrayToBase[5], DEC);
+  //Serial.println(arrayToBase[6], DEC);
+  //Serial.println("\r\n");
+
   delay(50);
   NRF_radio.powerUp();
   delay(50);
@@ -153,16 +174,10 @@ void NRF_sendData(int16_t* arrayToBase, uint8_t sizeofArrayToBase) {
   NRF_radio.write( arrayToBase, sizeofArrayToBase);
   //& не надо, в ф-ю уже передал указатель, а не сам массив
 
-  /*
-    uint8_t answerFromBase; //2^8 - 1   [0,255]
-    if ( NRF_radio.isAckPayloadAvailable() ) {
-      NRF_radio.read(&answerFromBase, sizeof(answerFromBase)); //приемник принял и ответил
-
-      //Serial.print(F("__Received answer from Base: "));
-      //Serial.print(answerFromBase, DEC);
-      //Serial.print(F("\r\n"));
-    }
-  */
+  uint8_t answerFromBase; //2^8 - 1   [0,255]
+  if ( NRF_radio.isAckPayloadAvailable() ) {
+    NRF_radio.read(&answerFromBase, sizeof(answerFromBase)); //приемник принял и ответил
+  }
 
   delay(50);
   NRF_radio.powerDown();
