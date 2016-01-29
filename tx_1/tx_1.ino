@@ -1,8 +1,8 @@
 /*
   ardu_328
   nrf24l01+
-  dht22
-  PIR
+  dht22  d2
+  PIR    d3
 */
 /* Defined constants in arduino don't take up any program memory space on the chip.
   The compiler will replace references to these constants with the defined value
@@ -17,6 +17,10 @@
     //G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
     //M   0=null, 100, 101          motion detector, bool
     //C   0=null, 0..1023 [+1]      gas CO, ADC value
+    //A   0=null, 100=off, 101=on   ALARM mode:
+                                      ON  SMS:ALL  BEEPER:OFF
+                                      OFF SMS:V,T,H,WL,CH4,CO  BEEPER:V,T,H,WL,CH4,CO
+
 
   LOGS => log on SD only
   DNGR => log on SD & send SMS [danger]
@@ -56,11 +60,14 @@ uint8_t PIR_motionDetected = 0;
 void setup() {
   MCUSR = 0;  //VERY VERY IMPORTANT!!!! ELSE WDT DOESNOT RESET, DOESNOT DISABLED!!!
   wdt_disable();
-
+  delay(50);
   pinMode(PIR_DATA_PIN, INPUT);
-  delay(61000); //for PIR calibrating 60s, reduction of power fluctuation on powerUp, etc
+  analogReference(INTERNAL);
+
+  delay(3000); //reduction of power fluctuation on powerUp
   NRF_init();
   dht.setup(DHT22_DATA_PIN);
+  delay(57000); //for PIR calibrating 60s
 
   //use the 1.1 V internal reference => other A* can NOT receive VCC, only 1.1V max
   /*
@@ -70,7 +77,7 @@ void setup() {
     INTERNAL2V56: внутреннее опорное напряжение 2.56 В (только для Arduino Mega)
     EXTERNAL: в качестве опорного напряжения будет использоваться напряжение, приложенное к выводу AREF (от 0 до 5В)
   */
-  analogReference(INTERNAL);
+
 }
 
 void loop() {
@@ -82,7 +89,7 @@ void loop() {
 
   //Serial.flush(); //the system is going to sleep while it's still sending the serial data.
   uint8_t countSleep = 0;
-  while (countSleep < 8) {
+  while (countSleep < 15) {
     LowPower.powerDown(SLEEP_4S, ADC_OFF, BOD_OFF);
     PIR_motionDetected = PIR_motionDetected | digitalRead(PIR_DATA_PIN); //Bitwise OR
     countSleep++;
@@ -110,14 +117,15 @@ void sendDataToBase() {
   // ((1e6+470e3)/470e3)*1.1 = Vmax = 3.44 Volts
   // 3.44/1023 = Volts per bit = 0.003363075
 
-  int16_t arrayToBase[7] = {
+  int16_t arrayToBase[8] = {
     batteryVoltage,               //100*V.xx 0=null, voltage on sensor battery, 100*V
     temperature + 100,            //T   0=null, -50..120 [+100]   temperature, C
     humidity + 100,               //H   0=null, 0..100   [+100]   humidity, %
     0,                            //W   0=null, 100, 101          water leak, bool
     0,                            //G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
-    PIR_motionDetected + 100 ,  //M   0=null, 100, 101          motion detector, bool
+    PIR_motionDetected + 100 ,    //M   0=null, 100, 101          motion detector, bool
     0,                            //C   0=null, 0..1023 [+1]      gas CO, ADC value
+    0                            //no alarm control
   };
 
   //Serial.print(humidity);
