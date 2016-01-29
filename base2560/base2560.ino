@@ -144,7 +144,7 @@ String GSM_answerCPAS = "";
 String GSM_answerCOPS = "";
 
 const uint8_t GSM_queueLoop_size = 12;
-String GSM_queueLoop_phones[GSM_queueLoop_size] = {"-"}; //0..11
+String GSM_queueLoop_phones[GSM_queueLoop_size] = {""}; //0..11
 String GSM_queueLoop_messages[GSM_queueLoop_size] = {""};
 uint8_t GSM_queueLoop_pos = 0;
 uint8_t GSM_queueLoop_stateMachine_pos = 0;

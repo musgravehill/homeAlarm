@@ -61,7 +61,12 @@ void GSM_addToQueue_SMS_all(String message) {
 }
 
 void GSM_queueLoop_stateMachine_processing() {
-  GSM_sendSMS(GSM_queueLoop_phones[GSM_queueLoop_stateMachine_pos], GSM_queueLoop_messages[GSM_queueLoop_stateMachine_pos]);
+  //check if not null
+  if (GSM_queueLoop_phones[GSM_queueLoop_stateMachine_pos] != "") {
+    GSM_sendSMS(GSM_queueLoop_phones[GSM_queueLoop_stateMachine_pos], GSM_queueLoop_messages[GSM_queueLoop_stateMachine_pos]);
+    GSM_queueLoop_phones[GSM_queueLoop_stateMachine_pos] = "";
+    GSM_queueLoop_messages[GSM_queueLoop_stateMachine_pos] = "";
+  }
   GSM_queueLoop_stateMachine_pos++; //create next pos
   if (GSM_queueLoop_stateMachine_pos > (GSM_queueLoop_size - 1)) {
     GSM_queueLoop_stateMachine_pos = 0; //loop, goto 0 position in queue
