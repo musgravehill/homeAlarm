@@ -19,6 +19,9 @@ void GSM_init() {
 }
 
 bool GSM_paramIsAllowSms(uint8_t paramNum) {
+  if (BASE_ALARM_MODE == false) {
+    return false;
+  }
   if (GSM_paramPrevSMSMillis[paramNum] == 1) {
     return true;
   }

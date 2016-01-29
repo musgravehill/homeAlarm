@@ -38,6 +38,9 @@
     G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
     M   0=null, (0,1 + 100) = 100=normal, 101=alert motion detector, bool
     C   0=null, 0..1023 [+1]      gas CO, ADC value
+    A   0=null, 100=off, 101=on   ALARM mode:
+                                      ON  SMS:ALL  BEEPER:OFF
+                                      OFF SMS:V,T,H,WL,CH4,CO  BEEPER:V,T,H,WL,CH4,CO
 
   LOGS => log on SD only
   DNGR => log on SD & send SMS [danger]
@@ -80,7 +83,8 @@ const uint64_t NRF_pipes[6] = {
 };
 
 uint8_t NRF_currPipeNum;
-int16_t NRF_messageFromSensor[7] = {
+int16_t NRF_messageFromSensor[8] = {
+  0,
   0,
   0,
   0,
@@ -113,6 +117,7 @@ bool BASE_sensorIsOn[6] = {false}; //0 1..5
 int16_t BASE_sensorDecodedParams[6][7] = {0}; //encoded params; 0==null;  [sensorNum][paramNum]
 bool BASE_sensorParamsIsDanger[6][7] = {true}; //[sensorPipeNum][paramNum]
 bool BASE_sensorParamsIsAvailable[6][7] = {true}; //[sensorPipeNum][paramNum]
+bool BASE_ALARM_MODE = false;
 
 //STATEMACHINE
 uint32_t STATEMACHINE_prevMillis_1s = 1;
@@ -272,11 +277,32 @@ void BASE_processDataFromSensor() {
     SD_log(string_dangers);
   }
   GSM_sendDangers();
+  BASE_setAlarmMode();
 
 #ifdef DEBUG
   debugSerial.println(string_logs);
   debugSerial.println(string_dangers);
 #endif
+}
+
+void BASE_setAlarmMode() {
+  if (NRF_messageFromSensor[7] > 0) {
+    BASE_ALARM_MODE = (101 == NRF_messageFromSensor[7]) ? true : false;
+
+    DateTime now = RTC3231.now();
+    uint8_t hh =  now.hour();
+    uint8_t ii =  now.minute();
+    String hhii = ((hh < 10) ? "0" : "") + String(hh, DEC) + ":" ;
+    hhii += ((ii < 10) ? "0" : "") + String(ii, DEC);
+
+    String string_alarmMode = "ALRMMODE;#" + String(NRF_currPipeNum, DEC) + ";";
+    string_alarmMode += String((char)(BASE_ALARM_MODE) ? "TRUE" : "FALSE") + ";";
+    string_alarmMode += hhii + ";";
+    SD_log(string_alarmMode);
+#ifdef DEBUG
+    debugSerial.println(string_alarmMode);
+#endif
+  }
 }
 
 void BASE_checkSensorsFault() {

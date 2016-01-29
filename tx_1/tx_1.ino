@@ -165,7 +165,7 @@ void NRF_init() {
   //NRF_radio.setPayloadSize(32); //32 bytes? Can corrupt "writeAckPayload"?
 
   NRF_radio.setAutoAck(true);////allow RX send answer(acknoledgement) to TX (for ALL pipes?)
-  //NRF_radio.enableAckPayload(); //custom ack //only for 0,1 pipes?
+  NRF_radio.enableAckPayload(); //custom ack //only for 0,1 pipes?
   ////NRF_radio.enableDynamicAck(); //for ALL pipes? Чтобы можно было вкл\выкл получение ACK?
 
   NRF_radio.stopListening();// ?
@@ -202,16 +202,10 @@ void NRF_sendData(int16_t* arrayToBase, uint8_t sizeofArrayToBase) {
   NRF_radio.write( arrayToBase, sizeofArrayToBase);
   //& не надо, в ф-ю уже передал указатель, а не сам массив
 
-  /*
-    uint8_t answerFromBase; //2^8 - 1   [0,255]
-    if ( NRF_radio.isAckPayloadAvailable() ) {
-      NRF_radio.read(&answerFromBase, sizeof(answerFromBase)); //приемник принял и ответил
-
-      //Serial.print(F("__Received answer from Base: "));
-      //Serial.print(answerFromBase, DEC);
-      //Serial.print(F("\r\n"));
-    }
-  */
+  uint8_t answerFromBase; //2^8 - 1   [0,255]
+  if ( NRF_radio.isAckPayloadAvailable() ) {
+    NRF_radio.read(&answerFromBase, sizeof(answerFromBase)); //приемник принял и ответил
+  }
 
   delay(50);
   NRF_radio.powerDown();
