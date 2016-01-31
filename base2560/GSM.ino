@@ -1,21 +1,22 @@
 void GSM_init() {
   gsmSerial.println("AT"); //synchronize baud rate. GSM by default in auto-baud mode, it will not output any until sync
-  delay(100);
+  delay(200);
   gsmSerial.println("ATE0"); //эхо выключено
-  delay(100);
+  delay(200);
   gsmSerial.println("ATV0"); //возврат кода ответа только 0=OK 4=ERROR
-  delay(100);
+  delay(200);
   gsmSerial.println("AT+CMEE=0"); //если ошибка, то короткий ответ=="ERROR or 4"
-  delay(100);
+  delay(200);
   gsmSerial.println("AT+CLIP=1"); //определитель номера
-  delay(100);
+  delay(200);
   gsmSerial.println("AT+CMGF=1"); //Switching to text mode
-  delay(100);
+  delay(200);
   gsmSerial.println("AT+CSCS=\"GSM\""); //english only
-  delay(100);
+  delay(200);
   //gsmSerial.println("ATS0=1"); //auto-respond to incoming call
   //delay(100);
   gsmSerial.println("AT+CMIC=0,15"); //mic amp
+  delay(200);
 }
 
 bool GSM_paramIsAllowSms(uint8_t paramNum) {
@@ -64,6 +65,11 @@ void GSM_queueLoop_stateMachine_processing() {
   //check if not null
   if (GSM_queueLoop_phones[GSM_queueLoop_stateMachine_pos] != "") {
     GSM_sendSMS(GSM_queueLoop_phones[GSM_queueLoop_stateMachine_pos], GSM_queueLoop_messages[GSM_queueLoop_stateMachine_pos]);
+#ifdef DEBUG
+    debugSerial.print("SMS WAS SENT:");
+    debugSerial.print(GSM_queueLoop_phones[GSM_queueLoop_stateMachine_pos] + " ");
+    debugSerial.println(GSM_queueLoop_messages[GSM_queueLoop_stateMachine_pos]);
+#endif
     GSM_queueLoop_phones[GSM_queueLoop_stateMachine_pos] = "";
     GSM_queueLoop_messages[GSM_queueLoop_stateMachine_pos] = "";
   }

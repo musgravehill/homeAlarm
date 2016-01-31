@@ -48,10 +48,10 @@ void STATEMACHINE_103s() {
   wdt_reset();
 
   //reset base after 1 day uptime
-  if ((int) millis() > 86400000L) {
+  if ((int) millis() > 120000L) {
     wdt_disable();
-    wdt_enable(WDTO_1S);
-    delay(1500);
+    wdt_enable(WDTO_2S);
+    delay(2500);
   }
 
 }
