@@ -70,13 +70,13 @@ void TFT_renderInfoLine() {
   infoLine += ((i < 10) ? "0" : "") + String(i, DEC);
   myDisplay.print(infoLine);
   myDisplay.setTextColor(ILI9341_GREEN);
-  infoLine = "  " + String(((int) temperature), DEC) + "C";
+  infoLine = "  " + String(((int)temperature), DEC) + "C";
   myDisplay.print(infoLine);
 
   //uptime days
   myDisplay.setCursor(2, 22);
   myDisplay.setTextColor(ILI9341_BLUE);
-  infoLine = "uptime " + String(((int) (millis() / 3600000L)), DEC) + " h";
+  infoLine = "uptime " + String((millis() / 3600000L), DEC) + " h";
   myDisplay.print(infoLine);
 
   //gsm
