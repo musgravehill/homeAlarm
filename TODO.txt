@@ -4,3 +4,11 @@ TVS на базе
 Дроссели дифф, синфаз на питании
 
 Опрос GSM каждые N секунд (напр, качество связи). Если долго не было ответа - RST_GSM дернуть. 
+
+ALARM_MODE_setAtMillis = millis
+if millis > ALARM_MODE_setAtMillis+ 60s   => alarm ALLOW
+else alarm=disallow, give time for go away from home
+
+Danger => fix it millis
+After 60s  SMS allow!
+60s to disallow alarm-mode by button
