@@ -54,23 +54,22 @@ bool GSM_paramIsAllowSms(uint8_t paramNum) {
   }
 }
 
-void GSM_sendDangers() {
+void GSM_initSmsDangers() {
   String SMS_danger = "";
-
   for (uint8_t sensorPipeNum = 1; sensorPipeNum < 6; sensorPipeNum++) {
     for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
       if (BASE_sensorParamsIsDanger[sensorPipeNum][paramNum] && GSM_paramIsAllowSms(paramNum)) {
         SMS_danger =  "#" + String(sensorPipeNum, DEC) + " ";
         SMS_danger +=  PARAMS_getVerbalParamName(paramNum) + "=";
         SMS_danger +=  String(BASE_sensorDecodedParams[sensorPipeNum][paramNum], DEC) + " ";
-        GSM_addToQueue_SMS_all(SMS_danger);
+        GSM_addToQueueSMS_forAllPhones(SMS_danger);
         GSM_paramPrevSMSMillis[paramNum] = millis();
       }
     }
   }
 }
 
-void GSM_addToQueue_SMS_all(String message) {
+void GSM_addToQueueSMS_forAllPhones(String message) {
   for (uint8_t i = 0; i < GSM_phoneNums_count; i++) {
     GSM_queueLoop_phones[GSM_queueLoop_pos] = GSM_phoneNums[i]; //0..7
     GSM_queueLoop_messages[GSM_queueLoop_pos] = message.substring(0, 63);
@@ -81,7 +80,7 @@ void GSM_addToQueue_SMS_all(String message) {
   }
 }
 
-void GSM_queueLoop_stateMachine_processing() {
+void GSM_queueLoopSMS_stateMachine_processing() {
   //check if not null
   if (GSM_queueLoop_phones[GSM_queueLoop_stateMachine_pos] != "") {
     GSM_sendSMS(GSM_queueLoop_phones[GSM_queueLoop_stateMachine_pos], GSM_queueLoop_messages[GSM_queueLoop_stateMachine_pos]);

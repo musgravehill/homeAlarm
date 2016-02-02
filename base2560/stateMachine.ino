@@ -34,7 +34,7 @@ void STATEMACHINE_1s() {
 
 void STATEMACHINE_3s() {
   wr();
-  GSM_sendDangers();
+  GSM_initSmsDangers();
   wr();
 }
 
@@ -52,7 +52,7 @@ void STATEMACHINE_61s() {
   wr();
   BASE_checkSensorsFault();
   wr();
-  GSM_queueLoop_stateMachine_processing();
+  GSM_queueLoopSMS_stateMachine_processing();//SMS are added to queue. Processing 1 sms at one time
   wr();
 }
 
