@@ -12,3 +12,54 @@ else alarm=disallow, give time for go away from home
 Danger => fix it millis
 After 60s  SMS allow!
 60s to disallow alarm-mode by button
+
+-----------------------------------------------------------------------------------------
+AT+ECHO=?    SAVE DEFAULT TO .TXT
+AT+ECHO=0,(0-65535),(0-65535),(0-65535),(0-65535),(0,1)   //main mic (mic1p mic1n)
+--
+< mic > audio channel
+	0 main audio handset channel
+	1 main audio handfree channel
+<nlp> nonlinear processing remove residual echo and background noise
+<aec> acoustic echo cancellation
+<nr> noise reduction
+<ns> noise suppression
+< state> enable or disable to close echo algorithm
+	0 echo algorithm be closed
+	1 echo algorithm be actived
+------------------------------------------------------------------------------------------
+AT+SVR Configure Voice Coding Type for Voice Calls
+0:FR
+1:EFR/FR
+2.HR/FR
+3:FR/HR
+4:HR/EFR
+5:EFR/HR
+6:AMR-FR/EFR,AMR-HR
+7:AMR-FR/EFR,AMR-HR/HR
+8:AMR-HR/HR/AMR-FR/EFR
+9:AMR-HR/AMR-FR/EFR
+10:AMR-HR/AMR-FR/FR
+11:AMR-HR/HR/AMR-FR
+12:AMR-FR/AMR-HR
+13:AMR-FR/FR/AMR-HR
+14:AMR-FR/FR/AMR-HR/HR
+15:AMR-FR/EFR/FR/AMR-HR/HR
+16:AMR-HR/AMR-FR/EFR/FR/HR
+17: AMR-FR/AMR-HR/EFR/FR/HR
+------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
