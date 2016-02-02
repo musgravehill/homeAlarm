@@ -19,6 +19,11 @@ void GSM_init() {
   delay(200);
 }
 
+void GSM_ping() {
+  gsmSerial.println("AT+CSQ");
+  delay(200);
+}
+
 bool GSM_paramIsAllowSms(uint8_t paramNum) {
   if (BASE_ALARM_MODE == false) {
     return false;
@@ -177,6 +182,7 @@ void GSM_processSerialString(String s) {
     String s_head = s.substring(0, 5); //+CSQ: //+CLIP
     if (s_head == "+CSQ:") {
       GSM_answerCSQ = s;
+      GSM_prevPingSuccessAnswerMillis = millis();
     }
     else if (s_head == "+CLIP") {
       GSM_answerCLIP = s;

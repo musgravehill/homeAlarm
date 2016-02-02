@@ -148,6 +148,7 @@ String GSM_queueLoop_phones[GSM_queueLoop_size] = {""}; //0..11
 String GSM_queueLoop_messages[GSM_queueLoop_size] = {""};
 uint8_t GSM_queueLoop_pos = 0;
 uint8_t GSM_queueLoop_stateMachine_pos = 0;
+uint32_t GSM_prevPingSuccessAnswerMillis = 1; //send AT+CSQ, not get answer => RST GSM
 
 //peripheral
 bool BASE_buzzerIsNeed = true;
@@ -190,7 +191,7 @@ void setup() {
   delay(50);
 
   pinMode(SD_CS, OUTPUT);
-  digitalWrite(SD_CS, HIGH); //disable SD
+  digitalWrite(SD_CS, HIGH); //sd off until init
   SD_init();
   delay(50);
 
