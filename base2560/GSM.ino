@@ -21,7 +21,22 @@ void GSM_init() {
 
 void GSM_ping() {
   gsmSerial.println("AT+CSQ");
-  delay(200);
+  delay(100);
+}
+
+void GSM_pingCheckTimeAnswer() {
+  if ( (millis() - GSM_prevPingSuccessAnswerMillis) > 37000 ) {
+    GSM_reset();
+#ifdef DEBUG
+    debugSerial.println("GSM stop responding (hang up) => RST");
+#endif
+  }
+}
+
+void GSM_reset() {
+  digitalWrite(GSM_ResetPin, 0);
+  delay(10);
+  digitalWrite(GSM_ResetPin, 1);
 }
 
 bool GSM_paramIsAllowSms(uint8_t paramNum) {

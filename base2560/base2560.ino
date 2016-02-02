@@ -149,6 +149,7 @@ String GSM_queueLoop_messages[GSM_queueLoop_size] = {""};
 uint8_t GSM_queueLoop_pos = 0;
 uint8_t GSM_queueLoop_stateMachine_pos = 0;
 uint32_t GSM_prevPingSuccessAnswerMillis = 1; //send AT+CSQ, not get answer => RST GSM
+uint8_t GSM_ResetPin = 23;
 
 //peripheral
 bool BASE_buzzerIsNeed = true;
@@ -167,6 +168,9 @@ int8_t MENU_state = 0;
 void setup() {
   MCUSR = 0;  //VERY VERY IMPORTANT!!!! ELSE WDT DOESNOT RESET, DOESNOT DISABLED!!!
   wdt_disable();
+
+  pinMode(GSM_ResetPin, OUTPUT);
+  digitalWrite(GSM_ResetPin, 1); //HIGH=normal, LOW=resetGSM
 
   delay(2000); //for calming current & voltage fluctuations
 
@@ -191,7 +195,7 @@ void setup() {
   delay(50);
 
   pinMode(SD_CS, OUTPUT);
-  digitalWrite(SD_CS, HIGH); //sd off until init
+  digitalWrite(SD_CS, 1); //sd off until init
   SD_init();
   delay(50);
 

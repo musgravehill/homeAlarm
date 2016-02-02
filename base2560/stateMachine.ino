@@ -30,6 +30,8 @@ void STATEMACHINE_1s() {
 
 void STATEMACHINE_17s() {
   wdt_reset();
+  GSM_pingCheckTimeAnswer();
+  wdt_reset();
   GSM_ping();
   wdt_reset();
   TFT_renderMenuState();
