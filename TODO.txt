@@ -48,8 +48,8 @@ AT+SVR Configure Voice Coding Type for Voice Calls
 16:AMR-HR/AMR-FR/EFR/FR/HR
 17: AMR-FR/AMR-HR/EFR/FR/HR
 ------------------------------------------------------------------------------------------
-
-
+AT+SIDET? Change the Side Tone Gain Level
+AT+SIDET=0,0   AT+SIDET=0,16
 
 
 
