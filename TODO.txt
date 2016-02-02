@@ -13,10 +13,12 @@ Danger => fix it millis
 After 60s  SMS allow!
 60s to disallow alarm-mode by button
 
------------------------------------------------------------------------------------------
-AT+ECHO=?    SAVE DEFAULT TO .TXT
+------------------------------------- ----------------------------------------------------
+AT+ECHO?    SAVE DEFAULT TO .TXT  +ECHO: (0,96,253,16388,20488),(1,96,224,5256,20488) 
 AT+ECHO=0,(0-65535),(0-65535),(0-65535),(0-65535),(0,1)   //main mic (mic1p mic1n)
 --
++ECHO: (0,		96,		253,	16388,	20488),(1,96,224,5256,20488)
+		mic1	nlp		aec		nr		ns   
 < mic > audio channel
 	0 main audio handset channel
 	1 main audio handfree channel
@@ -27,6 +29,8 @@ AT+ECHO=0,(0-65535),(0-65535),(0-65535),(0-65535),(0,1)   //main mic (mic1p mic1
 < state> enable or disable to close echo algorithm
 	0 echo algorithm be closed
 	1 echo algorithm be actived
+	
+	AT+ECHO=0,96,224,5256,20488
 ------------------------------------------------------------------------------------------
 AT+SVR Configure Voice Coding Type for Voice Calls
 0:FR

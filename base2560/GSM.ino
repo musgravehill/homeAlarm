@@ -37,6 +37,7 @@ void GSM_reset() {
   digitalWrite(GSM_ResetPin, 0);
   delay(10);
   digitalWrite(GSM_ResetPin, 1);
+  Serial.println("RST");
 }
 
 bool GSM_paramIsAllowSms(uint8_t paramNum) {
