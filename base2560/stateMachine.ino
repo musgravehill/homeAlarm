@@ -4,6 +4,10 @@ void STATEMACHINE_loop() {
     STATEMACHINE_1s();
     STATEMACHINE_prevMillis_1s = STATEMACHINE_currMillis;
   }
+  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_3s) > 3000) {
+    STATEMACHINE_3s();
+    STATEMACHINE_prevMillis_3s = STATEMACHINE_currMillis;
+  }
   if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_17s) > 17000) {
     STATEMACHINE_17s();
     STATEMACHINE_prevMillis_17s = STATEMACHINE_currMillis;
@@ -19,37 +23,43 @@ void STATEMACHINE_loop() {
 }
 
 void STATEMACHINE_1s() {
-  wdt_reset();
+  wr();
   TFT_initLED();
-  wdt_reset();
+  wr();
   GSM_listenSerial();
-  wdt_reset();
+  wr();
   GSM_checkIncomingCall();
-  wdt_reset();
+  wr();
+}
+
+void STATEMACHINE_3s() {
+  wr();
+  GSM_sendDangers();
+  wr();
 }
 
 void STATEMACHINE_17s() {
-  wdt_reset();
+  wr();
   GSM_pingCheckTimeAnswer();
-  wdt_reset();
+  wr();
   GSM_ping();
-  wdt_reset();
+  wr();
   TFT_renderMenuState();
-  wdt_reset();
+  wr();
 }
 
 void STATEMACHINE_61s() {
-  wdt_reset();
+  wr();
   BASE_checkSensorsFault();
-  wdt_reset();
+  wr();
   GSM_queueLoop_stateMachine_processing();
-  wdt_reset();
+  wr();
 }
 
 void STATEMACHINE_103s() {
-  wdt_reset();
+  wr();
   GSM_cleanAllSMS();
-  wdt_reset();
+  wr();
 
   //reset base after 1 day uptime
   if ((uint32_t) millis() > 86400000L) {
