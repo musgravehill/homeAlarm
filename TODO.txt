@@ -3,8 +3,7 @@
 TVS на базе
 ƒроссели на питание —»Ќ‘ј«Ќџ…(common mode) Ќјћќ“ј“№, ƒ»‘‘≈–≈Ќ÷»јЋ№Ќџ… уже есть.
 ћик синфазный дроссель сделать? 
-
-ќпрос GSM каждые N секунд (напр, качество св€зи). ≈сли долго не было ответа - RST_GSM дернуть. 
+ 
 
 ALARM_MODE_setAtMillis = millis
 if millis > ALARM_MODE_setAtMillis+ 60s   => alarm ALLOW
