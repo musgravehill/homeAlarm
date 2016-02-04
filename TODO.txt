@@ -3,6 +3,12 @@
 TVS на базе
 ƒроссели на питание —»Ќ‘ј«Ќџ…(common mode) Ќјћќ“ј“№, ƒ»‘‘≈–≈Ќ÷»јЋ№Ќџ… уже есть.
 ћик синфазный дроссель сделать? 
+
+BLM18HG471SN1D	
+BLM18GG471SN1D	
+DLM11GN601SD2D	
+BLM18HG601SN1D	
+BLM18HG102SN1D
  
 
 ALARM_MODE_setAtMillis = millis
