@@ -17,6 +17,12 @@ void GSM_init() {
   //delay(100);
   gsmSerial.println("AT+CMIC=0,15"); //mic amp
   delay(200);
+  gsmSerial.println("AT+ECHO=0,0,0,0,0");  
+  delay(200);
+  gsmSerial.println("AT+SIDET=0,0");  
+  delay(200);
+  gsmSerial.println("AT+SVR=17");  
+  delay(200);
 }
 
 void GSM_ping() {
