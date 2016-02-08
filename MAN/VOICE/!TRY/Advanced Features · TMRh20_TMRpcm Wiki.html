@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)https://github.com/TMRh20/TMRpcm/wiki/Advanced-Features -->
+<html lang="en" class=" is-copy-enabled is-u2f-enabled"><head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+
+    <link crossorigin="anonymous" href="./Advanced Features · TMRh20_TMRpcm Wiki_files/github-9b213e351ae9e2c5fd50806fd05375f51a47c8d1be16271d9ba1adf409f21ac9.css" integrity="sha256-myE+NRrp4sX9UIBv0FN19RpHyNG+Ficdm6Gt9AnyGsk=" media="all" rel="stylesheet">
+    <link crossorigin="anonymous" href="./Advanced Features · TMRh20_TMRpcm Wiki_files/github2-fd8d48abb9063f51f186b0da98caa88d32b7ca8baecaa10d8a91c18a6f129b7f.css" integrity="sha256-/Y1Iq7kGP1HxhrDamMqojTK3youuyqENipHBim8Sm38=" media="all" rel="stylesheet">
+    
+    
+    
+
+    <link as="script" href="./Advanced Features · TMRh20_TMRpcm Wiki_files/frameworks-ee521b8e9facac68ff27e93fc3ae0f8ed811d7bf9e434e84f4b9ea227780b084.js" rel="preload">
+    <link as="script" href="./Advanced Features · TMRh20_TMRpcm Wiki_files/github-696336964b7c42e4c6f4dfbaf1f8e57f425cd9a9d18a12f3fe6e3dd744fd7d13.js" rel="preload">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=1020">
+    
+    
+    <title>Advanced Features · TMRh20/TMRpcm Wiki</title>
+    <link rel="search" type="application/opensearchdescription+xml" href="https://github.com/opensearch.xml" title="GitHub">
+    <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
+    <link rel="apple-touch-icon" href="https://github.com/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="https://github.com/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://github.com/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://github.com/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://github.com/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://github.com/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://github.com/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://github.com/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://github.com/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://github.com/apple-touch-icon-180x180.png">
+    <meta property="fb:app_id" content="1401488693436528">
+
+      <meta content="https://avatars2.githubusercontent.com/u/2610460?v=3&amp;s=400" name="twitter:image:src"><meta content="@github" name="twitter:site"><meta content="summary" name="twitter:card"><meta content="TMRh20/TMRpcm" name="twitter:title"><meta content="TMRpcm - Arduino library for asynchronous playback of PCM/WAV files direct from SD card. Arduino Uno,Nano,Mega etc supported" name="twitter:description">
+      <meta content="https://avatars2.githubusercontent.com/u/2610460?v=3&amp;s=400" property="og:image"><meta content="GitHub" property="og:site_name"><meta content="object" property="og:type"><meta content="TMRh20/TMRpcm" property="og:title"><meta content="https://github.com/TMRh20/TMRpcm" property="og:url"><meta content="TMRpcm - Arduino library for asynchronous playback of PCM/WAV files direct from SD card. Arduino Uno,Nano,Mega etc supported" property="og:description">
+      <meta name="browser-stats-url" content="https://api.github.com/_private/browser/stats">
+    <meta name="browser-errors-url" content="https://api.github.com/_private/browser/errors">
+    <link rel="assets" href="https://assets-cdn.github.com/">
+    <link rel="web-socket" href="wss://live.github.com/_sockets/MTU1NjE2NzozNmFjNWFhOWUxMTNmNzk1ZjhjYzMwMzFmYzUzYjNjZToyNDg0YmY2MTZlNmQ4NDQ4NjhhYjBlNTJjYjViNDY4MWMyZGJmMDNjOGI3OTYzNjIyYzE4ZjI5MTY5YTM2OWUy--4cd82bfc7b97b24e11cfd1298eb26a78c052174f">
+    <meta name="pjax-timeout" content="1000">
+    <link rel="sudo-modal" href="https://github.com/sessions/sudo_modal">
+
+    <meta name="msapplication-TileImage" content="/windows-tile.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="selected-link" value="repo_wiki" data-pjax-transient="">
+
+    <meta name="google-site-verification" content="KT5gs8h0wvaagLKAVWq8bbeNwnZZK1r1XQysX3xurLU">
+<meta name="google-site-verification" content="ZzhVyEFwb7w3e0-uOTltm8Jsck2F5StVihD0exw2fsA">
+    <meta name="google-analytics" content="UA-3769691-2">
+
+<meta content="collector.githubapp.com" name="octolytics-host"><meta content="github" name="octolytics-app-id"><meta content="B90A8119:517E:BE55286:56B88FE0" name="octolytics-dimension-request_id"><meta content="1556167" name="octolytics-actor-id"><meta content="musgravehill" name="octolytics-actor-login"><meta content="a785d6b93acb21560b3ff24c8c72522a0fb3efec193cd104526525407878dcc9" name="octolytics-actor-hash">
+<meta content="/&lt;user-name&gt;/&lt;repo-name&gt;/wiki/show" data-pjax-transient="true" name="analytics-location">
+
+
+
+  <meta class="js-ga-set" name="dimension1" content="Logged In">
+
+
+
+        <meta name="hostname" content="github.com">
+    <meta name="user-login" content="musgravehill">
+
+        <meta name="expected-hostname" content="github.com">
+
+      <link rel="mask-icon" href="https://assets-cdn.github.com/pinned-octocat.svg" color="#4078c0">
+      <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+
+    <meta content="9bddf6768ca70b2037219717ea9cec0916496ec7" name="form-nonce">
+
+    <meta http-equiv="x-pjax-version" content="eaec3d22631a5488cd577bf43ec2d21b">
+
+      
+  <meta name="description" content="TMRpcm - Arduino library for asynchronous playback of PCM/WAV files direct from SD card. Arduino Uno,Nano,Mega etc supported">
+  <meta name="go-import" content="github.com/TMRh20/TMRpcm git https://github.com/TMRh20/TMRpcm.git">
+
+  <meta content="2610460" name="octolytics-dimension-user_id"><meta content="TMRh20" name="octolytics-dimension-user_login"><meta content="6317362" name="octolytics-dimension-repository_id"><meta content="TMRh20/TMRpcm" name="octolytics-dimension-repository_nwo"><meta content="true" name="octolytics-dimension-repository_public"><meta content="false" name="octolytics-dimension-repository_is_fork"><meta content="6317362" name="octolytics-dimension-repository_network_root_id"><meta content="TMRh20/TMRpcm" name="octolytics-dimension-repository_network_root_nwo">
+  <link href="https://github.com/TMRh20/TMRpcm/commits/master.atom" rel="alternate" title="Recent Commits to TMRpcm:master" type="application/atom+xml">
+
+
+  </head>
+
+
+  <body class="logged_in   env-production windows vis-public">
+    <a href="https://github.com/TMRh20/TMRpcm/wiki/Advanced-Features#start-of-content" tabindex="1" class="accessibility-aid js-skip-to-content">Skip to content</a>
+
+    
+    
+    
+
+
+
+      <div class="header header-logged-in true" role="banner">
+  <div class="container clearfix">
+
+    <a class="header-logo-invertocat" href="https://github.com/" data-hotkey="g d" aria-label="Homepage" data-ga-click="Header, go to dashboard, icon:logo">
+  <svg aria-hidden="true" class="octicon octicon-mark-github" height="28" role="img" version="1.1" viewBox="0 0 16 16" width="28"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59 0.4 0.07 0.55-0.17 0.55-0.38 0-0.19-0.01-0.82-0.01-1.49-2.01 0.37-2.53-0.49-2.69-0.94-0.09-0.23-0.48-0.94-0.82-1.13-0.28-0.15-0.68-0.52-0.01-0.53 0.63-0.01 1.08 0.58 1.23 0.82 0.72 1.21 1.87 0.87 2.33 0.66 0.07-0.52 0.28-0.87 0.51-1.07-1.78-0.2-3.64-0.89-3.64-3.95 0-0.87 0.31-1.59 0.82-2.15-0.08-0.2-0.36-1.02 0.08-2.12 0 0 0.67-0.21 2.2 0.82 0.64-0.18 1.32-0.27 2-0.27 0.68 0 1.36 0.09 2 0.27 1.53-1.04 2.2-0.82 2.2-0.82 0.44 1.1 0.16 1.92 0.08 2.12 0.51 0.56 0.82 1.27 0.82 2.15 0 3.07-1.87 3.75-3.65 3.95 0.29 0.25 0.54 0.73 0.54 1.48 0 1.07-0.01 1.93-0.01 2.2 0 0.21 0.15 0.46 0.55 0.38C13.71 14.53 16 11.53 16 8 16 3.58 12.42 0 8 0z"></path></svg>
+</a>
+
+
+      <div class="site-search repo-scope js-site-search" role="search">
+          <!-- </textarea> --><!-- '"` --><form accept-charset="UTF-8" action="https://github.com/TMRh20/TMRpcm/search" class="js-site-search-form" data-global-search-url="/search" data-repo-search-url="/TMRh20/TMRpcm/search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"></div>
+  <label class="js-chromeless-input-container form-control">
+    <div class="scope-badge">This repository</div>
+    <input type="text" class="js-site-search-focus js-site-search-field is-clearable chromeless-input" data-hotkey="s" name="q" placeholder="Search" aria-label="Search this repository" data-global-scope-placeholder="Search GitHub" data-repo-scope-placeholder="Search" tabindex="1" autocapitalize="off">
+  </label>
+</form>
+      </div>
+
+      <ul class="header-nav left" role="navigation">
+        <li class="header-nav-item">
+          <a href="https://github.com/pulls" class="js-selected-navigation-item header-nav-link" data-ga-click="Header, click, Nav menu - item:pulls context:user" data-hotkey="g p" data-selected-links="/pulls /pulls/assigned /pulls/mentioned /pulls">
+            Pull requests
+</a>        </li>
+        <li class="header-nav-item">
+          <a href="https://github.com/issues" class="js-selected-navigation-item header-nav-link" data-ga-click="Header, click, Nav menu - item:issues context:user" data-hotkey="g i" data-selected-links="/issues /issues/assigned /issues/mentioned /issues">
+            Issues
+</a>        </li>
+          <li class="header-nav-item">
+            <a class="header-nav-link" href="https://gist.github.com/" data-ga-click="Header, go to gist, text:gist">Gist</a>
+          </li>
+      </ul>
+
+    
+<ul class="header-nav user-nav right" id="user-links">
+  <li class="header-nav-item">
+      <span class="js-socket-channel js-updatable-content" data-channel="notification-changed:musgravehill" data-url="/notifications/header">
+      <a href="https://github.com/notifications" aria-label="You have unread notifications" class="header-nav-link notification-indicator tooltipped tooltipped-s" data-ga-click="Header, go to notifications, icon:unread" data-hotkey="g n">
+          <span class="mail-status unread"></span>
+          <svg aria-hidden="true" class="octicon octicon-bell" height="16" role="img" version="1.1" viewBox="0 0 14 16" width="14"><path d="M14 12v1H0v-1l0.73-0.58c0.77-0.77 0.81-2.55 1.19-4.42 0.77-3.77 4.08-5 4.08-5 0-0.55 0.45-1 1-1s1 0.45 1 1c0 0 3.39 1.23 4.16 5 0.38 1.88 0.42 3.66 1.19 4.42l0.66 0.58z m-7 4c1.11 0 2-0.89 2-2H5c0 1.11 0.89 2 2 2z"></path></svg>
+</a>  </span>
+
+  </li>
+
+  <li class="header-nav-item dropdown js-menu-container">
+    <a class="header-nav-link tooltipped tooltipped-s js-menu-target" href="https://github.com/new" aria-label="Create new…" data-ga-click="Header, create new, icon:add">
+      <svg aria-hidden="true" class="octicon octicon-plus left" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 9H7v5H5V9H0V7h5V2h2v5h5v2z"></path></svg>
+      <span class="dropdown-caret"></span>
+    </a>
+
+    <div class="dropdown-menu-content js-menu-content">
+      <ul class="dropdown-menu dropdown-menu-sw">
+        
+<a class="dropdown-item" href="https://github.com/new" data-ga-click="Header, create new repository">
+  New repository
+</a>
+
+
+  <a class="dropdown-item" href="https://github.com/organizations/new" data-ga-click="Header, create new organization">
+    New organization
+  </a>
+
+
+
+  <div class="dropdown-divider"></div>
+  <div class="dropdown-header">
+    <span title="TMRh20/TMRpcm">This repository</span>
+  </div>
+    <a class="dropdown-item" href="https://github.com/TMRh20/TMRpcm/issues/new" data-ga-click="Header, create new issue">
+      New issue
+    </a>
+
+      </ul>
+    </div>
+  </li>
+
+  <li class="header-nav-item dropdown js-menu-container">
+    <a class="header-nav-link name tooltipped tooltipped-sw js-menu-target" href="https://github.com/musgravehill" aria-label="View profile and more" data-ga-click="Header, show menu, icon:avatar">
+      <img alt="@musgravehill" class="avatar" height="20" src="./Advanced Features · TMRh20_TMRpcm Wiki_files/1556167" width="20">
+      <span class="dropdown-caret"></span>
+    </a>
+
+    <div class="dropdown-menu-content js-menu-content">
+      <div class="dropdown-menu  dropdown-menu-sw">
+        <div class=" dropdown-header header-nav-current-user css-truncate">
+            Signed in as <strong class="css-truncate-target">musgravehill</strong>
+
+        </div>
+
+
+        <div class="dropdown-divider"></div>
+
+          <a class="dropdown-item" href="https://github.com/musgravehill" data-ga-click="Header, go to profile, text:your profile">
+            Your profile
+          </a>
+        <a class="dropdown-item" href="https://github.com/stars" data-ga-click="Header, go to starred repos, text:your stars">
+          Your stars
+        </a>
+          <a class="dropdown-item" href="https://github.com/explore" data-ga-click="Header, go to explore, text:explore">
+            Explore
+          </a>
+          <a class="dropdown-item" href="https://github.com/integrations" data-ga-click="Header, go to integrations, text:integrations">
+            Integrations
+          </a>
+        <a class="dropdown-item" href="https://help.github.com/" data-ga-click="Header, go to help, text:help">
+          Help
+        </a>
+
+
+          <div class="dropdown-divider"></div>
+
+          <a class="dropdown-item" href="https://github.com/settings/profile" data-ga-click="Header, go to settings, icon:settings">
+            Settings
+          </a>
+
+          <!-- </textarea> --><!-- '"` --><form accept-charset="UTF-8" action="https://github.com/logout" class="logout-form" data-form-nonce="9bddf6768ca70b2037219717ea9cec0916496ec7" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="Y1jyRFUdlMSS3HYH8au+pZCOr/ThY9poKMkMoStmDgMvjqZuGKwO7G5/qfLjRXTrkMwCxd9kgT90rjzpk2ZPvg=="></div>
+            <button class="dropdown-item dropdown-signout" data-ga-click="Header, sign out, icon:logout">
+              Sign out
+            </button>
+</form>
+      </div>
+    </div>
+  </li>
+</ul>
+
+
+    
+  </div>
+</div>
+
+      
+
+      
+
+
+    <div id="start-of-content" class="accessibility-aid"></div>
+
+      <div id="js-flash-container">
+</div>
+
+
+    <div role="main" class="main-content">
+        <div itemscope="" itemtype="http://schema.org/WebPage">
+    <div id="js-repo-pjax-container" class="context-loader-container js-repo-nav-next" data-pjax-container="">
+      
+<div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav">
+  <div class="container repohead-details-container">
+
+    
+
+<ul class="pagehead-actions">
+
+  <li>
+        <!-- </textarea> --><!-- '"` --><form accept-charset="UTF-8" action="https://github.com/notifications/subscribe" class="js-social-container" data-autosubmit="true" data-form-nonce="9bddf6768ca70b2037219717ea9cec0916496ec7" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="2I0pW9P7yyRyUZYD2Zbm6AupPhxb+zmwgiimtGiS+jSusFpnqAn5qR4omEpyi8/3p5Clev7hGeGtqSrrSgaNxQ=="></div>      <input id="repository_id" name="repository_id" type="hidden" value="6317362">
+
+        <div class="select-menu js-menu-container js-select-menu">
+          <a href="https://github.com/TMRh20/TMRpcm/subscription" class="btn btn-sm btn-with-count select-menu-button js-menu-target" role="button" tabindex="0" aria-haspopup="true" data-ga-click="Repository, click Watch settings, action:wiki#show">
+            <span class="js-select-button">
+              <svg aria-hidden="true" class="octicon octicon-eye" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M8.06 2C3 2 0 8 0 8s3 6 8.06 6c4.94 0 7.94-6 7.94-6S13 2 8.06 2z m-0.06 10c-2.2 0-4-1.78-4-4 0-2.2 1.8-4 4-4 2.22 0 4 1.8 4 4 0 2.22-1.78 4-4 4z m2-4c0 1.11-0.89 2-2 2s-2-0.89-2-2 0.89-2 2-2 2 0.89 2 2z"></path></svg>
+              Watch
+            </span>
+          </a>
+          <a class="social-count js-social-count" href="https://github.com/TMRh20/TMRpcm/watchers">
+            22
+          </a>
+
+        <div class="select-menu-modal-holder">
+          <div class="select-menu-modal subscription-menu-modal js-menu-content" aria-hidden="true">
+            <div class="select-menu-header">
+              <svg aria-label="Close" class="octicon octicon-x js-menu-close" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12"><path d="M7.48 8l3.75 3.75-1.48 1.48-3.75-3.75-3.75 3.75-1.48-1.48 3.75-3.75L0.77 4.25l1.48-1.48 3.75 3.75 3.75-3.75 1.48 1.48-3.75 3.75z"></path></svg>
+              <span class="select-menu-title">Notifications</span>
+            </div>
+
+              <div class="select-menu-list js-navigation-container" role="menu">
+
+                <div class="select-menu-item js-navigation-item selected" role="menuitem" tabindex="0">
+                  <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5L4 13 0 9l1.5-1.5 2.5 2.5 6.5-6.5 1.5 1.5z"></path></svg>
+                  <div class="select-menu-item-text">
+                    <input checked="checked" id="do_included" name="do" type="radio" value="included">
+                    <span class="select-menu-item-heading">Not watching</span>
+                    <span class="description">Be notified when participating or @mentioned.</span>
+                    <span class="js-select-button-text hidden-select-button-text">
+                      <svg aria-hidden="true" class="octicon octicon-eye" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M8.06 2C3 2 0 8 0 8s3 6 8.06 6c4.94 0 7.94-6 7.94-6S13 2 8.06 2z m-0.06 10c-2.2 0-4-1.78-4-4 0-2.2 1.8-4 4-4 2.22 0 4 1.8 4 4 0 2.22-1.78 4-4 4z m2-4c0 1.11-0.89 2-2 2s-2-0.89-2-2 0.89-2 2-2 2 0.89 2 2z"></path></svg>
+                      Watch
+                    </span>
+                  </div>
+                </div>
+
+                <div class="select-menu-item js-navigation-item " role="menuitem" tabindex="0">
+                  <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5L4 13 0 9l1.5-1.5 2.5 2.5 6.5-6.5 1.5 1.5z"></path></svg>
+                  <div class="select-menu-item-text">
+                    <input id="do_subscribed" name="do" type="radio" value="subscribed">
+                    <span class="select-menu-item-heading">Watching</span>
+                    <span class="description">Be notified of all conversations.</span>
+                    <span class="js-select-button-text hidden-select-button-text">
+                      <svg aria-hidden="true" class="octicon octicon-eye" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M8.06 2C3 2 0 8 0 8s3 6 8.06 6c4.94 0 7.94-6 7.94-6S13 2 8.06 2z m-0.06 10c-2.2 0-4-1.78-4-4 0-2.2 1.8-4 4-4 2.22 0 4 1.8 4 4 0 2.22-1.78 4-4 4z m2-4c0 1.11-0.89 2-2 2s-2-0.89-2-2 0.89-2 2-2 2 0.89 2 2z"></path></svg>
+                      Unwatch
+                    </span>
+                  </div>
+                </div>
+
+                <div class="select-menu-item js-navigation-item " role="menuitem" tabindex="0">
+                  <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5L4 13 0 9l1.5-1.5 2.5 2.5 6.5-6.5 1.5 1.5z"></path></svg>
+                  <div class="select-menu-item-text">
+                    <input id="do_ignore" name="do" type="radio" value="ignore">
+                    <span class="select-menu-item-heading">Ignoring</span>
+                    <span class="description">Never be notified.</span>
+                    <span class="js-select-button-text hidden-select-button-text">
+                      <svg aria-hidden="true" class="octicon octicon-mute" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M8 2.81v10.38c0 0.67-0.81 1-1.28 0.53L3 10H1c-0.55 0-1-0.45-1-1V7c0-0.55 0.45-1 1-1h2l3.72-3.72c0.47-0.47 1.28-0.14 1.28 0.53z m7.53 3.22l-1.06-1.06-1.97 1.97-1.97-1.97-1.06 1.06 1.97 1.97-1.97 1.97 1.06 1.06 1.97-1.97 1.97 1.97 1.06-1.06-1.97-1.97 1.97-1.97z"></path></svg>
+                      Stop ignoring
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+</form>
+  </li>
+
+  <li>
+    
+  <div class="js-toggler-container js-social-container starring-container ">
+
+    <!-- </textarea> --><!-- '"` --><form accept-charset="UTF-8" action="https://github.com/TMRh20/TMRpcm/unstar" class="js-toggler-form starred js-unstar-button" data-form-nonce="9bddf6768ca70b2037219717ea9cec0916496ec7" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="jT4ShWwngfuDV/1zAOTooHr9itjmaAiYFYVG2o0TJrzVej9BcZJQAIOUhusDOedH0TUDPfDau1YtmStlRc0lRw=="></div>
+      <button class="btn btn-sm btn-with-count js-toggler-target" aria-label="Unstar this repository" title="Unstar TMRh20/TMRpcm" data-ga-click="Repository, click unstar button, action:wiki#show; text:Unstar">
+        <svg aria-hidden="true" class="octicon octicon-star" height="16" role="img" version="1.1" viewBox="0 0 14 16" width="14"><path d="M14 6l-4.9-0.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14l4.33-2.33 4.33 2.33L10.4 9.26 14 6z"></path></svg>
+        Unstar
+      </button>
+        <a class="social-count js-social-count" href="https://github.com/TMRh20/TMRpcm/stargazers">
+          110
+        </a>
+</form>
+    <!-- </textarea> --><!-- '"` --><form accept-charset="UTF-8" action="https://github.com/TMRh20/TMRpcm/star" class="js-toggler-form unstarred js-star-button" data-form-nonce="9bddf6768ca70b2037219717ea9cec0916496ec7" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="yYS/mZMM6+9fZsQhAiopXOTa522r9XI/wk3epTnmbWh5Ed03VsrqachYiehyQIdqq0fPqj0/8G3gssVYrpmlIw=="></div>
+      <button class="btn btn-sm btn-with-count js-toggler-target" aria-label="Star this repository" title="Star TMRh20/TMRpcm" data-ga-click="Repository, click star button, action:wiki#show; text:Star">
+        <svg aria-hidden="true" class="octicon octicon-star" height="16" role="img" version="1.1" viewBox="0 0 14 16" width="14"><path d="M14 6l-4.9-0.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14l4.33-2.33 4.33 2.33L10.4 9.26 14 6z"></path></svg>
+        Star
+      </button>
+        <a class="social-count js-social-count" href="https://github.com/TMRh20/TMRpcm/stargazers">
+          110
+        </a>
+</form>  </div>
+
+  </li>
+
+  <li>
+          <!-- </textarea> --><!-- '"` --><form accept-charset="UTF-8" action="https://github.com/TMRh20/TMRpcm/fork" class="btn-with-count" data-form-nonce="9bddf6768ca70b2037219717ea9cec0916496ec7" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="fAK/SQ6q3ZyVH0j9i2ChIzjaln3CZ6UXh+UtO5PKRs0hUBofh/QrPvvQWIWhhFBFK+sbNUu2YBGTQehD4qZvMA=="></div>
+            <button type="submit" class="btn btn-sm btn-with-count" data-ga-click="Repository, show fork modal, action:wiki#show; text:Fork" title="Fork your own copy of TMRh20/TMRpcm to your account" aria-label="Fork your own copy of TMRh20/TMRpcm to your account">
+              <svg aria-hidden="true" class="octicon octicon-repo-forked" height="16" role="img" version="1.1" viewBox="0 0 10 16" width="10"><path d="M8 1c-1.11 0-2 0.89-2 2 0 0.73 0.41 1.38 1 1.72v1.28L5 8 3 6v-1.28c0.59-0.34 1-0.98 1-1.72 0-1.11-0.89-2-2-2S0 1.89 0 3c0 0.73 0.41 1.38 1 1.72v1.78l3 3v1.78c-0.59 0.34-1 0.98-1 1.72 0 1.11 0.89 2 2 2s2-0.89 2-2c0-0.73-0.41-1.38-1-1.72V9.5l3-3V4.72c0.59-0.34 1-0.98 1-1.72 0-1.11-0.89-2-2-2zM2 4.2c-0.66 0-1.2-0.55-1.2-1.2s0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2-0.55 1.2-1.2 1.2z m3 10c-0.66 0-1.2-0.55-1.2-1.2s0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2-0.55 1.2-1.2 1.2z m3-10c-0.66 0-1.2-0.55-1.2-1.2s0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2-0.55 1.2-1.2 1.2z"></path></svg>
+              Fork
+            </button>
+</form>
+    <a href="https://github.com/TMRh20/TMRpcm/network" class="social-count">
+      48
+    </a>
+  </li>
+</ul>
+
+    <h1 itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb" class="entry-title public ">
+  <svg aria-hidden="true" class="octicon octicon-repo" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12"><path d="M4 9h-1v-1h1v1z m0-3h-1v1h1v-1z m0-2h-1v1h1v-1z m0-2h-1v1h1v-1z m8-1v12c0 0.55-0.45 1-1 1H6v2l-1.5-1.5-1.5 1.5V14H1c-0.55 0-1-0.45-1-1V1C0 0.45 0.45 0 1 0h10c0.55 0 1 0.45 1 1z m-1 10H1v2h2v-1h3v1h5V11z m0-10H2v9h9V1z"></path></svg>
+  <span class="author"><a href="https://github.com/TMRh20" class="url fn" itemprop="url" rel="author"><span itemprop="title">TMRh20</span></a></span><!--
+--><span class="path-divider">/</span><!--
+--><strong><a href="https://github.com/TMRh20/TMRpcm" data-pjax="#js-repo-pjax-container">TMRpcm</a></strong>
+
+  <span class="page-context-loader">
+    <img alt="" height="16" src="./Advanced Features · TMRh20_TMRpcm Wiki_files/octocat-spinner-32.gif" width="16">
+  </span>
+
+</h1>
+
+  </div>
+  <div class="container">
+    
+<nav class="reponav js-repo-nav js-sidenav-container-pjax js-octicon-loaders" role="navigation" data-pjax="#js-repo-pjax-container">
+
+  <a href="https://github.com/TMRh20/TMRpcm" aria-label="Code" class="js-selected-navigation-item reponav-item" data-hotkey="g c" data-selected-links="repo_source repo_downloads repo_commits repo_releases repo_tags repo_branches /TMRh20/TMRpcm">
+    <svg aria-hidden="true" class="octicon octicon-code" height="16" role="img" version="1.1" viewBox="0 0 14 16" width="14"><path d="M9.5 3l-1.5 1.5 3.5 3.5L8 11.5l1.5 1.5 4.5-5L9.5 3zM4.5 3L0 8l4.5 5 1.5-1.5L2.5 8l3.5-3.5L4.5 3z"></path></svg>
+    Code
+</a>
+    <a href="https://github.com/TMRh20/TMRpcm/issues" class="js-selected-navigation-item reponav-item" data-hotkey="g i" data-selected-links="repo_issues repo_labels repo_milestones /TMRh20/TMRpcm/issues">
+      <svg aria-hidden="true" class="octicon octicon-issue-opened" height="16" role="img" version="1.1" viewBox="0 0 14 16" width="14"><path d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7S10.14 13.7 7 13.7 1.3 11.14 1.3 8s2.56-5.7 5.7-5.7m0-1.3C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7S10.86 1 7 1z m1 3H6v5h2V4z m0 6H6v2h2V10z"></path></svg>
+      Issues
+      <span class="counter">12</span>
+</a>
+  <a href="https://github.com/TMRh20/TMRpcm/pulls" class="js-selected-navigation-item reponav-item" data-hotkey="g p" data-selected-links="repo_pulls /TMRh20/TMRpcm/pulls">
+    <svg aria-hidden="true" class="octicon octicon-git-pull-request" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12"><path d="M11 11.28c0-1.73 0-6.28 0-6.28-0.03-0.78-0.34-1.47-0.94-2.06s-1.28-0.91-2.06-0.94c0 0-1.02 0-1 0V0L4 3l3 3V4h1c0.27 0.02 0.48 0.11 0.69 0.31s0.3 0.42 0.31 0.69v6.28c-0.59 0.34-1 0.98-1 1.72 0 1.11 0.89 2 2 2s2-0.89 2-2c0-0.73-0.41-1.38-1-1.72z m-1 2.92c-0.66 0-1.2-0.55-1.2-1.2s0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2-0.55 1.2-1.2 1.2zM4 3c0-1.11-0.89-2-2-2S0 1.89 0 3c0 0.73 0.41 1.38 1 1.72 0 1.55 0 5.56 0 6.56-0.59 0.34-1 0.98-1 1.72 0 1.11 0.89 2 2 2s2-0.89 2-2c0-0.73-0.41-1.38-1-1.72V4.72c0.59-0.34 1-0.98 1-1.72z m-0.8 10c0 0.66-0.55 1.2-1.2 1.2s-1.2-0.55-1.2-1.2 0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2z m-1.2-8.8c-0.66 0-1.2-0.55-1.2-1.2s0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2-0.55 1.2-1.2 1.2z"></path></svg>
+    Pull requests
+    <span class="counter">1</span>
+</a>
+    <a href="https://github.com/TMRh20/TMRpcm/wiki" aria-selected="true" class="js-selected-navigation-item selected reponav-item" data-hotkey="g w" data-selected-links="repo_wiki /TMRh20/TMRpcm/wiki">
+      <svg aria-hidden="true" class="octicon octicon-book" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M2 5h4v1H2v-1z m0 3h4v-1H2v1z m0 2h4v-1H2v1z m11-5H9v1h4v-1z m0 2H9v1h4v-1z m0 2H9v1h4v-1z m2-6v9c0 0.55-0.45 1-1 1H8.5l-1 1-1-1H1c-0.55 0-1-0.45-1-1V3c0-0.55 0.45-1 1-1h5.5l1 1 1-1h5.5c0.55 0 1 0.45 1 1z m-8 0.5l-0.5-0.5H1v9h6V3.5z m7-0.5H8.5l-0.5 0.5v8.5h6V3z"></path></svg>
+      Wiki
+</a>
+  <a href="https://github.com/TMRh20/TMRpcm/pulse" class="js-selected-navigation-item reponav-item" data-selected-links="pulse /TMRh20/TMRpcm/pulse">
+    <svg aria-hidden="true" class="octicon octicon-pulse" height="16" role="img" version="1.1" viewBox="0 0 14 16" width="14"><path d="M11.5 8L8.8 5.4 6.6 8.5 5.5 1.6 2.38 8H0V10h3.6L4.5 8.2l0.9 5.4L9 8.5l1.6 1.5H14V8H11.5z"></path></svg>
+    Pulse
+</a>
+  <a href="https://github.com/TMRh20/TMRpcm/graphs" class="js-selected-navigation-item reponav-item" data-selected-links="repo_graphs repo_contributors /TMRh20/TMRpcm/graphs">
+    <svg aria-hidden="true" class="octicon octicon-graph" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M16 14v1H0V0h1v14h15z m-11-1H3V8h2v5z m4 0H7V3h2v10z m4 0H11V6h2v7z"></path></svg>
+    Graphs
+</a>
+
+</nav>
+
+  </div>
+</div>
+
+<div class="container new-discussion-timeline experiment-repo-nav">
+  <div class="repository-content">
+
+    
+
+<div id="wiki-wrapper" class="wiki-wrapper page">
+<div class="gh-header">
+  <div class="gh-header-show">
+    <h1 class="gh-header-title instapaper_title">Advanced Features</h1>
+      <div class="gh-header-meta">
+        TMRh20 edited this page <time datetime="2016-01-13T20:50:04Z" is="relative-time" title="14 янв. 2016 г., 0:50 GMT+4">26 days ago</time>
+        ·
+        <a href="https://github.com/TMRh20/TMRpcm/wiki/Advanced-Features/_history" class="history">
+          13 revisions
+        </a>
+      </div>
+  </div>
+</div>
+<div id="wiki-content">
+  <div class="has-rightbar">
+
+  <div id="wiki-rightbar">
+    <div class="wiki-pages-box readability-sidebar boxed-group flush js-wiki-pages-box " role="navigation">
+      
+<h3 class="js-wiki-toggle-collapse wiki-auxiliary-content">
+  <svg aria-hidden="true" class="octicon octicon-triangle-down caret-expanded" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12"><path d="M0 5l6 6 6-6H0z"></path></svg>
+  <svg aria-hidden="true" class="octicon octicon-triangle-right caret-collapsed" height="16" role="img" version="1.1" viewBox="0 0 6 16" width="6"><path d="M0 14l6-6L0 2v12z"></path></svg>
+  Pages <span class="counter">2</span>
+</h3>
+<div class="boxed-group-inner wiki-auxiliary-content wiki-auxiliary-content-no-bg">
+
+  <ul class="wiki-pages" data-filterable-for="wiki-pages-filter" data-filterable-type="substring">
+    <li>
+      <strong><a href="https://github.com/TMRh20/TMRpcm/wiki" class="wiki-page-link">Home</a></strong>
+    </li>
+    <li>
+      <strong><a href="https://github.com/TMRh20/TMRpcm/wiki/Advanced-Features" class="wiki-page-link">Advanced Features</a></strong>
+    </li>
+  </ul>
+</div>
+
+    </div>
+
+
+    <div class="clone-url">
+      <h5>Clone this wiki locally</h5>
+      <div class="input-group js-zeroclipboard-container">
+        <input type="text" class="input-mini text-small text-muted input-monospace js-url-field js-zeroclipboard-target" value="https://github.com/TMRh20/TMRpcm.wiki.git" readonly="readonly">
+        <span class="input-group-button">
+          <button aria-label="Copy to clipboard" class="js-zeroclipboard btn btn-sm zeroclipboard-button tooltipped tooltipped-s" data-copied-hint="Copied!" type="button"><svg aria-hidden="true" class="octicon octicon-clippy" height="16" role="img" version="1.1" viewBox="0 0 14 16" width="14"><path d="M2 12h4v1H2v-1z m5-6H2v1h5v-1z m2 3V7L6 10l3 3V11h5V9H9z m-4.5-1H2v1h2.5v-1zM2 11h2.5v-1H2v1z m9 1h1v2c-0.02 0.28-0.11 0.52-0.3 0.7s-0.42 0.28-0.7 0.3H1c-0.55 0-1-0.45-1-1V3c0-0.55 0.45-1 1-1h3C4 0.89 4.89 0 6 0s2 0.89 2 2h3c0.55 0 1 0.45 1 1v5h-1V5H1v9h10V12zM2 4h8c0-0.55-0.45-1-1-1h-1c-0.55 0-1-0.45-1-1s-0.45-1-1-1-1 0.45-1 1-0.45 1-1 1h-1c-0.55 0-1 0.45-1 1z"></path></svg></button>
+        </span>
+      </div>
+
+
+        <a href="github-windows://openRepo/https://github.com/TMRh20/TMRpcm.wiki" class="btn btn-sm sidebar-button" title="Save this wiki to your computer and use it in GitHub Desktop." aria-label="Save this wiki to your computer and use it in GitHub Desktop.">
+          <svg aria-hidden="true" class="octicon octicon-desktop-download" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 6h3V0h2v6h3L8 10 4 6z m11-4H11v1h4v8H1V3h4v-1H1c-0.55 0-1 0.45-1 1v9c0 0.55 0.45 1 1 1h5.34c-0.25 0.61-0.86 1.39-2.34 2h8c-1.48-0.61-2.09-1.39-2.34-2h5.34c0.55 0 1-0.45 1-1V3c0-0.55-0.45-1-1-1z"></path></svg>
+          Clone in Desktop
+        </a>
+    </div>
+  </div>
+
+  <div id="wiki-body" class="gollum-markdown-content instapaper_body">
+      <div class="markdown-body">
+        <p>Advanced features of the library</p>
+
+<p>This library was intended to be a simple and user friendly wav audio player using standard Arduino libraries, playing bare-bones standard format WAV files.Many of the extra features have been added due to user request, and are enabled optionally in pcmConfig.h to preserve the out of the box simplicity initially intended.</p>
+
+<p><strong>Code/Updates:</strong> <a href="https://github.com/TMRh20/TMRpcm">https://github.com/TMRh20/TMRpcm</a><br>
+<strong>Wiki:</strong> <a href="https://github.com/TMRh20/TMRpcm/wiki">https://github.com/TMRh20/TMRpcm/wiki</a><br>
+<strong>Blog:</strong> <a href="https://tmrh20.blogspot.com/">https://tmrh20.blogspot.com/</a>  </p>
+
+<p>Most of the extra features require more memory, more program space, and in some cases, more processing power for playback
+Some of them are still being fine tuned. Please keep this in mind when enabling these features.<br>
+See pcmConfig.h to configure the following options:  </p>
+
+<h3>
+<a id="user-content-user-defines" class="anchor" href="https://github.com/TMRh20/TMRpcm/wiki/Advanced-Features#user-defines" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><strong>User Defines</strong>
+</h3>
+
+<pre><code>The following options are configurable in pcmConfig.h:  
+#define buffSize 128     Control the size of the 2 buffers (4 in MULTI mode)  
+#define DISABLE_SPEAKER2 Disables default second speaker pin for compatibility with other libs. (pin 10 on Uno)
+#define ENABLE_MULTI     Enable multi track playback mode (Default single timer)  
+#define STEREO_OR_16BIT  Enable playback of stereo or 16-bit files  
+    #define MODE2        Enable dual timer multi track playback mode. Not available with TIMER2  
+#define SDFAT            SdFat library uses less prog space and memory. See SDFAT example included with lib.  
+#define HANDLE_TAGS      Skip tags for WAV files that contain metadata  
+#define USE_TIMER2       Use 8-bit TIMER2 instead of 16-bit timer(s)  
+#define rampMega         Force manual selection of PWM enable/disable ramping method.  
+#define ENABLE_RF        Enable streaming of audio over radio link (NRF24L01+)      
+</code></pre>
+
+<h3>
+<a id="user-content-speaker2complimentary-mode" class="anchor" href="https://github.com/TMRh20/TMRpcm/wiki/Advanced-Features#speaker2complimentary-mode" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><strong>Speaker2/Complimentary Mode</strong>
+</h3>
+
+<p>This library outputs WAV data to two timer pins by default, although only one is fully enabled by default.</p>
+
+<pre><code>The complimentary pin must be set as an output to enable:  
+eg:  
+Arduino Uno (Single Output): audio.speakerPin = 9;  
+Arduino Uno (Complimentary Output): audio.speakerPin = 9; pinMode(10,OUTPUT);  
+
+Uncomment the line #define DISABLE_SPEAKER2 in pcmConfig.h to fully disable the second pin.
+</code></pre>
+
+<h3>
+<a id="user-content-multi-mode" class="anchor" href="https://github.com/TMRh20/TMRpcm/wiki/Advanced-Features#multi-mode" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><strong>Multi Mode</strong>
+</h3>
+
+<p>Multi Mode enables simultaneous playback of two audio tracks.</p>
+
+<pre><code>Functions:
+The functions in multi mode are slightly different than standard mode:
+audio.speakerPin2 = 5;        Same functionality as standard mode, only used with 4 pin output
+audio.play("sound.wav");      Play a file on output 0
+audio.play("sound.wav",30,1); Play a file starting at 30 seconds, on output 1
+audio.play("sound.wav",0);    Play(WaveFile,Output 0 or 1) Defined by speakerpin and speakerpin2
+audio.stopPlayback(0);     Can include output number 0 or 1
+audio.isPlaying(0);        Can include output number 0 or 1
+audio.setVolume(4,0);      Set the volume for output 0
+audio.volume(0,1);         Decrease the volume for output 1  
+
+Modes:
+Default: Uses the same timer and pins as regular mode with complimentary output  
+MODE2: Uses two 16-bit timers and up to 4 pins  
+
+Usage:
+16kHz-20kHz sample rate recommended
+Memory buffer can be increased for improved performance
+Sounds played together should be of the same sample rate
+Uncomment the define in pcmConfig.h to enable multi mode
+The audio.speakerPin2 variable must be set in 4-pin mode to select the additional timer/pins to be used.
+
+Modes Simplified:
+
+Normal mode ( 2 pins, one track)        ( 1 or 2 speakers)
+Normal mode Stereo ( 2 pins, one track) ( 2 Speakers, non complimentary (pin to ground) )
+Normal MODE2 Stereo (4 pins, one track) ( 4 Speakers OR Complimentary output (pin-to-pin) with 2 Speakers)
+
+Multi mode ( 2 pins, two tracks )       ( 1 or 2 speakers)
+Multi mode Stereo ( 4 pins, 2 tracks)   ( 2 or 4 speakers, non complimentary)  
+Multi MODE2 (4 pins, 2 tracks)          ( 2 complimentary, or 4 non complimentary)
+
+Note: All 4-pin modes require a board with two or more 16-bit timers.
+</code></pre>
+
+<h3>
+<a id="user-content-stereo-and-16-bit-playback" class="anchor" href="https://github.com/TMRh20/TMRpcm/wiki/Advanced-Features#stereo-and-16-bit-playback" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><strong>Stereo and 16-Bit Playback</strong>
+</h3>
+
+<p>These modes require additional resources and processing power since double the data must be read from the SD card.
+    Mono tracks can be played in Stereo mode, not so in reverse.
+    The operation can be a bit difficult to explain, but here goes:</p>
+
+<pre><code>Normal Mode: 
+#define STEREO_OR_16BIT
+In this mode, stereo and 16-bit files are treated the same, with the first byte being read into one
+output, and the second byte into the other output. This will produce a stereo output for two speakers,
+connected from speaker pin(s) to ground, or a single 16-bit output using a resistor ladder.
+#define MODE2
+In Normal Mode, MODE2 will enable output STEREO or 16BIT audio using two additional timer pins. The timer and pins are
+specified by the speakerPin2 variable. Complimentary timer pins need to be set as output pins manually.
+
+In MULTI Mode:
+#define STEREO_OR_16BIT
+Enabling this option along with MULTI mode will allow two stereo or 16-bit tracks to be played on separate
+timer pins. This provides output for four speakers, connected from speaker pin(s) to ground or a single
+16-bit output for each track.
+#define MODE2
+Enabling this option with MULTI mode and STEREO_OR_16BIT both enabled will make no difference    
+
+See MULTI mode above. 
+</code></pre>
+
+<h3>
+<a id="user-content-sdfat-usage" class="anchor" href="https://github.com/TMRh20/TMRpcm/wiki/Advanced-Features#sdfat-usage" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><strong>SDFAT Usage</strong>
+</h3>
+
+<p>The SDFAT library can be used to reduce memory and program space usage, and increase performance. The files must be
+included in the sketch. See the SDFAT example included with the library.</p>
+
+<h3>
+<a id="user-content-metadata-id3v23-and-list-tags" class="anchor" href="https://github.com/TMRh20/TMRpcm/wiki/Advanced-Features#metadata-id3v23-and-list-tags" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><strong>Metadata (ID3v2.3 and LIST tags)</strong>
+</h3>
+
+<p>Functions have been added to read Song, Artist, and Album info from ID3v2.3 and LIST tags in WAV files</p>
+
+<p>Note: <a href="http://audacityteam.org/">Audacity</a> is the only supported program to add, modify or edit metadata.</p>
+
+<pre><code>Functions:
+listInfo - Reads LIST tags into a character buffer, returns the length of the tag
+id3Info -  Reads ID3 tags into a character buffer, returns the length of the tag
+getInfo -  Searches for both tags and reads into a character buffer, returns the length of the tag. ID3 is searched first.
+
+Tag To Request: 0 = Song Name, 1 = Artist Name, 2 = Album Name
+
+Syntax: byte length = audio.listInfo(&lt;Song Name&gt;,&lt;buffer[]&gt;,&lt;tagToRequest&gt;);
+        byte length = audio.id3Info(&lt;Song Name&gt;,&lt;buffer[]&gt;,&lt;tagToRequest&gt;);
+        byte length = audio.getInfo(&lt;Song Name&gt;,&lt;buffer[]&gt;,&lt;tagToRequest&gt;);
+</code></pre>
+
+<pre><code>Examples:
+1. Search LIST info only and print song name over serial:
+    char info[32];
+    audio.listInfo("song.wav",info,0);
+    Serial.print(info);Serial.println(":"); 
+
+2. Search ID3v2.3 and LIST info and print song, artist and album info over serial       
+    char info[40];
+    char* titles[3] = {"Now Playing: ", "by: ", "Album: "};
+
+    for(int i=0; i&lt;3; i++){
+      if(audio.getInfo("song1.wav",info,i) &gt; 0){
+        Serial.print(titles[i]);
+        Serial.println(info);
+      }
+    }
+    audio.play("song1.wav");        
+</code></pre>
+
+<h3>
+<a id="user-content-timer2-usage" class="anchor" href="https://github.com/TMRh20/TMRpcm/wiki/Advanced-Features#timer2-usage" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><strong>TIMER2 Usage</strong>
+</h3>
+
+<p>Mainly for use with Uno, Nano etc with only one 16-bit timer. TIMER2 can be used for audio playback when TIMER1 is required for other purposes.<br>
+SpeakerPins - Pin3 only on Uno,Nano,etc<br>
+To enable usage of 8-bit TIMER2, uncomment #define USE_TIMER2 in the user defines section  </p>
+
+<pre><code>Notes:
+1. This is usually not the best solution.
+2. Playback speed will be slightly different than with 16-bit timers.
+3. TIMER2 playback supports non-standard sample rates:
+   31.4 kHz, 23.5 kHz, and 15.7 kHz    
+4. Oversampling is on by default and cannot be changed in this mode
+5. 24-32kHz sample rate with 128buffer size is recommended
+</code></pre>
+
+<h3>
+<a id="user-content-pwm-and-rampmega-option" class="anchor" href="https://github.com/TMRh20/TMRpcm/wiki/Advanced-Features#pwm-and-rampmega-option" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><strong>PWM and rampMega option</strong>
+</h3>
+
+<p>Trying to reduce all of the popping noises created from PWM has been a struggle, but I've identified and addressed 4 main sources:  </p>
+
+<pre><code>Problem sources:      
+1. Enabling PWM/Timers on Arduino
+2. Disabling PWM/Timers on Arduino
+3. Difference in values between tracks
+4. Parsing of non-audio data
+</code></pre>
+
+<pre><code>Solutions:  
+1 and 2. In testing on Arduino Duemilanove and Mega boards, I discovered a need for different
+ramping methods on startup and disabling. Hopefully this addresses the issue on most other boards.  
+3.The ramping code between tracks is solid. If playing tracks of different sample rates, use the
+disable() function to turn the timers off between changes. Also see #4.  
+4.An option HANDLE_TAGS has been included in pcmConfig.h to allow proper playback of wav files
+with included metadata (ID3 or LIST info)  
+</code></pre>
+
+<h3>
+<a id="user-content-simple-digital-wav-file-generation" class="anchor" href="https://github.com/TMRh20/TMRpcm/wiki/Advanced-Features#simple-digital-wav-file-generation" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><strong>Simple Digital WAV File generation</strong>
+</h3>
+
+<p>These features will generate standards compliant WAV files. Raw data from analog inputs or other sensors or information sources
+can be written to the file to generate digital audio that can be played on any device that supports WAV files, or easily converted
+to other formats.<br>
+Note: More wav formats etc. will be added to this eventually.  </p>
+
+<pre><code>Syntax: audio.createWavTemplate(&lt;Song Name&gt;,&lt;Sample Rate&gt;);
+        audio.finalizeWavTemplate(&lt;Song Name&gt;);
+
+Usage: See the example included with the library. Generate the template file, then write data to it starting at 44 bytes.
+       Use the finalizeWavTemplate comand to add the file size details to the file prior to playback.. 
+
+Notes: If the specified file exists, it will be overwritten for creation, but only updated for finalization. These functions
+are called automatically when using the recording functions.
+</code></pre>
+
+<h3>
+<a id="user-content-recording-audio" class="anchor" href="https://github.com/TMRh20/TMRpcm/wiki/Advanced-Features#recording-audio" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><strong>Recording Audio</strong>
+</h3>
+
+<p>Audio recording is still being tested and may not perform as expected. </p>
+
+<pre><code>Functions:  
+startRecording - Starts recording from the specified analog pin  
+stopRecording -  Stops the recording and finalizes the wav file  
+
+Pass-through Mode - Outputs audio to speaker during recording
+Modes:  0:Normal/None, 1:Speaker enable  2:No recording, speaker out only
+
+Syntax: audio.startRecording(&lt;Song Name&gt;,&lt;Sample Rate&gt;, &lt;analog pin&gt;);
+        audio.startRecording(&lt;Song Name&gt;,&lt;Sample Rate&gt;, &lt;analog pin&gt;, &lt;passthrough mode&gt;);
+        audio.stopRecording(&lt;Song Name&gt;);  
+
+Usage: 
+1. Uncomment #define buffSize 128 AND #define ENABLE_RECORDING in pcmConfig.h
+2. Start recording:
+audio.startRecording("sound.wav",16000,A0);  
+3. Stop recording: 
+audio.stopRecording("sound.wav");  
+
+Notes: SdFat library is recommended for recording.
+Class 4 SD card minimum recommended
+May need to increase buffSize
+</code></pre>
+
+<h3>
+<a id="user-content-audio-streaming-over-nrf24l01-radio-link" class="anchor" href="https://github.com/TMRh20/TMRpcm/wiki/Advanced-Features#audio-streaming-over-nrf24l01-radio-link" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><strong>Audio streaming over NRF24L01+ radio link</strong>
+</h3>
+
+<p>This optional receiver library is included to enable PCM/WAV streaming/multicasting
+using NRF24L01+ radio modules, and utilizes the newly updated <a href="https://github.com/TMRh20/RF24/archive/master.zip">RF24 Radio Library</a> and newly created <a href="https://github.com/TMRh20/RF24Audio/archive/master.zip">RF24Audio library</a></p>
+
+<pre><code>Requirements: 
+2 or more Arduino (Uno,Mega,Nano,etc)
+2 or more NRF24L01+ Radio Modules + RF24 Arduino Library
+1 SD card for controller
+1 Output Device
+</code></pre>
+
+<pre><code>Step 1: Connect everything and test it all individually
+
+To enable receiver:
+1. Download and install the RF24Audio and RF24 library from the link above 
+2. Configure and upload the included 'minimal' example sketch
+
+To enable controller:
+1. Open pcmConfig.h and uncomment the #define ENABLE_RF line
+2. Open up, configure and run one of the two example files in streamingExamples folder
+</code></pre>
+
+<p>Note: The ENABLE_RF line MUST be commented out if not using RF features</p>
+
+      </div>
+
+  </div>
+  </div>
+</div>
+</div>
+
+
+  </div>
+  <div class="modal-backdrop"></div>
+</div>
+
+    </div>
+  </div>
+
+    </div>
+
+        <div class="container">
+  <div class="site-footer" role="contentinfo">
+    <ul class="site-footer-links right">
+        <li><a href="https://status.github.com/" data-ga-click="Footer, go to status, text:status">Status</a></li>
+      <li><a href="https://developer.github.com/" data-ga-click="Footer, go to api, text:api">API</a></li>
+      <li><a href="https://training.github.com/" data-ga-click="Footer, go to training, text:training">Training</a></li>
+      <li><a href="https://shop.github.com/" data-ga-click="Footer, go to shop, text:shop">Shop</a></li>
+        <li><a href="https://github.com/blog" data-ga-click="Footer, go to blog, text:blog">Blog</a></li>
+        <li><a href="https://github.com/about" data-ga-click="Footer, go to about, text:about">About</a></li>
+        <li><a href="https://github.com/pricing" data-ga-click="Footer, go to pricing, text:pricing">Pricing</a></li>
+
+    </ul>
+
+    <a href="https://github.com/" aria-label="Homepage">
+      <svg aria-hidden="true" class="octicon octicon-mark-github" height="24" role="img" title="GitHub " version="1.1" viewBox="0 0 16 16" width="24"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59 0.4 0.07 0.55-0.17 0.55-0.38 0-0.19-0.01-0.82-0.01-1.49-2.01 0.37-2.53-0.49-2.69-0.94-0.09-0.23-0.48-0.94-0.82-1.13-0.28-0.15-0.68-0.52-0.01-0.53 0.63-0.01 1.08 0.58 1.23 0.82 0.72 1.21 1.87 0.87 2.33 0.66 0.07-0.52 0.28-0.87 0.51-1.07-1.78-0.2-3.64-0.89-3.64-3.95 0-0.87 0.31-1.59 0.82-2.15-0.08-0.2-0.36-1.02 0.08-2.12 0 0 0.67-0.21 2.2 0.82 0.64-0.18 1.32-0.27 2-0.27 0.68 0 1.36 0.09 2 0.27 1.53-1.04 2.2-0.82 2.2-0.82 0.44 1.1 0.16 1.92 0.08 2.12 0.51 0.56 0.82 1.27 0.82 2.15 0 3.07-1.87 3.75-3.65 3.95 0.29 0.25 0.54 0.73 0.54 1.48 0 1.07-0.01 1.93-0.01 2.2 0 0.21 0.15 0.46 0.55 0.38C13.71 14.53 16 11.53 16 8 16 3.58 12.42 0 8 0z"></path></svg>
+</a>
+    <ul class="site-footer-links">
+      <li>© 2016 <span title="0.07683s from github-fe147-cp1-prd.iad.github.net">GitHub</span>, Inc.</li>
+        <li><a href="https://github.com/site/terms" data-ga-click="Footer, go to terms, text:terms">Terms</a></li>
+        <li><a href="https://github.com/site/privacy" data-ga-click="Footer, go to privacy, text:privacy">Privacy</a></li>
+        <li><a href="https://github.com/security" data-ga-click="Footer, go to security, text:security">Security</a></li>
+        <li><a href="https://github.com/contact" data-ga-click="Footer, go to contact, text:contact">Contact</a></li>
+        <li><a href="https://help.github.com/" data-ga-click="Footer, go to help, text:help">Help</a></li>
+    </ul>
+  </div>
+</div>
+
+
+
+    
+    
+    
+
+    <div id="ajax-error-message" class="flash flash-error">
+      <svg aria-hidden="true" class="octicon octicon-alert" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M15.72 12.5l-6.85-11.98C8.69 0.21 8.36 0.02 8 0.02s-0.69 0.19-0.87 0.5l-6.85 11.98c-0.18 0.31-0.18 0.69 0 1C0.47 13.81 0.8 14 1.15 14h13.7c0.36 0 0.69-0.19 0.86-0.5S15.89 12.81 15.72 12.5zM9 12H7V10h2V12zM9 9H7V5h2V9z"></path></svg>
+      <button type="button" class="flash-close js-flash-close js-ajax-error-dismiss" aria-label="Dismiss error">
+        <svg aria-hidden="true" class="octicon octicon-x" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12"><path d="M7.48 8l3.75 3.75-1.48 1.48-3.75-3.75-3.75 3.75-1.48-1.48 3.75-3.75L0.77 4.25l1.48-1.48 3.75 3.75 3.75-3.75 1.48 1.48-3.75 3.75z"></path></svg>
+      </button>
+      Something went wrong with that request. Please try again.
+    </div>
+
+
+      
+      <script crossorigin="anonymous" integrity="sha256-7lIbjp+srGj/J+k/w64PjtgR17+eQ06E9LnqIneAsIQ=" src="./Advanced Features · TMRh20_TMRpcm Wiki_files/frameworks-ee521b8e9facac68ff27e93fc3ae0f8ed811d7bf9e434e84f4b9ea227780b084.js"></script>
+      <script async="async" crossorigin="anonymous" integrity="sha256-aWM2lkt8QuTG9N+68fjlf0Jc2anRihLz/m4910T9fRM=" src="./Advanced Features · TMRh20_TMRpcm Wiki_files/github-696336964b7c42e4c6f4dfbaf1f8e57f425cd9a9d18a12f3fe6e3dd744fd7d13.js"></script>
+      
+      
+        <script crossorigin="anonymous" integrity="sha256-/8VwnSfvkOLKGe9LryHUTjoB3OUALvVesJjj9Lzi0hc=" src="./Advanced Features · TMRh20_TMRpcm Wiki_files/wiki-ffc5709d27ef90e2ca19ef4baf21d44e3a01dce5002ef55eb098e3f4bce2d217.js"></script>
+
+    <div class="js-stale-session-flash stale-session-flash flash flash-warn flash-banner hidden">
+      <svg aria-hidden="true" class="octicon octicon-alert" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M15.72 12.5l-6.85-11.98C8.69 0.21 8.36 0.02 8 0.02s-0.69 0.19-0.87 0.5l-6.85 11.98c-0.18 0.31-0.18 0.69 0 1C0.47 13.81 0.8 14 1.15 14h13.7c0.36 0 0.69-0.19 0.86-0.5S15.89 12.81 15.72 12.5zM9 12H7V10h2V12zM9 9H7V5h2V9z"></path></svg>
+      <span class="signed-in-tab-flash">You signed in with another tab or window. <a href="">Reload</a> to refresh your session.</span>
+      <span class="signed-out-tab-flash">You signed out in another tab or window. <a href="">Reload</a> to refresh your session.</span>
+    </div>
+    <div class="facebox" id="facebox" style="display:none;">
+  <div class="facebox-popup">
+    <div class="facebox-content" role="dialog" aria-labelledby="facebox-header" aria-describedby="facebox-description">
+    </div>
+    <button type="button" class="facebox-close js-facebox-close" aria-label="Close modal">
+      <svg aria-hidden="true" class="octicon octicon-x" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12"><path d="M7.48 8l3.75 3.75-1.48 1.48-3.75-3.75-3.75 3.75-1.48-1.48 3.75-3.75L0.77 4.25l1.48-1.48 3.75 3.75 3.75-3.75 1.48 1.48-3.75 3.75z"></path></svg>
+    </button>
+  </div>
+</div>
+
+  
+
+
+</body></html>

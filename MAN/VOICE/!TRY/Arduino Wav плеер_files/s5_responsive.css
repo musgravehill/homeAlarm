@@ -1,0 +1,390 @@
+/* ANY CSS FOR ALL WIDTHS GOES HERE
+----------------------------------------------------------- */
+
+#s5_map_canvas img { max-width:none !important;}
+
+
+/* ALL WIDTHS UNDER 970PX
+----------------------------------------------------------- */
+
+@media screen and (max-width: 970px){
+
+	/* DEFAULT
+	----------------- */
+
+	.s5_wrap {
+	width:100% !important;
+	}
+	
+	.s5_is_display, .s5_is_slide {
+	position:relative !important;
+	}
+	
+	.s5_is_slide {
+	height:auto !important;
+	}
+	
+	#fontControls {
+	display:none;
+	}
+	
+	/* CUSTOM
+	----------------- */
+	
+	body {
+	font-size:0.7em !important;
+	}
+	
+	.s5_wrap {
+	width:96% !important;
+	}
+	
+	#s5_pos_custom_2 {
+	width:100% !important;
+	float:none !important;
+	}
+	
+	#s5_pos_custom_2 .module_round_box_outer {
+	margin-right:0px;
+	}
+	
+	#s5_component_call_wrap {
+	float:none !important;
+	width:100% !important;
+	}
+	
+	#s5_register {
+	padding-top:3px;
+	height:12px;
+	}
+
+	#s5_login {
+	padding-top:3px;
+	height:12px;
+	}
+	
+}
+
+
+/* TABLET PORTRAIT MODE CSS
+----------------------------------------------------------- */
+
+@media screen and (min-width:580px) and (max-width: 970px){
+
+	
+	/* CUSTOM
+	----------------- */
+	
+	.tabshow_wrap {
+	float:left;
+	width:33%;
+	margin-bottom:0px !important;
+	}
+	
+	.tabshow_wrap .s5_is {
+	padding-left:5px;
+	padding-right:5px;
+	}
+	
+}
+
+
+/* TABLET PORTRAIT MODE CSS - SMALLER TABLETS
+----------------------------------------------------------- */
+
+@media screen and (max-width: 750px){
+
+	/* CUSTOM
+	----------------- */
+	
+	#s5_menu_spacer {
+	display:none !important;
+	}
+	
+	#s5_header_area1 {
+	position:static !important;
+	}
+	
+	.image_slide_wrap {
+	width:50%;
+	}
+	
+	.image_slide_wrap_top {
+	margin-bottom:20px;
+	}
+	
+	.image_slide_wrap_top, .image_slide_wrap_bottom {
+	float:left;
+	width:100%;
+	}
+	
+	.jdGallery .slideInfoZone p {
+	padding-top:20px !important;
+	}
+	.jdGallery .slideInfoZone h2 {
+	display:none;
+	}
+	
+	#s5_body_padding {
+	padding-bottom:8px;
+	}
+	
+	.s5_body_section {
+	margin-top:8px;
+	}
+
+}
+
+
+/* MOBILE LAYOUT CSS
+----------------------------------------------------------- */
+
+@media screen and (max-width: 579px){
+
+	/* DEFAULT
+	----------------- */
+
+	#s5_right_column_wrap_inner .s5_float_left, #s5_left_column_wrap_inner .s5_float_left {
+	float:none;
+	}
+
+	#s5_columns_wrap_inner {
+	width:100%;
+	}
+
+	#s5_center_column_wrap {
+	width:100%;
+	left:100%;
+	}
+
+	#s5_left_column_wrap {
+	left:0%;
+	}
+	
+	#s5_left_top_wrap, #s5_left_column_wrap, #s5_left_inset_wrap, #s5_left_wrap, #s5_left_bottom_wrap, #s5_right_top_wrap, #s5_right_column_wrap, #s5_right_inset_wrap, #s5_right_wrap, #s5_right_bottom_wrap, #s5_top_row1 .s5_float_left, #s5_top_row2 .s5_float_left, #s5_top_row3 .s5_float_left, #s5_above_columns_inner .s5_float_left, #s5_middle_top .s5_float_left , #s5_middle_bottom .s5_float_left, #s5_below_columns_inner .s5_float_left, #s5_bottom_row1 .s5_float_left, #s5_bottom_row2, .s5_float_left, #s5_bottom_row3 .s5_float_left, #s5_above_body .s5_float_left, #s5_below_body .s5_float_left {
+	width:100% !important;
+	}
+	
+	#s5_center_column_wrap_inner {
+	margin:0px !important;
+	}
+	
+	#s5_left_column_wrap {
+	margin-right:0px !important;
+	}
+	
+	#s5_right_column_wrap {
+	margin-left:0px !important;
+	}
+	
+	.items-row .item {
+	width:100% !important;
+	padding-left:0px !important;
+	padding-right:0px !important;
+	margin-right:0px !important;
+	margin-left:0px !important;
+	}
+	
+	/* CUSTOM
+	----------------- */
+	
+	.image_slide_wrap {
+	width:100%;
+	margin-bottom:20px;
+	}
+	
+	.image_slide_wrap img {
+	width:100%;
+	}
+	
+	.image_slide_wrap_top, .image_slide_wrap_bottom {
+	float:left;
+	width:100%;
+	margin-bottom:0px;
+	}
+	
+	.image_slide_wrap_bottom { 
+	margin-bottom:-20px;
+	}
+	
+	#s5_button_frame ul li {
+	float:left !important;
+	}
+	
+	.s5_ts_active a {
+	background:#353535 !important;
+	}
+	
+	#s5_button_frame ul li {
+	width:100% !important;
+	height:auto !important;
+	margin:0px;
+	text-indent:0px;
+	margin-bottom:6px;
+	}
+	
+	#s5_button_frame {
+	float:none;
+	margin:0px;
+	margin-bottom:20px;
+	}
+	
+	.tabshow_wrap, .tabshow_wrap img {
+	width:100% !important;
+	}
+	
+	#s5_component_wrap {
+	padding:8px;
+	padding-bottom:0px;
+	}
+	
+	#s5_component_call_wrap, #s5_pos_custom_2 .module_round_box_outer {
+	margin-bottom:10px;
+	}
+
+
+}
+
+
+/* CUSTOM SIZES
+----------------------------------------------------------- */
+
+@media screen and (max-width: 1150px){
+	#s5_search_wrap  {
+	display:none;
+	}
+	#s5_nav li .s5_level1_span1 {
+	padding-left:11px;
+	padding-right:13px;
+	}
+	.slideInfoZone {
+	width:42% !important;
+	}
+	#myGallery_height, .withArrows a.open, .jdGallery .slideElement, .jdGallery div.carouselContainer {
+	width:58% !important;
+	}
+}
+
+
+@media screen and (max-width: 1150px){
+	.jdGallery {
+	font-size:0.8em;
+	}
+	.jdGallery .slideInfoZone h2 {
+	margin-bottom:8px !important;
+	margin-top:20px !important;
+	padding-left:20px !important;
+	padding-right:20px !important;
+	font-size:1.2em !important;
+	}
+	.jdGallery .slideInfoZone p {
+	padding-left:20px !important;
+	padding-right:20px !important;
+	padding-bottom:20px !important;
+	}
+	.slideInfoZone .readon {
+	margin-top:10px;
+	}
+}
+
+@media screen and (max-width: 850px){
+	.s5_resize_center_columns {
+	min-height:1px !important;
+	}
+}
+
+
+/* S5 BOX
+----------------------------------------------------------- */
+
+@media screen and (max-width: 970px){
+
+	#colorbox {
+	width:50% !important;
+	height:auto !important;
+	}
+	
+	#cboxWrapper {
+	width:100% !important;
+	}
+	
+	#cboxContent, #cboxLoadedContent {
+	width:100% !important;
+	height:auto !important;
+	}
+	
+	#colorbox {
+	left:25% !important;
+	width:50% !important;
+	height:100% !important;
+	top:25% !important;
+	}
+	
+}
+
+@media screen and (max-width: 750px){
+
+	#cboxOverlay, #colorbox {
+	display:none !important;
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* SINGLE COLUMN FOR SMALL TABLETS - THIS IS ONLY USED FOR IE7 AND IE8. THE CLASS IS SET WITH JAVASCRIPT FOR IE ONLY
+----------------------------------------------------------- */
+
+@media screen and (max-width: 750px){
+	
+	.s5_ie_single_column #s5_right_column_wrap_inner .s5_float_left, .s5_ie_single_column #s5_left_column_wrap_inner .s5_float_left {
+	float:none  !important;
+	}
+
+	.s5_ie_single_column #s5_columns_wrap_inner {
+	width:100%  !important;
+	}
+
+	.s5_ie_single_column #s5_center_column_wrap {
+	width:100%  !important;
+	left:100%  !important;
+	}
+
+	.s5_ie_single_column #s5_left_column_wrap {
+	left:0%  !important;
+	}
+	
+	.s5_ie_single_column #s5_left_top_wrap, .s5_ie_single_column #s5_left_column_wrap, .s5_ie_single_column #s5_left_inset_wrap, .s5_ie_single_column #s5_left_wrap, .s5_ie_single_column #s5_left_bottom_wrap, .s5_ie_single_column #s5_right_top_wrap, .s5_ie_single_column #s5_right_column_wrap, .s5_ie_single_column #s5_right_inset_wrap, .s5_ie_single_column #s5_right_wrap, .s5_ie_single_column #s5_right_bottom_wrap {
+	width:100% !important;
+	}
+	
+	.s5_ie_single_column #s5_center_column_wrap_inner {
+	margin:0px !important;
+	}
+	
+	.s5_ie_single_column #s5_left_column_wrap {
+	margin-right:0px !important;
+	}
+	
+	.s5_ie_single_column #s5_right_column_wrap {
+	margin-left:0px !important;
+	}
+	
+	.s5_ie_single_column  .items-row .item {
+	width:100% !important;
+	padding-left:0px !important;
+	padding-right:0px !important;
+	margin-right:0px !important;
+	margin-left:0px !important;
+	}
+
+}

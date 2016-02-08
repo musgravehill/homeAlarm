@@ -1,0 +1,2269 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)http://www.radio-magic.ru/arduino-projects/173-arduino-wav -->
+<html prefix="og: http://ogp.me/ns#" xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru-RU" lang="ru-RU" slick-uniqueid="3"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script async="" src="./Arduino Wav плеер_files/"></script><script async="" src="./Arduino Wav плеер_files/"></script><script async="" src="./Arduino Wav плеер_files/"></script><script async="" src="./Arduino Wav плеер_files/"></script>
+  <!--<base href="http://www.radio-magic.ru/arduino-projects/173-arduino-wav">--><base href=".">
+  
+  <meta name="keywords" content="arduino wav, arduino плеер, проигрывание wav файлов">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Arduino Wav плеер">
+  <meta property="og:description" content="В этой статье хочу поделиться опытом проигрывание wav файлов на Arduino. Изобретать велосипед не стал а взял готовый пример Arduino Wav плеера с сайта instructables. Пример реально рабочий если все де">
+  <meta name="description" content="В этой статье хочу поделиться опытом проигрывание wav файлов на Arduino. Изобретать велосипед не стал а взял готовый пример Arduino Wav плеера">
+  <title>Arduino Wav плеер</title>
+  <link href="http://www.radio-magic.ru/component/jcomments/feed/com_content/173" rel="alternate" type="application/rss+xml" title="Arduino Wav плеер">
+  <link href="http://www.radio-magic.ru/templates/helion/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+  <link rel="stylesheet" href="./Arduino Wav плеер_files/k2.css" type="text/css">
+  <link rel="stylesheet" href="./Arduino Wav плеер_files/style.css" type="text/css">
+  <link rel="stylesheet" href="./Arduino Wav плеер_files/style(1).css" type="text/css">
+  <link rel="stylesheet" href="./Arduino Wav плеер_files/buttons.css" type="text/css">
+  <link rel="stylesheet" href="./Arduino Wav плеер_files/modal.css" type="text/css">
+  <script type="text/javascript" async="" src="./Arduino Wav плеер_files/code.js"></script><script type="text/javascript" async="" src="./Arduino Wav плеер_files/watch.js"></script><script async="" src="./Arduino Wav плеер_files/analytics.js"></script><script src="./Arduino Wav плеер_files/mootools-core.js" type="text/javascript"></script>
+  <script src="./Arduino Wav плеер_files/core.js" type="text/javascript"></script>
+  <script src="./Arduino Wav плеер_files/jquery.min.js" type="text/javascript"></script>
+  <script src="./Arduino Wav плеер_files/k2.js" type="text/javascript"></script>
+  <script src="./Arduino Wav плеер_files/jcomments-v2.3.js" type="text/javascript"></script>
+  <script src="./Arduino Wav плеер_files/ajax.js" type="text/javascript"></script>
+  <script src="./Arduino Wav плеер_files/caption.js" type="text/javascript"></script>
+  <script src="./Arduino Wav плеер_files/jquery.min(1).js" type="text/javascript"></script>
+  <script src="./Arduino Wav плеер_files/buttons.js" type="text/javascript"></script>
+  <script src="./Arduino Wav плеер_files/mootools-more.js" type="text/javascript"></script>
+  <script src="./Arduino Wav плеер_files/modal.js" type="text/javascript"></script>
+  <script type="text/javascript">
+window.addEvent('load', function() {
+				new JCaption('img.caption');
+			});
+            var jllickeproSettings = {
+                url : "http://radio-magic.ru",
+                typeGet : "0",
+                isCategory : 0,
+                buttonsContayner : "",
+            };
+		window.addEvent('domready', function() {
+
+			SqueezeBox.initialize({});
+			SqueezeBox.assign($$('a.modal'), {
+				parse: 'rel'
+			});
+		});
+function keepAlive() {	var myAjax = new Request({method: "get", url: "index.php"}).send();} window.addEvent("domready", function(){ keepAlive.periodical(840000); });
+  </script>
+  <link href="./Arduino Wav плеер_files/s5_accordion_menu.css" rel="stylesheet" type="text/css" media="screen">
+
+<meta name="viewport" content="initial-scale=1.0">
+<script type="text/javascript">
+//<![CDATA[
+window.addEvent('domready', function() {
+var myMenu = new MenuMatic({
+tabletWidth:1400,
+effect:"fade",
+duration:0,
+physics: Fx.Transitions.Pow.easeOut,
+hideDelay:200,
+orientation:"horizontal",
+tweakInitial:{x:0, y:0},
+direction:{    x: 'right',    y: 'down' },
+opacity:100            });
+});
+//]]>
+</script>
+<!-- Css and js addons for vertex features -->
+<link rel="stylesheet" type="text/css" href="./Arduino Wav плеер_files/css">
+<style type="text/css">
+.module_round_box_outer, #s5_above_body, #s5_below_body {
+font-size:1em !important;
+}
+#s5_component_wrap {
+font-size:1.3em !important;
+}
+/* MAX IMAGE WIDTH */
+img {
+height:auto !important;
+max-width:100% !important;
+-webkit-box-sizing: border-box !important; /* Safari/Chrome, other WebKit */
+-moz-box-sizing: border-box !important;    /* Firefox, other Gecko */
+box-sizing: border-box !important;         /* Opera/IE 8+ */
+}
+#map_canvas img {
+max-width:none !important;
+}
+.full_width {
+width:100% !important;
+-webkit-box-sizing: border-box !important; /* Safari/Chrome, other WebKit */
+-moz-box-sizing: border-box !important;    /* Firefox, other Gecko */
+box-sizing: border-box !important;         /* Opera/IE 8+ */
+}
+.S5_submenu_itemTablet{
+background:none !important;
+}
+#s5_right_wrap, #s5_left_wrap, #s5_right_inset_wrap, #s5_left_inset_wrap, #s5_right_top_wrap, #s5_left_top_wrap, #s5_right_bottom_wrap, #s5_left_bottom_wrap {
+width:100% !important;
+}
+#s5_right_column_wrap {
+width:0% !important;
+margin-left:-10% !important;
+}
+#s5_left_column_wrap {
+width:10% !important;
+}
+#s5_center_column_wrap_inner {
+margin-right:0% !important;
+margin-left:20% !important;
+}
+#s5_responsive_mobile_drop_down_wrap input {
+width:96% !important;
+}
+#s5_responsive_mobile_drop_down_search input {
+width:100% !important;
+}
+@media screen and (max-width: 750px){
+body {
+height:100% !important;
+position:relative !important;
+padding-bottom:48px !important;
+}
+}
+@media screen and (max-width: 970px){
+#subMenusContainer .S5_subtext {
+width:85%;
+}
+}
+#s5_responsive_mobile_bottom_bar, #s5_responsive_mobile_top_bar {
+background:#0B0B0B;
+background: -moz-linear-gradient(top, #272727 0%, #0B0B0B 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#272727), color-stop(100%,#0B0B0B)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #272727 0%,#0B0B0B 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #272727 0%,#0B0B0B 100%); /* Opera11.10+ */
+background: -ms-linear-gradient(top, #272727 0%,#0B0B0B 100%); /* IE10+ */
+background: linear-gradient(top, #272727 0%,#0B0B0B 100%); /* W3C */
+font-family: Ubuntu !important;
+}
+.s5_responsive_mobile_drop_down_inner, .s5_responsive_mobile_drop_down_inner input, .s5_responsive_mobile_drop_down_inner button, .s5_responsive_mobile_drop_down_inner .button, #s5_responsive_mobile_drop_down_search .validate {
+font-family: Ubuntu !important;
+}
+.s5_responsive_mobile_drop_down_inner button:hover, .s5_responsive_mobile_drop_down_inner .button:hover {
+background:#0B0B0B !important;
+}
+#s5_responsive_mobile_drop_down_menu, #s5_responsive_mobile_drop_down_menu a, #s5_responsive_mobile_drop_down_login a {
+font-family: Ubuntu !important;
+color:#FFFFFF !important;
+}
+#s5_responsive_mobile_bar_active, #s5_responsive_mobile_drop_down_menu .current a, .s5_responsive_mobile_drop_down_inner .s5_mod_h3, .s5_responsive_mobile_drop_down_inner .s5_h3_first {
+color:#3C99DF !important;
+}
+.s5_responsive_mobile_drop_down_inner button, .s5_responsive_mobile_drop_down_inner .button {
+background:#3C99DF !important;
+}
+#s5_responsive_mobile_drop_down_menu .active ul li, #s5_responsive_mobile_drop_down_menu .current ul li a, #s5_responsive_switch_mobile a, #s5_responsive_switch_desktop a, #s5_responsive_mobile_drop_down_wrap {
+color:#FFFFFF !important;
+}
+#s5_responsive_mobile_toggle_click_menu span {
+border-right:solid 1px #272727;
+}
+#s5_responsive_mobile_toggle_click_menu {
+border-right:solid 1px #0B0B0B;
+}
+#s5_responsive_mobile_toggle_click_search span, #s5_responsive_mobile_toggle_click_register span, #s5_responsive_mobile_toggle_click_login span, #s5_responsive_mobile_scroll a {
+border-left:solid 1px #272727;
+}
+#s5_responsive_mobile_toggle_click_search, #s5_responsive_mobile_toggle_click_register, #s5_responsive_mobile_toggle_click_login, #s5_responsive_mobile_scroll {
+border-left:solid 1px #0B0B0B;
+}
+.s5_responsive_mobile_open, .s5_responsive_mobile_closed:hover, #s5_responsive_mobile_scroll:hover {
+background:#272727;
+}
+#s5_responsive_mobile_drop_down_menu .s5_responsive_mobile_drop_down_inner, #s5_responsive_mobile_drop_down_register .s5_responsive_mobile_drop_down_inner, #s5_responsive_mobile_drop_down_login .s5_responsive_mobile_drop_down_inner, #s5_responsive_mobile_drop_down_search .s5_responsive_mobile_drop_down_inner {
+background:#272727;
+}
+.s5_wrap {
+max-width:1700px !important;
+}
+@media screen and (max-width: 850px){
+#s5_columns_wrap_inner {
+width:100% !important;
+}
+#s5_center_column_wrap {
+width:100% !important;
+left:100% !important;
+}
+#s5_left_column_wrap {
+left:0% !important;
+}
+#s5_left_top_wrap, #s5_left_column_wrap, #s5_left_inset_wrap, #s5_left_wrap, #s5_left_bottom_wrap, #s5_right_top_wrap, #s5_right_column_wrap, #s5_right_inset_wrap, #s5_right_wrap, #s5_right_bottom_wrap {
+width:100% !important;
+}
+#s5_center_column_wrap_inner {
+margin:0px !important;
+}
+#s5_left_column_wrap {
+margin-right:0px !important;
+}
+#s5_right_column_wrap {
+margin-left:0px !important;
+}
+.items-row .item {
+width:100% !important;
+padding-left:0px !important;
+padding-right:0px !important;
+margin-right:0px !important;
+margin-left:0px !important;
+}
+}
+@media screen and (min-width:580px) and (max-width: 900px){
+.s5_resize_bottom_row3 {
+min-height: 0px !important;
+}
+#s5_bottom_row3 #s5_pos_bottom_row3_1.s5_float_left, #s5_bottom_row3 #s5_pos_bottom_row3_2.s5_float_left {
+float:left !important;
+width:50% !important;
+}
+#s5_bottom_row3 #s5_pos_bottom_row3_3.s5_float_left, #s5_bottom_row3 #s5_pos_bottom_row3_4.s5_float_left, #s5_bottom_row3 #s5_pos_bottom_row3_5.s5_float_left, #s5_bottom_row3 #s5_pos_bottom_row3_6.s5_float_left {
+float:left !important;
+width:100% !important;
+}
+}
+</style><script type="text/javascript">//<![CDATA[
+<!-- Floating Menu JS -->
+//]]></script>
+<link rel="stylesheet" href="./Arduino Wav плеер_files/s5_flex_menu.css" type="text/css">
+<link rel="stylesheet" href="./Arduino Wav плеер_files/system.css" type="text/css">
+<link rel="stylesheet" href="./Arduino Wav плеер_files/general.css" type="text/css">
+<link href="./Arduino Wav плеер_files/template_default.css" rel="stylesheet" type="text/css">
+<link href="./Arduino Wav плеер_files/template.css" rel="stylesheet" type="text/css">
+<link href="./Arduino Wav плеер_files/com_content.css" rel="stylesheet" type="text/css">
+<link href="./Arduino Wav плеер_files/editor.css" rel="stylesheet" type="text/css">
+<link href="./Arduino Wav плеер_files/thirdparty.css" rel="stylesheet" type="text/css">
+<link href="http://www.radio-magic.ru/templates/helion/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="./Arduino Wav плеер_files/s5_responsive_bars.css">
+<link href="./Arduino Wav плеер_files/s5_responsive_hide_classes.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="./Arduino Wav плеер_files/s5_responsive.css">
+<link rel="stylesheet" type="text/css" href="./Arduino Wav плеер_files/custom.css">
+<!-- Info Slide Script - Called in header so css validates -->
+<!-- File compression. Needs to be called last on this file -->
+<!-- The excluded files, listed below the compressed php files, are excluded because their calls vary per device or per browser. Included compression files are only ones that have no conditions and are included on all devices and browsers. Otherwise unwanted css will compile in the compressed files. -->
+
+			<script type="text/javascript" src="./Arduino Wav плеер_files/top_compression_js.php"> </script>
+<link rel="stylesheet" href="./Arduino Wav плеер_files/s5_responsive_bars.css" type="text/css">
+<link rel="stylesheet" href="./Arduino Wav плеер_files/s5_responsive_hide_classes.css" type="text/css">
+<link rel="stylesheet" href="./Arduino Wav плеер_files/s5_responsive.css" type="text/css"> 
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="./Arduino Wav плеер_files/css">
+
+
+
+
+
+
+
+<style type="text/css"> 
+
+body, .inputbox {font-family: 'Helvetica',Helvetica,Arial,Sans-Serif ;} 
+
+
+
+.s5_mod_h3, .inputbox, .registration input, .login input, .contact-form input, #jform_contact_message, #mod-search-searchword, input, textarea, .s5_is_display h3, #s5_drop_down_text_inner, .btn, label, #s5_register, #s5_login, .s5_sub_a_span, .highlight_font, #s5_breadcrumb_wrap .showHere, .s5_am_innermenu, .jdGallery .slideInfoZone p, .article-info, p.readmore a, .readon, .s5_mod_h3, .s5_page_heading, h1, h2, h3, h4, h5, #s5_nav li a, .button, .btn-primary, .popular_item a, #s5navfs li, #s5_drop_down_text_inner, .pagenav a, .jdGallery .slideInfoZone h2, .middle_top_image_wrap h4, .highlight_font {
+
+font-family: Ubuntu;
+
+font-weight:400;
+
+}
+
+
+
+#s5_nav li:hover, #s5_nav li.mainMenuParentBtnFocused, #s5_nav li.active, .button, button, #subMenusContainer div ul, .module_round_box-highlight1, #s5_login, .s5_ts_not_active a {
+
+background:#3C99DF !important;
+
+}
+
+
+
+.module_round_box-highlight1 .s5_mod_h3_outer {
+
+background:#2380c6  !important;
+
+}
+
+
+
+.module_round_box-highlight2, button:hover, .button:hover, .btn-primary:hover {
+
+background:#317BB2 !important;
+
+}
+
+
+
+.module_round_box-highlight2 .s5_mod_h3_outer {
+
+background:#1d679e  !important;
+
+}
+
+
+
+.module_round_box-highlight3 {
+
+background:#b3cf87 !important;
+
+}
+
+
+
+.module_round_box-highlight4 {
+
+background:#E8982A !important;
+
+}
+
+
+
+.module_round_box-highlight4 .s5_mod_h3_outer {
+
+background:#d48416  !important;
+
+}
+
+
+
+.module_round_box-highlight3 .s5_mod_h3_outer {
+
+background:#a4c078  !important;
+
+}
+
+
+
+#subMenusContainer div.s5_sub_wrap_lower ul, #subMenusContainer div.s5_sub_wrap_lower_rtl ul {
+
+border:solid 1px #4ba8ee !important;
+
+}
+
+
+
+a, .module_round_box_outer ul li a:hover {
+
+color:#3C99DF;
+
+}
+
+
+
+#s5box_login ul li a:hover {
+
+color:#3C99DF !important;
+
+}
+
+
+
+.module_round_box-underline1 .s5_mod_h3_outer {
+
+border-bottom:solid 1px #3C99DF;
+
+}
+
+
+
+.module_round_box-underline2 .s5_mod_h3_outer {
+
+border-bottom:solid 1px #317BB2;
+
+}
+
+
+
+.module_round_box-underline3 .s5_mod_h3_outer {
+
+border-bottom:solid 1px #CCE8A0;
+
+}
+
+
+
+.module_round_box-underline4 .s5_mod_h3_outer {
+
+border-bottom:solid 1px #E8982A;
+
+}
+
+
+
+.highlight1_text {
+
+color:#3C99DF;
+
+}
+
+
+
+.highlight2_text {
+
+color:#317BB2;
+
+}
+
+
+
+.highlight3_text {
+
+color:#CCE8A0;
+
+}
+
+
+
+.highlight4_text {
+
+color:#E8982A;
+
+}
+
+
+
+p.readmore a, .readon {
+
+background:#E8982A url(http://www.radio-magic.ru/templates/helion/images/s5_readmore.png) no-repeat center right !important;
+
+}
+
+
+
+p.readmore a:hover, .readon:hover {
+
+background:#cf7f11 url(http://www.radio-magic.ru/templates/helion/images/s5_readmore.png) no-repeat center right !important;
+
+}
+
+
+
+.pagenav a {
+
+background:#E8982A !important;
+
+}
+
+
+
+.pagenav a:hover {
+
+background:#cf7f11 !important;
+
+}
+
+
+
+ul.menu li.current a, #s5_accordion_menu #current a, #s5_accordion_menu a:hover {
+
+color:#3C99DF !important;
+
+}
+
+
+
+.jdGallery .slideInfoZone h2, .accordion_text h4, .image_slide_wrap h4 {
+
+color:#CCE8A0 !important;
+
+}
+
+
+
+#s5_nav li {
+
+background:#317BB2 !important;
+
+border-right:solid 1px #408ac1 !important;
+
+}
+
+
+
+.jdGallery .slideInfoZone, #myGallery {
+
+background:#317BB2 !important;
+
+}
+
+
+
+.s5_va_active, #s5_accordion_menu h3.s5_am_open .s5_accordion_menu_left {
+
+border-left:solid 1px #3C99DF !important;
+
+}
+
+
+
+
+
+
+
+#s5_header_area1 {
+
+position:fixed;
+
+z-index:2;
+
+top:0px;
+
+}
+
+#s5_menu_spacer {
+
+display:block;
+
+}
+
+#subMenusContainer {
+
+position:fixed !important;
+
+}
+
+
+
+
+
+#s5_body_padding {
+
+background:none;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+.pagenav a, #s5_nav li, .s5_mod_h3_outer, #s5_login, #s5_register, .middle_top_image_wrap h4, p.readmore a, .readon, button, .button, .btn, label, fieldset, .uppercase {
+
+text-transform:uppercase;
+
+}
+
+
+
+
+
+.S5_parent_subtext {
+
+display:none;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+#s5_social_login_wrap {
+
+padding-bottom:0px;
+
+}
+
+#s5_below_custom_1_wrap {
+
+background:none;
+
+}
+
+
+
+
+
+
+
+
+/* k2 stuff */
+
+div.itemHeader h2.itemTitle, div.catItemHeader h3.catItemTitle, h3.userItemTitle a, #comments-form p, #comments-report-form p, #comments-form span, #comments-form .counter, #comments .comment-author, #comments .author-homepage,
+
+#comments-form p, #comments-form #comments-form-buttons, #comments-form #comments-form-error, #comments-form #comments-form-captcha-holder {font-family: 'Helvetica',Helvetica,Arial,Sans-Serif ;} 
+
+	
+
+.s5_wrap{width:96%;}	
+
+</style>
+
+<script type="text/javascript" async="" src="./Arduino Wav плеер_files/"></script></head>
+
+
+
+<body id="s5_body">
+<!-- RotaBan.ru Ad Code -->
+<script type="text/javascript">
+(function(){
+    var rb = document.createElement('script');
+        d = new Date();
+    d.setHours(0);
+    d.setMinutes(0);
+    d.setSeconds(0);
+    d.setMilliseconds(0);
+    rb.type = 'text/javascript';
+    rb.async = true;
+    rb.src = '//s1.rotaban.ru/rotaban.js?v=' + d.getTime();
+    (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(rb);
+})();
+</script>
+<!-- END RotaBan.ru Ad Code -->
+
+
+<div id="s5_scrolltotop"></div>
+
+
+
+<!-- Top Vertex Calls -->
+
+<!-- Call top bar for mobile devices if layout is responsive -->	
+	
+
+
+<!-- s5_responsive_mobile_top_bar_spacer must be called to keep a space at the top of the page since s5_responsive_mobile_top_bar_wrap is position absolute. -->	
+
+<div id="s5_responsive_mobile_top_bar_spacer"></div>
+
+
+
+<!-- s5_responsive_mobile_top_bar_wrap must be called off the page and not with display:none or it will cause issues with the togglers. -->
+
+<div id="s5_responsive_mobile_top_bar_wrap" style="margin-top:-50000px;position:absolute;z-index:20;top:0px">
+
+
+
+	<div id="s5_responsive_mobile_top_bar" class="s5_responsive_mobile_bar_light">
+
+
+
+			<div id="s5_responsive_mobile_toggle_click_menu" style="display:block;float:left" class="s5_responsive_mobile_closed">
+
+				<span></span>
+
+			</div>
+
+			
+
+			
+				<div id="s5_responsive_mobile_bar_active">
+
+					<span>
+
+						Проекты Arduino
+					</span>
+
+				</div>
+
+			
+			
+
+			<div id="s5_responsive_mobile_toggle_click_login" style="display:none;float:right" class="s5_responsive_mobile_closed">
+
+				<span></span>
+
+			</div>
+
+			
+
+			<div id="s5_responsive_mobile_toggle_click_register" style="display:none;float:right" class="s5_responsive_mobile_closed">
+
+				<span></span>
+
+			</div>
+
+			
+
+			<div id="s5_responsive_mobile_toggle_click_search" style="display:none;float:right" class="s5_responsive_mobile_closed">
+
+				<span></span>
+
+			</div>
+
+
+
+		<div style="clear:both;height:0px"></div>
+
+		
+
+	</div>
+
+
+
+	<div id="s5_responsive_mobile_drop_down_wrap" class="">
+
+		<div style="margin: 0px; position: static; overflow: hidden; height: 0px;"><div id="s5_responsive_mobile_drop_down_menu" style="margin: -260px 0px 0px; overflow: hidden;">
+
+			<div class="s5_responsive_mobile_drop_down_inner" style="-webkit-box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.6);-moz-box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.6);box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.6);">
+
+				
+					
+<ul class="menu">
+<li class="item-101"><a href="./Arduino Wav плеер_files/saved_resource">Главная</a></li><li class="item-115"><a href="http://www.radio-magic.ru/sitemap">Карта сайта</a></li><li class="item-121"><a href="http://www.radio-magic.ru/contacts">Контакты</a></li><li class="item-137 deeper parent"><a href="http://www.radio-magic.ru/literatura">Литература</a><ul><li class="item-216"><a href="http://www.radio-magic.ru/literatura/mk-books">Литература по микроконтроллерам</a></li><li class="item-217"><a href="http://www.radio-magic.ru/literatura/mk-books-2">Антенны</a></li></ul></li><li class="item-138 deeper parent"><span class="separator">Программы</span>
+<ul><li class="item-163"><a href="http://www.radio-magic.ru/programmu-dlya-radiolubitelej/programmu-mk">Микроконтроллеры</a></li><li class="item-164"><a href="http://www.radio-magic.ru/programmu-dlya-radiolubitelej/programmu-mk-2">Схемы</a></li><li class="item-165"><a href="http://www.radio-magic.ru/programmu-dlya-radiolubitelej/programmj-dlya-proectirovanija">Печатные платы</a></li><li class="item-219"><a href="http://www.radio-magic.ru/programmu-dlya-radiolubitelej/sound-generation">Программы для генерации сигналов</a></li><li class="item-220"><a href="http://www.radio-magic.ru/programmu-dlya-radiolubitelej/analyz-prog">Программы для измерений</a></li></ul></li><li class="item-268"><a href="http://forum.radio-magic.ru/">Форум</a></li></ul>
+
+				
+			</div>
+
+		</div></div>
+
+		
+
+		<div style="margin: 0px; position: static; overflow: hidden; height: 0px;"><div id="s5_responsive_mobile_drop_down_search" style="margin: 0px; overflow: hidden;">
+
+			<div class="s5_responsive_mobile_drop_down_inner" style="-webkit-box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.6);-moz-box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.6);box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.6);">
+
+				
+			</div>
+
+		</div></div>
+
+		
+
+		<div style="margin: 0px; position: static; overflow: hidden; height: 0px;"><div id="s5_responsive_mobile_drop_down_login" style="margin: 0px; overflow: hidden;">
+
+			<div class="s5_responsive_mobile_drop_down_inner" id="s5_responsive_mobile_drop_down_login_inner" style="-webkit-box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.6);-moz-box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.6);box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.6);">
+
+			</div>
+
+		</div></div>
+
+		
+
+		
+	
+
+		<div style="margin: 0px; position: static; overflow: hidden; height: 0px;"><div id="s5_responsive_mobile_drop_down_register" style="margin: 0px; overflow: hidden;">
+
+			<div class="s5_responsive_mobile_drop_down_inner" id="s5_responsive_mobile_drop_down_register_inner" style="-webkit-box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.6);-moz-box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.6);box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.6);">
+
+			</div>
+
+		</div></div>
+
+		
+
+		
+			
+
+	</div>
+
+
+
+</div>
+
+
+
+<script language="JavaScript" type="text/javascript">
+
+	var s5_responsive_login_url = "";
+
+	var s5_responsive_register_url = "";
+
+</script>
+
+<script type="text/javascript" language="javascript" src="./Arduino Wav плеер_files/s5_responsive_mobile_bar.js"></script>
+
+
+<!-- Fixed Tabs -->	
+
+<!-- Drop Down -->	
+
+<!-- Parallax Backgrounds -->
+
+<!-- Floating Menu Spacer -->
+
+
+
+<!-- Body Padding Div Used For Responsive Spacing -->		
+
+<div id="s5_body_padding">
+
+
+
+	<div id="s5_menu_spacer"></div>
+
+
+
+	<!-- Header -->			
+
+		<div id="s5_header_area1">		
+
+		<div id="s5_header_area2">	
+
+		<div id="s5_header_area_inner" class="s5_wrap">					
+
+			<div id="s5_header_wrap">
+
+				
+					
+						<img alt="logo" src="./Arduino Wav плеер_files/s5_logo.png" id="s5_logo" onclick="window.document.location.href=&#39;http://www.radio-magic.ru/&#39;">
+
+					
+				
+				
+					<div id="s5_menu_wrap">
+
+						<ul id="s5_nav" class="menu"><li><span class="s5_level1_span1"><span class="s5_level1_span2"><a href="./Arduino Wav плеер_files/saved_resource"><span onclick="window.document.location.href=&quot;/&quot;">Главная</span></a></span></span></li><li><span class="s5_level1_span1"><span class="s5_level1_span2"><a href="http://www.radio-magic.ru/sitemap"><span onclick="window.document.location.href=&quot;/sitemap&quot;">Карта сайта</span></a></span></span></li><li><span class="s5_level1_span1"><span class="s5_level1_span2"><a href="http://www.radio-magic.ru/contacts"><span onclick="window.document.location.href=&quot;/contacts&quot;">Контакты</span></a></span></span></li><li class="mainParentBtn"><span class="s5_level1_span1"><span class="s5_level1_span2"><a href="http://www.radio-magic.ru/literatura"><span onclick="window.document.location.href=&quot;/literatura&quot;">Литература</span></a></span></span></li><li class="mainParentBtn"><span class="s5_level1_span1"><span class="s5_level1_span2"><a href="javascript:;"><span onclick="window.document.location.href=&quot;javascript:;&quot;">Программы</span></a></span></span></li><li><span class="s5_level1_span1"><span class="s5_level1_span2"><a href="http://forum.radio-magic.ru/"><span onclick="window.document.location.href=&quot;http://forum.radio-magic.ru/&quot;">Форум</span></a></span></span></li></ul>
+					</div>
+
+				
+				
+				<div style="clear:both; height:0px"></div>			
+
+			</div>
+
+		</div>
+
+		</div>
+
+		</div>
+
+	<!-- End Header -->	
+
+	
+
+	
+	
+
+	
+	
+
+	<div id="s5_top_body_section" class="s5_body_section s5_wrap">
+
+	<div id="s5_top_body_section_inner">
+
+	
+
+	
+	
+
+	
+
+	<!-- Top Row1 -->	
+
+		
+			<div id="s5_top_row1_area1">
+
+			<div id="s5_top_row1_area2">
+
+			<div id="s5_top_row1_area_inner">
+
+
+
+				<div id="s5_top_row1_wrap">
+
+					<div id="s5_top_row1">
+
+					<div id="s5_top_row1_inner">
+
+					
+
+						
+						
+
+						
+						
+
+						
+							<div id="s5_pos_top_row1_3" class="s5_float_left" style="width:50%">
+
+									
+					
+						
+				
+		<div class="module_round_box_outer">
+		
+		<div class="module_round_box">
+
+
+				<div class="s5_module_box_1">
+					<div class="s5_module_box_2">
+												<div class="s5_mod_h3_outer">
+							<h3 class="s5_mod_h3"><span class="s5_h3_first">Последние </span> материалы</h3>
+						</div>
+												<ul class="latestnews">
+	<li>
+		<a href="http://www.radio-magic.ru/microcontrollers/335-ckhema-elektroniki-kvadrokoptera">
+			Cхема электроники квадрокоптера</a>
+	</li>
+	<li>
+		<a href="http://www.radio-magic.ru/elektrika/331-indikator-napryazheniya-seti">
+			Индикатор напряжения сети</a>
+	</li>
+	<li>
+		<a href="http://www.radio-magic.ru/microcontrollers/329-skhema-termometra-usb-na-mirkoskheme">
+			Схема термометра USB на микросхеме Atiny2313</a>
+	</li>
+	<li>
+		<a href="http://www.radio-magic.ru/beginners/327-kak-vybrat-tsifrovuyu-pristavku">
+			Как выбрать цифровую приставку?</a>
+	</li>
+	<li>
+		<a href="http://www.radio-magic.ru/power-supply/322-blok-pitaniya-na-60-v">
+			Блок питания на 60 В</a>
+	</li>
+</ul>
+						<div style="clear:both; height:0px"></div>
+					</div>
+				</div>
+
+			
+		</div>
+		
+		</div>
+
+	
+
+							</div>
+
+						
+						
+
+						
+						
+
+						
+							<div id="s5_pos_top_row1_5" class="s5_float_left" style="width:50%">
+
+									
+					
+						
+				
+		<div class="module_round_box_outer">
+		
+		<div class="module_round_box">
+
+
+				<div class="s5_module_box_1">
+					<div class="s5_module_box_2">
+												<div class="s5_mod_h3_outer">
+							<h3 class="s5_mod_h3"><span class="s5_h3_first">Последние </span> комментарии</h3>
+						</div>
+												<ul class="jcomments-latest">
+		<li>
+		<h4>
+							<a href="http://www.radio-magic.ru/arduino-projects/45-irremote">Arduino и IRremote</a>
+					</h4>
+		<ul>
+									<li>
+				
+								<span class="author">ВАФЛЁР</span>
+												<span class="date">29.01.2016 01:52</span>
+				
+				<div class="comment rounded">
+										<div>
+						 А что тут непонятного? Переменная типа long, по имени get. "long, это как int, но немного подлиньше" ...											</div>
+				</div>
+
+							</li>
+							</ul>
+	</li>
+		<li>
+		<h4>
+							<a href="http://www.radio-magic.ru/arduino-projects/123-led-seg">Cемисегментные светодиодные индикаторы и Arduino</a>
+					</h4>
+		<ul>
+									<li>
+				
+								<span class="author">Андрей</span>
+												<span class="date">01.02.2016 22:25</span>
+				
+				<div class="comment rounded">
+										<div>
+						Долго искал в интернете понятный скетч для вывода переменный на сегментный индикатор. Пример мне ...											</div>
+				</div>
+
+							</li>
+							</ul>
+	</li>
+	
+</ul>
+
+						<div style="clear:both; height:0px"></div>
+					</div>
+				</div>
+
+			
+		</div>
+		
+		</div>
+
+	
+
+							</div>
+
+						
+						
+
+						
+						
+
+						<div style="clear:both; height:0px"></div>
+
+
+
+					</div>
+
+					</div>
+
+				</div>
+
+
+
+		</div>
+
+		</div>
+
+		</div>
+
+		
+	<!-- End Top Row1 -->	
+
+		
+
+		
+
+		
+
+	<!-- Top Row2 -->	
+
+		
+	<!-- End Top Row2 -->
+
+	
+
+	
+
+	
+
+	<!-- Top Row3 -->	
+
+		
+	<!-- End Top Row3 -->	
+
+		
+
+	
+	
+
+	<div style="clear:both; height:0px"></div>
+
+	
+
+	</div>
+
+	</div>
+
+	
+
+	
+		
+
+	<!-- Center area -->	
+
+		
+		
+
+		<div id="s5_middle_body_section" class="s5_body_section s5_wrap">
+
+		<div id="s5_middle_body_section_inner">
+
+		
+
+		<div id="s5_center_area1">
+
+		<div id="s5_center_area2">
+
+		<div id="s5_center_area_inner">
+
+		
+
+		<!-- Above Columns Wrap -->	
+
+			
+		<!-- End Above Columns Wrap -->			
+
+				
+
+			<!-- Columns wrap, contains left, right and center columns -->	
+
+			<div id="s5_columns_wrap">
+
+			<div id="s5_columns_wrap_inner">
+
+				
+
+				<div id="s5_center_column_wrap">
+
+				<div id="s5_center_column_wrap_inner" style="margin-left: 20px; margin-right: 0px; min-height: 3231px;" class="s5_resize_center_columns">
+
+				
+
+				
+					
+
+					
+					
+
+						<div id="s5_below_custom_1_wrap">
+
+						
+			
+
+						<div id="s5_middle_top_wrap">
+
+							
+
+							<div id="s5_middle_top">
+
+							<div id="s5_middle_top_inner">
+
+							
+
+								
+								
+
+								
+								
+
+								
+								
+
+								
+								
+
+								
+								
+
+														
+
+								<div style="clear:both; height:0px"></div>
+
+
+
+							</div>
+
+							</div>
+
+						
+
+						</div>
+
+						
+
+						</div>
+
+
+
+					
+					
+
+					
+						
+
+						<div id="s5_component_wrap">
+
+						<div id="s5_component_wrap_inner">
+
+						
+
+						
+						
+
+							
+									
+
+							
+							
+
+								<div id="s5_component_call_wrap">
+
+								<div id="s5_component_call_wrap_inner">
+
+									
+<div id="system-message-container">
+</div>
+﻿<div class="item-page">
+
+	<h2>
+			<a href="http://www.radio-magic.ru/arduino-projects/173-arduino-wav">
+		Arduino Wav плеер</a>
+		</h2>
+
+
+
+<div><div style="margin-bottom:20px;"><script async="" src="./Arduino Wav плеер_files/"></script>
+<!-- Реклама в верху статьи -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9648741959541599" data-ad-slot="8950201460" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ </div></div>
+
+
+
+
+<p>В этой статье хочу поделиться опытом проигрывание wav файлов на <a href="http://www.radio-magic.ru/arduino-projects/41-chto-takoe-arduino">Arduino</a>. Изобретать велосипед не стал а взял готовый пример Arduino Wav плеера с сайта <a href="http://www.instructables.com/id/Playing-Wave-file-using-arduino/" rel="nofollow" target="_blank">instructables</a>. Пример реально рабочий если все делать правильно то проблем быть не должно, у меня ушло приблизительно около полу часа на все чтобы собрать схему, установить библиотеку и воспроизвести звук с SD карты.
+</p><p>Вот собственно сама схема
+</p><h3>Схема Arduino Wav плеера</h3>
+<p>&nbsp;<a class="modal" href="./Arduino Wav плеер_files/arduino_wav.jpg"><img style="display: block; margin-left: auto; margin-right: auto;" src="./Arduino Wav плеер_files/arduino_wav.jpg" alt="Проигрывание wav файлов на Arduino" width="489" height="321"></a>
+</p><p>Кнопки я не подключал, так как в примерах с библиотекой есть пример проигрывания 1 файла на SD карте где они не нужны. SD карту подключил так же как на схеме.
+</p><p>В итоге собранная мною схема состояла из:</p><div><script async="" src="./Arduino Wav плеер_files/"></script>
+<!-- Реклама в статье -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9648741959541599" data-ad-slot="4238323463" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<ul>
+<li>SD карты;</li>
+<li>Arduino Nano;</li>
+<li>Транзистора;</li>
+<li>Сопротивления;</li>
+<li>Динамика.</li>
+</ul>
+<p>Для воспроизведения wav фалов нам понадобится специальная библиотека.
+</p><p><a href="https://github.com/TMRh20/TMRpcm/wiki" rel="nofollow" target="_blank">Скачать библиотеку TMRpcs</a>
+</p><p><a href="http://www.mainon.ru/pages/show/expo"><img class="noimage" style="float: left;" src="./Arduino Wav плеер_files/kiosk-expo-s-series-windows-left.png" alt="kiosk-expo-s-series-windows-left" width="140" height="132"></a>Для того чтобы установить библиотеку нужно в среде Arduino IDE выбрать пункт импорт библиотеки zip. Но в моем случае это почему-то не сработало, если у вас произошло тоже самое, то можно распаковать этот архив в папку libraries в директории с установленной программой.
+</p><p>После того как импортировали библиотеку, в примерах Arduino IDE появится еще один пункт TMRpcs. В нем есть пример basic - пример который проигрывает один файл на SD карте однократно. Для повторного проигрывания нужно жать кнопку reset.
+</p><p>Пример кода для проигрывания файла wav на arduino
+</p><pre><code>
+#include                       // need to include the SD library
+//#define SD_ChipSelectPin 53  //example uses hardware SS pin 53 on Mega2560
+#define SD_ChipSelectPin 4  //using digital pin 4 on arduino nano 328, can use other pins
+#include            //  also need to include this library...
+#include 
+TMRpcm tmrpcm;   // create an object for use in this sketch
+void setup(){
+  tmrpcm.speakerPin = 9; //5,6,11 or 46 on Mega, 9 on Uno, Nano, etc
+  Serial.begin(9600);
+  if (!SD.begin(SD_ChipSelectPin)) {  // see if the card is present and can be initialized:
+    Serial.println("SD fail");  
+    return;   // don't do anything more if not
+  }
+  tmrpcm.play("music"); //the sound file "music" will play each time the arduino powers up, or is reset
+}
+void loop(){  
+  if(Serial.available()){    
+    if(Serial.read() == 'p'){ //send the letter p over the serial monitor to start playback
+      tmrpcm.play("music");
+    }
+  }
+}
+</code></pre>
+<p>В этом примере все что нужно сделать это поменять имя воспроизводимого файла на "music.wav" и таким же именем назвать сам файл на SD карте, ну или любым другим именем.
+</p><p>Файл wav нужно конвертировать под определенные параметры:
+</p><ul>
+<li>samples per seconds: 16000;</li>
+<li>bits per sample: 8;</li>
+<li>channels: mono.</li>
+</ul>
+<h3>Пример работы Arduino Wav плеера автора</h3>
+<p></p><div class="video-responsive"><iframe width="425" height="344" src="./Arduino Wav плеер_files/e8kifH2-Kvk.html" frameborder="0" allowfullscreen=""></iframe></div>				<div class="jllikeproSharesContayner jllikepro_173">
+				<input type="hidden" class="link-to-share" id="link-to-share-173" value="http://radio-magic.ru/arduino-projects/173-arduino-wav">
+				<input type="hidden" class="share-title" id="share-title-173" value="Arduino Wav плеер">
+				<input type="hidden" class="share-image" id="share-image-173" value="">
+				<div class="event-container">
+				<div class="likes-block_left">								<a title="FaceBook" class="like l-fb" id="l-fb-173">
+					<i class="l-ico"></i>
+					<span class="l-count"></span>
+					</a>					<a title="Вконтакте" class="like l-vk" id="l-vk-173">
+					<i class="l-ico"></i>
+					<span class="l-count"></span>
+					</a>					<a title="Twitter" class="like l-tw" id="l-tw-173">
+					<i class="l-ico"></i>
+					<span class="l-count"></span>
+					</a>					<a title="Одноклассники" class="like l-ok" id="l-ok-173">
+					<i class="l-ico"></i>
+					<span class="l-count"></span>
+					</a>					<a title="Google+" class="like l-gp like-not-empty" id="l-gp-173">
+					<i class="l-ico"></i>
+					<span class="l-count">2</span>
+					</a>					<a title="Мой мир" class="like l-ml" id="l-ml-173">
+					<i class="l-ico"></i>
+					<span class="l-count"></span>
+					</a>					<a title="LinkedIn" class="like l-ln" id="l-ln-173">
+					<i class="l-ico"></i>
+					<span class="l-count"></span>
+					</a>					<a title="Я.ру" class="like l-ya" id="l-ya-173">
+					<i class="l-ico"></i>
+					<span class="l-count"></span>
+					</a>					<a title="Pinterest" class="like l-pinteres like-not-empty" id="l-pinteres-173">
+					<i class="l-ico"></i>
+					<span class="l-count">1</span>
+					</a>
+											<!--<div>
+							<a style="text-decoration:none; color: #c0c0c0; font-family: arial,helvetica,sans-serif; font-size: 5pt; " target="_blank" href="http://joomline.ru/rasshirenija/plugin/jllike.html">Social Like</a>
+						</div> -->
+					</div>
+				</div>
+			</div>
+	
+<div><script async="" src="./Arduino Wav плеер_files/"></script>
+<!-- Реклама внизу статьи -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9648741959541599" data-ad-slot="2903667860" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<script type="text/javascript">
+<!--
+var jcomments=new JComments(173, 'com_content','/component/jcomments/');
+jcomments.setList('comments-list');
+//-->
+</script>
+<div id="jc">
+<div id="comments"><h4>Комментарии <a class="rss" href="http://www.radio-magic.ru/component/jcomments/feed/com_content/173" title="RSS лента комментариев этой записи" target="_blank">&nbsp;</a><a class="refresh" href="http://www.radio-magic.ru/arduino-projects/173-arduino-wav#" title="Обновить список комментариев" onclick="jcomments.showPage(173,&#39;com_content&#39;,0);return false;">&nbsp;</a></h4>
+<div id="comments-list" class="comments-list">
+	<div class="even" id="comment-item-284"><div class="rbox"><div class="rbox_tr"><div class="rbox_tl"><div class="rbox_t">&nbsp;</div></div></div><div class="rbox_m">
+<div class="comment-box">
+<a class="comment-anchor" href="http://www.radio-magic.ru/arduino-projects/173-arduino-wav#comment-284" id="comment-284">#1</a>
+<span class="comment-author">Юрий</span>
+<span class="comment-date">30.11.2015 23:16</span>
+<div class="comment-body" id="comment-body-284">Не могли бы Вы помочь новичку в создании печатной платы для этого проекта?<br>Сижу ковыряю... не получается (((</div>
+<span class="comments-buttons">
+<a href="http://www.radio-magic.ru/arduino-projects/173-arduino-wav#" onclick="jcomments.quoteComment(284); return false;">Цитировать</a>
+</span>
+</div><div class="clear"></div>
+</div><div class="rbox_br"><div class="rbox_bl"><div class="rbox_b">&nbsp;</div></div></div></div>
+</div>
+</div>
+<div id="comments-list-footer"><a class="refresh" href="http://www.radio-magic.ru/arduino-projects/173-arduino-wav#" title="Обновить список комментариев" onclick="jcomments.showPage(173,&#39;com_content&#39;,0);return false;">Обновить список комментариев</a><br><a class="rss" href="http://www.radio-magic.ru/component/jcomments/feed/com_content/173" title="RSS лента комментариев этой записи" target="_blank">RSS лента комментариев этой записи</a></div>
+</div>
+<h4>Добавить комментарий</h4>
+<form id="comments-form" name="comments-form" action="javascript:void(null);">
+<p>
+	<span>
+		<input id="comments-form-name" type="text" name="name" value="" maxlength="20" size="22" tabindex="1">
+		<label for="comments-form-name">Имя (обязательное)</label>
+	</span>
+</p>
+<p>
+	<span>
+		<input id="comments-form-email" type="text" name="email" value="" size="22" tabindex="2">
+		<label for="comments-form-email">E-Mail (обязательное)</label>
+	</span>
+</p>
+<p>
+	<span>
+		<div class="smiles"><img src="./Arduino Wav плеер_files/laugh.gif" alt=":D" class="smile"><img src="./Arduino Wav плеер_files/lol.gif" alt=":lol:" class="smile"><img src="./Arduino Wav плеер_files/smile.gif" alt=":-)" class="smile"><img src="./Arduino Wav плеер_files/wink.gif" alt=";-)" class="smile"><img src="./Arduino Wav плеер_files/cool.gif" alt="8)" class="smile"><img src="./Arduino Wav плеер_files/normal.gif" alt=":-|" class="smile"><img src="./Arduino Wav плеер_files/whistling.gif" alt=":-*" class="smile"><img src="./Arduino Wav плеер_files/redface.gif" alt=":oops:" class="smile"><img src="./Arduino Wav плеер_files/sad.gif" alt=":sad:" class="smile"><img src="./Arduino Wav плеер_files/cry.gif" alt=":cry:" class="smile"><img src="./Arduino Wav плеер_files/surprised.gif" alt=":o" class="smile"><img src="./Arduino Wav плеер_files/confused.gif" alt=":-?" class="smile"><img src="./Arduino Wav плеер_files/sick.gif" alt=":-x" class="smile"><img src="./Arduino Wav плеер_files/shocked.gif" alt=":eek:" class="smile"><img src="./Arduino Wav плеер_files/sleeping.gif" alt=":zzz" class="smile"><img src="./Arduino Wav плеер_files/tongue.gif" alt=":P" class="smile"><img src="./Arduino Wav плеер_files/rolleyes.gif" alt=":roll:" class="smile"><img src="./Arduino Wav плеер_files/unsure.gif" alt=":sigh:" class="smile"></div><textarea id="comments-form-comment" name="comment" cols="65" rows="8" tabindex="5"></textarea><div class="grippie"><span class="counter">Осталось: <span>1000</span>  символов</span></div>
+	</span>
+</p>
+<p>
+	<span>
+		<input class="checkbox" id="comments-form-subscribe" type="checkbox" name="subscribe" value="1" tabindex="5">
+		<label for="comments-form-subscribe">Подписаться на уведомления о новых комментариях</label><br>
+	</span>
+</p>
+<p>
+	<span>
+		<img class="captcha" onclick="jcomments.clear(&#39;captcha&#39;);" id="comments-form-captcha-image" src="./Arduino Wav плеер_files/39363" width="121" height="60" alt="Защитный код"><br>
+		<span class="captcha" onclick="jcomments.clear(&#39;captcha&#39;);">Обновить</span><br>
+		<input class="captcha" id="comments-form-captcha" type="text" name="captcha_refid" value="" size="5" tabindex="6"><br>
+	</span>
+</p>
+<div id="comments-form-buttons">
+	<div class="btn" id="comments-form-send"><div><a href="http://www.radio-magic.ru/arduino-projects/173-arduino-wav#" tabindex="7" onclick="jcomments.saveComment();return false;" title="Отправить (Ctrl+Enter)">Отправить</a></div></div>
+	<div class="btn" id="comments-form-cancel" style="display:none;"><div><a href="http://www.radio-magic.ru/arduino-projects/173-arduino-wav#" tabindex="8" onclick="return false;" title="Отменить">Отменить</a></div></div>
+	<div style="clear:both;"></div>
+</div>
+<div>
+	<input type="hidden" name="object_id" value="173">
+	<input type="hidden" name="object_group" value="com_content">
+</div>
+</form><a id="addcomments" href="http://www.radio-magic.ru/arduino-projects/173-arduino-wav#addcomments"></a>
+
+<script type="text/javascript">
+<!--
+function JCommentsInitializeForm()
+{
+	var jcEditor = new JCommentsEditor('comments-form-comment', true);
+	jcEditor.initSmiles('http://www.radio-magic.ru/components/com_jcomments/images/smiles');
+	jcEditor.addSmile(':D','laugh.gif');
+	jcEditor.addSmile(':lol:','lol.gif');
+	jcEditor.addSmile(':-)','smile.gif');
+	jcEditor.addSmile(';-)','wink.gif');
+	jcEditor.addSmile('8)','cool.gif');
+	jcEditor.addSmile(':-|','normal.gif');
+	jcEditor.addSmile(':-*','whistling.gif');
+	jcEditor.addSmile(':oops:','redface.gif');
+	jcEditor.addSmile(':sad:','sad.gif');
+	jcEditor.addSmile(':cry:','cry.gif');
+	jcEditor.addSmile(':o','surprised.gif');
+	jcEditor.addSmile(':-?','confused.gif');
+	jcEditor.addSmile(':-x','sick.gif');
+	jcEditor.addSmile(':eek:','shocked.gif');
+	jcEditor.addSmile(':zzz','sleeping.gif');
+	jcEditor.addSmile(':P','tongue.gif');
+	jcEditor.addSmile(':roll:','rolleyes.gif');
+	jcEditor.addSmile(':sigh:','unsure.gif');
+	jcEditor.addCounter(1000, 'Осталось:', ' символов', 'counter');
+	jcomments.setForm(new JCommentsForm('comments-form', jcEditor));
+}
+
+if (window.addEventListener) {window.addEventListener('load',JCommentsInitializeForm,false);}
+else if (document.addEventListener){document.addEventListener('load',JCommentsInitializeForm,false);}
+else if (window.attachEvent){window.attachEvent('onload',JCommentsInitializeForm);}
+else {if (typeof window.onload=='function'){var oldload=window.onload;window.onload=function(){oldload();JCommentsInitializeForm();}} else window.onload=JCommentsInitializeForm;} 
+//-->
+</script>
+<div id="comments-footer" align="center"></div>
+<script type="text/javascript">
+<!--
+jcomments.setAntiCache(1,1,0);
+//-->
+</script> 
+</div></div>
+
+									<div style="clear:both;height:0px"></div>
+
+								</div>
+
+								</div>
+
+								
+
+							
+							
+
+							
+							
+
+							<div style="clear:both;height:0px"></div>
+
+							
+
+						</div>
+
+						</div>
+
+						
+
+					
+					
+
+					
+					
+
+						<div id="s5_middle_bottom_wrap">
+
+							
+
+							<div id="s5_middle_bottom">
+
+							<div id="s5_middle_bottom_inner">
+
+							
+
+								
+									<div id="s5_pos_middle_bottom_1" class="s5_float_left" style="width:100%">
+
+										
+
+									</div>
+
+								
+								
+
+								
+								
+
+								
+								
+
+								
+								
+
+								
+								
+
+														
+
+								<div style="clear:both; height:0px"></div>
+
+
+
+							</div>
+
+							</div>
+
+						
+
+						</div>
+
+
+
+					
+					
+
+				</div>
+
+				</div>
+
+				<!-- Left column -->	
+
+				
+					<div id="s5_left_column_wrap" class="s5_resize_center_columns s5_float_left" style="width: 20px; min-height: 3231px;">
+
+					<div id="s5_left_column_wrap_inner">
+
+						
+						
+							<div id="s5_left_wrap" class="s5_float_left" style="width:20px">
+
+									
+					
+						
+				
+		<div class="module_round_box_outer">
+		
+		<div class="module_round_box">
+
+
+				<div class="s5_module_box_1">
+					<div class="s5_module_box_2">
+												<div class="s5_mod_h3_outer">
+							<h3 class="s5_mod_h3"><span class="s5_h3_first">Категории </span></h3>
+						</div>
+												<div style="position:absolute;top:0;left:-9999px;">
+<a href="http://joomla4ever.ru/extensions-shape5/960-s5-accordion-menu.html" title="S5 Accordion Menu - модуль joomla" target="_blank">S5 Accordion Menu - модуль joomla</a>
+<a href="http://forexlab.info/" title="Форекс" target="_blank">Форекс</a>
+</div>
+
+
+<div id="s5_accordion_menu">
+
+<div>
+
+ 
+
+    <h3 class="s5_am_toggler s5_am_not_parent"><span class="s5_accordion_menu_left"><a class="mainlevel" href="http://www.radio-magic.ru/microcontrollers"><span>Микроконтроллеры</span></a></span></h3><div class="s5_accordion_menu_element" style="display: none; border: none; overflow: hidden; padding: 0px; margin: 0px; opacity: 0; height: 0px;"></div><h3 id="current" class="s5_am_toggler s5_am_open s5_am_not_parent"><span class="s5_accordion_menu_left"><a class="mainlevel" href="http://www.radio-magic.ru/arduino-projects"><span>Проекты Arduino</span></a></span></h3><div class="s5_accordion_menu_element" style="display: none; border: none; overflow: hidden; padding: 0px; margin: 0px; opacity: 1; height: auto;"></div><h3 class="s5_am_toggler s5_am_not_parent"><span class="s5_accordion_menu_left"><a class="mainlevel" href="http://www.radio-magic.ru/metalloiskateli"><span>Металлоискатели</span></a></span></h3><div class="s5_accordion_menu_element" style="display: none; border: none; overflow: hidden; padding: 0px; margin: 0px; opacity: 0; height: 0px;"></div><h3 class="s5_am_toggler s5_am_not_parent"><span class="s5_accordion_menu_left"><a class="mainlevel" href="http://www.radio-magic.ru/amplifiers"><span>Аудио</span></a></span></h3><div class="s5_accordion_menu_element" style="display: none; border: none; overflow: hidden; padding: 0px; margin: 0px; opacity: 0; height: 0px;"></div><h3 class="s5_am_toggler s5_am_not_parent"><span class="s5_accordion_menu_left"><a class="mainlevel" href="http://www.radio-magic.ru/high-voltage"><span>Высоковольтное</span></a></span></h3><div class="s5_accordion_menu_element" style="display: none; border: none; overflow: hidden; padding: 0px; margin: 0px; opacity: 0; height: 0px;"></div><h3 class="s5_am_toggler s5_am_not_parent"><span class="s5_accordion_menu_left"><a class="mainlevel" href="http://www.radio-magic.ru/radioreceiver"><span>Радиоприемники</span></a></span></h3><div class="s5_accordion_menu_element" style="display: none; border: none; overflow: hidden; padding: 0px; margin: 0px; opacity: 0; height: 0px;"></div><h3 class="s5_am_toggler s5_am_not_parent"><span class="s5_accordion_menu_left"><a class="mainlevel" href="http://www.radio-magic.ru/power-supply"><span>Блоки питания</span></a></span></h3><div class="s5_accordion_menu_element" style="display: none; border: none; overflow: hidden; padding: 0px; margin: 0px; opacity: 0; height: 0px;"></div><h3 class="s5_am_toggler s5_am_not_parent"><span class="s5_accordion_menu_left"><a class="mainlevel" href="http://www.radio-magic.ru/transmitters"><span>Передатчики</span></a></span></h3><div class="s5_accordion_menu_element" style="display: none; border: none; overflow: hidden; padding: 0px; margin: 0px; opacity: 0; height: 0px;"></div><h3 class="s5_am_toggler s5_am_not_parent"><span class="s5_accordion_menu_left"><a class="mainlevel" href="http://www.radio-magic.ru/beginners"><span>Начинающим</span></a></span></h3><div class="s5_accordion_menu_element" style="display: none; border: none; overflow: hidden; padding: 0px; margin: 0px; opacity: 0; height: 0px;"></div><h3 class="s5_am_toggler s5_am_not_parent"><span class="s5_accordion_menu_left"><a class="mainlevel" href="http://www.radio-magic.ru/kompyutery"><span>Компьютеры</span></a></span></h3><div class="s5_accordion_menu_element" style="display: none; border: none; overflow: hidden; padding: 0px; margin: 0px; opacity: 0; height: 0px;"></div><h3 class="s5_am_toggler s5_am_not_parent"><span class="s5_accordion_menu_left"><a class="mainlevel" href="http://www.radio-magic.ru/elektrika"><span>Электрика</span></a></span></h3><div class="s5_accordion_menu_element" style="display: none; border: none; overflow: hidden; padding: 0px; margin: 0px; opacity: 0; height: 0px;"></div><h3 class="s5_am_toggler s5_am_not_parent"><span class="s5_accordion_menu_left"><a class="mainlevel" href="http://www.radio-magic.ru/3d-printers"><span>3D принтеры</span></a></span></h3><div class="s5_accordion_menu_element" style="display: none; border: none; overflow: hidden; padding: 0px; margin: 0px; opacity: 0; height: 0px;"></div><h3 class="s5_am_toggler s5_am_not_parent"><span class="s5_accordion_menu_left"><a class="mainlevel" href="http://www.radio-magic.ru/video-m"><span>Видеоматериалы</span></a></span></h3><div class="s5_accordion_menu_element" style="display: none; border: none; overflow: hidden; padding: 0px; margin: 0px; opacity: 0; height: 0px;"></div><h3 class="s5_am_toggler s5_am_not_parent"><span class="s5_accordion_menu_left"><a class="mainlevel" href="http://www.radio-magic.ru/spravochnue-dannje"><span>Справочные данные</span></a></span></h3><div class="s5_accordion_menu_element" style="display: none; border: none; overflow: hidden; padding: 0px; margin: 0px; opacity: 0; height: 0px;"></div>
+  
+
+</div>
+
+</div>
+
+
+<script type="text/javascript">			
+
+var s5_am_parent_link_enabled = "1";	
+
+var s5_closed_or_open = "open";
+
+	
+
+
+var s5_accordion_menu_display = "block";
+
+		
+
+</script>
+
+
+
+
+ 
+		<script src="./Arduino Wav плеер_files/s5_accordion_menu.js" type="text/javascript"></script>	
+
+
+	
+
+
+
+	
+						<div style="clear:both; height:0px"></div>
+					</div>
+				</div>
+
+			
+		</div>
+		
+		</div>
+
+		
+					
+						
+				
+		<div class="module_round_box_outer">
+		
+		<div class="module_round_box">
+
+
+				<div class="s5_module_box_1">
+					<div class="s5_module_box_2">
+												<div class="s5_mod_h3_outer">
+							<h3 class="s5_mod_h3"><span class="s5_h3_first">Справочные </span> данные</h3>
+						</div>
+												
+<ul class="menu">
+<li class="item-213"><a href="http://www.radio-magic.ru/datasheet-tranzistorov">Datasheet транзисторов</a></li><li class="item-257"><a href="http://www.radio-magic.ru/diodj-spravochnik">Справочник отечественных диодов</a></li><li class="item-258"><a href="http://www.radio-magic.ru/stabilitronj">Cправочник отечественных стабилитронов</a></li><li class="item-260"><a href="http://www.radio-magic.ru/smd-razmerj">Размеры smd компонентов</a></li><li class="item-262"><a href="http://www.radio-magic.ru/markirovka-smd">Маркировка SMD резисторов</a></li><li class="item-267"><a href="http://www.radio-magic.ru/smd-tranzistorj">Маркировка SMD транзисторов</a></li><li class="item-270"><a href="http://www.radio-magic.ru/smd-cap">Маркировка SMD конденсаторов</a></li></ul>
+						<div style="clear:both; height:0px"></div>
+					</div>
+				</div>
+
+			
+		</div>
+		
+		</div>
+
+		
+					
+						
+				
+		<div class="module_round_box_outer">
+		
+		<div class="module_round_box">
+
+
+				<div class="s5_module_box_1">
+					<div class="s5_module_box_2">
+												<div class="s5_mod_h3_outer">
+							<h3 class="s5_mod_h3"><span class="s5_h3_first">Полезные </span> ссылки!</h3>
+						</div>
+												
+<ul class="menu">
+<li class="item-150"><a href="http://www.radio-magic.ru/poleznje-ssjlki">Сайты по радиоэлектронике</a></li><li class="item-166"><a href="http://www.radio-magic.ru/index.php?option=com_ninjarsssyndicator&amp;feed_id=1&amp;format=raw">Лента новостей</a></li></ul>
+						<div style="clear:both; height:0px"></div>
+					</div>
+				</div>
+
+			
+		</div>
+		
+		</div>
+
+		
+					
+						
+				
+		<div class="module_round_box_outer">
+		
+		<div class="module_round_box">
+
+
+				<div class="s5_module_box_1">
+					<div class="s5_module_box_2">
+												<div class="s5_mod_h3_outer">
+							<h3 class="s5_mod_h3"><span class="s5_h3_first">Группа </span> в ВК</h3>
+						</div>
+												<script type="text/javascript" src="./Arduino Wav плеер_files/"></script>
+
+<!-- VK Widget -->
+<div id="vk_groups" style="margin:0 auto;">
+<script type="text/javascript">
+VK.Widgets.Group("vk_groups", {mode: 0, width: "200", height: "400", color1: 'FFFFFF', color2: '2B587A', color3: '5B7FA6'}, 62019270);
+</script>
+
+</div>						<div style="clear:both; height:0px"></div>
+					</div>
+				</div>
+
+			
+		</div>
+		
+		</div>
+
+	
+
+							</div>
+
+						
+						
+						
+							<div id="s5_left_bottom_wrap" class="s5_float_left" style="width:20px">
+
+									
+					
+						
+				
+		<div class="module_round_box_outer">
+		
+		<div class="module_round_box">
+
+
+				<div class="s5_module_box_1">
+					<div class="s5_module_box_2">
+												<div class="s5_mod_h3_outer">
+							<h3 class="s5_mod_h3"><span class="s5_h3_first">Форма </span> входа</h3>
+						</div>
+												                                                                                                                                                                               
+<form action="http://www.radio-magic.ru/arduino-projects" method="post" id="login-form">
+		<fieldset class="userdata">
+	<p id="form-login-username">
+		<label for="modlgn-username">Логин</label>
+		<input id="modlgn-username" type="text" name="username" class="inputbox" size="18">
+	</p>
+	<p id="form-login-password">
+		<label for="modlgn-passwd">Пароль</label>
+		<input id="modlgn-passwd" type="password" name="password" class="inputbox" size="18">
+	</p>
+		<p id="form-login-remember">
+		<label for="modlgn-remember">Запомнить меня</label>
+		<input id="modlgn-remember" type="checkbox" name="remember" class="inputbox" value="yes">
+	</p>
+		<input type="submit" name="Submit" class="button" value="Войти">
+	<input type="hidden" name="option" value="com_users">
+	<input type="hidden" name="task" value="user.login">
+	<input type="hidden" name="return" value="aW5kZXgucGhwP29wdGlvbj1jb21fY29udGVudCZ2aWV3PWFydGljbGUmY2F0aWQ9MTUmaWQ9MTczJkl0ZW1pZD0xMzk=">
+	<input type="hidden" name="99d5409bc4de75e45b8c06eb0dd044db" value="1">	</fieldset>
+	<ul>
+		<li>
+			<a href="http://www.radio-magic.ru/component/users/?view=reset">
+			Забыли пароль?</a>
+		</li>
+		<li>
+			<a href="http://www.radio-magic.ru/component/users/?view=remind">
+			Забыли логин?</a>
+		</li>
+				<li>
+			<a href="http://www.radio-magic.ru/component/users/?view=registration">
+				Регистрация</a>
+		</li>
+			</ul>
+	</form>
+						<div style="clear:both; height:0px"></div>
+					</div>
+				</div>
+
+			
+		</div>
+		
+		</div>
+
+	
+
+							</div>
+
+						
+						<div style="clear:both; height:0px"></div>
+
+					</div>
+
+					</div>
+
+				
+				<!-- End Left column -->	
+
+				<!-- Right column -->	
+
+				
+				<!-- End Right column -->	
+
+			</div>
+
+			</div>
+
+			<!-- End columns wrap -->	
+
+			
+
+		<!-- Below Columns Wrap -->	
+
+			
+		<!-- End Below Columns Wrap -->				
+
+			
+
+			
+
+		</div>
+
+		</div>
+
+		</div>
+
+		
+
+		<div style="clear:both; height:0px"></div>
+
+		
+
+		</div>
+
+		</div>
+
+		
+
+		
+	<!-- End Center area -->	
+
+	
+
+	
+
+	<div id="s5_footer_body_section" class="s5_body_section s5_wrap">
+
+	<div id="s5_footer_body_section_inner">
+
+	
+
+	<!-- Bottom Row1 -->	
+
+		
+			<div id="s5_bottom_row1_area1">
+
+			<div id="s5_bottom_row1_area2">
+
+			<div id="s5_bottom_row1_area_inner">
+
+
+
+				<div id="s5_bottom_row1_wrap">
+
+					<div id="s5_bottom_row1">
+
+					<div id="s5_bottom_row1_inner">
+
+					
+
+						
+							<div id="s5_pos_bottom_row1_1" class="s5_float_left" style="width:50%">
+
+									
+					
+						
+				
+		<div class="module_round_box_outer">
+		
+		<div class="module_round_box">
+
+
+				<div class="s5_module_box_1">
+					<div class="s5_module_box_2">
+												<div class="s5_mod_h3_outer">
+							<h3 class="s5_mod_h3"><span class="s5_h3_first">Новости </span> радиомира</h3>
+						</div>
+												<ul class="category-module">
+		    <li>
+	   	<h4>
+	   			<a class="mod-articles-category-title " href="http://www.radio-magic.ru/arduino-projects/25-news/139-graphen-reciever">
+		Миниатюрный радиоприемник на основе графена        </a>
+                </h4>
+
+       			        		
+			</li>
+	</ul>
+						<div style="clear:both; height:0px"></div>
+					</div>
+				</div>
+
+			
+		</div>
+		
+		</div>
+
+	
+
+							</div>
+
+						
+						
+
+						
+							<div id="s5_pos_bottom_row1_2" class="s5_float_left" style="width:50%">
+
+									
+					
+						
+				
+		<div class="module_round_box_outer">
+		
+		<div class="module_round_box">
+
+
+				<div class="s5_module_box_1">
+					<div class="s5_module_box_2">
+												<div class="s5_mod_h3_outer">
+							<h3 class="s5_mod_h3"><span class="s5_h3_first">Самые </span> читаемые</h3>
+						</div>
+												<ul class="mostread">
+	<li>
+		<a href="http://www.radio-magic.ru/metalloiskateli/35-chema-metalloiskatelya-pirat">
+			Схема металлоискателя пират</a>
+	</li>
+	<li>
+		<a href="http://www.radio-magic.ru/beginners/78-cap-mark">
+			 Маркировка конденсаторов</a>
+	</li>
+	<li>
+		<a href="http://www.radio-magic.ru/amplifiers/85-prostoi-usilitel">
+			Простой усилитель звука</a>
+	</li>
+	<li>
+		<a href="http://www.radio-magic.ru/high-voltage/27-tesla-coil">
+			Трансформатор тесла своими руками. Как сделать трансформатор Тесла</a>
+	</li>
+	<li>
+		<a href="http://www.radio-magic.ru/metalloiskateli/126-chema-metalloiskatelya-na-microsheme">
+			Схема металлодетектора на микросхеме</a>
+	</li>
+</ul>
+						<div style="clear:both; height:0px"></div>
+					</div>
+				</div>
+
+			
+		</div>
+		
+		</div>
+
+	
+
+							</div>
+
+						
+						
+
+						
+						
+
+						
+						
+
+						
+						
+
+						
+						
+
+						<div style="clear:both; height:0px"></div>
+
+
+
+					</div>
+
+					</div>
+
+				</div>
+
+
+
+		</div>
+
+		</div>
+
+		</div>
+
+		
+	<!-- End Bottom Row1 -->	
+
+		
+
+		
+
+	<!-- Bottom Row2 -->	
+
+		
+	<!-- End Bottom Row2 -->
+
+	
+
+	
+
+	
+
+	<!-- Bottom Row3 -->	
+
+		
+		<div id="s5_bottom_row3_area1">	
+
+		<div id="s5_bottom_row3_area2">
+
+		<div id="s5_bottom_row3_area_inner">
+
+		
+
+			<div id="s5_bottom_row3_wrap">
+
+				<div id="s5_bottom_row3">
+
+				<div id="s5_bottom_row3_inner">
+
+				
+
+					
+					
+
+					
+					
+
+					
+					
+
+					
+					
+
+					
+					
+
+					
+						<div id="s5_pos_bottom_row3_6" class="s5_float_left" style="width:100%">
+
+								
+				
+		<div class="module_round_box_outer">
+		
+		<div class="module_round_box">
+
+
+				<div class="s5_module_box_1">
+					<div class="s5_module_box_2">
+												<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-33587123-2', 'auto');
+  ga('send', 'pageview');
+
+</script>						<div style="clear:both; height:0px"></div>
+					</div>
+				</div>
+
+			
+		</div>
+		
+		</div>
+
+	
+
+						</div>
+
+											
+
+					<div style="clear:both; height:0px"></div>
+
+
+
+				</div>
+
+				</div>
+
+			</div>
+
+
+
+		</div>
+
+		</div>
+
+		</div>
+
+		
+	<!-- End Bottom Row3 -->
+
+	
+
+	
+
+	
+	
+
+	
+
+	<!-- Footer Area -->
+
+		<div id="s5_footer_area1">
+
+		<div id="s5_footer_area2">
+
+		<div id="s5_footer_area_inner">
+
+		
+
+			
+				<div id="s5_footer_module">
+
+							<div class="moduletable">
+			
+
+<div class="custom">
+	<p style="text-align: center;"><span>Copyright © Radio-Magic.ru</span></p>
+<p style="text-align: center;"><span> All Rights Reserved. </span>Запрещено копирование материалов без активной ссылки на этот сайт.</p>
+<noscript>
+&lt;div style="position: absolute; left: -10000px;"&gt;&lt;a class="modal" href="//top-fwz1.mail.ru/counter?id=2442970;js=na"&gt;&lt;img style="border: 0;" src="//top-fwz1.mail.ru/counter?id=2442970;js=na" alt="Рейтинг@Mail.ru" width="1" height="1" /&gt;&lt;/a&gt;&lt;/div&gt;
+</noscript></div>
+		</div>
+			<div class="moduletable">
+			<a href="http://top100.rambler.ru/navi/3035050/" rel="nofollow">
+<img src="./Arduino Wav плеер_files/top100.cnt" alt="Rambler&#39;s Top100" border="0">
+</a>
+
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter23284891 = new Ya.Metrika({id:23284891,
+                    webvisor:true,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true});
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript>&lt;div&gt;&lt;img src="//mc.yandex.ru/watch/23284891" style="position:absolute; left:-9999px;" alt="" /&gt;&lt;/div&gt;</noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+<!-- Rating@Mail.ru counter -->
+<script type="text/javascript">
+var _tmr = _tmr || [];
+_tmr.push({id: "2442970",  type: "pageView", start: (new Date()).getTime()});
+(function (d, w) {
+   var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true;
+   ts.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//top-fwz1.mail.ru/js/code.js";
+   var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
+   if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
+})(document, window);
+</script><noscript>&lt;div style="position:absolute;left:-10000px;"&gt;
+&lt;img src="//top-fwz1.mail.ru/counter?id=2442970;js=na" style="border:0;" height="1" width="1" alt="Рейтинг@Mail.ru" /&gt;
+&lt;/div&gt;</noscript>
+<!-- //Rating@Mail.ru counter -->
+
+
+<!-- begin of Top100 code -->
+
+<script id="top100Counter" type="text/javascript" src="./Arduino Wav плеер_files/top100.jcn"></script>
+<noscript>
+&lt;a href="http://top100.rambler.ru/navi/3047279/" rel="nofollow"&gt;
+&lt;img src="http://counter.rambler.ru/top100.cnt?3047279" alt="Rambler's Top100" border="0" /&gt;
+&lt;/a&gt;
+
+</noscript>
+<!-- end of Top100 code -->
+
+<!--LiveInternet counter--><script type="text/javascript"><!--
+document.write("<a href='//www.liveinternet.ru/click' "+
+"target=_blank><img src='//counter.yadro.ru/hit?t52.6;r"+
+escape(document.referrer)+((typeof(screen)=="undefined")?"":
+";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+";"+Math.random()+
+"' alt='' title='LiveInternet: показано число просмотров и"+
+" посетителей за 24 часа' "+
+"border='0' width='88' height='31'><\/a>")
+//--></script><a href="http://www.liveinternet.ru/click" target="_blank"><img src="./Arduino Wav плеер_files/" alt="" title="LiveInternet: показано число просмотров и посетителей за 24 часа" border="0" width="88" height="31"></a><!--/LiveInternet-->
+
+
+
+
+
+		</div>
+	
+
+				</div>	
+
+			
+			
+
+			
+				<div id="s5_bottom_menu_wrap">
+
+					
+
+				</div>	
+
+			
+			<div style="clear:both; height:0px"></div>
+
+			
+
+		</div>
+
+		</div>
+
+		</div>
+
+	<!-- End Footer Area -->
+
+	
+
+	
+
+	<div style="clear:both; height:0px"></div>
+
+	
+
+	</div>
+
+	</div>
+
+	
+
+	
+
+	
+
+	<!-- Bottom Vertex Calls -->
+
+	<!-- Page scroll, tooltips, multibox, and ie6 warning -->	
+	<!-- Start compression if enabled -->	
+	</div>
+<script type="text/javascript">//<![CDATA[
+var s5_resize_columns_browser_check = "other";
+var s5_resize_columns = "main";
+var s5_resize_columns_delay = "500";
+var s5_resize_columns_small_tablets = "default";
+//]]></script>
+<script type="text/javascript" language="javascript" src="./Arduino Wav плеер_files/saved_resource"></script>
+<!-- Additional scripts to load just before closing body tag -->
+<!-- Info Slide script - JS and CSS called in header -->
+<!-- File compression. Needs to be called last on this file -->
+ 
+			<script type="text/javascript" src="./Arduino Wav плеер_files/bottom_compression_js.php"> </script> 	
+<!-- Responsive Bottom Mobile Bar -->
+	<!-- Call bottom bar for mobile devices if layout is responsive -->	
+	<div id="s5_responsive_mobile_bottom_bar_outer" style="display:none">
+	<div id="s5_responsive_mobile_bottom_bar" class="s5_responsive_mobile_bar_light">
+		<!-- Call mobile links if links are enabled and cookie is currently set to mobile -->	
+					<div id="s5_responsive_switch_mobile">
+				<a id="s5_responsive_switch" href="http://www.radio-magic.ru/?s5_responsive_switch_wwwradiomagicru=0">Desktop Version</a>
+			</div>
+		
+				<div style="clear:both;height:0px"></div>
+	</div>
+	</div>
+
+<!-- Call bottom bar for all devices if user has chosen to see desktop version -->	
+
+	
+
+
+
+
+
+
+
+
+
+<div id="sbox-overlay" aria-hidden="true" tabindex="-1" style="z-index: 65555; opacity: 0;"></div><div id="sbox-window" role="dialog" aria-hidden="true" class="shadow" style="z-index: 65557;"><div id="sbox-content" style="opacity: 0;"></div><a id="sbox-btn-close" href="http://www.radio-magic.ru/arduino-projects/173-arduino-wav#" role="button" aria-controls="sbox-window"></a></div><div id="subMenusContainer"><div class="s5_sub_wrap" id="ul_child_3"><ul style="opacity: 0; float: left;"><li id="li_child_3"><ul style="float:left;"><li class="subMenuBtn"><span class="S5_submenu_item"><a href="http://www.radio-magic.ru/literatura/mk-books" tabindex="-1"><span class="s5_sub_a_span" onclick="window.document.location.href=&quot;/literatura/mk-books&quot;">Литература по микроконтроллерам</span></a></span></li><li class="subMenuBtn"><span class="S5_submenu_item"><a href="http://www.radio-magic.ru/literatura/mk-books-2" tabindex="-1"><span class="s5_sub_a_span" onclick="window.document.location.href=&quot;/literatura/mk-books-2&quot;">Антенны</span></a></span></li></ul></li></ul></div><div class="s5_sub_wrap" id="ul_child_6"><ul style="opacity: 0; float: left;"><li id="li_child_6"><ul style="float:left;"><li class="subMenuBtn"><span class="S5_submenu_item"><a href="http://www.radio-magic.ru/programmu-dlya-radiolubitelej/programmu-mk" tabindex="-1"><span class="s5_sub_a_span" onclick="window.document.location.href=&quot;/programmu-dlya-radiolubitelej/programmu-mk&quot;">Микроконтроллеры</span></a></span></li><li class="subMenuBtn"><span class="S5_submenu_item"><a href="http://www.radio-magic.ru/programmu-dlya-radiolubitelej/programmu-mk-2" tabindex="-1"><span class="s5_sub_a_span" onclick="window.document.location.href=&quot;/programmu-dlya-radiolubitelej/programmu-mk-2&quot;">Схемы</span></a></span></li><li class="subMenuBtn"><span class="S5_submenu_item"><a href="http://www.radio-magic.ru/programmu-dlya-radiolubitelej/programmj-dlya-proectirovanija" tabindex="-1"><span class="s5_sub_a_span" onclick="window.document.location.href=&quot;/programmu-dlya-radiolubitelej/programmj-dlya-proectirovanija&quot;">Печатные платы</span></a></span></li><li class="subMenuBtn"><span class="S5_submenu_item"><a href="http://www.radio-magic.ru/programmu-dlya-radiolubitelej/sound-generation" tabindex="-1"><span class="s5_sub_a_span" onclick="window.document.location.href=&quot;/programmu-dlya-radiolubitelej/sound-generation&quot;">Программы для генерации сигналов</span></a></span></li><li class="subMenuBtn"><span class="S5_submenu_item"><a href="http://www.radio-magic.ru/programmu-dlya-radiolubitelej/analyz-prog" tabindex="-1"><span class="s5_sub_a_span" onclick="window.document.location.href=&quot;/programmu-dlya-radiolubitelej/analyz-prog&quot;">Программы для измерений</span></a></span></li></ul></li></ul></div></div></body></html>
