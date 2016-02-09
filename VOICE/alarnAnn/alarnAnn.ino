@@ -35,6 +35,8 @@ void setup() {
   delay(50);
 
   tmrpcm.speakerPin = 9; //9 on 328
+  tmrpcm.setVolume(5);
+  tmrpcm.quality(1);//Set '1' for 2x oversampling
 
   Wire.begin();
   delay(50);

@@ -15,6 +15,7 @@ void STATEMACHINE_250ms() {
   if (btn_mute_state == 1) {
     AN_isAllowAlarm = false;
     AN_disallowAlarmMillis = millis();
+    tmrpcm.disable();
   }
 }
 
