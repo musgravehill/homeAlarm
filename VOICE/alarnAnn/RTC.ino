@@ -33,7 +33,7 @@ void RTC_setTimeFromSD() {
           i++;
         }
       }
-      SD_file.close();
+      //SD_file.close(); //dont close before delete
       SD_file.remove();
     }
 

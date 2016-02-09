@@ -28,7 +28,7 @@ void setup() {
   SD_init();
   delay(50);
 
-  tmrpcm.play("music.wav"); //the sound file "music" will play each time the arduino powers up, or is reset
+  tmrpcm.play("alarm.wav"); //the sound file "music" will play each time the arduino powers up, or is reset
 }
 
 void loop() {
