@@ -1,6 +1,6 @@
 void RTC_init() {
   SYS_DS3231.enableOscillator(true, true, 0);
-  SYS_DS3231.setClockMode(true); //ERROR? true=24 false=12? // Set 12/24h mode. True is 12-h, false is 24-hour.
+  SYS_DS3231.setClockMode(false); //only for SYS_DS3231.getHours! If get DateTime now = RTC3231.now();  now.hours()= 24h always ?
   delay(20);
 }
 void RTC_setTime() {
