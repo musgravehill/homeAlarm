@@ -12,31 +12,30 @@ TMRpcm tmrpcm;
 
 #include <Wire.h>
 #include "DS3231.h"
-RTClib RTC3231;  //A4 A5
+RTClib RTC3231;  //A4 SDA,  A5 SCL
 DS3231 SYS_DS3231;
 
 uint8_t AN_alarm_hh = 0;
 uint8_t AN_alarm_ii = 0;
-bool AN_isAllowAlarm = true; //disabled by curr play OR by button
-uint32_t AN_disallowAlarmMillis = 1;
-uint8_t AN_btn_mute = 5;
+//bool AN_isAllowAlarm = true; //disabled by curr play OR by button
+//uint32_t AN_disallowAlarmMillis = 1;
+//uint8_t AN_btn_mute = 5;
 
-uint32_t STATEMACHINE_prevMillis_250ms = 1;
+//uint32_t STATEMACHINE_prevMillis_250ms = 1;
 uint32_t STATEMACHINE_prevMillis_5s = 1;
 
-void setup() {
-  Serial.begin(9600);
+void setup() { 
 
-  pinMode(AN_btn_mute, INPUT);
+  //pinMode(AN_btn_mute, INPUT);
+
+  tmrpcm.speakerPin = 9; //9 on 328
+  tmrpcm.setVolume(5);
+  tmrpcm.quality(0);//Set '1' for 2x oversampling
 
   SD_init();
   delay(50);
   SD_makeHowtoFile();
-  delay(50);
-
-  tmrpcm.speakerPin = 9; //9 on 328
-  tmrpcm.setVolume(5);
-  tmrpcm.quality(1);//Set '1' for 2x oversampling
+  delay(50);  
 
   Wire.begin();
   delay(50);

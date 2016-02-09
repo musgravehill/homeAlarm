@@ -1,5 +1,5 @@
 void SD_init() {
-  if (sd.begin(SD_ChipSelectPin, SPI_FULL_SPEED)) {
+  if (sd.begin(SD_ChipSelectPin, SPI_HALF_SPEED)) {
     SD_isEnable = true;
   } else {
     SD_isEnable = false;

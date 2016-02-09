@@ -8,7 +8,7 @@ bool isAllowAlarm() {
   bool tmp;
   uint8_t hh = SYS_DS3231.getHour(tmp, tmp); // returns the values of the 12/24-hour flag and the AM/PM flag.
   uint8_t ii = SYS_DS3231.getMinute();
-  if ( (AN_isAllowAlarm) && (hh == AN_alarm_hh) && (ii == AN_alarm_ii) )  {
+  if ( (hh == AN_alarm_hh) && (ii == AN_alarm_ii) )  {  //(AN_isAllowAlarm) &&
     return true;
   }
   return false;
@@ -86,8 +86,8 @@ void RTC_setTimeFromSD() {
           i++;
         }
       }
-      //SD_file.close(); //dont close before delete
-      SD_file.remove();
+      SD_file.close(); //dont close before delete
+      //SD_file.remove();
     }
   }
 }
