@@ -4,11 +4,11 @@ void RTC_init() {
   delay(20);
 }
 
-bool isNeedAlarm() {
+bool isAllowAlarm() {
   bool tmp;
   uint8_t hh = SYS_DS3231.getHour(tmp, tmp); // returns the values of the 12/24-hour flag and the AM/PM flag.
   uint8_t ii = SYS_DS3231.getMinute();
-  if (hh == AN_alarm_hh) && (ii == AN_alarm_ii)  {
+  if ( (AN_isAllowAlarm) && (hh == AN_alarm_hh) && (ii == AN_alarm_ii) )  {
     return true;
   }
   return false;
@@ -37,7 +37,7 @@ void setAlarmTimeFromSD() {
         {
           val += String((char)chr);
         }
-        
+
         if (chr == '.') {
           uint8_t dtChunk = val.toInt();
           switch (i) {

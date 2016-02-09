@@ -17,8 +17,18 @@ DS3231 SYS_DS3231;
 
 uint8_t AN_alarm_hh = 0;
 uint8_t AN_alarm_ii = 0;
+bool AN_isAllowAlarm = true; //disabled by curr play OR by button
+uint32_t AN_disallowAlarmMillis = 1;
+uint8_t AN_btn_mute = 5;
+
+uint32_t STATEMACHINE_prevMillis_250ms = 1;
+uint32_t STATEMACHINE_prevMillis_5s = 1;
 
 void setup() {
+  Serial.begin(9600);
+
+  pinMode(AN_btn_mute, INPUT);
+
   SD_init();
   delay(50);
   SD_makeHowtoFile();
@@ -32,20 +42,14 @@ void setup() {
   RTC_init();
   RTC_setTimeFromSD(); //dt.txt    yy.mm.dd.hh.ii.ss.dow.
   delay(50);
-  setAlarmTimeFromSD() //alarm.txt    hh.ii.
+  setAlarmTimeFromSD(); //alarm.txt    hh.ii.
   delay(50);
 
   tmrpcm.play("alarm.wav");
 }
 
 void loop() {
-  if (isNeedAlarm()) {
-    tmrpcm.play("alarm.wav");
-  }
+  STATEMACHINE_loop();
 }
-
-
-
-
 
 
