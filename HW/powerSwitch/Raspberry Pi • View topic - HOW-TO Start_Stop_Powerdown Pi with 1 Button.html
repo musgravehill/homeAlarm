@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<!-- saved from url=(0062)https://www.raspberrypi.org/forums/viewtopic.php?f=91&t=129357 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="">
+<meta name="viewport" content="width=device-width">
+
+
+<title>Raspberry Pi • View topic - HOW-TO Start/Stop/Powerdown Pi with 1 Button</title>
+
+<link rel="shortcut icon" href="https://www.raspberrypi.org/favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="icon" href="https://www.raspberrypi.org/favicon.ico" type="image/x-ico">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+
+<link rel="stylesheet" type="text/css" media="all" href="./Raspberry Pi • View topic - HOW-TO Start_Stop_Powerdown Pi with 1 Button_files/style.css">
+<link rel="stylesheet" type="text/css" href="./Raspberry Pi • View topic - HOW-TO Start_Stop_Powerdown Pi with 1 Button_files/custom.css">
+<link rel="stylesheet" type="text/css" href="./Raspberry Pi • View topic - HOW-TO Start_Stop_Powerdown Pi with 1 Button_files/bootstrap-raspi.css">
+<!--[if lt IE 8]>
+<link rel="stylesheet" type="text/css" href="./styles/raspite/theme/css/ie7.css">
+<![endif]-->
+<link href="./Raspberry Pi • View topic - HOW-TO Start_Stop_Powerdown Pi with 1 Button_files/css" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+<script src="./styles/raspite/theme/js/html5shiv.js"></script>
+<![endif]-->
+<link rel="pingback" href="">
+
+<link rel="alternate" type="application/atom+xml" title="Feed - Raspberry Pi" href="http://www.raspberrypi.org/forums/feed.php"><link rel="alternate" type="application/atom+xml" title="Feed - New Topics" href="http://www.raspberrypi.org/forums/feed.php?mode=topics"><link rel="alternate" type="application/atom+xml" title="Feed - Forum - Beginners" href="http://www.raspberrypi.org/forums/feed.php?f=91"><link rel="alternate" type="application/atom+xml" title="Feed - Topic - HOW-TO Start/Stop/Powerdown Pi with 1 Button" href="http://www.raspberrypi.org/forums/feed.php?f=91&amp;t=129357">
+
+
+<script async="" src="./Raspberry Pi • View topic - HOW-TO Start_Stop_Powerdown Pi with 1 Button_files/analytics.js"></script><script type="text/javascript">
+// <![CDATA[
+	var jump_page = 'Enter the page number you wish to go to:';
+	var on_page = '1';
+	var per_page = '';
+	var base_url = '';
+	var style_cookie = 'phpBBstyle';
+	var style_cookie_settings = '; path=/; domain=.raspberrypi.org';
+	var onload_functions = new Array();
+	var onunload_functions = new Array();
+
+	
+
+	/**
+	* Find a member
+	*/
+	function find_username(url)
+	{
+		popup(url, 760, 570, '_usersearch');
+		return false;
+	}
+
+	/**
+	* New function for handling multiple calls to window.onload and window.unload by pentapenguin
+	*/
+	window.onload = function()
+	{
+		for (var i = 0; i < onload_functions.length; i++)
+		{
+			eval(onload_functions[i]);
+		}
+	};
+
+	window.onunload = function()
+	{
+		for (var i = 0; i < onunload_functions.length; i++)
+		{
+			eval(onunload_functions[i]);
+		}
+	};
+
+// ]]>
+</script>
+<link href="./Raspberry Pi • View topic - HOW-TO Start_Stop_Powerdown Pi with 1 Button_files/stylesheet.css" rel="stylesheet" type="text/css" media="screen, projection">
+
+
+
+</head>
+
+<body>
+<a name="top"></a>
+
+<header class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<!-- Cross-site Navigation -->
+
+		<nav class="container" role="navigation">
+			<h3 class="assistive-text">Main menu</h3>
+
+			<div class="skip-link"><a class="assistive-text" href="https://www.raspberrypi.org/forums/viewtopic.php?f=91&amp;t=129357#content" title="Skip to primary content">Skip to primary content</a></div>
+
+		  <a href="https://www.raspberrypi.org/forums/viewtopic.php?f=91&amp;t=129357#" class="btn btn-navbar pull-right" data-toggle="collapse" data-target=".nav-collapse">
+            <i class="icon-bar"></i>
+            <i class="icon-bar"></i>
+            <i class="icon-bar"></i>
+          </a>
+
+			<div class="nav-collapse">
+				<div class="nav pull-right">
+
+					<ul id="menu-test-menu" class="nav">
+						<li id="menu-item-1862" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1862"><a href="https://www.raspberrypi.org/quick-start-guide">Quick Start</a></li>
+						<li id="menu-item-1864" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1864"><a href="https://www.raspberrypi.org/downloads">Downloads</a></li>
+						<li id="menu-item-1870" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1870"><a href="https://www.raspberrypi.com/" onclick="javascript:_gaq.push([&#39;_trackEvent&#39;,&#39;outbound-menu&#39;,&#39;//www.raspberrypi.com&#39;]);">Buy Codecs</a></li>
+						<li id="menu-item-1867" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1867"><a href="https://www.raspberrypi.org/phpBB3">Forum</a></li>
+						<li id="menu-item-1869" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1869"><a href="https://www.raspberrypi.org/faqs">FAQs</a></li>
+						<li id="menu-item-1861" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1861 dropdown"><a href="https://www.raspberrypi.org/forums/viewtopic.php?f=91&amp;t=129357#" data-toggle="dropdown" data-target="#" class="dropdown-toggle">About <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li id="menu-item-1865" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1865"><a href="https://www.raspberrypi.org/about">About us</a></li>
+								<li id="menu-item-1866" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1866"><a href="https://www.raspberrypi.org/contact-us">Contact us</a></li>
+								<li id="menu-item-4662" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4662"><a href="https://www.raspberrypi.org/technical-help-and-resource-documents">Technical, help and resource documents</a></li>
+								<li id="menu-item-1863" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1863"><a href="https://www.raspberrypi.org/trademark-rules">Trademark rules</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<a class="nav-logo" href="https://www.raspberrypi.org/" title="Raspberry Pi" rel="home">Raspberry Pi</a>
+		</nav>
+
+
+
+	</div>
+</header>
+
+<div class="container">
+	
+	<div class="row-fluid searchbar">
+		<div class="span6">
+		<a href="https://www.raspberrypi.org/forums/faq.php?sid=6fbf7120a71ee4cb99219f24d3973754" title="Frequently Asked Questions">FAQ</a>
+		<a href="https://www.raspberrypi.org/forums/ucp.php?mode=register&amp;sid=6fbf7120a71ee4cb99219f24d3973754">Register</a>
+			<a href="https://www.raspberrypi.org/forums/ucp.php?mode=login&amp;sid=6fbf7120a71ee4cb99219f24d3973754" title="Login" accesskey="x">Login</a>
+			
+		</div>
+		<div class="span6 text-right">
+			
+			<form action="https://www.raspberrypi.org/forums/search.php?sid=6fbf7120a71ee4cb99219f24d3973754" method="get" id="search" class="form-search" style="display:inline-block; *display:inline; zoom:1;">
+				<input name="keywords" id="keywords" type="text" maxlength="128" title="Search for keywords" class="search-query input-small" value="Search…" onclick="if(this.value==&#39;Search…&#39;)this.value=&#39;&#39;;" onblur="if(this.value==&#39;&#39;)this.value=&#39;Search…&#39;;">
+				<button class="btn" value="Search" type="submit" title="Search"><i class="icon icon-search"></i></button>
+				<input type="hidden" name="sid" value="6fbf7120a71ee4cb99219f24d3973754">
+
+			</form>
+		
+		</div>
+	</div>
+	
+</div>
+
+<a name="content"></a>
+<div class="container" role="main">
+
+<div class="row-fluid">
+	<div class="span9">
+		<h2>HOW-TO Start/Stop/Powerdown Pi with 1 Button</h2>
+		
+		<!-- ICONS! -->
+			
+	</div>
+
+</div>
+
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+
+<br>
+<div class="row-fluid">
+	<div class="topic-actions span8">
+	
+		<a href="https://www.raspberrypi.org/forums/posting.php?mode=reply&amp;f=91&amp;t=129357&amp;sid=6fbf7120a71ee4cb99219f24d3973754" class="btn btn-info" title="Post a reply">Post a reply</a> 
+	&nbsp;</div>
+	
+	
+	<div class="paging span4 text-right">
+		15 posts
+		
+	</div>
+	
+	
+</div>
+	<div id="p864409" class="post row-fluid even">
+	
+		<div class="postbody span9">
+			
+
+			<div class="author">by <strong><a href="https://www.raspberrypi.org/forums/memberlist.php?mode=viewprofile&amp;u=52264&amp;sid=6fbf7120a71ee4cb99219f24d3973754">paulv</a></strong> » Fri Dec 18, 2015 8:38 am </div>
+
+			
+
+			<div class="content">The Raspberry Pi does not have a start/stop button like a PC, and can be finicky with the 5V power level, especially if you use (power hungry) WIFI dongles or Disk drives connected directly to the USB ports.<br><br>There are several commercially available solutions on the market and there are quite a number of solutions created by Forum members. I have several designs published as well (just search for paulv). Unfortunately, many of these solutions can be expensive, or use parts most (beginner) forum members do not have, are hard to get, or cannot handle, like tiny, tiny SMD parts.<br><br>In the course of a lot of experimenting and trying many things out, I found a very simple and inexpensive solution to the challenge of providing a solid 5V to the Pi Module, and by adding a single button that will allow you to start the Pi, stop it (executing a powerdown command) and then making the Pi powerless. <br><br>All it takes are a momentary push button, a few resistors, one capacitor, a Zener diode and optionally an LED. Most of you will have these parts in your stash already, otherwise they are commonly available parts you can get for a few dollars or Euros. The only other components you need is a DC-DC Buck converter, and a little box to put things in. You also need one USB micro cable that has solid power wires. Lastly, you need a DC wall wart that supplies anything from 7V to 40V with a minimum of 1 Amp, better is 2 or more. If you are like me, you will have several of these supplies somewhere. They can come from old routers, USB hubs, modems, even from printers or laptops. These supplies were designed to provide a steady, reliable voltage and current and will most likely have all sorts of filters and safety measures, unlike many phone or pad chargers.<br><br>[EDIT: if you have a 5V supply or use batteries, read on down to a specific post for that situation]<br><br>We will use a DC-DC Buck converter to reduce the voltage from the supply you have to a steady and precise 5V for the Pi. The Buck converter will also be used to switch the power, and it is important that the converter is based on the LM2596-ADJ chip. Please check that when your ordering this little board. They can be purchased for as little as a few Dollars or Euros, depending on the delivery time you prefer. Here is a picture of such a Buck converter : <div class="inline-attachment">
+		<dl class="file">
+			<dt class="attach-image"><img src="./Raspberry Pi • View topic - HOW-TO Start_Stop_Powerdown Pi with 1 Button_files/file.php" alt="Buck Converter.jpg" onclick="viewableArea(this);"></dt>
+			
+			<dd>Buck Converter.jpg (19.63 KiB) Viewed 1682 times</dd>
+		</dl>
+		</div> If you are planning to use an old inkjet printer supply, chances are they supply 38V DC, so look for a Buck converter that can have an input voltage of 40V. The LM2598 can handle this voltage, but the input cap may not. Many input capacitors are rated for 35V, be aware!<br><br>You'll also need a really good USB cable to avoid power losses in the cable itself. I personally use several of these: <div class="inline-attachment">
+		<dl class="file">
+			<dt class="attach-image"><img src="./Raspberry Pi • View topic - HOW-TO Start_Stop_Powerdown Pi with 1 Button_files/file(1).php" alt="USB Power Cable.jpg" onclick="viewableArea(this);"></dt>
+			
+			<dd>USB Power Cable.jpg (17.26 KiB) Viewed 1682 times</dd>
+		</dl>
+		</div> Search for "micro USB power cable DC barrel"<br><br>Here is the schematic we're working from: <div class="inline-attachment">
+		<dl class="file">
+			<dt class="attach-image"><img src="./Raspberry Pi • View topic - HOW-TO Start_Stop_Powerdown Pi with 1 Button_files/file(2).php" alt="Start_Stop-3V3.png" onclick="viewableArea(this);"></dt>
+			
+			<dd>Start_Stop-3V3.png (28.67 KiB) Viewed 944 times</dd>
+		</dl>
+		</div><br>[EDIT: To get more reliable result with various tolerances, R2 and C1 have been changed. This is reflected in the updated schematic and the text of this post]<br><br>For the sake of this how-to, we will assume you have a very common 12V DC wall wart or supply. To connect that to our little power board, you can either get yourself a matching DC power barrel connector, or just cut the cable and solder the leads (check for the proper polarity!) directly to the Buck converter.<br><br><span style="font-weight: bold">Before you do anything else, connect your DC supply to the Buck converter and adjust the output level of the Buck converter to a precise 5.1V, or 5V1. Do not omit this step right here right now, or you may fry your Pi.</span><br><br>The Buck converter now needs to be modified so we can used it also as a power switch. This is a little tricky, but not difficult. You need to lift pin 5 of the LM2596 chip from the solder pad on the board. This pin turns the output on or off and we need to attach a small wire to it. This pin is normally connected to ground. Make sure you add some fresh solder and/or solder paste to this pin, so the solder is more fluid when you heat it. You can use a small pair of tweezers, a pen knife or even a little wire looped around the pin to lift the pin while you're heating it. Don't pull on it hard, because you will most likely lift the PCB pad and track with it. If all else fails, you can also cut the pin with a fine cutter, as long as there is enough pin left to solder a wire to it. You can test success by applying power to the board again and connect the pin to something with a voltage that is above 1.5V. This input pin has Logic TTL specifications. However, according to the specification, you can connect it to the input. If you were successful the output should have no voltage, if there is power, you may still have a solder bridge. The chip seems to have an internal pull-down resistor, but according to the TI spec, you should not let it float, but if you do, it does not do anything. If all is well, solder a thin piece of wire to the pin going directly to the chip. To test it once more, attach the other end of the wire to ground, and you should have an output voltage again. Connect the wire to the input and the output should be gone again. This was the hard part.<br><br>To supply power to the Pi, you can again use a DC barrel connector, or cut the DC barrel from the USB cable, strip it and solder the leads directly onto the output solder pads of the Buck converter. Make sure you connect the wires correctly to the Buck converter! The other end with the micro USB connector goes to the Pi to power it. <br><br>I highly recommend you to power your Pi through the micro USB connector and not through the P1 connector. By doing that you will disable the over-voltage protection of the Pi. When you're working with 5+ voltages anywhere near your Pi, you don't want to take that risk.<br><br>Now for the rest of the logic. The design is almost completely independent of whatever you have in your stash of wall warts. You can use just about any voltage between 7V and 40V, just make sure it has the proper wattage or amount of Amps (1 minimum, 2 or more is better). <br>The voltage coming from the supply goes through a little circuit to reduce the power to a 3V3 level that the Pi GPIO pins can handle safely. We use R8 to create a bias current of 5mA for the 3.3V zener diode, and this is the only component that needs to change based on your supply voltage. For anything from 10 to 15 V, you can use the 1K5 value. The formula for other voltages is in the diagram.<br><br><span style="font-style: italic">If you only use one particular wall-wart supply, and will not regularly change to other wall-warts (promise to yourself in writing!) that have other voltages, AND you don't have a 3V3 Zener diode, you can use a voltage divider instead. The Zener needs a bias current of about 5mA to produce 3V3. The circuit itself can use less (somewhere between 0.5 and 2mA), and at the same time, is even more safe for the GPIO pins. If you use a 12V DC wall-wart, the total resister value can be 12K to give a current of 1mA (12V / 1mA = 12K Ohm). You can use a 8K2 resistor in place of the 1K5 and use a 3K3 resistor in place of the Zener diode. This will produce a voltage that is about 3V4, which is close enough, and safe. However, BEFORE you connect your precious Pi, measure the voltage at the junction of the two resistors and verify it is indeed somewhere around 3V4, but not more than 4V. If you use another wall-wart voltage, or other resistors, you can use this calculator if you need it : <a href="http://www.raltron.com/cust/tools/voltage_divider.asp" class="postlink">http://www.raltron.com/cust/tools/voltage_divider.asp</a> Using the calculator, plug in your supply voltage, the 3V4 as output voltage and the value of R2, which is 3K3. You'll get a value for R1, just round it to the closest resistor value. You don't need to be ultra precise, just make sure the voltage at the junction is above 3V2 and below 4V0.</span><br><br>The charge resistor R2 and the capacitor C1 need to provide at least about 2V at their junction when fully loaded. This limits the value range of R2, it can't be too high otherwise the voltage will not get high enough. This voltage level is important to pull the Enable pin of the LM2596 high, which will turn the output off. <br><br>When you press the button, the voltage across the capacitor and the Enable pin, through R3, a 10K resistor, will go to zero, and start to ramp up when you release the button again, because of R2. The ramp-up needs to be a little longer than it takes for the Pi to boot and to load the overlay, which will activate a low on GPIO-27, the KILL_PWR output. This active low will drive the voltage at the Enable pin close to ground through R6, another 10K resistor. So the KILL_PWR driven by the overlay will take over from the capacitor charge circuit and keep the power on from then onward. (the voltage at the Enable pin needs to be below 1.3V for the LM2596 to turn on). R3 and R6 need to be of the same value, allowing a tug of war for the action at the Enable pin, but not disturb the circuit on the other end so to speak. <br><br>This is what I mean with the tug of war at the Enable pin. During the boot process, when GPIO-27 is forced low through the overlay action, the Enable pin will be at about 200mV, because of the pull upwards through R5 and R3 towards 3V3. This is a pull up of about 160K, and will not be strong enough to lift the Enable pin towards a shut-off of the LM2596. It only causes the pin to go to about 200mV. Pressing the button during this period in the boot process will only make the level of the Enable pin to go more towards ground and as such will have no effect. <br><br>Towards the very end of the booting process however, our Python program gets loaded, and that will start to watch out for a button press to signal a powerdown request. To make the program recognize this button press, it sets the GPIO pull-up feature on the PI_SHUT_DOWN input. However, this will only add another 50K pull towards the 3V3 level at the button end, which lifts the Enable pin a little higher (to about 500mV) through R5, the 10K resistor. That will still have no effect on the LM2596 output because it is still nowhere near the 1V3 cut-off level. <br>At the button end however, the internal gpio 50K pull-up, through the protection resistor R9, will force about a 1V level at that junction, such that a push of the button will be recognized by the Python program correctly as a negative edge and a powerdown will start. At the end of that process, GPIO-27 will go high forcing the Enable pin way above the 1V3 level, and the power to the Pi will be cut. <br>A subsequent press of the button will restart the whole process and since the Pi is powerless, there is no effect on the Enable pin through Either the KILL_PWR signal or the PI_SHUT_DWN pin, so we really start the whole process from scratch again.<br><br>In normal situations, with a Pi Model B rev 2, it takes about 3.6 seconds from power-up until the overlay is loaded. To be on the safe side for future changes in the boot process, the R2 and C1 values will create a period of about 5 seconds before the power gets cut again. This time is highly dependent on the values of the components, and especially electrolytes (C1) can have tolerances of 20-30%. It is no problem to extend the period to more than 5 seconds, just don't go too close to 3.6 seconds because the Pi may end up without power during the boot process.<br><br>To connect the two GPIO pins to our little circuit, I used an old cable from a PC reset or power switch (proper reuse!). They have a nice two-pin connector with the proper spacing, so you can directly push it on the P1 connector of the Pi. I recommend you use GPIO-17 and GPIO-27 because they are next to each other on the P1 connector, and are general purpose pins with no surprises. You can use any GPIO pin you like, just make sure you change the following settings to reflect that. I do recommend you stay away from all the special GPIO pins, to avoid nasty surprises.<br><br>How you connect the other parts together depends on your skills and available perf. or prototype board. It should not be hard to connect this all together.<br><br>If you want to have an indication that your wall wart is plugged in, I suggest you add R1 and the LED. <br><br>When you have finished the hardware, don't connect it yet to the Pi. We need to prepare it first. Boot the Pi and get yourself to the prompt.<br><br>There are three things we need to install on the Pi in terms of software.<br>First open up an editor to modify the configuration file:<br><dl class="codebox"><dt>Code: <a href="https://www.raspberrypi.org/forums/viewtopic.php?f=91&amp;t=129357#" onclick="selectCode(this); return false;">Select all</a></dt><dd><code>sudo nano /boot/config.txt</code></dd></dl><br>Go to the very end and add this line:<dl class="codebox"><dt>Code: <a href="https://www.raspberrypi.org/forums/viewtopic.php?f=91&amp;t=129357#" onclick="selectCode(this); return false;">Select all</a></dt><dd><code>dtoverlay=gpio-poweroff,gpiopin=27</code></dd></dl> Save the results and close the file. This statement will tell the OS to treat GPIO-27 differently. Shortly in the boot sequence, this pin will be set active high, and the pin will be driven low while not activated. We use this pin to cut the power to the Pi after it has completed the power-down (or shutdown) sequence.<br><br>Now we need to add a program that will listen to the button press that signals a stop. We will use GPIO-17 to listen to the button press. In order to do that reliably, we will activate the GPIO pull-up that will allow the program to register a falling edge.<br><br>Here is that Python program:<dl class="codebox"><dt>Code: <a href="https://www.raspberrypi.org/forums/viewtopic.php?f=91&amp;t=129357#" onclick="selectCode(this); return false;">Select all</a></dt><dd><code>#!/usr/bin/env python2.7<br>#-------------------------------------------------------------------------------<br># Name:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Shutdown Daemon<br>#<br># Purpose:&nbsp; &nbsp; &nbsp; This program gets activated at the end of the boot process by<br>#&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;cron. (@ reboot sudo python /home/pi/shutdown_daemon.py)<br>#&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;It monitors a button press. If the user presses the button, we<br>#&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Halt the Pi, by executing the poweroff command.<br>#<br>#&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;The power to the Pi will then be cut when the Pi has reached the<br>#&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;poweroff state (Halt).<br>#&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;To activate a gpio pin with the poweroff state, the<br>#&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/boot/config.txt file needs to have :<br>#&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;dtoverlay=gpio-poweroff,gpiopin=27<br>#<br># Author:&nbsp; &nbsp; &nbsp; Paul Versteeg<br>#<br># Created:&nbsp; &nbsp; &nbsp;15-06-2015, revised on 18-12-2015<br># Copyright:&nbsp; &nbsp;(c) Paul 2015<br># Licence:&nbsp; &nbsp; &nbsp;&lt;your licence&gt;<br>#-------------------------------------------------------------------------------<br><br>import RPi.GPIO as GPIO<br>import subprocess<br><br>GPIO.setmode(GPIO.BCM) # use GPIO numbering<br>GPIO.setwarnings(False)<br><br># I use the following two GPIO pins because they are next to each other,<br># and I can use a two pin header to connect the switch logic to the Pi.<br>INT = 17&nbsp; &nbsp; # GPIO-17 button interrupt to shutdown procedure<br>KILL = 27&nbsp; &nbsp;# GPIO-27 /KILL : this pin is programmed in /boot/config.txt and<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # cannot be used by any other program<br><br># use a weak pull_up to create a high<br>GPIO.setup(INT, GPIO.IN, pull_up_down=GPIO.PUD_UP)<br><br>def main():<br><br>&nbsp; &nbsp; while True:<br>&nbsp; &nbsp; &nbsp; &nbsp; # set an interrupt on a falling edge and wait for it to happen<br>&nbsp; &nbsp; &nbsp; &nbsp; GPIO.wait_for_edge(INT, GPIO.FALLING)<br><br>&nbsp; &nbsp; &nbsp; &nbsp; subprocess.call(['poweroff'], shell=True, \<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; stdout=subprocess.PIPE, stderr=subprocess.PIPE)<br><br>if __name__ == '__main__':<br>&nbsp; &nbsp; main()</code></dd></dl> Start your editor again : <dl class="codebox"><dt>Code: <a href="https://www.raspberrypi.org/forums/viewtopic.php?f=91&amp;t=129357#" onclick="selectCode(this); return false;">Select all</a></dt><dd><code>nano shutdown_daemon.py</code></dd></dl> And cut and past the program, or type it in. Use Ctrl-X to save and exit the editor. This program uses an interrupt, so there will be no wasted processing power to speak of.<br><br>We will use the cron scheduler to start this Python program at boot time.<br>Start the crontab editor:<br><dl class="codebox"><dt>Code: <a href="https://www.raspberrypi.org/forums/viewtopic.php?f=91&amp;t=129357#" onclick="selectCode(this); return false;">Select all</a></dt><dd><code>crontab -e</code></dd></dl> Scroll to the end and start a new line with: <dl class="codebox"><dt>Code: <a href="https://www.raspberrypi.org/forums/viewtopic.php?f=91&amp;t=129357#" onclick="selectCode(this); return false;">Select all</a></dt><dd><code>@reboot sudo python /home/pi/shutdown_daemon.py</code></dd></dl> and use Ctrl-X to save the file and exit the editor.<br><br>Now it's time to test what you've done. <dl class="codebox"><dt>Code: <a href="https://www.raspberrypi.org/forums/viewtopic.php?f=91&amp;t=129357#" onclick="selectCode(this); return false;">Select all</a></dt><dd><code>sudo reboot</code></dd></dl> When the Pi has booted again, execute this : <dl class="codebox"><dt>Code: <a href="https://www.raspberrypi.org/forums/viewtopic.php?f=91&amp;t=129357#" onclick="selectCode(this); return false;">Select all</a></dt><dd><code>ps ax</code></dd></dl> and have a look if you see something like this: <blockquote class="uncited"><div> 2152 ?        Ss     0:00 /usr/sbin/cron<br> 2155 ?        S      0:00 /USR/SBIN/CRON<br> 2158 ?        Ss     0:00 /bin/sh -c sudo python /home/pi/shutdown_daemon.py<br> 2159 ?        Ss     0:00 /usr/bin/dbus-daemon --system<br> 2161 ?        S      0:00 sudo python /home/pi/shutdown_daemon.py<br> 2166 ?        S      0:00 python /home/pi/shutdown_daemon.py<br></div></blockquote> This will tell you that Cron has indeed installed the Python program, and it is running as root.<br>Shutdown the Pi to make it powerless : <dl class="codebox"><dt>Code: <a href="https://www.raspberrypi.org/forums/viewtopic.php?f=91&amp;t=129357#" onclick="selectCode(this); return false;">Select all</a></dt><dd><code>sudo poweroff</code></dd></dl> Disconnect the wall-wart from the mains such that everything is powerless. Also disconnect the Pi from the power source you have been using up to now.<br>Now it is time to connect the Pi to your new supply and also connect the two GPIO pins on the Pi to your hardware. Check if everything is correct, and plug the wall-wart back into the mains.<br><br>The Pi should boot normally. If you only get a momentary power to the Pi, you either made a mistake with the hardware, so check the wiring, or you may have a capacitor that is too far out from the value that I specified. You should be aware that electrolytes can be off by as much as 50%. If in doubt, measure the capacity, or use another one. You can also add a capacitor in parallel to C1 to increase the total capacitance value.<br><br>[Look for a post below for some trouble shooting tips if you have a problem with the hardware at this point.]<br><br>If your Pi booted up correctly, it's time to test the stop functionality. If you have a monitor connected, you don't need to log in, just press the button and the screen will tell you that the shutdown happened. If you log in through SSH, you'll get a message that the Pi will be halted.<br><br>As soon as the Pi is halted, the power will be cut, and you can restart the Pi by pressing the button again. <br><br>If everything is working you can now tweak the power supplied to the Pi by measuring the voltage on the Pi PCB (between TP1 and TP2 for classic Pi's or between P1-1 and P1-3) with a DMM. You can adjust the voltage to a precise 5.0V by adjusting the Buck supply and compensate for any losses in connectors and cables.<br><br>There are two caveats you need to be aware off with this simple but effective solution. One is that the first time when the power is supplied to the Pi (the wall-wart is plugged into the mains), the Pi will boot automatically. After that first time, the button will function normally. <br><br>The second caveat is that you cannot execute a software reboot (sudo reboot), because the Pi will become powerless and you'll have to manually press the button to power it up again.<br><br>I hope that this description will be complete enough for you to build this missing functionality for your Pi. Believe me, if you try and test things often on your Pi, you'll be grateful to have this capability.<br><br>Enjoy and happy holidays!<br><br>PS Here is some more information if you're interested : <a href="https://www.raspberrypi.org/forums/viewtopic.php?f=37&amp;t=128019" class="postlink">https://www.raspberrypi.org/forums/viewtopic.php?f=37&amp;t=128019</a></div>
+
+			
+				<div class="notice">Last edited by <a href="https://www.raspberrypi.org/forums/memberlist.php?mode=viewprofile&amp;u=52264&amp;sid=6fbf7120a71ee4cb99219f24d3973754">paulv</a> on Sat Jan 02, 2016 4:56 am, edited 18 times in total.
+					
+				</div>
+			
+
+		</div>
+
+		
+		<dl class="postprofile span3" id="profile864409">
+			<dt>
+				
+			</dt>
+		<dd><strong>Posts:</strong> 379</dd><dd><strong>Joined:</strong> Tue Jan 15, 2013 12:10 pm</dd><dd><strong>Location:</strong> Netherlands/Spain</dd>
+
+		</dl>
+	
+
+	
+	</div>
+
+
+	<div id="p864441" class="post row-fluid odd">
+	
+		<div class="postbody span9">
+			
+
+			<div class="author">by <strong><a href="https://www.raspberrypi.org/forums/memberlist.php?mode=viewprofile&amp;u=66366&amp;sid=6fbf7120a71ee4cb99219f24d3973754">FM81</a></strong> » Fri Dec 18, 2015 9:27 am </div>
+
+			
+
+			<div class="content">Thanks, very nice ...<br><br>One question and one correction:<br><br><blockquote><div><cite>paulv wrote:</cite>... Go to the very end and add this line:<dl class="codebox"><dt>Code: <a href="https://www.raspberrypi.org/forums/viewtopic.php?f=91&amp;t=129357#" onclick="selectCode(this); return false;">Select all</a></dt><dd><code>dtoverlay=gpio-poweroff,gpiopin=27</code></dd></dl> Save the results and close the file.</div></blockquote>This overlay is included in the latest Raspbian?<br><br><blockquote><div><cite>paulv wrote:</cite>... you may have a capacitor that is too far out from the 22uF that I specified. ... You can also put 2 x 47uF in parallel to get to the same value.</div></blockquote>You have to put 2x 47µF in serial to get ~22µF, in parallel you are near to 100µF!<br><br>Greetings, FM_81</div>
+
+			<div id="sig864441" class="signature">A: What does the command '<span style="color: red">cat</span> /dev/<span style="color: blue">uran</span>dom', can you tell me please?<br>B: Yeah, that's very simple: It feeds your <span style="color: red">cat</span> with <span style="color: blue">radioactive material</span>!</div>
+
+		</div>
+
+		
+		<dl class="postprofile span3" id="profile864441">
+			<dt>
+				
+			</dt>
+		<dd><strong>Posts:</strong> 341</dd><dd><strong>Joined:</strong> Wed Apr 17, 2013 4:33 pm</dd>
+
+		</dl>
+	
+
+	
+	</div>
+
+
+	<div id="p864472" class="post row-fluid even">
+	
+		<div class="postbody span9">
+			
+
+			<div class="author">by <strong><a href="https://www.raspberrypi.org/forums/memberlist.php?mode=viewprofile&amp;u=52264&amp;sid=6fbf7120a71ee4cb99219f24d3973754">paulv</a></strong> » Fri Dec 18, 2015 10:45 am </div>
+
+			
+
+			<div class="content"><blockquote><div><cite>FM81 wrote:</cite>Thanks, very nice ...<br><br>One question and one correction:<br><br><blockquote><div><cite>paulv wrote:</cite>... Go to the very end and add this line:<dl class="codebox"><dt>Code: <a href="https://www.raspberrypi.org/forums/viewtopic.php?f=91&amp;t=129357#" onclick="selectCode(this); return false;">Select all</a></dt><dd><code>dtoverlay=gpio-poweroff,gpiopin=27</code></dd></dl> Save the results and close the file.</div></blockquote>This overlay is included in the latest Raspbian? Yes! Has been for a while.<br><br><blockquote><div><cite>paulv wrote:</cite>... you may have a capacitor that is too far out from the 22uF that I specified. ... You can also put 2 x 47uF in parallel to get to the same value.</div></blockquote>You have to put 2x 47µF in serial to get ~22µF, in parallel you are near to 100µF! Oops, thanks. I corrected the post.<br><br>Greetings, FM_81</div></blockquote></div>
+
+			
+
+		</div>
+
+		
+		<dl class="postprofile span3" id="profile864472">
+			<dt>
+				
+			</dt>
+		<dd><strong>Posts:</strong> 379</dd><dd><strong>Joined:</strong> Tue Jan 15, 2013 12:10 pm</dd><dd><strong>Location:</strong> Netherlands/Spain</dd>
+
+		</dl>
+	
+
+	
+	</div>
+
+
+	<div id="p871025" class="post row-fluid odd">
+	
+		<div class="postbody span9">
+			
+
+			<div class="author">by <strong><a href="https://www.raspberrypi.org/forums/memberlist.php?mode=viewprofile&amp;u=107902&amp;sid=6fbf7120a71ee4cb99219f24d3973754">Milliways</a></strong> » Tue Dec 29, 2015 1:00 am </div>
+
+			
+
+			<div class="content">This is a clever idea. <br><br>It would be better to use a Boost Buck DC-DC up down Converter similar to the following. <!-- m --><a class="postlink" href="http://www.ebay.com/itm/381374427358">http://www.ebay.com/itm/381374427358</a><!-- m --> <br>This has a readily accessible enable pin, not requiring and modification, and enables operation from a lower voltage e.g. a LiPo cell.<br><br>Lots of people ask about on/off switches. These make sense if running off batteries, but the pawer saving if running off mains power would take several years to recover the cost of the circuit.</div>
+
+			
+
+		</div>
+
+		
+		<dl class="postprofile span3" id="profile871025">
+			<dt>
+				
+			</dt>
+		<dd><strong>Posts:</strong> 78</dd><dd><strong>Joined:</strong> Fri Apr 25, 2014 12:18 am</dd>
+
+		</dl>
+	
+
+	
+	</div>
+
+
+	<div id="p871163" class="post row-fluid even">
+	
+		<div class="postbody span9">
+			
+
+			<div class="author">by <strong><a href="https://www.raspberrypi.org/forums/memberlist.php?mode=viewprofile&amp;u=52264&amp;sid=6fbf7120a71ee4cb99219f24d3973754">paulv</a></strong> » Tue Dec 29, 2015 8:06 am </div>
+
+			
+
+			<div class="content">Hi Miliways,<br><br>Yes you are correct, these converters can be used too. <br>I actually have a couple of these converters (different design, same concept), and use them in other types of supplies for my Pi's too.<br><br>I had two reasons not to use this type in this particular post. This post started out with a 12V DC supply and evolved from there. Two, most (not all!) of these Buck-Boost (actually Boost-Buck) converters are very inefficient. They work by boosting the input voltage to close to 40V and then regulate the output down to whatever you need. With an output of 5V a lot of energy is turned into heat. I have published a fix for that, by modifying the boost output to a lower value (look for automatic power supply). However that fix was for a LM2577/XL6009-LM2596 combo version, and I have not figured out the circuit on the other types I have yet.<br><br>In any case, these Boost-Buck converters can be used with this start/stop circuit too. Just make sure the the enable pin of the converter is active low, and that the output is indeed switched off completely. (Some designs using the XL6009 do not disable the output. If used in the Boost mode, they disable the boost function, but are still passing the input voltage to the output.) More importantly, the XL6009E Enable pin is active high, so most likely you cannot use converters based on that chip with this design unless you modify it with a level convertor.<br><br>However, if you get a SEPIC type Buck-Boost converter, that is not using the XL6009E, chances are that the Enable pin is active low. If you get the non-SEPIC type that uses the LM2577-LM2596 combo or the XL6009-LM2596 combo, you can use the LM2596 Enable pin, which is active low, but chances are you need to lift that pin from the PCB. I'm working on yet another Pi supply with a LIPO battery as backup and that will go into details about the SEPIC Buck-Boost converter type. I'm waiting for some parts, so keep en eye out if you are interested.<br><br>As to your last comment, at least for me, it's not so much the power savings I'm after, but more the powerdown feature while experimenting. I prefer to have my Pi powerless when I fiddle with the gpio pins, or experiment with dt.blob files, overlays etc. Besides, there is a difference between a reboot or halt/reset, compared to a real poweroff-powerup sequence that many users may not be aware of. I really need that switch!<br><br>Thanks for contributing!<br><br>PS<br>Since I posted this reply earlier today, I wanted to verify what I said and quickly build a circuit with a SEPIC converter I was planning to use for a new design. Unfortunately, I found out that my start-stop circuit did not work with this converter. This particular converter uses the FP5139 in a SEPIC configuration and the start-stop circuit cannot drive the enable jumper pins without making modifications. Stay tuned to this post for an update.<br><br>At this moment, I can only recommend to use Boost-Buck converter circuits that use the LM2596 in the Buck portion, because the enable pin of that chip has been proven to work as a switch in my circuit.</div>
+
+			
+
+		</div>
+
+		
+		<dl class="postprofile span3" id="profile871163">
+			<dt>
+				
+			</dt>
+		<dd><strong>Posts:</strong> 379</dd><dd><strong>Joined:</strong> Tue Jan 15, 2013 12:10 pm</dd><dd><strong>Location:</strong> Netherlands/Spain</dd>
+
+		</dl>
+	
+
+	
+	</div>
+
+
+	<div id="p872138" class="post row-fluid odd">
+	
+		<div class="postbody span9">
+			
+
+			<div class="author">by <strong><a href="https://www.raspberrypi.org/forums/memberlist.php?mode=viewprofile&amp;u=52264&amp;sid=6fbf7120a71ee4cb99219f24d3973754">paulv</a></strong> » Wed Dec 30, 2015 2:32 pm </div>
+
+			
+
+			<div class="content">The above hint of using a Boost converter got me going on a post faster than I planned, but since I was already half way there, I decided to go all the way, so here it its...<br><br>So what if you don't have, or don't want to use a 10-40V DC supply and still want the Start-Stop functionality?<br><br>If you want to use battery cells or your trusted 5V DC wall-wart?<br><br>Well, there is a solution for that as well.<br><br>The answer to that challenge is to use a Boost converter. The problem is, many of those cannot be used. There are two reasons for that. The most obvious one is that of all the Boost converters I was able to find and have information on were using chips with an active high Enable pin, and we cannot use those without modifications to our circuit which would defeat the simplicity. The other problem with many Boost converters is that they will pass on a higher-than-intended input voltage straight to the output. If you look at the circuit below, you will see that the coil across the input and output is the reason. Besides the Boost converters that are based on the LM2577-ADJ do not even have an Enable pin, so they are out anyway. There is a "modern" replacement of the LM2577 available, the XL6009, and you will find many circuits that are based on that chip. This chip has an Enable pin, but as already mentioned, it is active high, and of no use. Besides, it has the same problem with higher inputs, because the coil will act as a short, even if the chip has been disabled. That's the problem with the XL6009 in this configuration, you can disable the chip, but the input voltage still goes to the output.<br><br>OK, but this chip can also be used in a SEPIC mode. (look here for details about SEPIC convertors : <a href="https://en.wikipedia.org/wiki/Single-ended_primary-inductor_converter" class="postlink">https://en.wikipedia.org/wiki/Single-ended_primary-inductor_converter</a> The crucial element of this converter type is that the input is isolated from the output by a capacitor or a transformer. But, because of the active high Enable pin, still not usable.<br><br>I have also a SEPIC converter that is based on a FP5139, nice board but, unfortunately, it also has an active high Enable pin, so no good in this application either.<br><br>Luckily for us, there are also many converters available that are based on a combination of an LM2577 or an XL6009 for the Boost function and an LM2596-ADJ to regulate (Buck) the output. We already know that we can use the LM2596 as a power switch. Here is an example. <br><div class="inline-attachment">
+		<dl class="file">
+			<dt class="attach-image"><img src="./Raspberry Pi • View topic - HOW-TO Start_Stop_Powerdown Pi with 1 Button_files/file(3).php" alt="Boost-Buck.jpg" onclick="viewableArea(this);"></dt>
+			
+			<dd>Boost-Buck.jpg (14.58 KiB) Viewed 1299 times</dd>
+		</dl>
+		</div> When you are trolling for one, look for the two large chips. The one on the left can be an LM2577-ADJ or an XL6009, and the one on the right must(!) be an LM2596-ADJ.<br><br>These boards work as follows. The input voltage, typically ranging from 3..30V DC, pump that up to about 32V, and the LM2596-ADJ is used to regulate that down (set by the trimmer) to get somewhere between 1.5..30V DC at the output. As I mentioned in the post above, that's inefficient if all you want is 5V.<br><br>So if we are going to use this board, how do we do that?<br><br>Quite simple. Apart from the fact that you need to pry loose the Enable pin (pin 5) of the LM2596, you also need to bring the output voltage of the Boost circuit down. Not only for efficiency reasons, but also for safety and reliability. Let's follow the schematic and I'll explain it. <br><span style="font-style: italic">BTW, I reverse engineered the schematics from the circuits I have. There may be other ones around with different values or circuit differences, but they are probably very close</span>   <div class="inline-attachment">
+		<dl class="file">
+			<dt class="attach-image"><img src="./Raspberry Pi • View topic - HOW-TO Start_Stop_Powerdown Pi with 1 Button_files/file(4).php" alt="Start_Stop 3-7Va.png" onclick="viewableArea(this);"></dt>
+			
+			<dd>Start_Stop 3-7Va.png (41.19 KiB) Viewed 914 times</dd>
+		</dl>
+		</div> [EDIT I changed this circuit from the original post a bit to avoid high voltage levels at the Pi GPIO pins. Adding two resistors is all it took. The text has been edited to reflect this. The start-stop circuit is now identical to the one in the first post] <br><div class="inline-attachment">
+		<dl class="file">
+			<dt class="attach-image"><img src="./Raspberry Pi • View topic - HOW-TO Start_Stop_Powerdown Pi with 1 Button_files/file(5).php" alt="XL6009-LM2596-mod.png" onclick="viewableArea(this);"></dt>
+			
+			<dd>XL6009-LM2596-mod.png (24.19 KiB) Viewed 1152 times</dd>
+		</dl>
+		</div> The output of the XL6009, or the LM2577-ADJ can both be reduced by adding one resistor (RX) such that it is parallel to the 20K adjustment resistor. Both chips use exactly the same output setting.  Using a 5K6 resistor in parallel, you get somewhere between 7.8 to 7.9V. It is relatively easy to solder this resistor directly on the leg of the chip on the one hand and to the solder pad of the large electrolyte on the other. You then need to solder a thin wire to this point and feed that to the resistor divider to create a 3V3 voltage level. This gives the Buck stage of the LM2596 enough headroom to produce a stable 5V, and we can use the same reduced and stable 3V3 voltage to power our magical start-stop circuit. <br><br>Look for a detailed description on how the start-stop circuit works in the first post.<br><br>So there you have it. The only important limitation for this circuit is that you should not feed more than 7V at the input, because, if you paid attention you already know, that higher voltage is passed on to the next stage AND your Pi! Yes you can add the same Zener based circuit of the design above, but let's face it. If you have a higher input voltage, why not use the circuit described in the first post?<br><br>Enjoy!</div>
+
+			
+				<div class="notice">Last edited by <a href="https://www.raspberrypi.org/forums/memberlist.php?mode=viewprofile&amp;u=52264&amp;sid=6fbf7120a71ee4cb99219f24d3973754">paulv</a> on Fri Jan 08, 2016 8:40 pm, edited 12 times in total.
+					
+				</div>
+			
+
+		</div>
+
+		
+		<dl class="postprofile span3" id="profile872138">
+			<dt>
+				
+			</dt>
+		<dd><strong>Posts:</strong> 379</dd><dd><strong>Joined:</strong> Tue Jan 15, 2013 12:10 pm</dd><dd><strong>Location:</strong> Netherlands/Spain</dd>
+
+		</dl>
+	
+
+	
+	</div>
+
+
+	<div id="p872246" class="post row-fluid even">
+	
+		<div class="postbody span9">
+			
+
+			<div class="author">by <strong><a href="https://www.raspberrypi.org/forums/memberlist.php?mode=viewprofile&amp;u=171075&amp;sid=6fbf7120a71ee4cb99219f24d3973754">deejayspinz</a></strong> » Wed Dec 30, 2015 5:04 pm </div>
+
+			
+
+			<div class="content">OP thx for posting this. I am following along with this and have the same power supply in the original post.  It also has the LM2596s chip and I found that even after separating the 5th pin from the board (far right when looking at the chip), the board still supplies output power.  I double checked the datasheet and am certain I have the right pin (the 2596 and 2596s are the same).  I am also sure that there are no bridges - the shrink wrap goes right up to the chip.  <br><br>Anyone else experience this?   I am wondering if it's a knock-off and the chip simply has pin 5 pulled down internally or something?  Sorry for the poor image quality. <br><br><img src="./Raspberry Pi • View topic - HOW-TO Start_Stop_Powerdown Pi with 1 Button_files/LM2596ForumImg.jpg" alt="Image"></div>
+
+			
+
+		</div>
+
+		
+		<dl class="postprofile span3" id="profile872246">
+			<dt>
+				
+			</dt>
+		<dd><strong>Posts:</strong> 5</dd><dd><strong>Joined:</strong> Wed Dec 30, 2015 12:51 pm</dd>
+
+		</dl>
+	
+
+	
+	</div>
+
+
+	<div id="p872331" class="post row-fluid odd">
+	
+		<div class="postbody span9">
+			
+
+			<div class="author">by <strong><a href="https://www.raspberrypi.org/forums/memberlist.php?mode=viewprofile&amp;u=52264&amp;sid=6fbf7120a71ee4cb99219f24d3973754">paulv</a></strong> » Wed Dec 30, 2015 7:04 pm </div>
+
+			
+
+			<div class="content">Deejayspinz, I mislead you in the original post. Sorry!<br>The LM2596 seems to have an internal pull-down, so you need to connect the pin to a voltage that is above 1.3V to disable the output. Just leaving it float is not recommended.<br>I fixed the text, thanks for bringing this up.</div>
+
+			
+				<div class="notice">Last edited by <a href="https://www.raspberrypi.org/forums/memberlist.php?mode=viewprofile&amp;u=52264&amp;sid=6fbf7120a71ee4cb99219f24d3973754">paulv</a> on Thu Dec 31, 2015 5:37 am, edited 1 time in total.
+					
+				</div>
+			
+
+		</div>
+
+		
+		<dl class="postprofile span3" id="profile872331">
+			<dt>
+				
+			</dt>
+		<dd><strong>Posts:</strong> 379</dd><dd><strong>Joined:</strong> Tue Jan 15, 2013 12:10 pm</dd><dd><strong>Location:</strong> Netherlands/Spain</dd>
+
+		</dl>
+	
+
+	
+	</div>
+
+
+	<div id="p872393" class="post row-fluid even">
+	
+		<div class="postbody span9">
+			
+
+			<div class="author">by <strong><a href="https://www.raspberrypi.org/forums/memberlist.php?mode=viewprofile&amp;u=171075&amp;sid=6fbf7120a71ee4cb99219f24d3973754">deejayspinz</a></strong> » Wed Dec 30, 2015 8:14 pm </div>
+
+			
+
+			<div class="content">@paulv.. Perfect, thx.. I thought I had a few duds here (tested it on 2).. I'm wiring things up on a breadboard and will report back once done testing.  Thanks for putting this together.. I'm also working on a modified Raspberry Pi case for 3D printing.  It will hold the Pi 2, the buck converter, some room for the circuit + a barrel jack...</div>
+
+			
+
+		</div>
+
+		
+		<dl class="postprofile span3" id="profile872393">
+			<dt>
+				
+			</dt>
+		<dd><strong>Posts:</strong> 5</dd><dd><strong>Joined:</strong> Wed Dec 30, 2015 12:51 pm</dd>
+
+		</dl>
+	
+
+	
+	</div>
+
+
+	<div id="p872718" class="post row-fluid odd">
+	
+		<div class="postbody span9">
+			
+
+			<div class="author">by <strong><a href="https://www.raspberrypi.org/forums/memberlist.php?mode=viewprofile&amp;u=162786&amp;sid=6fbf7120a71ee4cb99219f24d3973754">karrika</a></strong> » Thu Dec 31, 2015 8:33 am </div>
+
+			
+
+			<div class="content">Thank you paulv. I bought a converter like this for my Atari Lynx. It runs on batteries and has a power on/off button. My hope is to get a little longer play time by allowing the Lynx to run even after batteries are below 5V. This is an interesting modification. I may do the same for my DMX light control system and run from batteries just to reduce the number of cables.</div>
+
+			
+
+		</div>
+
+		
+		<dl class="postprofile span3" id="profile872718">
+			<dt>
+				<a href="https://www.raspberrypi.org/forums/memberlist.php?mode=viewprofile&amp;u=162786&amp;sid=6fbf7120a71ee4cb99219f24d3973754"><img src="./Raspberry Pi • View topic - HOW-TO Start_Stop_Powerdown Pi with 1 Button_files/file(6).php" width="90" height="90" alt="User avatar"></a><br>
+				
+			</dt>
+		<dd><strong>Posts:</strong> 412</dd><dd><strong>Joined:</strong> Mon Oct 19, 2015 6:21 am</dd><dd><strong>Location:</strong> Finland</dd>
+
+		</dl>
+	
+
+	
+	</div>
+
+
+	<div id="p872851" class="post row-fluid even">
+	
+		<div class="postbody span9">
+			
+
+			<div class="author">by <strong><a href="https://www.raspberrypi.org/forums/memberlist.php?mode=viewprofile&amp;u=171075&amp;sid=6fbf7120a71ee4cb99219f24d3973754">deejayspinz</a></strong> » Thu Dec 31, 2015 1:04 pm </div>
+
+			
+
+			<div class="content">So, I put this circuit together and and having some strange results.  When it's all hooked up, I have to hold the pushbutton for 3 or so seconds to get the Pi to start up.  Once started pushing the switch (or holding it for several seconds) does not shut the Pi down.  <br><br>Here are some measurements:<br>Pushbutton -0V (button open), 5.1V (button closed)<br>-  Pin 27 1.9V (button open),  0V (button closed)<br>- Pin 17 2.2V (button open), 1.9V (button closed)<br><br>I am fairly certain that the circuit is correct.  However, I did do one change.  I did not have D2 (3v3 diode) so instead used a 3.3v LED with the 1K5 resistor.  Since this lights up when powered,  I did not bother with R1 and the LED as I figured they are redundant now.  Is it possible this LED is causing an issue?  What should the voltages at Pin 17 &amp; 27 be?</div>
+
+			
+
+		</div>
+
+		
+		<dl class="postprofile span3" id="profile872851">
+			<dt>
+				
+			</dt>
+		<dd><strong>Posts:</strong> 5</dd><dd><strong>Joined:</strong> Wed Dec 30, 2015 12:51 pm</dd>
+
+		</dl>
+	
+
+	
+	</div>
+
+
+	<div id="p872915" class="post row-fluid odd">
+	
+		<div class="postbody span9">
+			
+
+			<div class="author">by <strong><a href="https://www.raspberrypi.org/forums/memberlist.php?mode=viewprofile&amp;u=52264&amp;sid=6fbf7120a71ee4cb99219f24d3973754">paulv</a></strong> » Thu Dec 31, 2015 2:49 pm </div>
+
+			
+
+			<div class="content">deejjayspinz,<br><br>Eliminating R1 and the LED from my proposed circuit is not the or a problem.<br><br>What will cause an issue is the charging voltage for the capacitor with your modification. Pressing the button for 3 seconds is an indication for that.<br>A very quick, momentary push should start the charging process and that should take about 4 seconds. The circuit looks simple, but because of the parts in play, and the "tricks" I use, you have to use the same parts, or experiment and find the root cause.<br><br>This is what you need to do to start fixing the boot issue. Do not connect the Pi to the converter. Use a DMM (you seem to have one) and hook it up to the output of the converter. Or connect another LED and a current limiting resistor to the output. Get ready to count seconds, and apply power to the converter through the wall-wart. There should be no power at the output. If there is, your connection to the Enable pin is not working. Check that again. If there is no power, push the button for a moment and start to count seconds. The converter should now have a voltage at the output, count until the voltage drops to zero. It should be around 4 seconds, a little more is no problem, less than 3.5 is. <br><br>If this does not work as advertised, you have a charging circuit that does not work and this is most likely because you used something else for the 3V3 Zener diode I use in my diagram. So first you need to find a better replacement for the Zener. Assuming you apply 12V DC from a wall-wart, you can make a resistor divider that results in about 3.3V at the junction. You can use the 1K5 resistor from the 12V down, and connect that to a 620 Ohm resistor to ground. Measure the voltage at the junction of the two, somewhere between 4 and 3.5V is OK. If not, or if you don't have these resistors, play with the DMM and your stash of resistors until you do. Use this for assistance if you need it : <a href="http://www.raltron.com/cust/tools/voltage_divider.asp" class="postlink">http://www.raltron.com/cust/tools/voltage_divider.asp</a> The total value of the two resistors should not get above 50K, otherwise you'll introduce other problems. Try the keep the total current through the two resisters somewhere between 0.5 and 2mA if you can. With 12V, 1mA results in a total value of 12K. A split of an 8K2 (top) and a 3K3 resistor should result in about 3V3, which is perfect.<br><br>If the voltage at the junction is OK, connect the top of the charging resistor to the junction. Put your DMM across the capacitor, and apply power. The voltage should creep up slowly. Press the button. The voltage should go to 0V immediately. <br><br>If OK, you can now connect the top of the capacitor with the 10K resistor to the Enable pin of the LM2596. (just follow the diagram) Apply power again, because everything was powerless, the Enable pin is already low, and C1 will already charge, without you pressing the button. Press the button again momentarily to remove the voltage across C1 and verify that you still have a voltage (5V) at the output of the converter. Measure how many seconds the converter shows an output. If it is less than 4 seconds, increase the value of the charging resistor, put  a 10K or 22K resistor in series and/or add some capacitance (put a 4.7 or 10uF cap parallel to C1), repeat until you have at least around a 5 second window of power. <br><br>If you got this far, and you are certain that the software modifications you made are correct, I'm pretty sure everything will work. If the stop button press does not work, follow each step in my description carefully and double check everything. It's not complicated, just make sure you don't make mistakes in typing etc. If you are new at Python, make sure the indentations are in the code, they are important! However, I'm pretty certain that your problem will have been solved by getting the proper voltages in place.<br><br>With this modification, you are no longer able to use different wall-warts with different voltages. You are stuck to a 12V DC wall-wart, or you need to redesign the voltage divider again.<br><br>Let me know how it it goes.<br>Success!</div>
+
+			
+				<div class="notice">Last edited by <a href="https://www.raspberrypi.org/forums/memberlist.php?mode=viewprofile&amp;u=52264&amp;sid=6fbf7120a71ee4cb99219f24d3973754">paulv</a> on Fri Jan 01, 2016 7:47 pm, edited 3 times in total.
+					
+				</div>
+			
+
+		</div>
+
+		
+		<dl class="postprofile span3" id="profile872915">
+			<dt>
+				
+			</dt>
+		<dd><strong>Posts:</strong> 379</dd><dd><strong>Joined:</strong> Tue Jan 15, 2013 12:10 pm</dd><dd><strong>Location:</strong> Netherlands/Spain</dd>
+
+		</dl>
+	
+
+	
+	</div>
+
+
+	<div id="p872931" class="post row-fluid even">
+	
+		<div class="postbody span9">
+			
+
+			<div class="author">by <strong><a href="https://www.raspberrypi.org/forums/memberlist.php?mode=viewprofile&amp;u=171075&amp;sid=6fbf7120a71ee4cb99219f24d3973754">deejayspinz</a></strong> » Thu Dec 31, 2015 3:17 pm </div>
+
+			
+
+			<div class="content">@paulv, thx for the detailed instructions..  I think you right about the LED replacement for the 3v3 diode being the issue.  When  I do the check as you described below, pushing the switch, then releasing it, I see the voltage drop quickly from 5.1v to just near 0 in about 3 (seconds.  It's below 0.5V at 3 seconds for sure). I guess the LED is stealing it away as the cap discharges?  I'm going to head over to my local electronics store to see if I can find a 3v3 diode and add the power LED separately (like the circuit).  Otherwise I'll try the voltage divider.   Any suggestions on what type of diode? Or any Schotty 3v3 diode will do?<br><br><span style="font-style: italic">Check that again. If there is no power, push the button for a moment and start to count seconds. The converter should now have a voltage at the output, count until the voltage drops to zero. It should be around 4 seconds, a little more is no problem, less than 3.5 is. <br></span></div>
+
+			
+
+		</div>
+
+		
+		<dl class="postprofile span3" id="profile872931">
+			<dt>
+				
+			</dt>
+		<dd><strong>Posts:</strong> 5</dd><dd><strong>Joined:</strong> Wed Dec 30, 2015 12:51 pm</dd>
+
+		</dl>
+	
+
+	
+	</div>
+
+
+	<div id="p873120" class="post row-fluid odd">
+	
+		<div class="postbody span9">
+			
+
+			<div class="author">by <strong><a href="https://www.raspberrypi.org/forums/memberlist.php?mode=viewprofile&amp;u=171075&amp;sid=6fbf7120a71ee4cb99219f24d3973754">deejayspinz</a></strong> » Thu Dec 31, 2015 8:34 pm </div>
+
+			
+
+			<div class="content">Shaazzaaaam!  It works!   Putting the 3v3 diode where it was supposed to be did the trick. Thanks for all your help and excellent instructions @paulv..    I also re-ran the test sequence you described above and it the voltage dropped from 5v to 0v in about 5 seconds.</div>
+
+			
+
+		</div>
+
+		
+		<dl class="postprofile span3" id="profile873120">
+			<dt>
+				
+			</dt>
+		<dd><strong>Posts:</strong> 5</dd><dd><strong>Joined:</strong> Wed Dec 30, 2015 12:51 pm</dd>
+
+		</dl>
+	
+
+	
+	</div>
+
+
+	<div id="p873921" class="post row-fluid even">
+	
+		<div class="postbody span9">
+			
+
+			<div class="author">by <strong><a href="https://www.raspberrypi.org/forums/memberlist.php?mode=viewprofile&amp;u=52264&amp;sid=6fbf7120a71ee4cb99219f24d3973754">paulv</a></strong> » Sat Jan 02, 2016 5:42 am </div>
+
+			
+
+			<div class="content">I have added a small additional feature to the Python program that listens to the button press to start a poweroff.<br><br>With the original program, any press of the button would result in a shutdown of the Pi.<br>Depending on how easy it is to accidentally press the button, I added a small change. With this, you need to deliberately press the button for 3 seconds before the power-down process will be started. Any button press shorter than 3 seconds will have no effect.<br><br>Here is the changed program: <dl class="codebox"><dt>Code: <a href="https://www.raspberrypi.org/forums/viewtopic.php?f=91&amp;t=129357#" onclick="selectCode(this); return false;">Select all</a></dt><dd><code>#!/usr/bin/env python2.7<br>#-------------------------------------------------------------------------------<br># Name:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Shutdown Daemon<br>#<br># Purpose:&nbsp; &nbsp; &nbsp; This program gets activated at the end of the boot process by<br>#&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;cron. (@ reboot sudo python /home/pi/shutdown_daemon.py)<br>#&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;It monitors a button press. If the user presses the button, we<br>#&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Halt the Pi, by executing the poweroff command.<br>#<br>#&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;The power to the Pi will then be cut when the Pi has reached the<br>#&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;poweroff state (Halt).<br>#&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;To activate a gpio pin with the poweroff state, the<br>#&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/boot/config.txt file needs to have :<br>#&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;dtoverlay=gpio-poweroff,gpiopin=27<br>#<br># Author:&nbsp; &nbsp; &nbsp; Paul Versteeg<br>#<br># Created:&nbsp; &nbsp; &nbsp;15-06-2015, revised on 18-12-2015<br># Copyright:&nbsp; &nbsp;(c) Paul 2015<br># Licence:&nbsp; &nbsp; &nbsp;&lt;your licence&gt;<br>#-------------------------------------------------------------------------------<br><br>import RPi.GPIO as GPIO<br>import subprocess<br>from time import sleep<br><br>GPIO.setmode(GPIO.BCM) # use GPIO numbering<br>GPIO.setwarnings(False)<br><br># I use the following two GPIO pins because they are next to each other,<br># and I can use a two pin header to connect the switch logic to the Pi.<br>INT = 17&nbsp; &nbsp; # GPIO-17 button interrupt to shutdown procedure<br>KILL = 27&nbsp; &nbsp;# GPIO-27 /KILL : this pin is programmed in /boot/config.txt and<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # cannot be used by any other program<br><br># use a weak pull_up to create a high<br>GPIO.setup(INT, GPIO.IN, pull_up_down=GPIO.PUD_UP)<br><br>def main():<br><br>&nbsp; &nbsp; while True:<br>&nbsp; &nbsp; &nbsp; &nbsp; # set an interrupt on a falling edge and wait for it to happen<br>&nbsp; &nbsp; &nbsp; &nbsp; GPIO.wait_for_edge(INT, GPIO.FALLING)<br>&nbsp; &nbsp; &nbsp; &nbsp; # we got here because the button was pressed.<br>&nbsp; &nbsp; &nbsp; &nbsp; # wait for 3 seconds to see if this was deliberate<br>&nbsp; &nbsp; &nbsp; &nbsp; sleep(3)<br>&nbsp; &nbsp; &nbsp; &nbsp; # check the button level again<br>&nbsp; &nbsp; &nbsp; &nbsp; if GPIO.input(INT) == 0:<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # still pressed, is a serious request, shutdown Pi<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; subprocess.call(['poweroff'], shell=True, \<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; stdout=subprocess.PIPE, stderr=subprocess.PIPE)<br><br><br>if __name__ == '__main__':<br>&nbsp; &nbsp; main()</code></dd></dl><br><br>Enjoy!</div>
+
+			
+
+		</div>
+
+		
+		<dl class="postprofile span3" id="profile873921">
+			<dt>
+				
+			</dt>
+		<dd><strong>Posts:</strong> 379</dd><dd><strong>Joined:</strong> Tue Jan 15, 2013 12:10 pm</dd><dd><strong>Location:</strong> Netherlands/Spain</dd>
+
+		</dl>
+	
+
+	
+	</div>
+
+
+	<div class="span4 text-right">
+		<form class="form-search" method="get" id="forum-search" action="https://www.raspberrypi.org/forums/search.php?sid=6fbf7120a71ee4cb99219f24d3973754">
+		<fieldset>
+			<input class="search-query" type="text" name="keywords" id="search_keywords" size="20" value="Search This Topic" onclick="if (this.value == &#39;Search This Topic&#39;) this.value = &#39;&#39;;" onblur="if (this.value == &#39;&#39;) this.value = &#39;Search This Topic&#39;;">
+			<button class="btn" type="submit" value="Search"><i class="icon icon-search"></i></button>
+			<input type="hidden" name="t" value="129357">
+<input type="hidden" name="sf" value="msgonly">
+<input type="hidden" name="sid" value="6fbf7120a71ee4cb99219f24d3973754">
+
+		</fieldset>
+		</form>
+
+	</div>	
+	
+	</div>
+	
+
+	<hr class="crease">
+	<div class="container">
+
+<div class="row-fluid">
+	<div class="topic-actions span8">
+	
+		<a href="https://www.raspberrypi.org/forums/posting.php?mode=reply&amp;f=91&amp;t=129357&amp;sid=6fbf7120a71ee4cb99219f24d3973754" class="btn btn-info" title="Post a reply">Post a reply</a> 
+	&nbsp;</div>
+	
+	
+	<div class="paging span4 text-right">
+		15 posts
+		
+	</div>
+	
+	
+</div>
+<br>
+
+
+<div class="row-fluid">
+	<div class="span4">
+		
+		<a href="https://www.raspberrypi.org/forums/viewforum.php?f=91&amp;sid=6fbf7120a71ee4cb99219f24d3973754" class="btn left" accesskey="r">Return to Beginners</a>
+		
+	</div>
+	<div class="span2">
+		&nbsp;
+	</div>
+	<div class="span6 text-right">
+		
+		<form method="post" id="jumpbox" action="https://www.raspberrypi.org/forums/viewforum.php?sid=6fbf7120a71ee4cb99219f24d3973754" onsubmit="if(this.f.value == -1){return false;}" class="form-inline">
+
+		
+		<fieldset class="jumpbox">
+		
+		
+			<label for="f" accesskey="j">Jump to: 
+			<select name="f" id="f" onchange="if(this.options[this.selectedIndex].value != -1){ document.forms[&#39;jumpbox&#39;].submit() }">
+			
+			
+				<option value="-1">Select a forum</option>
+			<option value="-1">------------------</option>
+				<option value="19">Community</option>
+			
+				<option value="63">&nbsp; &nbsp;General discussion</option>
+			
+				<option value="90">&nbsp; &nbsp;Other languages</option>
+			
+				<option value="75">&nbsp; &nbsp;&nbsp; &nbsp;Deutsch</option>
+			
+				<option value="76">&nbsp; &nbsp;&nbsp; &nbsp;Español</option>
+			
+				<option value="65">&nbsp; &nbsp;&nbsp; &nbsp;Français</option>
+			
+				<option value="79">&nbsp; &nbsp;&nbsp; &nbsp;Italiano</option>
+			
+				<option value="88">&nbsp; &nbsp;&nbsp; &nbsp;Nederlands</option>
+			
+				<option value="82">&nbsp; &nbsp;&nbsp; &nbsp;日本語</option>
+			
+				<option value="103">&nbsp; &nbsp;&nbsp; &nbsp;Polski</option>
+			
+				<option value="74">&nbsp; &nbsp;&nbsp; &nbsp;Português</option>
+			
+				<option value="84">&nbsp; &nbsp;&nbsp; &nbsp;Русский</option>
+			
+				<option value="89">&nbsp; &nbsp;&nbsp; &nbsp;Türkçe</option>
+			
+				<option value="57">&nbsp; &nbsp;User groups and events</option>
+			
+				<option value="106">&nbsp; &nbsp;The MagPi</option>
+			
+				<option value="83">&nbsp; &nbsp;The Pi Store</option>
+			
+				<option value="12">Using the Raspberry Pi</option>
+			
+				<option value="91" selected="selected">&nbsp; &nbsp;Beginners</option>
+			
+				<option value="28">&nbsp; &nbsp;Troubleshooting</option>
+			
+				<option value="29">&nbsp; &nbsp;Advanced users</option>
+			
+				<option value="102">&nbsp; &nbsp;Accessibility</option>
+			
+				<option value="17">Education</option>
+			
+				<option value="47">&nbsp; &nbsp;The Staffroom</option>
+			
+				<option value="99">&nbsp; &nbsp;Picademy</option>
+			
+				<option value="49">&nbsp; &nbsp;Teaching and learning resources</option>
+			
+				<option value="48">&nbsp; &nbsp;Using Raspberry Pi in the classroom</option>
+			
+				<option value="104">&nbsp; &nbsp;Astro Pi</option>
+			
+				<option value="94">&nbsp; &nbsp;Mathematica</option>
+			
+				<option value="111">&nbsp; &nbsp;High Altitude Balloon</option>
+			
+				<option value="14">Programming</option>
+			
+				<option value="72">&nbsp; &nbsp;Bare metal</option>
+			
+				<option value="33">&nbsp; &nbsp;C/C++</option>
+			
+				<option value="67">&nbsp; &nbsp;Graphics programming</option>
+			
+				<option value="68">&nbsp; &nbsp;&nbsp; &nbsp;OpenGLES</option>
+			
+				<option value="69">&nbsp; &nbsp;&nbsp; &nbsp;OpenVG</option>
+			
+				<option value="70">&nbsp; &nbsp;&nbsp; &nbsp;OpenMAX</option>
+			
+				<option value="81">&nbsp; &nbsp;Java</option>
+			
+				<option value="32">&nbsp; &nbsp;Python</option>
+			
+				<option value="77">&nbsp; &nbsp;Scratch</option>
+			
+				<option value="105">&nbsp; &nbsp;Windows 10 for IoT</option>
+			
+				<option value="95">&nbsp; &nbsp;Wolfram Language</option>
+			
+				<option value="34">&nbsp; &nbsp;Other languages</option>
+			
+				<option value="31">&nbsp; &nbsp;General programming discussion</option>
+			
+				<option value="15">Projects</option>
+			
+				<option value="37">&nbsp; &nbsp;Automation, sensing and robotics</option>
+			
+				<option value="40">&nbsp; &nbsp;Cases</option>
+			
+				<option value="78">&nbsp; &nbsp;Gaming</option>
+			
+				<option value="38">&nbsp; &nbsp;Graphics, sound and multimedia</option>
+			
+				<option value="39">&nbsp; &nbsp;Magazines and books</option>
+			
+				<option value="35">&nbsp; &nbsp;Media centres</option>
+			
+				<option value="36">&nbsp; &nbsp;Networking and servers</option>
+			
+				<option value="41">&nbsp; &nbsp;Other projects</option>
+			
+				<option value="16">Hardware and peripherals</option>
+			
+				<option value="43">&nbsp; &nbsp;Camera board</option>
+			
+				<option value="98">&nbsp; &nbsp;Compute Module</option>
+			
+				<option value="108">&nbsp; &nbsp;Official Foundation Display</option>
+			
+				<option value="45">&nbsp; &nbsp;Add-ons</option>
+			
+				<option value="100">&nbsp; &nbsp;B+ addons</option>
+			
+				<option value="107">&nbsp; &nbsp;Device Tree</option>
+			
+				<option value="44">&nbsp; &nbsp;Interfacing (DSI, CSI, I2C, etc.)</option>
+			
+				<option value="42">&nbsp; &nbsp;Gertboard classic</option>
+			
+				<option value="96">&nbsp; &nbsp;GertDuino</option>
+			
+				<option value="46">&nbsp; &nbsp;Recommended peripherals</option>
+			
+				<option value="18">Operating system distributions</option>
+			
+				<option value="66">&nbsp; &nbsp;Raspbian</option>
+			
+				<option value="53">&nbsp; &nbsp;Arch</option>
+			
+				<option value="51">&nbsp; &nbsp;Pidora / Fedora</option>
+			
+				<option value="55">&nbsp; &nbsp;RISCOS</option>
+			
+				<option value="56">&nbsp; &nbsp;Other</option>
+			
+				<option value="73">&nbsp; &nbsp;&nbsp; &nbsp;Android</option>
+			
+				<option value="50">&nbsp; &nbsp;&nbsp; &nbsp;Debian</option>
+			
+				<option value="85">&nbsp; &nbsp;&nbsp; &nbsp;FreeBSD</option>
+			
+				<option value="54">&nbsp; &nbsp;&nbsp; &nbsp;Gentoo</option>
+			
+				<option value="71">&nbsp; &nbsp;&nbsp; &nbsp;Linux Kernel</option>
+			
+				<option value="86">&nbsp; &nbsp;&nbsp; &nbsp;NetBSD</option>
+			
+				<option value="87">&nbsp; &nbsp;&nbsp; &nbsp;openSUSE</option>
+			
+				<option value="80">&nbsp; &nbsp;&nbsp; &nbsp;Plan 9</option>
+			
+				<option value="52">&nbsp; &nbsp;&nbsp; &nbsp;Puppy</option>
+			
+				<option value="20">Ye Olde Pi Shoppe</option>
+			
+				<option value="93">&nbsp; &nbsp;For sale</option>
+			
+				<option value="61">&nbsp; &nbsp;Wanted</option>
+			
+				<option value="21">Off topic</option>
+			
+				<option value="62">&nbsp; &nbsp;Off topic discussion</option>
+			
+			
+			</select>
+			<input type="submit" value="Go" class="btn">
+			</label>
+		</fieldset>
+		
+		</form>
+		
+	</div>
+</div>
+
+</div>
+<hr class="crease">
+<div class="container">
+
+<div class="row-fluid">
+	<div class="span8">
+		
+		<h5>Who is online</h5>
+		Users browsing this forum: <span style="color: #9E8DA7;" class="username-coloured">Bing [Bot]</span>, <a href="https://www.raspberrypi.org/forums/memberlist.php?mode=viewprofile&amp;u=17042&amp;sid=6fbf7120a71ee4cb99219f24d3973754">rpdom</a> and 22 guests
+		
+	</div>
+	<div class="span4">
+	&nbsp;
+	</div>
+</div>
+
+</div><!-- #main -->
+
+<footer id="colophon" role="contentinfo" class="wave">
+		<div class="container"><div class="row">
+			<aside class="footer1 span4">
+				<ul class="unstyled">
+					<li><a href="https://www.raspberrypi.org/forums/index.php?sid=6fbf7120a71ee4cb99219f24d3973754" accesskey="h"><i class="icon icon-home"></i> Board index</a></li>
+					
+					
+					
+					<li><a href="https://www.raspberrypi.org/forums/memberlist.php?mode=leaders&amp;sid=6fbf7120a71ee4cb99219f24d3973754"><i class="icon icon-eye-open"></i> The team</a></li><li><a href="https://www.raspberrypi.org/forums/ucp.php?mode=delete_cookies&amp;sid=6fbf7120a71ee4cb99219f24d3973754"><i class="icon icon-trash"></i> Delete all board cookies</a></li>
+					
+					<li><i class="icon icon-time"></i> All times are UTC </li>
+				</ul>
+			</aside>
+				
+			<aside class="footer2 span4">
+				
+			</aside>
+				
+			<aside class="footer3 span4">
+				
+			</aside>
+	
+		</div></div>
+	</footer><!-- #colophon -->
+<!-- #page -->
+
+
+<script type="text/javascript" src="./Raspberry Pi • View topic - HOW-TO Start_Stop_Powerdown Pi with 1 Button_files/jquery.js"></script>
+<script type="text/javascript" src="./Raspberry Pi • View topic - HOW-TO Start_Stop_Powerdown Pi with 1 Button_files/jquery.timeago.js"></script>
+<script type="text/javascript" src="./Raspberry Pi • View topic - HOW-TO Start_Stop_Powerdown Pi with 1 Button_files/forum_fn.js"></script>
+<script type="text/javascript" src="./Raspberry Pi • View topic - HOW-TO Start_Stop_Powerdown Pi with 1 Button_files/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+
+	jQuery("time.entry-date").timeago();
+	jQuery("time.date").timeago();
+  
+	jQuery('iframe').each( function() {
+		var url = jQuery(this).attr("src")
+		jQuery(this).attr("src",url+"&wmode=transparent")
+	});
+
+});
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-46270871-1', 'raspberrypi.org');
+  ga('send', 'pageview');
+
+</script>
+	
+
+</body></html>
