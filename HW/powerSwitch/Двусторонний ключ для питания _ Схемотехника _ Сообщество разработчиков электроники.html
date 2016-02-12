@@ -1,0 +1,2195 @@
+<!doctype html>
+
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="ru"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="ru"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="ru"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="ru" xmlns="http://www.w3.org/1999/html"> <!--<![endif]-->
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	
+	<title>Двусторонний ключ для питания / Схемотехника / Сообщество разработчиков электроники</title>
+	
+	<meta name="description" content="Блог разработчика электроники">
+	<meta name="keywords" content="bsvi, embedded, electronic, microcontroller, arm, avr, pic, soldering, smd, svn, altium designer, трансформатор тесла, SSTC, DRSSTC, программирование, паяльник, отладка, Си, C++, электроника, радиолюбитель">
+
+	<link href="http://tqfp.org/templates/skin/bsvi/images/favicon.ico?v3" rel="shortcut icon" />
+
+			<link rel="alternate" type="application/rss+xml" href="http://tqfp.org/rss/comments/57/" title="Двусторонний ключ для питания">
+	
+
+	<script type="text/javascript">
+		var DIR_WEB_ROOT 			= 'http://tqfp.org';
+		var DIR_STATIC_SKIN 		= 'http://tqfp.org/templates/skin/bsvi';
+		var DIR_ROOT_ENGINE_LIB 	= 'http://tqfp.org/engine/lib';
+		var LIVESTREET_SECURITY_KEY = 'a960417414feb8b0f95991b8810b8b3c';
+		var SESSION_ID				= 'fg3njo9l0is44blp4m6svdlc47';
+		var BLOG_USE_TINYMCE		= '';
+		
+		var TINYMCE_LANG = 'ru';
+
+		var aRouter = new Array();
+					aRouter['error'] = 'http://tqfp.org/error/';
+					aRouter['registration'] = 'http://tqfp.org/registration/';
+					aRouter['profile'] = 'http://tqfp.org/profile/';
+					aRouter['my'] = 'http://tqfp.org/my/';
+					aRouter['blog'] = 'http://tqfp.org/blog/';
+					aRouter['personal_blog'] = 'http://tqfp.org/personal_blog/';
+					aRouter['index'] = 'http://tqfp.org/index/';
+					aRouter['topic'] = 'http://tqfp.org/topic/';
+					aRouter['login'] = 'http://tqfp.org/login/';
+					aRouter['people'] = 'http://tqfp.org/people/';
+					aRouter['settings'] = 'http://tqfp.org/settings/';
+					aRouter['tag'] = 'http://tqfp.org/tag/';
+					aRouter['talk'] = 'http://tqfp.org/talk/';
+					aRouter['comments'] = 'http://tqfp.org/comments/';
+					aRouter['rss'] = 'http://tqfp.org/rss/';
+					aRouter['link'] = 'http://tqfp.org/link/';
+					aRouter['question'] = 'http://tqfp.org/question/';
+					aRouter['blogs'] = 'http://tqfp.org/blogs/';
+					aRouter['search'] = 'http://tqfp.org/search/';
+					aRouter['admin'] = 'http://tqfp.org/admin/';
+					aRouter['ajax'] = 'http://tqfp.org/ajax/';
+					aRouter['feed'] = 'http://tqfp.org/feed/';
+					aRouter['stream'] = 'http://tqfp.org/stream/';
+					aRouter['photoset'] = 'http://tqfp.org/photoset/';
+					aRouter['subscribe'] = 'http://tqfp.org/subscribe/';
+					aRouter['language'] = 'http://tqfp.org/language/';
+					aRouter['less'] = 'http://tqfp.org/less/';
+					aRouter['attachments'] = 'http://tqfp.org/attachments/';
+					aRouter['auction'] = 'http://tqfp.org/auction/';
+					aRouter['ec_ajax'] = 'http://tqfp.org/ec_ajax/';
+					aRouter['links'] = 'http://tqfp.org/links/';
+					aRouter['openid_login'] = 'http://tqfp.org/openid_login/';
+					aRouter['openid_settings'] = 'http://tqfp.org/openid_settings/';
+					aRouter['page'] = 'http://tqfp.org/page/';
+		
+
+	</script>
+
+	<link rel='stylesheet' type='text/css' href='http://tqfp.org/templates/cache/bsvi/3b4512e255a4843eb744362009895970.css' />
+
+	<script type='text/javascript' src='http://tqfp.org/templates/cache/bsvi/637a5cf3738e3a0e64fb7610ceab5ca9.js'></script>
+<!--[if lt IE 9]><script type='text/javascript' src='http://tqfp.org/engine/lib/external/html5shiv.js'></script><![endif]-->
+
+
+	
+	<script type="text/javascript">
+		var tinyMCE = false;
+		ls.lang.load({"blog_join":"\u0432\u0441\u0442\u0443\u043f\u0438\u0442\u044c \u0432 \u0431\u043b\u043e\u0433","blog_leave":"\u043f\u043e\u043a\u0438\u043d\u0443\u0442\u044c \u0431\u043b\u043e\u0433"});
+		ls.registry.set('comment_max_tree',7);
+		ls.registry.set('block_stream_show_tip',true);
+	</script>
+</head>
+
+
+
+	
+	
+
+<body class=" ls-user-role-guest ls-user-role-not-admin width-fluid">
+	  <script>
+    // --- code ---
+    var Attachments_FormUploadAction = "http://tqfp.org/attachments/receive";
+    var Attachments_PosibleFileExtensions = "zip rar gz pdf mp3";
+    var Attachments_FileFormPlace = "sidebar";
+    var Attachments_PathRootWeb = "http://tqfp.org";
+    var Attachments_AttachmentsAction = "http://tqfp.org/attachments/";
+    // --- msgs ---
+    var Attachments_AddFileMsg = "<span>Прикрепить файл:</span>";
+    var Attachments_DefaultInfoMsg = "Выберите файл";
+    var Attachments_UploadingFileNow = "Файл загружается...";
+    var Attachments_Not_Allowed_File_Types = "Недопустимый формат файла. Разрешено загружать файлы типов: ";
+    var Attachments_UploadDone = "Файл добавлен";
+    var Attachments_SidebarDetectionError = "Ошибка в вёрстке шаблона для сайдбара плагина Attachments. Сохраняйте класы обьектов для корректной работы";
+    var Attachments_WrongFileFormPlace = "Неверный параметр положения формы для загрузки файлов в конфиге для плагина Attachments";
+    var Attachments_DoYouReallyWantToDeleteThisFile = "Вы действительно хотите удалить этот файл?";
+    var Attachments_ElementTitleDownloadFile = "Скачать файл";
+    var Attachments_ElementTitleDeleteFile = "Удалить файл";
+    var Attachments_FileWasDeleted = "Файл удален";
+    var Attachments_CantAttachToSavedTopic = "Привязать файл можно только к новому топику. К существующему - никак";
+    var Attachments_ThereIsNoUnattachedFiles = "Нету непривязанных файлов.";
+  </script>
+
+
+
+
+	
+				<div class="modal modal-login" id="window_login_form">
+		<header class="modal-header">
+			<h3>Авторизация</h3>
+			<a href="#" class="close jqmClose"></a>
+		</header>
+		
+		
+		<script type="text/javascript">
+			jQuery(function($){
+				$('#popup-login-form').bind('submit',function(){
+					ls.user.login('popup-login-form');
+					return false;
+				});
+				$('#popup-login-form-submit').attr('disabled',false);
+			});
+		</script>
+		
+		<div class="modal-content">
+			<ul class="nav nav-pills nav-pills-tabs">
+				<li class="active js-block-popup-login-item" data-type="login"><a href="#">Войти</a></li>
+									<li class="js-block-popup-login-item" data-type="registration"><a href="#">Регистрация</a></li>
+								<li class="js-block-popup-login-item" data-type="reminder"><a href="#">Восстановление пароля</a></li>
+			</ul>
+			
+			
+			<div class="tab-content js-block-popup-login-content" data-type="login">
+				
+				<form action="http://tqfp.org/login/" method="post" id="popup-login-form">
+					<a href="http://tqfp.org/login/openid/" title="Войти через OpenID, GMail, ВКонтакте, Facebook, Twitter, Yandex, Rambler" ><img src="http://tqfp.org/plugins/openid/templates/skin/default/img/openid.png" alt="OpenID" style="margin-bottom: 10px;"/></a><br>
+
+
+					<p><label for="popup-login">Логин или эл. почта:</label>
+					<input type="text" name="login" id="popup-login" class="input-text input-width-300"></p>
+					
+					<p><label for="popup-password">Пароль:</label>
+					<input type="password" name="password" id="popup-password" class="input-text input-width-300">
+					<small class="validate-error-hide validate-error-login"></small></p>
+					
+					<p><label><input type="checkbox" name="remember" class="input-checkbox" checked> Запомнить меня</label></p>
+
+					
+
+					<input type="hidden" name="return-path" value="http://tqfp.org/circuit-design/dvustoronnie-klyuchi-na-tranzistorah.html">
+					<button type="submit" name="submit_login" class="button button-primary" id="popup-login-form-submit" disabled="disabled">Войти</button>
+				</form>
+				
+			</div>
+
+
+						<div data-type="registration" class="tab-content js-block-popup-login-content" style="display:none;">
+				<script type="text/javascript">
+					jQuery(document).ready(function($){
+						$('#popup-registration-form').find('input.js-ajax-validate').blur(function(e){
+							var aParams={ };
+							if ($(e.target).attr('name')=='password_confirm') {
+								aParams['password']=$('#popup-registration-user-password').val();
+							}
+							if ($(e.target).attr('name')=='password') {
+								aParams['password']=$('#popup-registration-user-password').val();
+								if ($('#popup-registration-user-password-confirm').val()) {
+									ls.user.validateRegistrationField('password_confirm',$('#popup-registration-user-password-confirm').val(),$('#popup-registration-form'),{ 'password': $(e.target).val() });
+								}
+							}
+							ls.user.validateRegistrationField($(e.target).attr('name'),$(e.target).val(),$('#popup-registration-form'),aParams);
+						});
+						$('#popup-registration-form').bind('submit',function(){
+							ls.user.registration('popup-registration-form');
+							return false;
+						});
+						$('#popup-registration-form-submit').attr('disabled',false);
+					});
+				</script>
+
+				
+				<form action="http://tqfp.org/registration/" method="post" id="popup-registration-form">
+					<a href="http://tqfp.org/login/openid/" title="Войти через OpenID, GMail, ВКонтакте, Facebook, Twitter, Yandex, Rambler" ><img src="http://tqfp.org/plugins/openid/templates/skin/default/img/openid.png" alt="OpenID" style="margin-bottom: 10px;"/></a><br>
+
+
+					<p><label for="popup-registration-login">Логин</label>
+					<input type="text" name="login" id="popup-registration-login" value="" class="input-text input-width-300 js-ajax-validate" />
+					<i class="icon-ok-green validate-ok-field-login" style="display: none"></i>
+					<i class="icon-question-sign js-tip-help" title="Может состоять только из букв (A-Z a-z), цифр (0-9). Знак подчеркивания (_) лучше не использовать. Длина логина не может быть меньше 3 и больше 30 символов."></i>
+					<small class="validate-error-hide validate-error-field-login"></small></p>
+
+					<p><label for="popup-registration-mail">E-mail</label>
+					<input type="text" name="mail" id="popup-registration-mail" value="" class="input-text input-width-300 js-ajax-validate" />
+					<i class="icon-ok-green validate-ok-field-mail" style="display: none"></i>
+					<i class="icon-question-sign js-tip-help" title="Для проверки регистрации и в целях безопасности нам нужен адрес вашей электропочты."></i>
+					<small class="validate-error-hide validate-error-field-mail"></small></p>
+
+					<p><label for="popup-registration-user-password">Пароль</label>
+					<input type="password" name="password" id="popup-registration-user-password" value="" class="input-text input-width-300 js-ajax-validate" />
+					<i class="icon-ok-green validate-ok-field-password" style="display: none"></i>
+					<i class="icon-question-sign js-tip-help" title="Должен содержать не менее 5 символов и не может совпадать с логином. Не используйте простые пароли, будьте разумны."></i>
+					<small class="validate-error-hide validate-error-field-password"></small></p>
+
+					<p><label for="popup-registration-user-password-confirm">Повторите пароль</label>
+					<input type="password" value="" id="popup-registration-user-password-confirm" name="password_confirm" class="input-text input-width-300 js-ajax-validate" />
+					<i class="icon-ok-green validate-ok-field-password_confirm" style="display: none"></i>
+					<small class="validate-error-hide validate-error-field-password_confirm"></small></p>
+
+					
+					<p><label for="popup-registration-captcha">Введите цифры и буквы</label>
+					<img src="http://tqfp.org/engine/lib/external/kcaptcha/index.php?PHPSESSID=fg3njo9l0is44blp4m6svdlc47" 
+						 onclick="this.src='http://tqfp.org/engine/lib/external/kcaptcha/index.php?PHPSESSID=fg3njo9l0is44blp4m6svdlc47&n='+Math.random();"
+						 class="captcha-image" />
+					<input type="text" name="captcha" id="popup-registration-captcha" value="" maxlength="3" class="input-text input-width-100 js-ajax-validate" />
+					<small class="validate-error-hide validate-error-field-captcha"></small></p>
+					
+
+					<p><label for="popup-login">Сколько ножек stm32f100c6 ? (цифрой):</label>
+<input type="text" name="regfield" id="popup-login" class="input-text input-width-300">
+<small class="validate-error-hide validate-error-field-captcha"></small>
+
+</p>
+
+
+					<input type="hidden" name="return-path" value="http://tqfp.org/circuit-design/dvustoronnie-klyuchi-na-tranzistorah.html">
+					<button type="submit" name="submit_register" class="button button-primary" id="popup-registration-form-submit" disabled="disabled">Зарегистрироваться</button>
+				</form>
+				
+			</div>
+						
+			
+			<div data-type="reminder" class="tab-content js-block-popup-login-content" style="display:none;">
+				<script type="text/javascript">
+					jQuery(document).ready(function($){
+						$('#popup-reminder-form').bind('submit',function(){
+							ls.user.reminder('popup-reminder-form');
+							return false;
+						});
+						$('#popup-reminder-form-submit').attr('disabled',false);
+					});
+				</script>
+				<form action="http://tqfp.org/login/reminder/" method="POST" id="popup-reminder-form">
+					<p><label for="popup-reminder-mail">Ваш e-mail</label>
+					<input type="text" name="mail" id="popup-reminder-mail" class="input-text input-width-300" />
+					<small class="validate-error-hide validate-error-reminder"></small></p>
+
+					<button type="submit" name="submit_reminder" class="button button-primary" id="popup-reminder-form-submit" disabled="disabled">Получить ссылку на изменение пароля</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+		
+
+	<div id="container" class="">
+
+
+
+<header id="header">
+
+    <a href="http://tqfp.org">
+        <img src="http://tqfp.org/templates/skin/bsvi/images/tqfp.png" class="logo"/>
+        <span class="big_caption">tqfp</span>
+        <span class="small_caption">...разрабатываем электронику вместе</span>
+    </a>
+
+
+            <div class="login-register">
+            <a href="http://tqfp.org/login/" class="js-login-form-show">Войти</a> или
+            <a href="http://tqfp.org/registration/" class="js-registration-form-show">Зарегистрироваться</a></li>
+        </div>
+    
+</header>
+
+
+    <nav id="userbar" class="clearfix">
+	
+        <a href="http://tqfp.org/index/" class="new">    </a>
+        <ul class="dropdown_menu">
+
+            <li class="active"><a href="http://tqfp.org/">Записи</a></li>
+            <li ><a href="http://tqfp.org/blogs/">Блоги</a></li>
+            <li ><a href="http://tqfp.org/people/">Люди</a></li>
+            <li ><a href="http://tqfp.org/stream/">Активность</a></li>
+            <li><a href="http://tqfp.org/forum/">Форум</a></li>
+            <li><a href="http://tqfp.org/meta/help.html">О сайте</a></li>
+            <li ><a href="http://tqfp.org/auction/">Барахолка</a></li>
+            <li><a href="http://simpletesla.ru/">SimpleTesla</a></li>
+            <li><a href="http://tqfp.org/calculatoria/">Калькулятория</a></li>
+
+            <li ><a href="http://tqfp.org/links/">Ссылки</a></li>
+        </ul>
+
+        <form action="http://tqfp.org/search/topics/" class="search">
+            <input type="text" placeholder="Поиск" maxlength="255" name="q" class="input-text">
+            <input type="submit" value="" title="Найти" class="input-submit icon icon-search">
+        </form>
+</nav>
+
+
+
+    <div class="nav-filter-wrapper">
+        <ul class="nav nav-filter nav-filter-sub">
+            <li ><a href="http://tqfp.org/index/newall/">Все</span></a></li>
+            <li ><a href="http://tqfp.org/">Только хорошие</a></li>
+
+                        
+        </ul>
+    </div>
+
+
+		<div id="wrapper" class="">
+					
+			<div id="content" role="main" 
+				class=" 
+					   "
+				>
+				
+					
+					
+
+	
+				
+				
+
+		
+
+<article class="topic topic-type-topic js-topic">
+	<header class="topic-header">
+		<h1 class="topic-title word-wrap">
+						
+						
+			<a href="http://tqfp.org/circuit-design/dvustoronnie-klyuchi-na-tranzistorah.html">Двусторонний ключ для питания</a>
+		</h1>
+		
+		
+				
+		
+		<div class="topic-info">
+            <a rel="author" href="http://tqfp.org/profile/bsvi/">bsvi</a> →
+			<a href="http://tqfp.org/blog/circuit-design/" class="topic-blog">Схемотехника</a>
+			
+			<time datetime="2013-01-19T00:11:20+04:00" title="19 января 2013, 00:11">
+				19 января 2013, 00:11
+			</time>
+
+            
+		</div>
+	</header>
+   
+   
+<div class="topic-content text">
+	
+	
+			Для i3, мне понадобилась такая система: по умолчанию питание берется от батарейки, а когда пользователь подключает USB, прерыватель начинает питаться от USB. Вроде бы, просто. Но чем отключать батарейку? Первая мысль — mosfet'ом, конечно. К сожалению, у мосфетов есть паразитный внутренний диод, который портит всю малину. Вот смотрите:<br/>
+<br/>
+<img src="http://tqfp.org/uploads/images/00/00/01/2013/01/18/ec93f78838.png" title="Полевой транзистор - плохой ключ" alt="Полевой транзистор - плохой ключ"/><br/>
+<a name="cut" rel="nofollow"></a> <br/>
+Видно, что USB закорочен на батарейку, и тут выживет сильнейший :) Понятно, что это — плохой вариант. Именно для того чтобы увидеть такие моменты, я всегда изображаю паразитный диод в символе транзистора. Опустив свои поиски, покажу готовый результат:<br/>
+<br/>
+<img src="http://tqfp.org/uploads/images/00/00/01/2013/01/18/5469d271f5.png" title="Двусторонний ключ" alt="Двусторонний ключ"/><br/>
+<br/>
+Идея в том, что один транзисторы блокируют внутренние диоды друг друга. (транзисторы можно поставить и истоками друг к другу, схема все равно будет работать).<br/>
+<br/>
+Такой ключ может проводить ток в обе стороны. Иногда это не желательно и нужна защита от переполюсовки, как в случае с i3. Если присмотреться, то видно, что левый транзистор играет роль управляемого «идеального диода», но, в отличии от него не проводит ток в обратном направлении, так как закрывается напряжением от USB.<br/>
+<br/>
+В качестве примера, у нас будет кусок схемы питания i3, в котором используется этот ключ(напряжение батареек (2xAA) 2-3.5в, USB и внешнего выхода — 4.75-5.25в):<br/>
+<br/>
+<a href="http://tqfp.org/uploads/images/00/00/01/2013/01/24/8fc3148070.png" class="photoset-image" title="Схема питания i3" rel="nofollow"><img src="http://tqfp.org/uploads/images/00/00/01/2013/01/24/562e5bc31e.png" title="Схема питания i3" alt="Схема питания i3"/></a><br/>
+<br/>
+Итак, с ключом на Q1 и Q2 вы уже знакомы. По умолчанию, ключ закрыт. Когда пользователь нажимает кнопку B1, напряжение на затворе падает и ключ открывается. При подаче питания, запускается процессор, который открывает Q3 и таким образом, при отпускании кнопки, система не выключается. <a href="http://tqfp.org/profile/unidk/" class="ls-user">unidk</a> очень удачно называл это «триггер на процессоре».<br/>
+<br/>
+Через отдельный диод D1, питание от USB смешивается с питанием от батареек. Раздельные диоды для затвора и для подачи питания нужны для того, чтобы напряжение от батарейки само не закрывало свой-же ключ.<br/>
+<br/>
+От чего сейчас питается прерыватель, он может узнать по напряжению VSupply. Если это напряжение меньше 4в, то это батарейка и можно мерить ее напряжение и экономить питание. Если больше — то это USB.<br/>
+<br/>
+Эта статья навеяна тем, что недавно я встретил человека в местном магазине радиодеталей, который хотел сделать высоковольтный двунаправленный ключ. Собственно, эта статья и является ответом на его вопрос.
+		
+	
+</div> 
+
+
+				
+
+	<footer class="topic-footer">
+		<ul class="topic-tags js-favourite-insert-after-form js-favourite-tags-topic-57">
+			<li>Теги:</li>
+			
+			<li><a rel="tag" href="http://tqfp.org/tag/%D0%BF%D0%B5%D1%80%D0%B5%D0%BA%D0%BB%D1%8E%D1%87%D0%B0%D1%82%D0%B5%D0%BB%D1%8C/">переключатель</a></li><li>, <a rel="tag" href="http://tqfp.org/tag/%D0%BA%D0%BB%D1%8E%D1%87/">ключ</a></li><li>, <a rel="tag" href="http://tqfp.org/tag/mosfet/">mosfet</a></li>		</ul>
+		
+		<ul class="topic-info">
+			<li id="vote_area_topic_57" class="vote 
+																																
+																">
+								<div class="vote-up" onclick="return ls.vote.vote(57,this,1,'topic');"></div>
+				<div class="vote-count " id="vote_total_topic_57" title="всего проголосовало: 7">
+					 
+						<a href="#" onclick="return ls.vote.vote(57,this,0,'topic');">?</a> 
+									</div>
+				<div class="vote-down" onclick="return ls.vote.vote(57,this,-1,'topic');"></div>
+							</li>
+
+			<li class="topic-info-author"><a rel="author" href="http://tqfp.org/profile/bsvi/">bsvi</a></li>
+			<li class="topic-info-favourite">
+				<div onclick="return ls.favourite.toggle(57,this,'topic');" class="favourite "></div>
+				<span class="favourite-count" id="fav_count_topic_57">4</span>
+			</li>
+			<li class="topic-info-share">
+                <a target="_blank" rel="nofollow" href="http://vkontakte.ru/share.php?url=http://tqfp.org/circuit-design/dvustoronnie-klyuchi-na-tranzistorah.html" class="icon-contact icon-contact-vkontakte"></a>
+                <a target="_blank" rel="nofollow" href="http://www.facebook.com/sharer/sharer.php?u=http://tqfp.org/circuit-design/dvustoronnie-klyuchi-na-tranzistorah.html" class="icon-contact icon-contact-facebook"></a>
+                <a target="_blank" rel="nofollow" href="http://twitter.com/home?status=http://tqfp.org/circuit-design/dvustoronnie-klyuchi-na-tranzistorah.html" class="icon-contact icon-contact-twitter"></a>
+                <a target="_blank" rel="nofollow" href="https://plus.google.com/share?url=http://tqfp.org/circuit-design/dvustoronnie-klyuchi-na-tranzistorah.html" class="icon-contact icon-contact-gplus"></a>
+            </li>
+
+						
+			
+		</ul>
+
+		
+					            
+			</footer>
+</article> <!-- /.topic -->
+
+
+
+
+
+
+
+
+<div class="comments" id="comments">
+	<header class="comments-header">
+		<h3><span id="count-comments">26</span> комментариев</h3>
+		
+			
+		<a name="comments"></a>
+	</header>
+
+
+						
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_286">
+		
+		
+
+<section id="comment_id_286" class="comment
+														
+														">
+			<a name="comment286"></a>
+		
+		
+		<a href="http://tqfp.org/profile/nomorewar/"><img src="http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e.png?size=48" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+								<a href="http://tqfp.org/profile/nomorewar/">nomorewar</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment286" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2013-01-19T14:57:02+04:00">19 января 2013, 14:57</time>
+				</a>
+			</li>
+			
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_286" class="vote 
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(286,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_286">0</span>
+					<div class="vote-up" onclick="return ls.vote.vote(286,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_286" class="comment-content text">
+			а мосфет в другую сторону включить на первой картинке нельзя? или я чего-то недопонял?
+		</div>
+
+        <div id="info_edit_286" class="info_edit"  style="display: none;">
+                    </div>
+
+				
+</section> 
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_287">
+		
+		
+
+<section id="comment_id_287" class="comment
+														
+														">
+			<a name="comment287"></a>
+		
+		
+		<a href="http://tqfp.org/profile/bsvi/"><img src="http://www.gravatar.com/avatar/e31d9aabdbf8bd9001b0f74937f09d4c.png?size=48" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+				<span class="comment-topic-author" title="Автор топика">автор</span>				<a href="http://tqfp.org/profile/bsvi/">bsvi</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment287" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2013-01-19T15:01:56+04:00">19 января 2013, 15:01</time>
+				</a>
+			</li>
+			
+							<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(287,286); return false;" title="Ответ на">↑</a></li>
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_287" class="vote 
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(287,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_287">0</span>
+					<div class="vote-up" onclick="return ls.vote.vote(287,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_287" class="comment-content text">
+			Нельзя, тогда он не будет работать как ключ. Паразитный диод будет постоянно проводить.
+		</div>
+
+        <div id="info_edit_287" class="info_edit"  style="display: none;">
+                    </div>
+
+				
+</section> 
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_288">
+		
+		
+
+<section id="comment_id_288" class="comment
+														
+														">
+			<a name="comment288"></a>
+		
+		
+		<a href="http://tqfp.org/profile/nomorewar/"><img src="http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e.png?size=48" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+								<a href="http://tqfp.org/profile/nomorewar/">nomorewar</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment288" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2013-01-19T15:10:42+04:00">19 января 2013, 15:10</time>
+				</a>
+			</li>
+			
+							<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(288,287); return false;" title="Ответ на">↑</a></li>
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_288" class="vote 
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(288,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_288">0</span>
+					<div class="vote-up" onclick="return ls.vote.vote(288,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_288" class="comment-content text">
+			чет не пойму, типа паразитный диод будет проводить в направлении с батарейки на нагрузку? при подключенном usb?
+		</div>
+
+        <div id="info_edit_288" class="info_edit"  style="display: none;">
+                    </div>
+
+				
+</section> 
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_289">
+		
+		
+
+<section id="comment_id_289" class="comment
+														
+														">
+			<a name="comment289"></a>
+		
+		
+		<a href="http://tqfp.org/profile/bsvi/"><img src="http://www.gravatar.com/avatar/e31d9aabdbf8bd9001b0f74937f09d4c.png?size=48" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+				<span class="comment-topic-author" title="Автор топика">автор</span>				<a href="http://tqfp.org/profile/bsvi/">bsvi</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment289" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2013-01-19T15:28:42+04:00">19 января 2013, 15:28</time>
+				</a>
+			</li>
+			
+							<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(289,288); return false;" title="Ответ на">↑</a></li>
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_289" class="vote 
+																																					vote-count-positive
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(289,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_289">+1</span>
+					<div class="vote-up" onclick="return ls.vote.vote(289,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_289" class="comment-content text">
+			Ключ не будет закрываться, а устройство не будет отключаться. Ключ не только как переключатель батарейка-USB, но и включает/отключает устройство — посмотри на схему i3.
+		</div>
+
+        <div id="info_edit_289" class="info_edit"  style="display: none;">
+                    </div>
+
+				
+</section> 
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_290">
+		
+		
+
+<section id="comment_id_290" class="comment
+														
+														">
+			<a name="comment290"></a>
+		
+		
+		<a href="http://tqfp.org/profile/nomorewar/"><img src="http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e.png?size=48" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+								<a href="http://tqfp.org/profile/nomorewar/">nomorewar</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment290" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2013-01-19T15:44:57+04:00">19 января 2013, 15:44</time>
+				</a>
+			</li>
+			
+							<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(290,289); return false;" title="Ответ на">↑</a></li>
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_290" class="vote 
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(290,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_290">0</span>
+					<div class="vote-up" onclick="return ls.vote.vote(290,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_290" class="comment-content text">
+			аа, вот я затупил, понял теперь. про вкл\выкл проглядел, пардон.
+		</div>
+
+        <div id="info_edit_290" class="info_edit"  style="display: none;">
+                    </div>
+
+				
+</section> 
+									
+				
+		    	
+			</div></div></div></div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_291">
+		
+		
+
+<section id="comment_id_291" class="comment
+														
+														">
+			<a name="comment291"></a>
+		
+		
+		<a href="http://tqfp.org/profile/neon/"><img src="http://tqfp.org/uploads/images/00/00/07/2012/11/20/avatar_48x48.gif?195131" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+								<a href="http://tqfp.org/profile/neon/">neon</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment291" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2013-01-20T01:28:03+04:00">20 января 2013, 01:28</time>
+				</a>
+			</li>
+			
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_291" class="vote 
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(291,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_291">0</span>
+					<div class="vote-up" onclick="return ls.vote.vote(291,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_291" class="comment-content text">
+			если честно, то это статья про создание себе проблем и их героического решения. В цепь батарейного питания ставится диод Шоттки, а т. к. напряжение автономного источника ниже, чем напряжение на USB, то ничего отключать не надо.<br/>
+<br/>
+Я бы поставил всего 1 микросхему и не стал городить кучу дискретных элементов. О преимуществах такого решения даже писать нечего, т. к. перечислять долго.
+		</div>
+
+        <div id="info_edit_291" class="info_edit"  style="display: none;">
+                    </div>
+
+				
+</section> 
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_292">
+		
+		
+
+<section id="comment_id_292" class="comment
+														
+														">
+			<a name="comment292"></a>
+		
+		
+		<a href="http://tqfp.org/profile/bsvi/"><img src="http://www.gravatar.com/avatar/e31d9aabdbf8bd9001b0f74937f09d4c.png?size=48" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+				<span class="comment-topic-author" title="Автор топика">автор</span>				<a href="http://tqfp.org/profile/bsvi/">bsvi</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment292" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2013-01-20T01:32:15+04:00">20 января 2013, 01:32</time>
+				</a>
+			</li>
+			
+							<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(292,291); return false;" title="Ответ на">↑</a></li>
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_292" class="vote 
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(292,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_292">0</span>
+					<div class="vote-up" onclick="return ls.vote.vote(292,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_292" class="comment-content text">
+			На кроме того, что на Шоттки будет падение, которое будет снижать время работы от батареек, дак еще Шотткой отключить прибор нельзя. Ключ не только мультиплексирует питание (именно поэтому он ключ, а не диод), но и отключает прибор :)<br/>
+<br/>
+А какую микросхему бы ты поставил?
+		</div>
+
+        <div id="info_edit_292" class="info_edit" >
+                                    Комментарий отредактирован <b>2013-01-20 01:32:56</b> пользователем <b>bsvi</b>
+	            </div>
+
+				
+</section> 
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_294">
+		
+		
+
+<section id="comment_id_294" class="comment
+														
+														">
+			<a name="comment294"></a>
+		
+		
+		<a href="http://tqfp.org/profile/neon/"><img src="http://tqfp.org/uploads/images/00/00/07/2012/11/20/avatar_48x48.gif?195131" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+								<a href="http://tqfp.org/profile/neon/">neon</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment294" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2013-01-20T02:30:40+04:00">20 января 2013, 02:30</time>
+				</a>
+			</li>
+			
+							<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(294,292); return false;" title="Ответ на">↑</a></li>
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_294" class="vote 
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(294,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_294">0</span>
+					<div class="vote-up" onclick="return ls.vote.vote(294,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_294" class="comment-content text">
+			в среднем 0,35 В разве это много? Зачем диодом отключать прибор? Для чего у тебя стоит повышающий преобразователь с выводом EN, который не используется.<br/>
+<br/>
+Я бы поставил LTC4415 или LTC2952.
+		</div>
+
+        <div id="info_edit_294" class="info_edit"  style="display: none;">
+                    </div>
+
+				
+</section> 
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_295">
+		
+		
+
+<section id="comment_id_295" class="comment
+														
+														">
+			<a name="comment295"></a>
+		
+		
+		<a href="http://tqfp.org/profile/bsvi/"><img src="http://www.gravatar.com/avatar/e31d9aabdbf8bd9001b0f74937f09d4c.png?size=48" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+				<span class="comment-topic-author" title="Автор топика">автор</span>				<a href="http://tqfp.org/profile/bsvi/">bsvi</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment295" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2013-01-20T03:04:47+04:00">20 января 2013, 03:04</time>
+				</a>
+			</li>
+			
+							<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(295,294); return false;" title="Ответ на">↑</a></li>
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_295" class="vote 
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(295,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_295">0</span>
+					<div class="vote-up" onclick="return ls.vote.vote(295,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_295" class="comment-content text">
+			0.35 — это 16% от емкости батарей — не мало. Тем-более, поставить транзистор не сложнее диода.<br/>
+<br/>
+С enable тоже не выйдет: напряжение питания контроллера 3.3в, чтобы включить преобразователь на enable нужно подать 90% от питающего напряжения (при питании от USB это — 5в), 90% от 5 — это 4.5, контроллер просто не сможет работать в качестве «триггера». Можно конечно транзистор поставить для сдвига уровней, но это будет не проще, чем то, что сейчас.<br/>
+<br/>
+LTC4415 или LTC2952 по 6$ — это очень жирно в качестве альтернативы копеечному транзистору.
+		</div>
+
+        <div id="info_edit_295" class="info_edit" >
+                                    Комментарий отредактирован <b>2013-01-20 03:06:50</b> пользователем <b>bsvi</b>
+	            </div>
+
+				
+</section> 
+									
+				
+		    	
+			</div></div></div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_330">
+		
+		
+
+<section id="comment_id_330" class="comment
+														
+														">
+			<a name="comment330"></a>
+		
+		
+		<a href="http://tqfp.org/profile/AlexG/"><img src="http://www.gravatar.com/avatar/61c524cc0b2bd49707af75136a56cd96.png?size=48" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+								<a href="http://tqfp.org/profile/AlexG/">AlexG</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment330" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2013-01-24T11:16:20+04:00">24 января 2013, 11:16</time>
+				</a>
+			</li>
+			
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_330" class="vote 
+																																					vote-count-positive
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(330,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_330">+1</span>
+					<div class="vote-up" onclick="return ls.vote.vote(330,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_330" class="comment-content text">
+			Пробую улучшить схему переключения с с основного питания на батарею в старой разработке. Идеальный диод возможно был бы подходящим вариантом, но я не полностью понимаю как он работает: Допустим у нас есть батарея подключенная через один P-канальный MOSFET (выключать питание не нужно), которая питает схему напряжением 3,6В, напряжение затвор-исток 3,6В, транзистор открыт, все хорошо. Затем мы подключаем основной источник питания который подает в схему питание 5В, напряжение затвор-исток только увеличилось, транзистор по-прежнему открыт, только ток через него течет в обратном направлении, т.е. «диод» не закрывается. Для проверки собрал тестовую схемку на IRLML5203 (&quot;-&quot; источника на затвор и сток, &quot;+&quot; на исток через миллиамперметр) и обнаружил что ток действительно отлично течет в обратном направлении при условии что напряжение на истоке достаточно для открывания транзистора (&gt;1,7В). Как на самом деле должен работать идеальный диод?
+		</div>
+
+        <div id="info_edit_330" class="info_edit"  style="display: none;">
+                    </div>
+
+				
+</section> 
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_331">
+		
+		
+
+<section id="comment_id_331" class="comment
+														
+														">
+			<a name="comment331"></a>
+		
+		
+		<a href="http://tqfp.org/profile/bsvi/"><img src="http://www.gravatar.com/avatar/e31d9aabdbf8bd9001b0f74937f09d4c.png?size=48" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+				<span class="comment-topic-author" title="Автор топика">автор</span>				<a href="http://tqfp.org/profile/bsvi/">bsvi</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment331" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2013-01-24T12:03:04+04:00">24 января 2013, 12:03</time>
+				</a>
+			</li>
+			
+							<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(331,330); return false;" title="Ответ на">↑</a></li>
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_331" class="vote 
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(331,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_331">0</span>
+					<div class="vote-up" onclick="return ls.vote.vote(331,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_331" class="comment-content text">
+			А ведь ты прав, спасибо! Поправил статью обратно до схемы с ключом. В ней напряжение с USB закрывает ключ и не дает току течь обратно.
+		</div>
+
+        <div id="info_edit_331" class="info_edit" >
+                                    Комментарий отредактирован <b>2013-01-24 13:01:47</b> пользователем <b>bsvi</b>
+	            </div>
+
+				
+</section> 
+									
+				
+					</div>
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_332">
+		
+		
+
+<section id="comment_id_332" class="comment
+														
+														">
+			<a name="comment332"></a>
+		
+		
+		<a href="http://tqfp.org/profile/bsvi/"><img src="http://www.gravatar.com/avatar/e31d9aabdbf8bd9001b0f74937f09d4c.png?size=48" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+				<span class="comment-topic-author" title="Автор топика">автор</span>				<a href="http://tqfp.org/profile/bsvi/">bsvi</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment332" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2013-01-24T13:03:04+04:00">24 января 2013, 13:03</time>
+				</a>
+			</li>
+			
+							<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(332,330); return false;" title="Ответ на">↑</a></li>
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_332" class="vote 
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(332,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_332">0</span>
+					<div class="vote-up" onclick="return ls.vote.vote(332,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_332" class="comment-content text">
+			Вот, написал небольшую заметку о <a href="http://tqfp.org/circuit-design/idealnyy-diod-na-mosfet.html" rel="nofollow">идеальных диодах</a>.
+		</div>
+
+        <div id="info_edit_332" class="info_edit" >
+                                    Комментарий отредактирован <b>2013-01-24 13:06:55</b> пользователем <b>bsvi</b>
+	            </div>
+
+				
+</section> 
+									
+				
+		    	
+			</div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_342">
+		
+		
+
+<section id="comment_id_342" class="comment
+														
+														">
+			<a name="comment342"></a>
+		
+		
+		<a href="http://tqfp.org/profile/RockKickstart/"><img src="http://www.gravatar.com/avatar/f71e97891b3e7950c4d412b453d0525b.png?size=48" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+								<a href="http://tqfp.org/profile/RockKickstart/">RockKickstart</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment342" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2013-01-25T00:11:51+04:00">25 января 2013, 00:11</time>
+				</a>
+			</li>
+			
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_342" class="vote 
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(342,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_342">0</span>
+					<div class="vote-up" onclick="return ls.vote.vote(342,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_342" class="comment-content text">
+			Спасибо за статью. Эту схему включения успешно используют в ноутбуках. <a href="http://tqfp.org/uploads/images/00/00/91/2013/01/25/39fd57.png" class="photoset-image" title="Участок схемы питания ноутбука" rel="nofollow"><img src="http://tqfp.org/uploads/images/00/00/91/2013/01/25/8e9f0c.png" title="Участок схемы питания ноутбука" alt="Участок схемы питания ноутбука"/></a>Например<br/>
+На схеме на AD_DOCK_IN подается напряжение от внешнего зарядного устройства для силовых цепей ноутбука(дежурные цепи подключены отдельно)
+		</div>
+
+        <div id="info_edit_342" class="info_edit" >
+                                    Комментарий отредактирован <b>2013-01-25 00:18:52</b> пользователем <b>RockKickstart</b>
+	            </div>
+
+				
+</section> 
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_343">
+		
+		
+
+<section id="comment_id_343" class="comment
+														
+														">
+			<a name="comment343"></a>
+		
+		
+		<a href="http://tqfp.org/profile/bsvi/"><img src="http://www.gravatar.com/avatar/e31d9aabdbf8bd9001b0f74937f09d4c.png?size=48" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+				<span class="comment-topic-author" title="Автор топика">автор</span>				<a href="http://tqfp.org/profile/bsvi/">bsvi</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment343" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2013-01-25T00:32:09+04:00">25 января 2013, 00:32</time>
+				</a>
+			</li>
+			
+							<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(343,342); return false;" title="Ответ на">↑</a></li>
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_343" class="vote 
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(343,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_343">0</span>
+					<div class="vote-up" onclick="return ls.vote.vote(343,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_343" class="comment-content text">
+			Ха, действительно похоже. Поотрывать бы что-то тем, кто схемы так рисует…
+		</div>
+
+        <div id="info_edit_343" class="info_edit"  style="display: none;">
+                    </div>
+
+				
+</section> 
+									
+				
+		    	
+			</div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_1401">
+		
+		
+
+<section id="comment_id_1401" class="comment
+														
+														">
+			<a name="comment1401"></a>
+		
+		
+		<a href="http://tqfp.org/profile/Dominikanez/"><img src="http://www.gravatar.com/avatar/9cb773e55842312699f0dd20417127fd.png?size=48" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+								<a href="http://tqfp.org/profile/Dominikanez/">Dominikanez</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment1401" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2013-08-01T07:52:49+04:00">1 августа 2013, 07:52</time>
+				</a>
+			</li>
+			
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_1401" class="vote 
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(1401,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_1401">0</span>
+					<div class="vote-up" onclick="return ls.vote.vote(1401,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_1401" class="comment-content text">
+			Специально зарегистрировался, чтобы спросить:<br/>
+ — что такое i3 и где на него целиком глянуть, ибо:<br/>
+ — непонятно что за ключи Q4 и Q5 и диод D6 с питанием от USB и напряжение VSupply, на схеме в посте всё совершенно другое; винегрет какой-то.
+		</div>
+
+        <div id="info_edit_1401" class="info_edit"  style="display: none;">
+                    </div>
+
+				
+</section> 
+									
+				
+					</div>
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_3822">
+		
+		
+
+<section id="comment_id_3822" class="comment
+														
+														">
+			<a name="comment3822"></a>
+		
+		
+		<a href="http://tqfp.org/profile/cg_shura/"><img src="http://www.gravatar.com/avatar/4e2b1716c51b9ef85241e30ade7c3ffe.png?size=48" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+								<a href="http://tqfp.org/profile/cg_shura/">cg_shura</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment3822" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2014-06-10T22:18:49+04:00">10 июня 2014, 22:18</time>
+				</a>
+			</li>
+			
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_3822" class="vote 
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(3822,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_3822">0</span>
+					<div class="vote-up" onclick="return ls.vote.vote(3822,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_3822" class="comment-content text">
+			А такой вариант какие имеет недостатки?<br/>
+<br/>
+<img src="http://tqfp.org/uploads/images/00/05/29/2014/06/10/cf16f2.png"/><br/>
+<br/>
+Задача — пропускать на выход или 5V_POWER, или USB_POWER
+		</div>
+
+        <div id="info_edit_3822" class="info_edit" >
+                                    Комментарий отредактирован <b>2014-06-10 22:20:33</b> пользователем <b>cg_shura</b>
+	            </div>
+
+				
+</section> 
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_3823">
+		
+		
+
+<section id="comment_id_3823" class="comment
+														
+														">
+			<a name="comment3823"></a>
+		
+		
+		<a href="http://tqfp.org/profile/bsvi/"><img src="http://www.gravatar.com/avatar/e31d9aabdbf8bd9001b0f74937f09d4c.png?size=48" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+				<span class="comment-topic-author" title="Автор топика">автор</span>				<a href="http://tqfp.org/profile/bsvi/">bsvi</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment3823" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2014-06-11T00:35:07+04:00">11 июня 2014, 00:35</time>
+				</a>
+			</li>
+			
+							<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(3823,3822); return false;" title="Ответ на">↑</a></li>
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_3823" class="vote 
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(3823,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_3823">0</span>
+					<div class="vote-up" onclick="return ls.vote.vote(3823,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_3823" class="comment-content text">
+			Главный недостаток — падение на диоде.
+		</div>
+
+        <div id="info_edit_3823" class="info_edit"  style="display: none;">
+                    </div>
+
+				
+</section> 
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_4395">
+		
+		
+
+<section id="comment_id_4395" class="comment
+														
+														">
+			<a name="comment4395"></a>
+		
+		
+		<a href="http://tqfp.org/profile/cg_shura/"><img src="http://www.gravatar.com/avatar/4e2b1716c51b9ef85241e30ade7c3ffe.png?size=48" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+								<a href="http://tqfp.org/profile/cg_shura/">cg_shura</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment4395" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2014-12-11T21:35:03+03:00">11 декабря 2014, 21:35</time>
+				</a>
+			</li>
+			
+							<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(4395,3823); return false;" title="Ответ на">↑</a></li>
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_4395" class="vote 
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(4395,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_4395">0</span>
+					<div class="vote-up" onclick="return ls.vote.vote(4395,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_4395" class="comment-content text">
+			Так ведь в приведенной схеме с двумя мосфетами тоже USB через диод идет.
+		</div>
+
+        <div id="info_edit_4395" class="info_edit"  style="display: none;">
+                    </div>
+
+				
+</section> 
+									
+				
+		    	
+			</div></div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_3848">
+		
+		
+
+<section id="comment_id_3848" class="comment
+														
+														">
+			<a name="comment3848"></a>
+		
+		
+		<a href="http://tqfp.org/profile/HIGHLNDER/"><img src="http://www.gravatar.com/avatar/ffeac5a7e3eededa6005f4a7f9682fdf.png?size=48" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+								<a href="http://tqfp.org/profile/HIGHLNDER/">HIGHLNDER</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment3848" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2014-06-24T23:21:54+04:00">24 июня 2014, 23:21</time>
+				</a>
+			</li>
+			
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_3848" class="vote 
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(3848,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_3848">0</span>
+					<div class="vote-up" onclick="return ls.vote.vote(3848,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_3848" class="comment-content text">
+			а мосфеты еще ставят не в разрыв питания, а в разрыв земли.
+		</div>
+
+        <div id="info_edit_3848" class="info_edit"  style="display: none;">
+                    </div>
+
+				
+</section> 
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_3849">
+		
+		
+
+<section id="comment_id_3849" class="comment
+														
+														">
+			<a name="comment3849"></a>
+		
+		
+		<a href="http://tqfp.org/profile/Koyodza/"><img src="http://tqfp.org/uploads/images/00/03/03/2016/01/07/avatar_48x48.jpg?205118" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+								<a href="http://tqfp.org/profile/Koyodza/">Koyodza</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment3849" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2014-06-26T01:09:42+04:00">26 июня 2014, 01:09</time>
+				</a>
+			</li>
+			
+							<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(3849,3848); return false;" title="Ответ на">↑</a></li>
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_3849" class="vote 
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(3849,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_3849">0</span>
+					<div class="vote-up" onclick="return ls.vote.vote(3849,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_3849" class="comment-content text">
+			Ставят, но это не в любой схеме допустимо.
+		</div>
+
+        <div id="info_edit_3849" class="info_edit"  style="display: none;">
+                    </div>
+
+				
+</section> 
+									
+				
+		    	
+			</div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_4043">
+		
+		
+
+<section id="comment_id_4043" class="comment
+														
+														">
+			<a name="comment4043"></a>
+		
+		
+		<a href="http://tqfp.org/profile/Devilar/"><img src="http://www.gravatar.com/avatar/e3ed1f37b7450ab1a67411c94166aed1.png?size=48" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+								<a href="http://tqfp.org/profile/Devilar/">Devilar</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment4043" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2014-08-05T09:46:50+04:00">5 августа 2014, 09:46</time>
+				</a>
+			</li>
+			
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_4043" class="vote 
+																																					vote-count-positive
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(4043,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_4043">+2</span>
+					<div class="vote-up" onclick="return ls.vote.vote(4043,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_4043" class="comment-content text">
+			Специально зарегистрировался, чтобы сказать, что вторая схема из приведенных в самом начале поста будет пускать ток в батарейку, если напряжение батарейки меньше напряжения с УСБ, на величину достаточную для открытия правого транзистора плюс падение на диоде в питании усб. Изначально на затворе правого транизстора напряжение батарейки, а на его стоке питание усб минус падение на диоде. Если этой разницы будет достаточно то транзистор откроется и к батарейке будет приложено напряжение УСБ минус падение на диоде минус падение на паразитном диоде. Понятно, что приложение большего напряжения к батарейке будет в итоге подзакрывать правый транзистор, но в итоге установится какое-то равновесное состояние, при этом батарейка будет заряжаться от УСБ.<br/>
+<br/>
+В схеме i3 указанный недостаток «перевернут» в сторону батарейки. Транзисторы подперты питанием УСБ, но в случае если питание батарейки выше чем питание усб. То преобразователь будет питаться от батарейки, питание усб как можно увидеть защищено диодом D1.<br/>
+<br/>
+А вот приведенная схема для ноутбука самая правильная на мой взгляд.
+		</div>
+
+        <div id="info_edit_4043" class="info_edit"  style="display: none;">
+                    </div>
+
+				
+</section> 
+									
+				
+					</div>
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_4402">
+		
+		
+
+<section id="comment_id_4402" class="comment
+														
+														">
+			<a name="comment4402"></a>
+		
+		
+		<a href="http://tqfp.org/profile/radiolok/"><img src="http://tqfp.org/uploads/images/00/00/57/2012/12/13/avatar_48x48.jpg?004041" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+								<a href="http://tqfp.org/profile/radiolok/">radiolok</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment4402" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2014-12-15T23:36:18+03:00">15 декабря 2014, 23:36</time>
+				</a>
+			</li>
+			
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_4402" class="vote 
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(4402,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_4402">0</span>
+					<div class="vote-up" onclick="return ls.vote.vote(4402,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_4402" class="comment-content text">
+			Какие еще феты можно поставить дабы схема работала от двух аккумуляторов АА?(т.е. от 2В).<br/>
+<br/>
+С оказавшимися под рукой IRLML5103 ключи полностью открываются лишь от 4В(а преобразователь сгорит при 5В...). У них хоть Gate threshold и стоит -1В, от 2В на каждом по вольту просаживается:)
+		</div>
+
+        <div id="info_edit_4402" class="info_edit" >
+                                    Комментарий отредактирован <b>2014-12-15 23:45:29</b> пользователем <b>radiolok</b>
+	            </div>
+
+				
+</section> 
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_4403">
+		
+		
+
+<section id="comment_id_4403" class="comment
+														
+														">
+			<a name="comment4403"></a>
+		
+		
+		<a href="http://tqfp.org/profile/bsvi/"><img src="http://www.gravatar.com/avatar/e31d9aabdbf8bd9001b0f74937f09d4c.png?size=48" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+				<span class="comment-topic-author" title="Автор топика">автор</span>				<a href="http://tqfp.org/profile/bsvi/">bsvi</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment4403" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2014-12-16T00:14:46+03:00">16 декабря 2014, 00:14</time>
+				</a>
+			</li>
+			
+							<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(4403,4402); return false;" title="Ответ на">↑</a></li>
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_4403" class="vote 
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(4403,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_4403">0</span>
+					<div class="vote-up" onclick="return ls.vote.vote(4403,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_4403" class="comment-content text">
+			А какой ток? Скорее-всего, будет проще шоттки поставить.
+		</div>
+
+        <div id="info_edit_4403" class="info_edit"  style="display: none;">
+                    </div>
+
+				
+</section> 
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_4404">
+		
+		
+
+<section id="comment_id_4404" class="comment
+														
+														">
+			<a name="comment4404"></a>
+		
+		
+		<a href="http://tqfp.org/profile/radiolok/"><img src="http://tqfp.org/uploads/images/00/00/57/2012/12/13/avatar_48x48.jpg?004041" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+								<a href="http://tqfp.org/profile/radiolok/">radiolok</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment4404" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2014-12-16T01:26:55+03:00">16 декабря 2014, 01:26</time>
+				</a>
+			</li>
+			
+							<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(4404,4403); return false;" title="Ответ на">↑</a></li>
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_4404" class="vote 
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(4404,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_4404">0</span>
+					<div class="vote-up" onclick="return ls.vote.vote(4404,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_4404" class="comment-content text">
+			150мА в пике, средний 50мА. <br/>
+У меня на них реализован софт-триггерный ключ, так что феты надо и одной шоткой не отделаешься.<br/>
+<br/>
+Попробую 6402 найти или иже с ней в закромах… у них тресхолд в два раза меньше.
+		</div>
+
+        <div id="info_edit_4404" class="info_edit"  style="display: none;">
+                    </div>
+
+				
+</section> 
+									
+				
+		    	
+			</div></div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_4455">
+		
+		
+
+<section id="comment_id_4455" class="comment
+														
+														">
+			<a name="comment4455"></a>
+		
+		
+		<a href="http://tqfp.org/profile/cg_shura/"><img src="http://www.gravatar.com/avatar/4e2b1716c51b9ef85241e30ade7c3ffe.png?size=48" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+								<a href="http://tqfp.org/profile/cg_shura/">cg_shura</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment4455" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2015-01-14T19:17:59+03:00">14 января 2015, 19:17</time>
+				</a>
+			</li>
+			
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_4455" class="vote 
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(4455,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_4455">0</span>
+					<div class="vote-up" onclick="return ls.vote.vote(4455,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_4455" class="comment-content text">
+			Не пойму, как в такой схеме открываются полевики, ведь истоки обоих полевиков получается висят в воздухе, а для открытия надо приложить напряжение между затвором и истоком. На затвор подаем, а на исток как попадает?
+		</div>
+
+        <div id="info_edit_4455" class="info_edit"  style="display: none;">
+                    </div>
+
+				
+</section> 
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_4501">
+		
+		
+
+<section id="comment_id_4501" class="comment
+														
+														">
+			<a name="comment4501"></a>
+		
+		
+		<a href="http://tqfp.org/profile/EvilGremlin/"><img src="http://www.gravatar.com/avatar/6d0495b9543699e5ec851b5d7816c5fa.png?size=48" alt="avatar" class="comment-avatar" /></a>
+		
+		
+		<ul class="comment-info">
+			<li class="comment-author">
+								<a href="http://tqfp.org/profile/EvilGremlin/">EvilGremlin</a>
+			</li>
+			<li class="comment-date">
+				<a href="#comment4501" class="link-dotted" title="Ссылка на комментарий">
+					<time datetime="2015-02-28T20:48:57+03:00">28 февраля 2015, 20:48</time>
+				</a>
+			</li>
+			
+							<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(4501,4455); return false;" title="Ответ на">↑</a></li>
+						<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+			
+			
+									
+				<li id="vote_area_comment_4501" class="vote 
+																		    
+																		
+																		">
+					<div class="vote-down" onclick="return ls.vote.vote(4501,this,-1,'comment');"></div>
+					<span class="vote-count" id="vote_total_comment_4501">0</span>
+					<div class="vote-up" onclick="return ls.vote.vote(4501,this,1,'comment');"></div>
+				</li>
+						
+			
+					</ul>
+		
+		
+		<div id="comment_content_id_4501" class="comment-content text">
+			А теперь возьми какой-нибудь полевик не шибко мощный, и ткни прозвонкой сток-затвор, а потом исток-сток, а потом то же самое в обратной полярности. Всё прекрасно откроется и закроется. На то он и полевик, что открывается полем, напряжение вторично.
+		</div>
+
+        <div id="info_edit_4501" class="info_edit"  style="display: none;">
+                    </div>
+
+				
+</section> 
+							</div></div>    
+			</div>				
+	
+	
+
+
+    
+
+
+
+
+
+			Только зарегистрированные и авторизованные пользователи могут оставлять комментарии.
+		
+
+
+
+
+
+			
+		</div> <!-- /content -->
+
+		
+					<aside id="sidebar" >
+	
+
+											<section class="block block-type-blog">
+		<header class="block-header">
+			<h3><a href="http://tqfp.org/blog/circuit-design/">Схемотехника</a></h3>
+		</header>
+
+		<div class="block-content">
+			<span id="blog_user_count_90">35</span> читателей<br />
+			4 топика
+			
+			<br />
+			<br />
+			
+						<a href="http://tqfp.org/rss/blog/circuit-design/" class="rss">RSS</a>
+		</div>
+	</section>
+	
+								<section class="block block-type-stream">
+	<header class="block-header">
+		<h3><a href="http://tqfp.org/comments/" title="Весь эфир">Последние обновления</a></h3>
+		<div class="block-update js-block-stream-update"></div>
+	</header>
+
+	
+	
+	<div class="block-content">
+		<ul class="nav nav-pills js-block-stream-nav" >
+			<li class="active js-block-stream-item" data-type="comment"><a href="#">Комментарии</a></li>
+			<li class="js-block-stream-item" data-type="topic"><a href="#">Публикации</a></li>
+			
+		</ul>
+		
+		<ul class="nav nav-pills js-block-stream-dropdown" style="display: none;">
+			<li class="dropdown active js-block-stream-dropdown-trigger"><a href="#">Комментарии</a> <i class="arrow"></i>
+				<ul class="dropdown-menu js-block-stream-dropdown-items">
+					<li class="active js-block-stream-item" data-type="comment"><a href="#">Комментарии</a></li>
+					<li class="js-block-stream-item" data-type="topic"><a href="#">Публикации</a></li>
+					
+				</ul>
+			</li>
+		</ul>
+		
+		
+		<div class="js-block-stream-content">
+			<ul class="item-list">
+									
+		<li class="js-title-comment" title="Предварительно шкурить заготовки хорошо кухонными губками с абразивной стороной.">
+			<a href="http://tqfp.org/profile/AleksRu78/"><img src="http://www.gravatar.com/avatar/e6122601d55643bc30afa6bf15153500.png?size=48" alt="avatar" class="avatar" /></a>
+			
+			<a href="http://tqfp.org/profile/AleksRu78/" class="author">AleksRu78</a> &rarr;
+			<a href="http://tqfp.org/blog/technologies/" class="blog-name">Технологии</a> &rarr;
+			<a href="http://tqfp.org/technologies/videourok-po-suhomu-plenochnomu-fotorezistu.html#comment5095" class="topic">Видеоурок по сухому пленочному фоторезисту</a>
+			
+			<p>
+				<time datetime="2016-02-08T13:53:37+03:00">8 февраля 2016, 13:53</time> |
+				16 комментариев
+			</p>
+		</li>
+									
+		<li class="js-title-comment" title="Спасибо за разъяснение, теперь понятно.">
+			<a href="http://tqfp.org/profile/barroweer/"><img src="http://www.gravatar.com/avatar/c7f2960d493bae36fc8fa26eaa715626.png?size=48" alt="avatar" class="avatar" /></a>
+			
+			<a href="http://tqfp.org/profile/barroweer/" class="author">barroweer</a> &rarr;
+			<a href="http://tqfp.org/blog/linux/" class="blog-name">Embedded linux</a> &rarr;
+			<a href="http://tqfp.org/linux/cape-dlya-beaglebone-na-baze-5-tft-zhki.html#comment5094" class="topic">Cape для Beaglebone на базе 5&#039;-TFT-ЖКИ</a>
+			
+			<p>
+				<time datetime="2016-01-30T20:30:50+03:00">30 января 2016, 20:30</time> |
+				3 комментария
+			</p>
+		</li>
+									
+		<li class="js-title-comment" title="Ну собственно мой вопрос был к  VRP , потому как насколько я понял автором «апгрейда» он и...">
+			<a href="http://tqfp.org/profile/james77/"><img src="http://www.gravatar.com/avatar/9613d15cfd956d66fa6e6481c4cfb6c8.png?size=48" alt="avatar" class="avatar" /></a>
+			
+			<a href="http://tqfp.org/profile/james77/" class="author">james77</a> &rarr;
+			<a href="http://tqfp.org/blog/equipment/" class="blog-name">Оборудование</a> &rarr;
+			<a href="http://tqfp.org/equipment/korad-ka3005d.html#comment5091" class="topic">Korad KA3005D</a>
+			
+			<p>
+				<time datetime="2016-01-28T11:47:06+03:00">28 января 2016, 11:47</time> |
+				25 комментариев
+			</p>
+		</li>
+									
+		<li class="js-title-comment" title="В научном журнале никто бы такую «орфографию» даже исправлять не стал: там статьи возвращают на...">
+			<a href="http://tqfp.org/profile/unidk/"><img src="http://tqfp.org/uploads/images/00/00/03/2012/11/17/avatar_48x48.jpg?184903" alt="avatar" class="avatar" /></a>
+			
+			<a href="http://tqfp.org/profile/unidk/" class="author">unidk</a> &rarr;
+			<a href="http://tqfp.org/profile/kvital/created/topics/" class="blog-name">Блог им. kvital</a> &rarr;
+			<a href="http://tqfp.org/kvital/registriruem-myuony-doma.html#comment5090" class="topic">Регистрируем мюоны дома!</a>
+			
+			<p>
+				<time datetime="2016-01-17T18:28:14+03:00">17 января 2016, 18:28</time> |
+				14 комментариев
+			</p>
+		</li>
+									
+		<li class="js-title-comment" title="Вот нашел: 2SD1047">
+			<a href="http://tqfp.org/profile/Henkol/"><img src="http://www.gravatar.com/avatar/22d634b5977146189dc85e68adbe4161.png?size=48" alt="avatar" class="avatar" /></a>
+			
+			<a href="http://tqfp.org/profile/Henkol/" class="author">Henkol</a> &rarr;
+			<a href="http://tqfp.org/blog/equipment/" class="blog-name">Оборудование</a> &rarr;
+			<a href="http://tqfp.org/equipment/regulyator-oborotov-dlya-korad-ka3005d.html#comment5083" class="topic">Регулятор оборотов для KORAD KA3005D</a>
+			
+			<p>
+				<time datetime="2016-01-12T11:55:47+03:00">12 января 2016, 11:55</time> |
+				14 комментариев
+			</p>
+		</li>
+									
+		<li class="js-title-comment" title="Спасибо! Это как-раз та самая вещь, которой всегда не хватает)))">
+			<a href="http://tqfp.org/profile/Hypnotriod/"><img src="http://tqfp.org/uploads/images/00/08/58/2015/10/20/avatar_48x48.jpg?213810" alt="avatar" class="avatar" /></a>
+			
+			<a href="http://tqfp.org/profile/Hypnotriod/" class="author">Hypnotriod</a> &rarr;
+			<a href="http://tqfp.org/profile/Hypnotriod/created/topics/" class="blog-name">Блог им. Hypnotriod</a> &rarr;
+			<a href="http://tqfp.org/Hypnotriod/the-beatsqueezer-stm32-sampler.html#comment5057" class="topic">The Beatsqueezer (STM32 sampler)</a>
+			
+			<p>
+				<time datetime="2016-01-04T19:52:29+03:00">4 января 2016, 19:52</time> |
+				21 комментарий
+			</p>
+		</li>
+									
+		<li class="js-title-comment" title="Уважаемый VRP! А Вы могли бы измерить габаритные размеры платы контроллера? На сайтах китайских...">
+			<a href="http://tqfp.org/profile/james77/"><img src="http://www.gravatar.com/avatar/9613d15cfd956d66fa6e6481c4cfb6c8.png?size=48" alt="avatar" class="avatar" /></a>
+			
+			<a href="http://tqfp.org/profile/james77/" class="author">james77</a> &rarr;
+			<a href="http://tqfp.org/blog/equipment/" class="blog-name">Оборудование</a> &rarr;
+			<a href="http://tqfp.org/equipment/obzor-payalnika-fm-2028-na-baze-zhal-hakko-raspakovka.html#comment5042" class="topic">Обзор паяльника FM-2028 на базе жал Hakko: распаковка</a>
+			
+			<p>
+				<time datetime="2015-12-23T17:03:42+03:00">23 декабря 2015, 17:03</time> |
+				5 комментариев
+			</p>
+		</li>
+									
+		<li class="js-title-comment" title="Быстрий счетчик (не спектрометр) ядерного излучения. Форма сигнала давно известна. Нужно только...">
+			<a href="http://tqfp.org/profile/kvital/"><img src="http://tqfp.org/uploads/images/00/06/54/2015/10/17/avatar_48x48.jpg?151101" alt="avatar" class="avatar" /></a>
+			
+			<a href="http://tqfp.org/profile/kvital/" class="author">kvital</a> &rarr;
+			<a href="http://tqfp.org/profile/kvital/created/topics/" class="blog-name">Блог им. kvital</a> &rarr;
+			<a href="http://tqfp.org/kvital/uchebnaya-platka-igrushka-na-max-ii.html#comment5041" class="topic">Учебная платка/игрушка на MAX II</a>
+			
+			<p>
+				<time datetime="2015-12-22T14:04:06+03:00">22 декабря 2015, 14:04</time> |
+				13 комментариев
+			</p>
+		</li>
+									
+		<li class="js-title-comment" title="Абсолютно с этим согласен. Но еще немного добавлю: статью на tqfp.org прочитает только довольно...">
+			<a href="http://tqfp.org/profile/unidk/"><img src="http://tqfp.org/uploads/images/00/00/03/2012/11/17/avatar_48x48.jpg?184903" alt="avatar" class="avatar" /></a>
+			
+			<a href="http://tqfp.org/profile/unidk/" class="author">unidk</a> &rarr;
+			<a href="http://tqfp.org/blog/linux/" class="blog-name">Embedded linux</a> &rarr;
+			<a href="http://tqfp.org/linux/beaglebone-black-pervoe-znakomstvo-video-versiya.html#comment5039" class="topic">Beaglebone Black : первое знакомство (видео-версия)</a>
+			
+			<p>
+				<time datetime="2015-12-21T21:17:22+03:00">21 декабря 2015, 21:17</time> |
+				11 комментариев
+			</p>
+		</li>
+									
+		<li class="js-title-comment" title="RGB не вариант. лучше повесить на 2 канала норм светодиодов ( типа Nichia) с разной цветовой...">
+			<a href="http://tqfp.org/profile/shdw/"><img src="http://www.gravatar.com/avatar/0ca38be22e882da69c4b99c1394281ce.png?size=48" alt="avatar" class="avatar" /></a>
+			
+			<a href="http://tqfp.org/profile/shdw/" class="author">shdw</a> &rarr;
+			<a href="http://tqfp.org/blog/equipment/" class="blog-name">Оборудование</a> &rarr;
+			<a href="http://tqfp.org/equipment/svetodiodnaya-podsvetka-dlya-mikroskopa.html#comment5017" class="topic">Светодиодная подсветка для микроскопа</a>
+			
+			<p>
+				<time datetime="2015-12-13T12:30:38+03:00">13 декабря 2015, 12:30</time> |
+				3 комментария
+			</p>
+		</li>
+	</ul>
+
+
+<footer>
+	<a href="http://tqfp.org/comments/">Весь эфир</a> | <a href="http://tqfp.org/rss/allcomments/">RSS</a>
+</footer>
+		</div>
+	</div>
+</section>
+
+
+										<div class="block" id="block_blogs">
+	<header class="block-header">
+		<h3>Блоги</h3>
+		<div class="block-update js-block-blogs-update"></div>
+	</header>
+	
+	
+	<div class="block-content">
+		<ul class="nav nav-pills js-block-blogs-nav">
+			<li class="active js-block-blogs-item" data-type="top"><a href="#">Топ</a></li>
+					</ul>
+		
+		
+		<div class="js-block-blogs-content">
+			<ul class="item-list">
+			<li>
+			<a href="http://tqfp.org/blog/altium-designer/"><img src="http://tqfp.org/uploads/images/00/00/01/2013/01/23/avatar_blog_altium-designer_48x48.png" alt="avatar" class="avatar" /></a>
+			
+						<a href="http://tqfp.org/blog/altium-designer/">Altium Designer</a>
+			
+			<p>Рейтинг: <strong>19.73</strong></p>
+		</li>
+			<li>
+			<a href="http://tqfp.org/blog/utc/"><img src="http://tqfp.org/uploads/images/00/00/01/2012/11/26/avatar_blog_utc_48x48.png" alt="avatar" class="avatar" /></a>
+			
+						<a href="http://tqfp.org/blog/utc/">Блог проекта UTC</a>
+			
+			<p>Рейтинг: <strong>9.04</strong></p>
+		</li>
+			<li>
+			<a href="http://tqfp.org/blog/parts/"><img src="http://tqfp.org/uploads/images/00/00/01/2012/12/19/avatar_blog_parts_48x48.png" alt="avatar" class="avatar" /></a>
+			
+						<a href="http://tqfp.org/blog/parts/">Компоненты</a>
+			
+			<p>Рейтинг: <strong>8.51</strong></p>
+		</li>
+			<li>
+			<a href="http://tqfp.org/blog/rln_electro/"><img src="http://tqfp.org/uploads/images/00/00/57/2013/01/07/avatar_blog_rln_electro_48x48.jpg" alt="avatar" class="avatar" /></a>
+			
+						<a href="http://tqfp.org/blog/rln_electro/">Блог проекта RLN Electro Ethernet</a>
+			
+			<p>Рейтинг: <strong>6.88</strong></p>
+		</li>
+			<li>
+			<a href="http://tqfp.org/blog/simple-tesla/"><img src="http://tqfp.org/templates/skin/bsvi/images/avatar_blog_48x48.png" alt="avatar" class="avatar" /></a>
+			
+						<a href="http://tqfp.org/blog/simple-tesla/">SimpleTesla</a>
+			
+			<p>Рейтинг: <strong>4.55</strong></p>
+		</li>
+	</ul>				
+		</div>
+
+		
+		<footer>
+			<a href="http://tqfp.org/blogs/">Все блоги</a>
+		</footer>
+	</div>
+</div>
+
+					
+</aside>
+			</div> <!-- /wrapper -->
+
+	
+	<footer id="footer">
+		<div class="ads"></div>
+
+		<div class="copyright">
+			&copy; tqfp.org, powered by <a href="http://livestreetcms.org" rel="nofollow">LiveStreet CMS</a>
+		</div>
+
+		
+	</footer>
+
+</div> <!-- /container -->
+
+<aside class="toolbar">
+	
+
+									
+
+			
+</aside>
+
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36498814-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
