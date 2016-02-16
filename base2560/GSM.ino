@@ -17,11 +17,11 @@ void GSM_init() {
   //delay(100);
   gsmSerial.println("AT+CMIC=0,15"); //mic amp
   delay(200);
-  gsmSerial.println("AT+ECHO=0,0,0,0,0");  
+  gsmSerial.println("AT+ECHO=0,0,0,0,0");
   delay(200);
-  gsmSerial.println("AT+SIDET=0,0");  
+  gsmSerial.println("AT+SIDET=0,0");
   delay(200);
-  gsmSerial.println("AT+SVR=17");  
+  gsmSerial.println("AT+SVR=17");
   delay(200);
 }
 
@@ -47,16 +47,34 @@ void GSM_reset() {
 }
 
 bool GSM_paramIsAllowSms(uint8_t paramNum) {
+
+#ifdef DEBUG
+  debugSerial.println(paramNum, DEC);
+#endif
+
+
   if (BASE_ALARM_MODE == false) {
+#ifdef DEBUG
+    debugSerial.println("BASE_ALARM_MODE == false");
+#endif
     return false;
   }
   if (GSM_paramPrevSMSMillis[paramNum] == 1) {
+#ifdef DEBUG
+    debugSerial.println("== 1");
+#endif
     return true;
   }
   if ( (millis() - GSM_paramPrevSMSMillis[paramNum]) >  GSM_periodParamAllowSMSMillis[paramNum]) {
+#ifdef DEBUG
+    debugSerial.println("millis");
+#endif
     return true;
   }
   else {
+#ifdef DEBUG
+    debugSerial.println("def false");
+#endif
     return false;
   }
 }

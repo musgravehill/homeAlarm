@@ -152,6 +152,7 @@ uint8_t BASE_voltagePin = A0; //TODO ADC AREF set to inner 1.1V and make -R-R- v
 
 //menu
 int8_t MENU_state = 8;
+//TODO BTN click ++ -- 
 
 #define DEBUG 1;
 
