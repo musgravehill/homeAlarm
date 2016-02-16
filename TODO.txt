@@ -1,4 +1,5 @@
 BASE onInit write readme.txt file with how-to info on SD. 
+BASE GSM_ping, GSM_SMS, GSM_get_info_TFT  overWrite & overFlow each other
 
 BLM18HG471SN1D	
 BLM18HG601SN1D	
