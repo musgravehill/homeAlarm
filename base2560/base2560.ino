@@ -111,7 +111,7 @@ bool BASE_sensorIsOn[6] = {false}; //0 1..5
 int16_t BASE_sensorDecodedParams[6][7] = {0}; //encoded params; 0==null;  [sensorNum][paramNum]
 bool BASE_sensorParamsIsDanger[6][7] = {true}; //[sensorPipeNum][paramNum]
 bool BASE_sensorParamsIsAvailable[6][7] = {true}; //[sensorPipeNum][paramNum]
-bool BASE_ALARM_MODE = false;
+bool BASE_ALARM_MODE = true;
 
 //STATEMACHINE
 uint32_t STATEMACHINE_prevMillis_1s = 1;

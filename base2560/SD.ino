@@ -1,14 +1,8 @@
 void SD_init() {
   if (SD_card.begin(SD_CS, SPI_HALF_SPEED)) {
     SD_isEnable = true;
-    #ifdef DEBUG
-    debugSerial.print("SD INIT TRUE");
-#endif
   } else {
     SD_isEnable = false;
-#ifdef DEBUG
-    debugSerial.print("SD INIT FALSE");
-#endif
   }
 }
 

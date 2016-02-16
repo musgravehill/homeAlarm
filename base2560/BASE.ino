@@ -56,7 +56,7 @@ void BASE_processDataFromSensor() {
 
 void BASE_setAlarmMode() {
   if (NRF_messageFromSensor[7] > 0) { //param7 = button "alarm on\off" on sensor box
-    BASE_ALARM_MODE = (101 == NRF_messageFromSensor[7]) ? true : false;
+    //BASE_ALARM_MODE = (101 == NRF_messageFromSensor[7]) ? true : false;
 
     DateTime now = RTC3231.now();
     uint8_t hh =  now.hour();

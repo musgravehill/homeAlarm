@@ -58,7 +58,7 @@ bool PARAMS_isDangerParamValue(uint8_t paramNum, int16_t paramVal_decoded) {
       isDanger = (bool) (paramVal_decoded < 310) ; //100*V
       break;
     case 1: //T   0=null, -50..120 [+100]   temperature, C
-      isDanger = (bool)( (paramVal_decoded < 15) || (paramVal_decoded > 28) );
+      isDanger = (bool)( (paramVal_decoded < 15) || (paramVal_decoded > 24) );
       break;
     case 2: //H   0=null, 0..100   [+100]   humidity, %
       isDanger = (bool)( (paramVal_decoded < 5) || (paramVal_decoded > 60) );
