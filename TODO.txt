@@ -1,8 +1,4 @@
-Диод на базе от переполюсовки
-Предохранители на БП
-TVS на базе
-Дроссели на питание СИНФАЗНЫЙ(common mode) НАМОТАТЬ, ДИФФЕРЕНЦИАЛЬНЫЙ уже есть.
-Мик синфазный дроссель сделать? 
+BASE onInit write readme.txt file with how-to info on SD. 
 
 BLM18HG471SN1D	
 BLM18HG601SN1D	

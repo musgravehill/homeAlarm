@@ -42,7 +42,7 @@
   LOGS => log on SD only
   DNGR => log on SD & send SMS [danger]
 */
-// [A0, A1] [2,3 ENCODER] [10,11,12,13 SD_softSPI] [20,21 RTC_i2c] [38 TFT_LED] [36,40,42,44,46,48 TFT_softSPI] [49,50,51,52,53 NRF_hwSPI]
+// [A0, A1] [2,3,4 BTNs] [5 BUZZER] [6,7 LEDs] [10,11,12,13 SD_softSPI] [20,21 RTC_i2c] [38 TFT_LED] [36,40,42,44,46,48 TFT_softSPI] [49,50,51,52,53 NRF_hwSPI]
 
 #include <SPI.h>
 #include <nRF24L01.h>
@@ -53,9 +53,6 @@
 #include "Adafruit_GFX.h"
 #include "Adafruit_ILI9341.h"
 #include <avr/wdt.h>
-
-#include <Encoder.h>
-Encoder myEncoder(2, 3);
 
 #include <SdFat.h>
 #include <SdFatUtil.h>
@@ -154,7 +151,7 @@ bool BASE_buzzerIsNeed = true;
 uint8_t BASE_voltagePin = A0; //TODO ADC AREF set to inner 1.1V and make -R-R- voltage divider
 
 //menu
-int8_t MENU_state = 0;
+int8_t MENU_state = 8;
 
 #define DEBUG 1;
 
@@ -225,9 +222,7 @@ void setup() {
 void loop() {
   wr();
   NRF_listen();
-  wr();
-  ENCODER_read();
-  wr();
+  wr();    
   STATEMACHINE_loop();
   wr();
 }
