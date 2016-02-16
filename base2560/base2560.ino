@@ -132,7 +132,7 @@ uint32_t GSM_periodParamAllowSMSMillis[7] = {   //millis between SMS //unsigned 
   1 * 3600000, //motion detector, bool
   1 * 3600000 //gas CO, ADC value
 };
-uint32_t GSM_paramPrevSMSMillis[7] = {1};  //BUG: powerDown->powerUp->this vars will be skip to 0 => SMS_send is allow again
+uint32_t GSM_paramPrevSMSMillis[7] = {1,1,1,1,1,1,1};  //BUG: powerDown->powerUp->this vars will be skip to 0 => SMS_send is allow again
 String GSM_answerCLIP = "";
 String GSM_answerCSQ = "";
 String GSM_answerCPAS = "";

@@ -1,12 +1,12 @@
 String PARAMS_getVerbalParamName(uint8_t paramNum) {
   if (paramNum == 0) {
-    return F("Batt");
+    return F("Battery");
   }
   if (paramNum == 1) {
-    return F("Temp-ra");
+    return F("Temperatura");
   }
   if (paramNum == 2) {
-    return F("Vlaga");
+    return F("Vlajnost");
   }
   if (paramNum == 3) {
     return F("Proteklo");
@@ -15,7 +15,7 @@ String PARAMS_getVerbalParamName(uint8_t paramNum) {
     return F("Gaz");
   }
   if (paramNum == 5) {
-    return F("Dvigaet");
+    return F("Dvigenie");
   }
   if (paramNum == 6) {
     return F("Ugar");

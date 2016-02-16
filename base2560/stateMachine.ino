@@ -42,8 +42,6 @@ void STATEMACHINE_17s() {
   wr();
   GSM_queueLoopSMS_stateMachine_processing();//SMS are added to queue. Processing 1 sms at one time
   wr();
-  GSM_pingCheckTimeAnswer();
-  wr();
   GSM_ping();
   wr();
   TFT_renderMenuState();
@@ -54,7 +52,8 @@ void STATEMACHINE_61s() {
   wr();
   BASE_checkSensorsFault();
   wr();
-
+  GSM_pingCheckTimeAnswer();
+  wr();
 }
 
 void STATEMACHINE_103s() {
