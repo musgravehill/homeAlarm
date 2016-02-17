@@ -1,5 +1,38 @@
+void ALARM_processSensorsParams() {
+
+  BASE_buzzer_isNeed = false;
+  BASE_siren_isNeed = false;
+
+  for (uint8_t sensorNum = 1; sensorNum < 6; sensorNum++) { //SENSORS PIPES 1..5!
+    for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
+
+      if (BASE_sensorParamsIsDanger[sensorNum][paramNum]) {
+        if (BASE_ALARM_MOTION_MODE) { //ALRM MODE && param_M_5
+          //SMS
+          if (GSM_paramIsAllowSms(paramNum)) {
+            String SMS_danger =  "#" + String(sensorNum, DEC) + " ";
+            SMS_danger +=  PARAMS_getVerbalParamName(paramNum) + "=";
+            SMS_danger +=  String(BASE_sensorDecodedParams[sensorNum][paramNum], DEC) + " ";
+            GSM_addToQueueSMS_forAllPhones(SMS_danger);
+          }
+          //siren
+          if (paramNum == 5) {
+            BASE_siren_isNeed = true;
+          }
+        }
+        else {
+          BASE_buzzer_isNeed = true;
+        }
+      }
+      BASE_sensorDecodedParams[sensorNum][paramNum];
+      BASE_sensorParamsIsDanger[sensorNum][paramNum];
+
+    }
+  }
+}
+
 void ALARM_save_alarmModeState() {
-  if (BASE_ALARM_MODE) {
+  if (BASE_ALARM_MOTION_MODE) {
     eeprom24C32.writeByte(eeprom24C32_address_alarmMode, B1);
   } else {
     eeprom24C32.writeByte(eeprom24C32_address_alarmMode, B0);
@@ -8,7 +41,7 @@ void ALARM_save_alarmModeState() {
 
 void ALARM_restore_alarmModeState() {
   uint8_t alarmStateFromEeprom = eeprom24C32.readByte(eeprom24C32_address_alarmMode);
-  BASE_ALARM_MODE = (alarmStateFromEeprom == 1) ? true : false;
+  BASE_ALARM_MOTION_MODE = (alarmStateFromEeprom == 1) ? true : false;
 }
 
 void ALARM_beepShort_buzzer() {

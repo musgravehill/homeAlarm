@@ -1,60 +1,21 @@
 void BASE_processDataFromSensor() {
   millisPrevSignal_sensors[NRF_currPipeNum] =  millis(); //save time of sensor answer
-  String string_logs = "LOGS;#" + String(NRF_currPipeNum, DEC) + ";";
-  String string_dangers = "DNGR;#" + String(NRF_currPipeNum, DEC) + ";";
-  const char paramCode[] = {'V', 'T', 'H', 'W', 'G', 'M', 'C'};
   int16_t paramVal_decoded;
-  bool issetDangers = false;
-
-  DateTime now = RTC3231.now();
-  uint8_t hh =  now.hour();
-  uint8_t ii =  now.minute();
-  String hhii = ((hh < 10) ? "0" : "") + String(hh, DEC) + ":" ;
-  hhii += ((ii < 10) ? "0" : "") + String(ii, DEC);
 
   for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
     if (NRF_messageFromSensor[paramNum] > 0) { //param is available
-      paramVal_decoded = PARAMS_decodeParam(paramNum, NRF_messageFromSensor[paramNum]); //decode to real range
-      string_logs +=  String((char)paramCode[paramNum]) + ";" + String(paramVal_decoded, DEC) + ";";
+      paramVal_decoded = PARAMS_decodeParam(paramNum, NRF_messageFromSensor[paramNum]);
       BASE_sensorParamsIsAvailable[NRF_currPipeNum][paramNum] = true;
       BASE_sensorDecodedParams[NRF_currPipeNum][paramNum] = paramVal_decoded;
-
-      //param is danger
-      if (PARAMS_isDangerParamValue(paramNum, paramVal_decoded)) {
-        issetDangers = true;
-        string_dangers += String((char)paramCode[paramNum]) + ";";
-        string_dangers += String(paramVal_decoded, DEC) + ";";
-        BASE_sensorParamsIsDanger[NRF_currPipeNum][paramNum] = true;
-
-        //BASE_ALARM_MODE = false;
-        //BASE_buzzer_isNeed = false;
-        //BASE_siren_isNeed = false;
-
-      }
-      else {
-        string_dangers += String((char)paramCode[paramNum]) + ";;";
-        BASE_sensorParamsIsDanger[NRF_currPipeNum][paramNum] = false;
-      }
+      BASE_sensorParamsIsDanger[NRF_currPipeNum][paramNum] = PARAMS_isDangerParamValue(paramNum, paramVal_decoded);
     }
-    //param NOT available
-    else {
-      string_logs += String((char)paramCode[paramNum]) +  ";;";
-      string_dangers += String((char)paramCode[paramNum]) + ";;";
+    else {  //param NOT available
       BASE_sensorParamsIsAvailable[NRF_currPipeNum][paramNum] = false;
+      BASE_sensorParamsIsDanger[NRF_currPipeNum][paramNum] = false;
+      BASE_sensorDecodedParams[NRF_currPipeNum][paramNum] = 0;
     }
   }
-
-  string_logs += hhii + ";";
-  SD_log(string_logs);
-  if (issetDangers) {
-    string_dangers += hhii + ";";
-    SD_log(string_dangers);
-  }
-
-#ifdef DEBUG
-  debugSerial.println(string_logs);
-  debugSerial.println(string_dangers);
-#endif
+  SD_sensorParamsLog(NRF_currPipeNum);
 }
 
 void BASE_checkSensorsFault() {

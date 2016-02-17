@@ -6,6 +6,56 @@ void SD_init() {
   }
 }
 
+
+void SD_sensorParamsLog(uint8_t sensorNum) {
+  String string_logs = "LOGS;#" + String(sensorNum, DEC) + ";";
+  String string_dangers = "DNGR;#" + String(sensorNum, DEC) + ";";
+  const char paramCode[] = {'V', 'T', 'H', 'W', 'G', 'M', 'C'};
+  bool issetDangers = false;
+
+  DateTime now = RTC3231.now();
+  uint8_t hh =  now.hour();
+  uint8_t ii =  now.minute();
+  String hhii = ((hh < 10) ? "0" : "") + String(hh, DEC) + ":" ;
+  hhii += ((ii < 10) ? "0" : "") + String(ii, DEC);
+
+  for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
+    if (BASE_sensorParamsIsAvailable[sensorNum][paramNum]) { //param is available
+      string_logs +=  String((char)paramCode[paramNum]) + ";";
+      string_logs += String(BASE_sensorDecodedParams[sensorNum][paramNum], DEC) + ";";
+      //param is danger
+      if (BASE_sensorParamsIsDanger[sensorNum][paramNum]) {
+        issetDangers = true;
+        string_dangers += String((char)paramCode[paramNum]) + ";";
+        string_dangers += String(BASE_sensorDecodedParams[sensorNum][paramNum], DEC) + ";";
+      }
+      else {
+        string_dangers += String((char)paramCode[paramNum]) + ";;";
+      }
+    }
+    else { //param NOT available
+      string_logs += String((char)paramCode[paramNum]) +  ";;";
+      string_dangers += String((char)paramCode[paramNum]) + ";;";
+    }
+  }
+
+  string_logs += hhii + ";";
+  SD_log(string_logs);
+  if (issetDangers) {
+    string_dangers += hhii + ";";
+    SD_log(string_dangers);
+  }
+
+#ifdef DEBUG
+  debugSerial.println(string_logs);
+  debugSerial.println(string_dangers);
+#endif
+}
+
+
+
+
+
 void SD_log(String data) {
   if (SD_isEnable) {
 

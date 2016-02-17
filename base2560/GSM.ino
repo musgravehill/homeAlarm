@@ -44,7 +44,7 @@ void GSM_reset() {
   digitalWrite(GSM_reset_pin, 0);
   delay(300);
   digitalWrite(GSM_reset_pin, 1);
-  
+
   DateTime now = RTC3231.now();
   uint8_t hh =  now.hour();
   uint8_t ii =  now.minute();
@@ -53,7 +53,7 @@ void GSM_reset() {
   String string_gsmrst = "GSMRST;";
   string_gsmrst += hhii + ";";
   SD_log(string_gsmrst);
-  
+
   delay(13000); //init GSM
 }
 
@@ -63,12 +63,7 @@ bool GSM_paramIsAllowSms(uint8_t paramNum) {
   debugSerial.println(GSM_paramPrevSMSMillis[paramNum], DEC);
 #endif
 
-  if (BASE_ALARM_MODE == false) {
-#ifdef DEBUG
-    debugSerial.println("BASE_ALARM_MODE == false");
-#endif
-    return false;
-  }
+
   if (GSM_paramPrevSMSMillis[paramNum] == 1) {
 #ifdef DEBUG
     debugSerial.println("== 1");
@@ -87,20 +82,6 @@ bool GSM_paramIsAllowSms(uint8_t paramNum) {
     debugSerial.println("def false");
 #endif
     return false;
-  }
-}
-
-void GSM_initSmsDangers() {
-  String SMS_danger = "";
-  for (uint8_t sensorPipeNum = 1; sensorPipeNum < 6; sensorPipeNum++) {
-    for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
-      if (BASE_sensorParamsIsDanger[sensorPipeNum][paramNum] && GSM_paramIsAllowSms(paramNum)) {
-        SMS_danger =  "#" + String(sensorPipeNum, DEC) + " ";
-        SMS_danger +=  PARAMS_getVerbalParamName(paramNum) + "=";
-        SMS_danger +=  String(BASE_sensorDecodedParams[sensorPipeNum][paramNum], DEC) + " ";
-        GSM_addToQueueSMS_forAllPhones(SMS_danger);
-      }
-    }
   }
 }
 
