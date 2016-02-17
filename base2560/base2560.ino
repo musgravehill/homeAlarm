@@ -53,9 +53,10 @@
 #include "Adafruit_GFX.h"
 #include "Adafruit_ILI9341.h"
 #include <avr/wdt.h>
-
+#include <Eeprom24C32_64.h>
 #include <SdFat.h>
 #include <SdFatUtil.h>
+
 //SD_SPI_CONFIGURATION >= 3  // Must be set in SdFat/SdFatConfig.h
 SdFatSoftSpi<10, 12, 11> SD_card; //MISO, MOSI, SCK
 SdFile SD_file;
@@ -106,6 +107,10 @@ uint8_t TFT_pinLedPower = 38;
 RTClib RTC3231;
 DS3231 SYS_DS3231;
 
+//eeprom
+static Eeprom24C32_64 eeprom24C32(0x50);
+const uint8_t eeprom24C32_address_alarmMode = 0;
+
 uint32_t BASE_sensorSilenceFaultMillis = 300000; //сенсор молчит более millis => он сломался
 bool BASE_sensorIsOn[6] = {false, false, false, false, false, false}; //0 1..5
 
@@ -136,8 +141,6 @@ bool BASE_sensorParamsIsAvailable[6][7] = {
   {false, false, false, false, false, false, false,},
   {false, false, false, false, false, false, false,}
 }; //[sensorPipeNum][paramNum]
-
-bool BASE_ALARM_MODE = true;
 
 //STATEMACHINE
 uint32_t STATEMACHINE_prevMillis_300ms = 1L;
@@ -175,6 +178,8 @@ uint8_t GSM_queueLoop_stateMachine_pos = 0;
 uint32_t GSM_prevPingSuccessAnswerMillis = 1; //send AT+CSQ, not get answer => RST GSM
 uint8_t GSM_reset_pin = 23;
 
+bool BASE_ALARM_MODE = false;
+
 //peripheral
 bool BASE_buzzer_isNeed = false;
 bool BASE_siren_isNeed = false;
@@ -211,6 +216,8 @@ void setup() {
   debugSerial.begin(57600); //DBG
   delay(50);
 #endif
+
+  eeprom24C32.initialize();
 
   gsmSerial.begin(57600, SERIAL_8N1); //default for Arduino & SIM800L
   delay(50);
