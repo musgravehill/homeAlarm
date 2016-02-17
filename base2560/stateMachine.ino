@@ -44,6 +44,8 @@ void STATEMACHINE_1s() {
   wr();
   GSM_checkIncomingCall();
   wr();
+  ALARM_controlSiren();
+  wr();
 }
 
 void STATEMACHINE_3s() {
@@ -59,12 +61,14 @@ void STATEMACHINE_3s() {
 void STATEMACHINE_5s() {
   wr();
   GSM_queueLoopSMS_stateMachine_processing();//SMS are added to queue. Processing 1 sms at one time
-  wr();
+  wr();  
 }
 
 void STATEMACHINE_17s() {
   wr();
   TFT_renderMenuState();
+  wr();
+  ALARM_controlBuzzer();
   wr();
 }
 

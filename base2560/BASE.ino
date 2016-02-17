@@ -25,6 +25,11 @@ void BASE_processDataFromSensor() {
         string_dangers += String((char)paramCode[paramNum]) + ";";
         string_dangers += String(paramVal_decoded, DEC) + ";";
         BASE_sensorParamsIsDanger[NRF_currPipeNum][paramNum] = true;
+
+        //BASE_ALARM_MODE = false;
+        //BASE_buzzer_isNeed = false;
+        //BASE_siren_isNeed = false;
+
       }
       else {
         string_dangers += String((char)paramCode[paramNum]) + ";;";

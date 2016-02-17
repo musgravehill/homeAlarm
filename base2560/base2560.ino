@@ -183,12 +183,12 @@ bool BASE_ALARM_MODE = false;
 //peripheral
 bool BASE_buzzer_isNeed = false;
 bool BASE_siren_isNeed = false;
+uint8_t BASE_buzzer_pin = 5; //N-mosfet
+uint8_t BASE_siren_pin = 8;  //N-mosfet
+
 uint8_t BASE_voltage_base_pin = A0; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
 uint8_t BASE_voltage_acdc_pin = A1; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
 uint8_t BASE_voltage_battery_pin = A2; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
-
-uint8_t BASE_buzzer_pin = 5; //N-mosfet
-uint8_t BASE_siren_pin = 8;  //N-mosfet
 
 //menu
 int8_t MENU_state = 1;
@@ -246,6 +246,11 @@ void setup() {
   //RTC_setTime();
 
   GSM_initPhoneNums();
+
+  ALARM_restore_alarmModeState();
+
+  ALARM_beepShort_buzzer();
+  ALARM_beepShort_siren();
 
   wdt_enable(WDTO_8S); //if WDT not reset on 8s => atmega restarts
 }
