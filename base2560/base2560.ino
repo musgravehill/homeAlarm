@@ -36,13 +36,13 @@
     M   0=null, (0,1 + 100) = 100=normal, 101=alert motion detector, bool
     C   0=null, 0..1023 [+1]      gas CO, ADC value
     A   0=null, 100=off, 101=on   ALARM mode:
-                                      ON  SMS:ALL  BEEPER:OFF
-                                      OFF SMS:V,T,H,WL,CH4,CO  BEEPER:V,T,H,WL,CH4,CO
+                                      true  SMS:ALL   SIREN:ON   BEEPER:OFF
+                                      false SMS:NONE  SIREN:OFF  BEEPER:V,T,H,W,G,C
 
   LOGS => log on SD only
   DNGR => log on SD & send SMS [danger]
 */
-// [A0, A1] [2,3,4 BTNs] [5 BUZZER] [6,7 LEDs] [10,11,12,13 SD_softSPI] [20,21 RTC_i2c] [38 TFT_LED] [36,40,42,44,46,48 TFT_softSPI] [49,50,51,52,53 NRF_hwSPI]
+// [A0, A1, A2] [2,3,4 BTNs] [5 BUZZER mosfet] [6,7 LEDs] [8 SIREN mosfet] [10,11,12,13 SD_softSPI] [20,21 RTC_i2c] [38 TFT_LED] [36,40,42,44,46,48 TFT_softSPI] [49,50,51,52,53 NRF_hwSPI]
 
 #include <SPI.h>
 #include <nRF24L01.h>
@@ -78,18 +78,18 @@ const uint64_t NRF_pipes[6] = {
 
 uint8_t NRF_currPipeNum;
 int16_t NRF_messageFromSensor[8] = {
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0
+  0, //V
+  0, //T
+  0, //H
+  0, //W
+  0, //G
+  0, //M
+  0, //C
+  0  //A
 };
 
 //время последнего сигнала от сенсоров, если давно было => сенсор сломался или выключен
-uint64_t millisPrevSignal_sensors[6] = {1}; // pipe 0..5
+uint32_t millisPrevSignal_sensors[6] = {1, 1, 1, 1, 1, 1}; // pipe 0..5
 
 RF24 radio(NRF_CE_PIN, NRF_CSN_PIN);
 
@@ -107,7 +107,7 @@ RTClib RTC3231;
 DS3231 SYS_DS3231;
 
 uint32_t BASE_sensorSilenceFaultMillis = 300000; //сенсор молчит более millis => он сломался
-bool BASE_sensorIsOn[6] = {false}; //0 1..5
+bool BASE_sensorIsOn[6] = {false, false, false, false, false, false}; //0 1..5
 int16_t BASE_sensorDecodedParams[6][7] = {0}; //encoded params; 0==null;  [sensorNum][paramNum]
 bool BASE_sensorParamsIsDanger[6][7] = {true}; //[sensorPipeNum][paramNum]
 bool BASE_sensorParamsIsAvailable[6][7] = {true}; //[sensorPipeNum][paramNum]
@@ -132,7 +132,7 @@ uint32_t GSM_periodParamAllowSMSMillis[7] = {   //millis between SMS //unsigned 
   1 * 3600000, //motion detector, bool
   1 * 3600000 //gas CO, ADC value
 };
-uint32_t GSM_paramPrevSMSMillis[7] = {1,1,1,1,1,1,1};  //BUG: powerDown->powerUp->this vars will be skip to 0 => SMS_send is allow again
+uint32_t GSM_paramPrevSMSMillis[7] = {1, 1, 1, 1, 1, 1, 1};
 String GSM_answerCLIP = "";
 String GSM_answerCSQ = "";
 String GSM_answerCPAS = "";
@@ -147,12 +147,15 @@ uint32_t GSM_prevPingSuccessAnswerMillis = 1; //send AT+CSQ, not get answer => R
 uint8_t GSM_ResetPin = 23;
 
 //peripheral
-bool BASE_buzzerIsNeed = true;
-uint8_t BASE_voltagePin = A0; //TODO ADC AREF set to inner 1.1V and make -R-R- voltage divider
+bool BASE_buzzerIsNeed = false;
+bool BASE_sirenIsNeed = false;
+uint8_t BASE_voltagePin = A0; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
+uint8_t BASE_voltagePin = A0; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
+uint8_t BASE_voltagePin = A0; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
 
 //menu
 int8_t MENU_state = 8;
-//TODO BTN click ++ -- 
+//TODO BTN click ++ --
 
 #define DEBUG 1;
 
@@ -223,7 +226,7 @@ void setup() {
 void loop() {
   wr();
   NRF_listen();
-  wr();    
+  wr();
   STATEMACHINE_loop();
   wr();
 }
