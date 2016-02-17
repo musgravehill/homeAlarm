@@ -44,6 +44,16 @@ void GSM_reset() {
   digitalWrite(GSM_reset_pin, 0);
   delay(300);
   digitalWrite(GSM_reset_pin, 1);
+  
+  DateTime now = RTC3231.now();
+  uint8_t hh =  now.hour();
+  uint8_t ii =  now.minute();
+  String hhii = ((hh < 10) ? "0" : "") + String(hh, DEC) + ":" ;
+  hhii += ((ii < 10) ? "0" : "") + String(ii, DEC);
+  String string_gsmrst = "GSMRST;";
+  string_gsmrst += hhii + ";";
+  SD_log(string_gsmrst);
+  
   delay(13000); //init GSM
 }
 
@@ -244,7 +254,7 @@ void GSM_processSerialString(String s) {
       GSM_answerCOPS = s;
     }
     GSM_prevPingSuccessAnswerMillis = millis(); //if too long -> GSM RESET
-    
+
     //#ifdef DEBUG
     //debugSerial.println("gsm_head:" + s_head);
     //#endif

@@ -51,32 +51,10 @@ void BASE_processDataFromSensor() {
     SD_log(string_dangers);
   }
 
-  BASE_setAlarmMode();
-
 #ifdef DEBUG
   debugSerial.println(string_logs);
   debugSerial.println(string_dangers);
 #endif
-}
-
-void BASE_setAlarmMode() {
-  if (NRF_messageFromSensor[7] > 0) { //param7 = button "alarm on\off" on sensor box
-    //BASE_ALARM_MODE = (101 == NRF_messageFromSensor[7]) ? true : false;
-
-    DateTime now = RTC3231.now();
-    uint8_t hh =  now.hour();
-    uint8_t ii =  now.minute();
-    String hhii = ((hh < 10) ? "0" : "") + String(hh, DEC) + ":" ;
-    hhii += ((ii < 10) ? "0" : "") + String(ii, DEC);
-
-    String string_alarmMode = "ALRMMODE;#" + String(NRF_currPipeNum, DEC) + ";";
-    string_alarmMode += String((char)(BASE_ALARM_MODE) ? "TRUE" : "FALSE") + ";";
-    string_alarmMode += hhii + ";";
-    SD_log(string_alarmMode);
-#ifdef DEBUG
-    debugSerial.println(string_alarmMode);
-#endif
-  }
 }
 
 void BASE_checkSensorsFault() {
