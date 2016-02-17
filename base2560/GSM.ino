@@ -31,7 +31,7 @@ void GSM_ping() {
 }
 
 void GSM_pingCheckTimeAnswer() {
-  if ( (millis() - GSM_prevPingSuccessAnswerMillis) > 8000L ) {
+  if ( (millis() - GSM_prevPingSuccessAnswerMillis) > 35000L ) {
     GSM_reset();
     GSM_prevPingSuccessAnswerMillis = millis();
 #ifdef DEBUG

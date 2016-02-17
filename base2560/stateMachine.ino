@@ -52,23 +52,24 @@ void STATEMACHINE_3s() {
   wr();
   ALARM_processSensorsParams();
   wr();
-  GSM_ping();
-  wr();
-  GSM_pingCheckTimeAnswer();
-  wr();
 }
 
 void STATEMACHINE_5s() {
   wr();
   GSM_queueLoopSMS_stateMachine_processing();//SMS are added to queue. Processing 1 sms at one time
   wr();
+  ALARM_controlBuzzer();
+  wr();
+
 }
 
 void STATEMACHINE_17s() {
   wr();
   TFT_renderMenuState();
   wr();
-  ALARM_controlBuzzer();
+  GSM_ping();
+  wr();
+  GSM_pingCheckTimeAnswer();
   wr();
 }
 

@@ -178,7 +178,7 @@ uint8_t GSM_queueLoop_stateMachine_pos = 0;
 uint32_t GSM_prevPingSuccessAnswerMillis = 1; //send AT+CSQ, not get answer => RST GSM
 uint8_t GSM_reset_pin = 23;
 
-bool BASE_ALARM_MOTION_MODE = false;
+bool BASE_ALARM_MOTION_MODE = true;
 
 //peripheral
 bool BASE_buzzer_isNeed = false;
