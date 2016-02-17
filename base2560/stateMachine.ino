@@ -1,30 +1,30 @@
 void STATEMACHINE_loop() {
   int32_t  STATEMACHINE_currMillis = millis();
-  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_300ms) > 300) {
+  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_300ms) > 300L) {
     STATEMACHINE_300ms();
     STATEMACHINE_prevMillis_300ms = STATEMACHINE_currMillis;
   }
-  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_1s) > 1000) {
+  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_1s) > 1000L) {
     STATEMACHINE_1s();
     STATEMACHINE_prevMillis_1s = STATEMACHINE_currMillis;
   }
-  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_3s) > 3000) {
+  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_3s) > 3000L) {
     STATEMACHINE_3s();
     STATEMACHINE_prevMillis_3s = STATEMACHINE_currMillis;
   }
-  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_5s) > 5000) {
+  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_5s) > 5000L) {
     STATEMACHINE_5s();
     STATEMACHINE_prevMillis_5s = STATEMACHINE_currMillis;
   }
-  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_17s) > 17000) {
+  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_17s) > 17000L) {
     STATEMACHINE_17s();
     STATEMACHINE_prevMillis_17s = STATEMACHINE_currMillis;
   }
-  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_61s) > 61000) {
+  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_61s) > 61000L) {
     STATEMACHINE_61s();
     STATEMACHINE_prevMillis_61s = STATEMACHINE_currMillis;
   }
-  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_103s) > 103000) {
+  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_103s) > 103000L) {
     STATEMACHINE_103s();
     STATEMACHINE_prevMillis_103s = STATEMACHINE_currMillis;
   }

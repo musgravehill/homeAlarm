@@ -31,7 +31,7 @@ void GSM_ping() {
 }
 
 void GSM_pingCheckTimeAnswer() {
-  if ( (millis() - GSM_prevPingSuccessAnswerMillis) > 8000 ) {
+  if ( (millis() - GSM_prevPingSuccessAnswerMillis) > 8000L ) {
     GSM_reset();
     GSM_prevPingSuccessAnswerMillis = millis();
 #ifdef DEBUG
@@ -89,7 +89,6 @@ void GSM_initSmsDangers() {
         SMS_danger +=  PARAMS_getVerbalParamName(paramNum) + "=";
         SMS_danger +=  String(BASE_sensorDecodedParams[sensorPipeNum][paramNum], DEC) + " ";
         GSM_addToQueueSMS_forAllPhones(SMS_danger);
-
       }
     }
   }

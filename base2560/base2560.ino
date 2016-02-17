@@ -140,27 +140,27 @@ bool BASE_sensorParamsIsAvailable[6][7] = {
 bool BASE_ALARM_MODE = true;
 
 //STATEMACHINE
-uint32_t STATEMACHINE_prevMillis_300ms = 1;
-uint32_t STATEMACHINE_prevMillis_1s = 1;
-uint32_t STATEMACHINE_prevMillis_3s = 1;
-uint32_t STATEMACHINE_prevMillis_5s = 1;
-uint32_t STATEMACHINE_prevMillis_17s = 1;
-uint32_t STATEMACHINE_prevMillis_61s = 1;
-uint32_t STATEMACHINE_prevMillis_103s = 1;
+uint32_t STATEMACHINE_prevMillis_300ms = 1L;
+uint32_t STATEMACHINE_prevMillis_1s = 1L;
+uint32_t STATEMACHINE_prevMillis_3s = 1L;
+uint32_t STATEMACHINE_prevMillis_5s = 1L;
+uint32_t STATEMACHINE_prevMillis_17s = 1L;
+uint32_t STATEMACHINE_prevMillis_61s = 1L;
+uint32_t STATEMACHINE_prevMillis_103s = 1L;
 
 //GSM
 String GSM_phoneNums[] = {};
 uint8_t GSM_phoneNums_count = 0;
 uint32_t GSM_periodParamAllowSMSMillis[7] = {   //millis between SMS //unsigned long 2^32-1
-  24 * 3600000, //voltage on sensor battery, V
-  1 * 3600000, //temperature, C
-  1 * 3600000, //humidity, %
-  1 * 3600000, //water leak, bool
-  1 * 3600000, //gas CH4, ADC value
-  1 * 3600000, //motion detector, bool
-  1 * 3600000 //gas CO, ADC value
+  24 * 3600000L, //voltage on sensor battery, V
+  1 * 3600000L, //temperature, C
+  1 * 3600000L, //humidity, %
+  1 * 3600000L, //water leak, bool
+  1 * 3600000L, //gas CH4, ADC value
+  1 * 3600000L, //motion detector, bool
+  1 * 3600000L //gas CO, ADC value
 };
-uint32_t GSM_paramPrevSMSMillis[7] = {1, 1, 1, 1, 1, 1, 1};
+uint32_t GSM_paramPrevSMSMillis[7] = {1L, 1L, 1L, 1L, 1L, 1L, 1L};
 
 String GSM_answerCLIP = "";
 String GSM_answerCSQ = "";
