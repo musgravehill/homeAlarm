@@ -8,6 +8,10 @@ void STATEMACHINE_loop() {
     STATEMACHINE_3s();
     STATEMACHINE_prevMillis_3s = STATEMACHINE_currMillis;
   }
+  if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_5s) > 5000) {
+    STATEMACHINE_5s();
+    STATEMACHINE_prevMillis_5s = STATEMACHINE_currMillis;
+  }
   if ((STATEMACHINE_currMillis - STATEMACHINE_prevMillis_17s) > 17000) {
     STATEMACHINE_17s();
     STATEMACHINE_prevMillis_17s = STATEMACHINE_currMillis;
@@ -36,13 +40,19 @@ void STATEMACHINE_3s() {
   wr();
   GSM_initSmsDangers();
   wr();
+  GSM_ping();
+  wr();
+  GSM_pingCheckTimeAnswer();
+  wr();
 }
 
-void STATEMACHINE_17s() {
+void STATEMACHINE_5s() {
   wr();
   GSM_queueLoopSMS_stateMachine_processing();//SMS are added to queue. Processing 1 sms at one time
   wr();
-  GSM_ping();
+}
+
+void STATEMACHINE_17s() {
   wr();
   TFT_renderMenuState();
   wr();
@@ -52,8 +62,7 @@ void STATEMACHINE_61s() {
   wr();
   BASE_checkSensorsFault();
   wr();
-  GSM_pingCheckTimeAnswer();
-  wr();
+
 }
 
 void STATEMACHINE_103s() {
@@ -62,11 +71,13 @@ void STATEMACHINE_103s() {
   wr();
 
   //reset base after 1 day uptime
-  if ((uint32_t) millis() > 86400000L) {
+  //what about ALARM_MODE? I NEED SOME "BTN" WITH FIXATION => SET MODE AFTER REBOOT AGAIN
+  //MAY BE EEPROM???
+  /*if ((uint32_t) millis() > 86400000L) {
     wdt_disable();
     delay(20);
     wdt_enable(WDTO_2S);
     delay(2100);
-  }
+  }*/
 }
 

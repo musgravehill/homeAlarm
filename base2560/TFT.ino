@@ -45,7 +45,7 @@ void TFT_renderMenuState() {
 }
 
 void TFT_renderInfoLine() {
-  String infoLine = "";  
+  String infoLine = "";
   //myDisplay.fillRect(0, 223, 320, 17, ILI9341_NAVY); //x y w h color
   myDisplay.fillScreen(ILI9341_BLACK);
   myDisplay.setTextSize(2);
@@ -74,7 +74,7 @@ void TFT_renderInfoLine() {
   //uptime days
   myDisplay.setCursor(2, 22);
   myDisplay.setTextColor(ILI9341_BLUE);
-  infoLine = "uptime " + String((millis() / 3600000L), DEC) + " h";
+  infoLine = "uptime " + String((millis() / 86400000L), DEC) + " d";
   myDisplay.print(infoLine);
 
   //gsm

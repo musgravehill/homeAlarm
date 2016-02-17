@@ -31,9 +31,9 @@ void GSM_ping() {
 }
 
 void GSM_pingCheckTimeAnswer() {
-  if ( (millis() - GSM_prevPingSuccessAnswerMillis) > 65000 ) {
-    GSM_prevPingSuccessAnswerMillis = millis();
+  if ( (GSM_prevPingSuccessAnswerMillis + 8000) >  millis() ) {
     GSM_reset();
+    GSM_prevPingSuccessAnswerMillis = millis();
 #ifdef DEBUG
     debugSerial.println("GSM stop responding (hang up) => RST");
 #endif
@@ -44,7 +44,7 @@ void GSM_reset() {
   digitalWrite(GSM_ResetPin, 0);
   delay(300);
   digitalWrite(GSM_ResetPin, 1);
-  Serial.println("RST");
+  delay(13000); //init GSM
 }
 
 bool GSM_paramIsAllowSms(uint8_t paramNum) {
@@ -65,10 +65,11 @@ bool GSM_paramIsAllowSms(uint8_t paramNum) {
 #endif
     return true;
   }
-  if ( (millis() - GSM_paramPrevSMSMillis[paramNum]) >  GSM_periodParamAllowSMSMillis[paramNum]) {
+  if ( (GSM_paramPrevSMSMillis[paramNum] + GSM_periodParamAllowSMSMillis[paramNum]) > millis() ) {
 #ifdef DEBUG
     debugSerial.println("millis");
 #endif
+     GSM_paramPrevSMSMillis[paramNum] = millis();
     return true;
   }
   else {
@@ -88,7 +89,7 @@ void GSM_initSmsDangers() {
         SMS_danger +=  PARAMS_getVerbalParamName(paramNum) + "=";
         SMS_danger +=  String(BASE_sensorDecodedParams[sensorPipeNum][paramNum], DEC) + " ";
         GSM_addToQueueSMS_forAllPhones(SMS_danger);
-        GSM_paramPrevSMSMillis[paramNum] = millis();
+        
       }
     }
   }
@@ -130,7 +131,7 @@ void GSM_sendSMS(String phone, String message) {
   delay(50);
   gsmSerial.print((char)26);
   delay(50);
-  //delay in state machine 61s
+  //delay in state machine
 }
 
 void GSM_cleanAllSMS() {

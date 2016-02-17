@@ -142,6 +142,7 @@ bool BASE_ALARM_MODE = true;
 //STATEMACHINE
 uint32_t STATEMACHINE_prevMillis_1s = 1;
 uint32_t STATEMACHINE_prevMillis_3s = 1;
+uint32_t STATEMACHINE_prevMillis_5s = 1;
 uint32_t STATEMACHINE_prevMillis_17s = 1;
 uint32_t STATEMACHINE_prevMillis_61s = 1;
 uint32_t STATEMACHINE_prevMillis_103s = 1;
