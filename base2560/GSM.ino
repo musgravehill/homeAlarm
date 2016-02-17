@@ -53,7 +53,6 @@ bool GSM_paramIsAllowSms(uint8_t paramNum) {
   debugSerial.println(GSM_paramPrevSMSMillis[paramNum], DEC);
 #endif
 
-
   if (BASE_ALARM_MODE == false) {
 #ifdef DEBUG
     debugSerial.println("BASE_ALARM_MODE == false");
@@ -174,6 +173,18 @@ void GSM_initPhoneNums() {
       GSM_phoneNums_count++;
     }
   }
+
+#ifdef DEBUG
+  debugSerial.print("GSM_phoneNums_count=");
+  debugSerial.println(GSM_phoneNums_count, DEC);
+  for (uint8_t i = 0; i < GSM_phoneNums_count; i++) {
+    debugSerial.print(i, DEC);
+    debugSerial.print("___");
+    debugSerial.print(GSM_phoneNums[i]);
+    debugSerial.println("___");
+  }
+#endif
+
 }
 
 void GSM_listenSerial() {
@@ -222,7 +233,6 @@ void GSM_processSerialString(String s) {
     String s_head = s.substring(0, 5); //+CSQ: //+CLIP
     if (s_head == "+CSQ:") {
       GSM_answerCSQ = s;
-      GSM_prevPingSuccessAnswerMillis = millis();
     }
     else if (s_head == "+CLIP") {
       GSM_answerCLIP = s;
@@ -233,6 +243,7 @@ void GSM_processSerialString(String s) {
     else if (s_head == "+COPS") {
       GSM_answerCOPS = s;
     }
+    GSM_prevPingSuccessAnswerMillis = millis(); //if too long -> GSM RESET
     //#ifdef DEBUG
     //debugSerial.println("gsm_head:" + s_head);
     //#endif

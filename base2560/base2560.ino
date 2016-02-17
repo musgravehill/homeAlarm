@@ -108,9 +108,35 @@ DS3231 SYS_DS3231;
 
 uint32_t BASE_sensorSilenceFaultMillis = 300000; //сенсор молчит более millis => он сломался
 bool BASE_sensorIsOn[6] = {false, false, false, false, false, false}; //0 1..5
-int16_t BASE_sensorDecodedParams[6][7] = {0}; //encoded params; 0==null;  [sensorNum][paramNum]
-bool BASE_sensorParamsIsDanger[6][7] = {true}; //[sensorPipeNum][paramNum]
-bool BASE_sensorParamsIsAvailable[6][7] = {true}; //[sensorPipeNum][paramNum]
+
+int16_t BASE_sensorDecodedParams[6][7] = {
+  {0, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0, 0}
+};  //encoded params; 0==null;  [sensorNum][paramNum]
+
+bool BASE_sensorParamsIsDanger[6][7] = {
+  {false, false, false, false, false, false, false,},
+  {false, false, false, false, false, false, false,},
+  {false, false, false, false, false, false, false,},
+  {false, false, false, false, false, false, false,},
+  {false, false, false, false, false, false, false,},
+  {false, false, false, false, false, false, false,}
+}; //[sensorPipeNum][paramNum]
+
+
+bool BASE_sensorParamsIsAvailable[6][7] = {
+  {false, false, false, false, false, false, false,},
+  {false, false, false, false, false, false, false,},
+  {false, false, false, false, false, false, false,},
+  {false, false, false, false, false, false, false,},
+  {false, false, false, false, false, false, false,},
+  {false, false, false, false, false, false, false,}
+}; //[sensorPipeNum][paramNum]
+
 bool BASE_ALARM_MODE = true;
 
 //STATEMACHINE
@@ -133,6 +159,7 @@ uint32_t GSM_periodParamAllowSMSMillis[7] = {   //millis between SMS //unsigned 
   1 * 3600000 //gas CO, ADC value
 };
 uint32_t GSM_paramPrevSMSMillis[7] = {1, 1, 1, 1, 1, 1, 1};
+
 String GSM_answerCLIP = "";
 String GSM_answerCSQ = "";
 String GSM_answerCPAS = "";
@@ -149,9 +176,9 @@ uint8_t GSM_ResetPin = 23;
 //peripheral
 bool BASE_buzzerIsNeed = false;
 bool BASE_sirenIsNeed = false;
-uint8_t BASE_voltagePin = A0; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
-uint8_t BASE_voltagePin = A0; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
-uint8_t BASE_voltagePin = A0; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
+uint8_t BASE_baseVoltagePin = A0; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
+uint8_t BASE_acdcVoltagePin = A1; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
+uint8_t BASE_batteryVoltagePin = A2; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
 
 //menu
 int8_t MENU_state = 8;
@@ -161,8 +188,6 @@ int8_t MENU_state = 8;
 
 #define debugSerial Serial
 #define gsmSerial Serial1
-
-
 
 void setup() {
   MCUSR = 0;  //VERY VERY IMPORTANT!!!! ELSE WDT DOESNOT RESET, DOESNOT DISABLED!!!
@@ -198,29 +223,15 @@ void setup() {
   SD_init();
   delay(50);
 
-
   RTC_init();
+  delay(50);
   RTC_setTimeFromSD();
   delay(50);
   //RTC_setTime();
 
   GSM_initPhoneNums();
 
-  BASE_buzzerIsNeed = true;
-
-#ifdef DEBUG
-  debugSerial.print("GSM_phoneNums_count=");
-  debugSerial.println(GSM_phoneNums_count, DEC);
-  for (uint8_t i = 0; i < GSM_phoneNums_count; i++) {
-    debugSerial.print(i, DEC);
-    debugSerial.print("___");
-    debugSerial.print(GSM_phoneNums[i]);
-    debugSerial.println("___");
-  }
-#endif
-
   wdt_enable(WDTO_8S); //if WDT not reset on 8s => atmega restarts
-
 }
 
 void loop() {
