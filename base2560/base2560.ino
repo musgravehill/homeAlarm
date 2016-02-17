@@ -140,6 +140,7 @@ bool BASE_sensorParamsIsAvailable[6][7] = {
 bool BASE_ALARM_MODE = true;
 
 //STATEMACHINE
+uint32_t STATEMACHINE_prevMillis_300ms = 1;
 uint32_t STATEMACHINE_prevMillis_1s = 1;
 uint32_t STATEMACHINE_prevMillis_3s = 1;
 uint32_t STATEMACHINE_prevMillis_5s = 1;
@@ -172,17 +173,22 @@ String GSM_queueLoop_messages[GSM_queueLoop_size] = {""};
 uint8_t GSM_queueLoop_pos = 0;
 uint8_t GSM_queueLoop_stateMachine_pos = 0;
 uint32_t GSM_prevPingSuccessAnswerMillis = 1; //send AT+CSQ, not get answer => RST GSM
-uint8_t GSM_ResetPin = 23;
+uint8_t GSM_reset_pin = 23;
 
 //peripheral
-bool BASE_buzzerIsNeed = false;
-bool BASE_sirenIsNeed = false;
-uint8_t BASE_baseVoltagePin = A0; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
-uint8_t BASE_acdcVoltagePin = A1; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
-uint8_t BASE_batteryVoltagePin = A2; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
+bool BASE_buzzer_isNeed = false;
+bool BASE_siren_isNeed = false;
+uint8_t BASE_voltage_base_pin = A0; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
+uint8_t BASE_voltage_acdc_pin = A1; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
+uint8_t BASE_voltage_battery_pin = A2; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
+
+uint8_t BASE_buzzer_pin = 5; //N-mosfet
+uint8_t BASE_siren_pin = 8;  //N-mosfet
 
 //menu
 int8_t MENU_state = 8;
+uint8_t MENU_btnPrev_pin = 2;
+uint8_t MENU_btnNext_pin = 3;
 //TODO BTN click ++ --
 
 #define DEBUG 1;
@@ -194,8 +200,11 @@ void setup() {
   MCUSR = 0;  //VERY VERY IMPORTANT!!!! ELSE WDT DOESNOT RESET, DOESNOT DISABLED!!!
   wdt_disable();
 
-  pinMode(GSM_ResetPin, OUTPUT);
-  digitalWrite(GSM_ResetPin, 1); //HIGH=normal, LOW=resetGSM
+  pinMode(GSM_reset_pin, OUTPUT);
+  digitalWrite(GSM_reset_pin, 1); //HIGH=normal, LOW=resetGSM
+
+  pinMode(MENU_btnPrev_pin, INPUT);
+  pinMode(MENU_btnNext_pin, INPUT);
 
   delay(2000); //for calming current & voltage fluctuations
 

@@ -27,13 +27,13 @@ void TFT_renderMenuState() {
     case 0:
       //no TFT render, TFT_LED will be off
       break;
-    case 4:
+    case 1:
       TFT_renderInfoLine();
       break;
-    case 8:
+    case 2:
       TFT_renderSensors();
       break;
-    case 12:
+    case 3:
       TFT_renderGSM();
       break;
   }

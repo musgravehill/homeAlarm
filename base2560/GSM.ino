@@ -41,9 +41,9 @@ void GSM_pingCheckTimeAnswer() {
 }
 
 void GSM_reset() {
-  digitalWrite(GSM_ResetPin, 0);
+  digitalWrite(GSM_reset_pin, 0);
   delay(300);
-  digitalWrite(GSM_ResetPin, 1);
+  digitalWrite(GSM_reset_pin, 1);
   delay(13000); //init GSM
 }
 
