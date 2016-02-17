@@ -31,7 +31,7 @@ void GSM_ping() {
 }
 
 void GSM_pingCheckTimeAnswer() {
-  if ( (GSM_prevPingSuccessAnswerMillis + 8000) >  millis() ) {
+  if ( (millis() - GSM_prevPingSuccessAnswerMillis) > 8000 ) {
     GSM_reset();
     GSM_prevPingSuccessAnswerMillis = millis();
 #ifdef DEBUG
@@ -65,11 +65,11 @@ bool GSM_paramIsAllowSms(uint8_t paramNum) {
 #endif
     return true;
   }
-  if ( (GSM_paramPrevSMSMillis[paramNum] + GSM_periodParamAllowSMSMillis[paramNum]) > millis() ) {
+  if ( (millis() - GSM_paramPrevSMSMillis[paramNum]) > GSM_periodParamAllowSMSMillis[paramNum] ) {
 #ifdef DEBUG
     debugSerial.println("millis");
 #endif
-     GSM_paramPrevSMSMillis[paramNum] = millis();
+    GSM_paramPrevSMSMillis[paramNum] = millis();
     return true;
   }
   else {
@@ -89,7 +89,7 @@ void GSM_initSmsDangers() {
         SMS_danger +=  PARAMS_getVerbalParamName(paramNum) + "=";
         SMS_danger +=  String(BASE_sensorDecodedParams[sensorPipeNum][paramNum], DEC) + " ";
         GSM_addToQueueSMS_forAllPhones(SMS_danger);
-        
+
       }
     }
   }
@@ -245,6 +245,7 @@ void GSM_processSerialString(String s) {
       GSM_answerCOPS = s;
     }
     GSM_prevPingSuccessAnswerMillis = millis(); //if too long -> GSM RESET
+    
     //#ifdef DEBUG
     //debugSerial.println("gsm_head:" + s_head);
     //#endif

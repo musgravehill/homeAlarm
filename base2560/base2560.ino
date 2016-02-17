@@ -186,10 +186,9 @@ uint8_t BASE_buzzer_pin = 5; //N-mosfet
 uint8_t BASE_siren_pin = 8;  //N-mosfet
 
 //menu
-int8_t MENU_state = 8;
+int8_t MENU_state = 1;
 uint8_t MENU_btnPrev_pin = 2;
 uint8_t MENU_btnNext_pin = 3;
-//TODO BTN click ++ --
 
 #define DEBUG 1;
 

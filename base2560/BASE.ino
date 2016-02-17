@@ -75,25 +75,10 @@ void BASE_setAlarmMode() {
 }
 
 void BASE_checkSensorsFault() {
-  uint32_t millisCurrSignal = millis();
+  uint32_t millisCurr = millis();
   for (uint8_t sensorPipeNum = 1; sensorPipeNum < 6; sensorPipeNum++) { //SENSORS PIPES 1..5!
-    int32_t deltaSignal = millisCurrSignal - millisPrevSignal_sensors[sensorPipeNum];
-#ifdef DEBUG
-    //debugSerial.print("deltas:");
-    //debugSerial.print(sensorPipeNum, DEC);
-    //debugSerial.print("_");
-    //debugSerial.println(deltaSignal, DEC);
-#endif
-    if (deltaSignal > BASE_sensorSilenceFaultMillis) {
+    if ((millisCurr - millisPrevSignal_sensors[sensorPipeNum]) > BASE_sensorSilenceFaultMillis) {
       BASE_sensorIsOn[sensorPipeNum] = false; //sensor fault
-#ifdef DEBUG
-      debugSerial.print("fault:");
-      debugSerial.print(sensorPipeNum, DEC);
-      debugSerial.print("_");
-      debugSerial.print(deltaSignal, DEC);
-      debugSerial.print(">");
-      debugSerial.println(BASE_sensorSilenceFaultMillis, DEC);
-#endif
     }
     else {
       BASE_sensorIsOn[sensorPipeNum] = true; //sensor ok
