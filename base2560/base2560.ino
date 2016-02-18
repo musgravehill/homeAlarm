@@ -109,7 +109,7 @@ uint32_t STATEMACHINE_prevMillis_61s = 1;
 uint32_t STATEMACHINE_prevMillis_103s = 1;
 
 //GSM
-String GSM_phoneNums[];
+String GSM_phoneNums[4]; //max allow 4 phones
 uint8_t GSM_phoneNums_count = 0;
 uint32_t GSM_periodParamAllowSMSMillis[7] = {   //millis between SMS //unsigned long 2^32-1
   24 * 3600000L, //voltage on sensor battery, V
