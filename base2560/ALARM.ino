@@ -30,7 +30,7 @@ void ALARM_processSensorsParams() {
 
 void ALARM_beepShort_buzzer() {
   digitalWrite(BASE_buzzer_pin, 1);
-  delay(500);
+  delay(100);
   digitalWrite(BASE_buzzer_pin, 0);
 }
 void ALARM_beepShort_siren() {

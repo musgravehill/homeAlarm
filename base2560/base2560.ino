@@ -42,7 +42,7 @@
   LOGS => log on SD only
   DNGR => log on SD & send SMS [danger]
 */
-// [A0, A1, A2] [2,3,4 BTNs] [5 BUZZER mosfet] [6,7 LEDs] [8 SIREN mosfet] [10,11,12,13 SD_softSPI] [20,21 RTC_i2c] [38 TFT_LED] [36,40,42,44,46,48 TFT_softSPI] [49,50,51,52,53 NRF_hwSPI]
+// [A0, A1, A2] [2,3,5 BTNs] [4 BUZZER mosfet] [6,7 LEDs] [8 SIREN mosfet] [10,11,12,13 SD_softSPI] [20,21 RTC_i2c] [38 TFT_LED] [36,40,42,44,46,48 TFT_softSPI] [49,50,51,52,53 NRF_hwSPI]
 
 #include <SPI.h>
 #include <nRF24L01.h>
@@ -121,25 +121,25 @@ int16_t BASE_sensorDecodedParams[6][7] = {
   {0, 0, 0, 0, 0, 0, 0},
   {0, 0, 0, 0, 0, 0, 0},
   {0, 0, 0, 0, 0, 0, 0}
-};  //encoded params; 0==null;  [sensorNum][paramNum]
+};  //encoded params;  [sensorNum][paramNum]
 
 bool BASE_sensorParamsIsDanger[6][7] = {
-  {false, false, false, false, false, false, false,},
-  {false, false, false, false, false, false, false,},
-  {false, false, false, false, false, false, false,},
-  {false, false, false, false, false, false, false,},
-  {false, false, false, false, false, false, false,},
-  {false, false, false, false, false, false, false,}
+  {false, false, false, false, false, false, false},
+  {false, false, false, false, false, false, false},
+  {false, false, false, false, false, false, false},
+  {false, false, false, false, false, false, false},
+  {false, false, false, false, false, false, false},
+  {false, false, false, false, false, false, false}
 }; //[sensorPipeNum][paramNum]
 
 
 bool BASE_sensorParamsIsAvailable[6][7] = {
-  {false, false, false, false, false, false, false,},
-  {false, false, false, false, false, false, false,},
-  {false, false, false, false, false, false, false,},
-  {false, false, false, false, false, false, false,},
-  {false, false, false, false, false, false, false,},
-  {false, false, false, false, false, false, false,}
+  {false, false, false, false, false, false, false},
+  {false, false, false, false, false, false, false},
+  {false, false, false, false, false, false, false},
+  {false, false, false, false, false, false, false},
+  {false, false, false, false, false, false, false},
+  {false, false, false, false, false, false, false}
 }; //[sensorPipeNum][paramNum]
 
 //STATEMACHINE
@@ -183,7 +183,7 @@ bool BASE_ALARM_MOTION_MODE = true;
 //peripheral
 bool BASE_buzzer_isNeed = false;
 bool BASE_siren_isNeed = false;
-uint8_t BASE_buzzer_pin = 5; //N-mosfet
+uint8_t BASE_buzzer_pin = 4; //N-mosfet
 uint8_t BASE_siren_pin = 8;  //N-mosfet
 
 uint8_t BASE_voltage_base_pin = A0; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider

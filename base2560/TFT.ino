@@ -201,6 +201,13 @@ void TFT_renderSensors() {
 
     //params
     for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
+
+Serial.print(sensorPipeNum, DEC);
+Serial.print("__");
+Serial.print(paramNum, DEC);
+Serial.print("__");
+Serial.println(BASE_sensorParamsIsAvailable[sensorPipeNum][paramNum]);
+      
       if (BASE_sensorParamsIsAvailable[sensorPipeNum][paramNum]) {
         if (BASE_sensorParamsIsDanger[sensorPipeNum][paramNum]) {
           myDisplay.setTextColor(ILI9341_RED);
