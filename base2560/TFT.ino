@@ -190,6 +190,7 @@ void TFT_renderSensors() {
   //data
   for (uint8_t sensorPipeNum = 1; sensorPipeNum < 6; sensorPipeNum++) { //SENSORS PIPES 1..5!
     //sensor num
+    myDisplay.setTextSize(2);
     myDisplay.setCursor( 4, (16 + sensorPipeNum * 40));
     if (BASE_sensorIsOn[sensorPipeNum]) {
       myDisplay.setTextColor(ILI9341_GREENYELLOW);
@@ -206,7 +207,7 @@ Serial.print(sensorPipeNum, DEC);
 Serial.print("__");
 Serial.print(paramNum, DEC);
 Serial.print("__");
-Serial.println(BASE_sensorParamsIsAvailable[sensorPipeNum][paramNum]);
+Serial.println(BASE_sensorParamsIsDanger[sensorPipeNum][paramNum]);
       
       if (BASE_sensorParamsIsAvailable[sensorPipeNum][paramNum]) {
         if (BASE_sensorParamsIsDanger[sensorPipeNum][paramNum]) {

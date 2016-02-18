@@ -34,10 +34,7 @@
     W   0=null, 0=null, (0,1 + 100) = 100=normal, 101=alert         water leak, bool
     G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
     M   0=null, (0,1 + 100) = 100=normal, 101=alert motion detector, bool
-    C   0=null, 0..1023 [+1]      gas CO, ADC value
-    A   0=null, 100=off, 101=on   ALARM mode:
-                                      true  SMS:ALL   SIREN:ON   BEEPER:OFF
-                                      false SMS:NONE  SIREN:OFF  BEEPER:V,T,H,W,G,C
+    C   0=null, 0..1023 [+1]      gas CO, ADC value    
 
   LOGS => log on SD only
   DNGR => log on SD & send SMS [danger]
@@ -77,20 +74,11 @@ const uint64_t NRF_pipes[6] = {
   0xDEADBEEF05LL
 };
 
-uint8_t NRF_currPipeNum;
-int16_t NRF_messageFromSensor[8] = {
-  0, //V
-  0, //T
-  0, //H
-  0, //W
-  0, //G
-  0, //M
-  0, //C
-  0  //A
-};
+uint8_t NRF_currPipeNum = 1;
+int16_t NRF_messageFromSensor[7];
 
 //время последнего сигнала от сенсоров, если давно было => сенсор сломался или выключен
-uint32_t millisPrevSignal_sensors[6] = {1, 1, 1, 1, 1, 1}; // pipe 0..5
+uint32_t millisPrevSignal_sensors[6]; // pipe 0..5
 
 RF24 radio(NRF_CE_PIN, NRF_CSN_PIN);
 
@@ -111,48 +99,17 @@ DS3231 SYS_DS3231;
 static Eeprom24C32_64 eeprom24C32(0x50);
 const uint8_t eeprom24C32_address_alarmMode = 0;
 
-uint32_t BASE_sensorSilenceFaultMillis = 300000; //сенсор молчит более millis => он сломался
-bool BASE_sensorIsOn[6] = {false, false, false, false, false, false}; //0 1..5
-
-int16_t BASE_sensorDecodedParams[6][7] = {
-  {0, 0, 0, 0, 0, 0, 0},
-  {0, 0, 0, 0, 0, 0, 0},
-  {0, 0, 0, 0, 0, 0, 0},
-  {0, 0, 0, 0, 0, 0, 0},
-  {0, 0, 0, 0, 0, 0, 0},
-  {0, 0, 0, 0, 0, 0, 0}
-};  //encoded params;  [sensorNum][paramNum]
-
-bool BASE_sensorParamsIsDanger[6][7] = {
-  {false, false, false, false, false, false, false},
-  {false, false, false, false, false, false, false},
-  {false, false, false, false, false, false, false},
-  {false, false, false, false, false, false, false},
-  {false, false, false, false, false, false, false},
-  {false, false, false, false, false, false, false}
-}; //[sensorPipeNum][paramNum]
-
-
-bool BASE_sensorParamsIsAvailable[6][7] = {
-  {false, false, false, false, false, false, false},
-  {false, false, false, false, false, false, false},
-  {false, false, false, false, false, false, false},
-  {false, false, false, false, false, false, false},
-  {false, false, false, false, false, false, false},
-  {false, false, false, false, false, false, false}
-}; //[sensorPipeNum][paramNum]
-
 //STATEMACHINE
-uint32_t STATEMACHINE_prevMillis_300ms = 1L;
-uint32_t STATEMACHINE_prevMillis_1s = 1L;
-uint32_t STATEMACHINE_prevMillis_3s = 1L;
-uint32_t STATEMACHINE_prevMillis_5s = 1L;
-uint32_t STATEMACHINE_prevMillis_17s = 1L;
-uint32_t STATEMACHINE_prevMillis_61s = 1L;
-uint32_t STATEMACHINE_prevMillis_103s = 1L;
+uint32_t STATEMACHINE_prevMillis_300ms = 1;
+uint32_t STATEMACHINE_prevMillis_1s = 1;
+uint32_t STATEMACHINE_prevMillis_3s = 1;
+uint32_t STATEMACHINE_prevMillis_5s = 1;
+uint32_t STATEMACHINE_prevMillis_17s = 1;
+uint32_t STATEMACHINE_prevMillis_61s = 1;
+uint32_t STATEMACHINE_prevMillis_103s = 1;
 
 //GSM
-String GSM_phoneNums[] = {};
+String GSM_phoneNums[];
 uint8_t GSM_phoneNums_count = 0;
 uint32_t GSM_periodParamAllowSMSMillis[7] = {   //millis between SMS //unsigned long 2^32-1
   24 * 3600000L, //voltage on sensor battery, V
@@ -163,7 +120,7 @@ uint32_t GSM_periodParamAllowSMSMillis[7] = {   //millis between SMS //unsigned 
   1 * 3600000L, //motion detector, bool
   1 * 3600000L //gas CO, ADC value
 };
-uint32_t GSM_paramPrevSMSMillis[7] = {1L, 1L, 1L, 1L, 1L, 1L, 1L};
+uint32_t GSM_paramPrevSMSMillis[7];
 
 String GSM_answerCLIP = "";
 String GSM_answerCSQ = "";
@@ -171,8 +128,8 @@ String GSM_answerCPAS = "";
 String GSM_answerCOPS = "";
 
 const uint8_t GSM_queueLoop_size = 12;
-String GSM_queueLoop_phones[GSM_queueLoop_size] = {""}; //0..11
-String GSM_queueLoop_messages[GSM_queueLoop_size] = {""};
+String GSM_queueLoop_phones[GSM_queueLoop_size]; //0..11
+String GSM_queueLoop_messages[GSM_queueLoop_size];
 uint8_t GSM_queueLoop_pos = 0;
 uint8_t GSM_queueLoop_stateMachine_pos = 0;
 uint32_t GSM_prevPingSuccessAnswerMillis = 1; //send AT+CSQ, not get answer => RST GSM
@@ -195,6 +152,13 @@ int8_t MENU_state = 1;
 uint8_t MENU_btnPrev_pin = 2;
 uint8_t MENU_btnNext_pin = 3;
 
+
+uint32_t BASE_sensorSilenceFaultMillis = 300000; //сенсор молчит более millis => он сломался
+bool BASE_sensorIsOn[6]; //0 1..5
+bool BASE_sensorParamsIsAvailable[6][7]; //[sensorPipeNum][paramNum]
+bool BASE_sensorParamsIsDanger[6][7]; //[sensorPipeNum][paramNum]
+int BASE_sensorDecodedParams[6][7];  //encoded params;  [sensorNum][paramNum]
+
 #define DEBUG 1;
 
 #define debugSerial Serial
@@ -203,6 +167,17 @@ uint8_t MENU_btnNext_pin = 3;
 void setup() {
   MCUSR = 0;  //VERY VERY IMPORTANT!!!! ELSE WDT DOESNOT RESET, DOESNOT DISABLED!!!
   wdt_disable();
+
+  for (uint8_t sensorPipeNum = 0; sensorPipeNum < 6; sensorPipeNum++) { //0 INCLUDE INIT! SENSORS PIPES 1..5 USE!
+    millisPrevSignal_sensors[sensorPipeNum] = (uint32_t) 1;
+    BASE_sensorIsOn[sensorPipeNum] = (bool) false;    
+    for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
+      BASE_sensorDecodedParams[sensorPipeNum][paramNum] = (int16_t) 999;
+      BASE_sensorParamsIsDanger[sensorPipeNum][paramNum] = false;
+      BASE_sensorParamsIsAvailable[sensorPipeNum][paramNum] = false;    
+      GSM_paramPrevSMSMillis[paramNum] = (uint32_t) 1;  
+    }
+  }
 
   pinMode(GSM_reset_pin, OUTPUT);
   digitalWrite(GSM_reset_pin, 1); //HIGH=normal, LOW=resetGSM

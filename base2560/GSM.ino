@@ -31,7 +31,7 @@ void GSM_ping() {
 }
 
 void GSM_pingCheckTimeAnswer() {
-  if ( (millis() - GSM_prevPingSuccessAnswerMillis) > 35000L ) {
+  if ( (millis() - GSM_prevPingSuccessAnswerMillis) > 35000 ) {
     GSM_reset();
     GSM_prevPingSuccessAnswerMillis = millis();
 #ifdef DEBUG
@@ -74,7 +74,7 @@ bool GSM_paramIsAllowSms(uint8_t paramNum) {
 #ifdef DEBUG
     debugSerial.println("millis");
 #endif
-    GSM_paramPrevSMSMillis[paramNum] = millis();
+    GSM_paramPrevSMSMillis[paramNum] = (uint32_t) millis();
     return true;
   }
   else {
