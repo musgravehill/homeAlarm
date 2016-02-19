@@ -16,7 +16,7 @@ MAX 1.1V for ADC A0..A*
 
 
 #if defined(__AVR_ATmega2560__)
-   analogReference(INTERNAL1V1);
+   analogReference(INTERNAL2V56);
 #else
    analogReference(INTERNAL);
 #endif
@@ -28,3 +28,11 @@ INTERNAL2V56: внутреннее опорное напряжение 2.56 В (
 EXTERNAL: в качестве опорного напряжения будет использоваться напряжение, приложенное к выводу AREF (от 0 до 5В)
 
 */
+//analogRead(sensorPin);
+
+//BASE_voltage_base_pin;
+//BASE_voltage_acdc_pin; 
+//BASE_voltage_battery_pin;
+
+
+

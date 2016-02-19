@@ -34,7 +34,7 @@
     W   0=null, 0=null, (0,1 + 100) = 100=normal, 101=alert         water leak, bool
     G   0=null, 0..1023 [+1] ADC  gas CH4, ADC value
     M   0=null, (0,1 + 100) = 100=normal, 101=alert motion detector, bool
-    C   0=null, 0..1023 [+1]      gas CO, ADC value    
+    C   0=null, 0..1023 [+1]      gas CO, ADC value
 
   LOGS => log on SD only
   DNGR => log on SD & send SMS [danger]
@@ -138,10 +138,9 @@ uint8_t GSM_reset_pin = 23;
 bool BASE_ALARM_MOTION_MODE = true;
 
 //peripheral
-bool BASE_buzzer_isNeed = false;
-bool BASE_siren_isNeed = false;
-uint8_t BASE_buzzer_pin = 4; //N-mosfet
-uint8_t BASE_siren_pin = 8;  //N-mosfet
+bool ALARM_buzzer_isNeed = false;
+bool ALARM_siren_isNeed = false;
+
 
 uint8_t BASE_voltage_base_pin = A0; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
 uint8_t BASE_voltage_acdc_pin = A1; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
@@ -149,9 +148,13 @@ uint8_t BASE_voltage_battery_pin = A2; //TODO ADC AREF set to inner 2.56V and ma
 
 //menu
 int8_t MENU_state = 1;
-uint8_t MENU_btnPrev_pin = 2;
-uint8_t MENU_btnNext_pin = 3;
-
+uint8_t INTERFACE_btn_prev_pin = 2;
+uint8_t INTERFACE_btn_next_pin = 3;
+uint8_t INTERFACE_buzzer_pin = 4; //N-mosfet
+uint8_t INTERFACE_btn_reset_pin = 5;
+uint8_t INTERFACE_led_alarm_pin = 6;
+uint8_t INTERFACE_led_reserveForFuture_pin = 7;
+uint8_t INTERFACE_siren_pin = 8;  //N-mosfet
 
 uint32_t BASE_sensorSilenceFaultMillis = 300000; //сенсор молчит более millis => он сломался
 bool BASE_sensorIsOn[6]; //0 1..5
@@ -168,22 +171,30 @@ void setup() {
   MCUSR = 0;  //VERY VERY IMPORTANT!!!! ELSE WDT DOESNOT RESET, DOESNOT DISABLED!!!
   wdt_disable();
 
+  delay(20);
+  analogReference(INTERNAL2V56);
+
   for (uint8_t sensorPipeNum = 0; sensorPipeNum < 6; sensorPipeNum++) { //0 INCLUDE INIT! SENSORS PIPES 1..5 USE!
     millisPrevSignal_sensors[sensorPipeNum] = (uint32_t) 1;
-    BASE_sensorIsOn[sensorPipeNum] = (bool) false;    
+    BASE_sensorIsOn[sensorPipeNum] = (bool) false;
     for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
-      BASE_sensorDecodedParams[sensorPipeNum][paramNum] = (int16_t) 999;
+      BASE_sensorDecodedParams[sensorPipeNum][paramNum] = (int16_t) 0;
       BASE_sensorParamsIsDanger[sensorPipeNum][paramNum] = false;
-      BASE_sensorParamsIsAvailable[sensorPipeNum][paramNum] = false;    
-      GSM_paramPrevSMSMillis[paramNum] = (uint32_t) 1;  
+      BASE_sensorParamsIsAvailable[sensorPipeNum][paramNum] = false;
+      GSM_paramPrevSMSMillis[paramNum] = (uint32_t) 1;
     }
   }
 
   pinMode(GSM_reset_pin, OUTPUT);
   digitalWrite(GSM_reset_pin, 1); //HIGH=normal, LOW=resetGSM
 
-  pinMode(MENU_btnPrev_pin, INPUT);
-  pinMode(MENU_btnNext_pin, INPUT);
+  pinMode(INTERFACE_btn_prev_pin, INPUT);
+  pinMode(INTERFACE_btn_next_pin, INPUT);
+  pinMode(INTERFACE_btn_reset_pin, INPUT);
+  pinMode(INTERFACE_led_alarm_pin, OUTPUT);
+  pinMode(INTERFACE_led_reserveForFuture_pin, OUTPUT);
+  pinMode(INTERFACE_buzzer_pin, OUTPUT);
+  pinMode(INTERFACE_siren_pin, OUTPUT);
 
   delay(2000); //for calming current & voltage fluctuations
 
@@ -224,8 +235,8 @@ void setup() {
 
   ALARM_restore_alarmModeState();
 
-  ALARM_beepShort_buzzer();
-  ALARM_beepShort_siren();
+  INTERFACE_buzzer_beep();
+  INTERFACE_siren_beep();
 
   wdt_enable(WDTO_8S); //if WDT not reset on 8s => atmega restarts
 }

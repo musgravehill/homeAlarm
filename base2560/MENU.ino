@@ -1,6 +1,7 @@
 void MENU_btnsCheck() {
-  if (digitalRead(MENU_btnPrev_pin) == 1) {
-    ALARM_beepShort_buzzer();
+  if (digitalRead(INTERFACE_btn_prev_pin) == 1) {
+    INTERFACE_buzzer_beep();
+    INTERFACE_led_alarm_blink();
     MENU_state--;
     if (MENU_state < 0) {
       MENU_state = 0;
@@ -8,14 +9,25 @@ void MENU_btnsCheck() {
     TFT_renderMenuState();
   }
 
-  if (digitalRead(MENU_btnNext_pin) == 1) {
-    ALARM_beepShort_buzzer();
+  if (digitalRead(INTERFACE_btn_next_pin) == 1) {
+    INTERFACE_buzzer_beep();
+    INTERFACE_led_alarm_blink();
     MENU_state++;
     if (MENU_state > 3) {
       MENU_state = 3;
     }
     TFT_renderMenuState();
   }
+
+  if (digitalRead(INTERFACE_btn_reset_pin) == 1) {
+    INTERFACE_buzzer_beep();
+    INTERFACE_led_alarm_blink();
+    wdt_disable();
+    delay(20);
+    wdt_enable(WDTO_2S);
+    delay(2100);
+  }
+
 }
 
 

@@ -1,6 +1,6 @@
 void ALARM_processSensorsParams() {
-  BASE_buzzer_isNeed = false;
-  BASE_siren_isNeed = false;
+  ALARM_buzzer_isNeed = false;
+  ALARM_siren_isNeed = false;
 
   for (uint8_t sensorNum = 1; sensorNum < 6; sensorNum++) { //SENSORS PIPES 1..5!
     for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
@@ -14,41 +14,29 @@ void ALARM_processSensorsParams() {
             GSM_addToQueueSMS_forAllPhones(SMS_danger);
           }
           //siren
-          if (paramNum == 5) {
-            BASE_siren_isNeed = true;
+          if (paramNum == 5) { //MOTION DETECTOR
+            ALARM_siren_isNeed = true;
           }
-          //for testing
-          BASE_buzzer_isNeed = true;
+          ALARM_buzzer_isNeed = true;//for testing
         }
         else {
-          BASE_buzzer_isNeed = true;
+          ALARM_buzzer_isNeed = true;
         }
       }
     }
   }
 }
 
-void ALARM_beepShort_buzzer() {
-  digitalWrite(BASE_buzzer_pin, 1);
-  delay(100);
-  digitalWrite(BASE_buzzer_pin, 0);
-}
-void ALARM_beepShort_siren() {
-  digitalWrite(BASE_siren_pin, 1);
-  delay(1000);
-  digitalWrite(BASE_siren_pin, 0);
-}
-void ALARM_controlBuzzer() {
-  if (BASE_buzzer_isNeed) {
-    ALARM_beepShort_buzzer();
+void ALARM_controlAlarm() {
+  if (ALARM_siren_isNeed) {
+    INTERFACE_siren_on();
+    INTERFACE_led_alarm_blink();
+  }
+  if (ALARM_buzzer_isNeed) {
+    INTERFACE_buzzer_beep();
+    INTERFACE_led_alarm_blink();
   }
 }
-void ALARM_controlSiren() {
-  if (BASE_siren_isNeed) {
-    digitalWrite(BASE_siren_pin, 1);
-  }
-}
-
 
 //TODO
 void ALARM_save_alarmModeState() {
