@@ -79,6 +79,11 @@ int16_t NRF_messageFromSensor[7];
 
 //время последнего сигнала от сенсоров, если давно было => сенсор сломался или выключен
 uint32_t millisPrevSignal_sensors[6]; // pipe 0..5
+uint32_t BASE_sensorSilenceFaultMillis = 300000; //сенсор молчит более millis => он сломался
+bool BASE_sensorIsOn[6]; //0 1..5
+bool BASE_sensorParamsIsAvailable[6][7]; //[sensorPipeNum][paramNum]
+bool BASE_sensorParamsIsDanger[6][7]; //[sensorPipeNum][paramNum]
+int BASE_sensorDecodedParams[6][7];  //encoded params;  [sensorNum][paramNum]
 
 RF24 radio(NRF_CE_PIN, NRF_CSN_PIN);
 
@@ -135,19 +140,20 @@ uint8_t GSM_queueLoop_stateMachine_pos = 0;
 uint32_t GSM_prevPingSuccessAnswerMillis = 1; //send AT+CSQ, not get answer => RST GSM
 uint8_t GSM_reset_pin = 23;
 
-bool BASE_ALARM_MOTION_MODE = true;
+//menu
+int8_t MENU_state = 1;
 
-//peripheral
+//ALARM
+bool BASE_ALARM_MOTION_MODE = true;
 bool ALARM_buzzer_isNeed = false;
 bool ALARM_siren_isNeed = false;
+uint32_t ALARM_siren_startTime = 0;
 
-
+//peripheral
 uint8_t BASE_voltage_base_pin = A0; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
 uint8_t BASE_voltage_acdc_pin = A1; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
 uint8_t BASE_voltage_battery_pin = A2; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
 
-//menu
-int8_t MENU_state = 1;
 uint8_t INTERFACE_btn_prev_pin = 2;
 uint8_t INTERFACE_btn_next_pin = 3;
 uint8_t INTERFACE_buzzer_pin = 4; //N-mosfet
@@ -156,11 +162,6 @@ uint8_t INTERFACE_led_alarm_pin = 6;
 uint8_t INTERFACE_led_reserveForFuture_pin = 7;
 uint8_t INTERFACE_siren_pin = 8;  //N-mosfet
 
-uint32_t BASE_sensorSilenceFaultMillis = 300000; //сенсор молчит более millis => он сломался
-bool BASE_sensorIsOn[6]; //0 1..5
-bool BASE_sensorParamsIsAvailable[6][7]; //[sensorPipeNum][paramNum]
-bool BASE_sensorParamsIsDanger[6][7]; //[sensorPipeNum][paramNum]
-int BASE_sensorDecodedParams[6][7];  //encoded params;  [sensorNum][paramNum]
 
 #define DEBUG 1;
 
