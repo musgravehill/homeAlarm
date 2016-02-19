@@ -144,9 +144,9 @@ uint8_t GSM_reset_pin = 23;
 int8_t MENU_state = 1;
 
 //ALARM
-bool BASE_ALARM_MOTION_MODE = true;
-bool ALARM_buzzer_isNeed = false;
-bool ALARM_siren_isNeed = false;
+bool ALARM_MOTIONDETECTION_MODE = true;
+bool ALARM_SOFT_isNeed = false;
+bool ALARM_LOUD_isNeed = false;
 uint32_t ALARM_indication_startTime = 0;
 
 //peripheral

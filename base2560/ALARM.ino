@@ -5,7 +5,7 @@ void ALARM_processSensorsParams() {
   for (uint8_t sensorNum = 1; sensorNum < 6; sensorNum++) { //SENSORS PIPES 1..5!
     for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
       if (BASE_sensorParamsIsDanger[sensorNum][paramNum]) {
-        if (BASE_ALARM_MOTION_MODE) { //ALARM MODE: SMS, SIREN
+        if (ALARM_MOTIONDETECTION_MODE) { //ALARM MODE: SMS, SIREN
           //SMS
           if (GSM_paramIsAllowSms(paramNum)) {
             String SMS_danger =  "#" + String(sensorNum, DEC) + " ";
@@ -44,9 +44,9 @@ void ALARM_controlIndication() {
   }
 }
 
-//TODO
-void ALARM_save_alarmModeState() {
-  if (BASE_ALARM_MOTION_MODE) {
+
+void ALARM_set_alarmModeState() {
+  if (ALARM_MOTIONDETECTION_MODE) {
     eeprom24C32.writeByte(eeprom24C32_address_alarmMode, B1);
   } else {
     eeprom24C32.writeByte(eeprom24C32_address_alarmMode, B0);
@@ -55,7 +55,7 @@ void ALARM_save_alarmModeState() {
 
 void ALARM_restore_alarmModeState() {
   uint8_t alarmStateFromEeprom = eeprom24C32.readByte(eeprom24C32_address_alarmMode);
-  BASE_ALARM_MOTION_MODE = (alarmStateFromEeprom == 1) ? true : false;
+  ALARM_MOTIONDETECTION_MODE = (alarmStateFromEeprom == B1) ? true : false;
 }
 
 
