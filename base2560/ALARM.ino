@@ -1,11 +1,11 @@
 void ALARM_processSensorsParams() {
-  ALARM_buzzer_isNeed = false;
-  ALARM_siren_isNeed = false;
+  ALARM_SOFT_isNeed = false;
+  ALARM_LOUD_isNeed = false;
 
   for (uint8_t sensorNum = 1; sensorNum < 6; sensorNum++) { //SENSORS PIPES 1..5!
     for (uint8_t paramNum = 0; paramNum < 7; paramNum++) {
       if (BASE_sensorParamsIsDanger[sensorNum][paramNum]) {
-        if (BASE_ALARM_MOTION_MODE) { //ALRM MODE && param_M_5
+        if (BASE_ALARM_MOTION_MODE) { //ALARM MODE: SMS, SIREN
           //SMS
           if (GSM_paramIsAllowSms(paramNum)) {
             String SMS_danger =  "#" + String(sensorNum, DEC) + " ";
@@ -15,12 +15,11 @@ void ALARM_processSensorsParams() {
           }
           //siren
           if (paramNum == 5) { //MOTION DETECTOR
-            ALARM_siren_isNeed = true;
+            ALARM_LOUD_isNeed = true;
           }
-          ALARM_buzzer_isNeed = true;//for testing
         }
-        else {
-          ALARM_buzzer_isNeed = true;
+        else { //owner at home, NO SMS||SIREN
+          ALARM_SOFT_isNeed = true;
         }
       }
     }
@@ -29,25 +28,19 @@ void ALARM_processSensorsParams() {
 
 void ALARM_controlIndication() {
   uint32_t currMillis = millis();
-  uint32_t delta = millis() - ALARM_indication_startTime;
-  if (
-    (ALARM_siren_isNeed || ALARM_buzzer_isNeed) &&
-    (ALARM_indication_startTime == 0) || (delta < 3000)  || (delta > 5000)
-  )
-  {
+  uint32_t durationOn = currMillis - ALARM_indication_startTime;
+  if (durationOn > 23000)  { //duration, when siren||beeper is ON
+    INTERFACE_siren_off(); //siren **seconds, then off  => saves battery power
+  }
+  if (ALARM_LOUD_isNeed) {
+    INTERFACE_siren_on();
+    INTERFACE_led_alarm_blink();
     ALARM_indication_startTime = currMillis;
-
-    if (ALARM_siren_isNeed) {
-      INTERFACE_siren_on();
-      INTERFACE_led_alarm_blink();
-    }
-    if (ALARM_buzzer_isNeed) {
-      INTERFACE_buzzer_beep();
-      INTERFACE_led_alarm_blink();
-    }
-
-  } else {
-    ALARM_indication_endTime = currMillis;
+  }
+  if (ALARM_SOFT_isNeed) {
+    INTERFACE_buzzer_beep();
+    INTERFACE_led_alarm_blink();
+    ALARM_indication_startTime = currMillis;
   }
 }
 

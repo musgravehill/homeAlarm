@@ -43,14 +43,14 @@ void STATEMACHINE_1s() {
   GSM_listenSerial();
   wr();
   GSM_checkIncomingCall();
-  wr();
-  ALARM_controlIndication();
-  wr();
+  wr();  
 }
 
 void STATEMACHINE_3s() {
   wr();
   ALARM_processSensorsParams();
+  wr();
+  ALARM_controlIndication();
   wr();
 }
 
