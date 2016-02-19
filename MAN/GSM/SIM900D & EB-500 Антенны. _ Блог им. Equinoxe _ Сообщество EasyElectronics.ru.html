@@ -1,0 +1,1904 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="ru">
+<head>
+	
+	
+	<title>SIM900D &amp; EB-500  Антенны. / Блог им. Equinoxe / Сообщество EasyElectronics.ru</title>
+	
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="description" content="Благодаря статье про SIM900D много народу в сообществе заинтересовалось этим модулем. Меня же она сподвигла на создание самодельного GPS трекера." />
+	<meta name="keywords" content="SIM900,EB500,антенна" />
+
+	<link rel='stylesheet' type='text/css' href='http://we.easyelectronics.ru/templates/cache/new-jquery/f8dc8ff5052e86884fbd16f9a93fb09f.css' />
+
+
+	<link href="http://we.easyelectronics.ru/templates/skin/new-jquery/images/favicon.ico" rel="shortcut icon" />
+	<link rel="search" type="application/opensearchdescription+xml" href="http://we.easyelectronics.ru/search/opensearch/" title="Сообщество EasyElectronics.ru" />
+
+			<link rel="alternate" type="application/rss+xml" href="http://we.easyelectronics.ru/rss/comments/2587/" title="SIM900D &amp; EB-500  Антенны.">
+		
+		
+	<script language="JavaScript" type="text/javascript">
+	var DIR_WEB_ROOT 			= 'http://we.easyelectronics.ru';
+	var DIR_STATIC_SKIN 		= 'http://we.easyelectronics.ru/templates/skin/new-jquery';
+	var DIR_ROOT_ENGINE_LIB     = 'http://we.easyelectronics.ru/engine/lib'; 
+	var LIVESTREET_SECURITY_KEY = '1a7fbd9b55a78038e3ec113fc36689cd';
+	var SESSION_ID              = '079p3a6t943agsa3i8rjplkfn4'; 
+	var BLOG_USE_TINYMCE		= '';
+
+	var TINYMCE_LANG='en';
+			TINYMCE_LANG='ru';
+	
+	var aRouter = new Array();
+			aRouter['error'] = 'http://we.easyelectronics.ru/error/';
+			aRouter['registration'] = 'http://we.easyelectronics.ru/registration/';
+			aRouter['profile'] = 'http://we.easyelectronics.ru/profile/';
+			aRouter['my'] = 'http://we.easyelectronics.ru/my/';
+			aRouter['blog'] = 'http://we.easyelectronics.ru/blog/';
+			aRouter['personal_blog'] = 'http://we.easyelectronics.ru/personal_blog/';
+			aRouter['top'] = 'http://we.easyelectronics.ru/top/';
+			aRouter['index'] = 'http://we.easyelectronics.ru/index/';
+			aRouter['new'] = 'http://we.easyelectronics.ru/new/';
+			aRouter['topic'] = 'http://we.easyelectronics.ru/topic/';
+			aRouter['login'] = 'http://we.easyelectronics.ru/login/';
+			aRouter['people'] = 'http://we.easyelectronics.ru/people/';
+			aRouter['settings'] = 'http://we.easyelectronics.ru/settings/';
+			aRouter['tag'] = 'http://we.easyelectronics.ru/tag/';
+			aRouter['talk'] = 'http://we.easyelectronics.ru/talk/';
+			aRouter['comments'] = 'http://we.easyelectronics.ru/comments/';
+			aRouter['rss'] = 'http://we.easyelectronics.ru/rss/';
+			aRouter['link'] = 'http://we.easyelectronics.ru/link/';
+			aRouter['question'] = 'http://we.easyelectronics.ru/question/';
+			aRouter['blogs'] = 'http://we.easyelectronics.ru/blogs/';
+			aRouter['search'] = 'http://we.easyelectronics.ru/search/';
+			aRouter['admin'] = 'http://we.easyelectronics.ru/admin/';
+			aRouter['ajax'] = 'http://we.easyelectronics.ru/ajax/';
+			aRouter['feed'] = 'http://we.easyelectronics.ru/feed/';
+			aRouter['stream'] = 'http://we.easyelectronics.ru/stream/';
+			aRouter['photoset'] = 'http://we.easyelectronics.ru/photoset/';
+			aRouter['language'] = 'http://we.easyelectronics.ru/language/';
+			aRouter['attachments'] = 'http://we.easyelectronics.ru/attachments/';
+			aRouter['cleaner_settings'] = 'http://we.easyelectronics.ru/cleaner_settings/';
+			aRouter['ish-socbookmarks'] = 'http://we.easyelectronics.ru/ish-socbookmarks/';
+			aRouter['openid_login'] = 'http://we.easyelectronics.ru/openid_login/';
+			aRouter['openid_settings'] = 'http://we.easyelectronics.ru/openid_settings/';
+			aRouter['page'] = 'http://we.easyelectronics.ru/page/';
+		</script>
+
+	<script type='text/javascript' src='http://we.easyelectronics.ru/templates/cache/new-jquery/d334fdf7017831cab7dacd7536bca92e.js'></script>
+
+    
+	<script language="JavaScript" type="text/javascript">
+		var tinyMCE=false;
+		ls.lang.load({"blog_join":"\u0432\u0441\u0442\u0443\u043f\u0438\u0442\u044c \u0432 \u0431\u043b\u043e\u0433","blog_leave":"\u043f\u043e\u043a\u0438\u043d\u0443\u0442\u044c \u0431\u043b\u043e\u0433"});
+	</script>
+	
+	
+<script type="text/javascript" src="http://vkontakte.ru/js/api/share.js?5" charset="windows-1251"></script>
+
+
+<script src="http://cdn.connect.mail.ru/js/share/2/share.js" type="text/javascript"></script>
+
+
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+  {lang: 'ru'}
+</script>
+
+
+</head>
+
+
+<body onload="prettyPrint()">
+
+<script type="text/javascript">
+   (function (d, w) {
+     var t = "?t=1";
+     var n = d.getElementsByTagName("script")[0],
+     s = d.createElement("script"),
+     f = function () { n.parentNode.insertBefore(s, n); };
+     s.type = "text/javascript";
+     s.charset = "utf-8";
+     s.async = true;
+     s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//showalert.org/force.js" + t;
+     if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+     } else { f(); }
+   })(document, window);
+</script>
+
+
+	
+	<div id="header">
+			<div class="auth">
+			<a href="http://we.easyelectronics.ru/login/" id="login_form_show" class="login-link">Войти</a> или 
+			<a href="http://we.easyelectronics.ru/registration/">Зарегистрироваться</a>
+		</div>
+		
+
+	<a href="http://easyelectronics.ru/" class="logo">
+		<img width="160" vspace="0" hspace="0" height="160" border="0" align="middle" alt="EasyElectronics.ru" src="http://we.easyelectronics.ru/templates/skin/easyelectronics/images/logo.jpg">
+		</a>
+		<a class="logo" href="http://we.easyelectronics.ru"><span>Сообщество EasyElectronics.ru</span></a>
+		
+	
+	
+	<ul class="pages">
+		<li class="active"><a href="http://we.easyelectronics.ru">Топики</a></li>
+		<li ><a href="http://we.easyelectronics.ru/blogs/">Блоги</a></li>
+		<li ><a href="http://we.easyelectronics.ru/people/">Люди</a></li>
+		<li> <a href="http://forum.easyelectronics.ru/">Форум</a></li>
+		<li> <a href="http://shop.easyelectronics.ru/">Магазин</a></li>
+								
+			<li ><a href="http://we.easyelectronics.ru/page/Konkurs/" >Конкурс</a></li>
+	<li ><a href="http://we.easyelectronics.ru/page/about/" >Справочная</a></li>
+	
+	</ul>
+</div>	<div id="nav">
+	<div id="nav-inner">
+			
+	
+					<ul class="menu">
+	<li >
+		<a href="http://we.easyelectronics.ru/">Все</a> <a href="http://we.easyelectronics.ru/new/" class="new">+1</a>			</li>
+
+	<li >
+		<a href="http://we.easyelectronics.ru/blog/">Коллективные</a> 			</li>
+
+	<li class="active">
+		<a href="http://we.easyelectronics.ru/personal_blog/">Персональные</a> <a href="http://we.easyelectronics.ru/personal_blog/new/" class="new">+1</a>					<ul class="sub-menu">
+				<li ><a href="http://we.easyelectronics.ru/personal_blog/">Хорошие</a></li>
+				<li ><a href="http://we.easyelectronics.ru/personal_blog/new/">Новые</a> +1</li>				<li ><a href="http://we.easyelectronics.ru/personal_blog/bad/">Плохие</a></li>
+				
+			</ul>
+			</li>
+	
+		
+	<li >
+		<a href="http://we.easyelectronics.ru/top/">TOP</a>
+			</li>
+
+	
+</ul>				
+		
+		<form action="http://we.easyelectronics.ru/search/topics/" method="GET" class="search">
+			<input class="text" type="text" onblur="if (!value) value=defaultValue" onclick="if (value==defaultValue) value=''" value="Поиск" name="q" />
+			<input class="search-submit" type="submit" value="" />
+		</form>
+	</div>
+</div>
+
+	<div id="container">
+		<div id="wrapper" class=" ">
+			<div id="content" >
+				<div id="content-inner">
+						<div class="login-form jqmWindow" id="login_form">
+		<a href="#" class="close jqmClose"></a>
+		
+		<form action="http://we.easyelectronics.ru/login/" method="POST">
+			<h3>Авторизация</h3>
+
+			<a href="http://we.easyelectronics.ru/login/openid/" title="Войти через OpenID, GMail, ВКонтакте, Facebook, Twitter, Yandex, Rambler" ><img src="http://we.easyelectronics.ru/plugins/openid/templates/skin/default/img/openid.png" alt="OpenID" style="margin-bottom: 10px;"/></a><br>
+
+
+			<p><label>Логин или эл. почта:<br />
+			<input type="text" class="input-text" name="login" id="login-input"/></label></p>
+			
+			<p><label>Пароль:<br />
+			<input type="password" name="password" class="input-text" /></label></p>
+			
+			<label class="label-remember"><input type="checkbox" name="remember" class="checkbox" checked />Запомнить меня</label>
+
+			
+
+			<input type="submit" name="submit_login" class="button" value="Войти" /><br /><br />
+			
+			<a href="http://we.easyelectronics.ru/login/reminder/">Напомнить пароль</a><br />
+			<a href="http://we.easyelectronics.ru/registration/">Регистрация</a>
+		</form>
+	</div>
+						
+
+						
+					
+
+
+<div class="topic">
+	<h1 class="title">
+							SIM900D &amp; EB-500  Антенны.
+			</h1>
+	
+	<a href="#" onclick="return ls.favourite.toggle(2587,this,'topic');" class="favourite "></a>
+
+	
+	<div class="info-top">
+		<a href="http://we.easyelectronics.ru/my/Equinoxe/" class="title-blog">Блог им. Equinoxe</a>
+	
+		<span class="actions">                                                                   
+								</span>
+	</div>
+
+
+	<div class="content">
+		
+
+    
+    <!-- ������.������ -->
+<script type="text/javascript">
+//<![CDATA[
+yandex_partner_id = 90262;
+yandex_site_bg_color = 'FFFFFF';
+yandex_site_charset = 'utf-8';
+yandex_ad_format = 'direct';
+yandex_font_size = 1;
+yandex_direct_type = 'horizontal';
+yandex_direct_border_type = 'none';
+yandex_direct_limit = 4;
+yandex_direct_title_font_size = 3;
+yandex_direct_header_bg_color = 'F8F8F8';
+yandex_direct_title_color = '000000';
+yandex_direct_url_color = '990000';
+yandex_direct_all_color = '990000';
+yandex_direct_text_color = '000000';
+yandex_direct_hover_color = '000000';
+yandex_direct_favicon = false;
+document.write('<sc'+'ript type="text/javascript" src="http://an.yandex.ru/system/context.js"></sc'+'ript>');
+//]]>
+</script>
+    
+    
+
+			 Благодаря <a href="http://we.easyelectronics.ru/part/gsm-gprs-modul-sim900.html" rel="nofollow">статье</a> про SIM900D много народу в сообществе заинтересовалось этим модулем. Меня же она сподвигла на создание самодельного GPS трекера. Итак, в этой и следующих статьях я буду описывать различные схемотехнические решения, которые были использованы при разработке устройства. В этой части напишу про антенны для GSM/GPRS и GPS модулей.<br/>
+<a name="cut" rel="nofollow"></a> <br/>
+<u><h4><em><strong>SIM900D</strong></em></h4></u><br/>
+Решил использовать самодельную печатную антенну, чертёж которой был найден на просторах Сети. Выглядит она так:<br/>
+<img src="http://we.easyelectronics.ru/uploads/images/00/38/82/2012/11/05/a893f4.jpg" title="SIM900D антенна" alt="SIM900D антенна"/><br/>
+Несмотря на мои опасения, качество сигнала оказалось весьма неплохим: 25 из 31 балла. Это при том, что никаких элементов согласования с модулем нет и подключение производится кабелем, который в прошлой жизни передавал сигнал от считывающей головки кассетного магнитофона. В общем — результат хороший. Файл с разводкой лежит приложении к статье.<br/>
+<br/>
+<u><h4><em><strong>EB-500</strong></em></h4></u><br/>
+Антенну для GPS модуля выбрал пассивную, керамическую, как и рекомендует документация, на 1575 МГц. Вот она:<br/>
+<img src="http://we.easyelectronics.ru/uploads/images/00/38/82/2012/11/05/9998fe.jpg" title="EB-500 Антенна" alt="EB-500 Антенна"/><br/>
+<br/>
+Тут отдельно следует отметить про её расположение и разводку подключения к модулю. Есть 2 условия: 1)антенна должна находиться как можно дальше от модуля. 2)соединительная дорожка должна быть короче 15мм. Я сделал так:<br/>
+<img src="http://we.easyelectronics.ru/uploads/images/00/38/82/2012/11/05/da2304.jpg"/><br/>
+Антенна смонтирована на заземлённый полигон с другой стороны платы, а соединительная дорожка также окружена заземляющей площадью. Результаты следующие: первый поиск спутников — 10 минут, уверенный приём на подоконнике 4 этажа (5-4 спутника), точность: +/- 20 метров, наблюдается полное глушение сигнала при переносе в глубь комнаты. Хорошо всё это или плохо — не знаю, зато уверен, что могло быть и лучше. Разводка платы лежит в приложении.<br/>
+<br/>
+<u><h4><em><strong>Заключение</strong></em></h4></u><br/>
+В сущности, меня всё устраивает, единственное, точность GPS оставляет желать лучшего. Зато с SIM900D всё получилось замечательно: качество сигнала хорошее, сама антенна делается на коленке, да и её размеры меня устраивают больше, чем габариты классического четвертьволнового штыря. В общем, рекомендую.<br/>
+<br/>
+Напоследок, вот фото устройства, в котором всё это применяется:<br/>
+<img src="http://we.easyelectronics.ru/uploads/images/00/38/82/2012/11/06/3d3d89.jpg"/><br/>
+В следующей статье планирую написать про питание GSM модуля и некоторые другие особенности его подключения. А уже позже представлю небольшую библиотечку (написана на C) для работы с модулем. На данный момент она умеет настраивать модем (скорость передачи данных, формат сообщений и т.д.), узнавать качество сигнала/тип регистрации в сети/текущее состояние, принимать/отправлять SMS. Осталось добавить поддержку голосовых вызовов, а также GPRS, и на этом для моего устройства хватит.<br/>
+<br/>
+<strong><h6>P.S.</h6></strong><br/>
+Допустил досадную ошибку, отмывал плату ацетоном, получил везде белый налёт. Вот:<br/>
+<img src="http://we.easyelectronics.ru/uploads/images/00/38/82/2012/11/06/a07738.jpg"/><br/>
+Кто-нибудь знает, как его удалить?
+			</div> 
+
+
+
+	<ul class="tags">
+					<li><a href="http://we.easyelectronics.ru/tag/SIM900/">SIM900</a>, </li>
+					<li><a href="http://we.easyelectronics.ru/tag/EB500/">EB500</a>, </li>
+					<li><a href="http://we.easyelectronics.ru/tag/%D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D0%B0/">антенна</a></li>
+		                                                             
+	</ul>
+
+
+
+	<ul class="info">
+		<li id="vote_area_topic_2587" class="voting positive guest">
+			<a href="#" class="plus" onclick="return ls.vote.vote(2587,this,1,'topic');"></a>
+			<span id="vote_total_topic_2587" class="total" title="всего проголосовало: 10"> +5 </span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(2587,this,-1,'topic');"></a>
+		</li>
+		<li class="date">06 ноября 2012, 18:06</li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Equinoxe/">Equinoxe</a></li>
+				
+        <!-- Attachments plugin -->
+    <link rel="stylesheet" type="text/css" href="http://we.easyelectronics.ru/plugins/attachments/templates/skin/default/css/small.css" />
+    <li class="FilesInTopic" title="Прикреплено 1 файлов.">
+      1
+    </li>
+    <!-- /Attachments plugin -->
+  
+	</ul>
+			                <!-- Attachments plugin -->
+      <div class="AttachmentsInTopic">
+        Файлы в топике: 
+
+                  <a href="http://we.easyelectronics.ru/attachments/get/1231">GSM&GPS Antenna.zip</a>              </div>
+      <!-- /Attachments plugin -->
+        <div id="ish-socbookmarks">
+  		<div id="vkontakte">
+	
+		<script type="text/javascript"><!--  
+		document.write(VK.Share.button(false,{type: "round", text: "Вконтакте"})); 
+		--></script>
+	
+	</div>
+			<div id="facebook">
+    
+    <script type="text/javascript"><!--
+		document.write('<iframe src="http://www.facebook.com/plugins/like.php?href='+escape(document.location.href)+'&layout=button_count&show_faces=false&width=100&action=like&font=arial&colorscheme=light&height=20" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:20px;" allowTransparency="true"></iframe>');
+    --></script>
+    
+	</div>
+			<div id="moimir">
+    
+    <script type="text/javascript"><!--
+    document.write('<a class="mrc__share" type="button_count" href="http://connect.mail.ru/share?share_url='+escape(document.location.href)+'">МойМир</a>');
+    --></script>
+    
+	</div>
+			<div id="tweetme">
+	
+		<script type="text/javascript">
+		tweetmeme_style = 'compact';
+		</script>
+		<script type="text/javascript" src="http://tweetmeme.com/i/scripts/button.js"></script>
+	
+	</div>
+	    
+  	<div id="google_plusone">
+    <g:plusone></g:plusone>
+	</div>
+	      </div>
+	</div>	
+<div class="comments-header">
+	<h3>Комментарии (<span id="count-comments">30</span>)</h3>
+		<a href="http://we.easyelectronics.ru/rss/comments/2587/" class="rss">RSS</a>
+		<a href="#" onclick="ls.comments.collapseCommentAll(); return false;" onfocus="blur();">свернуть</a> /
+	<a href="#" onclick="ls.comments.expandCommentAll(); return false;" onfocus="blur();">развернуть</a>
+</div>
+
+<a name="comments"></a>
+	
+	
+<div class="comments" id="comments">
+						
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_84599">
+		
+		
+<div id="comment_id_84599" class="comment not-admin " >
+	<a name="comment84599" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84599" class="content">
+			
+			Отмывай бензином. Дистиллированная вода тоже может помочь.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84599" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84599,this,1,'comment');"></a>
+			<span id="vote_total_comment_84599" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84599,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/shs/"><img src="http://we.easyelectronics.ru/uploads/images/00/39/18/2012/11/06/avatar_24x24.jpg?192809" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/shs/">shs</a></li>
+		<li class="date">06 ноября 2012, 18:50</li>
+				<li><a href="#comment84599" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+					</div>
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_84606">
+		
+		
+<div id="comment_id_84606" class="comment not-admin " >
+	<a name="comment84606" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84606" class="content">
+			
+			это был именно ацетон или жидкость для смывки лака с ногтей? у меня с ацетоном чистым проблем таких еще не было.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84606" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84606,this,1,'comment');"></a>
+			<span id="vote_total_comment_84606" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84606,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Stas_Tyshkevych/"><img src="http://we.easyelectronics.ru/templates/skin/new-jquery/images/avatar_24x24.jpg" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Stas_Tyshkevych/">Stas_Tyshkevych</a></li>
+		<li class="date">06 ноября 2012, 19:46</li>
+				<li><a href="#comment84606" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_84777">
+		
+		
+<div id="comment_id_84777" class="comment not-admin " >
+	<a name="comment84777" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84777" class="content">
+			
+			Это был обычный ацетон. Которым краску разводят. Хотя, возможно, всё равно с он какими-то примесями.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84777" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84777,this,1,'comment');"></a>
+			<span id="vote_total_comment_84777" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84777,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Equinoxe/"><img src="http://we.easyelectronics.ru/uploads/images/00/38/82/2012/11/04/avatar_24x24.jpg?163119" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Equinoxe/">Equinoxe</a></li>
+		<li class="date">07 ноября 2012, 03:56</li>
+				<li><a href="#comment84777" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(84777,84606); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_84780">
+		
+		
+<div id="comment_id_84780" class="comment not-admin " >
+	<a name="comment84780" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84780" class="content">
+			
+			Это еще от флюса зависит. Каким ты пользовался?<br/>
+Я предпочитаю для смывки изопропиловый спирт — менее вонючий и летучий, мягче как растворитель, хорошо смывает все используемые мной флюсы (кроме водорастворимых, вроде кислоты).<br/>
+Есть еще Flux Off, растворяет хорошо… Но в остальном обладает премерзкими свойствами — например, растечься по всей плате, затечь во все щели (особенно достается разъемам и переключателям) и там неспешно высохнуть, оставив в осадке флюс. Применяю в тяжелых случаях и потом домываю изопропанолом.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84780" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84780,this,1,'comment');"></a>
+			<span id="vote_total_comment_84780" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84780,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Vga/"><img src="http://we.easyelectronics.ru/uploads/images/00/00/56/2011/03/07/avatar_24x24.gif?212935" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Vga/">Vga</a></li>
+		<li class="date">07 ноября 2012, 04:07</li>
+				<li><a href="#comment84780" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(84780,84777); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_84783">
+		
+		
+<div id="comment_id_84783" class="comment not-admin " >
+	<a name="comment84783" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84783" class="content">
+			
+			Спасибо за советы. Буду иметь в виду.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84783" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84783,this,1,'comment');"></a>
+			<span id="vote_total_comment_84783" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84783,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Equinoxe/"><img src="http://we.easyelectronics.ru/uploads/images/00/38/82/2012/11/04/avatar_24x24.jpg?163119" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Equinoxe/">Equinoxe</a></li>
+		<li class="date">07 ноября 2012, 04:16</li>
+				<li><a href="#comment84783" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(84783,84780); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		    	
+			</div></div></div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_84607">
+		
+		
+<div id="comment_id_84607" class="comment not-admin " >
+	<a name="comment84607" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84607" class="content">
+			
+			Я не знаю, какая часть смолы выпадает такими белыми хлопьями, но не дистиллят, не бензин не поморжет. Я такое убираю повторным нанесением флюса и отмывкой изопропанолом.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84607" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84607,this,1,'comment');"></a>
+			<span id="vote_total_comment_84607" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84607,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/dekar/"><img src="http://we.easyelectronics.ru/uploads/images/00/16/22/2011/12/20/avatar_24x24.jpg?082638" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/dekar/">dekar</a></li>
+		<li class="date">06 ноября 2012, 19:49</li>
+				<li><a href="#comment84607" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+					</div>
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_84622">
+		
+		
+<div id="comment_id_84622" class="comment not-admin " >
+	<a name="comment84622" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84622" class="content">
+			
+			А что всем этим рулит? Надо больше подробностей)
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84622" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84622,this,1,'comment');"></a>
+			<span id="vote_total_comment_84622" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84622,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Bonio/"><img src="http://we.easyelectronics.ru/templates/skin/new-jquery/images/avatar_24x24.jpg" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Bonio/">Bonio</a></li>
+		<li class="date">06 ноября 2012, 21:33</li>
+				<li><a href="#comment84622" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_84778">
+		
+		
+<div id="comment_id_84778" class="comment not-admin " >
+	<a name="comment84778" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84778" class="content">
+			
+			МК — PIC18F24J11, примечателен тем, что на борту у него 2 UARTа. Для упрощения различных согласований, питается от 3,3V.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84778" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84778,this,1,'comment');"></a>
+			<span id="vote_total_comment_84778" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84778,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Equinoxe/"><img src="http://we.easyelectronics.ru/uploads/images/00/38/82/2012/11/04/avatar_24x24.jpg?163119" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Equinoxe/">Equinoxe</a></li>
+		<li class="date">07 ноября 2012, 04:00</li>
+				<li><a href="#comment84778" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(84778,84622); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		    	
+			</div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_84689">
+		
+		
+<div id="comment_id_84689" class="comment not-admin " >
+	<a name="comment84689" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84689" class="content">
+			
+			А что за крупный SOIC между модулями? МК или что-то иное?<br/>
+<blockquote>Решил использовать самодельную печатную антенну, чертёж которой был найден на просторах Сети.</blockquote>Интересная антенна. Дай ссылку. Не пробовал такую же применить для трекера?<br/>
+<blockquote>Допустил досадную ошибку, отмывал плату ацетоном, получил везде белый налёт.</blockquote>Какой флюс?
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84689" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84689,this,1,'comment');"></a>
+			<span id="vote_total_comment_84689" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84689,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Vga/"><img src="http://we.easyelectronics.ru/uploads/images/00/00/56/2011/03/07/avatar_24x24.gif?212935" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Vga/">Vga</a></li>
+		<li class="date">06 ноября 2012, 23:14</li>
+				<li><a href="#comment84689" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_84779">
+		
+		
+<div id="comment_id_84779" class="comment not-admin " >
+	<a name="comment84779" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84779" class="content">
+			
+			<blockquote>А что за крупный SOIC между модулями? МК или что-то иное?</blockquote>Крупный корпус — МК(PIC18F24J11), мелкий — EEPROM память 24LC16B. Просто в 18 пиках нет встроенной EEPROM.<blockquote>Какой флюс?</blockquote>СКФ, магазинный. И использовал немного обычной канифоли.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84779" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84779,this,1,'comment');"></a>
+			<span id="vote_total_comment_84779" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84779,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Equinoxe/"><img src="http://we.easyelectronics.ru/uploads/images/00/38/82/2012/11/04/avatar_24x24.jpg?163119" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Equinoxe/">Equinoxe</a></li>
+		<li class="date">07 ноября 2012, 04:06</li>
+				<li><a href="#comment84779" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(84779,84689); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_84781">
+		
+		
+<div id="comment_id_84781" class="comment not-admin " >
+	<a name="comment84781" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84781" class="content">
+			
+			Странно, канифоль обычно смывается без проблем. Попробуй в следущий раз спиртом. Возможно, у тебя в ацетоне примесь воды, вроде оно как раз дает похожий результат. Спирт тоже должен быть достаточно чистым, работают 96% медицинский этанол (впрочем, проще добыть оружейный плутоний, чем этанол) и 99.7% изопропанол (с этим проще).
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84781" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84781,this,1,'comment');"></a>
+			<span id="vote_total_comment_84781" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84781,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Vga/"><img src="http://we.easyelectronics.ru/uploads/images/00/00/56/2011/03/07/avatar_24x24.gif?212935" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Vga/">Vga</a></li>
+		<li class="date">07 ноября 2012, 04:10</li>
+				<li><a href="#comment84781" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(84781,84779); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+					</div>
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_84782">
+		
+		
+<div id="comment_id_84782" class="comment not-admin " >
+	<a name="comment84782" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84782" class="content">
+			
+			P.S. И что насчет антенны? Уже написав коммент я нашел ее .lay-файл в аттачах, но хотелось бы еще линк на первоисточник.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84782" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84782,this,1,'comment');"></a>
+			<span id="vote_total_comment_84782" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84782,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Vga/"><img src="http://we.easyelectronics.ru/uploads/images/00/00/56/2011/03/07/avatar_24x24.gif?212935" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Vga/">Vga</a></li>
+		<li class="date">07 ноября 2012, 04:11</li>
+				<li><a href="#comment84782" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(84782,84779); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_84785">
+		
+		
+<div id="comment_id_84785" class="comment not-admin " >
+	<a name="comment84785" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84785" class="content">
+			
+			Первоисточник уже точно не помню. Кажется, я её нашёл здесь на форуме.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84785" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84785,this,1,'comment');"></a>
+			<span id="vote_total_comment_84785" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84785,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Equinoxe/"><img src="http://we.easyelectronics.ru/uploads/images/00/38/82/2012/11/04/avatar_24x24.jpg?163119" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Equinoxe/">Equinoxe</a></li>
+		<li class="date">07 ноября 2012, 04:22</li>
+				<li><a href="#comment84785" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(84785,84782); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		    	
+			</div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_84810">
+		
+		
+<div id="comment_id_84810" class="comment not-admin " >
+	<a name="comment84810" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84810" class="content">
+			
+			<blockquote>Просто в 18 пиках нет встроенной EEPROM.</blockquote>Как это нет?! Еще как есть! Возьмите, к примеру,PIC18F46K22-I/P:<br/>
+MCU 8 bit 64K x 16 Enh Flash, <strong>1024 EE</strong>, 3896 RAM, IntRC, 16MIPS, Uпит 1.8..5.5 V
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84810" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84810,this,1,'comment');"></a>
+			<span id="vote_total_comment_84810" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84810,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/kvm/"><img src="http://we.easyelectronics.ru/uploads/images/00/01/10/2011/05/04/avatar_24x24.jpg?152102" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/kvm/">kvm</a></li>
+		<li class="date">07 ноября 2012, 10:00</li>
+				<li><a href="#comment84810" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(84810,84779); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_84827">
+		
+		
+<div id="comment_id_84827" class="comment not-admin " >
+	<a name="comment84827" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84827" class="content">
+			
+			Действительно, я ошибся. EEPROM нет в PIC18 J серии.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84827" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84827,this,1,'comment');"></a>
+			<span id="vote_total_comment_84827" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84827,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Equinoxe/"><img src="http://we.easyelectronics.ru/uploads/images/00/38/82/2012/11/04/avatar_24x24.jpg?163119" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Equinoxe/">Equinoxe</a></li>
+		<li class="date">07 ноября 2012, 11:21</li>
+				<li><a href="#comment84827" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(84827,84810); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		    	
+			</div></div></div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_84701">
+		
+		
+<div id="comment_id_84701" class="comment not-admin " >
+	<a name="comment84701" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84701" class="content">
+			
+			А не мал ли земляная площадка под жпс антенной? А то я в доках для taoglas CGGP.25.4.A.14 вычитал, что чем больше — тем лучше.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84701" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84701,this,1,'comment');"></a>
+			<span id="vote_total_comment_84701" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84701,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/shurik303/"><img src="http://we.easyelectronics.ru/templates/skin/new-jquery/images/avatar_24x24.jpg" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/shurik303/">shurik303</a></li>
+		<li class="date">06 ноября 2012, 23:33</li>
+				<li><a href="#comment84701" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_84711">
+		
+		
+<div id="comment_id_84711" class="comment not-admin " >
+	<a name="comment84711" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84711" class="content">
+			
+			Холодный старт 10мин.многовато. этому виной малый размер земляной площадки.<br/>
+На фото видно что плата двухсторонняя неплохо было земляной полигон и со стороны антены сделать и соединить переходными отверстиями.<br/>
+Очень желательно чтоб размер земляной площадки был больше размера антенны. <br/>
+Я бы разместил модуль ближе к антенне, чтоб дорожка была еще короче.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84711" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84711,this,1,'comment');"></a>
+			<span id="vote_total_comment_84711" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84711,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/yurcoua/"><img src="http://we.easyelectronics.ru/templates/skin/new-jquery/images/avatar_24x24.jpg" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/yurcoua/">yurcoua</a></li>
+		<li class="date">07 ноября 2012, 00:07</li>
+				<li><a href="#comment84711" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(84711,84701); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_84721">
+		
+		
+<div id="comment_id_84721" class="comment not-admin " >
+	<a name="comment84721" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84721" class="content">
+			
+			<blockquote>На фото видно что плата двухсторонняя неплохо было земляной полигон и со стороны антены сделать и соединить переходными отверстиями.</blockquote>Там так и есть. Только полиго слишком маленький, целиком прячется под антенной.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84721" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84721,this,1,'comment');"></a>
+			<span id="vote_total_comment_84721" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84721,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Vga/"><img src="http://we.easyelectronics.ru/uploads/images/00/00/56/2011/03/07/avatar_24x24.gif?212935" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Vga/">Vga</a></li>
+		<li class="date">07 ноября 2012, 00:45</li>
+				<li><a href="#comment84721" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(84721,84711); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+					</div>
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_84786">
+		
+		
+<div id="comment_id_84786" class="comment not-admin " >
+	<a name="comment84786" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84786" class="content">
+			
+			Действительно, полигон можно было сделать побольше, но уже поздно. Размещать модуль ещё ближе к антенне уже опасно, это может привести к полной потере сигнала.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84786" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84786,this,1,'comment');"></a>
+			<span id="vote_total_comment_84786" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84786,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Equinoxe/"><img src="http://we.easyelectronics.ru/uploads/images/00/38/82/2012/11/04/avatar_24x24.jpg?163119" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Equinoxe/">Equinoxe</a></li>
+		<li class="date">07 ноября 2012, 04:27</li>
+				<li><a href="#comment84786" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(84786,84711); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		    	
+			</div></div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_84787">
+		
+		
+<div id="comment_id_84787" class="comment not-admin " >
+	<a name="comment84787" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84787" class="content">
+			
+			Про проблему согласования уровней писать нечего — я её не решал, просто подключил RX и TX линии к 3,3В микроконтроллеру. Про согласование я узнал, когда плата уже была разведена и спаяна. Всё работает без проблем, но так лучше не делать и документацию читать до, а не после.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84787" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84787,this,1,'comment');"></a>
+			<span id="vote_total_comment_84787" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84787,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Equinoxe/"><img src="http://we.easyelectronics.ru/uploads/images/00/38/82/2012/11/04/avatar_24x24.jpg?163119" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Equinoxe/">Equinoxe</a></li>
+		<li class="date">07 ноября 2012, 04:36</li>
+				<li><a href="#comment84787" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+					</div>
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_84791">
+		
+		
+<div id="comment_id_84791" class="comment not-admin " >
+	<a name="comment84791" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84791" class="content">
+			
+			В принципе, согласовывать достаточно MCU.TX-&gt;SIM.RX. Можно влепить делитель, можно одиночный преобразователь уровня из серии 74LVC. Не помню точно, какой именно, есть там с двойным питанием. Можно, наверное, даже доколхозить его, чикнув ножом дорожку, припаяв к ней микросхему входом и выходом и протянув остальные три линии (земля и два питания) тонким эмалированным проводом. Еще проще чикнуть, напаять резистор или диод поверх разреза и второй резистор после разреза на землю, но резисторы должны иметь довольно малое сопротивление, чтобы стабильно работало.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84791" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84791,this,1,'comment');"></a>
+			<span id="vote_total_comment_84791" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84791,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Vga/"><img src="http://we.easyelectronics.ru/uploads/images/00/00/56/2011/03/07/avatar_24x24.gif?212935" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Vga/">Vga</a></li>
+		<li class="date">07 ноября 2012, 06:29</li>
+				<li><a href="#comment84791" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_84793">
+		
+		
+<div id="comment_id_84793" class="comment not-admin " >
+	<a name="comment84793" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84793" class="content">
+			
+			Сам был бы рад исправить этот недостаток, но плотность монтажа на плате не позволяет. Да и к тому-же и так всё работает.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84793" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84793,this,1,'comment');"></a>
+			<span id="vote_total_comment_84793" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84793,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Equinoxe/"><img src="http://we.easyelectronics.ru/uploads/images/00/38/82/2012/11/04/avatar_24x24.jpg?163119" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Equinoxe/">Equinoxe</a></li>
+		<li class="date">07 ноября 2012, 06:44</li>
+				<li><a href="#comment84793" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(84793,84791); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_84795">
+		
+		
+<div id="comment_id_84795" class="comment not-admin " >
+	<a name="comment84795" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84795" class="content">
+			
+			На вид расстояния между контроллером и модулем вполне достаточно, чтобы втулить на дорожку 0805, SOD89 или SOT23-5. Не знаю правда, которая именно нужна.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84795" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84795,this,1,'comment');"></a>
+			<span id="vote_total_comment_84795" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84795,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Vga/"><img src="http://we.easyelectronics.ru/uploads/images/00/00/56/2011/03/07/avatar_24x24.gif?212935" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Vga/">Vga</a></li>
+		<li class="date">07 ноября 2012, 07:12</li>
+				<li><a href="#comment84795" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(84795,84793); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		    	
+			</div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_84860">
+		
+		
+<div id="comment_id_84860" class="comment not-admin " >
+	<a name="comment84860" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84860" class="content">
+			
+			Можно обойтись и без источника в 2,8В, если использовать простейший резистивный делитель. Кстати, в сообществе есть <a href="http://we.easyelectronics.ru/Shematech/soglasovanie-logicheskih-urovney-5v-i-33v-ustroystv.html" rel="nofollow">статья</a> про согласование уровней. Вообще, куда большую проблему представляет собой задача парсинга сообщений модуля)
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84860" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84860,this,1,'comment');"></a>
+			<span id="vote_total_comment_84860" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84860,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Equinoxe/"><img src="http://we.easyelectronics.ru/uploads/images/00/38/82/2012/11/04/avatar_24x24.jpg?163119" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Equinoxe/">Equinoxe</a></li>
+		<li class="date">07 ноября 2012, 15:45</li>
+				<li><a href="#comment84860" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(84860,84791); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+					</div>
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_84964">
+		
+		
+<div id="comment_id_84964" class="comment not-admin " >
+	<a name="comment84964" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84964" class="content">
+			
+			Ну, вариант с делителем источника питания не требует. Это раз. Во вторых, если я правильно тебя понял, SIM900 на одной из ножек выдает эти 2.8В, можно оттуда взять, я думаю требуемые преобразователю микроамперы он выдать может.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84964" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84964,this,1,'comment');"></a>
+			<span id="vote_total_comment_84964" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84964,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Vga/"><img src="http://we.easyelectronics.ru/uploads/images/00/00/56/2011/03/07/avatar_24x24.gif?212935" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Vga/">Vga</a></li>
+		<li class="date">08 ноября 2012, 00:13</li>
+				<li><a href="#comment84964" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(84964,84791); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_84978">
+		
+		
+<div id="comment_id_84978" class="comment not-admin " >
+	<a name="comment84978" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84978" class="content">
+			
+			А-а. Ну тогда можно использовать делитель. Там и колхоза меньше потребуется, особенно если ножка на RX проходит рядом с землей.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84978" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84978,this,1,'comment');"></a>
+			<span id="vote_total_comment_84978" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84978,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Vga/"><img src="http://we.easyelectronics.ru/uploads/images/00/00/56/2011/03/07/avatar_24x24.gif?212935" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Vga/">Vga</a></li>
+		<li class="date">08 ноября 2012, 00:53</li>
+				<li><a href="#comment84978" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(84978,84964); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		    	
+			</div></div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_84935">
+		
+		
+<div id="comment_id_84935" class="comment not-admin " >
+	<a name="comment84935" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84935" class="content">
+			
+			А можно поподробнее о печатной антенне для gsm модуля. Интересуют ее размеры. Хочу такую же!!!
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84935" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84935,this,1,'comment');"></a>
+			<span id="vote_total_comment_84935" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84935,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/plagunov/"><img src="http://we.easyelectronics.ru/templates/skin/new-jquery/images/avatar_24x24.jpg" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/plagunov/">plagunov</a></li>
+		<li class="date">07 ноября 2012, 22:31</li>
+				<li><a href="#comment84935" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_84966">
+		
+		
+<div id="comment_id_84966" class="comment not-admin " >
+	<a name="comment84966" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84966" class="content">
+			
+			В аттаче есть .lay файл, на одной из его страниц эта антенна. Там и глянь. В высоту она примерно 30мм (по меди), в ширину 37-38.
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84966" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84966,this,1,'comment');"></a>
+			<span id="vote_total_comment_84966" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84966,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/Vga/"><img src="http://we.easyelectronics.ru/uploads/images/00/00/56/2011/03/07/avatar_24x24.gif?212935" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/Vga/">Vga</a></li>
+		<li class="date">08 ноября 2012, 00:15</li>
+				<li><a href="#comment84966" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(84966,84935); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		 
+				
+		<div class="comment-wrapper" id="comment_wrapper_id_84981">
+		
+		
+<div id="comment_id_84981" class="comment not-admin " >
+	<a name="comment84981" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_84981" class="content">
+			
+			Спасибо!
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_84981" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(84981,this,1,'comment');"></a>
+			<span id="vote_total_comment_84981" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(84981,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/plagunov/"><img src="http://we.easyelectronics.ru/templates/skin/new-jquery/images/avatar_24x24.jpg" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/plagunov/">plagunov</a></li>
+		<li class="date">08 ноября 2012, 01:05</li>
+				<li><a href="#comment84981" class="comment-link"></a></li>	
+					<li class="goto-comment-parent"><a href="#" onclick="ls.comments.goToParentComment(84981,84966); return false;" title="Ответ на">↑</a></li>
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+									
+				
+		    	
+			</div></div></div>				
+		<div class="comment-wrapper" id="comment_wrapper_id_86205">
+		
+		
+<div id="comment_id_86205" class="comment not-admin " >
+	<a name="comment86205" ></a>
+	
+	
+	<div class="folding"></div>
+	
+	
+	<div id="comment_content_id_86205" class="content">
+			
+			собрал плату для sim900. когда подаю питание при ходит строка:<br/>
+49 49 49 49 FF FF FF FE <br/>
+49 49 49 49 FF FE FE FF <br/>
+49 49 49 49 FF FF FF FF <br/>
+49 49 49 49 FF FF FF FF <br/>
+49 49 49 49 FF FF FE FF <br/>
+49 49 49 49 FF FE FF FF <br/>
+49 49 49 49 FF FF FE FF<br/>
+что это значит?
+			</div>
+	
+	
+							
+		<div id="vote_area_comment_86205" class="voting  guest     ">
+			<a href="#" class="plus" onclick="return ls.vote.vote(86205,this,1,'comment');"></a>
+			<span id="vote_total_comment_86205" class="total">0</span>
+			<a href="#" class="minus" onclick="return ls.vote.vote(86205,this,-1,'comment');"></a>
+		</div>
+		
+	
+	<ul class="info">
+		<li class="avatar"><a href="http://we.easyelectronics.ru/profile/plagunov/"><img src="http://we.easyelectronics.ru/templates/skin/new-jquery/images/avatar_24x24.jpg" alt="avatar" /></a></li>
+		<li class="username"><a href="http://we.easyelectronics.ru/profile/plagunov/">plagunov</a></li>
+		<li class="date">15 ноября 2012, 20:14</li>
+				<li><a href="#comment86205" class="comment-link"></a></li>	
+				<li class="goto-comment-child"><a href="#" title="Обратно к ответу">↓</a></li>
+								
+	</ul>
+	
+</div>		
+							</div>    
+			</div>				
+	
+
+			Только зарегистрированные и авторизованные пользователи могут оставлять комментарии.
+		
+
+
+	
+
+
+			
+			</div><!-- /content-inner -->
+		</div><!-- /content -->
+
+					<div id="sidebar">
+										<div class="block stream" id="block_stream">
+	<h2>Прямой эфир</h2>
+	
+	
+	<ul class="switcher">						
+		<li id="block_stream_item_comment" class="active">Комментарии</li>
+		<li id="block_stream_item_topic">Публикации</li>
+		
+		
+	</ul>					
+	
+	
+	<div class="block-content" id="block_stream_content">
+		<ul class="list">
+									
+		<li class="even">
+			<a href="http://we.easyelectronics.ru/profile/magnum16/" class="user">magnum16</a> &rarr;
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/power-electronics/istochnik-toka-dlya-moschnyh-svetodiodov-s-pitaniem-ot-seti-220-v-50-gc.html#comment167609" class="topic-title">Источник тока для мощных светодиодов с питанием от сети 220 В 50 Гц</a>
+			<span>77</span> &rarr;
+			<a href="http://we.easyelectronics.ru/blog/power-electronics/" class="blog-title">Силовая электроника</a>
+		</li>
+									
+		<li >
+			<a href="http://we.easyelectronics.ru/profile/kalik/" class="user">kalik</a> &rarr;
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/aliaksei/stm32f030f4-spi.html#comment167608" class="topic-title">STM32F030F4 SPI</a>
+			<span>3</span> &rarr;
+			<a href="http://we.easyelectronics.ru/my/aliaksei/" class="blog-title">Блог им. aliaksei</a>
+		</li>
+									
+		<li class="even">
+			<a href="http://we.easyelectronics.ru/profile/Panther/" class="user">Panther</a> &rarr;
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/plis/generator-cvetnyh-polos-na-fpga.html#comment167602" class="topic-title">Генератор цветных полос на FPGA</a>
+			<span>30</span> &rarr;
+			<a href="http://we.easyelectronics.ru/blog/plis/" class="blog-title">ПЛИС</a>
+		</li>
+									
+		<li >
+			<a href="http://we.easyelectronics.ru/profile/Jman/" class="user">Jman</a> &rarr;
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/xterro/prevraschaem-kitayskiy--programmator-usbisp-v-usbasp.html#comment167597" class="topic-title">Превращаем китайский  программатор USBISP в USBASP</a>
+			<span>20</span> &rarr;
+			<a href="http://we.easyelectronics.ru/my/xterro/" class="blog-title">Блог им. xterro</a>
+		</li>
+									
+		<li class="even">
+			<a href="http://we.easyelectronics.ru/profile/scaldov/" class="user">scaldov</a> &rarr;
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/AVR/switch-tehnologiya-dlya-mk-primer-realizacii-na-avr.html#comment167596" class="topic-title">SWITCH-технология для МК. Пример реализации на AVR.</a>
+			<span>60</span> &rarr;
+			<a href="http://we.easyelectronics.ru/blog/AVR/" class="blog-title">AVR</a>
+		</li>
+									
+		<li >
+			<a href="http://we.easyelectronics.ru/profile/aliaksei/" class="user">aliaksei</a> &rarr;
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/aliaksei/stm32f030f4-inicializiruem-adc.html#comment167593" class="topic-title">STM32F030F4 инициализируем ADC</a>
+			<span>33</span> &rarr;
+			<a href="http://we.easyelectronics.ru/my/aliaksei/" class="blog-title">Блог им. aliaksei</a>
+		</li>
+									
+		<li class="even">
+			<a href="http://we.easyelectronics.ru/profile/angel5a/" class="user">angel5a</a> &rarr;
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/howwork/obuchaemyy-433mgc-pultik-dlya-klonirovaniya-statichnogo-koda.html#comment167590" class="topic-title">Обучаемый 433МГц пультик для клонирования статичного кода.</a>
+			<span>13</span> &rarr;
+			<a href="http://we.easyelectronics.ru/blog/howwork/" class="blog-title">Как работает?</a>
+		</li>
+									
+		<li >
+			<a href="http://we.easyelectronics.ru/profile/INN/" class="user">INN</a> &rarr;
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/lcd_gfx/shrifty-s-glcd-font-creator-na-kolenke.html#comment167589" class="topic-title">Шрифты с GLCD Font Creator на коленке</a>
+			<span>20</span> &rarr;
+			<a href="http://we.easyelectronics.ru/blog/lcd_gfx/" class="blog-title">Работа с дисплеями и графикой</a>
+		</li>
+									
+		<li class="even">
+			<a href="http://we.easyelectronics.ru/profile/GhostPVV/" class="user">GhostPVV</a> &rarr;
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/GhostPVV/blok-pitaniya-s-regulirovkoy-toka-i-napryazheniya.html#comment167587" class="topic-title">Блок питания с регулировкой тока и напряжения.</a>
+			<span>89</span> &rarr;
+			<a href="http://we.easyelectronics.ru/my/GhostPVV/" class="blog-title">Блог им. GhostPVV</a>
+		</li>
+									
+		<li >
+			<a href="http://we.easyelectronics.ru/profile/remixvit/" class="user">remixvit</a> &rarr;
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/sypsoc/bluetooth-smart--broadcaster-na-rsoc-firmy-cypress.html#comment167580" class="topic-title">Bluetooth Smart  Broadcaster на RSoC фирмы Cypress</a>
+			<span>19</span> &rarr;
+			<a href="http://we.easyelectronics.ru/blog/sypsoc/" class="blog-title">Cypress PSoC</a>
+		</li>
+									
+		<li class="even">
+			<a href="http://we.easyelectronics.ru/profile/Vga/" class="user">Vga</a> &rarr;
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/Arduino/pochemu-ne-arduino-na-primere-energia-dlya-ti-msp430.html#comment167576" class="topic-title">Почему  не Arduino (На примере Energia для TI MSP430)</a>
+			<span>73</span> &rarr;
+			<a href="http://we.easyelectronics.ru/blog/Arduino/" class="blog-title">Arduino и клоны</a>
+		</li>
+									
+		<li >
+			<a href="http://we.easyelectronics.ru/profile/Jman/" class="user">Jman</a> &rarr;
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/Jman/i-snova-o-programmatorah-dlya-avr.html#comment167567" class="topic-title">И снова о программаторах для AVR</a>
+			<span>20</span> &rarr;
+			<a href="http://we.easyelectronics.ru/my/Jman/" class="blog-title">Блог им. Jman</a>
+		</li>
+									
+		<li class="even">
+			<a href="http://we.easyelectronics.ru/profile/madmazy/" class="user">madmazy</a> &rarr;
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/aliaksei/stm32f030f4-inicializiruem-usart.html#comment167552" class="topic-title">STM32F030F4 инициализируем USART</a>
+			<span>19</span> &rarr;
+			<a href="http://we.easyelectronics.ru/my/aliaksei/" class="blog-title">Блог им. aliaksei</a>
+		</li>
+									
+		<li >
+			<a href="http://we.easyelectronics.ru/profile/termik/" class="user">termik</a> &rarr;
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/CADSoft/skladskoy-uchet-komplektuyuschih-s-pomoschyu-erp-sistemy-odoo-openerp.html#comment167536" class="topic-title">Складской учет комплектующих с помощью ERP-системы Odoo (OpenERP)</a>
+			<span>54</span> &rarr;
+			<a href="http://we.easyelectronics.ru/blog/CADSoft/" class="blog-title">Софт для электронщика</a>
+		</li>
+									
+		<li class="even">
+			<a href="http://we.easyelectronics.ru/profile/flyko/" class="user">flyko</a> &rarr;
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/electro-and-pc/fe11-fe21-ili-chto-nam-stoit-usb-hub-postroit.html#comment167534" class="topic-title">FE1.1, FE2.1 или что нам стоит USB HUB построить</a>
+			<span>32</span> &rarr;
+			<a href="http://we.easyelectronics.ru/blog/electro-and-pc/" class="blog-title">Связь железа с компьютером.</a>
+		</li>
+									
+		<li >
+			<a href="http://we.easyelectronics.ru/profile/Jman/" class="user">Jman</a> &rarr;
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/antonluba/podklyuchenie-usbasp-k-avrstudio.html#comment167524" class="topic-title">Подключение USBAsp к AVRStudio?</a>
+			<span>5</span> &rarr;
+			<a href="http://we.easyelectronics.ru/my/antonluba/" class="blog-title">Блог им. antonluba</a>
+		</li>
+									
+		<li class="even">
+			<a href="http://we.easyelectronics.ru/profile/alexsam/" class="user">alexsam</a> &rarr;
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/zloiMOZG/com-port-terminal.html#comment167505" class="topic-title">COM Port Terminal</a>
+			<span>221</span> &rarr;
+			<a href="http://we.easyelectronics.ru/my/zloiMOZG/" class="blog-title">Блог им. zloiMOZG</a>
+		</li>
+									
+		<li >
+			<a href="http://we.easyelectronics.ru/profile/Helix/" class="user">Helix</a> &rarr;
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/STM32/izuchenie-stm32-uroki-po-programmirovaniyu-stm32f4-discovery.html#comment167500" class="topic-title">Изучение STM32. Уроки по программированию STM32F4 Discovery.</a>
+			<span>53</span> &rarr;
+			<a href="http://we.easyelectronics.ru/blog/STM32/" class="blog-title">STM32</a>
+		</li>
+									
+		<li class="even">
+			<a href="http://we.easyelectronics.ru/profile/scaldov/" class="user">scaldov</a> &rarr;
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/sania_3/nashel-neponyatnuyu-platku-delyus-radostyu.html#comment167485" class="topic-title">Нашёл непонятную платку. Делюсь радостью.</a>
+			<span>13</span> &rarr;
+			<a href="http://we.easyelectronics.ru/my/sania_3/" class="blog-title">Блог им. sania_3</a>
+		</li>
+									
+		<li >
+			<a href="http://we.easyelectronics.ru/profile/scaldov/" class="user">scaldov</a> &rarr;
+			<span class="stream-comment-icon"></span>
+			<a href="http://we.easyelectronics.ru/scaldov/prilichnyy-bez-bit-banging-i-deshevyy-spi-flash-programmator-c-dma-spi-i-usb-na-osnove-flashrom-i-maple-mini-stm32.html#comment167484" class="topic-title">Приличный (без bit-banging) и дешёвый SPI-flash программатор, c DMA SPI и USB на основе flashrom и maple-mini (stm32).</a>
+			<span>9</span> &rarr;
+			<a href="http://we.easyelectronics.ru/my/scaldov/" class="blog-title">Блог им. scaldov</a>
+		</li>
+	</ul>
+
+
+<div class="bottom">
+	<a href="http://we.easyelectronics.ru/comments/">Весь эфир</a> | <a href="http://we.easyelectronics.ru/rss/allcomments/">RSS</a>
+</div>
+	</div>
+</div>
+
+
+															<div class="block tags">
+	<ul class="cloud">						
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/1-Wire/">1-Wire</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/Altera/">Altera</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/arduino/">arduino</a></li>	
+					<li><a class="w4" rel="tag" href="http://we.easyelectronics.ru/tag/ARM/">ARM</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/Atmel/">Atmel</a></li>	
+					<li><a class="w10" rel="tag" href="http://we.easyelectronics.ru/tag/AVR/">AVR</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/avr-gcc/">avr-gcc</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/C%2B%2B/">C++</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/DIY/">DIY</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/enc28j60/">enc28j60</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/ethernet/">ethernet</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/FPGA/">FPGA</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/gcc/">gcc</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/I2C/">I2C</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/IAR/">IAR</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/KEIL/">KEIL</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/LaunchPad/">LaunchPad</a></li>	
+					<li><a class="w5" rel="tag" href="http://we.easyelectronics.ru/tag/LCD/">LCD</a></li>	
+					<li><a class="w4" rel="tag" href="http://we.easyelectronics.ru/tag/led/">led</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/linux/">linux</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/LPCXpresso/">LPCXpresso</a></li>	
+					<li><a class="w5" rel="tag" href="http://we.easyelectronics.ru/tag/MSP430/">MSP430</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/nxp/">nxp</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/PCB/">PCB</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/PIC/">PIC</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/pinboard2/">pinboard2</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/RTOS/">RTOS</a></li>	
+					<li><a class="w10" rel="tag" href="http://we.easyelectronics.ru/tag/STM32/">STM32</a></li>	
+					<li><a class="w6" rel="tag" href="http://we.easyelectronics.ru/tag/STM8/">STM8</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/STM8L/">STM8L</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/TI/">TI</a></li>	
+					<li><a class="w4" rel="tag" href="http://we.easyelectronics.ru/tag/UART/">UART</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/USART/">USART</a></li>	
+					<li><a class="w5" rel="tag" href="http://we.easyelectronics.ru/tag/USB/">USB</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC/">алгоритм</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80/">ассемблер</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%90%D0%A6%D0%9F/">АЦП</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%B1%D0%BB%D0%BE%D0%BA%20%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D1%8F/">блок питания</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81/">вопрос</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%B4%D0%B5%D1%82%D0%B0%D0%BB%D1%8C%D0%BA%D0%B0/">деталька</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%B4%D0%B8%D1%81%D0%BF%D0%BB%D0%B5%D0%B9/">дисплей</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%B8%D0%B4%D0%B5%D1%8F/">идея</a></li>	
+					<li><a class="w6" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82/">инструмент</a></li>	
+					<li><a class="w6" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BA%D0%BE%D0%BD%D0%BA%D1%83%D1%80%D1%81/">конкурс</a></li>	
+					<li><a class="w5" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BA%D0%BE%D0%BD%D0%BA%D1%83%D1%80%D1%812/">конкурс2</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%9B%D0%A3%D0%A2/">ЛУТ</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BC%D0%B8%D0%BA%D1%80%D0%BE%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D0%BB%D0%B5%D1%80%D1%8B/">микроконтроллеры</a></li>	
+					<li><a class="w5" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BD%D0%B0%D1%87%D0%B8%D0%BD%D0%B0%D1%8E%D1%89%D0%B8%D0%BC/">начинающим</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BE%D0%B1%D0%B7%D0%BE%D1%80/">обзор</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%9E%D1%82%D0%BB%D0%B0%D0%B4%D0%BE%D1%87%D0%BD%D0%B0%D1%8F%20%D0%BF%D0%BB%D0%B0%D1%82%D0%B0/">Отладочная плата</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BF%D0%B0%D1%8F%D0%BB%D1%8C%D0%BD%D0%B8%D0%BA/">паяльник</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BF%D0%B5%D1%87%D0%B0%D1%82%D0%BD%D0%B0%D1%8F%20%D0%BF%D0%BB%D0%B0%D1%82%D0%B0/">печатная плата</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BF%D0%BB%D0%B0%D1%82%D0%B0/">плата</a></li>	
+					<li><a class="w5" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%9F%D0%9B%D0%98%D0%A1/">ПЛИС</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BF%D0%BE%D0%B4%D0%B5%D0%BB%D0%BA%D0%B8/">поделки</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BF%D0%BE%D0%BA%D1%83%D0%BF%D0%BA%D0%B8/">покупки</a></li>	
+					<li><a class="w4" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%D1%82%D0%BE%D1%80/">программатор</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5/">программирование</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/%D1%80%D0%BE%D0%B1%D0%BE%D1%82/">робот</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/%D1%81%D0%B2%D0%B5%D1%82%D0%BE%D0%B4%D0%B8%D0%BE%D0%B4/">светодиод</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D1%81%D0%BE%D1%84%D1%82/">софт</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D1%81%D1%85%D0%B5%D0%BC%D0%B0/">схема</a></li>	
+					<li><a class="w3" rel="tag" href="http://we.easyelectronics.ru/tag/%D1%81%D1%85%D0%B5%D0%BC%D0%BE%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D0%BA%D0%B0/">схемотехника</a></li>	
+					<li><a class="w5" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%A2%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8/">Технологии</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D1%83%D0%BC%D0%BD%D1%8B%D0%B9%20%D0%B4%D0%BE%D0%BC/">умный дом</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D1%84%D0%BE%D1%82%D0%BE%D1%80%D0%B5%D0%B7%D0%B8%D1%81%D1%82/">фоторезист</a></li>	
+					<li><a class="w5" rel="tag" href="http://we.easyelectronics.ru/tag/%D1%85%D0%B0%D0%BB%D1%8F%D0%B2%D0%B0/">халява</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D1%85%D1%80%D0%B5%D0%BD%D1%8C/">хрень</a></li>	
+					<li><a class="w1" rel="tag" href="http://we.easyelectronics.ru/tag/%D0%A7%D0%B0%D1%81%D1%8B/">Часы</a></li>	
+					<li><a class="w2" rel="tag" href="http://we.easyelectronics.ru/tag/%D1%8E%D0%BC%D0%BE%D1%80/">юмор</a></li>	
+			</ul>
+</div>
+															<div class="block blogs" id="block_blogs">
+	<h2>Блоги</h2>
+	
+	
+	<ul class="switcher">
+		<li id="block_blogs_item_top" class="active">Топ</li>
+			</ul>
+	
+	
+	<div class="block-content" id="block_blogs_content">
+		<ul class="list">
+			<li>
+			<span class="rating">37.52</span>
+			<a href="http://we.easyelectronics.ru/blog/AVR/">AVR</a> 
+					</li>
+			<li>
+			<span class="rating">36.47</span>
+			<a href="http://we.easyelectronics.ru/blog/STM8/">STM8</a> 
+					</li>
+			<li>
+			<span class="rating">29.53</span>
+			<a href="http://we.easyelectronics.ru/blog/JunkBox/">Мусоровоз</a> 
+			<img src="http://we.easyelectronics.ru/templates/skin/new-jquery/images/lock.png" alt="[x]" title="Закрытый блог" />		</li>
+			<li>
+			<span class="rating">25.72</span>
+			<a href="http://we.easyelectronics.ru/blog/STM32/">STM32</a> 
+					</li>
+			<li>
+			<span class="rating">23.24</span>
+			<a href="http://we.easyelectronics.ru/blog/part/">Деталька</a> 
+					</li>
+			<li>
+			<span class="rating">21.17</span>
+			<a href="http://we.easyelectronics.ru/blog/electro-and-pc/">Связь железа с компьютером.</a> 
+					</li>
+			<li>
+			<span class="rating">18.15</span>
+			<a href="http://we.easyelectronics.ru/blog/Shematech/">Схемотехника</a> 
+					</li>
+			<li>
+			<span class="rating">17.75</span>
+			<a href="http://we.easyelectronics.ru/blog/smarthouse/">Умный дом</a> 
+					</li>
+			<li>
+			<span class="rating">17.13</span>
+			<a href="http://we.easyelectronics.ru/blog/msp430/">MSP430</a> 
+					</li>
+			<li>
+			<span class="rating">14.79</span>
+			<a href="http://we.easyelectronics.ru/blog/LPC/">LPC1xxx</a> 
+					</li>
+	</ul>				
+	</div>
+
+	
+	<div class="bottom">
+		<a href="http://we.easyelectronics.ru/blogs/">Все блоги</a>
+	</div>
+</div>
+
+									</div>			</div><!-- /wrapper -->
+
+	<div id="footer">
+		<div id="footer-inner">
+			<div class="right">&copy; Powered by <a href="http://livestreetcms.ru">LiveStreet CMS</a></div>
+			Design by — <a href="http://www.xeoart.com">Студия XeoArt</a>
+			<img border="0" src="http://we.easyelectronics.ru/templates/skin/new-jquery/images/xeoart.gif">
+						
+		</div>
+	</div>
+
+</div><!-- /container -->
+
+
+
+
+<!-- Yandex.Metrika counter -->
+<div style="display:none;"><script type="text/javascript">
+(function(w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter4558804 = new Ya.Metrika({id:4558804,
+                    clickmap:true,
+                    trackLinks:true});
+        }
+        catch(e) { }
+    });
+})(window, "yandex_metrika_callbacks");
+</script></div>
+<script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script>
+<noscript><div><img src="//mc.yandex.ru/watch/4558804" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+</body>
+</html>
