@@ -147,7 +147,7 @@ int8_t MENU_state = 1;
 bool BASE_ALARM_MOTION_MODE = true;
 bool ALARM_buzzer_isNeed = false;
 bool ALARM_siren_isNeed = false;
-uint32_t ALARM_siren_startTime = 0;
+uint32_t ALARM_indication_startTime = 0;
 
 //peripheral
 uint8_t BASE_voltage_base_pin = A0; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider

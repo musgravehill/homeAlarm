@@ -44,7 +44,7 @@ void STATEMACHINE_1s() {
   wr();
   GSM_checkIncomingCall();
   wr();
-  ALARM_controlAlarm();
+  ALARM_controlIndication();
   wr();
 }
 

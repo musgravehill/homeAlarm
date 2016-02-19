@@ -27,14 +27,27 @@ void ALARM_processSensorsParams() {
   }
 }
 
-void ALARM_controlAlarm() {
-  if (ALARM_siren_isNeed) {
-    INTERFACE_siren_on();
-    INTERFACE_led_alarm_blink();
-  }
-  if (ALARM_buzzer_isNeed) {
-    INTERFACE_buzzer_beep();
-    INTERFACE_led_alarm_blink();
+void ALARM_controlIndication() {
+  uint32_t currMillis = millis();
+  uint32_t delta = millis() - ALARM_indication_startTime;
+  if (
+    (ALARM_siren_isNeed || ALARM_buzzer_isNeed) &&
+    (ALARM_indication_startTime == 0) || (delta < 3000)  || (delta > 5000)
+  )
+  {
+    ALARM_indication_startTime = currMillis;
+
+    if (ALARM_siren_isNeed) {
+      INTERFACE_siren_on();
+      INTERFACE_led_alarm_blink();
+    }
+    if (ALARM_buzzer_isNeed) {
+      INTERFACE_buzzer_beep();
+      INTERFACE_led_alarm_blink();
+    }
+
+  } else {
+    ALARM_indication_endTime = currMillis;
   }
 }
 
