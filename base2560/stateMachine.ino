@@ -74,7 +74,7 @@ void STATEMACHINE_61s() {
   wr();
   BASE_checkSensorsFault();
   wr();
-  PWR_updateInfo()
+  PWR_updateInfo();
   wr();
 }
 

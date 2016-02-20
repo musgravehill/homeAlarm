@@ -50,12 +50,38 @@ void TFT_renderMenuState() {
 
 }
 
-void TFT_renderPWR(){
-  BASE_voltage_base = analogRead(BASE_voltage_base_pin) * 0.015;
-  BASE_voltage_acdc = analogRead(BASE_voltage_acdc_pin) * 0.015;
-  BASE_voltage_battery
-  
-  }
+void TFT_renderTestAlarm() {
+  myDisplay.fillScreen(ILI9341_PINK);
+  myDisplay.setTextSize(3);
+  myDisplay.setTextColor(ILI9341_BLACK);
+  myDisplay.setCursor(2, 2);
+  myDisplay.println("TEST: BUZZER, SIREN, LED");
+
+  INTERFACE_buzzer_beep();
+  INTERFACE_siren_beep();
+  INTERFACE_led_alarm_blink();
+}
+
+void TFT_renderPWR() {
+  String infoLine = "";
+  myDisplay.fillScreen(ILI9341_BLACK);
+  myDisplay.setTextSize(3);
+  myDisplay.setTextColor(ILI9341_WHITE);
+  myDisplay.setCursor(2, 2);
+
+  infoLine = "BASE: ";
+  infoLine += String((BASE_voltage_base / 100), DEC) + " V" ;
+  myDisplay.println(infoLine);
+
+  infoLine = "ACDC: ";
+  infoLine += String((BASE_voltage_acdc / 100), DEC) + " V" ;
+  myDisplay.println(infoLine);
+
+  infoLine = "BATT: ";
+  infoLine += String((BASE_voltage_battery / 100), DEC) + " V" ;
+  myDisplay.println(infoLine);
+
+}
 
 void TFT_renderInfoLine() {
   String infoLine = "";
