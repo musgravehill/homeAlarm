@@ -150,9 +150,12 @@ bool ALARM_LOUD_isNeed = false;
 uint32_t ALARM_indication_startTime = 0;
 
 //peripheral
-uint8_t BASE_voltage_base_pin = A0; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
-uint8_t BASE_voltage_acdc_pin = A1; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
-uint8_t BASE_voltage_battery_pin = A2; //TODO ADC AREF set to inner 2.56V and make -R-R- voltage divider
+uint8_t BASE_voltage_base_pin = A0; 
+uint8_t BASE_voltage_acdc_pin = A1; 
+uint8_t BASE_voltage_battery_pin = A2; 
+int16_t BASE_voltage_base = 0;
+int16_t BASE_voltage_acdc = 0;
+int16_t BASE_voltage_battery = 0;
 
 uint8_t INTERFACE_btn_prev_pin = 2;
 uint8_t INTERFACE_btn_next_pin = 3;

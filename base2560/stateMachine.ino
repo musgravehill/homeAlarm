@@ -43,7 +43,7 @@ void STATEMACHINE_1s() {
   GSM_listenSerial();
   wr();
   GSM_checkIncomingCall();
-  wr();  
+  wr();
 }
 
 void STATEMACHINE_3s() {
@@ -74,7 +74,8 @@ void STATEMACHINE_61s() {
   wr();
   BASE_checkSensorsFault();
   wr();
-
+  PWR_updateInfo()
+  wr();
 }
 
 void STATEMACHINE_103s() {

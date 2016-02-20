@@ -36,6 +36,12 @@ void TFT_renderMenuState() {
     case 3:
       TFT_renderGSM();
       break;
+    case 4:
+      TFT_renderPWR();
+      break;
+    case 5:
+      TFT_renderTestAlarm();
+      break;
   }
 #ifdef DEBUG
   debugSerial.print("MENU_state=");
@@ -43,6 +49,13 @@ void TFT_renderMenuState() {
 #endif
 
 }
+
+void TFT_renderPWR(){
+  BASE_voltage_base = analogRead(BASE_voltage_base_pin) * 0.015;
+  BASE_voltage_acdc = analogRead(BASE_voltage_acdc_pin) * 0.015;
+  BASE_voltage_battery
+  
+  }
 
 void TFT_renderInfoLine() {
   String infoLine = "";

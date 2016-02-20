@@ -13,8 +13,8 @@ void MENU_btnsCheck() {
     INTERFACE_buzzer_beep();
     INTERFACE_led_alarm_blink();
     MENU_state++;
-    if (MENU_state > 3) {
-      MENU_state = 3;
+    if (MENU_state > 5) {
+      MENU_state = 5;
     }
     TFT_renderMenuState();
   }
