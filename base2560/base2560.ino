@@ -241,6 +241,7 @@ void setup() {
 
   INTERFACE_buzzer_beep();
   INTERFACE_siren_beep();
+  INTERFACE_led_alarm_blink();
 
   wdt_enable(WDTO_8S); //if WDT not reset on 8s => atmega restarts
 }

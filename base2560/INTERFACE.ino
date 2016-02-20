@@ -17,6 +17,6 @@ void INTERFACE_siren_off() {
 
 void INTERFACE_led_alarm_blink() {
   digitalWrite(INTERFACE_led_alarm_pin, 1);
-  delay(77);
+  delay(100);
   digitalWrite(INTERFACE_led_alarm_pin, 0);
 }

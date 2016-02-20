@@ -52,7 +52,7 @@ void TFT_renderMenuState() {
 
 void TFT_renderTestAlarm() {
   myDisplay.fillScreen(ILI9341_PINK);
-  myDisplay.setTextSize(3);
+  myDisplay.setTextSize(2);
   myDisplay.setTextColor(ILI9341_BLACK);
   myDisplay.setCursor(2, 2);
   myDisplay.println("TEST: BUZZER, SIREN, LED");
@@ -271,18 +271,12 @@ void TFT_renderGSM() {
 
   myDisplay.fillScreen(ILI9341_WHITE);
   myDisplay.setTextColor(ILI9341_BLACK);
-  myDisplay.setTextSize(1);
+  myDisplay.setTextSize(2);
 
-  myDisplay.setCursor(10, 2);
-  myDisplay.println(GSM_answerCOPS);
-
-  myDisplay.setCursor(10, 12);
-  myDisplay.println(GSM_answerCPAS);
-
-  myDisplay.setCursor(10, 22);  ;
-  myDisplay.println(GSM_answerCSQ);
-
-  myDisplay.setCursor(10, 32);
+  myDisplay.setCursor(2, 2);
+  myDisplay.println(GSM_answerCOPS);  
+  myDisplay.println(GSM_answerCPAS);  
+  myDisplay.println(GSM_answerCSQ);  
   myDisplay.println(GSM_answerCLIP);
 
   /*
