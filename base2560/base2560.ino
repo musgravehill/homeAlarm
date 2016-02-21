@@ -141,7 +141,7 @@ uint32_t GSM_prevPingSuccessAnswerMillis = 1; //send AT+CSQ, not get answer => R
 uint8_t GSM_reset_pin = 23;
 
 //menu
-int8_t MENU_state = 1;
+int8_t MENU_state = 4;
 
 //ALARM
 bool ALARM_MOTIONDETECTION_MODE = true;
@@ -151,8 +151,8 @@ uint32_t ALARM_indication_startTime = 0;
 
 //peripheral
 uint8_t BASE_voltage_base_pin = A0; 
-uint8_t BASE_voltage_acdc_pin = A1; 
-uint8_t BASE_voltage_battery_pin = A2; 
+uint8_t BASE_voltage_battery_pin = A1;
+uint8_t BASE_voltage_acdc_pin = A2;  
 int16_t BASE_voltage_base = 0;
 int16_t BASE_voltage_acdc = 0;
 int16_t BASE_voltage_battery = 0;
@@ -200,7 +200,7 @@ void setup() {
   pinMode(INTERFACE_buzzer_pin, OUTPUT);
   pinMode(INTERFACE_siren_pin, OUTPUT);
 
-  delay(2000); //for calming current & voltage fluctuations
+  delay(1000); //for calming current & voltage fluctuations
 
 #ifdef DEBUG
   debugSerial.begin(57600); //DBG
@@ -242,6 +242,8 @@ void setup() {
   INTERFACE_buzzer_beep();
   INTERFACE_siren_beep();
   INTERFACE_led_alarm_blink();
+
+  PWR_updateInfo();
 
   wdt_enable(WDTO_8S); //if WDT not reset on 8s => atmega restarts
 }

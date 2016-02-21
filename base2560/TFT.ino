@@ -63,6 +63,8 @@ void TFT_renderTestAlarm() {
 }
 
 void TFT_renderPWR() {
+  PWR_updateInfo();
+  
   String infoLine = "";
   myDisplay.fillScreen(ILI9341_BLACK);
   myDisplay.setTextSize(3);
@@ -70,15 +72,15 @@ void TFT_renderPWR() {
   myDisplay.setCursor(2, 2);
 
   infoLine = "BASE: ";
-  infoLine += String((BASE_voltage_base / 100), DEC) + " V" ;
+  infoLine += String((BASE_voltage_base), DEC) + " V" ;
   myDisplay.println(infoLine);
 
   infoLine = "ACDC: ";
-  infoLine += String((BASE_voltage_acdc / 100), DEC) + " V" ;
+  infoLine += String((BASE_voltage_acdc), DEC) + " V" ;
   myDisplay.println(infoLine);
 
   infoLine = "BATT: ";
-  infoLine += String((BASE_voltage_battery / 100), DEC) + " V" ;
+  infoLine += String((BASE_voltage_battery), DEC) + " V" ;
   myDisplay.println(infoLine);
 
 }

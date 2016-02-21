@@ -29,9 +29,9 @@
 */
 
 void PWR_updateInfo() {
-  BASE_voltage_base = analogRead(BASE_voltage_base_pin) * 0.015;
-  BASE_voltage_acdc = analogRead(BASE_voltage_acdc_pin) * 0.015;
-  BASE_voltage_battery = analogRead(BASE_voltage_battery_pin) * 0.015;
+  BASE_voltage_base = analogRead(BASE_voltage_base_pin) * 0.4503245;
+  BASE_voltage_acdc = analogRead(BASE_voltage_acdc_pin) * 2.0297521;
+  BASE_voltage_battery = analogRead(BASE_voltage_battery_pin) * 2.37066;
 }
 
 
