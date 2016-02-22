@@ -1,4 +1,5 @@
 BASE onInit write readme.txt file with how-to info on SD. 
+MIC add caps, NFM
 
 BLM18HG471SN1D	
 BLM18HG601SN1D	
