@@ -26,7 +26,11 @@ void ALARM_processSensorsParams() {
   }
 }
 
-INTERFACE_btn_alarm_security_pin
+void ALARM_securityOnOff_btn() {
+  if (digitalRead(INTERFACE_btn_alarm_security_pin) == 1) {
+    ALARM_SECURITY_MODE = 0 ?? switch
+  }
+}
 
 void ALARM_controlIndication() {
   uint32_t currMillis = millis();
