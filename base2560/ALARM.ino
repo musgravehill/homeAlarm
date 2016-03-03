@@ -26,6 +26,8 @@ void ALARM_processSensorsParams() {
   }
 }
 
+INTERFACE_btn_alarm_security_pin
+
 void ALARM_controlIndication() {
   uint32_t currMillis = millis();
   uint32_t durationOn = currMillis - ALARM_indication_startTime;

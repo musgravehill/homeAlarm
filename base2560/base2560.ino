@@ -163,7 +163,7 @@ uint8_t INTERFACE_btn_next_pin = 3;
 uint8_t INTERFACE_buzzer_pin = 4; //N-mosfet
 uint8_t INTERFACE_btn_reset_pin = 5;
 uint8_t INTERFACE_led_alarm_pin = 6;
-uint8_t INTERFACE_led_reserveForFuture_pin = 7;
+uint8_t INTERFACE_btn_alarm_security_pin = 7;
 uint8_t INTERFACE_siren_pin = 8;  //N-mosfet
 
 
