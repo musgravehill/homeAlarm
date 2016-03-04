@@ -34,6 +34,8 @@ void STATEMACHINE_300ms() {
   wr();
   MENU_btnsCheck();
   wr();
+  ALARM_securityOnOff_btn();
+  wr();
 }
 
 void STATEMACHINE_1s() {

@@ -28,7 +28,17 @@ void ALARM_processSensorsParams() {
 
 void ALARM_securityOnOff_btn() {
   if (digitalRead(INTERFACE_btn_alarm_security_pin) == 1) {
-    ALARM_SECURITY_MODE = 0 ?? switch
+    if (ALARM_SECURITY_MODE == 1) {
+      ALARM_SECURITY_MODE = 0;
+      INTERFACE_buzzer_beep();
+      delay(4000);
+    } else {
+      ALARM_SECURITY_MODE = 1;
+      for (byte i = 0; i < 5; i++) {
+        INTERFACE_buzzer_beep();
+        delay(50);
+      }
+    }
   }
 }
 
