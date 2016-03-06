@@ -1,5 +1,6 @@
 BASE onInit write readme.txt file with how-to info on SD
-Make siren, power source for it
+Buy siren, relay+acc for it.
+
 
 BLM18HG471SN1D	
 BLM18HG601SN1D	
