@@ -1,5 +1,7 @@
 BASE onInit write readme.txt file with how-to info on SD
 Buy siren, relay+acc for it.
+Plastic box
+Pb acc 6V
 
 
 BLM18HG471SN1D	
